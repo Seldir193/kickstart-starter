@@ -1,0 +1,328 @@
+
+
+
+/*
+ Theme Name:  KickStart Starter
+ Theme URI:   http://localhost/wordpress/
+ Author:      Selcuk Kocyigit
+ Description: WordPress Style exakt wie React-Frontend
+ Version:     1.2.0
+ Text Domain: kickstart-starter
+*/
+
+/* === Base === */
+:root {
+  --brand: #0ea5e9; /* React Primary */
+  --text: #222;
+}
+
+html, body { height: 100%; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;     /* Header -> Main -> Footer */
+}
+
+.site-header { flex: 0 0 auto; }   /* bleibt oben */
+.site-footer { flex: 0 0 auto; margin-top: auto; } /* klebt unten */
+
+.site-main {                     /* dein Inhaltsbereich */
+  flex: 1 0 auto;                /* füllt Resthöhe */
+  display: flex;
+  align-items: center;           /* vertikal mittig */
+  justify-content: center;       /* horizontal mittig */
+  padding-block: 24px;
+
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial;
+  background: #f5f5f5;
+  color: var(--text);
+}
+h1,h2,h3 { margin: 0 0 8px; }
+
+/* === Container === */
+.container { max-width: 1200px; margin: 0 auto; padding: 16px; }
+
+/* === Header === */
+.site-header {
+  background: #fff;
+  border-bottom: 1px solid #eaeaea;
+  position: sticky; top: 0; z-index: 10;
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 64px;
+}
+.brand { font-weight: 700; font-size: 20px; }
+.menu { display: flex; gap: 12px; list-style: none; margin: 0; padding: 0; }
+.menu a {
+  text-decoration: none; padding: 8px 12px; border-radius: 8px;
+  color: #333;
+}
+/* kein Hover-Effekt im Header */
+.menu a:hover { color: #333; background: transparent; }
+/* nur aktiv hervorgehoben */
+.menu .current-menu-item a {
+  background: #111; color: #fff;
+}
+
+/* === Hero === */
+.home-hero, .programme-hero {
+  background: linear-gradient(180deg, #111 0%, #222 100%);
+  color: #fff; border-radius: 16px; padding: 48px; margin: 24px 0;
+  text-align: center;
+}
+.home-hero h1, .programme-hero h1 {
+  font-size: clamp(28px, 4vw, 48px);
+}
+.home-hero p, .programme-hero p { opacity: 0.9; }
+
+/* === Buttons === */
+.btn, .btn-primary, .angebot-button, .btn-book {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 10px 16px; border-radius: 10px; border: 1px solid transparent;
+  text-decoration: none; font-weight: 600; cursor: pointer;
+}
+.btn-primary, .angebot-button, .btn-book {
+  background: var(--brand); color: #fff;
+}
+/* KEIN Hover-Effekt – bleibt konstant */
+.btn-primary:hover, .angebot-button:hover, .btn-book:hover {
+  background: var(--brand); color: #fff;
+}
+
+/* === Grid + Cards === */
+.programme-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px; margin-top: 16px; max-width: 1100px; margin: 24px auto;
+}
+.programme-card {
+  background: #fff; border: 1px solid #eaeaea; border-radius: 12px;
+  padding: 16px; display: flex; flex-direction: column; gap: 12px;
+}
+.programme-card h2 { font-size: 18px; margin: 0; }
+.programme-card .facts { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.programme-card .price { font-weight: 700; margin: 8px 0; }
+
+/* === Footer === */
+.site-footer {
+  border-top: 1px solid #eaeaea;
+  padding: 20px 0; margin-top: 40px;
+  text-align: center; font-size: 14px; color: #666;
+}
+
+.brand { display: flex; align-items: center; gap: 8px; }
+.custom-logo { width: 50px; height: 50px; object-fit: contain; }
+.site-title { font-weight: 700; text-decoration: none; color: #111; font-size: 20px; }
+
+.btn, .btn-primary, .angebot-button, .btn-book, button.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background: var(--brand);
+  color: #fff;
+  text-decoration: none;
+}
+button.btn-primary:hover {
+  background: var(--brand); /* kein Hover-Effekt */
+}
+
+.contact-form div.ok {
+  margin: 10px 0 16px;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.contact-form h2 { margin-bottom: 12px; font-size: 28px; }
+.contact-form p { margin-bottom: 20px; color: #444; }
+
+.form .field { margin-bottom: 16px; }
+.form label { font-weight: 600; display: block; margin-bottom: 6px; }
+.form input, .form textarea {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  background:#fff;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 10px 16px; border-radius: 10px; border: none;
+  font-weight: 600; cursor: pointer;
+  background: #0ea5e9; color: #fff;
+}
+.btn-primary:hover { background: #0ea5e9; }
+.ok { color: #065f46; font-weight: 600; }
+
+/* ===================================================================== */
+/* ====== LAYOUT-FIX: Viewport kein Scroll, NUR main scrollt ============ */
+/* ===================================================================== */
+
+
+/* Viewport selbst: keine Y-Scrollbar (verhindert den 1px-Scroll bei 25%) */
+html { overflow-y: hidden; }
+
+
+
+/* Body als Grid: Header | Main | Footer */
+body {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+@supports (min-height: 100dvh) {
+  body { min-height: 100dvh; }
+}
+
+/* Header sticky (hast du schon) */
+.site-header { top: 0; z-index: 10; }
+
+
+/* Kontaktseiten automatisch vertikal zentrieren (kurzer Inhalt) */
+.site-main:has(.contact-form) {
+  justify-content: center;
+}
+
+/* Footer sicher unten, ohne Extra-Gap */
+.site-footer { margin-top: 0; width: 100%; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* MAIN: scrollt, kurze Inhalte zentrieren sich, lange starten oben */
+.site-main {
+  min-height: 0;                 /* wichtig gegen 1px-Überhang */
+  overflow-y: auto;              /* nur hier scrollen */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+
+  display: flex;
+  flex-direction: column;        /* << wieder aktivieren (vertikale Achse) */
+  align-items: center;           /* horizontal mittig */
+  justify-content: flex-start;   /* << wieder aktivieren (lange oben) */
+
+  padding: 24px 16px;
+}
+
+/* Kurze Seiten automatisch vertikal zentrieren (wenn Platz übrig) */
+.site-main > .container,
+.site-main > .container.content,
+.site-main > .contact-form,
+.site-main > .entry,
+.site-main > .page {
+  margin-block: auto;            /* zentriert nur bei „kurz“ */
+  width: 100%;
+  max-width: 720px;              /* optionales Breitenlimit */
+}
+
+/* Elemente, die nie vertikal zentriert werden sollen (z. B. Kachelraster) */
+.site-main .programme-grid { margin-block: 0; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Startseite (Home) zentrieren, solange kein langes Raster o.ä. drin ist */
+body.home .site-main {
+  justify-content: center;           /* vertikal mittig */
+}
+
+/* Falls auf Home doch ein langes Grid o.ä. steht: wieder oben starten */
+body.home .site-main:has(.programme-grid, .wp-block-gallery, .posts, .entry-list) {
+  justify-content: flex-start;
+}
+
+/* Generisch: wenn .site-main nur einen „kurzen“ Hauptblock hat, zentrieren */
+.site-main:has(> .home-hero):not(:has(.programme-grid, .wp-block-gallery)) {
+  justify-content: center;
+}
+
+/* Sicherheit: lange Listen/Gitter nie vertikal zentrieren */
+.site-main .programme-grid,
+.site-main .wp-block-gallery,
+.site-main .posts,
+.site-main .entry-list {
+  margin-block: 0;
+}
+
+
+
+
+
+.site-main {
+  /* …deine bisherigen Regeln… */
+  overflow-y: auto;
+  /* Scrollbar verstecken, Scroll bleibt */
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE/alt Edge */
+}
+.site-main::-webkit-scrollbar {   /* Chrome/Safari/Edge (Blink/WebKit) */
+  width: 0;
+  height: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+# System/IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs/Cache
+*.log
+.cache/
+.tmp/
+
+# Optional
+node_modules/
+dist/
+build/
+
+# Composer 
+vendor/
+composer.lock
+
+# Env/Temp
+.env
+.env.*
+*.local
+
+# Archive
+*.zip
+*.tar
+*.tar.gz
