@@ -206,7 +206,17 @@ function ks_sc_offers($atts) {
 
       if (!empty($o['info'])) echo '<p class="offer-info">' . esc_html((string)$o['info']) . '</p>';
 
-      if ($book) echo '<div class="card-actions"><a class="btn btn-primary" href="' . esc_url($book) . '">Jetzt buchen</a></div>';
+   
+
+
+      if ($book) {
+  echo '<div class="card-actions">';
+  echo '<a class="btn btn-primary" href="' . esc_url($book) . '" target="_blank" rel="noopener noreferrer">Jetzt buchen</a>';
+  echo '</div>';
+}
+
+
+    
     echo '</article>';
   }
   echo '</div>';
