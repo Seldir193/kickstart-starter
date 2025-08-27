@@ -102,114 +102,114 @@ function ks_redirect($ok)
 
 
 
-/* ========= KickStart Offers: minimal single shortcode ========= */
+
+
+
+
+
+
+
+
+
+
+
 
 function ks_api_base() {
   // Your API runs here
   return 'http://localhost:5000';
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ==== Unified Offers Shortcode: [ks_offers type="..."] or dynamic via ?type=... ====
+// Beispiele:
+//   [ks_offers type="Camp" limit="6"]          (statisch)
+//   [ks_offers limit="12"]  + URL ?type=Kindergarten (dynamisch)
 add_action('init', function () {
-
-  // Test: [ks_ping] -> "Shortcode OK"
-  add_shortcode('ks_ping', function () { return '<p>Shortcode OK</p>'; });
-
-  // [ks_offers type="Camp" limit="6"]
-  add_shortcode('ks_offers', function ($atts) {
-    $a = shortcode_atts(['type'=>'', 'limit'=>'6'], $atts, 'ks_offers');
-
-    $url = add_query_arg(array_filter([
-      'type'  => $a['type'],
-      'limit' => (int)$a['limit'],
-    ]), trailingslashit(ks_api_base()) . 'api/offers');
-
-    $res = wp_remote_get($url, ['timeout'=>8, 'headers'=>['Accept'=>'application/json']]);
-    if (is_wp_error($res)) {
-      return '<div class="card" style="color:#b91c1c"><strong>API:</strong> '.esc_html($res->get_error_message()).'</div>';
-    }
-    if (wp_remote_retrieve_response_code($res) !== 200) {
-      return '<div class="card" style="color:#b91c1c"><strong>API HTTP '.(int)wp_remote_retrieve_response_code($res).'</strong></div>';
-    }
-
-    $data = json_decode(wp_remote_retrieve_body($res), true);
-    if (json_last_error() !== JSON_ERROR_NONE) {
-      return '<div class="card" style="color:#b91c1c"><strong>API JSON:</strong> '.esc_html(json_last_error_msg()).'</div>';
-    }
-
-    // Normalize items
-    $items = [];
-    if (isset($data['items']) && is_array($data['items'])) $items = $data['items'];
-    elseif (is_array($data) && array_keys($data) === range(0, count($data)-1)) $items = $data;
-
-    ob_start();
-    if (empty($items)) {
-      echo '<p>Aktuell keine Angebote.</p>';
-    } else {
-      echo '<div class="grid">';
-      foreach ($items as $o) {
-        $id       = isset($o['_id']) ? esc_attr($o['_id']) : '';
-        $title    = isset($o['title']) ? esc_html($o['title']) : esc_html(trim(($o['type'] ?? '').' • '.($o['location'] ?? '')));
-        $location = isset($o['location']) ? esc_html($o['location']) : '';
-        $price    = (isset($o['price']) && $o['price'] !== '') ? esc_html($o['price']).' €' : '';
-        $info     = isset($o['info']) ? esc_html($o['info']) : '';
-        $book_url = esc_url('http://localhost:3000/book?offerId='.rawurlencode($id));
-
-        echo '<article class="card">';
-          echo '<h3 class="card-title">'.$title.'</h3>';
-          if ($location) echo '<div class="offer-meta">'.$location.'</div>';
-          if ($price)    echo '<div class="offer-price">'.$price.'</div>';
-          if ($info)     echo '<p class="offer-info">'.$info.'</p>';
-          echo '<div class="card-actions"><a class="btn btn-primary" href="'.$book_url.'">Jetzt buchen</a></div>';
-        echo '</article>';
-      }
-      echo '</div>';
-    }
-    return ob_get_clean();
-  });
+  add_shortcode('ks_offers', 'ks_sc_offers');
 });
 
+function ks_sc_offers($atts) {
+  $api_base  = rtrim(ks_api_base(), '/');     // z.B. http://127.0.0.1:5000
+  $book_base = 'http://localhost:3000';       // Next-Frontend
 
+  $a     = shortcode_atts(['type' => '', 'limit' => '12'], $atts, 'ks_offers');
+  $limit = max(1, intval($a['limit']));
 
+  // 1) type aus Attribut bevorzugen, sonst aus URL (?type=...)
+  $typeAttr = trim((string)$a['type']);
+  $typeUrl  = isset($_GET['type']) ? sanitize_text_field(wp_unslash($_GET['type'])) : '';
+  $type     = $typeAttr !== '' ? $typeAttr : $typeUrl;
 
+  // Enum wie im Backend
+  $valid_types = ['Camp','Foerdertraining','Kindergarten','PersonalTraining','AthleticTraining'];
+  if ($type !== '' && !in_array($type, $valid_types, true)) {
+    $type = ''; // ungültig -> alle
+  }
 
+  // API-URL bauen
+  $url = $api_base . '/api/offers';
+  if ($type !== '') $url = add_query_arg('type', rawurlencode($type), $url);
 
+  // Daten holen
+  $res  = wp_remote_get($url, ['timeout'=>10, 'headers'=>['Accept'=>'application/json']]);
+  if (is_wp_error($res) || wp_remote_retrieve_response_code($res) !== 200) {
+    return '<p>No offers found.</p>';
+  }
 
+  $data  = json_decode(wp_remote_retrieve_body($res), true);
+  $items = [];
+  if (isset($data['items']) && is_array($data['items'])) {
+    $items = $data['items'];
+  } elseif (is_array($data) && array_keys($data) === range(0, count($data)-1)) {
+    $items = $data; // bare array
+  }
 
+  if (empty($items)) return '<p>No offers found.</p>';
+  if (count($items) > $limit) $items = array_slice($items, 0, $limit);
 
+  // === Markup wie vorher, damit dein CSS greift ===
+  ob_start();
+  echo '<div class="grid">';
+  foreach ($items as $o) {
+    $id    = isset($o['_id']) ? (string)$o['_id'] : '';
+    $to    = isset($o['type']) ? (string)$o['type'] : '';
+    $loc   = isset($o['location']) ? (string)$o['location'] : '';
+    $title = !empty($o['title']) ? (string)$o['title'] : trim($to . ' • ' . $loc);
 
+    $priceStr = (isset($o['price']) && $o['price'] !== '') ? (intval($o['price']) . ' €') : '';
+    $timeStr  = (!empty($o['timeFrom']) && !empty($o['timeTo'])) ? ($o['timeFrom'] . '–' . $o['timeTo']) : '';
+    $ageStr   = (isset($o['ageFrom'],$o['ageTo']) && $o['ageFrom'] !== null && $o['ageTo'] !== null)
+                ? ('Ages ' . intval($o['ageFrom']) . '–' . intval($o['ageTo'])) : '';
 
+    $book = $id ? $book_base . '/book?offerId=' . rawurlencode($id) : '';
 
+    echo '<article class="card">';
+      echo '<h3 class="card-title">' . esc_html($title ?: 'Offer') . '</h3>';
+      if ($loc)     echo '<div class="offer-meta">' . esc_html($loc) . '</div>';
 
+      // Meta-Linie wie früher (Preis/Time/Age)
+      $metaParts = array_values(array_filter([$priceStr, $timeStr, $ageStr]));
+      if ($metaParts) echo '<div class="offer-price">' . esc_html(implode(' • ', $metaParts)) . '</div>';
 
+      if (!empty($o['info'])) echo '<p class="offer-info">' . esc_html((string)$o['info']) . '</p>';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      if ($book) echo '<div class="card-actions"><a class="btn btn-primary" href="' . esc_url($book) . '">Jetzt buchen</a></div>';
+    echo '</article>';
+  }
+  echo '</div>';
+  return ob_get_clean();
+}
 
