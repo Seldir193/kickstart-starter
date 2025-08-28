@@ -25,7 +25,31 @@ body {
 }
 
 .site-header { flex: 0 0 auto; }   /* bleibt oben */
-.site-footer { flex: 0 0 auto; margin-top: auto; } /* klebt unten */
+
+
+
+
+/* Optional: kleiner Anbieter-Login rechts oder inline trennen */
+.site-footer a { text-decoration: none; color:#666; }
+.site-footer a:hover { text-decoration: underline; }
+
+
+.site-footer {
+  border-top: 1px solid #eaeaea;
+  padding: 20px 0;
+
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  justify-content: center;
+  gap:20px;
+  flex: 0 0 auto; 
+  margin-top: auto;
+  cursor: pointer;  
+}
+
+
 
 .site-main {                     /* dein Inhaltsbereich */
   flex: 1 0 auto;                /* füllt Resthöhe */
@@ -46,7 +70,14 @@ body {
 h1,h2,h3 { margin: 0 0 8px; }
 
 /* === Container === */
-.container { max-width: 1200px; margin: 0 auto; padding: 16px; }
+.container {
+   max-width: 1200px;
+   margin: 0 auto;
+   padding:16px;  
+   display: flex;
+   justify-content: center;
+   gap:20px;
+  }
 
 /* === Header === */
 .site-header {
@@ -465,5 +496,11 @@ body { padding-top: calc(var(--header-height) + var(--wp-admin-bar-h)); }
   background: #000;
   color: #fff;
 }
+
+
+
+
+
+
 
 
