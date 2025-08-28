@@ -1,3 +1,20 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?php ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -16,15 +33,22 @@
         <?php bloginfo('name'); ?>
       </a>
     </div>
-    <nav class="main-nav">
-      <?php wp_nav_menu([
-        'theme_location' => 'primary',
-        'container'      => false,
-        'menu_class'     => 'menu',
-        'fallback_cb'    => false
-      ]); ?>
-    </nav>
+
+    <nav class="main-nav" aria-label="<?php esc_attr_e('Primary', 'kickstart-starter'); ?>">
+  <?php
+    wp_nav_menu([
+      'theme_location' => 'primary',
+      'container'      => false,
+      'menu_class'     => 'menu',
+      'fallback_cb'    => false,
+    ]);
+  ?>
+  <div class="ks-programs" data-mega>
+    <?php get_template_part('template-parts/mega-programs'); ?>
   </div>
+</nav>
+
+
 </header>
 
 <main class="site-main">
