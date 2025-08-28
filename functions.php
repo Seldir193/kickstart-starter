@@ -231,7 +231,10 @@ function ks_sc_offers($atts) {
         $ageStr   = (isset($o['ageFrom'],$o['ageTo']) && $o['ageFrom'] !== null && $o['ageTo'] !== null)
                     ? ('Ages ' . intval($o['ageFrom']) . '–' . intval($o['ageTo'])) : '';
 
-        $book = $id ? $book_base . '/book?offerId=' . rawurlencode($id) : '';
+        #$book = $id ? $book_base . '/book?offerId=' . rawurlencode($id) : '';
+
+        $book = $id ? $book_base . '/book?offerId=' . rawurlencode($id) . '&embed=1' : '';
+
 
         echo '<article class="card">';
             echo '<h3 class="card-title">' . esc_html($title ?: 'Offer') . '</h3>';
