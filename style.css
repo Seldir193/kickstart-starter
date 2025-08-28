@@ -325,3 +325,145 @@ body.home .site-main:has(.programme-grid, .wp-block-gallery, .posts, .entry-list
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:root {
+  --header-height: 72px;          /* echte Headerhöhe hier anpassen */
+  --header-bg: #fff;
+  --mega-gap: 8px;
+  --mega-z: 1000;
+  --mega-backdrop: rgba(0,0,0,.45);
+  --mega-bg: #fff;
+  --mega-link: #666;
+
+  /* WP-Adminbar-Offset (0 / 32px) */
+  --wp-admin-bar-h: 0px;
+}
+.admin-bar { --wp-admin-bar-h: 32px; }
+
+/* Header fixieren */
+.site-header {
+  position: fixed;
+  top: var(--wp-admin-bar-h);
+  left: 0; right: 0;
+  z-index: calc(var(--mega-z) + 1); /* Header bleibt über Panel/Backdrop */
+  background: var(--header-bg);
+}
+
+/* Inhalt unter den fixen Header schieben */
+html, body { margin: 0; }
+body { padding-top: calc(var(--header-height) + var(--wp-admin-bar-h)); }
+
+/* Container im Header */
+.ks-programs { position: relative; }
+
+/* Backdrop (abdunkeln, aber NICHT den Header) */
+.ks-programs__backdrop {
+  position: fixed;
+  left: 0; right: 0;
+  top: calc(var(--wp-admin-bar-h) + var(--header-height) + var(--mega-gap));
+  bottom: 0;
+  background: var(--mega-backdrop);
+  z-index: var(--mega-z);
+  display: none;
+}
+
+/* Vollbreites weißes Panel unter dem Header */
+.ks-programs__panel {
+  position: fixed;
+  left: 0; right: 0;
+  top: calc(var(--wp-admin-bar-h) + var(--header-height) + var(--mega-gap));
+  width: 100vw;
+  background: var(--mega-bg);
+  z-index: var(--mega-z);
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+/* Innenlayout (4 Spalten) */
+.ks-programs__row {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  padding: 16px 12px;
+  text-align: left;
+}
+.ks-programs__col { min-width: 0; }
+
+/* Überschriften fett */
+.ks-programs__heading {
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+/* Links grau, ohne Unterstreichung – nur Hover unterstreichen */
+.ks-programs__link {
+  display: block;
+  color: var(--mega-link);
+  text-decoration: none;
+  padding: 6px 0;
+}
+.ks-programs__link:hover { text-decoration: underline; }
+
+/* Responsiv */
+@media (max-width: 900px) {
+  .ks-programs__row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .ks-programs__row { grid-template-columns: 1fr; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* default hidden */
+.ks-programs .ks-programs__panel,
+.ks-programs .ks-programs__backdrop { display: none; }
+
+/* visible when JS toggles .is-open */
+.ks-programs.is-open .ks-programs__panel,
+.ks-programs.is-open .ks-programs__backdrop { display: block; }
+
+/* active button only when open */
+.ks-programs.is-open .ks-programs__button {
+  background: #000;
+  color: #fff;
+}
+
+
