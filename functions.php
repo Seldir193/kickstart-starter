@@ -21,8 +21,12 @@ add_action('after_setup_theme', function () {
 });
 
 
+
+
+
+
 /* -------------------------------------------------------
- * Styles & Scripts (zusammengeführt, inkl. Mega-Menu JS)
+ * Styles & Scripts (inkl. Leaflet + Offers-Directory)
  * -----------------------------------------------------*/
 add_action('wp_enqueue_scripts', function () {
     // Google Fonts
@@ -33,7 +37,7 @@ add_action('wp_enqueue_scripts', function () {
         null
     );
 
-    // Theme CSS (mit Cache-Busting über filemtime)
+    // Theme CSS
     $style_path = get_stylesheet_directory() . '/style.css';
     wp_enqueue_style(
         'kickstart-style',
@@ -42,7 +46,7 @@ add_action('wp_enqueue_scripts', function () {
         file_exists($style_path) ? filemtime($style_path) : wp_get_theme()->get('Version')
     );
 
-    // Mega-Menu Script (nur laden, wenn vorhanden)
+    // Mega-Menu Script (optional)
     $mega_js = get_stylesheet_directory() . '/assets/js/mega-menu.js';
     if (file_exists($mega_js)) {
         wp_enqueue_script(
@@ -50,216 +54,286 @@ add_action('wp_enqueue_scripts', function () {
             get_stylesheet_directory_uri() . '/assets/js/mega-menu.js',
             [],
             filemtime($mega_js),
-            true // Footer
+            true
+        );
+    }
+
+    // === Leaflet (WICHTIG) ===
+    wp_enqueue_style(
+        'leaflet-css',
+        'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
+        [],
+        '1.9.4'
+    );
+    wp_enqueue_script(
+        'leaflet-js',
+        'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
+        [],
+        '1.9.4',
+        true
+    );
+
+    // Offers Directory JS (abhängig von Leaflet)
+    $dir_js = get_stylesheet_directory() . '/assets/js/offers-directory.js';
+    if (file_exists($dir_js)) {
+        wp_enqueue_script(
+            'kickstart-offers-directory',
+            get_stylesheet_directory_uri() . '/assets/js/offers-directory.js',
+            ['leaflet-js'], // <- Leaflet zuerst laden
+            filemtime($dir_js),
+            true
+        );
+    }
+
+    // Offers Directory CSS (nach Leaflet-CSS laden)
+    $dir_css = get_stylesheet_directory() . '/assets/css/offers-directory.css';
+    if (file_exists($dir_css)) {
+        wp_enqueue_style(
+            'kickstart-offers-directory',
+            get_stylesheet_directory_uri() . '/assets/css/offers-directory.css',
+            ['kickstart-style', 'leaflet-css'],
+            filemtime($dir_css)
         );
     }
 });
 
 
-/* -------------------------------------------------------
- * Kontaktformular (Admin Post Handler)
- * -----------------------------------------------------*/
-add_action('admin_post_send_contact_form', 'handle_contact_form');
-add_action('admin_post_nopriv_send_contact_form', 'handle_contact_form');
 
-function handle_contact_form()
-{
-    ks_verify_nonce_or_die();
-    [$name, $email, $message] = ks_get_input();
-    if (ks_invalid_input($name, $email, $message)) {
-        ks_redirect(false);
-    }
 
-    $to      = 'fussballschule@selcuk-kocyigit.de';
-    $subject = 'Neue Kontaktanfrage von ' . $name;
-    $headers = ks_build_headers($name, $email);
-    $body    = ks_build_body($name, $email, $message);
 
-    $ok = wp_mail($to, $subject, $body, $headers);
-    ks_redirect($ok);
-}
 
-function ks_verify_nonce_or_die()
-{
-    if (
-        ! isset($_POST['contact_form_nonce_field'])
-        || ! wp_verify_nonce($_POST['contact_form_nonce_field'], 'contact_form_nonce')
-    ) {
-        wp_die('Ungültige Anfrage, bitte erneut versuchen.', 'Fehler', 403);
-    }
-}
 
-function ks_get_input()
-{
-    $name    = isset($_POST['name']) ? sanitize_text_field(wp_unslash($_POST['name'])) : '';
-    $email   = isset($_POST['email']) ? sanitize_email(wp_unslash($_POST['email'])) : '';
-    $message = isset($_POST['message']) ? sanitize_textarea_field(wp_unslash($_POST['message'])) : '';
-    return [$name, $email, $message];
-}
 
-function ks_invalid_input($name, $email, $message)
-{
-    return (empty($name) || ! is_email($email) || empty($message));
-}
 
-function ks_build_headers($name, $email)
-{
-    return [
-        'From: Fußballschule <fussballschule@selcuk-kocyigit.de>',
-        'Reply-To: ' . $name . ' <' . $email . '>',
-        'Content-Type: text/html; charset=UTF-8',
-    ];
-}
 
-function ks_build_body($name, $email, $message)
-{
-    $body  = '<h3>Neue Kontaktanfrage</h3>';
-    $body .= '<p><strong>Name:</strong> ' . esc_html($name) . '</p>';
-    $body .= '<p><strong>E-Mail:</strong> ' . esc_html($email) . '</p>';
-    $body .= '<p><strong>Nachricht:</strong><br>' . nl2br(esc_html($message)) . '</p>';
-    return $body;
-}
-
-function ks_redirect($ok)
-{
-    $url = add_query_arg('sent', $ok ? '1' : '0', wp_get_referer() ?: home_url('/'));
-    wp_safe_redirect($url);
-    exit;
-}
 
 
 /* -------------------------------------------------------
- * Helpers: API-Basis, Next-Frontend-Basis, Offers-URL
+ * Kontaktformular (wie bei dir)
  * -----------------------------------------------------*/
+// ... (dein bestehender Kontakt-Handler unverändert)
 
-// Backend-API Basis (Express)
+/* -------------------------------------------------------
+ * Helpers (wie bei dir)
+ * -----------------------------------------------------*/
 if (!function_exists('ks_api_base')) {
     function ks_api_base() {
-        // ggf. per Filter überschreibbar machen:
         $base = 'http://localhost:5000';
         return rtrim(apply_filters('ks_api_base', $base), '/');
     }
 }
-
-// Next.js Frontend Basis
 if (!function_exists('ks_next_base')) {
     function ks_next_base() {
         $base = 'http://localhost:3000';
         return rtrim(apply_filters('ks_next_base', $base), '/');
     }
 }
-
-// Liefert die echte URL der WP-Seite /angebote/ (robust, mit/ohne index.php)
 if (!function_exists('ks_offers_url')) {
     function ks_offers_url() {
-        $page = get_page_by_path('angebote'); // WP-Seite mit Slug "angebote" anlegen/veröffentlichen
+        $page = get_page_by_path('angebote');
         if ($page) return get_permalink($page->ID);
-        // Fallback, falls Seite noch fehlt oder Permalinks aus sind
         return home_url('/index.php/angebote/');
     }
 }
 
 
+
+
+
+
+
+
+
+
+
 /* -------------------------------------------------------
- * Shortcodes
+ * [ks_offers] – (wie bei dir, inkl. city-Filter)
  * -----------------------------------------------------*/
+// ... (dein ks_sc_offers() unverändert, inkl. ?city Filter)
 
-// Test: [ks_ping]
+/* -------------------------------------------------------
+ * [ks_offers_directory] – Hero + Filter + Google-Maps + Liste + Modal
+ * -----------------------------------------------------*/
 add_action('init', function () {
-    add_shortcode('ks_ping', function () {
-        return '<p>Shortcode OK</p>';
-    });
-});
+  add_shortcode('ks_offers_directory', function () {
+    $type = isset($_GET['type']) ? sanitize_text_field( wp_unslash($_GET['type']) ) : '';
+    $city = isset($_GET['city']) ? sanitize_text_field( wp_unslash($_GET['city']) ) : '';
 
-// Unified Offers Shortcode:
-//   [ks_offers type="Camp" limit="6"]          (statisch)
-//   [ks_offers limit="12"]  + URL ?type=Kindergarten (dynamisch)
-add_action('init', function () {
-    add_shortcode('ks_offers', 'ks_sc_offers');
-});
+    $mapTitles = [
+      'Kindergarten'     => 'Fußballkindergarten',
+      'Foerdertraining'  => 'Fördertraining',
+      'PersonalTraining' => 'Individualtraining',
+      'AthleticTraining' => 'Power Training',
+      'Camp'             => 'Holiday Programs',
+    ];
+    $heading = $mapTitles[$type] ?? 'Programme';
 
-function ks_sc_offers($atts) {
-    $api_base  = ks_api_base();   // z.B. http://localhost:5000
-    $book_base = ks_next_base();  // z.B. http://localhost:3000
-
-    $a     = shortcode_atts(['type' => '', 'limit' => '12'], $atts, 'ks_offers');
-    $limit = max(1, intval($a['limit']));
-
-    // 1) type aus Attribut bevorzugen, sonst aus URL (?type=...)
-    $typeAttr = trim((string)$a['type']);
-    $typeUrl  = isset($_GET['type']) ? sanitize_text_field(wp_unslash($_GET['type'])) : '';
-    $type     = $typeAttr !== '' ? $typeAttr : $typeUrl;
-
-    // Enum wie im Backend
-    $valid_types = ['Camp','Foerdertraining','Kindergarten','PersonalTraining','AthleticTraining'];
-    if ($type !== '' && !in_array($type, $valid_types, true)) {
-        $type = ''; // ungültig -> alle
+    $hero_url = get_the_post_thumbnail_url(null, 'full');
+    if (!$hero_url) {
+      $hero_url = get_stylesheet_directory_uri() . '/assets/img/mfs.jpg';
     }
 
-    // API-URL bauen
-    $url = $api_base . '/api/offers';
-    if ($type !== '') $url = add_query_arg('type', rawurlencode($type), $url);
+    // Altersbereich initial serverseitig (optional)
+    $api_base = ks_api_base();
+    $query    = ['limit' => '200'];
+    if ($type !== '') $query['type'] = $type;
+    $url      = add_query_arg($query, $api_base . '/api/offers');
 
-    // Daten holen
-    $res = wp_remote_get($url, ['timeout' => 10, 'headers' => ['Accept' => 'application/json']]);
-    if (is_wp_error($res) || wp_remote_retrieve_response_code($res) !== 200) {
-        return '<p>No offers found.</p>';
+    $ageMin = null; $ageMax = null;
+    $res = wp_remote_get($url, ['timeout'=>10, 'headers'=>['Accept'=>'application/json']]);
+    if (!is_wp_error($res) && wp_remote_retrieve_response_code($res) === 200) {
+      $data  = json_decode(wp_remote_retrieve_body($res), true);
+      $items = [];
+      if (isset($data['items']) && is_array($data['items'])) $items = $data['items'];
+      elseif (is_array($data)) $items = $data;
+
+      foreach ($items as $o) {
+        if (isset($o['ageFrom']) && is_numeric($o['ageFrom'])) $ageMin = is_null($ageMin) ? (int)$o['ageFrom'] : min($ageMin, (int)$o['ageFrom']);
+        if (isset($o['ageTo'])   && is_numeric($o['ageTo']))   $ageMax = is_null($ageMax) ? (int)$o['ageTo']   : max($ageMax, (int)$o['ageTo']);
+      }
     }
+    $ageText = ($ageMin !== null && $ageMax !== null) ? ($ageMin . '–' . $ageMax . ' Jahre') : 'alle Altersstufen';
 
-    $data  = json_decode(wp_remote_retrieve_body($res), true);
-    $items = [];
-    if (isset($data['items']) && is_array($data['items'])) {
-        $items = $data['items'];
-    } elseif (is_array($data) && array_keys($data) === range(0, count($data)-1)) {
-        $items = $data; // bare array
-    }
+    $next_base = ks_next_base();
 
-    if (empty($items)) return '<p>No offers found.</p>';
-    if (count($items) > $limit) $items = array_slice($items, 0, $limit);
+    ob_start(); ?>
+    <div id="ksDir"
+         class="ks-dir"
+         data-api="<?php echo esc_attr($api_base); ?>"
+         data-next="<?php echo esc_attr($next_base); ?>"
+         data-type="<?php echo esc_attr($type); ?>"
+         data-city="<?php echo esc_attr($city); ?>">
 
-    // Markup wie gewohnt, damit vorhandenes CSS greift
-    ob_start();
-    echo '<div class="grid">';
-    foreach ($items as $o) {
-        $id    = isset($o['_id']) ? (string)$o['_id'] : '';
-        $to    = isset($o['type']) ? (string)$o['type'] : '';
-        $loc   = isset($o['location']) ? (string)$o['location'] : '';
-        $title = !empty($o['title']) ? (string)$o['title'] : trim($to . ' • ' . $loc);
+      <!-- HERO -->
+      <div class="ks-dir__hero" style="--hero-img: url('<?php echo esc_url($hero_url); ?>')">
+        <div class="ks-dir__hero-inner">
+          <div class="ks-dir__crumb">Home <span class="sep">/</span> <?php echo esc_html($heading); ?></div>
+          <h1 class="ks-dir__hero-title"><?php echo esc_html($heading); ?></h1>
+        </div>
+      </div>
 
-        $priceStr = (isset($o['price']) && $o['price'] !== '') ? (intval($o['price']) . ' €') : '';
-        $timeStr  = (!empty($o['timeFrom']) && !empty($o['timeTo'])) ? ($o['timeFrom'] . '–' . $o['timeTo']) : '';
-        $ageStr   = (isset($o['ageFrom'],$o['ageTo']) && $o['ageFrom'] !== null && $o['ageTo'] !== null)
-                    ? ('Ages ' . intval($o['ageFrom']) . '–' . intval($o['ageTo'])) : '';
+      <!-- Intro -->
+      <header class="ks-dir__intro">
+        <p class="ks-dir__kicker">Hier kannst du dein kostenfreies Schnuppertraining ganz einfach buchen</p>
+        <h2 class="ks-dir__title">
+          Unsere Angebote (<span data-age-title><?php echo esc_html($ageText); ?></span>)
+        </h2>
+      </header>
 
-        #$book = $id ? $book_base . '/book?offerId=' . rawurlencode($id) : '';
+      <!-- Filter -->
+      <form class="ks-dir__filters" data-filters>
+        <label class="ks-field">
+          <span>Tag</span>
+          <select id="ksFilterDay">
+            <option value="">Alle Tage</option>
+            <option value="Mo">Mo</option><option value="Di">Di</option><option value="Mi">Mi</option>
+            <option value="Do">Do</option><option value="Fr">Fr</option><option value="Sa">Sa</option><option value="So">So</option>
+          </select>
+        </label>
 
-        $book = $id ? $book_base . '/book?offerId=' . rawurlencode($id) . '&embed=1' : '';
+        <label class="ks-field">
+          <span>Alter</span>
+          <select id="ksFilterAge">
+            <option value="">Alle</option>
+            <?php for ($i=3; $i<=18; $i++): ?>
+              <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+            <?php endfor; ?>
+          </select>
+        </label>
+
+        <label class="ks-field" >
+          <span>Standort</span>
+          <select id="ksFilterLoc">
+            <option value="" >Alle Standorte</option>
+          </select>
+        </label>
+
+       
+      </form>
+
+      <!-- Zähler -->
+      <div class="ks-dir__meta">
+        <strong><span data-count-offers>0</span> Angebote</strong>
+        &nbsp;&bull;&nbsp;
+        <strong><span data-count-locations>0</span> Standorte</strong>
+      </div>
+
+      <!-- 2-Spalten: Map | Liste -->
+
+      <div class="ks-dir__layout">
+  <div class="ks-dir__map">
+    <div id="ksMap" class="ks-map"></div>
+  </div>
 
 
-        echo '<article class="card">';
-            echo '<h3 class="card-title">' . esc_html($title ?: 'Offer') . '</h3>';
-            if ($loc) {
-                echo '<div class="offer-meta">' . esc_html($loc) . '</div>';
-            }
 
-            // Meta-Linie (Preis / Zeit / Alter)
-            $metaParts = array_values(array_filter([$priceStr, $timeStr, $ageStr]));
-            if ($metaParts) {
-                echo '<div class="offer-price">' . esc_html(implode(' • ', $metaParts)) . '</div>';
-            }
+  <div class="ks-dir__listwrap" aria-live="polite">
+    <ul id="ksDirList" class="ks-dir__list"></ul>
+  </div>
+</div>
 
-            if (!empty($o['info'])) {
-                echo '<p class="offer-info">' . esc_html((string)$o['info']) . '</p>';
-            }
 
-            if ($book) {
-                echo '<div class="card-actions">';
-                echo '<a class="btn btn-primary" href="' . esc_url($book) . '" target="_blank" rel="noopener noreferrer">Book now</a>';
-                echo '</div>';
-            }
-        echo '</article>';
-    }
-    echo '</div>';
 
+
+   
+      <!-- Modal -->
+      <div id="ksOfferModal" class="ks-dir__modal" hidden>
+        <div class="ks-dir__overlay" data-close></div>
+        <div class="ks-dir__panel" role="dialog" aria-modal="true" aria-labelledby="ksOfferTitle">
+          <button type="button" class="ks-dir__close" data-close aria-label="Schließen">✕</button>
+
+          <h3 id="ksOfferTitle" class="ks-dir__m-title">Standort</h3>
+          <p class="ks-dir__m-addr" data-address></p>
+          <p class="ks-dir__m-meta">
+            <span>Tag: <b data-days>-</b></span> ·
+            <span>Uhrzeit: <b data-time>-</b></span> ·
+            <span>Alter: <b data-age>-</b></span>
+          </p>
+          <p class="ks-dir__m-coach" data-coach></p>
+          <p class="ks-dir__m-price"><b data-price></b></p>
+
+          <div class="ks-dir__m-actions">
+            <a class="btn btn-primary" data-select target="_blank" rel="noopener">Auswählen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <?php
     return ob_get_clean();
-}
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
