@@ -74,7 +74,7 @@ h1,h2,h3 { margin: 0 0 8px; }
    max-width: 1200px;
    margin: 0 auto;
    padding:16px;  
-   display: flex;
+  display: flex;
    justify-content: center;
    gap:20px;
   }
@@ -504,3 +504,236 @@ body { padding-top: calc(var(--header-height) + var(--wp-admin-bar-h)); }
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* KS Gate Modal */
+.ks-modal[hidden] { display: none; }
+.ks-modal { position: fixed; inset: 0; z-index: 999; }
+.ks-modal__overlay {
+  position: absolute; inset: 0; background: rgba(0,0,0,.45);
+}
+.ks-modal__panel {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  width: calc(100% - 24px);
+  margin: 16vh auto 0;
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(17,24,39,.1);
+  padding: 20px;
+}
+.ks-modal__title { margin: 0 0 10px; font-weight: 700; font-size: 20px; }
+.ks-modal__close {
+  position: absolute; top: 10px; right: 10px;
+  border: 1px solid #eaeaea; background: #fff;
+  border-radius: 999px; padding: 6px 8px; cursor: pointer;
+}
+.ks-modal__close:hover { background: #fafafa; }
+
+.ks-gate__form { display: grid; gap: 12px; }
+.ks-gate__label { font-weight: 600; }
+.ks-gate__select {
+  width: 100%;
+  border: 1px solid #e5e7eb; border-radius: 10px; padding: 10px 12px; background: #fff;
+}
+.ks-gate__actions { display: flex; justify-content: flex-end; gap: 8px; }
+
+.ks-gate__hint { text-align: center; margin: 16px 0; color: #666; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Zwei Spalten: Map links, Liste rechts */
+.ks-dir__layout {
+  display: grid;
+  grid-template-columns: minmax(420px, 1fr) 1fr;
+  gap: 16px;
+  align-items: start;
+  margin-top: 12px;
+}
+
+/* Map nimmt die volle Höhe ein und bleibt sichtbar */
+.ks-dir__map {
+  position: sticky;
+  top: calc(var(--header-height, 72px) + 12px);
+}
+
+.ks-map {
+  width: 100%;
+  height: calc(100dvh - var(--header-height, 72px) - 24px);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #e5e7eb;
+}
+
+/* Intro über den Filtern */
+.ks-dir__intro { margin-bottom: 8px; }
+.ks-dir__kicker { margin: 0 0 6px; color: #555; }
+.ks-dir__title { margin: 0; }
+
+/* Filterleiste */
+.ks-dir__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: end;
+  margin: 10px 0;
+}
+.ks-field { display: grid; gap: 6px; }
+.ks-field select { height: 40px; padding: 0 12px; }
+
+/* Zähler */
+.ks-dir__meta { margin: 6px 0 4px; color: #475569; }
+
+/* Liste rechts: Standard-Karten-Style nutzen */
+.ks-dir__list { display: grid; gap: 12px; }
+.ks-dir__list .card { margin: 0; }
+
+/* Responsive: unter 900px Map oben, Liste darunter */
+@media (max-width: 900px) {
+  .ks-dir__layout {
+    grid-template-columns: 1fr;
+  }
+  .ks-map {
+    height: 320px;
+  }
+  .ks-dir__map { position: static; top: auto; }
+}
+
+
+
+
+.ks-dir__list { list-style: none; margin: 0; padding: 0; }
+
+.ks-dir__listwrap{ max-height: calc(3 * var(--row-h) + 2 * var(--row-gap)); overflow-y: auto; }
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======= HERO ======= */
+.ks-dir__hero {
+  position: relative;
+  width: 100%;
+  min-height: clamp(220px, 30vw, 360px);
+  background-image: var(--hero-img);
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+/* Lesbarkeit: dunkler Verlauf links */
+.ks-dir__hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 40%, rgba(0,0,0,0) 70%);
+}
+
+.ks-dir__hero-inner {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;      /* vertikal mittig */
+  align-items: flex-start;      /* linksbündig */
+  padding: clamp(16px, 4vw, 36px);
+  color: #fff;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.ks-dir__crumb {
+  font-size: 14px;
+  opacity: .9;
+}
+.ks-dir__crumb .sep { margin: 0 .35em; opacity: .7; }
+
+.ks-dir__hero-title {
+  margin: 6px 0 0;
+  font-weight: 800;
+  line-height: 1.1;
+  font-size: clamp(28px, 5vw, 48px);
+}
+
+/* Intro unter dem Bild */
+.ks-dir__intro { margin: 10px 0 6px; }
+.ks-dir__kicker { margin: 0 0 6px; color: #555; }
+.ks-dir__title  { margin: 0; }
+
+
+
+
+
+
+
+
+
+
+.ks-map { width: 100%; height: 100%; }
+
+/* Leaflet-Container vollflächig in der linken Spalte */
+.ks-dir__map .ks-map { 
+  width: 100%;
+  height: 100%;
+}
