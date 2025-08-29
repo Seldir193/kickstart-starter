@@ -4,9 +4,11 @@
 
 
 
+
 <?php
 $offers_url = ks_offers_url(); // nutzt den robusten Helper
 ?>
+
 
 <div class="ks-programs__backdrop" aria-hidden="true"></div>
 
@@ -38,3 +40,4 @@ $offers_url = ks_offers_url(); // nutzt den robusten Helper
     </div>
   </div>
 </div>
+
