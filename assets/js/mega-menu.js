@@ -1,100 +1,105 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// @ts-nocheck
 (function () {
-  function ready(fn){document.readyState==='loading'?document.addEventListener('DOMContentLoaded',fn):fn();}
+  'use strict';
 
-  ready(function () {
-    const toggle = document.querySelector('.ks-programs-toggle');                 // <a>
-    const wrap   = document.querySelector('[data-mega].ks-programs');            // <li>
+  function qs(root, sel) { return (root || document).querySelector(sel); }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // Toggle-Ziel: <li class="ks-programs-toggle"><a>PROGRAMS</a></li>
+    var toggle =
+      qs(document, '.menu .ks-programs-toggle > a') ||
+      qs(document, '.menu .ks-programs-toggle');
+
+    // Wrapper: <div class="ks-programs" data-mega>…</div>
+    var wrap = qs(document, '[data-mega].ks-programs');
+
     if (!toggle || !wrap) return;
 
-    const panel    = wrap.querySelector('.ks-programs__panel');
-    const backdrop = wrap.querySelector('.ks-programs__backdrop');
+    var backdrop = qs(wrap, '.ks-programs__backdrop');
+    var panel    = qs(wrap, '.ks-programs__panel');
 
-    // ARIA
+    // ARIA setup
     toggle.setAttribute('role', 'button');
     toggle.setAttribute('aria-expanded', 'false');
     if (panel) {
-      const pid = panel.id || 'mega-programs-panel';
+      var pid = 'mega-programs-panel';
       panel.id = pid;
       toggle.setAttribute('aria-controls', pid);
-      panel.setAttribute('aria-hidden', 'true');
     }
-    backdrop && backdrop.setAttribute('aria-hidden', 'true');
 
-    const isOpen = () => wrap.classList.contains('is-open');
+    var isOpen = false;
 
     function openPanel() {
+      if (isOpen) return;
+      isOpen = true;
       wrap.classList.add('is-open');
       toggle.setAttribute('aria-expanded', 'true');
-      panel && panel.setAttribute('aria-hidden', 'false');
-      backdrop && backdrop.setAttribute('aria-hidden', 'false');
-      armOutsideClose();
+
+      // Fokus ins Panel (erstes fokussierbares Element)
+      if (panel) {
+        var first = panel.querySelector('a,button,input,select,textarea,[tabindex]');
+        if (first && first.focus) {
+          try { first.focus({ preventScroll: true }); } catch (e) { /* noop */ }
+        }
+      }
     }
 
     function closePanel() {
+      if (!isOpen) return;
+      isOpen = false;
       wrap.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
-      panel && panel.setAttribute('aria-hidden', 'true');
-      backdrop && backdrop.setAttribute('aria-hidden', 'true');
-      disarmOutsideClose();
     }
 
-    function togglePanel(e) {
-      e.preventDefault();
-      isOpen() ? closePanel() : openPanel();
+    function togglePanel(ev) {
+      if (ev && ev.preventDefault) ev.preventDefault();
+      if (isOpen) closePanel(); else openPanel();
     }
 
-    // Toggle
+    // Klick auf den Menü-Button
     toggle.addEventListener('click', togglePanel);
-    toggle.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePanel(e); }
-      if (e.key === 'Escape') closePanel();
+
+    // Klick auf Backdrop schließt
+    if (backdrop) {
+      backdrop.addEventListener('click', closePanel);
+    }
+
+    // Outside-Click schließt
+    document.addEventListener('pointerdown', function (e) {
+      var t = e.target;
+      if (!t) return;
+      if (wrap.contains(t)) return;   // Klick IN der Mega
+      if (toggle.contains(t)) return; // Klick am Button
+      closePanel();
     });
 
-    // Backdrop closes
-    backdrop && backdrop.addEventListener('click', closePanel);
+    // ESC schließt
+    document.addEventListener('keydown', function (e) {
+      if (e && e.key === 'Escape') closePanel();
+    });
 
-    // Outside click (capture) — closes unless inside toggle or inside panel
-    let outsideHandler = null;
-    function armOutsideClose() {
-      setTimeout(() => {
-        if (outsideHandler) return;
-        outsideHandler = (e) => {
-          if (!isOpen()) return;
-          const t = e.target instanceof Element ? e.target : null;
-          if (t && (t.closest('.ks-programs-toggle') || t.closest('.ks-programs__panel'))) return;
-          closePanel();
-        };
-        document.addEventListener('pointerdown', outsideHandler, true);
-      }, 0);
+    // Link-Klicks im Panel schließen ebenfalls
+    if (panel) {
+      panel.addEventListener('click', function (e) {
+        var a = (e && e.target && e.target.closest) ? e.target.closest('a') : null;
+        if (a) closePanel();
+      });
     }
-    function disarmOutsideClose() {
-      if (!outsideHandler) return;
-      document.removeEventListener('pointerdown', outsideHandler, true);
-      outsideHandler = null;
-    }
-
-    // ESC closes
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePanel(); });
-
-    // Optional: close on scroll
-    window.addEventListener('scroll', () => { if (isOpen()) closePanel(); }, { passive: true });
   });
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
