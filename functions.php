@@ -58,6 +58,9 @@ add_action('wp_enqueue_scripts', function () {
         );
     }
 
+    
+
+
     // === Leaflet (WICHTIG) ===
     wp_enqueue_style(
         'leaflet-css',
@@ -73,13 +76,31 @@ add_action('wp_enqueue_scripts', function () {
         true
     );
 
+
+
+    
+    // Dialog JS
+$dlg_js = get_stylesheet_directory() . '/assets/js/offers-dialog.js';
+if (file_exists($dlg_js)) {
+    wp_enqueue_script(
+        'kickstart-offers-dialog',
+        get_stylesheet_directory_uri() . '/assets/js/offers-dialog.js',
+        [],
+        filemtime($dlg_js),
+        true
+    );
+}
+
+
+
     // Offers Directory JS (abhängig von Leaflet)
     $dir_js = get_stylesheet_directory() . '/assets/js/offers-directory.js';
     if (file_exists($dir_js)) {
         wp_enqueue_script(
             'kickstart-offers-directory',
             get_stylesheet_directory_uri() . '/assets/js/offers-directory.js',
-            ['leaflet-js'], // <- Leaflet zuerst laden
+           # ['leaflet-js'], // <- Leaflet zuerst laden
+             ['leaflet-js', 'kickstart-offers-dialog'],
             filemtime($dir_js),
             true
         );
@@ -197,12 +218,17 @@ add_action('init', function () {
     $next_base = ks_next_base();
 
     ob_start(); ?>
-    <div id="ksDir"
-         class="ks-dir"
-         data-api="<?php echo esc_attr($api_base); ?>"
-         data-next="<?php echo esc_attr($next_base); ?>"
-         data-type="<?php echo esc_attr($type); ?>"
-         data-city="<?php echo esc_attr($city); ?>">
+   
+   
+<div id="ksDir"
+     class="ks-dir"
+     data-api="<?php echo esc_attr($api_base); ?>"
+     data-next="<?php echo esc_attr($next_base); ?>"
+     data-type="<?php echo esc_attr($type); ?>"
+     data-city="<?php echo esc_attr($city); ?>"
+     data-close-icon="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/close.png' ); ?>"
+     data-coachph="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/avatar.png' ); ?>">
+
 
       <!-- HERO -->
       <div class="ks-dir__hero" style="--hero-img: url('<?php echo esc_url($hero_url); ?>')">
@@ -276,10 +302,18 @@ add_action('init', function () {
 
 
    
+    
+
+
+
+    
+ 
+
       <!-- Modal -->
       <div id="ksOfferModal" class="ks-dir__modal" hidden>
         <div class="ks-dir__overlay" data-close></div>
         <div class="ks-dir__panel" role="dialog" aria-modal="true" aria-labelledby="ksOfferTitle">
+
           <button type="button" class="ks-dir__close" data-close aria-label="Schließen">✕</button>
 
           <h3 id="ksOfferTitle" class="ks-dir__m-title">Standort</h3>
