@@ -305,6 +305,19 @@ add_action('init', function () {
     
 
 
+<!-- Booking Modal (iframe) -->
+<div id="ksBookModal" class="ks-dir__modal" hidden>
+  <div class="ks-dir__overlay" data-close></div>
+  <div class="ks-dir__panel" role="dialog" aria-modal="true" aria-label="Buchung">
+    <button type="button" class="ks-dir__close" data-close aria-label="Schließen">
+      <?php
+      $close = get_stylesheet_directory_uri() . '/assets/img/close.png';
+      echo '<img src="' . esc_url($close) . '" alt="Schließen" width="14" height="14">';
+      ?>
+    </button>
+    <iframe class="ks-book__frame" src="" title="Buchung" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</div>
 
     
  
