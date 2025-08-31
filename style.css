@@ -844,3 +844,109 @@ body.ks-modal-open{overflow:hidden;}
   .ks-session__actions{ justify-content: stretch; }
   .ks-session__btn{ width: 100%; }
 }
+
+
+
+
+
+
+
+
+
+
+
+/* booking iframe inside modal */
+.ks-book__frame{
+  width: 100%;
+  height: 72vh;           /* nice viewport height inside panel */
+  border: 0;
+  background: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* kleine Helpers für das Formular */
+.ks-book__h4 { margin: 12px 0 6px; font-size: 16px; font-weight: 700; }
+.ks-book__person a { color:#0ea5e9; text-decoration:none; }
+.ks-book__person a:hover { text-decoration:underline; }
+
+.ks-fs { border:1px solid #eaeaea; border-radius:10px; padding:12px; margin:12px 0; }
+.ks-fs > legend { font-weight:700; padding:0 6px; }
+
+.ks-row { display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+.ks-grid { display:grid; gap:12px; grid-template-columns: 1fr 1fr; }
+.ks-field { display:grid; gap:6px; }
+.ks-field--sm input { max-width: 120px; }
+.ks-field--btn { align-self: end; }
+.ks-err { display:none; color:#b91c1c; font-size:12px; }
+.ks-check { display:flex; gap:8px; align-items:flex-start; }
+
+.dob-group { display:flex; gap:8px; }
+.dob-group select { min-width: 80px; }
+
+.ks-actions { margin-top: 10px; display:flex; justify-content:flex-end; }
+@media (max-width:600px){ .ks-grid { grid-template-columns: 1fr; } }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* iFrame im Modal (eingebettetes Next-Formular) */
+.ks-book__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+
