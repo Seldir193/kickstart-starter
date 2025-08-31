@@ -20,16 +20,51 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // assets/js/offers-dialog.js
 (function () {
   "use strict";
 
-  const $  = (s, c = document) => c.querySelector(s);
+  /* ========== tiny helpers ========== */
+  const $  = (sel, ctx = document) => ctx.querySelector(sel);
   const esc = (s) => String(s).replace(/[&<>"']/g, m =>
     ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[m])
   );
+  const pick = (o, path) => {
+    try { return path.reduce((a,k)=> (a && a[k] != null ? a[k] : null), o) ?? null; } catch { return null; }
+  };
 
-  // ---- formatting helpers ----
+  /* ========== day/name/address helpers ========== */
   const DAY_ALIASES = {
     m:"Mo", mo:"Mo", montag:"Mo", monday:"Mo", mon:"Mo",
     di:"Di", dienstag:"Di", tuesday:"Di", tue:"Di",
@@ -40,8 +75,8 @@
     so:"So", sonntag:"So", sunday:"So", sun:"So"
   };
   const DAY_LONG = { Mo:"Montag", Di:"Dienstag", Mi:"Mittwoch", Do:"Donnerstag", Fr:"Freitag", Sa:"Samstag", So:"Sonntag" };
-  const normDay = v => v ? (DAY_ALIASES[String(v).trim().toLowerCase()] || v) : "";
-  const dayLongPlural = c => (DAY_LONG[c] || c) + (c ? "s" : "");
+  const normDay = (v) => v ? (DAY_ALIASES[String(v).trim().toLowerCase()] || v) : "";
+  const dayLongPlural = (c) => (DAY_LONG[c] || c) + (c ? "s" : "");
 
   const nameAddr = (o) => {
     const name = o.clubName || o.club || o.provider || o.title || o.type || "Standort";
@@ -51,22 +86,16 @@
     return { name, addr };
   };
 
-  // coords for Google link
-  const isLat = n => Number.isFinite(n) && n >= -90 && n <= 90;
-  const isLng = n => Number.isFinite(n) && n >= -180 && n <= 180;
-  const parseCoord = v => {
-    if (v == null) return NaN;
-    const n = Number(String(v).trim().replace(",", "."));
-    return Number.isFinite(n) ? n : NaN;
-  };
+  /* ========== coords → google maps link ========== */
+  const isLat = (n) => Number.isFinite(n) && n >= -90 && n <= 90;
+  const isLng = (n) => Number.isFinite(n) && n >= -180 && n <= 180;
+  const parseCoord = (v) => { if (v == null) return NaN; const n = Number(String(v).trim().replace(",", ".")); return Number.isFinite(n) ? n : NaN; };
   function latLngOf(o){
-    const lat = parseCoord(o.lat ?? o.latitude);
-    const lng = parseCoord(o.lng ?? o.lon ?? o.long ?? o.longitude);
+    const lat = parseCoord(o.lat ?? o.latitude), lng = parseCoord(o.lng ?? o.lon ?? o.long ?? o.longitude);
     if (isLat(lat) && isLng(lng)) return [lat, lng];
     const c = o.coords || o.coord || o.position || o.geo || o.gps || o.map || o.center || o.centerPoint || o.point || o.location;
     if (c && typeof c === "object") {
-      const la = parseCoord(c.lat ?? c.latitude);
-      const lo = parseCoord(c.lng ?? c.lon ?? c.long ?? c.longitude);
+      const la = parseCoord(c.lat ?? c.latitude), lo = parseCoord(c.lng ?? c.lon ?? c.long ?? c.longitude);
       if (isLat(la) && isLng(lo)) return [la, lo];
     }
     return null;
@@ -78,6 +107,7 @@
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addr || (o.location || ""))}`;
   };
 
+  /* ========== formatters & booking link ========== */
   const formatAge   = s => {
     const f = Number(s.ageFrom ?? ""), t = Number(s.ageTo ?? "");
     if (Number.isFinite(f) && Number.isFinite(t)) return `${f} - ${t} Jährige`;
@@ -88,7 +118,6 @@
     const a = String(s.timeFrom || "").trim(), b = String(s.timeTo || "").trim();
     return a && b ? `${a} - ${b}` : (a || b || "—");
   };
-  const formatCoach = s => s.coachName || s.coach || [s.coachFirst, s.coachLast].filter(Boolean).join(" ") || "—";
   const formatPrice = s => Number.isFinite(+s.price) ? `${(+s.price).toFixed(2)}€/Monat` : (s.priceText || "—");
   const bookHref    = (base, s) => {
     const id = s && s._id ? String(s._id) : "";
@@ -96,29 +125,195 @@
     return id ? `${b}/book?offerId=${encodeURIComponent(id)}&embed=1` : "#";
   };
 
-  // session cards
-  function buildSessionsHtml(nextBase, sessions){
+  /* ========== coach helpers ========== */
+  function getCoachFull(o){
+    return (
+      o.coachName ||
+      [o.coachFirst, o.coachLast].filter(Boolean).join(" ") ||
+      o.coach ||
+      ""
+    ).trim();
+  }
+  function splitName(full){
+    const parts = String(full).trim().split(/\s+/).filter(Boolean);
+    if (!parts.length) return { first: "—", last: "" };
+    if (parts.length === 1) return { first: parts[0], last: "" };
+    return { first: parts[0], last: parts.slice(1).join(" ") };
+  }
+  function getCoachFirst(o){ return splitName(getCoachFull(o)).first; }
+  function getCoachLast(o){  return splitName(getCoachFull(o)).last;  }
+
+
+
+
+
+
+function getNextBase(){
+  const root = document.getElementById('ksDir');
+  const base = (root?.dataset?.next || '').trim();
+  return base ? base.replace(/\/+$/, '') : '';
+}
+
+function normalizeCoachSrc(src){
+  if (!src) return '';
+
+  // schon absolute URL?
+  if (/^https?:\/\//i.test(src)) return src;
+
+  const next = getNextBase(); // z. B. http://localhost:3000
+
+  // /api/uploads/coach/...
+  if (src.startsWith('/api/uploads/coach/')) {
+    return next ? `${next}${src}` : src; // ohne next wäre falsch (würde auf WP-Origin zeigen)
+  }
+
+  // /uploads/coach/...  -> /api/uploads/coach/... auf Next
+  if (/^\/?uploads\/coach\//i.test(src)) {
+    const p = src.startsWith('/') ? `/api${src}` : `/api/${src}`;
+    return next ? `${next}${p}` : p;
+  }
+
+  // nur Dateiname -> /api/uploads/coach/<name> auf Next
+  if (/^[\w.\-]+\.(png|jpe?g|webp|gif)$/i.test(src)) {
+    const p = `/api/uploads/coach/${src}`;
+    return next ? `${next}${p}` : p;
+  }
+
+  // alles andere unverändert
+  return src;
+}
+
+
+
+
+  function getCoachAvatar(o){
     const root = document.getElementById("ksDir");
-    const coachPH = root?.dataset?.coachph || "";
+    const ph   = root?.dataset?.coachph || "";
+    const direct =
+      o.coachImage || o.coachPhoto || o.coachAvatar || o.coachPic || o.coachImg ||
+      o.coach_image || o.coach_photo || o.coach_avatar || o.coach_pic || o.coach_img ||
+      pick(o, ["coach","image"]) || pick(o, ["coach","photo"]) || pick(o, ["coach","avatar"]) ||
+      pick(o, ["provider","coachImage"]) || pick(o, ["provider","coach_image"]) ||
+      pick(o, ["owner","avatarUrl"]) || pick(o, ["owner","coachImage"]) ||
+      pick(o, ["creator","avatarUrl"]) || pick(o, ["user","avatarUrl"]);
+    return normalizeCoachSrc(direct || ph || "");
+  }
 
-    const coachFirst = (s) =>
-      s.coachFirst || (s.coachName ? String(s.coachName).split(/\s+/)[0] : (s.coach || "").split(/\s+/)[0]) || "—";
-    const coachLast  = (s) => {
-      if (s.coachLast) return s.coachLast;
-      const full = s.coachName || s.coach || "";
-      const parts = String(full).trim().split(/\s+/);
-      return parts.length > 1 ? parts.slice(1).join(" ") : "—";
-    };
-    const coachImg   = (s) =>
-      s.coachImage || s.coachPhoto || s.coachAvatar || s.coachPic || s.coachImg || coachPH;
 
-    return (sessions || []).map((s) => {
+
+
+
+  /* ========== body lock ========== */
+  const LOCK_ATTR = "data-ks-modal-lock";
+  const lockBody = () => {
+    if (!document.body.hasAttribute(LOCK_ATTR)) {
+      document.body.setAttribute(LOCK_ATTR, document.body.style.overflow || "");
+      document.body.style.overflow = "hidden";
+    }
+    document.body.classList.add("ks-modal-open");
+  };
+  const unlockBody = () => {
+    if (document.body.hasAttribute(LOCK_ATTR)) {
+      document.body.style.overflow = document.body.getAttribute(LOCK_ATTR);
+      document.body.removeAttribute(LOCK_ATTR);
+    }
+    document.body.classList.remove("ks-modal-open");
+  };
+
+  /* ========== enforce modal layout (wins against stray CSS) ========== */
+  const forceLayout = (modal, overlay, panel, z = 4000) => {
+    if (modal) { modal.style.position="fixed"; modal.style.inset="0"; modal.style.zIndex=String(z); modal.style.display="grid"; modal.style.placeItems="center"; }
+    if (overlay){ overlay.style.position="absolute"; overlay.style.inset="0"; overlay.style.background="rgba(0,0,0,.45)"; overlay.style.display="block"; overlay.style.zIndex="0"; }
+    if (panel) {
+      panel.style.position="relative"; panel.style.zIndex="1";
+      panel.style.background="#fff"; panel.style.border="1px solid #eaeaea";
+      panel.style.borderRadius="12px"; panel.style.boxShadow="0 16px 40px rgba(0,0,0,.18)";
+      panel.style.padding="16px"; panel.style.width="min(720px, calc(100% - 24px))";
+      panel.style.maxHeight="calc(100dvh - 24px)"; panel.style.overflow="auto";
+    }
+  };
+
+  /* ========== BOOKING DIALOG (iframe) ========== */
+  const BookDialog = (() => {
+    function ensure() {
+      let modal = $("#ksBookModal");
+      if (!modal) {
+        modal = document.createElement("div");
+        modal.id = "ksBookModal";
+        modal.className = "ks-dir__modal";
+        modal.hidden = true;
+        modal.innerHTML = `
+          <div class="ks-dir__overlay" data-close></div>
+          <div class="ks-dir__panel" role="dialog" aria-modal="true" aria-label="Buchung">
+            <button type="button" class="ks-dir__close" data-close aria-label="Schließen">✕</button>
+            <iframe class="ks-book__frame" src="" title="Buchung" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="width:100%;height:80vh;border:0;border-radius:10px;"></iframe>
+          </div>`;
+        document.body.appendChild(modal);
+      }
+      return modal;
+    }
+
+    function open(url, opts = {}) {
+      const modal = ensure();
+      const overlay = $(".ks-dir__overlay", modal);
+      const panel   = $(".ks-dir__panel", modal);
+      const frame   = $(".ks-book__frame", modal);
+      const closeBtn= $(".ks-dir__close", modal);
+
+      // optional close icon
+      const root = $("#ksDir");
+      const icon = opts.closeIcon || root?.dataset?.closeIcon || root?.dataset?.closeicon || "";
+      if (icon) closeBtn.innerHTML = `<img src="${esc(icon)}" alt="Schließen" width="14" height="14">`;
+
+      // stronger z-index so it sits on top of offer dialog
+      forceLayout(modal, overlay, panel, 4100);
+
+      frame.src = url || "#";
+      modal.hidden = false;
+      lockBody();
+
+      // handlers
+      const doClose = () => {
+        modal.hidden = true;
+        frame.src = "about:blank";
+        overlay.removeEventListener("click", onOverlay);
+        modal.removeEventListener("click", onAny);
+        document.removeEventListener("keydown", onEsc);
+        unlockBody();
+      };
+      const onOverlay = () => doClose();
+      const onAny     = (e) => { if (e.target.closest("[data-close]")) doClose(); };
+      const onEsc     = (e) => { if (e.key === "Escape") doClose(); };
+
+      overlay.addEventListener("click", onOverlay);
+      modal.addEventListener("click", onAny);
+      document.addEventListener("keydown", onEsc);
+    }
+
+    function close() {
+      const modal = $("#ksBookModal");
+      if (!modal || modal.hidden) return;
+      const frame = $(".ks-book__frame", modal);
+      if (frame) frame.src = "about:blank";
+      modal.hidden = true;
+      unlockBody();
+    }
+
+    return { open, close };
+  })();
+
+
+
+  /* ========== session cards ========== */
+  function buildSessionsHtml(nextBase, sessions){
+    const list = Array.isArray(sessions) ? sessions : [];
+    return list.map((s) => {
       const day   = (Array.isArray(s.days) && s.days.length) ? dayLongPlural(normDay(s.days[0])) : "—";
       const time  = formatTime(s);
       const age   = formatAge(s);
-      const fName = coachFirst(s);
-      const lName = coachLast(s);
-      const img   = coachImg(s);
+      const fName = getCoachFirst(s);
+      const lName = getCoachLast(s);
+      const img   = getCoachAvatar(s);
       const href  = bookHref(nextBase, s);
 
       return `
@@ -138,129 +333,77 @@
           </div>
 
           <div class="ks-session__actions">
-            <a class="btn btn-primary ks-session__btn" href="${esc(href)}" target="_blank" rel="noopener">Auswählen</a>
+            <a class="btn btn-primary ks-session__btn" href="${esc(href)}" data-book-href="${esc(href)}">Auswählen</a>
             <span class="ks-session__price">${esc(formatPrice(s))}</span>
           </div>
         </div>`;
     }).join("");
   }
 
-  // force true overlay layout (wins against any conflicting CSS)
-  function forceLayout(modal, overlay, panel){
-    if (modal) {
-      modal.style.position   = "fixed";
-      modal.style.inset      = "0";
-      modal.style.zIndex     = "4000";
-      modal.style.display    = "grid";
-      modal.style.placeItems = "center";
-    }
-    if (overlay) {
-      overlay.style.position      = "absolute";
-      overlay.style.inset         = "0";
-      overlay.style.background    = "rgba(0,0,0,.45)";
-      overlay.style.display       = "block";
-      overlay.style.zIndex        = "0";
-      overlay.style.pointerEvents = "auto";
-    }
-    if (panel) {
-      panel.style.position     = "relative";
-      panel.style.zIndex       = "1";
-      panel.style.background   = "#fff";
-      panel.style.border       = "1px solid #eaeaea";
-      panel.style.borderRadius = "12px";
-      panel.style.boxShadow    = "0 16px 40px rgba(0,0,0,.18)";
-      panel.style.padding      = "16px";
-      panel.style.width        = "min(720px, calc(100% - 24px))";
-      panel.style.maxHeight    = "calc(100dvh - 24px)";
-      panel.style.overflow     = "auto";
-    }
+  /* ========== offer modal: wiring ========== */
+  function attachHandlers(modal, overlay){
+    const panel = $(".ks-dir__panel", modal);
+
+    const panelOnClick = (e) => {
+      // close?
+      if (e.target.closest("[data-close]")) { close(); return; }
+
+      // booking?
+      const book = e.target.closest("[data-book-href]");
+      if (book) {
+        e.preventDefault();
+        const url = book.getAttribute("data-book-href") || book.getAttribute("href") || "";
+        const root = $("#ksDir");
+        const icon = root?.dataset?.closeIcon || root?.dataset?.closeicon || "";
+        close(); // hide offer dialog
+        BookDialog.open(url, { closeIcon: icon });
+        return;
+      }
+      e.stopPropagation();
+    };
+    panel && panel.addEventListener("click", panelOnClick);
+
+    const onOverlayClick = () => close();
+    overlay && overlay.addEventListener("click", onOverlayClick);
+
+    const onEsc = (e) => { if (e.key === "Escape") close(); };
+    document.addEventListener("keydown", onEsc);
+
+    modal.__ksHandlers = { panelOnClick, onOverlayClick, onEsc };
+  }
+  function detachHandlers(modal){
+    const h = modal && modal.__ksHandlers;
+    if (!h) return;
+    const panel   = $(".ks-dir__panel", modal);
+    const overlay = $(".ks-dir__overlay", modal);
+    panel   && panel.removeEventListener("click", h.panelOnClick);
+    overlay && overlay.removeEventListener("click", h.onOverlayClick);
+    document.removeEventListener("keydown", h.onEsc);
+    modal.__ksHandlers = null;
   }
 
-  // body lock
-  const LOCK_ATTR = "data-ks-modal-lock";
-  function lockBody(){
-    if (!document.body.hasAttribute(LOCK_ATTR)) {
-      document.body.setAttribute(LOCK_ATTR, document.body.style.overflow || "");
-      document.body.style.overflow = "hidden";
-    }
-    document.body.classList.add("ks-modal-open");
-  }
-  function unlockBody(){
-    if (document.body.hasAttribute(LOCK_ATTR)) {
-      document.body.style.overflow = document.body.getAttribute(LOCK_ATTR);
-      document.body.removeAttribute(LOCK_ATTR);
-    }
-    document.body.classList.remove("ks-modal-open");
-  }
+  /* ========== public API ========== */
+  const LAST = { offer:null, sessions:null, opts:null };
 
-
-
-
-
-
-
-
-
-  // replace your current attachHandlers/detachHandlers with this:
-
-function attachHandlers(modal, overlay){
-  const panel = document.querySelector("#ksOfferModal .ks-dir__panel");
-
-  // Handle clicks *inside* the dialog:
-  // - If the click is on [data-close] (e.g. the X img inside the button), close().
-  // - Otherwise stop propagation so overlay/modal don’t see inside clicks.
-  const panelOnClick = (e) => {
-    if (e.target.closest("[data-close]")) { close(); return; }
-    e.stopPropagation();
-  };
-  panel && panel.addEventListener("click", panelOnClick);
-
-  // Clicking the dimmed background closes
-  const onOverlayClick = () => close();
-  overlay && overlay.addEventListener("click", onOverlayClick);
-
-  // ESC closes
-  const onEsc = (e) => { if (e.key === "Escape") close(); };
-  document.addEventListener("keydown", onEsc);
-
-  modal.__ksHandlers = { panelOnClick, onOverlayClick, onEsc };
-}
-
-function detachHandlers(modal){
-  const h = modal && modal.__ksHandlers;
-  if (!h) return;
-  const panel   = document.querySelector("#ksOfferModal .ks-dir__panel");
-  const overlay = document.querySelector("#ksOfferModal .ks-dir__overlay");
-  panel   && panel.removeEventListener("click", h.panelOnClick);
-  overlay && overlay.removeEventListener("click", h.onOverlayClick);
-  document.removeEventListener("keydown", h.onEsc);
-  modal.__ksHandlers = null;
-}
-
-
-
-
-
-
-
-
-
-
-  // public API
   function open(offer, sessions, opts = {}){
     const modal = $("#ksOfferModal");
     if (!modal || !offer) return;
+
+    // remember last (for BACK from booking)
+    LAST.offer = offer;
+    LAST.sessions = sessions;
+    LAST.opts = opts;
 
     let overlay = $(".ks-dir__overlay", modal);
     let panel   = $(".ks-dir__panel",   modal);
     if (!overlay) { overlay = document.createElement("div"); overlay.className = "ks-dir__overlay"; modal.appendChild(overlay); }
     if (!panel)   { panel   = document.createElement("div"); panel.className   = "ks-dir__panel";   modal.appendChild(panel); }
 
-    forceLayout(modal, overlay, panel);
+    forceLayout(modal, overlay, panel, 4000);
 
     const root     = $("#ksDir");
     const closeURL = opts.closeIcon || root?.dataset?.closeIcon || root?.dataset?.closeicon || "";
-    const nextBase = opts.nextBase || root?.dataset?.next || "http://localhost:3000";
+    const nextBase = opts.nextBase  || root?.dataset?.next      || "http://localhost:3000";
 
     const { name, addr } = nameAddr(offer);
     const gHref = googleMapsHref(offer);
@@ -292,5 +435,73 @@ function detachHandlers(modal){
     unlockBody();
   }
 
-  window.KSOffersDialog = { open, close };
+  // expose
+  window.KSOffersDialog = { open, close, __last: LAST };
+
+  /* ========== BACK from embedded booking (Next) ========== */
+  // In /book/page.tsx send: window.parent?.postMessage({ type: 'KS_BOOKING_BACK' }, '*');
+  window.addEventListener("message", (e) => {
+    const d = e && e.data;
+    if (!d || (d.type !== "KS_BOOKING_BACK" && d.type !== "KS_BOOKING_CLOSE")) return;
+    // close booking dialog
+    BookDialog.close();
+    // BACK → reopen last offer dialog
+    if (d.type === "KS_BOOKING_BACK" && window.KSOffersDialog && window.KSOffersDialog.__last?.offer) {
+      const { offer, sessions, opts } = window.KSOffersDialog.__last;
+      window.KSOffersDialog.open(offer, sessions, opts || {});
+    }
+  }, false);
+
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
