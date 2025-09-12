@@ -1,3 +1,5 @@
+
+
 <?php
 /**
  * KickStart Starter Theme – functions.php
@@ -180,14 +182,31 @@ add_action('init', function () {
     $type = isset($_GET['type']) ? sanitize_text_field( wp_unslash($_GET['type']) ) : '';
     $city = isset($_GET['city']) ? sanitize_text_field( wp_unslash($_GET['city']) ) : '';
 
+     $category = isset($_GET['category']) ? sanitize_text_field( wp_unslash($_GET['category']) ) : '';
+    $sub_type = isset($_GET['sub_type']) ? sanitize_text_field( wp_unslash($_GET['sub_type']) ) : '';
+
     $mapTitles = [
       'Kindergarten'     => 'Fußballkindergarten',
       'Foerdertraining'  => 'Fördertraining',
       'PersonalTraining' => 'Individualtraining',
       'AthleticTraining' => 'Power Training',
       'Camp'             => 'Holiday Programs',
+
+      'Torwarttraining'            => 'Torwarttraining',
+      'Foerdertraining_Athletik'   => 'Fördertraining · Athletik',
+      'Einzeltraining_Athletik'    => 'Einzeltraining · Athletik',
+      'Einzeltraining_Torwart'     => 'Einzeltraining · Torwart',
+      'RentACoach_Generic'         => 'Rent-a-Coach',
+      'ClubProgram_Generic'        => 'Club Program',
+      'CoachEducation'             => 'Coach Education',
     ];
-    $heading = $mapTitles[$type] ?? 'Programme';
+     $headingKey = $sub_type ?: $type;
+     $heading = $mapTitles[$headingKey] ?? 'Programme';
+    //$heading = $mapTitles[$type] ?? 'Programme';
+
+  
+
+
 
     $hero_url = get_the_post_thumbnail_url(null, 'full');
     if (!$hero_url) {
@@ -198,6 +217,10 @@ add_action('init', function () {
     $api_base = ks_api_base();
     $query    = ['limit' => '200'];
     if ($type !== '') $query['type'] = $type;
+     if ($city !== '')     $query['city']     = $city;
+    if ($category !== '') $query['category'] = $category;
+    if ($sub_type !== '') $query['sub_type'] = $sub_type;
+
     $url      = add_query_arg($query, $api_base . '/api/offers');
 
     $ageMin = null; $ageMax = null;
@@ -225,6 +248,9 @@ add_action('init', function () {
      data-api="<?php echo esc_attr($api_base); ?>"
      data-next="<?php echo esc_attr($next_base); ?>"
      data-type="<?php echo esc_attr($type); ?>"
+     data-category="<?php echo esc_attr($category); ?>"
+           data-subtype="<?php echo esc_attr($sub_type); ?>"
+
      data-city="<?php echo esc_attr($city); ?>"
      data-close-icon="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/close.png' ); ?>"
      data-coachph="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/avatar.png' ); ?>">
@@ -349,6 +375,52 @@ add_action('init', function () {
     return ob_get_clean();
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
