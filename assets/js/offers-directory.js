@@ -1,24 +1,5 @@
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // assets/js/offers-directory.js
 (function () {
   "use strict";
@@ -128,6 +109,10 @@
   /* ===== geocoding (Nominatim) ===== */
   const GEOCODE_ENDPOINT = "https://nominatim.openstreetmap.org/search";
   const geoCache = new Map(), inflight = new Map();
+
+
+
+
   async function geocodeCity(name){
     const key = normalizeCity(name); if (!key) return null;
     if (geoCache.has(key)) return geoCache.get(key);
@@ -157,6 +142,14 @@
     }
     return pts;
   }
+
+
+
+
+
+
+
+
 
   /* ===== map setup ===== */
   const DEFAULT_CENTER = [51.1657, 10.4515]; // Germany
@@ -302,6 +295,12 @@
       const f = Number(o.ageFrom ?? 0), t = Number(o.ageTo ?? 99);
       return Number.isFinite(f) && Number.isFinite(t) && age >= f && age <= t;
     });
+
+
+
+
+
+
     const p2 = pointsFrom(aItems);
     if (p2.length) { flyTo(map, p2); return; }
     const names = Array.from(new Set(aItems.map(o => cityFromLocationString(o.location)).filter(Boolean)));
@@ -325,6 +324,11 @@
     const API  = root.dataset.api  || "http://localhost:5000";
     const CITY = root.dataset.city || "";
 
+    // NEW: category/sub_type aus WP
+const CATEGORY = root.dataset.category || "";
+const SUBTYPE  = root.dataset.subtype  || "";
+
+
     const mapNode = $("#ksMap", root);
     ensureMapHeight(mapNode);
     const map = initMap(mapNode);
@@ -332,7 +336,15 @@
     let items = [], filtered = [], markers = [], allPts = [];
 
     // fetch offers
-    const url = buildUrl(`${API}/api/offers`, { type: TYPE || undefined, limit: 500 });
+    //const url = buildUrl(`${API}/api/offers`, { type: TYPE || undefined, limit: 500 });
+    // NEW: Backend direkt mitfiltern lassen (spart Datenmenge)
+const url = buildUrl(`${API}/api/offers`, {
+  type: TYPE || undefined,
+  category: CATEGORY || undefined,
+  sub_type: SUBTYPE || undefined,
+  limit: 500
+});
+
     try {
       const data = await fetch(url).then(r => r.json());
       items = Array.isArray(data?.items) ? data.items : (Array.isArray(data) ? data : []);
@@ -346,13 +358,28 @@
       if (listEl) listEl.innerHTML = '<li><div class="card">Keine Angebote gefunden.</div></li>';
     }
 
+
+    // NEW: akzeptiere sowohl type als auch legacy_type (rückwärtskompatibel)
+function matchesType(o, t) {
+  if (!t) return true;
+  const a = String(o.type || "");
+  const b = String(o.legacy_type || "");
+  return a === t || b === t;
+}
+
+
     async function apply(){
       const day = normDay(daySel?.value || "");
       const age = (ageSel && ageSel.value !== "") ? parseInt(ageSel.value, 10) : NaN;
       const loc = (locSel?.value || "").trim();
 
       filtered = items.filter(o => {
-        if (TYPE && o.type !== TYPE) return false;
+        //if (TYPE && o.type !== TYPE) return false;
+        if (TYPE && !matchesType(o, TYPE)) return false;      // NEW
+if (CATEGORY && o.category !== CATEGORY) return false; // NEW
+if (SUBTYPE && o.sub_type !== SUBTYPE) return false;   // NEW
+
+
         if (day && !offerHasDay(o, day)) return false;
         if (!isNaN(age)) {
           const f = Number(o.ageFrom ?? 0), t = Number(o.ageTo ?? 99);
@@ -376,7 +403,11 @@
       setCounters(root, filtered);
       setAgeHeadline(ageTitle, filtered);
 
-      if (!map) return;
+  
+
+    
+
+  if (!map) return;
       const noneSet = (!day && isNaN(age) && !loc);
       if (noneSet) { resetView(map, allPts); return; }
       if (loc) { await moveForLoc(map, loc, items, filtered); return; }
@@ -384,13 +415,64 @@
       if (!isNaN(age)) { await moveForAge(map, age, items, filtered); return; }
     }
 
+
+
+
     daySel && daySel.addEventListener("change", apply);
     ageSel && ageSel.addEventListener("change", apply);
     locSel && locSel.addEventListener("change", apply);
 
+
+
     apply(); // initial
   });
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
