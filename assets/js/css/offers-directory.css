@@ -168,5 +168,8 @@ body.ks-modal-open{ overflow:hidden; } /* prevent page scroll while modal is ope
 
 
 
+.ks-news-msg{display:none;margin-top:8px;font-size:14px}
+.ks-news-msg.is-ok{color:#0a7a3d}
+.ks-news-msg.is-err{color:#b91c1c}
 
 
