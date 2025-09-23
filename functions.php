@@ -80,6 +80,7 @@ add_action('wp_enqueue_scripts', function () {
 
 
 
+
     
     // Dialog JS
 $dlg_js = get_stylesheet_directory() . '/assets/js/offers-dialog.js';
@@ -108,6 +109,27 @@ if (file_exists($dlg_js)) {
         );
     }
 
+
+
+
+
+// in wp_enqueue_scripts callback:
+$news_js = get_stylesheet_directory() . '/assets/js/newsletter.js';
+if (file_exists($news_js)) {
+  wp_enqueue_script(
+    'ks-newsletter',
+    get_stylesheet_directory_uri() . '/assets/js/newsletter.js',
+    [],
+    filemtime($news_js),
+    true
+  );
+  wp_localize_script('ks-newsletter', 'KS_NEWS', [
+    'api' => 'http://127.0.0.1:5000/api/public/newsletter',
+  ]);
+}
+
+
+
     // Offers Directory CSS (nach Leaflet-CSS laden)
     $dir_css = get_stylesheet_directory() . '/assets/css/offers-directory.css';
     if (file_exists($dir_css)) {
@@ -119,10 +141,6 @@ if (file_exists($dlg_js)) {
         );
     }
 });
-
-
-
-
 
 
 
