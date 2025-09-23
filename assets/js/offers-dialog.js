@@ -10,47 +10,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // assets/js/offers-dialog.js
 (function () {
   "use strict";
@@ -242,12 +201,21 @@ function normalizeCoachSrc(src){
         modal.id = "ksBookModal";
         modal.className = "ks-dir__modal";
         modal.hidden = true;
+
+
+
         modal.innerHTML = `
           <div class="ks-dir__overlay" data-close></div>
           <div class="ks-dir__panel" role="dialog" aria-modal="true" aria-label="Buchung">
             <button type="button" class="ks-dir__close" data-close aria-label="Schließen">✕</button>
             <iframe class="ks-book__frame" src="" title="Buchung" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="width:100%;height:80vh;border:0;border-radius:10px;"></iframe>
           </div>`;
+
+
+
+
+
+
         document.body.appendChild(modal);
       }
       return modal;
@@ -413,6 +381,7 @@ function normalizeCoachSrc(src){
       ? `<button type="button" class="ks-dir__close" data-close aria-label="Schließen"><img src="${esc(closeURL)}" alt="Schließen" width="14" height="14"></button>`
       : `<button type="button" class="ks-dir__close" data-close aria-label="Schließen">✕</button>`;
 
+
     panel.innerHTML = `
       ${closeBtn}
       <h3 class="ks-dir__m-title">${esc(name)}</h3>
@@ -453,6 +422,57 @@ function normalizeCoachSrc(src){
   }, false);
 
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
