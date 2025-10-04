@@ -1,0 +1,40 @@
+/* Abschnitt-Hintergründe etc. werden über Utility-Klassen gelöst.
+   Falls du individuelle Feinheiten brauchst, hier ergänzen. */
+
+/* Beispiel-Feinschliff (optional): */
+#fr-intro .ks-kicker{letter-spacing:.02em}
+#fr-benefits img{object-fit:cover}
+
+
+
+/* === Franchise Vorteile (3er-Grid) === */
+.ks-section--soft{background:#f5f6f7}
+
+.ks-title-wrap{position:relative;text-align:center;margin-bottom:32px}
+.ks-title-wrap .ks-dir__title{position:relative;z-index:2}
+.ks-title-wrap::after{
+  content:attr(data-bgword);
+  position:absolute;left:50%;top:-10px;transform:translateX(-50%);
+  font-family:"Barlow Condensed",system-ui,sans-serif;font-weight:700;
+  font-size:160px;line-height:1;letter-spacing:.02em;
+  color:#000;opacity:.05;pointer-events:none;z-index:1;white-space:nowrap;
+}
+
+.ks-benefits{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:56px;text-align:center;align-items:start
+}
+.ks-benefit__icon{width:140px;max-width:60%;height:auto;margin:0 auto 16px;display:block}
+.ks-benefit h3{
+  margin:6px 0 10px;font-size:28px;line-height:1.2;
+  text-transform:uppercase;letter-spacing:.02em
+}
+.ks-benefit p{
+  margin:0 auto;max-width:420px;color:#7d8288;line-height:1.6
+}
+
+/* responsive */
+@media (max-width: 980px){
+  .ks-benefits{grid-template-columns:1fr;gap:36px}
+  .ks-title-wrap::after{font-size:96px}
+}
