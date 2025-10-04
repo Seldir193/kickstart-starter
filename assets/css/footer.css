@@ -1,0 +1,265 @@
+
+
+
+/* =======================================================
+ * Footer – final
+ * ======================================================= */
+
+/* -------- Base / Full-bleed Hintergrund -------- */
+.site-footer{
+  --accent:#D71019;           /* Akzentfarbe für Icons/Bullets */
+  color:#eaeaea;
+  background:#0e0e10;
+  font-size:15px;
+  width:100%;
+}
+
+/* Inhalt auf Header-Breite begrenzen (wie layout.css .container) */
+.site-footer .container{
+  max-width:1440px;
+  margin:0 auto;
+  padding-left:16px;
+  padding-right:16px;
+}
+
+/* Da .site-footer in layout.css ein Flex-Container ist:
+   Top/Bottom vollflächig machen und nicht schrumpfen */
+.site-footer > .footer-top,
+.site-footer > .footer-bottom{
+  width:100%;
+  flex:0 0 auto;
+}
+
+/* Links: global neutral */
+.site-footer a{ color:#eaeaea; text-decoration:none; }
+.site-footer a:hover,
+.site-footer a:focus{ text-decoration:none; }
+
+/* -------- Top-Bereich -------- */
+
+
+.footer-grid{
+  display:grid;
+  gap:28px;
+  grid-template-columns:1fr;
+}
+@media (min-width:768px){
+  .footer-grid{ grid-template-columns:1.2fr 1fr 1fr 1fr; }
+}
+
+.footer-head{
+  font-size:14px;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+
+  
+  margin:0 0 12px;
+}
+
+.footer-head,
+.footer-head a {
+  color: #fff;
+}
+
+/* Logo aus dem Customizer im Footer NICHT invertieren */
+.footer-logo img{ max-height:42px; width:auto; filter:brightness(0) invert(1); } /* alte Regel */
+.footer-logo img,
+.footer-logo .custom-logo,
+.footer-logo-img{ filter:none; } /* überschreibt die alte Regel */
+
+.footer-title{ margin:0 0 6px; font-size:20px; }
+.footer-tagline{ margin:6px 0 0; color:#bfc3c8; }
+
+/* Listen & Menüs */
+.footer-list,
+.footer-menu,
+.social-list{ list-style:none; padding:0; margin:0; }
+
+.footer-list li,
+.footer-menu li{ margin:6px 0; }
+
+.footer-menu a{ opacity:.9; }
+.footer-menu a:hover{ opacity:1; text-decoration:none; }
+
+/* Social */
+.social-list{ display:flex; gap:10px; margin-top:4px; }
+.social-list a{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:36px; height:36px; border-radius:999px;
+  background:#1b1b1f; border:1px solid #26262b; font-weight:600;
+}
+
+
+/* Social-Icons als einfarbige Masken im Kreis-Button */
+.social-list a.social-icon {
+  position: relative;            /* Basis für das Pseudo-Element */
+  overflow: hidden;              /* sauberer Zuschnitt */
+}
+
+
+
+
+
+
+.social-list a.social-icon::before{
+  content: "";
+  inline-size: 20px;
+  block-size: 20px;
+  display: block;
+  -webkit-mask: var(--icon) no-repeat center / contain;
+          mask: var(--icon) no-repeat center / contain;
+  background-color: var(--accent);   /* gleiche Farbe wie Plus-/Kontakt-Icons */
+}
+
+
+/* Social-Icons: default grau, hover weiß */
+.site-footer .social-list a.social-icon::before{
+  background-color: #b9bec4;                 /* grau im Normalzustand */
+  transition: background-color .2s ease;
+}
+
+.site-footer .social-list a.social-icon:hover::before{
+  background-color: #ffffff;                 /* beim Hover weiß */
+}
+
+
+.social-list a:hover{ background:#232329; }
+
+/* -------- Kontakt-Icons (einfarbig, kein Hover) -------- */
+.footer-contact,
+.footer-links,
+.footer-social{ display:flex; flex-direction:column; align-items:flex-start; }
+
+.footer-list{ text-align:left; }
+.footer-list li.with-icon{ display:flex; align-items:center; }
+
+.ks-contact-icon{
+  --size:28px;
+  inline-size:var(--size);
+  block-size:var(--size);
+  display:inline-flex; align-items:center; justify-content:center;
+  margin-right:10px; position:relative; top:1px;
+}
+.ks-contact-icon::before{
+  content:"";
+  inline-size:16px; block-size:16px; display:block;
+  -webkit-mask:var(--icon) no-repeat center / contain;
+          mask:var(--icon) no-repeat center / contain;
+  background-color:var(--accent);
+}
+
+/* Nur Text-Links hovern */
+.footer-list li .text{  color: #b9bec4; cursor: pointer; }
+.footer-list li .link{   color: #b9bec4;  cursor:pointer; text-decoration:none; }
+
+
+.footer-list li .link:hover{ color: #fff; text-decoration:none; }
+
+/* -------- Quicklinks mit Plus-Bullets -------- */
+.footer-menu.with-plus{ list-style:none; padding:0; margin:0; text-align:left; }
+
+.footer-menu.with-plus li{
+  position:relative;
+  padding-left:28px;
+  margin:8px 0;
+}
+.footer-menu.with-plus li::before{
+  content:"";
+  position:absolute; left:0; top:2px;
+  inline-size:14px; block-size:14px;
+  -webkit-mask:var(--plus-icon) no-repeat center / contain;
+          mask:var(--plus-icon) no-repeat center / contain;
+  background-color:var(--accent);
+  opacity:.95;
+}
+.footer-menu.with-plus a{  color: #b9bec4;    text-decoration:none; cursor:pointer; }
+.footer-menu.with-plus a:hover{ color: #fff; text-decoration:none; }
+
+/* -------- 4. Spalte: Unsere Standorte -------- */
+.footer-locations{ display:flex; flex-direction:column; align-items:flex-start; }
+.footer-locations .world-title{   color: #fff; text-decoration:none; }
+
+
+
+
+
+.footer-locations .world-title:hover{color: #fff; text-decoration:none; }
+.footer-locations .world-link{
+  display:inline-block;
+  padding:8px;
+  border:1px solid #26262b;
+  border-radius:12px;
+  background:#121215;
+  transition:background .2s ease;
+}
+.footer-locations .world-link:hover{ background:#1a1a1f; }
+.footer-locations .world-img{
+  display:block; width:200px; max-width:100%; height:auto; opacity:.9;
+}
+@media (max-width:480px){
+  .footer-locations .world-img{ width:160px; }
+}
+
+/* -------- Bottom (zentriert) -------- */
+.footer-bottom{ text-align:center; }
+
+.footer-bottom .footer-bottom-inner{
+  display:flex !important;
+  flex-direction:column !important;   /* © + Logo in einer Zeile (siehe .copyright-wrap) + Login darunter */
+  align-items:center !important;
+  justify-content:center !important;
+  gap:10px;
+  padding:unset;
+}
+
+.copyright-wrap{
+  display:flex; align-items:center; justify-content:center;
+  gap:10px; flex-wrap:wrap;
+}
+.footer-mini-logo{ height:30px; width:auto; display:block; filter:none; }
+
+.footer-bottom small{ color:#b9bec4; }
+.anbieter-login a{
+  display:inline-block; padding:6px 10px; border:1px solid #2a2a30; border-radius:8px;
+}
+.anbieter-login a:hover{ background:#1b1b21; text-decoration:none; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
