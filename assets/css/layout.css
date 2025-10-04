@@ -1,0 +1,202 @@
+
+
+@layer layout {
+  /* Body als 3-Zeilen-Grid: Header | Main | Footer */
+  body{
+    min-height:100vh;
+    display:grid;
+    grid-template-rows:auto 1fr auto;
+  }
+  @supports(min-height:100dvh){
+    body{ min-height:100dvh; }
+  }
+
+  /* Header fixiert, mit Adminbar-Offset */
+  .site-header{
+    position:fixed;
+    top:var(--wp-admin-bar-h);
+    left:0; right:0;
+    z-index:calc(var(--mega-z) + 1);
+    background:var(--header-bg);
+    border-bottom:1px solid #eaeaea;
+  }
+
+  /* Inhalt unter fixen Header schieben */
+  body{ padding-top:calc(var(--header-height) + var(--wp-admin-bar-h)); }
+
+  /* Header-Innenleben */
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    min-height:64px;
+  }
+  .brand{ display:flex; align-items:center; gap:8px; font-weight:700; font-size:20px; }
+  .custom-logo{ width:50px; height:50px; object-fit:contain; }
+  .site-title{ font-weight:700; text-decoration:none; color:#111; font-size:20px; }
+
+  /* Menü */
+  .menu{ display:flex; gap:12px; list-style:none; margin:0; padding:0; }
+  .menu a{ text-decoration:none; padding:8px 12px; border-radius:8px; color:#333; }
+  .menu a:hover{ color:#333; background:transparent; }
+  .menu .current-menu-item a{ background:#111; color:#fff; }
+
+  /* Container */
+  .container{
+    max-width:1440px;
+    margin:0 auto;
+    padding:16px;
+   
+    gap:20px;
+  }
+
+  /* Main scrollt, Rest nicht */
+  .site-main{
+    /* frühere Scroll-Container-Eigenschaften entfernen */
+    overflow:visible;
+    min-height:auto;
+    -webkit-overflow-scrolling:auto;
+    overscroll-behavior:auto;
+
+    /* Layout beibehalten */
+    display:flex;
+    flex-direction:column;
+    align-items:center;         /* horizontal */
+    justify-content:flex-start; /* lange Seiten starten oben */
+    padding:24px 16px;
+  }
+  .site-main::-webkit-scrollbar{ width:0; height:0; }
+
+  /* Kurze Seiten vertikal zentrieren */
+  .site-main > .container,
+  .site-main > .container.content,
+  .site-main > .contact-form,
+  .site-main > .entry,
+  .site-main > .page{
+    margin-block:auto;
+    width:100%;
+  }
+  .site-main .programme-grid{ margin-block:0; }
+
+  /* Startseite zentrieren, außer bei langen Rastern */
+  
+  body.home .site-main:has(.programme-grid, .wp-block-gallery, .posts, .entry-list){ justify-content:flex-start; }
+  .site-main:has(> .home-hero):not(:has(.programme-grid, .wp-block-gallery)){ justify-content:center; }
+
+  /* Footer */
+  .site-footer{
+    border-top:1px solid #eaeaea;
+    padding:20px 0;
+    text-align:center; font-size:14px; color:#666;
+    display:flex; justify-content:center; gap:20px;
+    margin-top:0; width:100%;
+  }
+  .site-footer a{ text-decoration:none; color:#666; }
+  .site-footer a:hover{ text-decoration:underline; }
+
+
+
+
+
+
+  html, body { overflow-x: hidden; }
+
+  /* Scrollbar unsichtbar, Scrollen bleibt möglich */
+  html { scrollbar-width: none; }           /* Firefox */
+  body { -ms-overflow-style: none; }        /* IE/alt Edge */
+  html::-webkit-scrollbar { width: 0; height: 0; } /* Chrome/Safari/Edge */
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* === Container-System + Full-bleed Utilities ===================== */
+:root{
+  /* Standard-Container fürs ganze Projekt */
+  --container-max: 1200px;
+
+  /* Optionaler Wide-Container (z. B. für Portfolio-Hero) */
+  --container-wide: 1440px;
+
+  /* Randabstand links/rechts – responsive */
+  --gutter: clamp(12px, 2vw, 24px);
+}
+
+/* Basis-Container (wie dein Header) */
+.container{
+  /* exakt wie dein Header: max 1200, aber mit dynamischem Padding */
+  /*width: min(100% - (2 * var(--gutter)), var(--container-max));*/
+  margin-inline: auto;
+}
+
+/* Breiter Container für ausgewählte Sektionen */
+.container--wide{
+  width: min(100% - (2 * var(--gutter)), var(--container-wide));
+}
+
+/* Full-bleed: Element zieht auf Viewport-Breite,
+   egal ob es in einem .container steckt */
+.full-bleed{
+  margin-inline: calc(50% - 50vw);
+  width: 100vw;
+}
+
+/* Band-Section: Hintergrund geht über volle Breite,
+   Inhalt bleibt im Container */
+.section-band{
+  background: var(--band-bg, #102a52); /* z. B. Sponsor-Band */
+  padding-block: clamp(20px, 3vw, 40px);
+}
+
+/* Dünne Trennlinie über volle Breite */
+.hr-bleed{
+  height: 1px;
+  background: var(--hr, #e5e7eb);
+}
+
+/* Sicherheit gegen horizontale Scroll-Leiste bei 100vw */
+html, body { overflow-x: clip; } /* (clip verhindert chrome-scrollbug) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
