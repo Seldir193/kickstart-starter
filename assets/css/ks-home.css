@@ -1,0 +1,529 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================================================== */
+/*  KS Home (assets/css/ks-home.css)                                          */
+/* ========================================================================== */
+
+:root{
+  /* Passe das an deine globale .container Breite an (z. B. 1100/1200/1400px) */
+  --ks-container: 1440px;
+}
+
+/* ========================= */
+/* HERO (mit Tabs & Slides)  */
+/* ========================= */
+
+.ks-home-hero{
+  position: relative;
+  padding: clamp(24px, 6vw, 56px) 0;
+  background: #f7f7f7;
+}
+
+/* Tabs oben – an Containerbreite zentriert (kein absolutes Positionieren) */
+.ks-hero-tabs{
+  position: relative;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+
+  max-width: var(--ks-container);
+  width: 100%;
+  margin: 0 auto 10px;        /* zentriert */
+  padding-left: 16px;         /* wie .container padding */
+  padding-right: 16px;
+}
+
+.ks-hero-tab{
+  appearance: none;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #111;
+  opacity: .55;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.ks-hero-tab__num{
+  border-top: 2px solid #111;
+  padding: .1em .5em;
+  line-height: 1;
+}
+.ks-hero-tab.is-active{ opacity: 1; }
+
+/* Slides (nur die aktive sichtbar) */
+.ks-hero-slides{ position: relative; }
+.ks-hero-slide{ display: none; }
+.ks-hero-slide.is-active{ display: block;    background: #fafafa;}
+
+/* Grid im Hero */
+.ks-home-grid{
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 32px;
+  align-items: center;
+}
+
+/* Stelle sicher, dass die Slide-Container exakt dieselbe Breite verwenden */
+#home-hero .ks-hero-slide > .container{
+  max-width: var(--ks-container) !important;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.ks-home-hero__title{
+  font-size: clamp(36px, 6vw, 72px);
+  line-height: 1.05;
+  font-weight: 800;
+  margin: 8px 0 12px;
+}
+.ks-home-hero__lead{ color:#374151; max-width: 60ch; }
+.ks-home-hero__actions{ display:flex; gap:12px; margin-top:18px; }
+
+.ks-home-hero__img{
+  width: 100%;
+  height: clamp(340px, 50vw, 560px);
+  object-fit: contain;
+  object-position: bottom right;
+  display: block;
+}
+
+/* Großes Wasserzeichen im Hintergrund aus dem data-watermark-Attribut */
+.ks-home-hero::after{
+  content: attr(data-watermark);
+  position: absolute;
+  left: 0; right: 0; bottom: 6%;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: .02em;
+  font-size: clamp(64px, 22vw, 240px);
+  color: rgba(0,0,0,.04);
+  pointer-events: none;
+}
+
+/* ============== */
+/* „WERTE“-Block  */
+/* ============== */
+
+.ks-home-values{ background:#fafafa; }
+
+.ks-values{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  text-align: center;
+  margin-top: 24px;
+}
+.ks-value img{
+  height: 100px; width: auto;
+  margin: 0 auto 10px; display: block;
+}
+.ks-value h3{ font-weight: 800; margin: 6px 0 8px; }
+.ks-value p{ color:#6b7280; max-width: 42ch; margin: 0 auto; }
+
+/* ======= */
+/*  FAQ    */
+/* ======= */
+
+.ks-home-faq{
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.ks-home-faq__image{
+  background: var(--faq-img) center/contain no-repeat, #edf2f7;
+  border-radius: 12px;
+  min-height: 280px;
+}
+
+/* ====================== */
+/*  VIDEO-PORTAL (Hero 2) */
+/* ====================== */
+
+.ks-home-portal{
+  position: relative;
+  padding: clamp(28px, 7vw, 72px) 0;
+  color: #fff;
+  background:
+    radial-gradient(1000px 500px at 20% 40%, rgba(0,0,0,.45), rgba(0,0,0,.75)),
+    var(--portal-bg) center/cover no-repeat,
+    #111;
+}
+
+.ks-home-portal__grid{
+  max-width: var(--ks-container);
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.ks-home-portal__title{
+  margin: 0 0 8px;
+  font-weight: 900;
+  line-height: 1.05;
+  font-size: clamp(28px, 5vw, 52px);
+}
+.ks-home-portal__title span{
+  display: block;
+  font-size: .6em;
+  opacity: .85;
+  letter-spacing: .18em;
+}
+
+.ks-home-portal__actions{ margin-top: 14px; }
+
+.ks-home-portal__media{
+  width: 100%;
+  min-height: clamp(220px, 36vw, 420px);
+  background: var(--portal-img) bottom right / contain no-repeat;
+  filter: drop-shadow(0 16px 40px rgba(0,0,0,.3));
+}
+
+/* ================ */
+/*  Responsive      */
+/* ================ */
+
+@media (max-width: 900px){
+  .ks-home-grid{ grid-template-columns: 1fr; }
+  .ks-home-hero__img{
+    height: clamp(260px, 48vw, 420px);
+    margin-inline: auto;
+  }
+  .ks-home-hero::after{
+    font-size: clamp(64px, 30vw, 180px);
+    bottom: 2%;
+  }
+
+  .ks-hero-tabs{
+    justify-content: center;
+    gap: 10px;
+  }
+  .ks-hero-tab__label{ display: none; }
+
+  .ks-values{ grid-template-columns: 1fr; }
+
+  .ks-home-faq{ grid-template-columns: 1fr; }
+
+  .ks-home-portal__grid{ grid-template-columns: 1fr; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Partner-Brandbar ===== */
+.ks-brandbar{
+  background:#19355f;           /* dunkles Blau wie im Screenshot */
+  color:#fff;
+  /* Vollbreite "Bleed" */
+  position:relative;
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding:28px 0;
+}
+.ks-brandbar .container{
+  display:flex;
+  justify-content:center;
+}
+.ks-brandbar__list{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:56px;
+  flex-wrap:wrap;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.ks-brandbar__item img{
+  display:block;
+  height:28px;                  /* Logo-Höhe anpassen */
+  width:auto;
+  filter:brightness(0) invert(1); /* auf Weiß “recoloren”, falls PNG/SVG dunkel ist */
+  opacity:.95;
+}
+@media (min-width: 992px){
+  .ks-brandbar__item img{ height:34px; }
+}
+@media (max-width: 480px){
+  .ks-brandbar__list{ gap:28px; }
+  .ks-brandbar__item img{ height:24px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ks-home-hero { display:block; width:100%; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===============================
+   Full-Bleed Bänder OHNE Markup-Änderung
+   (nutzt ::before und 50vw-Trick)
+   =============================== */
+
+html, body { overflow-x: clip; } /* Sicherheit gegen horizontale Scrollbar */
+
+/* Die drei Sections bekommen einen vollbreiten Hintergrund,
+   der Content bleibt im Container (1440px bei dir). */
+#faq,
+#coach-portal,
+#brandbar {
+  position: relative;
+  z-index: 0;            /* Platz für den ::before Layer dahinter */
+}
+
+/* generischer Bleed-Layer */
+#faq::before,
+#coach-portal::before,
+#brandbar::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%; right: 50%;
+  margin-left: -50vw;    /* zieht nach links auf Viewport-Breite */
+  margin-right: -50vw;   /* und nach rechts */
+  z-index: -1;           /* liegt hinter dem eigentlichen Inhalt */
+}
+
+/* 1) Grauer "Feedback/FAQ"-Block */
+#faq::before {
+  background: #f3f4f6;   /* deine gewünschte Band-Farbe */
+}
+
+/* 2) Video-Portal – mit deinem vorhandenen Bild & Gradient */
+#coach-portal::before {
+  background:
+    radial-gradient(1000px 500px at 20% 40%, rgba(0,0,0,.45), rgba(0,0,0,.75)),
+    var(--portal-bg) center/cover no-repeat,
+    #111;
+}
+
+/* 3) Brandbar – dunkelblau wie im Screenshot */
+#brandbar::before {
+  background: #173261;
+}
+
+/* Optional: kleine Innenabstände, falls nötig */
+#faq, #coach-portal, #brandbar {
+  padding-block: clamp(24px, 4vw, 56px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* === Full-bleed Bänder für Hero + Werte ===================== */
+.ks-home-hero,
+.ks-home-values{
+  position: relative;
+  width: 100vw;                         /* volle Bildschirmbreite */
+  margin-left:  calc(50% - 50vw);       /* aus dem Container „ausbrechen“ */
+  margin-right: calc(50% - 50vw);
+}
+
+/* (nur zur Klarheit – hast du schon, aber hier nochmal) */
+.ks-home-hero{   background:#f7f7f7; }   /* graues Band hinter dem „CAMP“-Hero */
+.ks-home-values{ background:#fafafa; }   /* hellgraues Band für „Unsere Werte“ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== News: full-bleed Band + Layout =================================== */
+#news{
+  position: relative;
+  background: #fafafa;                          /* gewünschtes Full-bleed Grau */
+  /* aus dem Container ausbrechen */
+  width: 100vw;
+  margin-left:  calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-block: clamp(32px, 6vw, 72px);
+}
+
+/* Inhalt zentriert auf deine Containerbreite halten */
+#news > .container{
+  max-width: var(--ks-container);               /* du nutzt 1200px */
+  width: 100%;
+  margin-inline: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:0px;
+}
+
+/* großes, sehr helles Wasserzeichen hinter der Überschrift */
+#news::after{
+  content: "NEWS";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: clamp(0px, 2vw, 20px);
+  font-weight: 900;
+  letter-spacing: .03em;
+  font-size: clamp(64px, 18vw, 220px);
+  color: rgba(0,0,0,.04);
+  pointer-events: none;
+}
+
+/* Grid für die 3 News-Karten (wie im Beispiel) */
+.ks-news{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2.4vw, 36px);
+  align-items: start;
+}
+
+/* optionale Kleinigkeiten für Karten */
+.ks-news__item{ display:flex; flex-direction:column; gap:8px; }
+.ks-news__thumb img{ display:block; width:100%; height:auto; border-radius:8px; }
+.ks-news__meta{ opacity:.6; font-size:.85rem; letter-spacing:.06em; }
+
+/* Responsiv: 2 Spalten auf Tablet, 1 auf Mobile */
+@media (max-width: 1024px){
+  .ks-news{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px){
+  .ks-news{ grid-template-columns: 1fr; }
+}
