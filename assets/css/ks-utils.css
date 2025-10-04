@@ -1,0 +1,104 @@
+/* === KS Utilities (zentral, schlank) === */
+
+/* Spacing */
+.ks-py-32{padding-top:32px;padding-bottom:32px}
+.ks-py-48{padding-top:48px;padding-bottom:48px}
+.ks-py-56{padding-top:56px;padding-bottom:56px}
+.ks-mb-16{margin-bottom:16px}
+.ks-mt-16{margin-top:16px}
+.ks-mt-28{margin-top:28px}
+.ks-fw-700{font-weight:700}
+
+/* Text / Align */
+.ks-text-center{text-align:center}
+.ks-text-light{color:#fff}
+.ks-text-accent{color:#e25}
+.ks-link-light{color:#fff;text-decoration:underline}
+.ks-link-light:hover{opacity:.9}
+
+/* Grids */
+.ks-grid-12-8{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:start}
+.ks-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+
+/* Hintergründe */
+.ks-bg-white{background:#fff}
+.ks-bg-dark{background:#1f2a33}
+.ks-bg-deep{background:#0f0f10}
+.ks-bg-fafa{background:#fafafa} /* neu: ersetzt den letzten inline-style im Franchise-FAQ */
+
+/* Listen mit Plus-Markierung (rechte Spalte) */
+.ks-list-plus{list-style:none;margin:0;padding:0;line-height:1.8;font-weight:700}
+.ks-list-plus li::before{content:"+";margin-right:.5em;color:#c00}
+
+/* Letzte Sektion leicht absetzen */
+.ks-standorte{border-top:1px solid rgba(255,255,255,.08)}
+
+
+
+/* ===========================
+   Kontakt-Icons (About & Offers)
+   =========================== */
+@layer pages {
+  /* Smooth Scrolling (einmal global) */
+  html { scroll-behavior: smooth; }
+
+  /* Kontakt: Text-Links ohne Unterstreichung/Linie im Kontakt-Block */
+  #kontakt .ks-contact-cards a.ks-link-light { text-decoration: none !important; }
+
+  /* Runder Icon-Link ohne Unterstreichung */
+  #kontakt .ks-contact-cards a.ks-contact-iconwrap { text-decoration: none; }
+
+  /* Runder Wrapper + weicher Hover/Lift */
+  #kontakt .ks-contact-cards .ks-contact-iconwrap{
+    display:inline-flex;justify-content:center;align-items:center;
+    width:56px;height:56px;border-radius:999px;
+    background:#ffffff;cursor:pointer;
+    will-change:transform,background-color,box-shadow;
+    transition:
+      background-color .28s cubic-bezier(.22,.61,.36,1),
+      box-shadow .28s cubic-bezier(.22,.61,.36,1),
+      transform .22s cubic-bezier(.22,.61,.36,1);
+    margin-bottom:12px;
+  }
+
+  /* Icon als Mask – Standardfarbe DFS-Rot */
+  #kontakt .ks-contact-cards .ks-contact-icon{
+    width:20px;height:20px;background:#D71019;
+    -webkit-mask: var(--icon) center/contain no-repeat;
+            mask: var(--icon) center/contain no-repeat;
+    display:inline-block;
+    transition:background-color .28s cubic-bezier(.22,.61,.36,1);
+  }
+
+  /* Hover/Focus: Kreis grau, Icon weiß, sanfter Lift */
+  #kontakt .ks-contact-cards .ks-contact-iconwrap:hover,
+  #kontakt .ks-contact-cards .ks-contact-iconwrap:focus-visible{
+    background:#394248;
+    box-shadow:0 8px 20px rgba(0,0,0,.14);
+    transform:translate3d(0,-2px,0);
+  }
+  #kontakt .ks-contact-cards .ks-contact-iconwrap:hover .ks-contact-icon,
+  #kontakt .ks-contact-cards .ks-contact-iconwrap:focus-visible .ks-contact-icon{
+    background:#ffffff; /* Icon → weiß */
+  }
+
+  /* Active: leicht zurück */
+  #kontakt .ks-contact-cards .ks-contact-iconwrap:active{
+    transform:translate3d(0,-1px,0);
+    box-shadow:0 6px 16px rgba(0,0,0,.12);
+  }
+
+  /* Größer auf großen Screens */
+  @media (min-width:992px){
+    #kontakt .ks-contact-cards .ks-contact-iconwrap{width:60px;height:60px}
+    #kontakt .ks-contact-cards .ks-contact-icon{width:22px;height:22px}
+  }
+
+  /* Barrierearm: Bewegungen reduzieren */
+  @media (prefers-reduced-motion:reduce){
+    #kontakt .ks-contact-cards .ks-contact-iconwrap,
+    #kontakt .ks-contact-cards .ks-contact-icon{transition:none}
+  }
+}
+
+html, body { overflow-x:hidden; }
