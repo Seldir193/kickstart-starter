@@ -1,0 +1,116 @@
+@layer components {
+  /* Hero-Blöcke der Start/Programme-Seite */
+  .home-hero,.programme-hero{
+    background:linear-gradient(180deg,#111 0%,#222 100%);
+    color:#fff; border-radius:16px; padding:48px; margin:24px 0; text-align:center;
+  }
+  .home-hero h1,.programme-hero h1{ font-size:clamp(28px,4vw,48px); }
+  .home-hero p,.programme-hero p{ opacity:.9; }
+
+  /* Buttons */
+  .btn,.btn-primary,.angebot-button,.btn-book,button.btn-primary{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:10px 16px; border-radius:10px; border:none;
+    cursor:pointer; font-weight:600; background:var(--brand); color:#fff;
+    text-decoration:none;
+  }
+  .btn-primary:hover,.angebot-button:hover,.btn-book:hover,button.btn-primary:hover{
+    background:var(--brand);
+  }
+
+  /* Karten & Grid (Programme) */
+  .programme-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:16px; margin:24px auto; max-width:1100px;
+  }
+  .programme-card{
+    background:#fff; border:1px solid #eaeaea; border-radius:12px;
+    padding:16px; display:flex; flex-direction:column; gap:12px;
+  }
+  .programme-card h2{ font-size:18px; margin:0; }
+  .programme-card .facts{ list-style:none; padding:0; margin:0; display:grid; gap:4px; }
+  .programme-card .price{ font-weight:700; margin:8px 0; }
+
+  /* Kontaktformular & Felder */
+  .contact-form{ max-width:600px; margin:40px auto; padding:24px; background:#fff; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,.05); }
+  .contact-form h2{ margin-bottom:12px; font-size:28px; }
+  .contact-form p{ margin-bottom:20px; color:#444; }
+  .contact-form div.ok{ margin:10px 0 16px; }
+  .form .field{ margin-bottom:16px; }
+  .form label{ font-weight:600; display:block; margin-bottom:6px; }
+  .form input,.form textarea{
+    width:100%; border:1px solid #e5e7eb; border-radius:8px; padding:10px; font-size:16px; background:#fff;
+  }
+  .ok{ color:#065f46; font-weight:600; }
+
+  /* Accordion */
+  .ks-page{ max-width:980px; margin:0 auto; padding:24px; }
+  .ks-acc details{ border-top:1px solid #e5e7eb; }
+  .ks-acc details + details{ border-top:0; }
+  .ks-acc summary{
+    cursor:pointer; padding:16px 0; font-weight:700; font-size:28px; line-height:1.2;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .ks-acc summary::after{ content:'+'; font-weight:700; }
+  .ks-acc details[open] summary::after{ content:'–'; }
+  .ks-acc .acc-body{ padding:0 0 18px 0; color:#374151; }
+  .ks-acc .acc-body p{ margin:0 0 10px 0; }
+
+  /* Mega-Menu (Programs) */
+  .ks-programs{ position:relative; }
+  .ks-programs__backdrop{
+    position:fixed; left:0; right:0;
+    top:calc(var(--wp-admin-bar-h) + var(--header-height) + var(--mega-gap));
+    bottom:0; background:var(--mega-backdrop);
+    z-index:var(--mega-z); display:none;
+  }
+  .ks-programs__panel{
+    position:fixed; left:0; right:0;
+    top:calc(var(--wp-admin-bar-h) + var(--header-height) + var(--mega-gap));
+    width:100vw; background:var(--mega-bg);
+    z-index:var(--mega-z); display:none;
+  }
+  .ks-programs__row{
+    max-width:1100px; margin:0 auto; display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr)); gap:24px; padding:16px 12px; text-align:left;
+  }
+  .ks-programs__col{ min-width:0; }
+  .ks-programs__heading{ font-weight:700; margin:0 0 6px; }
+  .ks-programs__link{ display:block; color:var(--mega-link); text-decoration:none; padding:6px 0; }
+  .ks-programs__link:hover{ text-decoration:underline; }
+  @media (max-width:900px){ .ks-programs__row{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media (max-width:560px){ .ks-programs__row{ grid-template-columns:1fr; } }
+  .ks-programs .ks-programs__panel,
+  .ks-programs .ks-programs__backdrop{ display:none; }
+  .ks-programs.is-open .ks-programs__panel,
+  .ks-programs.is-open .ks-programs__backdrop{ display:block; }
+  .ks-programs.is-open .ks-programs__button{ background:#000; color:#fff; }
+
+  /* Generische Modal-Komponente */
+  .ks-modal[hidden]{ display:none; }
+  .ks-modal{ position:fixed; inset:0; z-index:999; }
+  .ks-modal__overlay{ position:absolute; inset:0; background:rgba(0,0,0,.45); }
+  .ks-modal__panel{
+    position:relative; z-index:1; max-width:520px; width:calc(100% - 24px);
+    margin:16vh auto 0; background:#fff; border:1px solid #eaeaea; border-radius:12px;
+    box-shadow:0 10px 25px rgba(17,24,39,.1); padding:20px;
+  }
+  .ks-modal__close{
+    position:absolute; top:10px; right:10px; border:1px solid #eaeaea; background:#fff;
+    border-radius:999px; padding:6px 8px; cursor:pointer;
+  }
+  .ks-modal__close:hover{ background:#fafafa; }
+  .ks-modal__title{ margin:0 0 10px; font-weight:700; font-size:20px; }
+
+  /* Franchise/JOBS Split + Hilfs-Elemente */
+  .ks-split{ display:grid; grid-template-columns:1fr 560px; gap:32px; align-items:start; }
+  @media (max-width:900px){ .ks-split{ grid-template-columns:1fr; } }
+  .ks-kicker{ letter-spacing:.18em; text-transform:uppercase; color:#b91c1c; font-weight:700; font-size:12px; margin:0 0 12px; }
+  .ks-split h2{ font-size:52px; line-height:1.05; margin:0 0 12px; font-weight:800; }
+  .ks-split p{ color:#374151; line-height:1.7; }
+  .ks-vid{ width:100%; }
+  .ks-vid iframe,.ks-vid video,.ks-vid img{ width:100%; height:auto; aspect-ratio:16/9; border:0; border-radius:8px; display:block; }
+  .ks-right-below{ margin-top:16px; color:#374151; line-height:1.7; }
+  .ks-btn{ display:inline-block; border:2px solid #111; padding:10px 18px; border-radius:6px; text-decoration:none; color:#111; font-weight:700; }
+  .ks-btn:hover{ background:#111; color:#fff; }
+}
