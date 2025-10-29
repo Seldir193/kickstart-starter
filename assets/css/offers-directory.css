@@ -1,5 +1,27 @@
-/* Offers Directory Styles */
+
+/* ========================================================================== */
+/* Offers Directory Styles                                                    */
+/* ========================================================================== */
+
 @layer pages {
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+
+
+
   /* ===== Modal ===== */
   .ks-dir__modal[hidden]{display:none!important;}
   .ks-dir__modal{position:fixed;inset:0;z-index:4000;display:grid;place-items:center;}
@@ -19,10 +41,7 @@
   .ks-dir__map{ position:sticky; top:calc(var(--header-height,72px) + 12px); }
 
   /* Map: Basis + kompakte Höhe */
-  .ks-map{
-    width:100%;
-    border-radius:12px; overflow:hidden; background:#e5e7eb;
-  }
+  .ks-map{ width:100%; border-radius:12px; overflow:hidden; background:#e5e7eb; }
   .ks-dir__map .ks-map{
     height:min(520px, calc(100dvh - var(--header-height,72px) - 24px));
   }
@@ -36,9 +55,7 @@
   .ks-dir__intro{ margin:10px 0 6px; }
   .ks-dir__kicker{ margin:0 0 6px; color:#555; }
   .ks-dir__title{ margin:0; }
-  .ks-dir__filters{
-    display:flex; flex-wrap:wrap; gap:10px 16px; align-items:end; margin:10px 0;
-  }
+  .ks-dir__filters{ display:flex; flex-wrap:wrap; gap:10px 16px; align-items:end; margin:10px 0; }
   .ks-field{ display:grid; gap:6px; }
   .ks-field select{ height:40px; padding:0 12px; }
 
@@ -122,6 +139,9 @@
   @media (max-width:600px){ .ks-grid{ grid-template-columns:1fr; } }
 
   /* ===== Brandbar ===== */
+  .ks-brandbar__item{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; }
+  .ks-brandbar__label{ color:#fff; font-weight:600; font-size:14px; line-height:1; }
+
   .ks-brandbar{
     background:#19355f; color:#fff; position:relative;
     width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
@@ -132,24 +152,30 @@
     display:flex; align-items:center; justify-content:center;
     gap:56px; flex-wrap:wrap; margin:0; padding:0; list-style:none;
   }
-  .ks-brandbar__item img{ display:block; height:28px; width:auto; filter:brightness(0) invert(1); opacity:.95; }
+  .ks-brandbar__item img{ display:block; height:28px; width:auto; opacity:.95; }
   @media (min-width: 992px){ .ks-brandbar__item img{ height:34px; } }
   @media (max-width: 480px){
     .ks-brandbar__list{ gap:28px; }
     .ks-brandbar__item img{ height:24px; }
   }
 
-  /* ===== FAQ (unter Brandbar, Directory) ===== */
+  /* ===== FAQ (Directory) – Grid, Cards, Media ===== */
   .ks-dir-faq__grid{ display:grid; grid-template-columns:1.2fr 1fr; gap:24px; align-items:start; }
   .ks-accs{ margin-top:12px; display:grid; gap:10px; }
   .ks-acc{ border-bottom:1px dotted #e5e7eb; padding:10px 0; }
-  .ks-acc summary{ list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; font-weight:700; color:#111; }
-  .ks-acc__icon{ margin-left:12px; transition:transform .15s ease; }
-  .ks-acc[open] .ks-acc__icon{ transform:rotate(45deg); }
-  .ks-acc__body{ padding:8px 0 2px; color:#374151; }
-  .ks-dir-faq__media{ position:relative; border-radius:12px; overflow:hidden; margin:0; background:#0f172a; }
+  .ks-acc summary{
+    list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between;
+    font-weight:700; color:#111; gap:12px; padding:8px 0;
+  }
+  .ks-acc__body{ padding:8px 0 2px; color:#374151; padding-inline: 12px; }
+
+  .ks-dir-faq__media{ position:relative; border-radius:12px; overflow:hidden; margin:0; background:#0f172a; z-index:1; }
   .ks-dir-faq__media img{ width:100%; height:auto; display:block; opacity:.9; }
-  .ks-dir-faq__play{ position:absolute; inset:auto auto 12px 12px; border:0; border-radius:8px; padding:10px 12px; background:#fff; color:#111; cursor:pointer; font-weight:700; }
+  .ks-dir-faq__play{
+    position:absolute; inset:auto auto 12px 12px; border:0; border-radius:8px; padding:10px 12px;
+    background:#fff; color:#111; cursor:pointer; font-weight:700;
+  }
+
   @media (max-width: 900px){ .ks-dir-faq__grid{ grid-template-columns:1fr; } }
 
   /* ===== Programmbeschreibung (Directory) ===== */
@@ -160,10 +186,61 @@
   .ks-pluslist{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
   .ks-pluslist li{ display:flex; gap:10px; align-items:flex-start; }
   .ks-plus{ display:inline-block; width:22px; height:22px; min-width:22px; line-height:22px; text-align:center; border-radius:999px; background:#ef4444; color:#fff; font-weight:800; }
+
   @media (max-width: 900px){ .ks-dir-program__grid{ grid-template-columns:1fr; } }
 }
 
-/* Bleed ohne horizontales Scrollen */
+/* ========================================================================== */
+/*   FAQ: Plus/Minus PNG-Icons NUR für die Directory-FAQ (#dir-faq)          */
+/*   und zentrierter Titelblock mit großem „FAQ“-Watermark                   */
+/* ========================================================================== */
+
+/* Standard-Marker ausblenden */
+#dir-faq .ks-acc summary::marker{ content:""; }
+#dir-faq .ks-acc summary::-webkit-details-marker{ display:none; }
+
+/* Plus/Minus-Icon rechts */
+#dir-faq .ks-acc summary::after{
+  content:"";
+  width:20px; height:20px; flex:0 0 20px;
+  background:var(--acc-plus) center/contain no-repeat;
+  opacity:.9;
+  transition:transform .18s ease, opacity .18s ease, background-image .18s ease;
+}
+#dir-faq .ks-acc[open] summary::after{ background-image:var(--acc-minus); }
+@media (max-width:480px){
+  #dir-faq .ks-acc summary::after{ width:18px; height:18px; flex-basis:18px; }
+}
+
+/* Titelblock in der FAQ mittig über beide Spalten + Watermark */
+#dir-faq .ks-dir-faq__grid{ position:relative; }
+#dir-faq .ks-title-wrap{
+  grid-column:1 / -1;
+  text-align:center;
+  position:relative;
+  margin-bottom:18px;
+}
+#dir-faq .ks-title-wrap .ks-kicker{
+  margin:0 0 6px; letter-spacing:.12em;
+}
+#dir-faq .ks-title-wrap::after{
+  content:attr(data-bgword);
+  position:absolute; left:50%; transform:translateX(-50%); top:-80px;
+  font-weight:900; letter-spacing:.03em;
+  font-size:clamp(72px,16vw,180px);
+  color:rgba(0,0,0,.05);
+  pointer-events:none; z-index:0;
+}
+/* Bild immer über dem Watermark */
+#dir-faq .ks-dir-faq__media{ position:relative; z-index:1; }
+
+@media (max-width:900px){
+  #dir-faq .ks-title-wrap{ margin-bottom:12px; }
+  #dir-faq .ks-title-wrap::after{ font-size:clamp(64px,28vw,140px); top:-6px; }
+}
+
+/* Optional: globale Sicherheitskante gegen horizontales Scrollen */
+html, body { overflow-x: clip; }
 
 
 
@@ -174,3 +251,294 @@
 
 
 
+
+
+
+.ks-dir__title{
+  font-weight: 800;
+    font-size: 52px;
+    color:var(--text) ;
+  line-height: 1.05;
+  margin: 8px 0 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==== DIR-FAQ (Masken only + Hover-Kreis, weißes Icon) =================== */
+#dir-faq{
+  --acc-mask-size: 62%;
+  --acc-size: 30px;
+  --acc-gap: 14px;
+  /* --acc-plus / --acc-minus kommen inline aus PHP */
+}
+
+/* Textzeile + Platz fürs Icon rechts */
+#dir-faq .ks-acc summary{
+  position: relative;
+  padding: 12px 12px;
+  padding-right: calc(var(--acc-size) + var(--acc-gap) + 6px);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  transition: color .18s ease, background-color .18s ease;
+}
+
+/* Basis der Pseudo-Elemente */
+#dir-faq .ks-acc summary::before,
+#dir-faq .ks-acc summary::after{
+  content:"";
+  position:absolute;
+  right: var(--acc-gap);
+  top:50%;
+  transform:translateY(-50%);
+  width: var(--acc-size);
+  height: var(--acc-size);
+  pointer-events:none;
+}
+
+/* WICHTIG: alte BG-Bilder ausschalten, Maske erzwingen */
+#dir-faq .ks-acc summary::after{
+  background-image: none !important;
+  -webkit-mask: var(--acc-plus) center / var(--acc-mask-size) no-repeat !important;
+          mask: var(--acc-plus) center / var(--acc-mask-size) no-repeat !important;
+  background-color:#000 !important;   /* schwarz im Normalzustand */
+  z-index:1;
+  transition: transform .18s ease, opacity .18s ease, filter .18s ease, background-color .18s ease;
+}
+
+/* Open: Minus-Maske */
+#dir-faq .ks-acc[open] summary::after{
+  background-image: none !important;
+  -webkit-mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
+          mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
+  background-color:#000 !important;
+}
+
+/* Hover: schwarzer Kreis unten, Icon oben WEISS + Scale */
+#dir-faq .ks-acc summary:hover::before{
+  background:#000;
+  border-radius:50%;
+  z-index:0;
+}
+#dir-faq .ks-acc summary:hover::after{
+  background-image: none !important;
+  background-color:#fff !important;   /* → weißes Plus/Minus */
+  opacity:1 !important;
+  filter:none !important;
+  transform: translateY(-50%) scale(1.18);
+}
+
+/* dezentes Text-Hover */
+#dir-faq .ks-acc summary:hover{
+  color:#0f172a;
+  background-color: rgba(15, 23, 42, .04);
+}
+
+/* Tastaturfokus sichtbar lassen */
+#dir-faq .ks-acc summary:focus-visible{
+  outline:2px solid #0ea5e9;
+  outline-offset:2px;
+}
+
+/* Mobile: Icon etwas größer ok */
+@media (max-width: 480px){
+  #dir-faq{ --acc-size: 28px; --acc-mask-size: 66%; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* === Persistenter Hover-Look, aber nur wenn geöffnet ([open]) = Minus === */
+
+/* 1) Text-Hintergrund wie Hover */
+#faq .ks-acc[open] summary,
+#dir-faq .ks-acc[open] summary{
+  color:#0f172a;
+  background-color: rgba(15, 23, 42, .04);
+}
+
+/* 2) Schwarzer Kreis unter dem Icon dauerhaft anzeigen */
+#faq .ks-acc[open] summary::before,
+#dir-faq .ks-acc[open] summary::before{
+  background:#000;
+  border-radius:50%;
+  z-index:0;
+}
+
+/* 3) Minus-Icon in WEISS (persistiert), ohne Scale-Jump im Normalzustand */
+#faq .ks-acc[open] summary::after,
+#dir-faq .ks-acc[open] summary::after{
+  background-image: none !important;
+  -webkit-mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
+          mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
+  background-color:#fff !important;     /* weißes Minus */
+  transform: translateY(-50%) scale(1);  /* ruhig im Normalzustand */
+  opacity:1 !important;
+  filter:none !important;
+}
+
+/* 4) Optional: beim echten Hover zusätzlich sanft vergrößern */
+#faq .ks-acc[open] summary:hover::after,
+#dir-faq .ks-acc[open] summary:hover::after{
+  transform: translateY(-50%) scale(1.18);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==== Sicherheit gegen horizontale Scrollbar (wie auf home) ==== */
+html, body { overflow-x: clip; }
+
+/* =========================================================
+   Full-Bleed Bänder für Offers Directory (ohne Markup-Änderung)
+   ========================================================= */
+
+/* 1) HERO vollbreit – Inhalt bleibt im .ks-dir__hero-inner/Container */
+.ks-dir__hero{
+  position: relative;
+  width: 100vw;
+  margin-left:  calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  /* dein Hero-Hintergrund kommt bereits via --hero-img inline */
+  background: var(--hero-img) center/cover no-repeat, #f7f7f7; /* Fallback-Farbe wie auf home */
+}
+
+/* 2) FAQ, Kontakt, Brandbar: Full-Bleed per ::before-Layer */
+#dir-faq,
+#kontakt,
+#brandbar{
+  position: relative;
+  z-index: 0;
+}
+
+#dir-faq::before,
+#kontakt::before,
+#brandbar::before{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  left:50%; right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
+  z-index:-1;        /* hinter dem Inhalt */
+}
+
+/* Farben/Backdrops – analog zu home */
+#dir-faq::before{
+  background:#f3f4f6; /* wie #faq auf home */
+}
+#kontakt::before{
+  background:#111;    /* dunkler Block; passe an wenn du willst */
+  /* Beispiel mit Gradient möglich – hier bewusst schlicht gelassen */
+}
+#brandbar::before{
+  background:#173261; /* wie Brandbar auf home */
+}
+
+/* Optional: konsistente Innenabstände für die Bänder */
+#dir-faq, #kontakt, #brandbar{
+  padding-block: clamp(24px, 4vw, 56px);
+}
+
+/* 3) Falls du auch einen “Werte / Programmbeschreibung”-Streifen willst */
+#dir-program{
+  position: relative;
+  z-index: 0;
+}
+#dir-program::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  left:50%; right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
+  z-index:-1;
+  background:#fafafa; /* hellgrau wie home values */
+}
+
+/* 4) Inhalt weiterhin zentriert – falls du keinen globalen Containerstil hast */
+#dir-faq > .container,
+#brandbar > .container,
+#kontakt > .container,
+.ks-dir__hero .ks-dir__hero-inner,
+#dir-program > .container{
+  max-width: 1440px;     /* gleiche Breite wie auf home */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
