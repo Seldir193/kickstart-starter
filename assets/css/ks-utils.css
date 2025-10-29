@@ -11,7 +11,7 @@
 
 /* Text / Align */
 .ks-text-center{text-align:center}
-.ks-text-light{color:#fff}
+.ks-text-light{color:#fff !important}
 .ks-text-accent{color:#e25}
 .ks-link-light{color:#fff;text-decoration:underline}
 .ks-link-light:hover{opacity:.9}
