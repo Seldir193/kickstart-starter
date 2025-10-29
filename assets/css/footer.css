@@ -131,14 +131,15 @@
 .footer-social{ display:flex; flex-direction:column; align-items:flex-start; }
 
 .footer-list{ text-align:left; }
-.footer-list li.with-icon{ display:flex; align-items:center; }
+.footer-list li.with-icon{ display:flex; align-items:center;  gap:10px;}
 
 .ks-contact-icon{
   --size:28px;
-  inline-size:var(--size);
+ /* inline-size: var(--size);*/
   block-size:var(--size);
   display:inline-flex; align-items:center; justify-content:center;
-  margin-right:10px; position:relative; top:1px;
+  /*margin-right:10px; */
+  position:relative; top:1px;
 }
 .ks-contact-icon::before{
   content:"";
