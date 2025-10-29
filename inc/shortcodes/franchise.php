@@ -1,4 +1,11 @@
+
+
+
+
 <?php
+
+
+
 /* -------------------------------------------------------
  * [ks_franchise] – Hero + Intro (Text|Video) + MEHR-Buttons
  * -----------------------------------------------------*/
@@ -34,6 +41,17 @@ add_shortcode('ks_franchise', function ($atts = []) {
 
   // Hero-Bild via CSS-Variable auf #fr-hero
   wp_add_inline_style('ks-franchise', '#fr-hero{--hero-img:url("'.esc_url($hero).'")}');
+
+
+
+
+
+
+
+
+
+
+
 
   ob_start(); ?>
   <!-- HERO -->
@@ -144,30 +162,72 @@ add_shortcode('ks_franchise', function ($atts = []) {
 
 
 
-  <!-- FAQ -->
 
-<section id="fr-faq" class="ks-sec ks-py-48 ks-bg-fafa">
 
-    <div class="container container--1100">
+
+
+
+
+
+
+
+
+
+
+<!-- FAQ -->
+<?php $theme_uri = get_stylesheet_directory_uri(); ?>
+<section id="fr-faq"
+  class="ks-sec ks-py-56"
+  style="
+    --acc-plus:url('<?php echo $theme_uri; ?>/assets/img/home/plus.png');
+    --acc-minus:url('<?php echo $theme_uri; ?>/assets/img/home/minus.png');
+  ">
+
+  <div class="container fr-faq">
+
+    <!-- Titelblock zentriert + Watermark -->
+    <div class="ks-title-wrap" data-bgword="FAQ">
+      <div class="ks-kicker">FAQ</div>
       <h2 class="ks-dir__title">Häufig gestellte Fragen</h2>
-      <details open class="ks-acc">
+    </div>
+
+    <!-- Linke Spalte: Akkordeon -->
+    <div class="fr-faq__left">
+      <details class="ks-acc" open>
         <summary>Wie hoch sind die Startkosten für ein DFS-Franchise?</summary>
         <div class="ks-acc__body">Die Höhe hängt vom Standort ab; eine detaillierte Aufstellung erhältst du im persönlichen Austausch.</div>
       </details>
+
       <details class="ks-acc">
         <summary>Welche Qualifikationen sind erforderlich?</summary>
         <div class="ks-acc__body">Trainererfahrung ist hilfreich; wichtig sind Zuverlässigkeit, Begeisterung &amp; Organisation.</div>
       </details>
+
       <details class="ks-acc">
         <summary>Welche Unterstützung bietet die DFS?</summary>
         <div class="ks-acc__body">Schulungen, Materialien, Best Practices &amp; Austausch mit Partnern.</div>
       </details>
+
       <details class="ks-acc">
         <summary>Wie erhalte ich weitere Informationen?</summary>
         <div class="ks-acc__body">Nutze das Kontaktformular – wir melden uns zeitnah.</div>
       </details>
     </div>
-  </section>
+
+    <!-- Rechte Spalte: MFS-Logo / Bild -->
+    <figure class="fr-faq__image">
+      <img
+        src="<?php echo esc_url($theme_uri . '/assets/img/franchise/mfs.png'); ?>"
+        alt="MFS Logo" loading="lazy" decoding="async">
+    </figure>
+
+  </div>
+</section>
+
+
+
+
+
   <?php
   return ob_get_clean();
 });
