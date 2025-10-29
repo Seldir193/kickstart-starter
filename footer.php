@@ -33,7 +33,7 @@
             <a class="text link" href="tel:+4917643203362">+49 176 4320 3362</a>
           </li>
         </ul>
-      </section>
+      </section >
 
       <!-- 2) Quicklinks -->
       <nav class="footer-links" aria-label="Quicklinks">
