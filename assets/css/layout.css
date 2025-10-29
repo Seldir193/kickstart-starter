@@ -1,11 +1,13 @@
 
 
+
 @layer layout {
   /* Body als 3-Zeilen-Grid: Header | Main | Footer */
   body{
     min-height:100vh;
     display:grid;
     grid-template-rows:auto 1fr auto;
+   
   }
   @supports(min-height:100dvh){
     body{ min-height:100dvh; }
@@ -13,7 +15,8 @@
 
   /* Header fixiert, mit Adminbar-Offset */
   .site-header{
-    position:fixed;
+    /*position:fixed;*/
+     position: sticky;
     top:var(--wp-admin-bar-h);
     left:0; right:0;
     z-index:calc(var(--mega-z) + 1);
@@ -22,7 +25,7 @@
   }
 
   /* Inhalt unter fixen Header schieben */
-  body{ padding-top:calc(var(--header-height) + var(--wp-admin-bar-h)); }
+  /*body{ padding-top:calc(var(--header-height) + var(--wp-admin-bar-h)); }*/
 
   /* Header-Innenleben */
   .header-inner{
@@ -63,6 +66,8 @@
     justify-content:flex-start; /* lange Seiten starten oben */
     padding:24px 16px;
   }
+
+ 
   .site-main::-webkit-scrollbar{ width:0; height:0; }
 
   /* Kurze Seiten vertikal zentrieren */
@@ -174,6 +179,12 @@
 
 /* Sicherheit gegen horizontale Scroll-Leiste bei 100vw */
 html, body { overflow-x: clip; } /* (clip verhindert chrome-scrollbug) */
+
+
+
+
+
+html { margin-top: 0 !important; }
 
 
 
