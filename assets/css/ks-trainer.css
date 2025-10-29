@@ -1,0 +1,341 @@
+
+/* ===========================
+   Trainer-Detailseite (WP)
+   =========================== */
+
+/* --- HERO: Full-Bleed + mittiges Wasserzeichen --- */
+.ks-trainer-hero{
+  position: relative;
+  background:#f7f8fa;
+  padding:48px 0 28px;
+--kicker-shift: -14px;
+  /* Full-bleed */
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  overflow:hidden;
+
+  --wm-size: clamp(64px, 22vw, 140px);
+}
+
+/* Wasserzeichen mittig */
+.ks-trainer-hero::after{
+  content: attr(data-watermark);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 900;
+  letter-spacing: .02em;
+  font-size: var(--wm-size);
+  line-height: 1;
+  white-space: nowrap;
+  color: rgba(0,0,0,.05);
+  pointer-events: none;
+}
+
+/* Inhalt im Hero-Container halten */
+.ks-trainer-hero .container{
+  max-width: var(--ks-container, 1440px);
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero-Text */
+.ks-trainer-hero .ks-kicker{
+  font-size:12px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#a0a6b0;
+  margin-bottom:8px;
+
+    position: relative;
+  top: var(--kicker-shift);
+}
+.ks-trainer-hero h1{
+  margin:0;
+  font-size:42px;
+  line-height:1.1;
+  font-weight:800;
+}
+
+/* === Abschnitt unter dem Hero === */
+.ks-trainer-wrap{ padding:36px 0 64px; }
+
+/* Container: volle 1440px Nutzbreite (ohne Innenabstand) */
+.ks-trainer-wrap .container{
+  max-width: var(--ks-container, 1440px);
+  margin: 0 auto;
+  padding-inline: 0 !important;   /* echte 1440px Breite */
+  box-sizing: border-box;
+}
+
+/* ------------------------------
+   3-Spalten-Grid (Desktop)
+   links: 220px (Dropdown)
+   mitte: 290px (Foto)
+   rechts: rest (Info)
+---------------------------------*/
+.ks-trainer-grid{
+  display: grid;
+  grid-template-columns: 220px 290px minmax(0,1fr);
+  gap: 40px;
+  align-items: stretch;           /* gleiche Höhe für Foto & Info */
+}
+
+/* Linke Spalte: Dropdown */
+.ks-trainer-select{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+}
+
+/* Das native <select> bleibt fürs Submit, wird aber visuell ersetzt */
+.ks-trainer-select .ks-select{
+  position:absolute !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+  width:1px; height:1px;
+}
+
+/* Mittlere Spalte: Foto exakt so hoch wie Info */
+.ks-trainer-col--photo{
+  display: flex;
+  align-items: stretch;
+}
+.ks-trainer-photo{
+  width: 100%;
+  max-width: 290px;
+  height: 100%;                  /* koppelt an Info-Höhe */
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 10px 22px rgba(0,0,0,.06);
+  background:#fff;
+  display: flex;
+}
+.ks-trainer-photo img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit: cover;             /* füllt ohne Verzerrung (ggf. Beschnitt) */
+}
+
+/* Rechte Spalte: Info-Tabelle füllt Höhe */
+.ks-trainer-col--right{
+  min-width: 0;
+  display: flex;                 /* erlaubt height:100% in Tabelle */
+}
+.ks-trainer-table{
+  width:100%;
+  height:100%;
+  border-collapse:collapse;
+  font-size:14px;
+  background:#fff;
+  box-shadow:0 10px 22px rgba(0,0,0,.06);
+  border-radius:10px;
+  overflow:hidden;
+  align-self: stretch;
+}
+.ks-trainer-table thead th{
+  background:#22375d;
+  color:#fff;
+  text-transform:uppercase;
+  font-size:12px;
+  letter-spacing:.12em;
+  text-align:left;
+  padding:14px 18px;
+}
+.ks-trainer-table tbody th{
+  width:220px;
+  color:#6b7280;
+  font-weight:600;
+  text-transform:uppercase;
+  font-size:12px;
+  letter-spacing:.06em;
+  padding:14px 18px;
+  border-bottom:1px solid #eef0f3;
+  background:#fafbfc;
+}
+.ks-trainer-table tbody td{
+  padding:14px 18px;
+  border-bottom:1px solid #eef0f3;
+}
+.ks-trainer-table tbody tr:last-child th,
+.ks-trainer-table tbody tr:last-child td{
+  border-bottom:none;
+}
+
+/* ------------------------------
+   Custom Dropdown (UI-Ersatz)
+   - Trigger 50px hoch
+   - Overlay max. 5 Zeilen (scrollbar)
+---------------------------------*/
+.ks-dd{ position:relative; width:100%; max-width:100%; }
+
+.ks-dd__btn{
+  height:50px;
+  padding:0 14px 0 16px;
+  width:100%;
+  border:1px solid #d9dee6;
+  border-radius:8px;
+  background:#fff;
+  cursor:pointer;
+  display:flex;
+  align-items:center;            /* Text vertikal mittig */
+  justify-content:space-between;
+  gap:10px;
+  font-weight:600;
+  line-height:1;
+}
+.ks-dd__caret{
+  flex:0 0 auto;
+  width:0; height:0;
+  border-left:5px solid transparent;
+  border-right:5px solid transparent;
+  border-top:6px solid #5b6472;
+  transition:transform .15s ease;
+}
+.ks-dd[aria-expanded="true"] .ks-dd__caret{ transform:rotate(180deg); }
+
+.ks-dd__panel{
+  position:absolute; left:0; right:0; top:calc(100% + 6px);
+  background:#fff;
+  border:1px solid #d9dee6;
+  border-radius:8px;
+  box-shadow:0 10px 22px rgba(0,0,0,.08);
+  z-index:20;
+  overflow:auto;
+  --row-h: 40px;
+  max-height: calc(var(--row-h) * 5); /* max. 5 Einträge sichtbar */
+  display:none;
+}
+.ks-dd[aria-expanded="true"] .ks-dd__panel{ display:block; }
+
+.ks-dd__option{
+  padding:0 14px 0 16px;
+  height:var(--row-h);
+  display:flex;
+  align-items:center;            /* Zeilen vertikal mittig */
+  cursor:pointer;
+  user-select:none;
+}
+.ks-dd__option:hover,
+.ks-dd__option[aria-selected="true"]{
+  background:#f4f7fb;
+}
+
+/* ------------------------------
+   Breakpoints
+---------------------------------*/
+@media (max-width: 1280px){
+  .ks-trainer-grid{
+    gap: 28px;
+    grid-template-columns: 200px 280px minmax(0,1fr);
+  }
+}
+
+@media (max-width: 1024px){
+  .ks-trainer-grid{
+    gap: 24px;
+    grid-template-columns: 200px 260px minmax(0,1fr);
+  }
+}
+
+@media (max-width: 900px){
+  /* Container mobil wieder mit Luft */
+  .ks-trainer-wrap .container{
+    padding-inline: 16px !important;
+  }
+
+  /* Spalten stapeln */
+  .ks-trainer-grid{
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .ks-trainer-col--left{ order: 1; }
+  .ks-trainer-col--photo{ order: 2; }
+  .ks-trainer-col--right{ order: 3; }
+
+  /* Foto: natürliches Seitenverhältnis mobil */
+  .ks-trainer-photo{
+    height: auto;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+  .ks-trainer-photo img{
+    height: auto;
+  }
+}
+
+
+
+
+
+
+
+
+/* Optional: auf sehr kleinen Screens nicht verschieben */
+@media (max-width: 600px){
+  .ks-trainer-hero .ks-kicker{ top: 0; }
+}
+
+
+
+
+
+
+/* === Foto fix, Info flexibel ========================================= */
+/* feste Fotogröße (Desktop) über Variablen steuerbar */
+.ks-trainer-wrap {
+  --photo-w: 290px;           /* fixe Breite */
+  --photo-h: 426px;           /* fixe Höhe (z.B. 420px) */
+}
+
+/* Rechte Spalte wieder flexibel – keine erzwungene Höhe */
+.ks-trainer-col--right { 
+  display: block !important;
+}
+.ks-trainer-table {
+  height: auto !important;
+  align-self: auto !important;
+}
+
+/* Linke/mittlere Spalte: Foto immer gleiche Breite & Höhe */
+.ks-trainer-col--photo{
+  display: flex;
+  align-items: flex-start;    /* Foto oben beginnen lassen */
+}
+.ks-trainer-photo{
+  width: var(--photo-w);
+  max-width: 100%;
+  height: var(--photo-h);
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+  background: #fff;
+}
+.ks-trainer-photo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* füllt den Rahmen sauber aus */
+}
+
+/* Grid-Spalte für Foto bleibt „fix“ */
+.ks-trainer-grid{
+  grid-template-columns: 220px var(--photo-w) minmax(0,1fr);
+}
+
+/* --- Responsive: mobil darf das Foto etwas dynamischer sein --- */
+@media (max-width: 900px){
+  /* mobil stapeln wir ohnehin – Foto bekommt sinnvolle Grenzen */
+  .ks-trainer-photo{
+    width: min(100%, 340px);
+    height: clamp(260px, 52vw, var(--photo-h));  /* nicht zu klein, nicht zu groß */
+    margin-inline: auto;
+  }
+}
