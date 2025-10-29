@@ -1,4 +1,16 @@
+
+
+
+
 <?php
+
+
+
+
+
+
+
+
 /* -------------------------------------------------------
  * [ks_offers_directory] – Hero + Filter + Map + Liste + Modal + Brandbar + (FAQ, Kontakt, Programmbeschreibung)
  * -----------------------------------------------------*/
@@ -69,6 +81,10 @@ add_action('init', function () {
       }
     }
     $ageText = ($ageMin !== null && $ageMax !== null) ? ($ageMin . '–' . $ageMax . ' Jahre') : 'alle Altersstufen';
+
+
+ 
+
 
     $next_base = ks_next_base();
 
@@ -368,12 +384,13 @@ add_action('init', function () {
 <?php
   // Partner-Brandbar Markup (nur Markup; Styles in offers-directory.css)
   $brand_base = get_stylesheet_directory_uri() . '/assets/img/';
+
   $brands = [
-    [ 'src' => $brand_base . 'mfs.png', 'alt' => 'DFS Partner 1' ],
-    [ 'src' => $brand_base . 'mfs.png', 'alt' => 'Puma' ],
-    [ 'src' => $brand_base . 'mfs.png', 'alt' => 'DFS Berater' ],
-    [ 'src' => $brand_base . 'mfs.png', 'alt' => 'Teamstolz' ],
-    [ 'src' => $brand_base . 'mfs.png', 'alt' => 'DFS Player' ],
+    [ 'src' => $brand_base . 'mfs.png', 'label' => 'Bodosee Sportlo' ],
+    [ 'src' => $brand_base . 'mfs.png', 'label' => 'Puma' ],
+    [ 'src' => $brand_base . 'mfs.png', 'label' => 'DFS Berater' ],
+    [ 'src' => $brand_base . 'mfs.png', 'label' => 'Teamstolz' ],
+    [ 'src' => $brand_base . 'mfs.png', 'label' => 'DFS Player' ],
   ];
 ?>
 
@@ -382,24 +399,47 @@ add_action('init', function () {
     <ul class="ks-brandbar__list" role="list">
       <?php foreach ($brands as $b): ?>
         <li class="ks-brandbar__item">
-          <img src="<?php echo esc_url($b['src']); ?>"
-               alt="<?php echo esc_attr($b['alt']); ?>"
-               loading="lazy" decoding="async">
+          <img
+            src="<?php echo esc_url($b['src']); ?>"
+            alt="" aria-hidden="true"
+            loading="lazy" decoding="async">
+          <span class="ks-brandbar__label"><?php echo esc_html($b['label']); ?></span>
         </li>
       <?php endforeach; ?>
     </ul>
   </div>
 </section>
 
+
+
+
+
 <?php
   // ===== Sektion 1: FAQ (dynamisch nach Kurs) =====
   $media = get_stylesheet_directory_uri() . '/assets/img/mfs.png';
+  $theme_uri = get_stylesheet_directory_uri();
 ?>
-<section id="dir-faq" class="ks-sec ks-dir-faq" aria-label="Häufig gestellte Fragen">
-  <div class="container ks-dir-faq__grid">
-    <div class="ks-dir-faq__left">
+<section id="dir-faq"
+  class="ks-sec ks-py-56"
+  
+  aria-label="Häufig gestellte Fragen"
+  style="--acc-plus:url('<?php echo $theme_uri; ?>/assets/img/home/plus.png');
+         --acc-minus:url('<?php echo $theme_uri; ?>/assets/img/home/minus.png');">
+
+
+
+
+
+     <div class="container ks-dir-faq__grid">
+    <!-- ZENTRIERTER TITELBLOCK (spannt über beide Spalten) -->
+    <div class="ks-title-wrap" data-bgword="FAQ">
       <div class="ks-kicker">FAQ</div>
       <h2 class="ks-dir__title">Häufig gestellte Fragen</h2>
+    </div>
+
+      <div class="ks-dir-faq__left">
+        
+      
 
       <div class="ks-accs">
         <?php foreach ($course['faq'] as $qa): ?>
