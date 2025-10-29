@@ -1,0 +1,48 @@
+.ks-cta-strip{background:#fafafa}
+.ks-cta-strip>.container{max-width:var(--ks-container,1440px);margin:0 auto;padding:0 16px}
+.ks-cta-grid{display:grid;grid-template-columns:1fr;gap:20px}
+
+.ks-cta-text .ks-eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#6b7280;margin-bottom:6px}
+.ks-cta-title{margin:0 0 8px;font-size:clamp(24px,2.6vw,36px);line-height:1.15;font-weight:800}
+.ks-cta-text p{margin:0 0 14px;color:#394248}
+
+.ks-cta-form{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.ks-cta-form .ks-select{position:absolute !important;opacity:0 !important;pointer-events:none !important;width:1px;height:1px}
+
+.ks-dd{position:relative}
+
+
+#program-cta .ks-cta-form .ks-dd{ width: clamp(220px, 22vw, 280px); max-width: 100%; }
+
+
+.ks-dd__btn{height:50px;padding:0 14px 0 16px;width:100%;border:1px solid #d9dee6;border-radius:8px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:600;line-height:1}
+.ks-dd__caret{flex:0 0 auto;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #5b6472;transition:transform .15s ease}
+.ks-dd[aria-expanded="true"] .ks-dd__caret{transform:rotate(180deg)}
+
+.ks-dd__panel{position:absolute;left:0;right:0;top:calc(100% + 6px);background:#fff;border:1px solid #d9dee6;border-radius:8px;box-shadow:0 10px 22px rgba(0,0,0,.08);z-index:20;overflow:auto;--row-h:40px;max-height:calc(var(--row-h) * 5);display:none}
+.ks-dd[aria-expanded="true"] .ks-dd__panel{display:block}
+
+.ks-dd__option{padding:0 14px 0 16px;height:var(--row-h);display:flex;align-items:center;cursor:pointer;user-select:none}
+.ks-dd__option:hover,.ks-dd__option[aria-selected="true"]{background:#f4f7fb}
+
+#program-cta .ks-cta-title{font-weight:800;line-height:1.1;font-size:clamp(24px,2.4vw,34px);margin:2px 0 4px}
+#program-cta .ks-eyebrow{font-size:clamp(11px,.9vw,13px);letter-spacing:.14em;color:#9aa3ae}
+#program-cta .ks-cta-text p{font-size:clamp(15px,1.1vw,18px);line-height:1.55;margin-top:10px}
+#program-cta .ks-dd__btn{font-size:clamp(14px,1vw,16px);height:50px}
+#program-cta .ks-dd__option{font-size:clamp(14px,1vw,16px)}
+
+#program-cta .ks-select[hidden],
+#program-cta .ks-select{position:absolute !important;width:1px !important;height:1px !important;margin:-1px !important;padding:0 !important;border:0 !important;overflow:hidden !important;clip:rect(0 0 0 0) !important;clip-path:inset(50%) !important;white-space:nowrap !important;opacity:0 !important;pointer-events:none !important}
+
+@media (max-width:560px){
+  .ks-cta-form{flex-direction:column;align-items:stretch}
+  #program-cta .ks-cta-form .ks-dd{width:100%}
+}
+
+
+
+
+
+
+
+
