@@ -1,3 +1,4 @@
+
 /* Abschnitt-Hintergründe etc. werden über Utility-Klassen gelöst.
    Falls du individuelle Feinheiten brauchst, hier ergänzen. */
 
@@ -12,13 +13,7 @@
 
 .ks-title-wrap{position:relative;text-align:center;margin-bottom:32px}
 .ks-title-wrap .ks-dir__title{position:relative;z-index:2}
-.ks-title-wrap::after{
-  content:attr(data-bgword);
-  position:absolute;left:50%;top:-10px;transform:translateX(-50%);
-  font-family:"Barlow Condensed",system-ui,sans-serif;font-weight:700;
-  font-size:160px;line-height:1;letter-spacing:.02em;
-  color:#000;opacity:.05;pointer-events:none;z-index:1;white-space:nowrap;
-}
+
 
 .ks-benefits{
   display:grid;grid-template-columns:repeat(3,1fr);
@@ -37,4 +32,549 @@
 @media (max-width: 980px){
   .ks-benefits{grid-template-columns:1fr;gap:36px}
   .ks-title-wrap::after{font-size:96px}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Franchise FAQ: Plus/Minus Icons über CSS-Variablen vom Abschnitt */
+#fr-faq .ks-acc summary::marker{ content:""; }
+#fr-faq .ks-acc summary::-webkit-details-marker{ display:none; }
+
+#fr-faq .ks-acc summary{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  cursor:pointer; font-weight:700; color:#111;
+  padding:8px 0;
+  position:relative;
+  padding-right:40px;              /* Platz fürs Icon rechts */
+}
+
+#fr-faq .ks-acc summary::after{
+  content:"";
+  position:absolute; right:0; top:50%; transform:translateY(-50%);
+  width:20px; height:20px;
+  background: var(--acc-plus) center/contain no-repeat;
+  opacity:.9;
+}
+
+#fr-faq .ks-acc[open] summary::after{
+  background: var(--acc-minus) center/contain no-repeat;
+}
+
+#fr-faq .ks-acc{ border-bottom:1px dotted #e5e7eb; padding:10px 0; }
+#fr-faq .ks-acc__body{ padding:8px 0 2px; color:#374151; padding-inline: 12px; }
+#fr-faq .ks-acc summary:focus-visible{ outline:2px solid #0ea5e9; outline-offset:2px; }
+#fr-faq .ks-acc summary:hover{ color:#0f172a; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Franchise: FAQ Layout (zentrierter Titel + Watermark + Logo rechts) ===== */
+.fr-faq{
+  display:grid;
+  grid-template-columns: 1.15fr .85fr; /* links Akkordeon | rechts Bild/Logo */
+  gap:24px;
+  align-items:start;
+  position:relative;
+}
+
+/* Titelblock über beide Spalten, mittig, mit großem Watermark 'FAQ' */
+.fr-faq > .ks-title-wrap{
+  grid-column:1 / -1;
+  text-align:center;
+  margin-bottom:18px;
+  position:relative;
+}
+.fr-faq > .ks-title-wrap .ks-kicker{
+  margin:0 0 6px;
+  letter-spacing:.12em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.fr-faq > .ks-title-wrap::after,
+.ks-title-wrap::after{
+  content:attr(data-bgword);
+  position:absolute;left:50%;top:-80px;transform:translateX(-50%);
+  
+font-weight:900;
+  letter-spacing:.03em;
+  font-size: clamp(72px, 16vw, 180px);
+  color:#000;opacity:.05;pointer-events:none;z-index:1;white-space:nowrap;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Rechte Spalte (Logo/Grafik) */
+.fr-faq__image{
+  position:relative;
+  border-radius:12px;
+  overflow:hidden;
+  margin:0;
+  background:#0f172a;                /* sanfter Kontrast wie im Beispiel */
+  display:grid;
+  place-items:center;
+  min-height:280px;
+  z-index:1;                         /* über dem Watermark */
+}
+.fr-faq__image img{
+  max-width:82%;
+  height:auto;
+  display:block;
+  filter: drop-shadow(0 16px 36px rgba(0,0,0,.28));
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .fr-faq{ grid-template-columns:1fr; }
+  .fr-faq > .ks-title-wrap{ margin-bottom:12px; }
+  .fr-faq > .ks-title-wrap::after{
+    font-size: clamp(64px, 28vw, 140px);
+    top:-6px;
+  }
+  .fr-faq__image img{ max-width:68%; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===================== FR-FAQ: Icon + Abstände ===================== */
+/* Konfiguration */
+#fr-faq{
+  --acc-mask-size: 62%;  /* Symbolgröße relativ zu 30x30 (55–70%) */
+  --acc-size: 30px;      /* Durchmesser Icon/Kreis */
+  --acc-gap: 14px;       /* Abstand Icon zur rechten Kante */
+}
+
+/* Platz für das Icon rechts freihalten (Text kollidiert nie mit dem Icon) */
+#fr-faq .ks-acc summary{
+  position: relative;
+  padding-right: calc(var(--acc-size) + var(--acc-gap) + 6px);
+}
+
+/* Gemeinsame Basis der Pseudo-Elemente */
+#fr-faq .ks-acc summary::before,
+#fr-faq .ks-acc summary::after{
+  content:"";
+  position:absolute; 
+  right: var(--acc-gap); 
+  top:50%; 
+  transform:translateY(-50%);
+  width: var(--acc-size); 
+  height: var(--acc-size); 
+  pointer-events:none;
+}
+
+/* NORMAL: Symbol per Maske in SCHWARZ (kein Kreis) */
+#fr-faq .ks-acc summary::after{
+  background-image: none !important; /* kein Bild-Background */
+  -webkit-mask: var(--acc-plus) center / var(--acc-mask-size) no-repeat !important;
+          mask: var(--acc-plus) center / var(--acc-mask-size) no-repeat !important;
+  background-color:#000 !important;  /* schwarz im Normalzustand */
+  z-index:1;
+}
+#fr-faq .ks-acc[open] summary::after{
+  -webkit-mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
+          mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
+  background-color:#000 !important;
+}
+
+/* HOVER: unten schwarzer Kreis, oben dasselbe Symbol in WEISS */
+#fr-faq .ks-acc summary:hover::before{
+  background:#000; 
+  border-radius:50%; 
+  z-index:0;
+}
+#fr-faq .ks-acc summary:hover::after{
+  /* gleiche Maske/Größe wie normal, nur Farbe tauschen */
+  -webkit-mask: var(--acc-plus) center / var(--acc-mask-size) no-repeat !important;
+          mask: var(--acc-plus) center / var(--acc-mask-size) no-repeat !important;
+  background-color:#fff !important; 
+  z-index:1;
+}
+#fr-faq .ks-acc[open] summary:hover::after{
+  -webkit-mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
+          mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
+  background-color:#fff !important; 
+  z-index:1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* === FAQ Hover: Text + Icon deutlich sichtbar (Franchise) === */
+#fr-faq .ks-acc summary{
+  /* weiche Animationen + größere Hoverfläche */
+   border: 1px solid transparent;
+  border-radius: 10px; 
+  padding-block: 12px;
+  padding-inline: 12px;
+  transition: color .18s ease, background-color .18s ease;
+}
+
+#fr-faq .ks-acc summary::after{
+  transition: transform .18s ease, opacity .18s ease, filter .18s ease, background-image .18s ease;
+}
+
+/* Hover: Text dunkler + dezenter Hintergrund */
+#fr-faq .ks-acc summary:hover{
+  color: #0f172a;
+  background-color: rgba(15, 23, 42, .04);
+}
+
+/* Hover: Icon skaliert + leicht heller (sichtbarer Effekt auch ohne Hover-Asset) */
+#fr-faq .ks-acc summary:hover::after{
+  transform: translateY(-50%) scale(1.18);
+  opacity: 1;
+  /* macht PNG sichtbar heller/kontrastreicher, falls du keine Hover-Datei hast */
+  filter: brightness(1.2) contrast(1.1) saturate(1.1);
+  /* falls Hover-Asset vorhanden, wird es automatisch genommen */
+  background-image: var(--acc-plus-hov, var(--acc-plus));
+}
+
+/* Geöffnet: MINUS-Variante – gleicher Hover-Effekt */
+#fr-faq .ks-acc[open] summary::after{
+  background: var(--acc-minus) center/contain no-repeat;
+}
+#fr-faq .ks-acc[open] summary:hover::after{
+  background-image: var(--acc-minus-hov, var(--acc-minus));
+  transform: translateY(-50%) scale(1.18);
+   filter: brightness(1.2) contrast(1.1) saturate(1.1); 
+}
+
+/* Tastatur: Fokus sichtbar lassen */
+#fr-faq .ks-acc summary:focus-visible{
+  outline: 2px solid #0ea5e9;
+  outline-offset: 2px;
+}
+
+/* Falls Motion reduziert: keine Animationen */
+@media (prefers-reduced-motion: reduce){
+  #fr-faq .ks-acc summary,
+  #fr-faq .ks-acc summary::after{ transition: none; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* === FAQ (Franchise): Persistenter Hover-Look nur wenn geöffnet ([open]) === */
+
+/* Text/Hintergrund wie Hover, wenn offen */
+#fr-faq .ks-acc[open] summary{
+  color:#0f172a;
+  background-color: rgba(15, 23, 42, .04);
+}
+
+/* schwarzer Kreis unter dem Icon */
+#fr-faq .ks-acc[open] summary::before{
+  background:#000;
+  border-radius:50%;
+  z-index:0;
+}
+
+/* Minus-Icon als weiße Maske (persistiert) */
+#fr-faq .ks-acc[open] summary::after{
+  background-image: none !important;
+  -webkit-mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
+          mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
+  background-color:#fff !important;
+  transform: translateY(-50%) scale(1);
+  opacity:1 !important;
+  filter:none !important;
+}
+
+/* optional: bei echtem Hover leicht vergrößern */
+#fr-faq .ks-acc[open] summary:hover::after{
+  transform: translateY(-50%) scale(1.18);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===============================
+   Full-Bleed Bänder (Franchise)
+   =============================== */
+
+/* Sicherheit gegen horizontales Scrollen */
+html, body { overflow-x: clip; }
+
+/* 0) Gemeinsame Container-Politur für die Franchise-Sections */
+#fr-hero .ks-dir__hero-inner,
+#fr-intro > .container,
+#fr-worldwide > .container,
+#fr-benefits > .container,
+#fr-faq > .container {
+  max-width: 1440px; /* wie auf home */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* 1) HERO vollbreit – Hintergrund via --hero-img (kommt bei dir bereits inline) */
+#fr-hero {
+  position: relative;
+  width: 100vw;
+  margin-left:  calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  /* Fallback-Farbe wie auf home-hero */
+  background: var(--hero-img) center/cover no-repeat, #f7f7f7;
+}
+
+/* 2) „Wer wir sind“ (fr-intro) – falls neutraler Hintergrund bleiben soll:
+      NUR aus dem Container ausbrechen, aber keine Farbe ändern */
+
+
+/* 3) WORLDWIDE (heller Block) – Full-Bleed Grau/Weiß per ::before */
+#fr-worldwide {
+  position: relative;
+  z-index: 0;
+}
+#fr-worldwide::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%; right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  z-index: -1;
+  background: #ffffff; /* war bei dir hell – identisch beibehalten */
+}
+
+/* 4) BENEFITS – sanfter Abschnitt-Hintergrund (wie home values) */
+#fr-benefits {
+  position: relative;
+  z-index: 0;
+}
+#fr-benefits::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%; right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  z-index: -1;
+  background: #fafafa; /* hellgrau wie auf home values */
+}
+
+/* 5) FAQ (Franchise) – Full-Bleed, Inhalt bleibt zentriert */
+#fr-faq {
+  position: relative;
+  z-index: 0;
+}
+#fr-faq::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%; right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  z-index: -1;
+  background: #f3f4f6; /* wie #faq auf home */
+}
+
+/* 6) (Optional) Einheitliche vertikale Innenabstände für die Full-Bleed-Bänder */
+#fr-worldwide,
+#fr-benefits,
+#fr-faq {
+  padding-block: clamp(24px, 4vw, 56px);
 }
