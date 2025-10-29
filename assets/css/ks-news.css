@@ -1,0 +1,43 @@
+
+
+/* === News Detail: Medien-Größen sauber begrenzen === */
+
+/* Titelbild oben */
+.ks-news-single header img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:520px;       /* bei Bedarf anpassen (z.B. 420px) */
+  object-fit:cover;       /* füllt den Rahmen, schneidet ggf. minimal */
+  border-radius:12px;
+  margin:12px 0 0;
+}
+
+/* eigener Ratio-Wrapper (wir verwenden ihn im Shortcode) */
+.ks-news-single .ratio{
+  position:relative;
+  width:100%;
+  aspect-ratio:16 / 9;    /* echtes 16:9 */
+  background:#000;
+  border-radius:12px;
+  overflow:hidden;
+  margin:12px 0 0;
+}
+
+/* Medien im Ratio-Wrapper vollflächig einpassen */
+.ks-news-single .ratio > video,
+.ks-news-single .ratio > img,
+.ks-news-single .ratio > iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;       /* Video/Bild füllt den Rahmen */
+}
+
+/* Falls du zusätzlich „normale“ Bilder im Content hast */
+.ks-news-single .ks-news-content img{
+  max-width:100%;
+  height:auto;
+}
+
