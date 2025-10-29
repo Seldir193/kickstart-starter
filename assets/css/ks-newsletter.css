@@ -18,6 +18,28 @@
   letter-spacing:.04em;
 }
 
+
+/* Thumbnails in Listen (Latest/Archiv) */
+.ks-news-item__thumb { display:block; }
+.ks-news-item__thumb img{
+  display:block;
+  width:100%;
+  aspect-ratio: 16 / 9; /* einheitliches Seitenverhältnis */
+  object-fit: cover;    /* sauberer Zuschnitt ohne Layout-Sprung */
+  height:auto;
+}
+
+/* Bild oben in der Detailseite */
+.ks-news-single header > img{
+  display:block;
+  width:100%;
+  height:auto;
+  /* wenn du auch hier einen Zuschnitt willst:
+     aspect-ratio: 16 / 9; object-fit: cover; */
+}
+
+
+
 .newsletter-box p{
   margin:0 0 14px;
   color:#4b5563;
@@ -152,6 +174,7 @@
 
 
 
+.ks-news-single video { width:100%; height:auto; display:block; }
 
 
 
@@ -161,3 +184,13 @@
 
 
 
+
+
+
+
+.ks-news-sidebar .ks-widget-ad img{
+  max-width:100%;
+  height:auto;
+  display:block;
+  border-radius:8px;
+}
