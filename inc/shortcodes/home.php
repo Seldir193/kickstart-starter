@@ -1,4 +1,3 @@
-
 <?php
 // inc/shortcodes/home.php
 // Rendert die komplette Startseite via [ks_home]
@@ -10,10 +9,11 @@ if (!function_exists('ks_register_home_shortcode')) {
   function ks_register_home_shortcode() {
 
     add_shortcode('ks_home', function ($atts = []) {
+      $theme_dir = get_stylesheet_directory();
       $theme_uri = get_stylesheet_directory_uri();
 
       /* ==== CSS laden ==== */
-      $utils_abs = get_stylesheet_directory() . '/assets/css/ks-utils.css';
+      $utils_abs = $theme_dir . '/assets/css/ks-utils.css';
       if (file_exists($utils_abs) && !wp_style_is('ks-utils', 'enqueued')) {
         wp_enqueue_style(
           'ks-utils',
@@ -22,15 +22,49 @@ if (!function_exists('ks_register_home_shortcode')) {
           filemtime($utils_abs)
         );
       }
-      $home_abs = get_stylesheet_directory() . '/assets/css/ks-home.css';
+
+      $home_abs = $theme_dir . '/assets/css/ks-home.css';
       if (file_exists($home_abs)) {
         wp_enqueue_style(
           'ks-home',
           $theme_uri . '/assets/css/ks-home.css',
-          ['kickstart-style','ks-utils'],
+          ['kickstart-style', 'ks-utils'],
           filemtime($home_abs)
         );
       }
+
+
+// JS: Program-CTA
+$cta_js = $theme_dir . '/assets/js/ks-program-cta.js';
+if (file_exists($cta_js)) {
+  wp_enqueue_script(
+    'ks-program-cta',
+    $theme_uri . '/assets/js/ks-program-cta.js',
+    [],
+    filemtime($cta_js),
+    true
+  );
+}
+
+
+
+
+      /* ==== Feedback CSS/JS laden ==== */
+$fb_css = $theme_dir . '/assets/css/ks-feedback.css';
+if (file_exists($fb_css)) {
+  wp_enqueue_style('ks-feedback', $theme_uri . '/assets/css/ks-feedback.css', ['ks-utils'], filemtime($fb_css));
+}
+$fb_js = $theme_dir . '/assets/js/ks-feedback.js';
+if (file_exists($fb_js)) {
+  wp_enqueue_script('ks-feedback', $theme_uri . '/assets/js/ks-feedback.js', [], filemtime($fb_js), true);
+}
+
+
+$wa_css = $theme_dir . '/assets/css/ks-wa.css';
+if (file_exists($wa_css)) {
+  wp_enqueue_style('ks-wa', $theme_uri . '/assets/css/ks-wa.css', [], filemtime($wa_css));
+}
+
 
       /* ==== Shortcode-Attribute ==== */
       $atts = shortcode_atts([
@@ -51,9 +85,9 @@ if (!function_exists('ks_register_home_shortcode')) {
       $portal_laptop = $theme_uri . '/assets/img/home/mfs.png';
       wp_add_inline_style(
         'ks-home',
-        ".ks-home-faq__image{--faq-img:url('{$ball_img}')}
-         .ks-home-portal{--portal-bg:url('{$portal_bg}')}
-         .ks-home-portal__media{--portal-img:url('{$portal_laptop}')}"
+        ".ks-home-faq__image{--faq-img:url('{$ball_img}')}" .
+        ".ks-home-portal{--portal-bg:url('{$portal_bg}')}" .
+        ".ks-home-portal__media{--portal-img:url('{$portal_laptop}')}"
       );
 
       // Platzhalter-Icons – gern ersetzen
@@ -74,19 +108,14 @@ if (!function_exists('ks_register_home_shortcode')) {
       ];
 
       /* ==== Hero-Slides (Tabs) ==== */
-      $img_camp    = $theme_uri . '/assets/img/home/mfs.png';
-      $img_foerder = $theme_uri . '/assets/img/home/mfs.png';
-      $img_kita    = $theme_uri . '/assets/img/home/mfs.png';
-      $img_einzel  = $theme_uri . '/assets/img/home/mfs.png';
-      $fallback    = $theme_uri . '/assets/img/home/mfs.png';
-
+      $fallback_img = $theme_uri . '/assets/img/home/mfs.png';
       $slides = [
         [
           'key' => 'camp', 'label' => 'CAMPS', 'num' => '01',
           'title' => 'Fussballcamps',
           'lead'  => 'Ein 3- bis 5-tägiges Fußballprogramm mit Tricks, Koordination, Torschüssen, Wettkämpfen und einem Abschlussturnier – ideal, um Technik und Spaß zu verbinden.',
           'watermark' => 'CAMPS',
-          'img' => $img_camp ?: $fallback,
+          'img' => $fallback_img,
           'book' => $book_urls['camp'],
         ],
         [
@@ -94,7 +123,7 @@ if (!function_exists('ks_register_home_shortcode')) {
           'title' => 'Fördertraining',
           'lead'  => 'Verbessere dein Spiel durch unser wöchentliches Fördertraining! Dich erwarten Tricks, Schusstechniken, Koordination und tolle Abschlussspiele.',
           'watermark' => 'FÖRDERTRAINING',
-          'img' => $img_foerder ?: $fallback,
+          'img' => $fallback_img,
           'book' => $book_urls['foerder'],
         ],
         [
@@ -102,7 +131,7 @@ if (!function_exists('ks_register_home_shortcode')) {
           'title' => 'Kindergarten',
           'lead'  => 'Bewegung, Koordination und Freude am Ball — spielerisch und altersgerecht im Kindergarten.',
           'watermark' => 'KINDERGARTEN',
-          'img' => $img_kita ?: $fallback,
+          'img' => $fallback_img,
           'book' => $book_urls['kita'],
         ],
         [
@@ -110,7 +139,7 @@ if (!function_exists('ks_register_home_shortcode')) {
           'title' => 'Einzeltraining',
           'lead'  => '1-zu-1 Coaching: individuell, effizient und zielgerichtet — Technik, Torschuss, Athletik.',
           'watermark' => 'EINZELTRAINING',
-          'img' => $img_einzel ?: $fallback,
+          'img' => $fallback_img,
           'book' => $book_urls['einzel'],
         ],
       ];
@@ -135,12 +164,64 @@ if (!function_exists('ks_register_home_shortcode')) {
         })();"
       );
 
+      /* ==== TEAM Daten serverseitig laden ==== */
+      $next_base = function_exists('ks_next_base') ? ks_next_base() : '';
+      // Kandidaten: öffentliche API, dann Admin-API
+      $team_api_candidates = [];
+      if ($next_base) {
+        $team_api_candidates[] = trailingslashit($next_base) . 'api/coaches?limit=48';
+        $team_api_candidates[] = trailingslashit($next_base) . 'api/admin/coaches?limit=48';
+      }
+      $coaches = [];
+      foreach ($team_api_candidates as $api) {
+        $res = wp_remote_get($api, ['timeout'=>10, 'headers'=>['Accept'=>'application/json']]);
+        if (!is_wp_error($res) && wp_remote_retrieve_response_code($res) === 200) {
+          $json = json_decode(wp_remote_retrieve_body($res), true);
+          if (isset($json['items']) && is_array($json['items'])) {
+            $coaches = $json['items'];
+            break;
+          } elseif (is_array($json)) {
+            $coaches = $json;
+            break;
+          }
+        }
+      }
+
+      /* ==== Team-Karussell-JS (separate Datei, optional) ==== */
+      $team_js = $theme_dir . '/assets/js/ks-team.js';
+      if (file_exists($team_js)) {
+        wp_enqueue_script('ks-team', $theme_uri . '/assets/js/ks-team.js', [], filemtime($team_js), true);
+      }
+
+      // Helper zum Normalisieren der Bild-URL (http/https ODER data:image/ erlauben)
+      if (!function_exists('ks_normalize_next_img')) {
+        function ks_normalize_next_img($u) {
+          $u = trim((string)$u);
+          if ($u === '') return '';
+
+          // Absolut (http/https) ODER Base64-Data-URL → direkt zurückgeben
+          if (preg_match('~^(https?://|data:image/)~i', $u)) {
+            return $u;
+          }
+
+          // führendes "admin/" entfernen
+          $u = preg_replace('#^/?admin/#i', '', $u);
+
+          // relative Pfade an NEXT-Base anhängen
+          $base = function_exists('ks_next_base') ? rtrim(ks_next_base(), '/') : '';
+          if ($base) {
+            if ($u[0] !== '/') $u = '/'.$u;
+            return $base.$u;
+          }
+          return $u;
+        }
+      }
+
       /* ==== Markup ==== */
       ob_start(); ?>
 
       <!-- 1) HERO mit Tabs -->
       <section id="home-hero" class="ks-home-hero ks-sec" data-watermark="<?php echo esc_attr($slides[0]['watermark']); ?>">
-        <!-- Tabs oben mittig -->
         <nav class="ks-hero-tabs" aria-label="Hero Auswahl">
           <?php foreach ($slides as $i => $s): ?>
             <button type="button"
@@ -153,7 +234,6 @@ if (!function_exists('ks_register_home_shortcode')) {
           <?php endforeach; ?>
         </nav>
 
-        <!-- Slides -->
         <div class="ks-hero-slides">
           <?php foreach ($slides as $i => $s): ?>
             <div class="ks-hero-slide<?php echo $i===0 ? ' is-active' : ''; ?>"
@@ -224,26 +304,34 @@ if (!function_exists('ks_register_home_shortcode')) {
       </section>
 
       <!-- 4) FAQ -->
-      <section id="faq" class="ks-sec ks-py-56">
+      <?php $theme_uri_local = $theme_uri; ?>
+      <section id="faq"
+        class="ks-sec ks-py-56"
+        style="--acc-plus:url('<?php echo $theme_uri_local; ?>/assets/img/home/plus.png');
+               --acc-minus:url('<?php echo $theme_uri_local; ?>/assets/img/home/minus.png');">
+
         <div class="container ks-home-faq">
-          <div>
+          <div class="ks-title-wrap" data-bgword="FAQ">
             <div class="ks-kicker">FAQ</div>
             <h2 class="ks-dir__title">Häufig gestellte Fragen</h2>
+          </div>
 
+          <div>
             <details open class="ks-acc">
               <summary>Wo finden eure Trainingsangebote statt?</summary>
-              <div class="ks-acc__body">
-                Unsere Trainings finden auf den Sportanlagen unserer Partnervereine und in den Soccerhallen in und um NRW statt.
-              </div>
+              <div class="ks-acc__body">Unsere Trainings finden auf den Sportanlagen unserer Partnervereine und in den Soccerhallen in und um NRW statt.</div>
             </details>
+
             <details class="ks-acc">
               <summary>Wer kann teilnehmen?</summary>
               <div class="ks-acc__body">Kinder, Jugendliche und Erwachsene – wir haben passende Gruppen für alle Altersstufen.</div>
             </details>
+
             <details class="ks-acc">
               <summary>Wie bekomme ich die neuesten Informationen?</summary>
               <div class="ks-acc__body">Abonniere unseren Newsletter oder folge uns auf Social Media.</div>
             </details>
+
             <details class="ks-acc">
               <summary>Wie kann ich Mitglied werden?</summary>
               <div class="ks-acc__body">Buche ein Schnuppertraining – wir erklären dir alles weitere vor Ort.</div>
@@ -276,9 +364,225 @@ if (!function_exists('ks_register_home_shortcode')) {
         <div class="container container--1400">
           <div class="ks-kicker">Wir sind für dich da</div>
           <h2 class="ks-dir__title">Unser Team</h2>
-          <div id="ksTeamCarousel" class="ks-team"></div>
+
+          <div class="ks-team-wrap">
+            <button class="ks-team__nav ks-team__nav--prev" aria-label="Zurück">
+              <img src="<?php echo esc_url($theme_uri . '/assets/img/home/left.png'); ?>" alt="" width="28" height="28" />
+            </button>
+
+            <div id="ksTeamCarousel" class="ks-team">
+
+              <?php
+                // Trainer-Seite finden (erst per Slug, dann per Shortcode), Fallback /trainer/
+                $trainer_url = '';
+                $page_by_path = get_page_by_path('trainer');
+                if ($page_by_path) {
+                  $trainer_url = get_permalink($page_by_path->ID);
+                }
+                if (!$trainer_url) {
+                  $pages = get_posts([
+                    'post_type'      => 'page',
+                    's'              => '[ks_trainer_profile]',
+                    'posts_per_page' => 1,
+                  ]);
+                  if (!empty($pages)) {
+                    $trainer_url = get_permalink($pages[0]->ID);
+                  }
+                }
+                if (!$trainer_url) {
+                  $trainer_url = home_url('/trainer/');
+                }
+              ?>
+
+              <ul class="ks-team__track" aria-live="polite">
+                <?php if (!empty($coaches)): ?>
+                  <?php foreach ($coaches as $c):
+                    $first = isset($c['firstName']) ? $c['firstName'] : '';
+                    $last  = isset($c['lastName'])  ? $c['lastName']  : '';
+                    $full  = trim(($c['name'] ?? '') ?: trim($first . ' ' . $last));
+                    if ($full === '') $full = 'Trainer';
+
+                    $slug = isset($c['slug']) && $c['slug'] !== '' ? $c['slug'] : sanitize_title($full);
+
+                    // Bild-URL robust normalisieren (http/https ODER data:image/)
+                    $rawImg = isset($c['photoUrl']) ? $c['photoUrl'] : '';
+                    $img    = $rawImg ? ks_normalize_next_img($rawImg) : '';
+                    if ($img === '') $img = $fallback_img;
+
+                    $role = isset($c['position']) && $c['position'] ? $c['position'] : 'Trainer';
+
+                    // Link auf Trainer-Seite mit Query ?c=<slug>
+                    $href = add_query_arg('c', rawurlencode($slug), $trainer_url);
+                  ?>
+                    <li class="ks-team__card">
+                      <a href="<?php echo esc_url($href); ?>">
+                        <img
+                          class="ks-team__img"
+                          src="<?php echo esc_attr($img); ?>"
+                          alt="<?php echo esc_attr($full); ?>"
+                          loading="lazy"
+                          decoding="async" />
+                      </a>
+                      <div class="ks-team__meta">
+                        <div class="ks-team__role"><?php echo esc_html($role); ?></div>
+                        <div class="ks-team__name"><a href="<?php echo esc_url($href); ?>"><?php echo esc_html($full); ?></a></div>
+                      </div>
+                    </li>
+                  <?php endforeach; ?>
+                <?php else: ?>
+                  <li class="ks-team__card">
+                    <div class="ks-team__meta">
+                      <div class="ks-team__name">Keine Trainer gefunden.</div>
+                    </div>
+                  </li>
+                <?php endif; ?>
+              </ul>
+            </div>
+
+            <button class="ks-team__nav ks-team__nav--next" aria-label="Weiter">
+              <img src="<?php echo esc_url($theme_uri . '/assets/img/home/right.png'); ?>" alt="" width="28" height="28" />
+            </button>
+          </div>
         </div>
       </section>
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- 2.5) Feedback -->
+<?php
+  $fb_img = $theme_uri . '/assets/img/home/mfs.png'; // Platzhalter
+  $feedbacks = [
+    [
+      'img'    => $fb_img,
+      'quote'  => 'Ihr Einsatz, Ihre Energie, verbunden mit zielorientiertem Coaching ist fast unbezahlbar für die Jugendlichen.',
+      'author' => 'Christian Gross',
+      'meta'   => 'Schweizer Profitrainer (Tottenham Hotspur, VfB Stuttgart, Young Boys Bern)',
+    ],
+    [
+      'img'    => $fb_img,
+      'quote'  => 'Die Trainingsqualität und die Organisation sind außergewöhnlich jedes Detail stimmt.',
+      'author' => 'Muster Coach',
+      'meta'   => 'U17-Trainer, NRW',
+    ],
+    [
+      'img'    => $fb_img,
+      'quote'  => 'Fachlich top und menschlich nah so macht Förderung Sinn.',
+      'author' => 'Elternstimme',
+      'meta'   => 'Dortmund',
+    ],
+    [
+      'img'    => $fb_img,
+      'quote'  => 'Kindgerecht, motivierend, professionell klare Empfehlung.',
+      'author' => 'Vereinsvorstand',
+      'meta'   => 'Partnerverein',
+    ],
+  ];
+?>
+
+
+
+
+
+
+<section id="feedback" class="ks-sec ks-py-56 ks-fb" data-watermark="FEEDBACK" aria-label="Feedbacks">
+  <nav class="ks-fb-tabs" aria-label="Feedback Auswahl">
+    <?php foreach ($feedbacks as $i => $f): ?>
+      <button type="button" class="ks-fb-tab<?php echo $i===0 ? ' is-active' : ''; ?>" data-key="fb-<?php echo $i; ?>">
+        <span class="ks-fb-tab__label">Feedback</span>
+        <span class="ks-fb-tab__num"><?php echo sprintf('%02d', $i+1); ?></span>
+      </button>
+    <?php endforeach; ?>
+  </nav>
+
+
+  
+
+  <div class="container ks-fb-grid">
+
+ 
+    
+    <?php foreach ($feedbacks as $i => $f): ?>
+      <article class="ks-fb-slide<?php echo $i===0 ? ' is-active' : ''; ?>" data-key="fb-<?php echo $i; ?>">
+      
+ 
+      <div class="ks-fb-media">
+          <img src="<?php echo esc_url($f['img']); ?>" alt="" loading="lazy" decoding="async">
+        </div>
+  
+
+        <div class="ks-fb-content">
+          
+
+          
+  <div class="ks-fb-quote">
+    <img
+      class="quote-icon"
+      src="<?php echo get_template_directory_uri(); ?>/assets/img/feedback/quote.svg"
+      alt="" aria-hidden="true"
+      loading="lazy" decoding="async"
+    >
+    <?php echo esc_html($f['quote']); ?>
+  </div>
+
+  
+
+
+          <div class="ks-fb-author">
+            <strong><?php echo esc_html(mb_strtoupper($f['author'])); ?></strong>
+            <div class="ks-fb-meta"><?php echo esc_html($f['meta']); ?></div>
+          </div>
+        </div>
+      </article>
+    <?php endforeach; ?>
+  </div>
+
+
+
+  
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       <?php if ($show_news): ?>
       <!-- 6) Neuigkeiten -->
@@ -315,33 +619,111 @@ if (!function_exists('ks_register_home_shortcode')) {
         </div>
       </section>
 
+      <!-- Brandbar -->
       <section id="brandbar" class="ks-sec ks-brandbar" aria-label="Partner & Marken">
         <div class="container">
           <ul class="ks-brandbar__list" role="list">
             <?php
-              // Passe die Dateinamen/Alt-Texte an deine Assets an:
               $brands = [
-                [ 'src' => $theme_uri . '/assets/img/brands/bodosee-sportlo.svg', 'alt' => 'Bodosee Sportlo' ],
-                [ 'src' => $theme_uri . '/assets/img/brands/puma.svg',            'alt' => 'Puma' ],
-                [ 'src' => $theme_uri . '/assets/img/brands/dfsberater.svg',      'alt' => 'DFS Berater' ],
-                [ 'src' => $theme_uri . '/assets/img/brands/teamstolz.svg',       'alt' => 'Teamstolz' ],
-                [ 'src' => $theme_uri . '/assets/img/brands/dfsplayer.svg',       'alt' => 'DFS Player' ],
+                [ 'src' => $theme_uri . '/assets/img/brands/bodosee-sportlo.svg', 'label' => 'Bodosee Sportlo' ],
+                [ 'src' => $theme_uri . '/assets/img/home/mfs.png',               'label' => 'Puma' ],
+                [ 'src' => $theme_uri . '/assets/img/brands/dfsberater.svg',      'label' => 'DFS Berater' ],
+                [ 'src' => $theme_uri . '/assets/img/brands/teamstolz.svg',       'label' => 'Teamstolz' ],
+                [ 'src' => $theme_uri . '/assets/img/brands/dfsplayer.svg',       'label' => 'DFS Player' ],
               ];
               foreach ($brands as $b):
-                $src = esc_url($b['src']);
-                $alt = esc_attr($b['alt']);
+                $src   = esc_url($b['src']);
+                $label = esc_html($b['label']);
             ?>
               <li class="ks-brandbar__item">
-                <img src="<?php echo $src; ?>" alt="<?php echo $alt; ?>" loading="lazy" decoding="async">
+                <img src="<?php echo $src; ?>" alt="" loading="lazy" decoding="async" aria-hidden="true">
+                <span class="ks-brandbar__label"><?php echo $label; ?></span>
               </li>
             <?php endforeach; ?>
           </ul>
         </div>
       </section>
-
       <?php endif; ?>
 
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="program-cta" class="ks-sec ks-py-56 ks-cta-strip" aria-label="Programm schnell buchen">
+  <div class="container ks-cta-grid">
+   
+
+       <div class="ks-cta-text">
+      <div class="ks-eyebrow">Schnell buchen</div>
+      <h2 class="ks-dir__title">Dein Programm auswählen</h2>
+      <p>Wähle ein Angebot und starte direkt mit der Anmeldung.</p>
+              </div>
+
       <?php
+        $programs = [
+          'Foerdertraining'  => 'Fördertraining',
+          'PersonalTraining' => 'Einzeltraining',
+          'Camp'             => 'Fußballcamp',
+          'Kindergarten'     => 'Kindergarten',
+        ];
+      ?>
+     <form id="ksProgramForm" class="ks-cta-form" action="<?php echo esc_url($offers); ?>" method="get">
+  <!-- natives Select bleibt fürs Submit, wird vollständig versteckt -->
+
+
+<label class="screen-reader-text" for="ksProgramSelect">Programm</label>
+<select id="ksProgramSelect" name="type" class="ks-select" hidden>
+  <option value="" selected disabled>Bitte auswählen …</option>
+  <?php foreach ($programs as $val => $label): ?>
+    <option value="<?php echo esc_attr($val); ?>"><?php echo esc_html($label); ?></option>
+  <?php endforeach; ?>
+</select>
+
+
+
+  <!-- einzig sichtbares Dropdown (Custom UI wie beim Trainer) -->
+  <div class="ks-dd" id="ks-dd-program" aria-expanded="false">
+    <button type="button" class="ks-dd__btn" aria-haspopup="listbox" aria-expanded="false">
+      <span class="ks-dd__label">Bitte wählen…</span>
+      <span class="ks-dd__caret" aria-hidden="true"></span>
+    </button>
+    <div class="ks-dd__panel" role="listbox" tabindex="-1"></div>
+  </div>
+</form>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+<?php
+
+echo do_shortcode('[ks_whatsapp_locations]');
+
+?>
+
+<?php
+      
+
+
       return ob_get_clean();
     });
 
@@ -349,6 +731,10 @@ if (!function_exists('ks_register_home_shortcode')) {
 
   add_action('init', 'ks_register_home_shortcode');
 }
+
+
+
+
 
 
 
