@@ -301,6 +301,7 @@
 
 
 
+
     const p2 = pointsFrom(aItems);
     if (p2.length) { flyTo(map, p2); return; }
     const names = Array.from(new Set(aItems.map(o => cityFromLocationString(o.location)).filter(Boolean)));
@@ -427,10 +428,6 @@ if (SUBTYPE && o.sub_type !== SUBTYPE) return false;   // NEW
     apply(); // initial
   });
 })();
-
-
-
-
 
 
 
