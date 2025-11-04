@@ -1,30 +1,53 @@
 
 
-/* === News Detail: Medien-Größen sauber begrenzen === */
 
-/* Titelbild oben */
+
+/* =========================================================
+   DFS – NEWS Styles (latest, archive, single)
+   ========================================================= */
+
+/* ---------- Design-Variablen ---------- */
+:root{
+  --news-accent: red;      /* Hoverfarbe für Titel (kräftiges Gelb) */
+  --news-title:  #111111;      /* Standard Titel/Text */
+  --news-muted:  #6B7280;      /* Meta/Excerpt grau */
+  --news-line:   #000000;      /* Linie bei "Mehr lesen" */
+}
+
+/* ---------- Reset/Grundverhalten ---------- */
+.ks-news-item a{
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Alle Texte in Cards: weiche Farb-Transition (kein Layout-Shift) */
+.ks-news-item *{
+  transition: color .125s ease-out;  /* 125 ms */
+}
+
+/* =========================================================
+   A) NEWS DETAIL: Medien-Größen
+   ========================================================= */
 .ks-news-single header img{
   display:block;
   width:100%;
   height:auto;
-  max-height:520px;       /* bei Bedarf anpassen (z.B. 420px) */
-  object-fit:cover;       /* füllt den Rahmen, schneidet ggf. minimal */
+  max-height:520px;        /* ggf. 420px, wenn kompakter gewünscht */
+  object-fit:cover;
   border-radius:12px;
   margin:12px 0 0;
 }
 
-/* eigener Ratio-Wrapper (wir verwenden ihn im Shortcode) */
+/* Ratio-Wrapper (16:9) für Videos/iframes/Bilder im Content */
 .ks-news-single .ratio{
   position:relative;
   width:100%;
-  aspect-ratio:16 / 9;    /* echtes 16:9 */
+  aspect-ratio:16 / 9;
   background:#000;
   border-radius:12px;
   overflow:hidden;
   margin:12px 0 0;
 }
-
-/* Medien im Ratio-Wrapper vollflächig einpassen */
 .ks-news-single .ratio > video,
 .ks-news-single .ratio > img,
 .ks-news-single .ratio > iframe{
@@ -32,12 +55,207 @@
   inset:0;
   width:100%;
   height:100%;
-  object-fit:cover;       /* Video/Bild füllt den Rahmen */
+  object-fit:cover;
 }
 
-/* Falls du zusätzlich „normale“ Bilder im Content hast */
+/* Normale Bilder im Content */
 .ks-news-single .ks-news-content img{
   max-width:100%;
   height:auto;
 }
+
+/* =========================================================
+   B) HOME/SEITE – [ks_news_latest] (3er Grid, ohne Bilder)
+   ========================================================= */
+.ks-news-latest .ks-news-grid{
+  max-width:1400px;
+  margin:0 auto;
+  padding:0 16px;
+}
+
+.ks-news-latest .ks-news-main{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:28px;
+}
+
+.ks-news-latest .ks-news-item{
+  display:flex;
+  flex-direction:column;
+}
+
+/* Auf HOME: Thumbs AUS (nur Texte zeigen) */
+.ks-news-latest .ks-news-item__thumb{ display:none; }
+
+/* Typografie */
+.ks-news-latest .ks-news-item__title{
+  margin:10px 0 0;
+  font-size:25px;
+  line-height:1.3;
+  color:var(--news-title);
+}
+.ks-news-latest .ks-news-item__excerpt{ margin-top:8px; color:var(--news-muted); }
+.ks-news-latest .ks-news-item__meta{ color:var(--news-muted); }
+
+/* Responsive */
+@media (max-width:1024px){
+  .ks-news-latest .ks-news-main{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+}
+@media (max-width:640px){
+  .ks-news-latest .ks-news-main{ grid-template-columns:1fr; }
+}
+
+/* =========================================================
+   C) NEWS ARCHIVE (Liste/Übersicht mit Bildern)
+   ========================================================= */
+.ks-news-archive .ks-news-grid{
+  max-width:1400px;
+  margin:0 auto;
+  padding:0 16px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 320px; /* Content + Sidebar */
+  gap:32px;
+}
+@media (max-width:1024px){
+  .ks-news-archive .ks-news-grid{
+    grid-template-columns:1fr; /* Sidebar unter Content */
+  }
+}
+
+/* Grid der Artikel im Archiv (kann einspaltig sein, passt sich über CSS an) */
+.ks-news-archive .ks-news-main{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:28px;
+}
+
+/* Auf ARCHIVE: Thumbs AN + 16:9 */
+.ks-news-archive .ks-news-item__thumb{ display:block; }
+.ks-news-archive .ks-news-item__thumb img{
+  display:block;
+  width:100%;
+  aspect-ratio:16 / 9;
+  height:auto;
+  object-fit:cover;
+  border-radius:12px;
+}
+
+/* Typografie im Archiv */
+.ks-news-archive .ks-news-item__title{
+  margin:10px 0 0;
+  font-size:24px;
+  line-height:1.3;
+  color:var(--news-title);
+}
+.ks-news-archive .ks-news-item__excerpt{ margin-top:8px; color:var(--news-muted); }
+.ks-news-archive .ks-news-item__meta{ color:var(--news-muted); }
+
+/* Sidebar Widgets (optional, minimal) */
+.ks-news-archive .ks-news-sidebar .widget{ margin:0 0 24px; }
+.ks-news-archive .ks-news-sidebar .widget-title{
+  font-size:14px;
+  letter-spacing:.06em;
+  font-weight:700;
+  color:#111;
+  margin:0 0 10px;
+}
+.ks-news-archive .ks-news-sidebar .widget-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+.ks-news-archive .ks-news-sidebar .widget-list li{ margin:6px 0; }
+
+/* =========================================================
+   D) HOVER-VERHALTEN (einheitlich für Cards)
+   ========================================================= */
+
+/* Titel färbt gelb beim Hover der Card */
+.ks-news-item:hover .ks-news-item__title a{
+  color:var(--news-accent);
+}
+
+/* Meta + Excerpt leicht dunkler beim Hover (besserer Kontrast) */
+.ks-news-item:hover .ks-news-item__meta,
+.ks-news-item:hover .ks-news-item__excerpt{
+  color:red;
+}
+
+/* KEIN Transform/Scale – damit nichts springt! */
+
+/* =========================================================
+   E) "MEHR LESEN" – Linie wächst, Text bleibt schwarz
+   ========================================================= */
+.ks-link-more{
+  --u:50%;                                 /* Start: bis zur Mitte */
+  position:relative;
+  display:inline-block;
+  padding-bottom:1px;
+  font-size:14px;
+  font-weight:600;
+  color:var(--news-title) !important;      /* Text immer schwarz */
+  background-image:linear-gradient(var(--news-line), var(--news-line));
+  background-repeat:no-repeat;
+  background-position:0 100%;
+  background-size:var(--u) 2px;            /* animierbare Länge */
+  transition:background-size .125s ease-out; /* 125 ms Länge */
+}
+
+/* Beim Hover wächst nur die Linie, keine Farbänderung */
+.ks-link-more:hover{
+  --u:100%;
+  color:var(--news-title) !important;      /* bleibt schwarz */
+}
+
+/* Sicherheit: Card-Hover ändert "Mehr lesen" nicht */
+.ks-news-item:hover .ks-link-more{
+  color:var(--news-title) !important;
+}
+
+/* =========================================================
+   F) Sonstiges (Pagination etc. – optional dezent)
+   ========================================================= */
+.ks-pagination{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+  margin-top:20px;
+}
+.ks-pagination a,
+.ks-pagination span{
+  display:inline-block;
+  min-width:36px;
+  text-align:center;
+  padding:6px 10px;
+  border-radius:8px;
+  text-decoration:none;
+  color:#111;
+  background:#f3f4f6;
+}
+.ks-pagination .current{
+  background:#e5e7eb;
+  font-weight:700;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
