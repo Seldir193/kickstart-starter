@@ -92,7 +92,14 @@ if (!function_exists('ks_register_news_shortcodes')) {
     add_shortcode('ks_news_latest', function ($atts = []) {
       ks_news_enqueue_assets();
 
-      $atts = shortcode_atts(['limit' => 3], $atts, 'ks_news_latest');
+      /*$atts = shortcode_atts(['limit' => 3], $atts, 'ks_news_latest');*/
+
+      $atts = shortcode_atts([
+  'limit'  => 3,
+  'thumbs' => '1', // 1 = mit Bild, 0 = ohne Bild
+], $atts, 'ks_news_latest');
+
+$show_thumbs = ($atts['thumbs'] !== '0');
       $api  = ks_news_api_base();
       $url  = add_query_arg([
         'limit'     => (int)$atts['limit'],
@@ -164,6 +171,8 @@ if (!function_exists('ks_register_news_shortcodes')) {
       $data = ks_news_fetch($url);
 
       ob_start(); ?>
+
+
       <section class="ks-news-archive">
         <div class="container ks-news-grid">
 
@@ -187,11 +196,21 @@ if (!function_exists('ks_register_news_shortcodes')) {
                   <div class="ks-news-item__meta">
                     <?= $catName ? $catName . ' · ' : '' ?><?= esc_html($date) ?>
                   </div>
-                  <?php if ($cover): ?>
-                    <a href="<?= $detail ?>" class="ks-news-item__thumb">
-                      <img src="<?= $cover ?>" alt="<?= $title ?>" loading="lazy" />
-                    </a>
-                  <?php endif; ?>
+                 
+
+
+
+
+
+
+
+<?php if ($cover): ?>
+  <a href="<?= $detail ?>" class="ks-news-item__thumb">
+    <img src="<?= $cover ?>" alt="<?= $title ?>" loading="lazy" />
+  </a>
+<?php endif; ?>
+
+
                   <h2 class="ks-news-item__title"><a href="<?= $detail ?>"><?= $title ?></a></h2>
                   <div class="ks-news-item__excerpt"><?= $excerpt ?></div>
                   <p class="ks-news-item__more"><a class="ks-link-more" href="<?= $detail ?>">MEHR LESEN</a></p>
