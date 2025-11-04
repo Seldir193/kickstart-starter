@@ -578,46 +578,20 @@ if (file_exists($wa_css)) {
 
 
 
+<?php if ($show_news): ?>
+<section id="news" class="ks-sec ks-py-48">
+  <div class="container">
+    <div class="ks-kicker">Aktuelles</div>
+    <h2 class="ks-dir__title">Neuigkeiten</h2>
+  </div>
+
+  <?php echo do_shortcode('[ks_news_latest limit="3" thumbs="0"]'); ?>
+</section>
+<?php endif; ?>
 
 
 
-
-
-
-      <?php if ($show_news): ?>
-      <!-- 6) Neuigkeiten -->
-      <section id="news" class="ks-sec ks-py-48">
-        <div class="container">
-          <div class="ks-kicker">Aktuelles</div>
-          <h2 class="ks-dir__title">Neuigkeiten</h2>
-
-          <div class="ks-news">
-            <?php
-            $q = new WP_Query([
-              'posts_per_page'       => 3,
-              'ignore_sticky_posts'  => true,
-              'post_status'          => 'publish',
-            ]);
-
-            if ($q->have_posts()):
-              while ($q->have_posts()): $q->the_post(); ?>
-                <article class="ks-news__item">
-                  <?php if (has_post_thumbnail()): ?>
-                    <a href="<?php the_permalink(); ?>" class="ks-news__thumb"><?php the_post_thumbnail('medium_large'); ?></a>
-                  <?php endif; ?>
-                  <div class="ks-news__meta"><?php echo esc_html( get_the_date('d.m.Y') ); ?></div>
-                  <h3 class="ks-news__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                  <p class="ks-news__excerpt"><?php echo esc_html( wp_trim_words(get_the_excerpt(), 22) ); ?></p>
-                  <p><a class="ks-btn ks-btn--ghost" href="<?php the_permalink(); ?>">MEHR LESEN</a></p>
-                </article>
-              <?php endwhile;
-              wp_reset_postdata();
-            else: ?>
-              <p>Keine Beiträge gefunden.</p>
-            <?php endif; ?>
-          </div>
-        </div>
-      </section>
+  
 
       <!-- Brandbar -->
       <section id="brandbar" class="ks-sec ks-brandbar" aria-label="Partner & Marken">
@@ -643,7 +617,7 @@ if (file_exists($wa_css)) {
           </ul>
         </div>
       </section>
-      <?php endif; ?>
+     
 
       
 
