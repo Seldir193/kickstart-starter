@@ -237,3 +237,90 @@ body {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Boot-Animation: läuft nur einmal direkt nach Laden ===== */
+
+/* während des Boots keine Transitions, nur die Keyframe-Animation */
+.ks-fb:not(.fb-boot-done) .ks-fb-content{
+  transition: none !important;
+}
+
+/* 01 (die aktive Slide) fährt beim allerersten Paint von unten in die Mitte */
+.ks-fb:not(.fb-boot-done) .ks-fb-slide.is-active .ks-fb-content{
+  animation: ksFbBootUp 0.95s cubic-bezier(.22,.61,.36,1) both;
+}
+
+@keyframes ksFbBootUp{
+  from { opacity: 0; transform: translate3d(0, 160px, 0); }
+  to   { opacity: 1; transform: translate3d(0,   0px, 0); }
+}
+
+/* ===== Normale Richtungs-Transitions für Tab-Wechsel ===== */
+.ks-fb, .ks-fb-grid, .ks-fb-slide, .ks-fb-content{ overflow: visible; }
+
+/* Basis für normale Wechsel */
+.ks-fb .ks-fb-content{
+  opacity: 1;
+  transform: translate3d(0,0,0);
+  transition:
+    transform 1.25s cubic-bezier(.22,.61,.36,1),
+    opacity   1.25s cubic-bezier(.22,.61,.36,1);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* Startposition je Richtung (wird per JS gesetzt) */
+.ks-fb .ks-fb-content.is-prep.dir-down{ transform: translate3d(0, 160px, 0); opacity: 0; } /* von unten */
+.ks-fb .ks-fb-content.is-prep.dir-up  { transform: translate3d(0,-160px, 0); opacity: 0; } /* von oben */
+
+/* Zielzustand */
+.ks-fb .ks-fb-content.is-anim{ transform: translate3d(0,0,0); opacity: 1; }
+
+@media (prefers-reduced-motion: reduce){
+  .ks-fb:not(.fb-boot-done) .ks-fb-slide.is-active .ks-fb-content{ animation: none !important; }
+  .ks-fb .ks-fb-content{
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
