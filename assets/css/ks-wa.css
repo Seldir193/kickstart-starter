@@ -170,9 +170,120 @@
 
 
 /* Icon im Button (inline SVG) */
-.ks-wa-btn{ display:inline-flex; align-items:center; gap:10px; }
+.ks-wa-btn{ display:inline-flex; align-items:center; gap:10px; cursor:pointer;}
 .ks-wa-ico{ display:inline-flex; width:18px; height:18px; line-height:0; }
 .ks-wa-ico svg{ width:18px; height:18px; display:block; color:currentColor; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* === WhatsApp Dropdown: Klassen-Mapping auf .ks-dd =================== */
+/* Wrapper */
+.ks-dd{ position: relative; }
+
+/* Button (wie .ks-wa-dd__btn) */
+.ks-dd__btn{
+  height:46px; min-width:220px; padding:0 14px;
+  border:1px solid #e3e6e8; border-radius:10px; background:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  font-weight:600; color:#2a3036;
+}
+.ks-dd__btn:focus-visible{
+  outline:3px solid rgba(37,211,102,.35);
+  outline-offset:2px;
+}
+
+/* Panel (wie .ks-wa-dd__panel) */
+.ks-dd__panel{
+  position:absolute; left:0; right:0; top:calc(100% + 6px);
+  background:#fff; border:1px solid #e3e6e8; border-radius:12px;
+  box-shadow:0 12px 24px rgba(0,0,0,.08);
+  max-height:calc(2 * 44px);
+  overflow-y:auto;
+  z-index:1000;
+}
+/* falls hidden gesetzt ist -> unsichtbar */
+.ks-dd__panel[hidden]{ display:none; }
+
+/* Auto-Dropup wie vorher */
+.ks-dd__panel.is-dropup{ top:auto; bottom:calc(100% + 6px); }
+
+/* Option (wie .ks-wa-dd__option) */
+.ks-dd__option{ padding:10px 14px; line-height:24px; cursor:pointer; }
+.ks-dd__option:hover{ background:#f6f7f8; }
+
+/* optional: wenn JS .is-open setzt, Panel sicher anzeigen */
+.ks-dd.is-open .ks-dd__panel{ display:block; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Caret-Icon animiert drehen, wenn geöffnet */
+.ks-wa-dd__caret{
+  display:inline-block;
+  transition: transform .18s ease;
+}
+
+/* beim Öffnen (Button hat aria-expanded="true") */
+.ks-wa-dd__btn[aria-expanded="true"] .ks-wa-dd__caret{
+  transform: rotate(180deg);
+}
+
+/* (optional) auch für das generische Dropdown verwenden */
+.ks-dd__caret{ transition: transform .18s ease; }
+.ks-dd__btn[aria-expanded="true"] .ks-dd__caret{ transform: rotate(180deg); }
+
+/* (optional) Bewegungen reduzieren, wenn gewünscht */
+@media (prefers-reduced-motion: reduce){
+  .ks-wa-dd__caret,
+  .ks-dd__caret{ transition: none; }
+}
+
+
+
 
 
 
