@@ -1,0 +1,100 @@
+/* === 1) Wasserzeichen: erst von oben rein, dann stehen bleiben === */
+.ks-home-hero::after{
+  /* dein bestehendes Layout bleibt – wir animieren nur translate & opacity */
+  opacity: 0;
+  transform: translateY(-40px);
+}
+.ks-home-hero.wm-enter::after{
+  transition: transform .9s cubic-bezier(.16,1,.3,1),
+              opacity   .9s cubic-bezier(.16,1,.3,1);
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* === 2) Text: weich von links (du hast lange Zeiten gewünscht) === */
+.ks-home-hero__left{
+  transform: translate3d(-164px,0,0);
+  opacity: 0;
+}
+.ks-home-hero__left.enter{
+  transition: transform 3.4s cubic-bezier(.16,1,.3,1),
+              opacity   3.4s cubic-bezier(.16,1,.3,1);
+  transform: translate3d(0,0,0);
+  opacity: 1;
+}
+
+/* === 3) Bild: weich von unten === */
+.ks-home-hero__img{
+  transform: translate3d(0,64px,0);
+  opacity: 0;
+}
+.ks-home-hero__img.enter{
+  transition: transform 3.4s cubic-bezier(.16,1,.3,1),
+              opacity   3.4s cubic-bezier(.16,1,.3,1);
+  transform: translate3d(0,0,0);
+  opacity: 1;
+}
+
+/* Buttons/ks-btn bleiben unberührt – keine Overrides hier! */
+
+@media (prefers-reduced-motion: reduce){
+  .ks-home-hero::after,
+  .ks-home-hero.wm-enter::after,
+  .ks-home-hero__left,
+  .ks-home-hero__left.enter,
+  .ks-home-hero__img,
+  .ks-home-hero__img.enter{
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* === Wasserzeichen als echte Buchstaben-Spans (ersetzt das ::after visuell) === */
+.ks-home-hero.wm-ready::after { content: none; }  /* altes ::after ausblenden, wenn wir Spans nutzen */
+
+.ks-hero-wm{
+  position: absolute;
+  left: 0; right: 0; bottom: 6%;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: .02em;
+  font-size: clamp(64px, 22vw, 240px);
+  color: rgba(0,0,0,.04);
+  pointer-events: none;
+  white-space: pre;        /* Spaces beibehalten */
+}
+
+.ks-hero-wm span{
+  display: inline-block;
+  transform-origin: 50% 0%;
+  transform: translateY(-40px) scaleY(0.7);
+  opacity: 0;
+}
+
+/* Wenn .enter gesetzt wird, laufen die Transitions (Delays kommen per JS pro Span) */
+.ks-hero-wm.enter span{
+  transition: transform .9s cubic-bezier(.16,1,.3,1),
+              opacity   .9s cubic-bezier(.16,1,.3,1);
+  transform: translateY(0) scaleY(1);
+  opacity: 1;
+}
