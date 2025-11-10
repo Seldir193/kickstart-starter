@@ -1,10 +1,5 @@
 
 
-
-
-
-
-
 <?php
 // [ks_whatsapp_locations mode="auto" text="..." campaign="whatsapp_locations" btn_class="ks-wa-btn" select_class="ks-wa-select" placeholder="Standort wählen…"]
 // - mode=auto  : 1 Standort => Button, >=2 Standorte => Dropdown + Button
@@ -28,20 +23,12 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
       $locations = [
         [ 'label' => 'Dortmund', 'phone' => '4917643203362' ],
         [ 'label' => 'Köln',     'phone' => '491714324324' ],
+        [ 'label' => 'Duisburg',     'phone' => '491714324388' ],
         // weitere Standorte …
       ];
 
-   
-
-
-
-
-// kompaktes WhatsApp-Icon als Inline-SVG (übernimmt currentColor)
-$wa_icon = '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" focusable="false">
-  <path fill="currentColor" d="M128 20C69 20 20 66.7 20 124.2c0 21.9 6.3 42.5 17.3 59.9L20 236l54-16c15.6 8.5 33.4 13.4 54 13.4 59 0 108-46.7 108-104.2C236 66.7 187 20 128 20zm0 187.8c-17.7 0-34.1-4.7-48-13.5l-3.4-2.1-32 9.3 9.5-30.6-2.2-3.5c-10.2-16-15.6-34.3-15.6-53.5 0-52 44-94.3 98-94.3s98 42.3 98 94.3-44 94.3-98 94.3zm55.6-70.5c-3-1.5-17.5-8.7-20.2-9.7-2.7-1-4.7-1.5-6.7 1.5s-7.7 9.7-9.5 11.7c-1.7 2-3.5 2.2-6.5.7-3-1.5-12.5-4.6-23.8-14.7-8.8-7.8-14.7-17.5-16.4-20.5-1.7-3-.2-4.5 1.3-6 1.3-1.3 3-3.5 4.5-5.2s2-3 3-5c1-2 .5-3.7 0-5.2-.5-1.5-6.7-16-9.2-21.9-2.4-5.8-4.8-5-6.7-5h-5.7c-2 0-5.2.7-8 3.7-2.7 3-10.5 10.3-10.5 25s10.7 29 12.2 31c1.5 2 21 32.5 51 45.5 30 13 30 8.7 35.5 8.2 5.5-.5 17.5-7.2 20-14.2 2.5-7 2.5-13 1.7-14.2-.8-1.2-2.8-2-5.8-3.5z"/>
-</svg>';
-
-
+      // kompaktes WhatsApp-Icon als Inline-SVG (übernimmt currentColor)
+      $wa_icon = '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" focusable="false"><path fill="currentColor" d="M128 20C69 20 20 66.7 20 124.2c0 21.9 6.3 42.5 17.3 59.9L20 236l54-16c15.6 8.5 33.4 13.4 54 13.4 59 0 108-46.7 108-104.2C236 66.7 187 20 128 20zm0 187.8c-17.7 0-34.1-4.7-48-13.5l-3.4-2.1-32 9.3 9.5-30.6-2.2-3.5c-10.2-16-15.6-34.3-15.6-53.5 0-52 44-94.3 98-94.3s98 42.3 98 94.3-44 94.3-98 94.3zm55.6-70.5c-3-1.5-17.5-8.7-20.2-9.7-2.7-1-4.7-1.5-6.7 1.5s-7.7 9.7-9.5 11.7c-1.7 2-3.5 2.2-6.5.7-3-1.5-12.5-4.6-23.8-14.7-8.8-7.8-14.7-17.5-16.4-20.5-1.7-3-.2-4.5 1.3-6 1.3-1.3 3-3.5 4.5-5.2s2-3 3-5c1-2 .5-3.7 0-5.2-.5-1.5-6.7-16-9.2-21.9-2.4-5.8-4.8-5-6.7-5h-5.7c-2 0-5.2.7-8 3.7-2.7 3-10.5 10.3-10.5 25s10.7 29 12.2 31c1.5 2 21 32.5 51 45.5 30 13 30 8.7 35.5 8.2 5.5-.5 17.5-7.2 20-14.2 2.5-7 2.5-13 1.7-14.2-.8-1.2-2.8-2-5.8-3.5z"/></svg>';
 
       // ---- Säubern & validieren ----
       $clean = [];
@@ -135,154 +122,136 @@ $wa_icon = '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 256 256"
         return ob_get_clean();
       }
 
+      // ---------- DROPDOWN: Custom-Dropdown + Button ----------
+      $uid = 'wa_'.wp_generate_uuid4();
+      ?>
+      <section class="ks-sec ks-wa-strip ks-wa-dropdown" aria-label="WhatsApp Kontakt je Standort">
+        <div class="container ks-wa-inner">
+          <p class="ks-wa-text">
+            Fragen? <strong>Wähle deinen Standort & schreib uns auf WhatsApp.</strong>
+          </p>
 
+          <form id="<?php echo esc_attr($uid); ?>_form" class="ks-wa-form" onsubmit="return false;">
+            <!-- natives Select nur für Screenreader/Form-Sync, UNSICHTBAR -->
+            <label for="<?php echo esc_attr($uid); ?>_select" class="screen-reader-only">Standort</label>
+            <select id="<?php echo esc_attr($uid); ?>_select" name="wa_location" class="screen-reader-only" tabindex="-1" aria-hidden="true">
+              <option value="" selected disabled><?php echo esc_html($a['placeholder'] ?? 'Standort wählen…'); ?></option>
+              <?php foreach ($clean as $loc): ?>
+                <option value="<?php echo esc_attr($loc['phone']); ?>" data-slug="<?php echo esc_attr(sanitize_title($loc['label'])); ?>">
+                  <?php echo esc_html($loc['label']); ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ---------- DROPDOWN: Custom-Dropdown + Button ----------
-$uid = 'wa_'.wp_generate_uuid4();
-?>
-<section class="ks-sec ks-wa-strip ks-wa-dropdown" aria-label="WhatsApp Kontakt je Standort">
-  <div class="container ks-wa-inner">
-    <p class="ks-wa-text">
-      Fragen? <strong>Wähle deinen Standort & schreib uns auf WhatsApp.</strong>
-    </p>
-
-    <form id="<?php echo esc_attr($uid); ?>_form" class="ks-wa-form" onsubmit="return false;">
-      <!-- natives Select nur für Screenreader/Form-Sync, UNSICHTBAR -->
-      <label for="<?php echo esc_attr($uid); ?>_select" class="screen-reader-only">Standort</label>
-      <select id="<?php echo esc_attr($uid); ?>_select" name="wa_location" class="screen-reader-only" tabindex="-1" aria-hidden="true">
-        <option value="" selected disabled><?php echo esc_html($a['placeholder'] ?? 'Standort wählen…'); ?></option>
-        <?php foreach ($clean as $loc): ?>
-          <option value="<?php echo esc_attr($loc['phone']); ?>" data-slug="<?php echo esc_attr(sanitize_title($loc['label'])); ?>">
-            <?php echo esc_html($loc['label']); ?>
-          </option>
-        <?php endforeach; ?>
-      </select>
-
-      <!-- sichtbares Custom-Dropdown -->
-      <div class="ks-wa-dd" id="<?php echo esc_attr($uid); ?>_dd">
-        <button type="button" class="ks-wa-dd__btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="<?php echo esc_attr($uid); ?>_panel">
-          <span class="ks-wa-dd__label"><?php echo esc_html($a['placeholder'] ?? 'Standort wählen…'); ?></span>
-          <span class="ks-wa-dd__caret" aria-hidden="true"></span>
-        </button>
-        <div class="ks-wa-dd__panel" id="<?php echo esc_attr($uid); ?>_panel" role="listbox" tabindex="-1" hidden>
-          <?php foreach ($clean as $loc): ?>
-            <div class="ks-wa-dd__option"
-                 role="option"
-                 data-phone="<?php echo esc_attr($loc['phone']); ?>"
-                 data-slug="<?php echo esc_attr(sanitize_title($loc['label'])); ?>"
-                 data-label="<?php echo esc_attr($loc['label']); ?>">
-              <?php echo esc_html($loc['label']); ?>
+            <!-- sichtbares Custom-Dropdown (vereinheitlicht auf .ks-dd) -->
+            <div class="ks-dd" id="<?php echo esc_attr($uid); ?>_dd">
+              <button type="button" class="ks-dd__btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="<?php echo esc_attr($uid); ?>_panel">
+                <span class="ks-dd__label"><?php echo esc_html($a['placeholder'] ?? 'Standort wählen…'); ?></span>
+                <span class="ks-dd__caret" aria-hidden="true"></span>
+              </button>
+              <div class="ks-dd__panel" id="<?php echo esc_attr($uid); ?>_panel" role="listbox" tabindex="-1" hidden>
+                <?php foreach ($clean as $loc): ?>
+                  <div class="ks-dd__option"
+                       role="option"
+                       data-phone="<?php echo esc_attr($loc['phone']); ?>"
+                       data-slug="<?php echo esc_attr(sanitize_title($loc['label'])); ?>"
+                       data-label="<?php echo esc_attr($loc['label']); ?>">
+                    <?php echo esc_html($loc['label']); ?>
+                  </div>
+                <?php endforeach; ?>
+              </div>
             </div>
-          <?php endforeach; ?>
+
+            <button type="button" id="<?php echo esc_attr($uid); ?>_btn" class="<?php echo esc_attr($a['btn_class']); ?>" aria-disabled="true">
+              <span class="ks-wa-ico" aria-hidden="true"><?php echo $wa_icon; ?></span>
+              WhatsApp öffnen
+            </button>
+          </form>
         </div>
-      </div>
+      </section>
 
-      
+      <script>
+      (function(){
+        var uid   = '<?php echo esc_js($uid); ?>';
+        var sel   = document.getElementById(uid + '_select');
+        var dd    = document.getElementById(uid + '_dd');
+        var btn   = document.getElementById(uid + '_btn');
+        var bOpen = dd.querySelector('.ks-dd__btn');
+        var label = dd.querySelector('.ks-dd__label');
+        var panel = document.getElementById(uid + '_panel');
 
-   
+        var text  = <?php echo json_encode($a['text']); ?>;
+        var baseCampaign = <?php echo json_encode($a['campaign']); ?>;
 
-<button type="button" id="<?php echo esc_attr($uid); ?>_btn" class="<?php echo esc_attr($a['btn_class']); ?>" aria-disabled="true">
-  <span class="ks-wa-ico" aria-hidden="true"><?php echo $wa_icon; ?></span>
-  WhatsApp öffnen
-</button>
+        function setDisabled(dis){ btn.setAttribute('aria-disabled', dis ? 'true' : 'false'); }
 
-    </form>
-  </div>
-</section>
+        function openPanel(){
+          // Trainer-UI erwartet .is-open am Wrapper + hidden entfernen
+          dd.classList.add('is-open');
+          panel.classList.remove('is-dropup');
+          panel.removeAttribute('hidden');
 
-<script>
-(function(){
-  var uid   = '<?php echo esc_js($uid); ?>';
-  var sel   = document.getElementById(uid + '_select');
-  var dd    = document.getElementById(uid + '_dd');
-  var btn   = document.getElementById(uid + '_btn');
-  var bOpen = dd.querySelector('.ks-wa-dd__btn');
-  var label = dd.querySelector('.ks-wa-dd__label');
-  var panel = document.getElementById(uid + '_panel');
+          // nach Layout-Berechnung Dropup entscheiden
+          requestAnimationFrame(function(){
+            var rect = panel.getBoundingClientRect();
+            var spaceBelow = window.innerHeight - rect.top;
+            var needed = rect.height || 88;
+            if (spaceBelow < needed + 24){ panel.classList.add('is-dropup'); }
+          });
 
-  var text  = <?php echo json_encode($a['text']); ?>;
-  var baseCampaign = <?php echo json_encode($a['campaign']); ?>;
+          bOpen.setAttribute('aria-expanded','true');
+          panel.focus();
+        }
+        function closePanel(){
+          dd.classList.remove('is-open');
+          panel.setAttribute('hidden','');
+          bOpen.setAttribute('aria-expanded','false');
+        }
 
-  function setDisabled(dis){ btn.setAttribute('aria-disabled', dis ? 'true' : 'false'); }
+        bOpen.addEventListener('click', function(e){
+          e.stopPropagation();
+          if (dd.classList.contains('is-open')) closePanel();
+          else openPanel();
+        });
+        document.addEventListener('click', function(e){
+          if (!dd.contains(e.target)) closePanel();
+        });
 
-  function openPanel(){
-    panel.classList.remove('is-dropup');
-    panel.hidden = false;
-    // Auto-DropUP wenn unten zu wenig Platz (Footer!)
-    var rect = panel.getBoundingClientRect();
-    var spaceBelow = window.innerHeight - rect.top;
-    var needed = rect.height || 88;
-    if (spaceBelow < needed + 24){ panel.classList.add('is-dropup'); }
-    bOpen.setAttribute('aria-expanded','true');
-    panel.focus();
-  }
-  function closePanel(){ panel.hidden = true; bOpen.setAttribute('aria-expanded','false'); }
+        // ESC zum Schließen (UX)
+        panel.addEventListener('keydown', function(e){
+          if (e.key === 'Escape'){ e.preventDefault(); closePanel(); bOpen.focus(); }
+        });
 
-  bOpen.addEventListener('click', function(){ panel.hidden ? openPanel() : closePanel(); });
-  document.addEventListener('click', function(e){ if (!dd.contains(e.target)) closePanel(); });
+        panel.addEventListener('click', function(e){
+          var opt = e.target.closest('.ks-dd__option');
+          if(!opt) return;
+          sel.value = opt.dataset.phone;
+          label.textContent = opt.dataset.label;
+          setDisabled(false);
+          closePanel();
+        });
 
-  panel.addEventListener('click', function(e){
-    var opt = e.target.closest('.ks-wa-dd__option');
-    if(!opt) return;
-    sel.value = opt.dataset.phone;
-    label.textContent = opt.dataset.label;
-    setDisabled(false);
-    closePanel();
-  });
+        setDisabled(true);
 
-  setDisabled(true);
+        btn.addEventListener('click', function(){
+          var phone = sel.value;
+          if(!phone) return;
+          var slug = sel.options[sel.selectedIndex]?.dataset.slug || 'standort';
+          var msg  = encodeURIComponent(text);
+          var utm  = 'utm_source=website&utm_medium=cta&utm_campaign=' + encodeURIComponent(baseCampaign + '_' + slug);
+          window.open('https://wa.me/' + phone + '?text=' + msg + '&' + utm, '_blank');
+        });
+      })();
+      </script>
+      <?php
 
-  btn.addEventListener('click', function(){
-    var phone = sel.value;
-    if(!phone) return;
-    var slug = sel.options[sel.selectedIndex]?.dataset.slug || 'standort';
-    var msg  = encodeURIComponent(text);
-    var utm  = 'utm_source=website&utm_medium=cta&utm_campaign=' + encodeURIComponent(baseCampaign + '_' + slug);
-    window.open('https://wa.me/' + phone + '?text=' + msg + '&' + utm, '_blank');
-  });
-})();
-</script>
-<?php
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
       return ob_get_clean();
     });
   }
   add_action('init', 'ks_register_whatsapp_locations_shortcode');
 }
+
+
+
+
 
