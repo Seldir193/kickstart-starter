@@ -1,0 +1,174 @@
+
+
+/* ========================================================================== */
+/*  DFS Coach Portal (assets/css/ks-videos.css)                                */
+/*  – Vollbleed, dunkles Grau (nicht pures Schwarz), BW-Hintergrundfoto       */
+/*  – Großer "VIDEOS" Schriftzug                                              */
+/*  – Device-Bild rechts: smartes Bleed bis Viewportrand                      */
+/* ========================================================================== */
+
+/* Sicherheitsnetz gegen horizontales Scrollen bei Full-Bleed */
+html, body { overflow-x: clip; }
+
+/* ---------------------------------------------- */
+/* Section-Wrapper (Vollbleed + Höhe + Typo)      */
+/* ---------------------------------------------- */
+#coach-portal{
+  position: relative;
+  z-index: 0;
+  padding: clamp(56px, 8vw, 128px) 0;
+  color: #fff;
+}
+
+/* Vollbleed-Layer: ::before Bühne, ::after Foto */
+#coach-portal::before,
+#coach-portal::after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  /* 50vw-Trick: macht die Pseudolayer viewport-breit, ohne Markup zu ändern */
+  left:50%; right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
+
+  z-index:-2;
+}
+
+/* Bühne (nicht pures Schwarz) + leichte Vignette */
+#coach-portal::before{
+  background:
+    radial-gradient(1200px 600px at 20% 40%, rgba(0,0,0,.28), rgba(0,0,0,.65)),
+    linear-gradient(180deg, #222 0%, #1a1a1a 100%);
+}
+
+/* Großes Hintergrundbild in BW, standardmäßig „cover“ */
+
+
+
+#coach-portal::after{
+  z-index:-1;
+
+    background: var(--portal-bg) center right / cover no-repeat;
+  filter: grayscale(100%) brightness(.72) contrast(1.05);
+  opacity: .95;
+}
+
+/* Bei sehr breiten Viewports (oder Zoom 25%) auf „contain“ umschalten,
+   damit das Motiv vollständig sichtbar bleibt und nicht oben abgeschnitten wirkt. */
+@media (min-width: 1800px){
+  #coach-portal::after{
+    background-size: contain;           /* komplette Figur sichtbar */
+    background-position: center left;  /* rechts ausrichten */
+  }
+}
+
+/* ---------------------------------------------- */
+/* Inhalt/Grid                                     */
+/* ---------------------------------------------- */
+.ks-home-portal__grid{
+  position: relative;
+  isolation:isolate; /* "VIDEOS" sauber darüber */
+  max-width: var(--ks-container);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: clamp(18px, 3vw, 28px);
+  align-items: center;
+  min-height: clamp(480px, 48vw, 780px);
+}
+
+/* Großer Schriftzug "VIDEOS" */
+#coach-portal .ks-home-portal__grid::before{
+  content: "VIDEOS";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: start center;
+  padding-top: clamp(8px, 4vw, 32px);
+  z-index: 1;
+  font-weight: 900;
+  letter-spacing: .02em;
+  font-size: clamp(56px, 9vw, 140px);
+  color: rgba(255,255,255,.94);
+  text-shadow: 0 4px 22px rgba(0,0,0,.35);
+  pointer-events: none;
+}
+
+/* ---------------------------------------------- */
+/* Typo & CTA                                      */
+/* ---------------------------------------------- */
+.ks-home-portal__title{
+  margin: 0 0 8px;
+  font-weight: 900;
+  line-height: 1.05;
+  font-size: clamp(28px, 5vw, 52px);
+}
+.ks-home-portal__title span{
+  display:block;
+  font-size:.6em;
+  opacity:.85;
+  letter-spacing:.18em;
+}
+.ks-home-portal__actions{ margin-top:14px; }
+
+/* ---------------------------------------------- */
+/* Rechtes „Geräte“-Bild                          */
+/*  – steht im Grid (Spalte 2)                    */
+/*  – bleedet bei breitem Viewport bis zum Rand   */
+/*  – kehrt bei schmalem Viewport sauber zurück   */
+/* ---------------------------------------------- */
+.ks-home-portal__media{
+  width: 100%;
+  min-height: clamp(260px, 34vw, 460px);
+  background: var(--portal-img) bottom left / contain no-repeat;
+  filter: drop-shadow(0 16px 40px rgba(0,0,0,.35));
+  justify-self: end;
+
+  /* Magie: ziehe das Element genau um die „Bleed“-Breite nach rechts heraus.
+     Wenn 100vw <= Container -> 0px (kein Bleed).
+     Wenn 100vw > Container  -> negativer Rand zieht bis Viewportrand. */
+  margin-right: calc(0px - max(0px, (100vw - var(--ks-container)) / 2));
+}
+
+/* Optional: wenig Puffer, damit es bei Ultra-Wide nicht „zu weit“ rausfliegt */
+@media (min-width: 2200px){
+  .ks-home-portal__media{
+    margin-right: calc( -1 * ( (100vw - var(--ks-container)) / 3 - 24px ) );
+  }
+}
+
+/* ---------------------------------------------- */
+/* Responsive                                      */
+/* ---------------------------------------------- */
+@media (max-width: 900px){
+  .ks-home-portal__grid{
+    grid-template-columns: 1fr;
+    min-height: clamp(420px, 64vw, 600px);
+    text-align:left;
+  }
+  .ks-home-portal__media{
+    min-height: clamp(220px, 50vw, 360px);
+    margin-top: 8px;
+    /* bei schmalen Viewports kein Bleed */
+    margin-right: 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
