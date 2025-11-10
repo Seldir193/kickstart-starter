@@ -49,6 +49,21 @@ if (file_exists($cta_js)) {
 
 
 
+
+$videos_css = $theme_dir . '/assets/css/ks-videos.css';
+if (file_exists($videos_css)) {
+  wp_enqueue_style(
+    'ks-videos',
+    $theme_uri . '/assets/css/ks-videos.css',
+    ['ks-home'],                         // NACH ks-home.css
+    filemtime($videos_css)
+  );
+}
+
+
+
+
+
       /* ==== Feedback CSS/JS laden ==== */
 $fb_css = $theme_dir . '/assets/css/ks-feedback.css';
 if (file_exists($fb_css)) {
@@ -64,6 +79,31 @@ $wa_css = $theme_dir . '/assets/css/ks-wa.css';
 if (file_exists($wa_css)) {
   wp_enqueue_style('ks-wa', $theme_uri . '/assets/css/ks-wa.css', [], filemtime($wa_css));
 }
+
+
+
+
+// HERO: Autoplay & Animation
+$hero_css = $theme_dir . '/assets/css/ks-hero-anim.css';
+if (file_exists($hero_css)) {
+  wp_enqueue_style(
+    'ks-hero-anim',
+    $theme_uri . '/assets/css/ks-hero-anim.css',
+    ['ks-home'], // nach Grundlayout
+    filemtime($hero_css)
+  );
+}
+$hero_js  = $theme_dir . '/assets/js/ks-hero.js';
+if (file_exists($hero_js)) {
+  wp_enqueue_script(
+    'ks-hero',
+    $theme_uri . '/assets/js/ks-hero.js',
+    [], // keine Abhängigkeiten
+    filemtime($hero_js),
+    true
+  );
+}
+
 
 
       /* ==== Shortcode-Attribute ==== */
@@ -83,12 +123,16 @@ if (file_exists($wa_css)) {
       $ball_img      = $theme_uri . '/assets/img/home/mfs.png';
       $portal_bg     = $theme_uri . '/assets/img/home/mfs.png';
       $portal_laptop = $theme_uri . '/assets/img/home/mfs.png';
+    
+
       wp_add_inline_style(
         'ks-home',
         ".ks-home-faq__image{--faq-img:url('{$ball_img}')}" .
         ".ks-home-portal{--portal-bg:url('{$portal_bg}')}" .
-        ".ks-home-portal__media{--portal-img:url('{$portal_laptop}')}"
+        ".ks-home-portal__media{--portal-img:url('{$portal_laptop}')}"  
+     
       );
+
 
       // Platzhalter-Icons – gern ersetzen
       $icon1 = $theme_uri . '/assets/img/home/mfs.png';
@@ -96,7 +140,7 @@ if (file_exists($wa_css)) {
       $icon3 = $theme_uri . '/assets/img/home/mfs.png';
 
       /* ==== Video (oEmbed) ==== */
-      $video_embed = wp_oembed_get('https://www.youtube.com/watch?v=8ZcmTl_1ER8');
+      $video_embed = wp_oembed_get('https://www.youtube.com/watch?v=KEWP2dELhrY');
       if (!$video_embed) $video_embed = '<div class="ks-vid-ph" aria-hidden="true"></div>';
 
       /* ==== Buchungs-URLs ==== */
@@ -144,26 +188,7 @@ if (file_exists($wa_css)) {
         ],
       ];
 
-      /* ==== JS für Tabs (Footer) ==== */
-      wp_register_script('ks-home-hero', false, [], null, true);
-      wp_enqueue_script('ks-home-hero');
-      wp_add_inline_script(
-        'ks-home-hero',
-        "(function(){
-          var hero=document.getElementById('home-hero');
-          if(!hero) return;
-          var tabs=hero.querySelectorAll('.ks-hero-tab');
-          var slides=hero.querySelectorAll('.ks-hero-slide');
-          function act(k){
-            slides.forEach(function(s){ s.classList.toggle('is-active', s.dataset.key===k); });
-            tabs.forEach(function(t){ t.classList.toggle('is-active', t.dataset.key===k); });
-            var a=hero.querySelector('.ks-hero-slide.is-active');
-            if(a){ hero.setAttribute('data-watermark', a.dataset.watermark||''); }
-          }
-          tabs.forEach(function(t){ t.addEventListener('click', function(){ act(t.dataset.key); }); });
-        })();"
-      );
-
+    
       /* ==== TEAM Daten serverseitig laden ==== */
       $next_base = function_exists('ks_next_base') ? ks_next_base() : '';
       // Kandidaten: öffentliche API, dann Admin-API
@@ -270,10 +295,11 @@ if (file_exists($wa_css)) {
             <p>Unser Ziel ist es stets mit Spaß und Freude jeden Einzelnen maximal zu fördern – von den Kleinsten bis zu
               ambitionierten Talenten. Neben sportlichem Know-how ist es uns ein großes Anliegen, soziale Werte zu vermitteln.</p>
             <p class="ks-mt-16">
-              <a class="ks-btn ks-btn--ghost" href="<?php echo esc_url($about_url); ?>">MEHR</a>
+              <a class="ks-btn " href="<?php echo esc_url($about_url); ?>">MEHR</a>
             </p>
           </div>
-          <div class="ks-vid"><?php echo $video_embed; ?></div>
+          <div class="ks-vid ratio"><?php echo $video_embed; ?></div>
+      
         </div>
       </section>
 
@@ -342,7 +368,11 @@ if (file_exists($wa_css)) {
         </div>
       </section>
 
-      <!-- 4.5) MFSCoach Video-Portal -->
+     
+
+
+
+ <!-- 4.5) MFSCoach Video-Portal -->
       <section id="coach-portal" class="ks-sec ks-home-portal" aria-label="MFSCoach Video Portal">
         <div class="container ks-home-portal__grid">
           <div class="ks-home-portal__text">
@@ -358,6 +388,15 @@ if (file_exists($wa_css)) {
           <div class="ks-home-portal__media" role="presentation" aria-hidden="true"></div>
         </div>
       </section>
+
+
+
+
+
+
+
+
+
 
       <!-- 5) Team -->
       <section id="team" class="ks-sec ks-py-56 ks-bg-white">
@@ -460,33 +499,41 @@ if (file_exists($wa_css)) {
         <!-- 2.5) Feedback -->
 <?php
   $fb_img = $theme_uri . '/assets/img/home/mfs.png'; // Platzhalter
-  $feedbacks = [
-    [
-      'img'    => $fb_img,
-      'quote'  => 'Ihr Einsatz, Ihre Energie, verbunden mit zielorientiertem Coaching ist fast unbezahlbar für die Jugendlichen.',
-      'author' => 'Christian Gross',
-      'meta'   => 'Schweizer Profitrainer (Tottenham Hotspur, VfB Stuttgart, Young Boys Bern)',
-    ],
-    [
-      'img'    => $fb_img,
-      'quote'  => 'Die Trainingsqualität und die Organisation sind außergewöhnlich jedes Detail stimmt.',
-      'author' => 'Muster Coach',
-      'meta'   => 'U17-Trainer, NRW',
-    ],
-    [
-      'img'    => $fb_img,
-      'quote'  => 'Fachlich top und menschlich nah so macht Förderung Sinn.',
-      'author' => 'Elternstimme',
-      'meta'   => 'Dortmund',
-    ],
-    [
-      'img'    => $fb_img,
-      'quote'  => 'Kindgerecht, motivierend, professionell klare Empfehlung.',
-      'author' => 'Vereinsvorstand',
-      'meta'   => 'Partnerverein',
-    ],
-  ];
+ 
+$feedbacks = [
+  [
+    'img'    => $fb_img,
+    'quote'  => 'Ihr Einsatz, Ihre Energie, verbunden mit zielorientiertem Coaching ist fast unbezahlbar für die Jugendlichen.',
+    'author' => 'Christian Gross',
+    'meta'   => 'Schweizer Profitrainer (Tottenham Hotspur, VfB Stuttgart, Young Boys Bern)',
+    'label'  => 'Trainer',
+  ],
+  [
+    'img'    => $fb_img,
+    'quote'  => 'Die Trainingsqualität und die Organisation sind außergewöhnlich, jedes Detail stimmt.',
+    'author' => 'Muster Coach',
+    'meta'   => 'U17-Trainer, NRW',
+    'label'  => 'Trainer',
+  ],
+  [
+    'img'    => $fb_img,
+    'quote'  => 'Fachlich top und menschlich nah – so macht Förderung Sinn.',
+    'author' => 'Elternstimme',
+    'meta'   => 'Dortmund',
+    'label'  => 'Eltern',
+  ],
+  [
+    'img'    => $fb_img,
+    'quote'  => 'Kindgerecht, motivierend, professionell – klare Empfehlung.',
+    'author' => 'Vereinsvorstand',
+    'meta'   => 'Partnerverein',
+    'label'  => 'Partner',
+  ],
+];
+
 ?>
+
+
 
 
 
@@ -497,7 +544,8 @@ if (file_exists($wa_css)) {
   <nav class="ks-fb-tabs" aria-label="Feedback Auswahl">
     <?php foreach ($feedbacks as $i => $f): ?>
       <button type="button" class="ks-fb-tab<?php echo $i===0 ? ' is-active' : ''; ?>" data-key="fb-<?php echo $i; ?>">
-        <span class="ks-fb-tab__label">Feedback</span>
+      
+         <span class="ks-fb-tab__label"><?php echo esc_html($f['label'] ?? 'Feedback'); ?></span>
         <span class="ks-fb-tab__num"><?php echo sprintf('%02d', $i+1); ?></span>
       </button>
     <?php endforeach; ?>
@@ -511,7 +559,7 @@ if (file_exists($wa_css)) {
  
     
     <?php foreach ($feedbacks as $i => $f): ?>
-      <article class="ks-fb-slide<?php echo $i===0 ? ' is-active' : ''; ?>" data-key="fb-<?php echo $i; ?>">
+      <article class="ks-fb-slide <?php echo $i===0 ? ' is-active' : ''; ?>" data-key="fb-<?php echo $i; ?>">
       
  
       <div class="ks-fb-media">
@@ -594,7 +642,7 @@ if (file_exists($wa_css)) {
   
 
       <!-- Brandbar -->
-      <section id="brandbar" class="ks-sec ks-brandbar" aria-label="Partner & Marken">
+      <section id="brandbar" class="ks-sec ks-brandbar" aria-label="Partner & Marken"      >
         <div class="container">
           <ul class="ks-brandbar__list" role="list">
             <?php
@@ -639,7 +687,7 @@ if (file_exists($wa_css)) {
    
 
        <div class="ks-cta-text">
-      <div class="ks-eyebrow">Schnell buchen</div>
+      <div class="ks-kicker">Schnell buchen</div>
       <h2 class="ks-dir__title">Dein Programm auswählen</h2>
       <p>Wähle ein Angebot und starte direkt mit der Anmeldung.</p>
               </div>
