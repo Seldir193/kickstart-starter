@@ -8,7 +8,7 @@
 
 /* ---------- Design-Variablen ---------- */
 :root{
-  --news-accent: red;      /* Hoverfarbe für Titel (kräftiges Gelb) */
+  --news-accent:  #0F1E2E;      /* Hoverfarbe für Titel (kräftiges Gelb) */
   --news-title:  #111111;      /* Standard Titel/Text */
   --news-muted:  #6B7280;      /* Meta/Excerpt grau */
   --news-line:   #000000;      /* Linie bei "Mehr lesen" */
@@ -17,7 +17,7 @@
 /* ---------- Reset/Grundverhalten ---------- */
 .ks-news-item a{
   text-decoration: none;
-  color: inherit;
+  color: inherit ;
 }
 
 /* Alle Texte in Cards: weiche Farb-Transition (kein Layout-Shift) */
@@ -178,7 +178,7 @@
 /* Meta + Excerpt leicht dunkler beim Hover (besserer Kontrast) */
 .ks-news-item:hover .ks-news-item__meta,
 .ks-news-item:hover .ks-news-item__excerpt{
-  color:red;
+  color:var(--news-accent) ;
 }
 
 /* KEIN Transform/Scale – damit nichts springt! */
@@ -187,7 +187,7 @@
    E) "MEHR LESEN" – Linie wächst, Text bleibt schwarz
    ========================================================= */
 .ks-link-more{
-  --u:50%;                                 /* Start: bis zur Mitte */
+  --u:25%;                                 /* Start: bis zur Mitte */
   position:relative;
   display:inline-block;
   padding-bottom:1px;
