@@ -250,7 +250,7 @@
 }
 
 /* Optional: globale Sicherheitskante gegen horizontales Scrollen */
-html, body { overflow-x: clip; }
+/*html, body { overflow-x: clip; }*/
 
 
 
@@ -470,7 +470,7 @@ html, body { overflow-x: clip; }
 
 
 /* ==== Sicherheit gegen horizontale Scrollbar (wie auf home) ==== */
-html, body { overflow-x: clip; }
+/*html, body { overflow-x: clip; }*/
 
 /* =========================================================
    Full-Bleed Bänder für Offers Directory (ohne Markup-Änderung)

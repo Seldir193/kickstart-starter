@@ -1,13 +1,37 @@
 
 
 
+/* Vollbreit (#fafafa) hinter den Tabs, Content bleibt im Container */
+.ks-hero-tabs::before{
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%; right: 50%;
+  margin-left: -50vw;          /* 50vw-Trick = Full-bleed */
+  margin-right: -50vw;
+  background: #f5f5f5;
+  z-index: -1;                 /* liegt hinter den Tabs */
+  pointer-events: none;
+}
 
 
 
 
 
+/* Tabs oben – an Containerbreite zentriert (kein absolutes Positionieren) */
+.ks-hero-tabs{
+  position: relative;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+z-index: 1; 
+  max-width: var(--ks-container);
+  width: 100%;
+  margin: 0 auto 10px;        /* zentriert */
+  padding-left: 16px;         /* wie .container padding */
+  padding-right: 16px;
 
-
+}
 
 
 
@@ -52,22 +76,13 @@
 .ks-home-hero{
   position: relative;
   padding: clamp(24px, 6vw, 56px) 0;
-  background: #f7f7f7;
+  background-color: #f5f5f5;
 }
+
 
 /* Tabs oben – an Containerbreite zentriert (kein absolutes Positionieren) */
-.ks-hero-tabs{
-  position: relative;
-  display: flex;
-  gap: 14px;
-  align-items: center;
 
-  max-width: var(--ks-container);
-  width: 100%;
-  margin: 0 auto 10px;        /* zentriert */
-  padding-left: 16px;         /* wie .container padding */
-  padding-right: 16px;
-}
+
 
 .ks-hero-tab{
   appearance: none;
@@ -365,7 +380,7 @@
    (nutzt ::before und 50vw-Trick)
    =============================== */
 
-html, body { overflow-x: clip; } /* Sicherheit gegen horizontale Scrollbar */
+/*html, body { overflow-x: clip; } *//* Sicherheit gegen horizontale Scrollbar */
 
 /* Die drei Sections bekommen einen vollbreiten Hintergrund,
    der Content bleibt im Container (1440px bei dir). */
@@ -404,12 +419,12 @@ html, body { overflow-x: clip; } /* Sicherheit gegen horizontale Scrollbar */
 
 
 
-/* Optional: kleine Innenabstände, falls nötig */
+/* Optional: kleine Innenabstände, falls nötig 
 #faq, #coach-portal, #brandbar {
   padding-block: clamp(24px, 4vw, 1006px);
 }
 
-
+*/
 
 
 
@@ -526,7 +541,7 @@ html, body { overflow-x: clip; } /* Sicherheit gegen horizontale Scrollbar */
 }
 
 /* (nur zur Klarheit – hast du schon, aber hier nochmal) */
-.ks-home-hero{   background:#f7f7f7; }   /* graues Band hinter dem „CAMP“-Hero */
+  /* graues Band hinter dem „CAMP“-Hero */
 .ks-home-values{ background:#fafafa; }   /* hellgraues Band für „Unsere Werte“ */
 
 

@@ -247,7 +247,8 @@ if (file_exists($hero_js)) {
 
       <!-- 1) HERO mit Tabs -->
       <section id="home-hero" class="ks-home-hero ks-sec" data-watermark="<?php echo esc_attr($slides[0]['watermark']); ?>">
-        <nav class="ks-hero-tabs" aria-label="Hero Auswahl">
+        
+                               <nav class="ks-hero-tabs" aria-label="Hero Auswahl">
           <?php foreach ($slides as $i => $s): ?>
             <button type="button"
               class="ks-hero-tab<?php echo $i===0 ? ' is-active' : ''; ?>"
@@ -258,13 +259,18 @@ if (file_exists($hero_js)) {
             </button>
           <?php endforeach; ?>
         </nav>
-
+         
         <div class="ks-hero-slides">
+    
+
           <?php foreach ($slides as $i => $s): ?>
             <div class="ks-hero-slide<?php echo $i===0 ? ' is-active' : ''; ?>"
                  data-key="<?php echo esc_attr($s['key']); ?>"
                  data-watermark="<?php echo esc_attr($s['watermark']); ?>">
               <div class="container ks-home-grid">
+
+      
+
                 <div class="ks-home-hero__left">
                   <div class="ks-kicker">DORTMUNDER FUSSBALL SCHULE</div>
                   <h1 class="ks-home-hero__title"><?php echo esc_html($s['title']); ?></h1>
@@ -483,6 +489,8 @@ if (file_exists($hero_js)) {
             </button>
           </div>
         </div>
+
+
       </section>
 
 

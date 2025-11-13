@@ -66,6 +66,10 @@ if (!function_exists('ks_register_trainer_shortcode')) {
         return '<p>Trainer nicht gefunden. (Ungültige Antwort)</p>';
       }
 
+
+      
+
+
       $full = trim(($coach['name'] ?? '') ?: trim(($coach['firstName'] ?? '') . ' ' . ($coach['lastName'] ?? '')));      
       if ($full === '') $full = 'Trainer';
       $img  = ks_normalize_next_img($coach['photoUrl'] ?? '');

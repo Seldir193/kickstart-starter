@@ -494,7 +494,7 @@ font-weight:900;
    =============================== */
 
 /* Sicherheit gegen horizontales Scrollen */
-html, body { overflow-x: clip; }
+/*html, body { overflow-x: clip; }*/
 
 /* 0) Gemeinsame Container-Politur für die Franchise-Sections */
 #fr-hero .ks-dir__hero-inner,

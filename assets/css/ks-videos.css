@@ -8,7 +8,7 @@
 /* ========================================================================== */
 
 /* Sicherheitsnetz gegen horizontales Scrollen bei Full-Bleed */
-html, body { overflow-x: clip; }
+/*html, body { overflow-x: clip; }*/
 
 /* ---------------------------------------------- */
 /* Section-Wrapper (Vollbleed + Höhe + Typo)      */

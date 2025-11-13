@@ -64,7 +64,7 @@
     flex-direction:column;
     align-items:center;         /* horizontal */
     justify-content:flex-start; /* lange Seiten starten oben */
-    padding:24px 16px;
+    padding:30px 16px;
   }
 
  
@@ -102,7 +102,9 @@
 
 
 
-  html, body { overflow-x: hidden; }
+  /*html, body { overflow-x: hidden; }*/
+
+
 
   /* Scrollbar unsichtbar, Scrollen bleibt möglich */
   html { scrollbar-width: none; }           /* Firefox */
@@ -178,7 +180,7 @@
 }
 
 /* Sicherheit gegen horizontale Scroll-Leiste bei 100vw */
-html, body { overflow-x: clip; } /* (clip verhindert chrome-scrollbug) */
+/*html, body { overflow-x: clip; }*/ /* (clip verhindert chrome-scrollbug) */
 
 
 

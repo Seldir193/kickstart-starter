@@ -13,8 +13,7 @@
   --wm-offset: clamp(16px, 4vw, 64px);
   --wm-shift: -6vh;
   --content-lift: -3vh;
-  padding-top: var(--fb-pad);
-  padding-bottom: 50px;
+  
 }
 
 .ks-fb::after {
@@ -224,11 +223,11 @@
   }
 }
 
-html,
+/*html,
 body {
   overflow-x: clip;
 }
-
+*/
 
 
 

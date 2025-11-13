@@ -339,3 +339,65 @@
     margin-inline: auto;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* TRAINER dropdown — keep navy while open */
+.ks-trainer-wrap .ks-dd__btn {
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+/* Hover (closed): black border */
+.ks-trainer-wrap .ks-dd__btn:hover {
+  border-color: var(--text);
+}
+
+/* Caret base color */
+.ks-trainer-wrap .ks-dd__caret {
+  border-top-color: #5b6472;
+  transition: transform .18s ease, border-top-color .18s ease;
+}
+
+/* OPEN state (aria-expanded="true"): force navy, also when hovered */
+.ks-trainer-wrap .ks-dd[aria-expanded="true"] .ks-dd__btn,
+.ks-trainer-wrap .ks-dd[aria-expanded="true"] .ks-dd__btn:hover {
+  border-color: var(--brand-navy);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-navy) 22%, white);
+}
+
+/* Caret navy while open */
+.ks-trainer-wrap .ks-dd[aria-expanded="true"] .ks-dd__caret {
+  border-top-color: var(--brand-navy);
+}
+
+/* Panel border a bit tinted while open (optional) */
+.ks-trainer-wrap .ks-dd[aria-expanded="true"] .ks-dd__panel {
+  border-color: color-mix(in oklab, var(--brand-navy) 20%, #d9dee6);
+}

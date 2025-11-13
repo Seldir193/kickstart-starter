@@ -3,7 +3,7 @@
    =============================== */
 
 /* Sicherheit gegen horizontales Scrollen */
-html, body { overflow-x: clip; }
+/*html, body { overflow-x: clip; }*/
 
 /* Gemeinsame Container-Breite für About-Sections */
 #about-hero .ks-dir__hero-inner,
@@ -53,7 +53,7 @@ html, body { overflow-x: clip; }
   left:50%; right:50%;
   margin-left:-50vw; margin-right:-50vw;
   z-index:-1;
-  background:#ffffff;
+  background:#fafafa;
 }
 
 /* 4) PHILOSOPHIE – sanftes Grau wie Home values */
