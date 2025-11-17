@@ -10,12 +10,19 @@
 
 
 
-
 /* -------------------------------------------------------
  * [ks_offers_directory] – Hero + Filter + Map + Liste + Modal + Brandbar + (FAQ, Kontakt, Programmbeschreibung)
  * -----------------------------------------------------*/
 add_action('init', function () {
   add_shortcode('ks_offers_directory', function () {
+
+    
+$media = get_stylesheet_directory_uri() . '/assets/img/mfs.png';
+  $theme_uri = get_stylesheet_directory_uri();
+
+
+
+
     $type      = isset($_GET['type']) ? sanitize_text_field( wp_unslash($_GET['type']) ) : '';
     $city      = isset($_GET['city']) ? sanitize_text_field( wp_unslash($_GET['city']) ) : '';
     $category  = isset($_GET['category']) ? sanitize_text_field( wp_unslash($_GET['category']) ) : '';
@@ -35,8 +42,30 @@ add_action('init', function () {
       'ClubProgram_Generic'          => 'Club Program',
       'CoachEducation'               => 'Coach Education',
     ];
+
+       $mapWatermarks = [
+      'Kindergarten'             => 'KINDERGARTEN',
+      'Foerdertraining'          => 'FÖRDERTRAINING',
+      'PersonalTraining'         => 'EINZELTRAINING',
+      'AthleticTraining'         => 'POWERTRAINING',
+
+       'PowerTraining'            => 'POWERTRAINING',   // optional
+  'Powertraining'            => 'POWERTRAINING',  
+      'Camp'                     => 'CAMP',
+      'Torwarttraining'          => 'TORWART',
+      'Foerdertraining_Athletik' => 'ATHLETIK',
+      'Einzeltraining_Athletik'  => 'ATHLETIK',
+      'Einzeltraining_Torwart'   => 'TORWART',
+      'RentACoach_Generic'       => 'RENT A COACH',
+      'ClubProgram_Generic'      => 'CLUB PROGRAM',
+      'CoachEducation'           => 'COACH EDUCATION',
+      'Generic'                  => 'PROGRAMME',
+    ];
+
     $headingKey = $sub_type ?: $type;
-    $heading    = $mapTitles[$headingKey] ?? 'Programme';
+    $heading    = $mapTitles[$headingKey] ?? 'Powertraining';
+
+
 
     // Normalize Kurs-Schlüssel für dynamische Texte
     $normalize = function (string $k = null) {
@@ -51,6 +80,25 @@ add_action('init', function () {
       }
     };
     $courseKey = $normalize($headingKey);
+    // Schnupper-Kicker nur bei Weekly Courses anzeigen
+
+    // Für diese Kursarten KEINE Filter anzeigen
+$noFilterCourses = ['RentACoach', 'ClubProgram', 'CoachEducation'];
+$showFilters = !in_array($courseKey, $noFilterCourses, true);
+
+
+
+$showKicker = in_array($courseKey, [
+  'Foerdertraining',
+  'Kindergarten',
+  'Torwarttraining',
+  'Foerdertraining_Athletik',
+], true);
+$kickerClass = $showKicker
+  ? 'ks-dir__kicker'
+  : 'ks-dir__kicker ks-dir__kicker--hidden';
+
+    $watermark = $mapWatermarks[$courseKey] ?? $heading;
 
     $hero_url = get_the_post_thumbnail_url(null, 'full');
     if (!$hero_url) {
@@ -67,25 +115,80 @@ add_action('init', function () {
 
     $url = add_query_arg($query, $api_base . '/api/offers');
 
-    $ageMin = null; $ageMax = null;
-    $res = wp_remote_get($url, ['timeout'=>10, 'headers'=>['Accept'=>'application/json']]);
-    if (!is_wp_error($res) && wp_remote_retrieve_response_code($res) === 200) {
-      $data  = json_decode(wp_remote_retrieve_body($res), true);
-      $items = [];
-      if (isset($data['items']) && is_array($data['items'])) $items = $data['items'];
-      elseif (is_array($data)) $items = $data;
 
-      foreach ($items as $o) {
-        if (isset($o['ageFrom']) && is_numeric($o['ageFrom'])) $ageMin = is_null($ageMin) ? (int)$o['ageFrom'] : min($ageMin, (int)$o['ageFrom']);
-        if (isset($o['ageTo'])   && is_numeric($o['ageTo']))   $ageMax = is_null($ageMax) ? (int)$o['ageTo']   : max($ageMax, (int)$o['ageTo']);
-      }
+
+
+
+
+// 1) Dynamisch aus den Angeboten (Fallback vorbereiten)
+$ageMin = null; $ageMax = null;
+$res = wp_remote_get($url, ['timeout'=>10, 'headers'=>['Accept'=>'application/json']]);
+if (!is_wp_error($res) && wp_remote_retrieve_response_code($res) === 200) {
+  $data  = json_decode(wp_remote_retrieve_body($res), true);
+  $items = [];
+  if (isset($data['items']) && is_array($data['items'])) $items = $data['items'];
+  elseif (is_array($data)) $items = $data;
+
+  foreach ($items as $o) {
+    if (isset($o['ageFrom']) && is_numeric($o['ageFrom'])) {
+      $ageMin = is_null($ageMin) ? (int)$o['ageFrom'] : min($ageMin, (int)$o['ageFrom']);
     }
-    $ageText = ($ageMin !== null && $ageMax !== null) ? ($ageMin . '–' . $ageMax . ' Jahre') : 'alle Altersstufen';
+    if (isset($o['ageTo']) && is_numeric($o['ageTo'])) {
+      $ageMax = is_null($ageMax) ? (int)$o['ageTo'] : max($ageMax, (int)$o['ageTo']);
+    }
+  }
+}
+
+// 2) Standard-Fallback aus den Daten
+$ageText = ($ageMin !== null && $ageMax !== null)
+  ? ($ageMin . '–' . $ageMax . ' Jahre')
+  : 'alle Altersstufen';
 
 
- 
+if ($headingKey === 'Einzeltraining_Torwart') {
+  $ageText = '6–25 Jahre';
+
+} else {
+// 3) HARTE Bereiche pro Kurs – GLEICH wie im JS
+switch ($courseKey) {
+  // Weekly Courses
+  case 'Kindergarten':
+    $ageText = '4–6 Jahre';
+    break;
+
+  case 'Foerdertraining':
+  case 'Foerdertraining_Athletik':
+  case 'Torwarttraining':
+  case 'GoalkeeperTraining': // falls du so einen Key hast
+    $ageText = '7–17 Jahre';
+    break;
+
+  // Holiday Programs
+  case 'Camp':
+    $ageText = '6–13 Jahre';
+    break;
+
+  case 'AthleticTraining':    // Power Training (normalisiert)
+  case 'Powertraining':       // Power Training (Schreibweise)
+  case 'AthletikTraining':    // falls so in der DB
+    $ageText = '7–17 Jahre';
+    break;
+
+  // Individual Courses
+  case 'PersonalTraining':        // 1:1 Training
+  case 'Einzeltraining_Athletik': // 1:1 Training Athletik
+  case 'Einzeltraining_Torwart':  // 1:1 Training Torwart
+    $ageText = '6–25 Jahre';
+    break;
+
+  // Coach Education
+  case 'CoachEducation':
+    $ageText = 'alle Altersstufen';
+    break;
+}
 
 
+}
     $next_base = ks_next_base();
 
     /* ===== Kurs-Texte (dyn. für FAQ & Programmbeschreibung) ===== */
@@ -287,7 +390,8 @@ add_action('init', function () {
      data-coachph="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/avatar.png' ); ?>">
 
   <!-- HERO (Bild via CSS-Variable, kein CSS in PHP) -->
-  <div class="ks-dir__hero" style="--hero-img:url('<?php echo esc_url($hero_url); ?>')">
+  <div class="ks-dir__hero" data-watermark="<?php echo esc_attr($watermark); ?>" 
+   style="--hero-img:url('<?php echo esc_url($hero_url); ?>')">
     <div class="ks-dir__hero-inner">
       <div class="ks-dir__crumb">Home <span class="sep">/</span> <?php echo esc_html($heading); ?></div>
       <h1 class="ks-dir__hero-title"><?php echo esc_html($heading); ?></h1>
@@ -295,13 +399,23 @@ add_action('init', function () {
   </div>
 
   <!-- Intro -->
-  <header class="ks-dir__intro">
-    <p class="ks-dir__kicker">Hier kannst du dein kostenfreies Schnuppertraining ganz einfach buchen</p>
-    <h2 class="ks-dir__title">
-      Unsere Angebote (<span data-age-title><?php echo esc_html($ageText); ?></span>)
-    </h2>
-  </header>
 
+
+ 
+
+<header class="ks-dir__intro ks-py-56">
+  <p class="<?php echo esc_attr($kickerClass); ?>">
+    Hier kannst du dein kostenfreies Schnuppertraining ganz einfach buchen
+  </p>
+
+  <h2 class="ks-dir__title">
+    Unsere Angebote (<span data-age-title><?php echo esc_html($ageText); ?></span>)
+  </h2>
+</header>
+
+
+
+<?php if ($showFilters): ?>
   <!-- Filter -->
   <form class="ks-dir__filters" data-filters>
     <label class="ks-field">
@@ -337,9 +451,11 @@ add_action('init', function () {
     &nbsp;&bull;&nbsp;
     <strong><span data-count-locations>0</span> Standorte</strong>
   </div>
+<?php endif; ?>
+
 
   <!-- 2-Spalten: Map | Liste -->
-  <div class="ks-dir__layout">
+  <div class="ks-dir__layout ks-py-56">
     <div class="ks-dir__map"><div id="ksMap" class="ks-map"></div></div>
     <div class="ks-dir__listwrap" aria-live="polite">
       <ul id="ksDirList" class="ks-dir__list"></ul>
@@ -381,29 +497,30 @@ add_action('init', function () {
   </div>
 </div> <!-- /#ksDir -->
 
-<?php
-  // Partner-Brandbar Markup (nur Markup; Styles in offers-directory.css)
-  $brand_base = get_stylesheet_directory_uri() . '/assets/img/';
 
-  $brands = [
-    [ 'src' => $brand_base . 'mfs.png', 'label' => 'Bodosee Sportlo' ],
-    [ 'src' => $brand_base . 'mfs.png', 'label' => 'Puma' ],
-    [ 'src' => $brand_base . 'mfs.png', 'label' => 'DFS Berater' ],
-    [ 'src' => $brand_base . 'mfs.png', 'label' => 'Teamstolz' ],
-    [ 'src' => $brand_base . 'mfs.png', 'label' => 'DFS Player' ],
-  ];
-?>
 
-<section id="brandbar" class="ks-sec ks-brandbar" aria-label="Partner &amp; Marken">
+
+
+
+
+<section id="brandbar" class="ks-sec ks-brandbar" aria-label="Partner & Marken">
   <div class="container">
     <ul class="ks-brandbar__list" role="list">
-      <?php foreach ($brands as $b): ?>
+      <?php
+        $brands = [
+          [ 'src' => $theme_uri . '/assets/img/brands/bodosee-sportlo.svg', 'label' => 'Bodosee Sportlo' ],
+          [ 'src' => $theme_uri . '/assets/img/home/mfs.png',               'label' => 'Puma' ],
+          [ 'src' => $theme_uri . '/assets/img/brands/dfsberater.svg',      'label' => 'DFS Berater' ],
+          [ 'src' => $theme_uri . '/assets/img/brands/teamstolz.svg',       'label' => 'Teamstolz' ],
+          [ 'src' => $theme_uri . '/assets/img/brands/dfsplayer.svg',       'label' => 'DFS Player' ],
+        ];
+        foreach ($brands as $b):
+          $src   = esc_url($b['src']);
+          $label = esc_html($b['label']);
+      ?>
         <li class="ks-brandbar__item">
-          <img
-            src="<?php echo esc_url($b['src']); ?>"
-            alt="" aria-hidden="true"
-            loading="lazy" decoding="async">
-          <span class="ks-brandbar__label"><?php echo esc_html($b['label']); ?></span>
+          <img src="<?php echo $src; ?>" alt="" loading="lazy" decoding="async" aria-hidden="true">
+          <span class="ks-brandbar__label"><?php echo $label; ?></span>
         </li>
       <?php endforeach; ?>
     </ul>
@@ -412,13 +529,10 @@ add_action('init', function () {
 
 
 
+   
 
 
-<?php
-  // ===== Sektion 1: FAQ (dynamisch nach Kurs) =====
-  $media = get_stylesheet_directory_uri() . '/assets/img/mfs.png';
-  $theme_uri = get_stylesheet_directory_uri();
-?>
+
 <section id="dir-faq"
   class="ks-sec ks-py-56"
   

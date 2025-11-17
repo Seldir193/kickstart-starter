@@ -166,19 +166,54 @@ z-index: 1;
 
 .ks-home-values{ background:#fafafa; }
 
+/* Icon sanft anheben */
+.ks-value .icon-wrap {
+  display: inline-block;
+  transform: translateY(10px);          /* Start etwas unten */
+  transition: transform 0.35s ease;     /* Animation */
+}
+
+.ks-value:hover .icon-wrap {
+  transform: translateY(0);             /* Nach oben fahren */
+}
+
+/* Optional: etwas mehr "Float"-Feeling */
+.ks-value .icon-wrap img {
+  transition: transform 0.35s ease;
+}
+
+.ks-value:hover .icon-wrap img {
+  transform: translateY(-3px);          /* Mini-Feinlift */
+}
+
+
+
+
+
+
+
+.ks-values .ks-value{
+  display: block;
+  text-decoration: none;
+  
+  cursor: pointer;
+}
+
+
 .ks-values{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
   text-align: center;
   margin-top: 24px;
+  
 }
 .ks-value img{
   height: 100px; width: auto;
   margin: 0 auto 10px; display: block;
 }
-.ks-value h3{ font-weight: 800; margin: 6px 0 8px; }
-.ks-value p{ color:#6b7280; max-width: 42ch; margin: 0 auto; }
+.ks-value h3{ font-weight: 800; margin: 6px 0 8px;  }
+.ks-value p{ color:#6b7280; max-width: 42ch; margin: 0 auto;  }
 
 /* ======= */
 /*  FAQ    */
@@ -254,68 +289,6 @@ z-index: 1;
 
 
 
-/* ===== Partner-Brandbar ===== */
-.ks-brandbar{
-  background: #19355f;           /* dunkles Blau wie im Screenshot */
-  color:#fff;
-  /* Vollbreite "Bleed" */
-  position:relative;
-  width:100vw;
-  margin-left:calc(50% - 50vw);
-  margin-right:calc(50% - 50vw);
-  padding:28px 0;
-}
-.ks-brandbar .container{
-  display:flex;
-  justify-content:center;
-}
-.ks-brandbar__list{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:56px;
-  flex-wrap:wrap;
-  margin:0;
-  padding:0;
-  list-style:none;
-  flex:1;
-}
-.ks-brandbar__item img{
-  display:block;
-  height:28px;                  /* Logo-Höhe anpassen */
-  width:auto;
-/*  filter:brightness(0) invert(1); /* auf Weiß “recoloren”, falls PNG/SVG dunkel ist */
-  opacity:.95;
-}
-@media (min-width: 992px){
-  .ks-brandbar__item img{ height:34px; }
-}
-@media (max-width: 480px){
-  .ks-brandbar__list{ gap:28px; }
-  .ks-brandbar__item img{ height:24px; }
-
-    .ks-brandbar__label { font-size: 13px; }
-}
-
-
-
-
-
-
-/* Text unter dem Logo – wie vorher */
-.ks-brandbar__label{
-  color:#fff;
-  font-weight:600;
-  font-size:14px;
-  line-height:1;
-}
-
-
-
-
-
-
-
 
 
 
@@ -375,57 +348,6 @@ z-index: 1;
 
 
 
-/* ===============================
-   Full-Bleed Bänder OHNE Markup-Änderung
-   (nutzt ::before und 50vw-Trick)
-   =============================== */
-
-/*html, body { overflow-x: clip; } *//* Sicherheit gegen horizontale Scrollbar */
-
-/* Die drei Sections bekommen einen vollbreiten Hintergrund,
-   der Content bleibt im Container (1440px bei dir). */
-#faq,
-#coach-portal,
-#brandbar {
-  position: relative;
-  z-index: 0;            /* Platz für den ::before Layer dahinter */
-}
-
-/* generischer Bleed-Layer */
-#faq::before,
-#coach-portal::before,
-#brandbar::before {
-  content: "";
-  position: absolute;
-  top: 0; bottom: 0;
-  left: 50%; right: 50%;
-  margin-left: -50vw;    /* zieht nach links auf Viewport-Breite */
-  margin-right: -50vw;   /* und nach rechts */
-  z-index: -1;           /* liegt hinter dem eigentlichen Inhalt */
-}
-
-/* 1) Grauer "Feedback/FAQ"-Block */
-#faq::before {
-  background: #f3f4f6;   /* deine gewünschte Band-Farbe */
-}
-
-/* 2) Video-Portal – mit deinem vorhandenen Bild & Gradient */
-#coach-portal::before {
-  background:
-    radial-gradient(1000px 500px at 20% 40%, rgba(0,0,0,.45), rgba(0,0,0,.75)),
-    var(--portal-bg) center/cover no-repeat,
-    #111;
-}
-
-
-
-/* Optional: kleine Innenabstände, falls nötig 
-#faq, #coach-portal, #brandbar {
-  padding-block: clamp(24px, 4vw, 1006px);
-}
-
-*/
-
 
 
 
@@ -454,50 +376,6 @@ z-index: 1;
   --brand-gold-700: #E5C300;  /* dunkleres Gold (Basis) */
   --brand-navy:     #0F1E2E;
 }
-
-#brandbar{
-  position: relative;
-  background: var(--brand-navy);
-  color:#fff;
-}
-
-/* Linie oben – Basis: dunkler */
-#brandbar::before{
-  content:"";
-  position:absolute;
-  left:0; right:0; top:0;
-  height:4px;
-  background-color: var(--brand-gold-700);
-  transition: background-color .25s ease, height .25s ease;
-}
-
-/* Hover/Focus: heller & ggf. etwas höher */
-#brandbar:hover::before,
-#brandbar:focus-within::before{
-  background-color: var(--brand-gold); /* heller */
-  /* Alternative mit extra “Glow” (wo unterstützt):
-     background-color: color-mix(in oklab, var(--brand-gold) 85%, white); */
-  height:6px; /* optional, stärkerer Reiz */
-}
-
-/* Inhalt */
-#brandbar .container{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:16px;
-  padding:10px 16px;
-}
-
-#brandbar a{ color:#fff; text-decoration:none; }
-#brandbar a:hover{ text-decoration:underline; }
-
-/* Bewegungen reduzieren */
-@media (prefers-reduced-motion: reduce){
-  #brandbar::before{ transition: background-color .25s ease; }
-}
-
-
 
 
 
