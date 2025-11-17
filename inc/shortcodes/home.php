@@ -34,6 +34,9 @@ if (!function_exists('ks_register_home_shortcode')) {
       }
 
 
+
+
+
 // JS: Program-CTA
 $cta_js = $theme_dir . '/assets/js/ks-program-cta.js';
 if (file_exists($cta_js)) {
@@ -135,9 +138,10 @@ if (file_exists($hero_js)) {
 
 
       // Platzhalter-Icons – gern ersetzen
-      $icon1 = $theme_uri . '/assets/img/home/mfs.png';
-      $icon2 = $theme_uri . '/assets/img/home/mfs.png';
-      $icon3 = $theme_uri . '/assets/img/home/mfs.png';
+      $icon1 = $theme_uri . '/assets/img/home/soccer.svg';
+      $icon2 = $theme_uri . '/assets/img/home/know_how.svg';
+      $icon3 = $theme_uri . '/assets/img/home/football-game.svg';
+      $werte_target = home_url('/');
 
       /* ==== Video (oEmbed) ==== */
       $video_embed = wp_oembed_get('https://www.youtube.com/watch?v=KEWP2dELhrY');
@@ -316,22 +320,35 @@ if (file_exists($hero_js)) {
           <h2 class="ks-dir__title">Unsere Werte</h2>
 
           <div class="ks-values">
-            <div class="ks-value">
-              <img src="<?php echo esc_url($icon1); ?>" alt="" loading="lazy">
-              <h3>Spass &amp; Freude</h3>
-              <p>Der Spaß am Fußball steht bei uns an erster Stelle!</p>
-            </div>
-            <div class="ks-value">
-              <img src="<?php echo esc_url($icon2); ?>" alt="" loading="lazy">
-              <h3>Sportliches Know-how</h3>
-              <p>Regelmäßige Schulungen für unsere Trainer*innen.</p>
-            </div>
-            <div class="ks-value">
-              <img src="<?php echo esc_url($icon3); ?>" alt="" loading="lazy">
-              <h3>Vorbilder</h3>
-              <p>Unser Handeln prägt die Spieler*innen nachhaltig.</p>
-            </div>
+  <a class="ks-value" href="<?php echo esc_url($werte_target); ?>">
+
+  <div class="icon-wrap">
+
+    <img src="<?php echo esc_url($icon1); ?>" alt="" loading="lazy">
           </div>
+    <h3>Spass &amp; Freude</h3>
+    <p>Der Spaß am Fußball steht bei uns an erster Stelle!</p>
+  </a>
+
+  <a class="ks-value" href="<?php echo esc_url($werte_target); ?>">
+    <div class="icon-wrap">
+    <img src="<?php echo esc_url($icon2); ?>" alt="" loading="lazy">
+          </div>
+    <h3>Sportliches Know-how</h3>
+    <p>Regelmäßige Schulungen für unsere Trainer*innen.</p>
+  </a>
+
+  <a class="ks-value" href="<?php echo esc_url($werte_target); ?>">
+    <div class="icon-wrap">
+    <img src="<?php echo esc_url($icon3); ?>" alt="" loading="lazy">
+          </div>
+    <h3>Vorbilder</h3>
+    <p>Unser Handeln prägt die Spieler*innen nachhaltig.</p>
+  </a>
+</div>
+
+      
+    
         </div>
       </section>
 
