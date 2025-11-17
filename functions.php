@@ -15,6 +15,13 @@ add_action('wp_enqueue_scripts', function () {
     [],
     '1.0'
   );
+
+    wp_enqueue_style(
+    'ks-werbung',
+    get_stylesheet_directory_uri() . '/assets/css/ks-werbung.css',
+    [],
+    '1.0'
+  );
 });
 
 
