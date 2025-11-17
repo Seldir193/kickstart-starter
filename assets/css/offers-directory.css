@@ -52,15 +52,7 @@
   }
 
   /* ===== Intro & Filter ===== */
-  .ks-dir__intro{ margin:10px 0 6px; }
-  .ks-dir__kicker{ margin:0 0 6px; color:#555; }
-  .ks-dir__title{ margin:0; }
-  .ks-dir__filters{ display:flex; flex-wrap:wrap; gap:10px 16px; align-items:end; margin:10px 0; }
-  .ks-field{ display:grid; gap:6px; }
-  .ks-field select{ height:40px; padding:0 12px; }
 
-  /* ===== Zähler & Liste ===== */
-  .ks-dir__meta{ margin:6px 0 4px; color:#475569; }
   .ks-dir__listwrap{
     --row-h: 120px; --row-gap: 12px;
     max-height:calc(3 * var(--row-h) + 2 * var(--row-gap));
@@ -136,28 +128,7 @@
   .dob-group{ display:flex; gap:8px; }
   .dob-group select{ min-width:80px; }
   .ks-actions{ margin-top:10px; display:flex; justify-content:flex-end; }
-  @media (max-width:600px){ .ks-grid{ grid-template-columns:1fr; } }
-
-  /* ===== Brandbar ===== */
-  .ks-brandbar__item{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; }
-  .ks-brandbar__label{ color:#fff; font-weight:600; font-size:14px; line-height:1; }
-
-  .ks-brandbar{
-    background:#19355f; color:#fff; position:relative;
-    width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
-    padding:28px 0;
-  }
-  .ks-brandbar .container{ display:flex; justify-content:center; }
-  .ks-brandbar__list{
-    display:flex; align-items:center; justify-content:center;
-    gap:56px; flex-wrap:wrap; margin:0; padding:0; list-style:none;
-  }
-  .ks-brandbar__item img{ display:block; height:28px; width:auto; opacity:.95; }
-  @media (min-width: 992px){ .ks-brandbar__item img{ height:34px; } }
-  @media (max-width: 480px){
-    .ks-brandbar__list{ gap:28px; }
-    .ks-brandbar__item img{ height:24px; }
-  }
+ 
 
   /* ===== FAQ (Directory) – Grid, Cards, Media ===== */
   .ks-dir-faq__grid{ display:grid; grid-template-columns:1.2fr 1fr; gap:24px; align-items:start; }
@@ -264,13 +235,6 @@
 
 
 
-.ks-dir__title{
-  font-weight: 800;
-    font-size: 52px;
-    color:var(--text) ;
-  line-height: 1.05;
-  margin: 8px 0 12px;
-}
 
 
 
@@ -469,86 +433,365 @@
 
 
 
-/* ==== Sicherheit gegen horizontale Scrollbar (wie auf home) ==== */
-/*html, body { overflow-x: clip; }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* =========================================================
-   Full-Bleed Bänder für Offers Directory (ohne Markup-Änderung)
+   DFS-Style Hero für Offers Directory – wie Home Hero
    ========================================================= */
 
-/* 1) HERO vollbreit – Inhalt bleibt im .ks-dir__hero-inner/Container */
+:root{
+  /* Falls noch nicht global gesetzt – gleiche Breite wie auf home */
+  --ks-container: 1440px;
+}
+
 .ks-dir__hero{
   position: relative;
   width: 100vw;
   margin-left:  calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  /* dein Hero-Hintergrund kommt bereits via --hero-img inline */
-  background: var(--hero-img) center/cover no-repeat, #f7f7f7; /* Fallback-Farbe wie auf home */
+  padding: clamp(24px, 6vw, 56px) 0;
+  background: #f5f5f5;   /* WICHTIG: komplettes background überschreibt das alte Bild */
+  overflow: hidden;
 }
 
-/* 2) FAQ, Kontakt, Brandbar: Full-Bleed per ::before-Layer */
-#dir-faq,
-#kontakt,
-#brandbar{
+
+/* Alte dunkle Gradient-Überlagerung killen */
+.ks-dir__hero::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: none;           /* kein Verlauf mehr */
+}
+
+/* Großes Wasserzeichen im Hintergrund – wie auf home */
+
+/* Großes Wasserzeichen im Offers-Hero – wie auf der Startseite */
+
+
+.ks-dir__hero::after{
+  content: attr(data-watermark);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6%;
+  text-align: center;              /* mittig */
+  padding-left: 0;                 /* kein Versatz */
+  font-weight: 900;
+  letter-spacing: .02em;
+  font-size: clamp(64px, 22vw, 240px);
+  color: rgba(0,0,0,.04);
+  pointer-events: none;
+  white-space: nowrap;             /* keine 2. Zeile */
+}
+
+
+/* Inhalt wie beim Home-Hero im Container halten */
+.ks-dir__hero-inner{
   position: relative;
-  z-index: 0;
+  z-index: 1;
+
+  max-width: var(--ks-container);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  /* kein Flex mit voller Höhe mehr – wir arbeiten flacher */
+  padding-top: clamp(16px, 4vw, 32px);
+  padding-bottom: clamp(16px, 4vw, 32px);
+
+  color: var(--tex);
 }
 
-#dir-faq::before,
-#kontakt::before,
-#brandbar::before{
-  content:"";
-  position:absolute;
-  top:0; bottom:0;
-  left:50%; right:50%;
-  margin-left:-50vw;
-  margin-right:-50vw;
-  z-index:-1;        /* hinter dem Inhalt */
+/* Crumb & Titel an Home-Hero anlehnen */
+.ks-dir__crumb{
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+.ks-dir__crumb .sep{
+  margin: 0 .35em;
+  opacity: .7;
 }
 
-/* Farben/Backdrops – analog zu home */
-#dir-faq::before{
-  background:#f3f4f6; /* wie #faq auf home */
-}
-#kontakt::before{
-  background:#111;    /* dunkler Block; passe an wenn du willst */
-  /* Beispiel mit Gradient möglich – hier bewusst schlicht gelassen */
-}
-#brandbar::before{
-  background:#173261; /* wie Brandbar auf home */
+.ks-dir__hero-title{
+  margin: 0 0 8px;
+  font-weight: 800;
+  line-height: 1.05;
+  font-size: clamp(36px, 6vw, 72px);  /* wie .ks-home-hero__title */
 }
 
-/* Optional: konsistente Innenabstände für die Bänder */
-#dir-faq, #kontakt, #brandbar{
-  padding-block: clamp(24px, 4vw, 56px);
+.ks-dir__hero-inner::before{
+  content: "";
+  position: absolute;
+  right: 40px;
+  top: 80%;                        /* mittig ausrichten */
+  transform: translateY(-50%);     /* wirklich zentrieren */
+  width: min(620px, 50vw);
+  height: clamp(320px, 55vw, 620px);
+  background: var(--hero-img) center right / contain no-repeat;
+  pointer-events: none;
 }
 
-/* 3) Falls du auch einen “Werte / Programmbeschreibung”-Streifen willst */
-#dir-program{
-  position: relative;
-  z-index: 0;
-}
-#dir-program::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  left:50%; right:50%;
-  margin-left:-50vw;
-  margin-right:-50vw;
-  z-index:-1;
-  background:#fafafa; /* hellgrau wie home values */
+
+
+/* Auf kleineren Screens: Bild zentrieren & etwas kleiner */
+@media (max-width: 900px){
+  .ks-dir__hero-inner{
+    padding-bottom: clamp(24px, 8vw, 40px);
+  }
+  .ks-dir__hero-inner::before{
+    right: 50%;
+    transform: translateX(50%);
+    width: min(420px, 70vw);
+    height: clamp(220px, 60vw, 420px);
+  }
 }
 
-/* 4) Inhalt weiterhin zentriert – falls du keinen globalen Containerstil hast */
-#dir-faq > .container,
-#brandbar > .container,
-#kontakt > .container,
-.ks-dir__hero .ks-dir__hero-inner,
-#dir-program > .container{
-  max-width: 1440px;     /* gleiche Breite wie auf home */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Intro + Filter + Meta zentrieren wie im MFS-Layout */
+.ks-dir__intro,
+.ks-dir__filters,
+.ks-dir__meta{
+  max-width: 1440px;          /* gleiche Breite wie Home */
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   padding-left: 16px;
   padding-right: 16px;
 }
+
+
+
+.ks-dir__title{
+  font-weight: 800;
+    font-size: 52px;
+    color:var(--text) ;
+  line-height: 1.05;
+ 
+  margin: 0;
+}
+
+
+/* Filter-Zeile mittig ausrichten */
+.ks-dir__filters{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: flex-end;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.ks-field{
+  display: grid;
+  gap: 6px;
+}
+
+.ks-field select{
+  height: 40px;
+  padding: 0 12px;
+}
+
+/* Zähler unter den Filtern ebenfalls mittig */
+.ks-dir__meta{
+  margin: 6px 0 4px;
+  color: #475569;
+  text-align: center;
+}
+
+
+
+
+
+.ks-dir__intro{
+  margin: 10px 0 6px;
+  text-align: center;
+
+   position: relative;
+  z-index: 1;
+}
+
+
+
+
+
+
+.ks-dir__intro::before{
+  content: "ANGEBOTE";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10px; /* ggf. feinjustieren */
+  font-weight: 900;
+  letter-spacing: .03em;
+  font-size: clamp(72px, 18vw, 120px);
+  color: rgba(0,0,0,.03);
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ks-dir__kicker{
+  margin: 0 0 4px;
+  line-height: 1.4;
+  min-height: 1.4em; /* reserviert immer Platz */
+
+  color: #555;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.ks-dir__kicker--hidden{
+  visibility: hidden;   /* Text unsichtbar, aber Platz bleibt */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Full-Bleed-Hintergrund für das Offers-Directory */
+#ksDir{
+  position: relative;
+  z-index: 0;
+}
+
+#ksDir::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: #fafafa;     /* Vollflächig weiß */
+  z-index: -1;          /* hinter allem Inhalt */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ks-py-56 {
+  padding-block: 56px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
