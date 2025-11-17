@@ -1,15 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
 // assets/js/offers-dialog.js
 (function () {
   "use strict";
@@ -44,6 +32,17 @@
     const addr = (l1 && l2) ? `${l1} - ${l2}` : (l1 || l2 || (o.location || ""));
     return { name, addr };
   };
+
+  /* Club-Programme (keine normale Sessions-Tabelle) */
+  function isNonTrialProgram(offer){
+    if (!offer) return false;
+    const key = (offer.sub_type || offer.type || '').trim();
+    return (
+      key === 'RentACoach_Generic' ||
+      key === 'ClubProgram_Generic' ||
+      key === 'CoachEducation'
+    );
+  }
 
   /* ========== coords → google maps link ========== */
   const isLat = (n) => Number.isFinite(n) && n >= -90 && n <= 90;
@@ -102,48 +101,35 @@
   function getCoachFirst(o){ return splitName(getCoachFull(o)).first; }
   function getCoachLast(o){  return splitName(getCoachFull(o)).last;  }
 
-
-
-
-
-
-function getNextBase(){
-  const root = document.getElementById('ksDir');
-  const base = (root?.dataset?.next || '').trim();
-  return base ? base.replace(/\/+$/, '') : '';
-}
-
-function normalizeCoachSrc(src){
-  if (!src) return '';
-
-  // schon absolute URL?
-  if (/^https?:\/\//i.test(src)) return src;
-
-  const next = getNextBase(); // z. B. http://localhost:3000
-
-  // /api/uploads/coach/...
-  if (src.startsWith('/api/uploads/coach/')) {
-    return next ? `${next}${src}` : src; // ohne next wäre falsch (würde auf WP-Origin zeigen)
+  function getNextBase(){
+    const root = document.getElementById('ksDir');
+    const base = (root?.dataset?.next || '').trim();
+    return base ? base.replace(/\/+$/, '') : '';
   }
 
-  // /uploads/coach/...  -> /api/uploads/coach/... auf Next
-  if (/^\/?uploads\/coach\//i.test(src)) {
-    const p = src.startsWith('/') ? `/api${src}` : `/api/${src}`;
-    return next ? `${next}${p}` : p;
+  function normalizeCoachSrc(src){
+    if (!src) return '';
+
+    if (/^https?:\/\//i.test(src)) return src;
+
+    const next = getNextBase();
+
+    if (src.startsWith('/api/uploads/coach/')) {
+      return next ? `${next}${src}` : src;
+    }
+
+    if (/^\/?uploads\/coach\//i.test(src)) {
+      const p = src.startsWith('/') ? `/api${src}` : `/api/${src}`;
+      return next ? `${next}${p}` : p;
+    }
+
+    if (/^[\w.\-]+\.(png|jpe?g|webp|gif)$/i.test(src)) {
+      const p = `/api/uploads/coach/${src}`;
+      return next ? `${next}${p}` : p;
+    }
+
+    return src;
   }
-
-  // nur Dateiname -> /api/uploads/coach/<name> auf Next
-  if (/^[\w.\-]+\.(png|jpe?g|webp|gif)$/i.test(src)) {
-    const p = `/api/uploads/coach/${src}`;
-    return next ? `${next}${p}` : p;
-  }
-
-  // alles andere unverändert
-  return src;
-}
-
-
-
 
   function getCoachAvatar(o){
     const root = document.getElementById("ksDir");
@@ -157,10 +143,6 @@ function normalizeCoachSrc(src){
       pick(o, ["creator","avatarUrl"]) || pick(o, ["user","avatarUrl"]);
     return normalizeCoachSrc(direct || ph || "");
   }
-
-
-
-
 
   /* ========== body lock ========== */
   const LOCK_ATTR = "data-ks-modal-lock";
@@ -179,7 +161,7 @@ function normalizeCoachSrc(src){
     document.body.classList.remove("ks-modal-open");
   };
 
-  /* ========== enforce modal layout (wins against stray CSS) ========== */
+  /* ========== enforce modal layout ========== */
   const forceLayout = (modal, overlay, panel, z = 4000) => {
     if (modal) { modal.style.position="fixed"; modal.style.inset="0"; modal.style.zIndex=String(z); modal.style.display="grid"; modal.style.placeItems="center"; }
     if (overlay){ overlay.style.position="absolute"; overlay.style.inset="0"; overlay.style.background="rgba(0,0,0,.45)"; overlay.style.display="block"; overlay.style.zIndex="0"; }
@@ -202,19 +184,12 @@ function normalizeCoachSrc(src){
         modal.className = "ks-dir__modal";
         modal.hidden = true;
 
-
-
         modal.innerHTML = `
           <div class="ks-dir__overlay" data-close></div>
           <div class="ks-dir__panel" role="dialog" aria-modal="true" aria-label="Buchung">
             <button type="button" class="ks-dir__close" data-close aria-label="Schließen">✕</button>
             <iframe class="ks-book__frame" src="" title="Buchung" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="width:100%;height:80vh;border:0;border-radius:10px;"></iframe>
           </div>`;
-
-
-
-
-
 
         document.body.appendChild(modal);
       }
@@ -228,19 +203,16 @@ function normalizeCoachSrc(src){
       const frame   = $(".ks-book__frame", modal);
       const closeBtn= $(".ks-dir__close", modal);
 
-      // optional close icon
       const root = $("#ksDir");
       const icon = opts.closeIcon || root?.dataset?.closeIcon || root?.dataset?.closeicon || "";
       if (icon) closeBtn.innerHTML = `<img src="${esc(icon)}" alt="Schließen" width="14" height="14">`;
 
-      // stronger z-index so it sits on top of offer dialog
       forceLayout(modal, overlay, panel, 4100);
 
       frame.src = url || "#";
       modal.hidden = false;
       lockBody();
 
-      // handlers
       const doClose = () => {
         modal.hidden = true;
         frame.src = "about:blank";
@@ -270,11 +242,10 @@ function normalizeCoachSrc(src){
     return { open, close };
   })();
 
-
-
   /* ========== session cards ========== */
   function buildSessionsHtml(nextBase, sessions){
     const list = Array.isArray(sessions) ? sessions : [];
+
     return list.map((s) => {
       const day   = (Array.isArray(s.days) && s.days.length) ? dayLongPlural(normDay(s.days[0])) : "—";
       const time  = formatTime(s);
@@ -283,6 +254,8 @@ function normalizeCoachSrc(src){
       const lName = getCoachLast(s);
       const img   = getCoachAvatar(s);
       const href  = bookHref(nextBase, s);
+
+      const btnLabel = 'Weiter';  // ✅ EINHEITLICHER Button-Text
 
       return `
         <div class="ks-session">
@@ -301,7 +274,7 @@ function normalizeCoachSrc(src){
           </div>
 
           <div class="ks-session__actions">
-            <a class="btn btn-primary ks-session__btn" href="${esc(href)}" data-book-href="${esc(href)}">Auswählen</a>
+            <a class="btn btn-primary ks-session__btn" href="${esc(href)}" data-book-href="${esc(href)}">${esc(btnLabel)}</a>
             <span class="ks-session__price">${esc(formatPrice(s))}</span>
           </div>
         </div>`;
@@ -313,17 +286,15 @@ function normalizeCoachSrc(src){
     const panel = $(".ks-dir__panel", modal);
 
     const panelOnClick = (e) => {
-      // close?
       if (e.target.closest("[data-close]")) { close(); return; }
 
-      // booking?
       const book = e.target.closest("[data-book-href]");
       if (book) {
         e.preventDefault();
         const url = book.getAttribute("data-book-href") || book.getAttribute("href") || "";
         const root = $("#ksDir");
         const icon = root?.dataset?.closeIcon || root?.dataset?.closeicon || "";
-        close(); // hide offer dialog
+        close();
         BookDialog.open(url, { closeIcon: icon });
         return;
       }
@@ -357,7 +328,6 @@ function normalizeCoachSrc(src){
     const modal = $("#ksOfferModal");
     if (!modal || !offer) return;
 
-    // remember last (for BACK from booking)
     LAST.offer = offer;
     LAST.sessions = sessions;
     LAST.opts = opts;
@@ -381,14 +351,35 @@ function normalizeCoachSrc(src){
       ? `<button type="button" class="ks-dir__close" data-close aria-label="Schließen"><img src="${esc(closeURL)}" alt="Schließen" width="14" height="14"></button>`
       : `<button type="button" class="ks-dir__close" data-close aria-label="Schließen">✕</button>`;
 
+    const nonTrial = isNonTrialProgram(offer);
+
+    // 🔁 KEINE Unterzeile mehr
+    const sublineHtml = '';
+
+    // Club-Programme: einfache Karte
+    let sessionsHtml;
+    if (nonTrial) {
+      const href = bookHref(nextBase, offer);
+      sessionsHtml = `
+        <div class="ks-session ks-session--simple">
+          <div class="ks-session__info">
+            Dieses Programm ist anfragebasiert. Klicke auf „Weiter“.
+          </div>
+          <div class="ks-session__actions">
+            <a class="btn btn-primary ks-session__btn" href="${esc(href)}" data-book-href="${esc(href)}">Weiter</a>
+          </div>
+        </div>`;
+    } else {
+      sessionsHtml = buildSessionsHtml(nextBase, list);
+    }
 
     panel.innerHTML = `
       ${closeBtn}
       <h3 class="ks-dir__m-title">${esc(name)}</h3>
-      <p class="ks-dir__m-sub">Kostenfreies Schnuppertraining</p>
+      ${sublineHtml}
       <p class="ks-dir__m-addr">${esc(addr)}</p>
       <p class="ks-offer__google"><a href="${esc(gHref)}" target="_blank" rel="noopener">Anfahrt mit Google</a></p>
-      <div class="ks-offer__sessions">${buildSessionsHtml(nextBase, list)}</div>
+      <div class="ks-offer__sessions">${sessionsHtml}</div>
     `;
 
     modal.hidden = false;
@@ -404,17 +395,13 @@ function normalizeCoachSrc(src){
     unlockBody();
   }
 
-  // expose
   window.KSOffersDialog = { open, close, __last: LAST };
 
   /* ========== BACK from embedded booking (Next) ========== */
-  // In /book/page.tsx send: window.parent?.postMessage({ type: 'KS_BOOKING_BACK' }, '*');
   window.addEventListener("message", (e) => {
     const d = e && e.data;
     if (!d || (d.type !== "KS_BOOKING_BACK" && d.type !== "KS_BOOKING_CLOSE")) return;
-    // close booking dialog
     BookDialog.close();
-    // BACK → reopen last offer dialog
     if (d.type === "KS_BOOKING_BACK" && window.KSOffersDialog && window.KSOffersDialog.__last?.offer) {
       const { offer, sessions, opts } = window.KSOffersDialog.__last;
       window.KSOffersDialog.open(offer, sessions, opts || {});
@@ -422,103 +409,6 @@ function normalizeCoachSrc(src){
   }, false);
 
 })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
