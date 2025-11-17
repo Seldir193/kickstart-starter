@@ -1,0 +1,129 @@
+
+:root{
+   
+  --brand-gold: #FDE100;
+  --brand-gold-700: #E5C200;
+  
+}
+
+
+
+/* ===== Partner-Brandbar ===== */
+.ks-brandbar{
+  background: #19355f;           /* dunkles Blau wie im Screenshot */
+  color:#fff;
+  /* Vollbreite "Bleed" */
+  position:relative;
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding:28px 0;
+}
+.ks-brandbar .container{
+  display:flex;
+  justify-content:center;
+}
+.ks-brandbar__list{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:56px;
+  flex-wrap:wrap;
+  margin:0;
+  padding:0;
+  list-style:none;
+  flex:1;
+}
+.ks-brandbar__item img{
+  display:block;
+  height:28px;                  /* Logo-Höhe anpassen */
+  width:auto;
+/*  filter:brightness(0) invert(1); /* auf Weiß “recoloren”, falls PNG/SVG dunkel ist */
+  opacity:.95;
+}
+@media (min-width: 992px){
+  .ks-brandbar__item img{ height:34px; }
+}
+@media (max-width: 480px){
+  .ks-brandbar__list{ gap:28px; }
+  .ks-brandbar__item img{ height:24px; }
+
+    .ks-brandbar__label { font-size: 13px; }
+}
+
+
+
+
+
+
+/* Text unter dem Logo – wie vorher */
+.ks-brandbar__label{
+  color:#fff;
+  font-weight:600;
+  font-size:14px;
+  line-height:1;
+}
+
+
+
+
+
+
+
+
+
+#brandbar{
+  position: relative;
+  background: var(--brand-navy);
+  color:#fff;
+}
+
+
+#brandbar::before{
+  content:"";
+  position:absolute;
+  left:0; right:0; top:0;
+  height:4px;
+  /* Fallback-Farbe, falls Variable fehlt */
+  background-color: var(--brand-gold-700, #b78300);
+  transition: background-color .25s ease, height .25s ease;
+}
+
+
+/* Hover/Focus: heller & ggf. etwas höher */
+#brandbar:hover::before,
+#brandbar:focus-within::before{
+  background-color: var(--brand-gold); /* heller */
+  /* Alternative mit extra “Glow” (wo unterstützt):
+     background-color: color-mix(in oklab, var(--brand-gold) 85%, white); */
+  height:6px; /* optional, stärkerer Reiz */
+}
+
+/* Inhalt */
+#brandbar .container{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  padding:10px 16px;
+}
+
+#brandbar a{ color:#fff; text-decoration:none; }
+#brandbar a:hover{ text-decoration:underline; }
+
+/* Bewegungen reduzieren */
+@media (prefers-reduced-motion: reduce){
+  #brandbar::before{ transition: background-color .25s ease; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
