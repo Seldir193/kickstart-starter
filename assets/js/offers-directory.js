@@ -3,47 +3,82 @@
   "use strict";
 
   /* ===== helpers (dom, text) ===== */
-  const $  = (sel, ctx = document) => ctx.querySelector(sel);
+  const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
-  const esc = (s) => String(s).replace(/[&<>"']/g, m => (
-    { "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[m]
-  ));
+  const esc = (s) =>
+    String(s).replace(
+      /[&<>"']/g,
+      (m) =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[
+          m
+        ])
+    );
 
   /* ===== day helpers ===== */
   const DAY_ALIASES = {
-    m:"Mo", mo:"Mo", montag:"Mo", monday:"Mo", mon:"Mo",
-    di:"Di", dienstag:"Di", tuesday:"Di", tue:"Di",
-    mi:"Mi", mittwoch:"Mi", wednesday:"Mi", wed:"Mi",
-    do:"Do", donnerstag:"Do", thursday:"Do", thu:"Do",
-    fr:"Fr", freitag:"Fr", friday:"Fr", fri:"Fr",
-    sa:"Sa", samstag:"Sa", saturday:"Sa", sat:"Sa",
-    so:"So", sonntag:"So", sunday:"So", sun:"So"
+    m: "Mo",
+    mo: "Mo",
+    montag: "Mo",
+    monday: "Mo",
+    mon: "Mo",
+    di: "Di",
+    dienstag: "Di",
+    tuesday: "Di",
+    tue: "Di",
+    mi: "Mi",
+    mittwoch: "Mi",
+    wednesday: "Mi",
+    wed: "Mi",
+    do: "Do",
+    donnerstag: "Do",
+    thursday: "Do",
+    thu: "Do",
+    fr: "Fr",
+    freitag: "Fr",
+    friday: "Fr",
+    fri: "Fr",
+    sa: "Sa",
+    samstag: "Sa",
+    saturday: "Sa",
+    sat: "Sa",
+    so: "So",
+    sonntag: "So",
+    sunday: "So",
   };
   const DAY_LONG = {
-    Mo:"Montag", Di:"Dienstag", Mi:"Mittwoch",
-    Do:"Donnerstag", Fr:"Freitag", Sa:"Samstag", So:"Sonntag"
+    Mo: "Montag",
+    Di: "Dienstag",
+    Mi: "Mittwoch",
+    Do: "Donnerstag",
+    Fr: "Freitag",
+    Sa: "Samstag",
+    So: "Sonntag",
   };
-  const normDay = (v) => v ? (DAY_ALIASES[String(v).trim().toLowerCase()] || v) : "";
+  const normDay = (v) =>
+    v ? DAY_ALIASES[String(v).trim().toLowerCase()] || v : "";
   const offerHasDay = (o, code) => {
     if (!code) return true;
     const arr = Array.isArray(o.days) ? o.days : [];
-    return arr.some(d => normDay(d) === code);
+    return arr.some((d) => normDay(d) === code);
   };
 
   /* ===== city helpers ===== */
-  function normalizeCity(s){
+  function normalizeCity(s) {
     if (!s) return "";
-    let out = String(s).normalize("NFD").replace(/\p{Diacritic}/gu, "");
+    let out = String(s)
+      .normalize("NFD")
+      .replace(/\p{Diacritic}/gu, "");
     return out.replace(/[^a-z0-9]+/gi, " ").trim().toLowerCase();
   }
 
-  function cityMatches(itemLoc, selectedLoc){
-    const a = normalizeCity(itemLoc), b = normalizeCity(selectedLoc);
+  function cityMatches(itemLoc, selectedLoc) {
+    const a = normalizeCity(itemLoc),
+      b = normalizeCity(selectedLoc);
     if (!a || !b) return false;
     return a === b || a.includes(b) || b.includes(a);
   }
 
-  function cityFromLocationString(s){
+  function cityFromLocationString(s) {
     const raw = String(s || "").trim();
     if (!raw) return "";
     const split = raw.split(/\s*[-–—,•|]\s*/);
@@ -52,10 +87,9 @@
 
   const normalizeStandort = (o) => String(o.location || "").trim();
 
-  // Liefert eine Stadt / Standortnamen aus einem Offer
   function cityFromOffer(o) {
-    if (o.city) return String(o.city).trim();       // bevorzugt "city" aus der API
-    if (o.standort) return String(o.standort).trim(); // falls später so benannt
+    if (o.city) return String(o.city).trim();
+    if (o.standort) return String(o.standort).trim();
     if (o.location) return cityFromLocationString(o.location);
     return "";
   }
@@ -68,24 +102,30 @@
     const n = Number(String(v).trim().replace(",", "."));
     return Number.isFinite(n) ? n : NaN;
   };
-  const normalizePair = (a,b) =>
-    (isLat(a) && isLng(b)) ? [a,b] :
-    (isLng(a) && isLat(b) ? [b,a] : [a,b]);
+  const normalizePair = (a, b) =>
+    isLat(a) && isLng(b)
+      ? [a, b]
+      : isLng(a) && isLat(b)
+      ? [b, a]
+      : [a, b];
 
   const parseLatLngString = (s) => {
-    const m = String(s||"").trim().match(
-      /(-?\d+(?:[.,]\d+)?)[\s,;]+(-?\d+(?:[.,]\d+)?)/);
+    const m = String(s || "")
+      .trim()
+      .match(/(-?\d+(?:[.,]\d+)?)[\s,;]+(-?\d+(?:[.,]\d+)?)/);
     if (!m) return null;
-    const a = parseCoord(m[1]), b = parseCoord(m[2]);
+    const a = parseCoord(m[1]),
+      b = parseCoord(m[2]);
     if (!Number.isFinite(a) || !Number.isFinite(b)) return null;
-    return normalizePair(a,b);
+    return normalizePair(a, b);
   };
 
   const coordsFromArray = (arr) => {
     if (!Array.isArray(arr) || arr.length < 2) return null;
-    const a = parseCoord(arr[0]), b = parseCoord(arr[1]);
+    const a = parseCoord(arr[0]),
+      b = parseCoord(arr[1]);
     if (!Number.isFinite(a) || !Number.isFinite(b)) return null;
-    return normalizePair(a,b);
+    return normalizePair(a, b);
   };
 
   const firstFinite = (cands) => {
@@ -96,15 +136,23 @@
     return NaN;
   };
 
-  function latLngOf(o){
-    { // flat fields
+  function latLngOf(o) {
+    {
       const lat = firstFinite([o.lat, o.latitude, o.latDeg]);
       const lng = firstFinite([o.lng, o.lon, o.long, o.longitude]);
       if (isLat(lat) && isLng(lng)) return [lat, lng];
     }
     const C = [
-      o.coords, o.coord, o.position, o.geo, o.gps, o.map,
-      o.center, o.centerPoint, o.point, o.location
+      o.coords,
+      o.coord,
+      o.position,
+      o.geo,
+      o.gps,
+      o.map,
+      o.center,
+      o.centerPoint,
+      o.point,
+      o.location,
     ].filter(Boolean);
 
     for (const c of C) {
@@ -136,11 +184,11 @@
       }
     }
 
-    for (const key of ["latlng","lat_lon","lon_lat"]) {
+    for (const key of ["latlng", "lat_lon", "lon_lat"]) {
       const p = parseLatLngString(o[key]);
       if (p) return p;
     }
-    for (const [k,v] of Object.entries(o)) {
+    for (const [, v] of Object.entries(o)) {
       if (typeof v === "string") {
         const p = parseLatLngString(v);
         if (p) return p;
@@ -149,9 +197,9 @@
     return null;
   }
 
-  const pointsFrom = (items=[]) => {
+  const pointsFrom = (items = []) => {
     const pts = [];
-    items.forEach(o => {
+    items.forEach((o) => {
       const ll = latLngOf(o);
       if (ll) pts.push(ll);
     });
@@ -160,21 +208,25 @@
 
   /* ===== geocoding (Nominatim) ===== */
   const GEOCODE_ENDPOINT = "https://nominatim.openstreetmap.org/search";
-  const geoCache = new Map(), inflight = new Map();
+  const geoCache = new Map(),
+    inflight = new Map();
 
-  async function geocodeCity(name){
+  async function geocodeCity(name) {
     const key = normalizeCity(name);
     if (!key) return null;
     if (geoCache.has(key)) return geoCache.get(key);
-    if (inflight.has(key))  return inflight.get(key);
+    if (inflight.has(key)) return inflight.get(key);
 
-    const url = `${GEOCODE_ENDPOINT}?format=jsonv2&q=${encodeURIComponent(name)}&limit=1&addressdetails=0`;
-    const p = fetch(url, { headers: { "Accept": "application/json" } })
-      .then(r => r.json())
-      .then(j => {
+    const url = `${GEOCODE_ENDPOINT}?format=jsonv2&q=${encodeURIComponent(
+      name
+    )}&limit=1&addressdetails=0`;
+    const p = fetch(url, { headers: { Accept: "application/json" } })
+      .then((r) => r.json())
+      .then((j) => {
         let res = null;
         if (Array.isArray(j) && j.length) {
-          const lat = parseCoord(j[0].lat), lon = parseCoord(j[0].lon);
+          const lat = parseCoord(j[0].lat),
+            lon = parseCoord(j[0].lon);
           if (Number.isFinite(lat) && Number.isFinite(lon)) res = [lat, lon];
         }
         geoCache.set(key, res);
@@ -190,8 +242,9 @@
     return p;
   }
 
-  async function geocodeCities(names, limit = 8){
-    const pts = [], seen = new Set();
+  async function geocodeCities(names, limit = 8) {
+    const pts = [],
+      seen = new Set();
     for (const n of names) {
       const k = normalizeCity(n);
       if (!k || seen.has(k)) continue;
@@ -207,19 +260,19 @@
   const DEFAULT_CENTER = [51.1657, 10.4515]; // Germany
   const DEFAULT_Z = 6;
 
-  function ensureMapHeight(el){
+  function ensureMapHeight(el) {
     if (el && el.getBoundingClientRect().height < 50) {
       el.style.height = "360px";
     }
   }
 
-  function initMap(el){
+  function initMap(el) {
     if (!el || !window.L) return null;
     const map = L.map(el, { scrollWheelZoom: true, zoomControl: true });
-    L.tileLayer(
-      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      { maxZoom: 19, attribution: "© OpenStreetMap" }
-    ).addTo(map);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "© OpenStreetMap",
+    }).addTo(map);
     map.setView(DEFAULT_CENTER, DEFAULT_Z);
     map.whenReady(() => map.invalidateSize());
     requestAnimationFrame(() => map.invalidateSize());
@@ -230,19 +283,27 @@
     return map;
   }
 
-  const clearMarkers = (ms) => { ms.forEach(m => m.remove()); return []; };
+  const clearMarkers = (ms) => {
+    ms.forEach((m) => m.remove());
+    return [];
+  };
 
-  function setMarkers(map, arr, listEl){
+  function setMarkers(map, arr, listEl) {
     const ms = [];
     arr.forEach((o, i) => {
       const ll = latLngOf(o);
       if (!ll) return;
       const mk = L.marker(ll).addTo(map);
       mk.bindPopup(
-        `<strong>${esc(o.title || o.type || "Standort")}</strong><br>${esc(o.location || "")}`
+        `<strong>${esc(o.title || o.type || "Standort")}</strong><br>${esc(
+          o.location || ""
+        )}`
       );
       mk.on("click", () => {
-        const li = listEl?.querySelector(`.ks-offer[data-offer-index="${i}"]`);
+        const li =
+          listEl?.querySelector(
+            `.ks-offer[data-offer-index="${i}"]`
+          ) || null;
         if (li) li.scrollIntoView({ behavior: "smooth", block: "start" });
       });
       ms.push(mk);
@@ -250,86 +311,169 @@
     return ms;
   }
 
-  function flyTo(map, pts){
+  function flyTo(map, pts) {
     if (!pts.length) return;
     if (pts.length === 1) {
       map.flyTo(pts[0], 12, { duration: 0.5 });
     } else {
-      map.flyToBounds(L.latLngBounds(pts), { padding: [24,24] });
+      map.flyToBounds(L.latLngBounds(pts), { padding: [24, 24] });
     }
   }
 
-  function resetView(map, allPts){
+  function resetView(map, allPts) {
     if (!map) return;
     if (allPts.length > 1) flyTo(map, allPts);
-    else if (allPts.length === 1) map.flyTo(allPts[0], 12, { duration: 0.5 });
+    else if (allPts.length === 1)
+      map.flyTo(allPts[0], 12, { duration: 0.5 });
     else map.setView(DEFAULT_CENTER, DEFAULT_Z);
   }
 
   /* ===== UI rendering ===== */
-  function buildUrl(base, q){
+  function buildUrl(base, q) {
     const u = new URL(base, window.location.origin);
-    Object.entries(q || {}).forEach(([k,v]) => {
+    Object.entries(q || {}).forEach(([k, v]) => {
       if (v != null && v !== "") u.searchParams.set(k, v);
     });
     return u.toString();
   }
 
-  function fillLocations(selectEl, arr){
+  function fillLocations(selectEl, arr) {
     if (!selectEl) return;
     const cities = Array.from(
       new Set(
         arr
-          .map(o => cityFromOffer(o))
+          .map((o) => cityFromOffer(o))
           .filter(Boolean)
       )
-    ).sort((a,b) => a.localeCompare(b, "de"));
+    ).sort((a, b) => a.localeCompare(b, "de"));
 
     selectEl.innerHTML =
       `<option value="">Alle Standorte</option>` +
-      cities.map(c => `<option>${esc(c)}</option>`).join("");
+      cities.map((c) => `<option>${esc(c)}</option>`).join("");
   }
 
-  function nameAddr(o){
-    const name = o.clubName || o.club || o.provider || o.title || o.type || "Standort";
+  function nameAddr(o) {
+    const name =
+      o.clubName ||
+      o.club ||
+      o.provider ||
+      o.title ||
+      o.type ||
+      "Standort";
     const l1 = o.address || o.street || "";
     const l2 = [o.zip || o.postalCode || "", o.city || ""]
-      .filter(Boolean).join(", ");
-    const addr = (l1 && l2)
-      ? `${l1} - ${l2}`
-      : (l1 || l2 || (o.location || ""));
+      .filter(Boolean)
+      .join(", ");
+    const addr =
+      l1 && l2
+        ? `${l1} - ${l2}`
+        : l1 || l2 || (o.location || "");
     return { name, addr };
   }
 
-  function renderList(listEl, arr, ref, map, onOpen){
+  /* Gruppen-Helfer: Powertraining → pro Standort nur 1 Karte */
+  function groupByLocation(arr) {
+    const map = new Map();
+    arr.forEach((o) => {
+      const key = normalizeStandort(o) || cityFromOffer(o) || (o.title || "");
+      if (!key) return;
+      let g = map.get(key);
+      if (!g) {
+        const { name, addr } = nameAddr(o);
+        g = { key, rep: o, name, addr, offers: [] };
+        map.set(key, g);
+      }
+      g.offers.push(o);
+    });
+    return Array.from(map.values());
+  }
+
+  function renderList(listEl, displayArr, allItems, map, isPowertrainingPage, root, groups) {
     if (!listEl) return;
-    if (!arr.length) {
-      listEl.innerHTML = '<li><div class="card">Keine Angebote gefunden.</div></li>';
+    if (!displayArr.length) {
+      listEl.innerHTML =
+        '<li><div class="card">Keine Angebote gefunden.</div></li>';
       return;
     }
-    listEl.innerHTML = arr.map((o,i) => {
-      const { name, addr } = nameAddr(o);
-      return `<li class="ks-offer" data-offer-index="${i}">
+
+    if (isPowertrainingPage && groups && groups.length) {
+      // Eine Karte pro Standort
+      listEl.innerHTML = groups
+        .map(
+          (g, i) => `
+        <li class="ks-offer" data-offer-index="${i}" data-loc-key="${esc(
+            g.key
+          )}">
+          <article class="card">
+            <h3 class="card-title">${esc(g.name)}</h3>
+            ${
+              g.addr
+                ? `<div class="offer-meta">${esc(g.addr)}</div>`
+                : ""
+            }
+          </article>
+        </li>`
+        )
+        .join("");
+
+      const NEXT = root?.dataset?.next || "http://localhost:3000";
+
+      $$(".ks-offer", listEl).forEach((li, idx) => {
+        li.addEventListener("click", () => {
+          const group = groups[idx];
+          if (!group) return;
+
+          const offersAtLoc = allItems.filter(
+            (o) => normalizeStandort(o) === group.key
+          );
+          const offer = offersAtLoc[0] || group.rep;
+
+          const ll = offer ? latLngOf(offer) : null;
+          if (ll && map) {
+            map.setView(ll, 14, { animate: true });
+          }
+
+          if (window.KSOffersDialog && offer) {
+            window.KSOffersDialog.open(
+              offer,
+              offersAtLoc.length ? offersAtLoc : [offer],
+              { nextBase: NEXT }
+            );
+          }
+        });
+      });
+
+      return;
+    }
+
+    // Standard-Rendering: eine Karte pro Offer
+    listEl.innerHTML = displayArr
+      .map((o, i) => {
+        const { name, addr } = nameAddr(o);
+        return `<li class="ks-offer" data-offer-index="${i}">
         <article class="card">
           <h3 class="card-title">${esc(name)}</h3>
           ${addr ? `<div class="offer-meta">${esc(addr)}</div>` : ""}
         </article>
       </li>`;
-    }).join("");
+      })
+      .join("");
 
-    $$(".ks-offer", listEl).forEach(li => {
+    const NEXT = root?.dataset?.next || "http://localhost:3000";
+
+    $$(".ks-offer", listEl).forEach((li, idx) => {
       li.addEventListener("click", () => {
-        const i = parseInt(li.dataset.offerIndex || "-1", 10);
-        const offer = ref[i];
-        const ll = offer ? latLngOf(offer) : null;
+        const offer = displayArr[idx];
+        if (!offer) return;
+
+        const ll = latLngOf(offer);
         if (ll && map) map.setView(ll, 14, { animate: true });
 
-        // Sessions am selben Standort (exakter location-String)
         const key = normalizeStandort(offer);
-        const sessions = ref.filter(x => normalizeStandort(x) === key);
+        const sessions = allItems.filter(
+          (x) => normalizeStandort(x) === key
+        );
 
-        const root = $("#ksDir");
-        const NEXT = root?.dataset?.next || "http://localhost:3000";
         if (window.KSOffersDialog) {
           window.KSOffersDialog.open(
             offer,
@@ -341,13 +485,15 @@
     });
   }
 
-  function setCounters(root, arr){
+  function setCounters(root, arr) {
     const o = $("[data-count-offers]", root);
     const l = $("[data-count-locations]", root);
     if (o) o.textContent = String(arr.length);
     if (l) {
       const s = new Set(
-        arr.map(x => cityFromOffer(x)).filter(Boolean)
+        arr
+          .map((x) => cityFromOffer(x))
+          .filter(Boolean)
       );
       l.textContent = String(s.size);
     }
@@ -358,9 +504,7 @@
 
     const key = String(courseKey || "").trim();
 
-    // 1) feste Bereiche je nach Kurs
     switch (key) {
-      // Weekly Courses
       case "Kindergarten":
         el.textContent = "4–6 Jahre";
         return;
@@ -371,7 +515,6 @@
         el.textContent = "7–17 Jahre";
         return;
 
-      // Holiday Programs
       case "Camp":
         el.textContent = "6–13 Jahre";
         return;
@@ -382,29 +525,27 @@
         el.textContent = "7–17 Jahre";
         return;
 
-      // Individual Courses
       case "PersonalTraining":
       case "Einzeltraining_Athletik":
       case "Einzeltraining_Torwart":
         el.textContent = "6–25 Jahre";
         return;
 
-      // Coach Education
       case "CoachEducation":
         el.textContent = "alle Altersstufen";
         return;
     }
 
-    // 2) Fallback: dynamisch aus den Offer-Daten
-    let min = null, max = null;
-    arr.forEach(o => {
+    let min = null,
+      max = null;
+    arr.forEach((o) => {
       const from = Number(o.ageFrom);
-      const to   = Number(o.ageTo);
+      const to = Number(o.ageTo);
       if (Number.isFinite(from)) {
-        min = (min == null) ? from : Math.min(min, from);
+        min = min == null ? from : Math.min(min, from);
       }
       if (Number.isFinite(to)) {
-        max = (max == null) ? to : Math.max(max, to);
+        max = max == null ? to : Math.max(max, to);
       }
     });
 
@@ -416,51 +557,81 @@
   }
 
   /* ===== movement logic ===== */
-  async function moveForLoc(map, loc, items, filtered){
+  async function moveForLoc(map, loc, items, filtered) {
     const pts = pointsFrom(filtered);
-    if (pts.length) { flyTo(map, pts); return; }
+    if (pts.length) {
+      flyTo(map, pts);
+      return;
+    }
 
-    const locItems = items.filter(o => {
+    const locItems = items.filter((o) => {
       const c = cityFromOffer(o);
       return cityMatches(c, loc);
     });
 
     const p2 = pointsFrom(locItems);
-    if (p2.length) { flyTo(map, p2); return; }
+    if (p2.length) {
+      flyTo(map, p2);
+      return;
+    }
 
     const g = await geocodeCity(loc);
     if (g) flyTo(map, [g]);
   }
 
-  async function moveForDay(map, day, items, filtered){
+  async function moveForDay(map, day, items, filtered) {
     const pts = pointsFrom(filtered);
-    if (pts.length) { flyTo(map, pts); return; }
-    const dItems = items.filter(o => offerHasDay(o, day));
+    if (pts.length) {
+      flyTo(map, pts);
+      return;
+    }
+    const dItems = items.filter((o) => offerHasDay(o, day));
     const p2 = pointsFrom(dItems);
-    if (p2.length) { flyTo(map, p2); return; }
-    const names = Array.from(new Set(
-      dItems.map(o => cityFromLocationString(o.location)).filter(Boolean)
-    ));
+    if (p2.length) {
+      flyTo(map, p2);
+      return;
+    }
+    const names = Array.from(
+      new Set(
+        dItems
+          .map((o) => cityFromLocationString(o.location))
+          .filter(Boolean)
+      )
+    );
     const gs = await geocodeCities(names, 8);
     if (gs.length) flyTo(map, gs);
   }
 
-  async function moveForAge(map, age, items, filtered){
+  async function moveForAge(map, age, items, filtered) {
     const pts = pointsFrom(filtered);
-    if (pts.length) { flyTo(map, pts); return; }
+    if (pts.length) {
+      flyTo(map, pts);
+      return;
+    }
 
-    const aItems = items.filter(o => {
+    const aItems = items.filter((o) => {
       const f = Number(o.ageFrom ?? 0);
       const t = Number(o.ageTo ?? 99);
-      return Number.isFinite(f) && Number.isFinite(t) &&
-             age >= f && age <= t;
+      return (
+        Number.isFinite(f) &&
+        Number.isFinite(t) &&
+        age >= f &&
+        age <= t
+      );
     });
 
     const p2 = pointsFrom(aItems);
-    if (p2.length) { flyTo(map, p2); return; }
-    const names = Array.from(new Set(
-      aItems.map(o => cityFromLocationString(o.location)).filter(Boolean)
-    ));
+    if (p2.length) {
+      flyTo(map, p2);
+      return;
+    }
+    const names = Array.from(
+      new Set(
+        aItems
+          .map((o) => cityFromLocationString(o.location))
+          .filter(Boolean)
+      )
+    );
     const gs = await geocodeCities(names, 8);
     if (gs.length) flyTo(map, gs);
   }
@@ -473,42 +644,31 @@
     return a === t || b === t;
   }
 
-  /* ===== Program-/Kurs-Gruppen (Standard vs. Spezialprogramme) ===== */
-
-  // Normalisiert Strings wie "RentACoach_Generic", "Rent a Coach", "rent-a-coach"
+  /* ===== Program-/Kurs-Gruppen ===== */
   function normalizeProgramKey(str) {
     return String(str || "")
       .toLowerCase()
       .replace(/[\s_\-]+/g, "");
   }
 
-  // Ermittelt die Programm-Gruppe eines Keys (TYPE / SUBTYPE / CATEGORY)
   function getProgramGroupFromKey(key) {
     const n = normalizeProgramKey(key);
     if (!n) return "standard";
 
-    if (n.includes("rentacoach"))     return "rentacoach";
-    if (n.includes("clubprogram"))    return "clubprogram";
+    if (n.includes("rentacoach")) return "rentacoach";
+    if (n.includes("clubprogram")) return "clubprogram";
     if (n.includes("coacheducation")) return "coacheducation";
     if (n.includes("camp") || n.includes("trainingscamp")) return "camp";
 
-    // alles andere sind Standard-Programme (Fördertraining, Kindergarten, usw.)
     return "standard";
   }
 
-  // Ermittelt die Programm-Gruppe für ein Offer (aus type / sub_type / category)
   function getProgramGroupForOffer(o) {
-    const parts = [
-      o.sub_type,
-      o.category,
-      o.type
-    ].filter(Boolean);
-
+    const parts = [o.sub_type, o.category, o.type].filter(Boolean);
     const combined = parts.join("|");
     return getProgramGroupFromKey(combined);
   }
 
-  // Filtert die Gesamtliste passend zum aktuell ausgewählten Programm
   function filterByProgram(allItems, currentKey) {
     const currentGroup = getProgramGroupFromKey(currentKey);
 
@@ -516,15 +676,92 @@
       const g = getProgramGroupForOffer(o);
 
       if (currentGroup === "standard") {
-        // z.B. Fördertraining-Seite:
-        // → NUR Standard-Programme anzeigen, Spezialprogramme ausblenden
         return g === "standard";
       }
 
-      // Spezialseite (rentacoach, clubprogram, coacheducation, camp)
-      // → NUR die passende Gruppe anzeigen
       return g === currentGroup;
     });
+  }
+
+  /* ===== Holiday-Helpers (Camps & Powertraining) ===== */
+  function getHolidayLabel(o) {
+    return (
+      o.holidayWeekLabel ||
+      o.holidayLabel ||
+      o.holidayWeek ||
+      o.holiday_name ||
+      o.holidayName ||
+      o.holiday ||
+      ""
+    );
+  }
+
+  function getHolidayFrom(o) {
+    return (
+      o.holidayDateFrom ||
+      o.holidayFrom ||
+      o.dateFrom ||
+      o.startDate ||
+      o.start ||
+      ""
+    );
+  }
+
+  function getHolidayTo(o) {
+    return (
+      o.holidayDateTo ||
+      o.holidayTo ||
+      o.dateTo ||
+      o.endDate ||
+      o.end ||
+      ""
+    );
+  }
+
+  function getHolidaySeasonKey(label) {
+    const s = String(label || "").toLowerCase();
+    if (!s) return "";
+    if (s.includes("oster")) return "oster";
+    if (s.includes("pfingst")) return "pfingst";
+    if (s.includes("sommer")) return "sommer";
+    if (s.includes("herbst")) return "herbst";
+    if (s.includes("winter") || s.includes("weihnacht") || s.includes("xmas"))
+      return "winter";
+    return "";
+  }
+
+  function getHolidayWeekKey(o) {
+    const label = getHolidayLabel(o).trim();
+    const from = getHolidayFrom(o);
+    const to = getHolidayTo(o);
+
+    let range = "";
+    if (from && to) range = ` (${from} – ${to})`;
+    else if (from) range = ` (${from})`;
+
+    const key = (label + range).trim();
+    return key || "";
+  }
+
+  function fillHolidayWeeksSelect(sel, arr, seasonValue) {
+    if (!sel) return;
+    const seen = new Set();
+    const opts = [];
+
+    arr.forEach((o) => {
+      const label = getHolidayLabel(o);
+      const season = getHolidaySeasonKey(label);
+      if (seasonValue && seasonValue !== season) return;
+
+      const key = getHolidayWeekKey(o);
+      if (!key || seen.has(key)) return;
+      seen.add(key);
+      opts.push(key);
+    });
+
+    sel.innerHTML =
+      '<option value="">Alle Zeiträume</option>' +
+      opts.map((k) => `<option value="${esc(k)}">${esc(k)}</option>`).join("");
   }
 
   /* ===== main ===== */
@@ -532,39 +769,58 @@
     const root = $("#ksDir");
     if (!root) return;
 
-    const daySel   = $("#ksFilterDay", root);
-    const ageSel   = $("#ksFilterAge", root);
-    const locSel   = $("#ksFilterLoc", root);
-    const listEl   = $("#ksDirList", root);
+    const daySel = $("#ksFilterDay", root);
+    const ageSel = $("#ksFilterAge", root);
+    const locSel = $("#ksFilterLoc", root);
+    const listEl = $("#ksDirList", root);
     const ageTitle = $("[data-age-title]", root);
 
+    const holidaySeasonSel = $("#ksFilterHolidaySeason", root);
+    const holidayWeekSel = $("#ksFilterHolidayWeek", root);
+
     const TYPE = root.dataset.type || "";
-    const API  = root.dataset.api  || "http://localhost:5000";
+    const API = root.dataset.api || "http://localhost:5000";
     const CITY = root.dataset.city || "";
 
     const CATEGORY = root.dataset.category || "";
-    const SUBTYPE  = root.dataset.subtype  || "";
+    const SUBTYPE = root.dataset.subtype || "";
+
+    const catLower = (CATEGORY || "").toLowerCase();
+    const isHolidayPage =
+      catLower === "holiday" ||
+      catLower === "holidayprograms" ||
+      getProgramGroupFromKey(SUBTYPE || TYPE) === "camp";
+
+    const normProgKey = (SUBTYPE || TYPE || "").toLowerCase();
+    const isPowertrainingPage =
+      normProgKey.includes("powertraining") ||
+      normProgKey.includes("athletictraining") ||
+      normProgKey.includes("athletiktraining");
 
     const mapNode = $("#ksMap", root);
     ensureMapHeight(mapNode);
     const map = initMap(mapNode);
 
-    let items = [], filtered = [], markers = [], allPts = [];
+    let items = [],
+      filtered = [],
+      markers = [],
+      allPts = [];
 
-    // Backend direkt mitfiltern lassen
     const url = buildUrl(`${API}/api/offers`, {
       type: TYPE || undefined,
       category: CATEGORY || undefined,
       sub_type: SUBTYPE || undefined,
-      limit: 500
+      limit: 500,
     });
 
     try {
-      const data = await fetch(url).then(r => r.json());
-      items = Array.isArray(data?.items) ? data.items
-             : (Array.isArray(data) ? data : []);
+      const data = await fetch(url).then((r) => r.json());
+      items = Array.isArray(data?.items)
+        ? data.items
+        : Array.isArray(data)
+        ? data
+        : [];
 
-      // Program-Filter anwenden (z.B. Fördertraining vs. Rent-a-Coach etc.)
       const currentProgramKey = (SUBTYPE || TYPE || "").trim();
       items = filterByProgram(items, currentProgramKey);
 
@@ -572,12 +828,20 @@
 
       if (CITY && locSel) {
         const opt = Array.from(locSel.options).find(
-          o => normalizeCity(o.value) === normalizeCity(CITY)
+          (o) => normalizeCity(o.value) === normalizeCity(CITY)
         );
         if (opt) locSel.value = opt.value;
       }
 
       allPts = pointsFrom(items);
+
+      if (isHolidayPage) {
+        fillHolidayWeeksSelect(
+          holidayWeekSel,
+          items,
+          holidaySeasonSel ? holidaySeasonSel.value || "" : ""
+        );
+      }
     } catch (e) {
       if (listEl) {
         listEl.innerHTML =
@@ -585,24 +849,42 @@
       }
     }
 
-    async function apply(){
-      const day = normDay(daySel?.value || "");
-      const age = (ageSel && ageSel.value !== "")
-        ? parseInt(ageSel.value, 10)
-        : NaN;
+    async function apply() {
+      // Holiday-Seiten: kein Tag-/Altersfilter, nur Ferienfilter
+      const day = isHolidayPage ? "" : normDay(daySel?.value || "");
+      const age =
+        isHolidayPage || !ageSel || ageSel.value === ""
+          ? NaN
+          : parseInt(ageSel.value, 10);
       const loc = (locSel?.value || "").trim();
 
-      filtered = items.filter(o => {
+      const seasonVal =
+        isHolidayPage && holidaySeasonSel
+          ? holidaySeasonSel.value
+          : "";
+      const weekVal =
+        isHolidayPage && holidayWeekSel ? holidayWeekSel.value : "";
+
+      filtered = items.filter((o) => {
         if (TYPE && !matchesType(o, TYPE)) return false;
         if (CATEGORY && o.category !== CATEGORY) return false;
         if (SUBTYPE && o.sub_type !== SUBTYPE) return false;
 
-        if (day && !offerHasDay(o, day)) return false;
+        if (isHolidayPage) {
+          const label = getHolidayLabel(o);
+          const season = getHolidaySeasonKey(label);
+          const wKey = getHolidayWeekKey(o);
 
-        if (!isNaN(age)) {
-          const f = Number(o.ageFrom ?? 0);
-          const t = Number(o.ageTo ?? 99);
-          if (!(age >= f && age <= t)) return false;
+          if (seasonVal && seasonVal !== season) return false;
+          if (weekVal && weekVal !== wKey) return false;
+        } else {
+          if (day && !offerHasDay(o, day)) return false;
+
+          if (!isNaN(age)) {
+            const f = Number(o.ageFrom ?? 0);
+            const t = Number(o.ageTo ?? 99);
+            if (!(age >= f && age <= t)) return false;
+          }
         }
 
         const offerCity = cityFromOffer(o);
@@ -611,44 +893,80 @@
         return true;
       });
 
-      renderList(listEl, filtered, filtered, map, (offer) => {
-        if (!offer) return;
-        const key = normalizeStandort(offer);
-        const sessions = items.filter(x => normalizeStandort(x) === key);
-        const NEXT = root?.dataset?.next || "http://localhost:3000";
-        if (window.KSOffersDialog) {
-          window.KSOffersDialog.open(
-            offer,
-            sessions.length ? sessions : [offer],
-            { nextBase: NEXT }
-          );
-        }
-      });
+      // Anzeige-Liste + Marker-Basis
+      let displayArr = filtered;
+      let groups = null;
+
+      if (isPowertrainingPage) {
+        groups = groupByLocation(filtered);
+        displayArr = groups.map((g) => g.rep);
+      }
+
+      renderList(
+        listEl,
+        displayArr,
+        filtered,
+        map,
+        isPowertrainingPage,
+        root,
+        groups
+      );
 
       if (map) {
         markers = clearMarkers(markers);
-        markers = setMarkers(map, filtered, listEl);
+        markers = setMarkers(map, displayArr, listEl);
       }
+
       setCounters(root, filtered);
       setAgeHeadline(ageTitle, filtered, SUBTYPE || TYPE);
 
       if (!map) return;
-      const noneSet = (!day && isNaN(age) && !loc);
-      if (noneSet) { resetView(map, allPts); return; }
-      if (loc)  { await moveForLoc(map, loc, items, filtered); return; }
-      if (day)  { await moveForDay(map, day, items, filtered); return; }
-      if (!isNaN(age)) { await moveForAge(map, age, items, filtered); return; }
+      const noneSet =
+        !day &&
+        isNaN(age) &&
+        !loc &&
+        !seasonVal &&
+        !weekVal;
+      if (noneSet) {
+        resetView(map, allPts);
+        return;
+      }
+      if (loc) {
+        await moveForLoc(map, loc, items, filtered);
+        return;
+      }
+      if (day) {
+        await moveForDay(map, day, items, filtered);
+        return;
+      }
+      if (!isNaN(age)) {
+        await moveForAge(map, age, items, filtered);
+        return;
+      }
     }
 
-    daySel && daySel.addEventListener("change", apply);
-    ageSel && ageSel.addEventListener("change", apply);
-    locSel && locSel.addEventListener("change", apply);
+    if (daySel) daySel.addEventListener("change", apply);
+    if (ageSel) ageSel.addEventListener("change", apply);
+    if (locSel) locSel.addEventListener("change", apply);
 
-    apply(); // initial
+    if (holidaySeasonSel) {
+      holidaySeasonSel.addEventListener("change", () => {
+        fillHolidayWeeksSelect(
+          holidayWeekSel,
+          items,
+          holidaySeasonSel.value || ""
+        );
+        apply();
+      });
+    }
+
+    if (holidayWeekSel) {
+      holidayWeekSel.addEventListener("change", apply);
+    }
+
+    apply();
   });
 })();
-
-
 
 
 
