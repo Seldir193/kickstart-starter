@@ -148,12 +148,10 @@
 
 
 
-.fr-faq > .ks-title-wrap::after,
-.ks-title-wrap::after{
+.fr-faq > .ks-title-wrap::after{
   content:attr(data-bgword);
   position:absolute;left:50%;top:-80px;transform:translateX(-50%);
-  
-font-weight:900;
+  font-weight:900;
   letter-spacing:.03em;
   font-size: clamp(72px, 16vw, 180px);
   color:#000;opacity:.05;pointer-events:none;z-index:1;white-space:nowrap;
@@ -163,9 +161,11 @@ font-weight:900;
 
 
 
-
-
-
+/* Nur Franchise-Seite: Titel verstecken */
+.page-id-397 .entry-title,
+.page-id-307 h1.entry-title {
+    display: none !important;
+}
 
 
 
@@ -516,8 +516,9 @@ font-weight:900;
   width: 100vw;
   margin-left:  calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
+  background:var(--light-gray);
   /* Fallback-Farbe wie auf home-hero */
-  background: var(--hero-img) center/cover no-repeat, #f7f7f7;
+  /*background: var(--hero-img) center/cover no-repeat, #f7f7f7;*/
 }
 
 /* 2) „Wer wir sind“ (fr-intro) – falls neutraler Hintergrund bleiben soll:
