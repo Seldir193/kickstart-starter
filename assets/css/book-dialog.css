@@ -1,0 +1,156 @@
+/* ========================================================================== */
+/* Booking Dialog Styles – BOOK DIALOG (iframe)                               */
+/* ========================================================================== */
+
+@layer pages {
+
+  /* ===============================
+     2. Booking-Dialog (zweite Modal)
+     – komplett eigene Klassen
+     =============================== */
+
+  .ks-book-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 4100;
+    display: flex;
+
+    /* WICHTIG: NICHT mehr mittig */
+    align-items: center;
+    justify-content: center;
+
+    padding: 120px 0px 0px;
+  }
+
+  .ks-book-modal[hidden] {
+    display: none !important;
+  }
+
+  .ks-book-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .ks-book-modal__panel {
+    position: relative;
+    z-index: 1;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+    padding: 16px;
+    width: min(760px, 100%);
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    transition:
+      opacity 0.28s ease-out 0.05s,
+      transform 1.25s cubic-bezier(0.22, 1, 0.36, 1) 0.02s;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* nur iFrame scrollt */
+  }
+
+  .ks-book-modal__panel.ks-prep {
+    opacity: 0 !important;
+    transform: translateY(40px) scale(0.95) !important;
+  }
+
+  .ks-book-modal__panel.ks-ready {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .ks-book-modal__frame,
+  .ks-book__frame {
+    flex: 1 1 auto;
+    width: 100%;
+    display: block;
+    border: 0;
+    border-radius: 10px;
+    background: #fff;
+  }
+
+  /* ===== Booking Form-Helfer (Next.js Booking) ===== */
+
+  .ks-book__h4 {
+    margin: 12px 0 6px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .ks-book__person a {
+    color: #0ea5e9;
+    text-decoration: none;
+  }
+
+  .ks-book__person a:hover {
+    text-decoration: underline;
+  }
+
+  .ks-fs {
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding: 12px;
+    margin: 12px 0;
+  }
+
+  .ks-fs > legend {
+    font-weight: 700;
+    padding: 0 6px;
+  }
+
+  .ks-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .ks-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ks-field--sm input {
+    max-width: 120px;
+  }
+
+  .ks-field--btn {
+    align-self: end;
+  }
+
+  .ks-err {
+    display: none;
+    color: #b91c1c;
+    font-size: 12px;
+  }
+
+  .ks-check {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .dob-group {
+    display: flex;
+    gap: 8px;
+  }
+
+  .dob-group select {
+    min-width: 80px;
+  }
+
+  .ks-actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* Optional: auch hier body-lock, falls dieses CSS alleine geladen wird */
+  body.ks-modal-open {
+    overflow: hidden;
+  }
+}
