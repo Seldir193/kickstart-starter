@@ -1,13 +1,71 @@
+
+
 <?php
 
 /* -------------------------------------------------------
- * [ks_offers_directory] – Hero + Filter + Map + Liste + Modal + Brandbar + (FAQ, Kontakt, Programmbeschreibung)
+ * [ks_offers_directory] – Hero + Filter + Map + Liste + Modal + Brandbar + FAQ (pro Kurs)
  * -----------------------------------------------------*/
 add_action('init', function () {
   add_shortcode('ks_offers_directory', function () {
 
-    $media     = get_stylesheet_directory_uri() . '/assets/img/mfs.png';
+    if (function_exists('ks_enqueue_feedback_assets')) {
+    ks_enqueue_feedback_assets();
+  }
+
+
+
+    /* ==== Theme-Pfade ==== */
+    $theme_dir = get_stylesheet_directory();
     $theme_uri = get_stylesheet_directory_uri();
+$select_icon = $theme_uri . '/assets/img/offers/select-caret.svg';
+   
+    /* ==== CSS wie auf der Startseite laden ==== */
+
+    // ks-utils.css
+    $utils_abs = $theme_dir . '/assets/css/ks-utils.css';
+    if (file_exists($utils_abs) && !wp_style_is('ks-utils', 'enqueued')) {
+      wp_enqueue_style(
+        'ks-utils',
+        $theme_uri . '/assets/css/ks-utils.css',
+        ['kickstart-style'],
+        filemtime($utils_abs)
+      );
+    }
+
+    // ks-home.css (enthält FAQ-Styles: .ks-acc, .ks-home-faq, etc.)
+    $home_abs = $theme_dir . '/assets/css/ks-home.css';
+    if (file_exists($home_abs) && !wp_style_is('ks-home', 'enqueued')) {
+      wp_enqueue_style(
+        'ks-home',
+        $theme_uri . '/assets/css/ks-home.css',
+        ['kickstart-style', 'ks-utils'],
+        filemtime($home_abs)
+      );
+    }
+
+    // OPTIONAL: eigenes Directory-CSS
+    $dir_abs = $theme_dir . '/assets/css/ks-dir.css';
+    if (file_exists($dir_abs) && !wp_style_is('ks-dir', 'enqueued')) {
+      wp_enqueue_style(
+        'ks-dir',
+        $theme_uri . '/assets/css/ks-dir.css',
+        ['ks-home'],
+        filemtime($dir_abs)
+      );
+    }
+
+    // FAQ-Bild rechts setzen (wie in home.php)
+    if (wp_style_is('ks-home', 'enqueued')) {
+      $faq_img = $theme_uri . '/assets/img/home/mfs.png';
+      wp_add_inline_style(
+        'ks-home',
+        ".ks-home-faq__image{--faq-img:url('{$faq_img}')}"
+      );
+    }
+
+    /* ==== bisheriger Code ==== */
+
+    $media     = $theme_uri . '/assets/img/mfs.png';
 
     $type      = isset($_GET['type']) ? sanitize_text_field( wp_unslash($_GET['type']) ) : '';
     $city      = isset($_GET['city']) ? sanitize_text_field( wp_unslash($_GET['city']) ) : '';
@@ -50,7 +108,7 @@ add_action('init', function () {
     $headingKey = $sub_type ?: $type;
     $heading    = $mapTitles[$headingKey] ?? 'Powertraining';
 
-    // Normalize Kurs-Schlüssel für dynamische Texte
+    // Normalize Kurs-Schlüssel für dyn. Logik
     $normalize = function (string $k = null) {
       if (!$k) return 'Generic';
       switch ($k) {
@@ -64,6 +122,38 @@ add_action('init', function () {
     };
     $courseKey = $normalize($headingKey);
 
+       // =====================================================
+    // FAQ-KEY für diesen Kurs bestimmen (für ks_get_faq_items)
+    // =====================================================
+    $faqKey = $headingKey ?: $courseKey;
+
+    switch ($headingKey) {
+      case 'AthleticTraining':
+      case 'AthletikTraining':
+      case 'PowerTraining':
+      case 'Powertraining':
+        $faqKey = 'Powertraining';
+        break;
+      case 'Einzeltraining_Torwart':
+        $faqKey = 'Torwarttraining';
+        break;
+      case 'RentACoach_Generic':
+        $faqKey = 'RentACoach';
+        break;
+      case 'Einzeltraining_Athletik':
+      case 'einzeltraining_athletik':
+        $faqKey = 'Einzeltraining_Athletik';
+        break;
+      case 'ClubProgram_Generic':
+        $faqKey = 'Trainingscamp';
+        break;
+      default:
+        $faqKey = $courseKey ?: $faqKey;
+        break;
+    }
+
+    $next_base = ks_next_base();
+
     // Für diese Kursarten KEINE Filter anzeigen
     $noFilterCourses = ['RentACoach', 'ClubProgram', 'CoachEducation'];
     $showFilters = !in_array($courseKey, $noFilterCourses, true);
@@ -75,7 +165,7 @@ add_action('init', function () {
       $catLower === 'holidayprograms' ||
       in_array($courseKey, ['Camp', 'AthleticTraining', 'Powertraining'], true);
 
-    // Schnupper-Kicker nur bei Weekly Courses anzeigen
+    // Schnupper-Kicker nur bei Weekly Courses
     $showKicker = in_array($courseKey, [
       'Foerdertraining',
       'Kindergarten',
@@ -90,7 +180,7 @@ add_action('init', function () {
 
     $hero_url = get_the_post_thumbnail_url(null, 'full');
     if (!$hero_url) {
-      $hero_url = get_stylesheet_directory_uri() . '/assets/img/mfs.png';
+      $hero_url = $theme_uri . '/assets/img/mfs.png';
     }
 
     // Altersbereich initial serverseitig (optional)
@@ -103,7 +193,7 @@ add_action('init', function () {
 
     $url = add_query_arg($query, $api_base . '/api/offers');
 
-    // 1) Dynamisch aus den Angeboten (Fallback vorbereiten)
+    // 1) Dynamisch aus den Angeboten
     $ageMin = null; $ageMax = null;
     $res = wp_remote_get($url, ['timeout'=>10, 'headers'=>['Accept'=>'application/json']]);
     if (!is_wp_error($res) && wp_remote_retrieve_response_code($res) === 200) {
@@ -169,197 +259,9 @@ add_action('init', function () {
       }
     }
 
-    $next_base = ks_next_base();
-    /* ===== Kurs-Texte (dyn. für FAQ & Programmbeschreibung) ===== */
-    $texts = [
-      'Kindergarten' => [
-        'faq' => [
-          ['Wo, wann und wie lange findet der Fußballkindergarten statt?', 'Die Einheiten finden wöchentlich in unseren Partnervereinen oder Soccerhallen statt und dauern jeweils ca. 60 Minuten.'],
-          ['Was kostet der Fußballkindergarten?', 'Die Gebühr variiert je nach Standort. Den genauen Preis siehst du im jeweiligen Angebot.'],
-          ['Dürfen Eltern zusehen?', 'Ja, gerne. Bitte bleibt außerhalb des Übungsfeldes, damit die Kinder fokussiert bleiben.'],
-          ['Welche Ausrüstung benötige ich?', 'Bequeme Sportsachen, Sportschuhe (Halle: Hallenschuhe), Trinkflasche. Bälle stellen wir bereit.'],
-          ['Wie sehen die Anmelde- und Kündigungsbedingungen aus?', 'Monatlich kündbar gemäß unseren AGB. Details im Buchungsprozess.'],
-          ['Was passiert an Feiertagen und in Schulferien?', 'In der Regel pausieren die Einheiten. Info erhaltet ihr rechtzeitig per E-Mail.'],
-        ],
-        'about' => [
-          'eyebrow' => 'Für 3–6-Jährige',
-          'body'    => 'Der Fußballkindergarten (FuKiGa) vermittelt spielerisch Bewegung, Koordination und erste fußballspezifische Techniken – immer mit Spaß und in kleinen Gruppen.',
-          'bullets' => [
-            'Spaß an Bewegung und Freude am Fußball wecken',
-            'Koordinative Bewegungsabläufe stärken',
-            'Selbstvertrauen und Sozialverhalten fördern',
-            'Altersgerechte, abwechslungsreiche Übungen',
-          ],
-        ],
-      ],
-      'Foerdertraining' => [
-        'faq' => [
-          ['Für wen ist das Fördertraining?', 'Für Spieler*innen aller Vereine, die an Technik, Torschuss, 1-gegen-1 und Spielverständnis arbeiten möchten.'],
-          ['Wie oft findet das Training statt?', 'Wöchentlich, 60–90 Minuten je nach Standort.'],
-          ['Kann ich ein Probetraining machen?', 'Ja – buche einfach ein kostenfreies Schnuppertraining im Angebot.'],
-          ['Welche Ausrüstung brauche ich?', 'Fußballschuhe, Schienbeinschoner, Sportkleidung, Trinkflasche.'],
-          ['Wie lange läuft die Mitgliedschaft?', 'Monatlich kündbar – Details im Buchungsprozess/AGB.'],
-          ['Gibt es Ferien-/Feiertagspausen?', 'Ja, in der Regel pausieren wir. Du bekommst rechtzeitig eine Info.'],
-        ],
-        'about' => [
-          'eyebrow' => 'Für 6–14-Jährige',
-          'body'    => 'Im Fördertraining verbessern wir systematisch Technik, Koordination und Spielverständnis. Klare Lernziele, kleine Gruppen, moderne Trainingsformen.',
-          'bullets' => [
-            'Technik: Ballan- & Mitnahme, Dribbling, Passen',
-            'Torschuss & 1-gegen-1 Offensiv/Defensiv',
-            'Koordination & Athletik altersgerecht',
-            'Kleine Gruppen, hohe Wiederholungszahlen',
-          ],
-        ],
-      ],
-      'PersonalTraining' => [
-        'faq' => [
-          ['Was ist Einzeltraining?', '1-zu-1 oder 1-zu-2 Coaching – individuell, effizient und zielgerichtet.'],
-          ['Wie lange dauert eine Einheit?', 'Meist 60 Minuten; Umfang nach Absprache.'],
-          ['Wo findet das Training statt?', 'Auf einem unserer Standorte oder nach Vereinbarung.'],
-          ['Welche Ziele kann ich erreichen?', 'Technik verfeinern, Torschuss verbessern, Schnelligkeit/Koordination steigern.'],
-          ['Kann ich Termine flexibel buchen?', 'Ja. Wähle im Angebot einen Termin oder kontaktiere uns.'],
-          ['Gibt es Pakete?', 'Ja, Pakete mit Preisvorteil sind möglich – Details im Angebot.'],
-        ],
-        'about' => [
-          'eyebrow' => 'Individuelles Coaching',
-          'body'    => 'Im Einzeltraining arbeiten wir an deinen persönlichen Zielen. Hohe Wiederholungszahl, direkte Korrektur, messbare Fortschritte.',
-          'bullets' => [
-            'Individueller Trainingsplan',
-            'Technik, Abschluss, 1-gegen-1',
-            'Koordination & Athletik nach Bedarf',
-            'Sichtbare Fortschritte durch Feedback',
-          ],
-        ],
-      ],
-      'Torwarttraining' => [
-        'faq' => [
-          ['Für wen ist das Torwarttraining?', 'Für Keeper aller Leistungsstufen – Grundlagen bis leistungsorientiert.'],
-          ['Welche Inhalte werden trainiert?', 'Grundstellung, Fangen/Lenken, Fall-/Sprungtechniken, 1-gegen-1, Spieleröffnung.'],
-          ['Benötige ich spezielle Ausrüstung?', 'TW-Handschuhe, ggf. lange Kleidung.'],
-          ['Wie oft/Wie lange?', 'Wöchentlich 60–90 Minuten, je nach Standort.'],
-          ['Probetraining möglich?', 'Ja, über das Schnuppertraining im Angebot.'],
-          ['Ferien/Feiertage?', 'In der Regel Pause; Info per E-Mail.'],
-        ],
-        'about' => [
-          'eyebrow' => 'Für Torhüter*innen',
-          'body'    => 'Strukturiertes Keeper-Training – technische Basis, Mut im 1-gegen-1 und moderne Spieleröffnung.',
-          'bullets' => [
-            'Grundtechniken & Fangtechniken',
-            '1-gegen-1 & Raumverteidigung',
-            'Sprung-/Falltechniken',
-            'Spieleröffnung & Kommunikation',
-          ],
-        ],
-      ],
-      'AthleticTraining' => [
-        'faq' => [
-          ['Was ist Power/Athletiktraining?', 'Athletik, Schnelligkeit, Stabilität & Verletzungsprophylaxe – fußballspezifisch.'],
-          ['Wer kann teilnehmen?', 'Spieler*innen aller Positionen; Inhalte werden altersgerecht angepasst.'],
-          ['Wie oft/Wie lange?', 'Wöchentlich 60 Minuten (Standortabhängig).'],
-          ['Brauche ich Equipment?', 'Sportkleidung, ggf. Handtuch/Trinkflasche – Geräte stellen wir.'],
-          ['Probetraining?', 'Ja, als Schnuppertraining im Angebot.'],
-          ['Pausen?', 'Feiertage/Ferien i. d. R. Pause – Info per E-Mail.'],
-        ],
-        'about' => [
-          'eyebrow' => 'Schnelligkeit & Stabilität',
-          'body'    => 'Mehr Power auf dem Platz: Schnelligkeit, Stabilität und Beweglichkeit – verletzungspräventiv und altersgerecht.',
-          'bullets' => [
-            'Schnelligkeit & Antritt',
-            'Core-Stability & Balance',
-            'Beweglichkeit & Mobilität',
-            'Verletzungsprophylaxe',
-          ],
-        ],
-      ],
-      'Camp' => [
-        'faq' => [
-          ['Wie lange dauert ein Camp?', '3–5 Tage mit vielseitigem Trainingsprogramm.'],
-          ['Was ist inklusive?', 'Training, Wettkämpfe, Abschlussturnier – je nach Camp zusätzlich Trikot/Verpflegung.'],
-          ['Welche Altersklassen?', 'Standortabhängig; meist 6–14 Jahre.'],
-          ['Betreuungszeiten?', 'Tagesprogramm; Details im jeweiligen Angebot.'],
-          ['Kann man sich mit Freund*innen anmelden?', 'Ja, sehr gern – im Anmeldeformular vermerken.'],
-          ['Was, wenn es regnet?', 'Wir trainieren wetterangepasst – Infos vor Ort.'],
-        ],
-        'about' => [
-          'eyebrow' => 'Ferien-Highlights',
-          'body'    => 'Unsere Feriencamps verbinden intensives Training mit viel Spaß, Teamwettkämpfen und einem Abschlussturnier.',
-          'bullets' => [
-            'Technik & Spielformen',
-            'Wettkämpfe & Turniere',
-            'Teamgeist & Fairplay',
-            'Unvergessliche Erlebnisse',
-          ],
-        ],
-      ],
-      // Fallbacks
-      'RentACoach' => [
-        'faq' => [
-          ['Wie funktioniert Rent-a-Coach?', 'Wir kommen zu eurem Verein/Team – Inhalte & Termine nach Absprache.'],
-          ['Welche Inhalte?', 'Von Technik bis Athletik – je nach Zielsetzung.'],
-          ['Kosten?', 'Individuell je Umfang/Anfahrt.'],
-          ['Terminabsprache?', 'Einfach Kontakt aufnehmen.'],
-          ['Ausrüstung?', 'Wir bringen Material mit – Platz/ Halle erforderlich.'],
-          ['Rechnung/AGB?', 'Erhaltet ihr digital per E-Mail.'],
-        ],
-        'about' => [
-          'eyebrow' => 'Für Vereine & Teams',
-          'body'    => 'Wir unterstützen euch direkt vor Ort – mit strukturierten Einheiten und klaren Lernzielen.',
-          'bullets' => ['Individuelle Trainingsziele','Flexible Terminplanung','Erfahrene Coaches','Messbare Fortschritte'],
-        ],
-      ],
-      'ClubProgram' => [
-        'faq' => [
-          ['Was ist das Club Program?', 'Vereinsbegleitende Ausbildung mit klaren Modulen und Coach-Fortbildungen.'],
-          ['Ablauf?', 'Analyse, Konzept, regelmäßige Einheiten, Evaluation.'],
-          ['Kosten?', 'Je nach Paket/Umfang.'],
-          ['Bindung?', 'Vertraglich geregelt – transparent & flexibel.'],
-          ['Trainerausbildung?', 'Ja, interne Fortbildungen möglich.'],
-          ['Kontakt?', 'Meldet euch – wir planen individuell.'],
-        ],
-        'about' => [
-          'eyebrow' => 'Vereinsentwicklung',
-          'body'    => 'Strukturiertes Programm zur nachhaltigen Spieler- und Trainerentwicklung in eurem Club.',
-          'bullets' => ['Modulare Ausbildung','Trainer-Workshops','Spielerentwicklung','Nachhaltige Strukturen'],
-        ],
-      ],
-      'CoachEducation' => [
-        'faq' => [
-          ['Für wen ist Coach Education?', 'Für Trainer*innen aller Altersklassen.'],
-          ['Formate?', 'Workshops, Praxis-Clinics, Online-Module.'],
-          ['Inhalte?', 'Methodik, Trainingsplanung, Technik/Taktik, Athletik.'],
-          ['Zertifikat?', 'Ja, je nach Format.'],
-          ['Voraussetzungen?', 'Motivation & Offenheit – sonst keine.'],
-          ['Anmeldung?', 'Über unsere Angebote/Termine.'],
-        ],
-        'about' => [
-          'eyebrow' => 'Für Trainer*innen',
-          'body'    => 'Praxisnahes Know-how für modernes, effizientes Coaching – sofort umsetzbar.',
-          'bullets' => ['Methodik & Didaktik','Trainingsplanung','Technik/Taktik','Athletik & Prävention'],
-        ],
-      ],
-      'Generic' => [
-        'faq' => [
-          ['Wer kann teilnehmen?', 'Alle interessierten Spieler*innen – Inhalte werden dem Niveau angepasst.'],
-          ['Wie oft/Wie lange?', 'Je nach Standort/Format 60–90 Minuten.'],
-          ['Probetraining?', 'Ja – im Angebot auswählbar.'],
-          ['Ausrüstung?', 'Sportkleidung, Schuhe, Trinkflasche.'],
-          ['Laufzeit/Kündigung?', 'Transparent gemäß AGB.'],
-          ['Feiertage/Ferien?', 'In der Regel Pause – Info per E-Mail.'],
-        ],
-        'about' => [
-          'eyebrow' => 'Training & Entwicklung',
-          'body'    => 'Strukturiertes Training mit klaren Lernzielen, hohem Spaßfaktor und nachhaltiger Entwicklung.',
-          'bullets' => ['Technik & Koordination','Spielformen','Teamgeist','Nachhaltiges Lernen'],
-        ],
-      ],
-    ];
-    
-        
-    $course = $texts[$courseKey] ?? $texts['Generic'];
-
     ob_start(); ?>
 <div id="ksDir"
+
      class="ks-dir"
      data-api="<?php echo esc_attr($api_base); ?>"
      data-next="<?php echo esc_attr($next_base); ?>"
@@ -367,12 +269,13 @@ add_action('init', function () {
      data-category="<?php echo esc_attr($category); ?>"
      data-subtype="<?php echo esc_attr($sub_type); ?>"
      data-city="<?php echo esc_attr($city); ?>"
-     data-close-icon="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/close.png' ); ?>"
-     data-coachph="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/avatar.png' ); ?>">
+     data-close-icon="<?php echo esc_url( $theme_uri . '/assets/img/close.png' ); ?>"
+     data-coachph="<?php echo esc_url( $theme_uri . '/assets/img/avatar.png' ); ?>">
 
   <!-- HERO -->
-  <div class="ks-dir__hero" data-watermark="<?php echo esc_attr($watermark); ?>" 
-   style="--hero-img:url('<?php echo esc_url($hero_url); ?>')">
+  <div class="ks-dir__hero"
+       data-watermark="<?php echo esc_attr($watermark); ?>"
+       style="--hero-img:url('<?php echo esc_url($hero_url); ?>')">
     <div class="ks-dir__hero-inner">
       <div class="ks-dir__crumb">Home <span class="sep">/</span> <?php echo esc_html($heading); ?></div>
       <h1 class="ks-dir__hero-title"><?php echo esc_html($heading); ?></h1>
@@ -390,37 +293,68 @@ add_action('init', function () {
     </h2>
   </header>
 
+
+
 <?php if ($showFilters): ?>
-
+<script>document.documentElement.classList.add('ks-js');</script>
   <?php if ($isHolidayCourse): ?>
-    <!-- Holiday-Filter: Ferienzeit / Zeitraum / Standort (für Camp & Powertraining) -->
+ 
+
+
+
+
+
+
+
+
+
+
+
     <form class="ks-dir__filters" data-filters>
-      <label class="ks-field">
-        <span>Ferienzeit</span>
-        <select id="ksFilterHolidaySeason">
-          <option value="">Alle Ferienzeiten</option>
-          <option value="oster">Ostern</option>
-          <option value="pfingst">Pfingsten</option>
-          <option value="sommer">Sommer</option>
-          <option value="herbst">Herbst</option>
-          <option value="winter">Winter</option>
-        </select>
-      </label>
+  <label class="ks-field ks-field--with-icon">
+    <span>Ferienzeit</span>
+    <div class="ks-field__control ks-field__control--select">
+      <select id="ksFilterHolidaySeason">
+        <option value="">Alle Ferienzeiten</option>
+        <option value="oster">Ostern</option>
+        <option value="pfingst">Pfingsten</option>
+        <option value="sommer">Sommer</option>
+        <option value="herbst">Herbst</option>
+        <option value="winter">Winter</option>
+      </select>
+      <span class="ks-field__icon" aria-hidden="true">
+        <img src="<?php echo esc_url( $select_icon ); ?>" alt="">
+      </span>
+    </div>
+  </label>
 
-      <label class="ks-field">
-        <span>Zeitraum</span>
-        <select id="ksFilterHolidayWeek">
-          <option value="">Alle Zeiträume</option>
-        </select>
-      </label>
+  <label class="ks-field ks-field--with-icon">
+    <span>Zeitraum</span>
+    <div class="ks-field__control ks-field__control--select">
+      <select id="ksFilterHolidayWeek">
+        <option value="">Alle Zeiträume</option>
+      </select>
+      <span class="ks-field__icon" aria-hidden="true">
+        <img src="<?php echo esc_url( $select_icon ); ?>" alt="">
+      </span>
+    </div>
+  </label>
 
-      <label class="ks-field">
-        <span>Standort</span>
-        <select id="ksFilterLoc">
-          <option value="">Alle Standorte</option>
-        </select>
-      </label>
-    </form>
+  <label class="ks-field ks-field--with-icon">
+    <span>Standort</span>
+    <div class="ks-field__control ks-field__control--select">
+      <select id="ksFilterLoc">
+        <option value="">Alle Standorte</option>
+      </select>
+      <span class="ks-field__icon" aria-hidden="true">
+        <img src="<?php echo esc_url( $select_icon ); ?>" alt="">
+      </span>
+    </div>
+  </label>
+</form>
+
+
+
 
     <div class="ks-dir__meta">
       <strong><span data-count-offers>0</span> Angebote</strong>
@@ -429,34 +363,67 @@ add_action('init', function () {
     </div>
 
   <?php else: ?>
-    <!-- Standard-Filter: Tag / Alter / Standort (alle anderen Programme) -->
+   
+
+
+
+
+
+
+
+
     <form class="ks-dir__filters" data-filters>
-      <label class="ks-field">
-        <span>Tag</span>
-        <select id="ksFilterDay">
-          <option value="">Alle Tage</option>
-          <option value="Mo">Mo</option><option value="Di">Di</option><option value="Mi">Mi</option>
-          <option value="Do">Do</option><option value="Fr">Fr</option><option value="Sa">Sa</option><option value="So">So</option>
-        </select>
-      </label>
+  <label class="ks-field ks-field--with-icon">
+    <span>Tag</span>
+    <div class="ks-field__control ks-field__control--select">
+      <select id="ksFilterDay">
+        <option value="">Alle Tage</option>
+        <option value="Mo">Mo</option>
+        <option value="Di">Di</option>
+        <option value="Mi">Mi</option>
+        <option value="Do">Do</option>
+        <option value="Fr">Fr</option>
+        <option value="Sa">Sa</option>
+        <option value="So">So</option>
+      </select>
+      <span class="ks-field__icon" aria-hidden="true">
+        <img src="<?php echo esc_url( $select_icon ); ?>" alt="">
+      </span>
+    </div>
+  </label>
 
-      <label class="ks-field">
-        <span>Alter</span>
-        <select id="ksFilterAge">
-          <option value="">Alle</option>
-          <?php for ($i=3; $i<=18; $i++): ?>
-            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-          <?php endfor; ?>
-        </select>
-      </label>
+  <label class="ks-field ks-field--with-icon">
+    <span>Alter</span>
+    <div class="ks-field__control ks-field__control--select">
+      <select id="ksFilterAge">
+        <option value="">Alle</option>
+        <?php for ($i = 3; $i <= 18; $i++): ?>
+          <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+        <?php endfor; ?>
+      </select>
+      <span class="ks-field__icon" aria-hidden="true">
+        <img src="<?php echo esc_url( $select_icon ); ?>" alt="">
+      </span>
+    </div>
+  </label>
 
-      <label class="ks-field">
-        <span>Standort</span>
-        <select id="ksFilterLoc">
-          <option value="">Alle Standorte</option>
-        </select>
-      </label>
-    </form>
+  <label class="ks-field ks-field--with-icon">
+    <span>Standort</span>
+    <div class="ks-field__control ks-field__control--select">
+      <select id="ksFilterLoc">
+        <option value="">Alle Standorte</option>
+      </select>
+      <span class="ks-field__icon" aria-hidden="true">
+        <img src="<?php echo esc_url( $select_icon ); ?>" alt="">
+      </span>
+    </div>
+  </label>
+</form>
+
+
+
+
+
 
     <div class="ks-dir__meta">
       <strong><span data-count-offers>0</span> Angebote</strong>
@@ -481,11 +448,15 @@ add_action('init', function () {
     <div class="ks-dir__panel" role="dialog" aria-modal="true" aria-label="Buchung">
       <button type="button" class="ks-dir__close" data-close aria-label="Schließen">
         <?php
-          $close = get_stylesheet_directory_uri() . '/assets/img/close.png';
+          $close = $theme_uri . '/assets/img/close.png';
           echo '<img src="' . esc_url($close) . '" alt="Schließen" width="14" height="14">';
         ?>
       </button>
-      <iframe class="ks-book__frame" src="" title="Buchung" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe class="ks-book__frame"
+              src=""
+              title="Buchung"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
 
@@ -510,9 +481,247 @@ add_action('init', function () {
   </div>
 </div> <!-- /#ksDir -->
 
-<!-- Brandbar, FAQ, Kontakt, Programmbeschreibung – alles wie gehabt -->
+<?php echo do_shortcode('[ks_brandbar]'); ?>
+
 <?php
-    // … hier bleibt dein kompletter Brandbar/FAQ/Kontakt/Programm-Code unverändert …
+ 
+
+    // Kurs-bezogene FAQ-Items über zentralen Helper laden
+  $faq_items = $faqKey
+    ? ks_get_faq_items('offers', $faqKey)
+    : [];
+
+
+  // Video wie bisher
+  $faq_video_embed = wp_oembed_get('https://www.youtube.com/watch?v=KEWP2dELhrY');
+  if (!$faq_video_embed) {
+    $faq_video_embed = '<div class="ks-vid-ph" aria-hidden="true"></div>';
+  }
+
+  if (!empty($faq_items)) {
+    echo ks_render_faq_section($faq_items, [
+      'section_id'    => 'dir-faq',                             // eigene ID
+      'wrapper_class' => 'container ks-home-faq ks-dir-faq__grid',
+      'title'         => 'Häufig gestellte Fragen',
+      'kicker'        => 'FAQ',
+      'watermark'     => 'FAQ',                                 // immer „FAQ“
+      'use_video'     => true,
+      'video_embed'   => $faq_video_embed,
+    ]);
+  }
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Kontakt-Bereich unter den FAQ -->
+<section id="kontakt" class="ks-sec ks-py-56 ks-bg-dark ks-text-light">
+  <div class="container container--1100 ks-text-center">
+    <div class="ks-kicker ks-text-accent">Kontakt</div>
+    <h2 class="ks-dir__title ks-text-light">Hast du Fragen?</h2>
+    <p>Bei Interesse kannst du uns folgendermaßen erreichen:</p>
+
+     <?php $icon_base = get_stylesheet_directory_uri() . '/assets/img/offers/'; ?>
+    <div class="ks-grid-3 ks-mt-28 ks-contact-cards">
+      <div class="ks-text-center">
+        <a class="ks-contact-iconwrap" href="tel:+4917643203362" aria-label="Anrufen">
+          <span class="ks-contact-icon"
+                style="--icon:url('<?php echo esc_url($icon_base . 'phone.png'); ?>')"></span>
+        </a>
+        <div class="ks-fw-700 ks-mb-16">Ruf uns an:</div>
+        <div>
+          <a class="ks-link-light" href="tel:+4917643203362">+49 (176) 43 20 33 62</a>
+        </div>
+      </div>
+
+      <div class="ks-text-center">
+        <a class="ks-contact-iconwrap" href="mailto:fussballschule@selcuk-kocyigit.de" aria-label="E-Mail schreiben">
+          <span class="ks-contact-icon"
+                style="--icon:url('<?php echo esc_url($icon_base . 'mail.png'); ?>')"></span>
+        </a>
+        <div class="ks-fw-700 ks-mb-16">Schreib uns:</div>
+        <div>
+          <a class="ks-link-light" href="mailto:fussballschule@selcuk-kocyigit.de">
+            fussballschule@selcuk-kocyigit.de
+          </a>
+        </div>
+      </div>
+
+      <div class="ks-text-center">
+        <a class="ks-contact-iconwrap" href="#ksDir" aria-label="Nach oben scrollen">
+          <span class="ks-contact-icon"
+                style="--icon:url('<?php echo esc_url($icon_base . 'clock.png'); ?>')"></span>
+        </a>
+        <div class="ks-fw-700 ks-mb-16">Telefonzeiten:</div>
+        <div>
+         
+          <a class="ks-link-light" href="#dir-faq">Mo.–Fr. 09:00–20:00 Uhr</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<?php
+
+// ---------------------------------------------------------
+// Programm-Textblock unterhalb "Hast du Fragen?"
+// Steuert Text je nach Kurs (type / sub_type)
+// ---------------------------------------------------------
+
+$courseKey = '';
+if (!empty($sub_type)) {
+  $courseKey = $sub_type;
+} elseif (!empty($type)) {
+  $courseKey = $type;
+}
+
+$program_title   = '';
+$program_age     = '';
+$program_text    = [];
+$program_bullets = [];
+
+// Wir vereinheitlichen Key ein bisschen fürs Lookup
+$normKey = strtolower(trim($courseKey));
+
+// Spezialfälle aus der API / Mongo normalisieren
+if ($normKey === 'rentacoach_generic') {
+  $normKey = 'rentacoach';
+} elseif ($normKey === 'clubprogram_generic') {
+  $normKey = 'clubprogram';
+}
+
+// Mapping für Schreibvarianten
+$aliasMap = [
+  'fördertraining'          => 'foerdertraining',
+  'fördertraining_athletik' => 'foerdertraining_athletik',
+  'athletiktraining'        => 'foerdertraining_athletik',
+];
+
+if (isset($aliasMap[$normKey])) {
+  $normKey = $aliasMap[$normKey];
+}
+
+// Programmtexte aus externer Datei laden
+$prog_file = $theme_dir . '/inc/shortcodes/offer-program-texts.php';
+$programs  = [];
+
+if (file_exists($prog_file)) {
+  $data = include $prog_file;
+  if (is_array($data)) {
+    $programs = $data;
+  }
+}
+
+if (!empty($programs[$normKey]) && is_array($programs[$normKey])) {
+  $cfg = $programs[$normKey];
+
+  // Falls manche Keys null sind (Alias), auf Zielkey mappen
+  if ($cfg === null) {
+    // Alias-Ziel suchen
+    foreach ($programs as $key => $val) {
+      if ($val !== null && $key === $aliasMap[$normKey]) {
+        $cfg = $val;
+        break;
+      }
+    }
+  }
+
+  if (is_array($cfg)) {
+    $program_title   = $cfg['title']   ?? '';
+    $program_age     = $cfg['age']     ?? '';
+    $program_text    = $cfg['text']    ?? [];
+    $program_bullets = $cfg['bullets'] ?? [];
+  }
+}
+
+if ($program_title) : ?>
+
+  <section class="ks-sec ks-py-48 ks-program-text ks-program-text--full">
+    <div class="container container--1100">
+      <?php if ($program_age): ?>
+        <div class="ks-kicker">
+          <?php echo esc_html($program_age); ?>
+        </div>
+      <?php endif; ?>
+
+      <h2 class="ks-dir__title">
+        <?php echo esc_html($program_title); ?>
+      </h2>
+
+      <div class="ks-grid-12-8">
+        <div>
+          <?php foreach ($program_text as $p): ?>
+            <p><?php echo esc_html($p); ?></p>
+          <?php endforeach; ?>
+        </div>
+
+        <?php if (!empty($program_bullets)): ?>
+          <ul class="ks-list-plus">
+            <?php foreach ($program_bullets as $b): ?>
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span><?php echo esc_html($b); ?></span>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        <?php endif; ?>
+      </div>
+    </div>
+  </section>
+<?php endif; ?>
+          
+
+
+  <?php
+  if (function_exists('ks_render_feedback_section')) {
+    echo ks_render_feedback_section();
+  }
+  ?>
+
+
+
+
+<?php
+
     return ob_get_clean();
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
