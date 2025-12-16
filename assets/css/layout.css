@@ -3,6 +3,14 @@
 
 @layer layout {
   /* Body als 3-Zeilen-Grid: Header | Main | Footer */
+
+
+
+
+
+
+
+
   body{
     min-height:100vh;
     display:grid;
@@ -46,11 +54,14 @@
   .container{
     max-width:1440px;
     margin:0 auto;
-    padding:16px;
-   
+   /* padding:16px;*/
+    padding:  16px;
     gap:20px;
   }
 
+
+
+ 
   /* Main scrollt, Rest nicht */
   .site-main{
     /* frühere Scroll-Container-Eigenschaften entfernen */
@@ -64,10 +75,21 @@
     flex-direction:column;
     align-items:center;         /* horizontal */
     justify-content:flex-start; /* lange Seiten starten oben */
-    padding:30px 16px;
+    
   }
 
- 
+
+  
+
+
+ /* Nur Startseite: oben Luft für 01/02/03, unten keine Extra-Lücke */
+.home .site-main {
+  padding-top: 30px;   /* dein alter Wert von vorher */
+  padding-bottom: 0;
+}
+
+
+
   .site-main::-webkit-scrollbar{ width:0; height:0; }
 
   /* Kurze Seiten vertikal zentrieren */
@@ -76,10 +98,18 @@
   .site-main > .contact-form,
   .site-main > .entry,
   .site-main > .page{
+    /*margin-block:auto;*/
     margin-block:auto;
     width:100%;
+
+      padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 16px;
+  padding-right: 16px;
   }
   .site-main .programme-grid{ margin-block:0; }
+
+
 
   /* Startseite zentrieren, außer bei langen Rastern */
   
@@ -112,8 +142,13 @@
   html::-webkit-scrollbar { width: 0; height: 0; } /* Chrome/Safari/Edge */
 
 
-}
+   body:not(.home) .site-main {
+    padding-bottom: 0; /* falls irgendwo noch Padding dran hängt */
+  }
 
+ 
+
+}
 
 
 
@@ -203,6 +238,13 @@ html { margin-top: 0 !important; }
 
 
 
+.entry-content :where(.wp-block-columns) {
+  margin-bottom: 0 !important;
+}
+
+.entry-content :where(.wp-block-columns.is-layout-flex) {
+  gap: 0 !important;
+}
 
 
 
@@ -210,6 +252,15 @@ html { margin-top: 0 !important; }
 
 
 
+/* Leere Absätze im Seiteninhalt sollen keinen Abstand erzeugen */
+.entry-content p:empty {
+  margin-block: 0 !important;
+  padding-block: 0 !important;
+}
 
-
+/* Sicherstellen, dass das letzte Element im Content
+   nicht noch einen extra Bottom-Abstand macht */
+.entry-content > *:last-child {
+  margin-bottom: 0 !important;
+}
 
