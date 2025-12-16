@@ -1,0 +1,87 @@
+/* ========================================================================== */
+/* Offers Dialog Styles – NUR Modal-Shell (Overlay, Panel, Close-Button)     */
+/*   – Layout, Hero, Filter, FAQ, Sessions etc. liegen in ks-dir.css         */
+/* ========================================================================== */
+
+@layer pages {
+
+  /* ===============================
+     Offers-Dialog (erste Modal)
+     wird für:
+       - #ksOfferModal
+       - #ksBookModal
+     benutzt (beide haben .ks-dir__modal, .ks-dir__overlay, .ks-dir__panel)
+     =============================== */
+
+  .ks-dir__modal[hidden] {
+    display: none !important;
+  }
+
+  .ks-dir__modal {
+    position: fixed;
+    inset: 0;
+    z-index: 4000;
+    display: grid;
+    place-items: center;
+  }
+
+  .ks-dir__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .ks-dir__panel {
+    position: relative;
+    z-index: 1;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+    padding: 16px;
+    width: min(720px, calc(100% - 24px));
+    max-height: calc(100dvh - 24px);
+    overflow: auto; /* Scroll nur im Panel */
+  }
+
+  /* Body lock, wenn ein Modal offen ist */
+  body.ks-modal-open {
+    overflow: hidden;
+  }
+
+  /* Close-Button (wird in beiden Modals genutzt) */
+  .ks-dir__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid #eaeaea;
+    background: #fff;
+    cursor: pointer;
+  }
+
+  .ks-dir__close img {
+    width: 30px;
+    height: 30px;
+    display: block;
+  }
+
+  .ks-dir__close:hover {
+    background: #fafafa;
+  }
+}
+
+
+
+
+
+
+
+
+
+
