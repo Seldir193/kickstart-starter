@@ -2,6 +2,8 @@
 (function () {
   "use strict";
 
+  let onOutsidePointerDown = null;
+
   /* ===== helpers (dom, text) ===== */
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
@@ -747,7 +749,7 @@
     if (!sel) return;
     const seen = new Set();
     const opts = [];
-
+     
     arr.forEach((o) => {
       const label = getHolidayLabel(o);
       const season = getHolidaySeasonKey(label);
@@ -764,16 +766,232 @@
       opts.map((k) => `<option value="${esc(k)}">${esc(k)}</option>`).join("");
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function enhanceFilterSelects(root) {
+  if (!root) return;
+
+  const selects = Array.from(root.querySelectorAll("[data-filters] select"));
+  if (!selects.length) return;
+
+  const closeAll = () => {
+    root.querySelectorAll(".ks-dir-dd.is-open").forEach((dd) => {
+      dd.classList.remove("is-open");
+      dd.setAttribute("aria-expanded", "false");
+      const btn = dd.querySelector(".ks-dir-dd__btn");
+      if (btn) btn.setAttribute("aria-expanded", "false");
+      const panel = dd.querySelector(".ks-dir-dd__panel");
+      if (panel) panel.innerHTML = "";
+    });
+  };
+
+  selects.forEach((nativeSel) => {
+    if (nativeSel.dataset.enhanced === "1") return;
+    nativeSel.dataset.enhanced = "1";
+
+    const wrapLabel = nativeSel.closest("label.ks-field");
+    const control = wrapLabel?.querySelector(".ks-field__control--select");
+    if (!wrapLabel || !control) return;
+
+    const iconImg = control.querySelector(".ks-field__icon img");
+    const caretSrc = iconImg?.getAttribute("src") || "";
+
+    nativeSel.classList.add("ks-dir-native-select");
+    nativeSel.tabIndex = -1;
+    nativeSel.setAttribute("aria-hidden", "true");
+
+    const dd = document.createElement("div");
+    dd.className = "ks-dir-dd";
+    dd.setAttribute("aria-expanded", "false");
+
+    dd.innerHTML = `
+      <button type="button" class="ks-dir-dd__btn" aria-expanded="false">
+        <span class="ks-dir-dd__label"></span>
+        <span class="ks-dir-dd__caret" aria-hidden="true">
+          ${caretSrc ? `<img src="${caretSrc}" alt="">` : ""}
+        </span>
+      </button>
+      <div class="ks-dir-dd__panel" role="listbox"></div>
+    `;
+
+    control.classList.add("is-enhanced");
+    control.innerHTML = "";
+    control.appendChild(dd);
+    control.appendChild(nativeSel);
+
+    const btn = dd.querySelector(".ks-dir-dd__btn");
+    const label = dd.querySelector(".ks-dir-dd__label");
+    const panel = dd.querySelector(".ks-dir-dd__panel");
+
+    function syncLabel() {
+      const opt = nativeSel.selectedOptions?.[0];
+      label.textContent = opt ? opt.textContent : "Bitte auswählen …";
+    }
+
+    function buildPanel() {
+      panel.innerHTML = "";
+      Array.from(nativeSel.options).forEach((opt) => {
+        const item = document.createElement("div");
+        item.className = "ks-dir-dd__option";
+        item.setAttribute("role", "option");
+        item.setAttribute("tabindex", "-1");
+        item.setAttribute("data-value", opt.value);
+        item.textContent = opt.textContent;
+        if (opt.selected) item.setAttribute("aria-selected", "true");
+        panel.appendChild(item);
+      });
+
+      const sel = panel.querySelector('.ks-dir-dd__option[aria-selected="true"]');
+      const first = panel.querySelector(".ks-dir-dd__option");
+      (sel || first)?.focus({ preventScroll: true });
+    }
+
+    function openDD() {
+      closeAll();
+      buildPanel();
+      dd.classList.add("is-open");
+      dd.setAttribute("aria-expanded", "true");
+      btn.setAttribute("aria-expanded", "true");
+
+      onOutsidePointerDown = (e) => {
+    if (!dd.contains(e.target)) closeDD();
+  };
+
+  // capture=true ist wichtig, damit es zuverlässig klappt
+  document.addEventListener("pointerdown", onOutsidePointerDown, true);
+
+  // ESC (wie du schon hast, kann bleiben)
+  document.addEventListener(
+    "keydown",
+    (e) => {
+      if (e.key === "Escape") closeDD();
+    },
+    { once: true }
+  );
+    }
+
+    function closeDD() {
+      dd.classList.remove("is-open");
+      dd.setAttribute("aria-expanded", "false");
+      btn.setAttribute("aria-expanded", "false");
+      panel.innerHTML = "";
+
+       if (onOutsidePointerDown) {
+    document.removeEventListener("pointerdown", onOutsidePointerDown, true);
+    onOutsidePointerDown = null;
+  }
+
+      try { btn.focus({ preventScroll: true }); } catch {}
+    }
+
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dd.classList.contains("is-open") ? closeDD() : openDD();
+    });
+
+    panel.addEventListener("click", (e) => {
+      const item = e.target.closest(".ks-dir-dd__option");
+      if (!item) return;
+
+      nativeSel.value = item.getAttribute("data-value") ?? "";
+      syncLabel();
+
+      panel.querySelectorAll(".ks-dir-dd__option").forEach((x) => x.removeAttribute("aria-selected"));
+      item.setAttribute("aria-selected", "true");
+
+      nativeSel.dispatchEvent(new Event("change", { bubbles: true }));
+      closeDD();
+    });
+
+    nativeSel.addEventListener("change", () => {
+      syncLabel();
+      if (dd.classList.contains("is-open")) buildPanel();
+    });
+
+    syncLabel();
+  });
+
+  // ✅ WICHTIG: erst NACH dem Enhancen sichtbar machen
+  root.classList.add("is-ready");
+
+  // nur 1x global listener
+  if (!root.dataset.ddOutsideBound) {
+    root.dataset.ddOutsideBound = "1";
+    document.addEventListener("pointerdown", (e) => {
+      if (!root.contains(e.target)) {
+        root.querySelectorAll(".ks-dir-dd.is-open").forEach((dd) => {
+          dd.classList.remove("is-open");
+          dd.setAttribute("aria-expanded", "false");
+          const btn = dd.querySelector(".ks-dir-dd__btn");
+          if (btn) btn.setAttribute("aria-expanded", "false");
+          const panel = dd.querySelector(".ks-dir-dd__panel");
+          if (panel) panel.innerHTML = "";
+        });
+      }
+    });
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   /* ===== main ===== */
   document.addEventListener("DOMContentLoaded", async () => {
     const root = $("#ksDir");
     if (!root) return;
+     
+enhanceFilterSelects(root);
+
+
+
 
     const daySel = $("#ksFilterDay", root);
     const ageSel = $("#ksFilterAge", root);
     const locSel = $("#ksFilterLoc", root);
     const listEl = $("#ksDirList", root);
     const ageTitle = $("[data-age-title]", root);
+
+    function resetSelect(sel) {
+  if (!sel) return;
+  sel.value = "";
+  sel.dispatchEvent(new Event("change", { bubbles: true }));
+}
+
 
     const holidaySeasonSel = $("#ksFilterHolidaySeason", root);
     const holidayWeekSel = $("#ksFilterHolidayWeek", root);
@@ -841,6 +1059,8 @@
           items,
           holidaySeasonSel ? holidaySeasonSel.value || "" : ""
         );
+        const weekSel = $("#ksFilterHolidayWeek", root);
+  if (weekSel) weekSel.dispatchEvent(new Event("change", { bubbles: true }));
       }
     } catch (e) {
       if (listEl) {
@@ -945,30 +1165,54 @@
       }
     }
 
-    if (daySel) daySel.addEventListener("change", apply);
+   // if (daySel) daySel.addEventListener("change", apply);
+
+    if (daySel) {
+  daySel.addEventListener("change", () => {
+    // Tag ist "Master" → reset die anderen zwei
+    resetSelect(ageSel);
+    resetSelect(locSel);
+    apply();
+  });
+}
     if (ageSel) ageSel.addEventListener("change", apply);
     if (locSel) locSel.addEventListener("change", apply);
 
-    if (holidaySeasonSel) {
-      holidaySeasonSel.addEventListener("change", () => {
-        fillHolidayWeeksSelect(
-          holidayWeekSel,
-          items,
-          holidaySeasonSel.value || ""
-        );
-        apply();
-      });
-    }
+ 
 
-    if (holidayWeekSel) {
-      holidayWeekSel.addEventListener("change", apply);
-    }
+
+if (holidaySeasonSel) {
+  holidaySeasonSel.addEventListener("change", () => {
+    // Ferienzeit ist "Master" → reset Zeitraum + Standort
+    resetSelect(holidayWeekSel);
+    resetSelect(locSel);
+
+    fillHolidayWeeksSelect(
+      holidayWeekSel,
+      items,
+      holidaySeasonSel.value || ""
+    );
 
     apply();
   });
+}
+
+if (holidayWeekSel) holidayWeekSel.addEventListener("change", apply);
+
+
+
+    apply();
+  });
+
+
+
+
+
+
+
+
+
 })();
-
-
 
 
 
