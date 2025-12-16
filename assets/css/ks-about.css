@@ -104,3 +104,9 @@
 #mfs, #team, #philosophie, #kontakt, #ziele, #standorte{
   padding-block: clamp(24px, 4vw, 56px);
 }
+
+/* Nur Franchise-Seite: Titel verstecken */
+.page-id-159 .entry-title,
+.page-id-159 h1.entry-title {
+    display: none !important;
+}
