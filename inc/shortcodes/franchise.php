@@ -6,6 +6,14 @@
 
 
 
+
+
+
+
+
+
+
+
 /* -------------------------------------------------------
  * [ks_franchise] – Hero + Intro (Text|Video) + MEHR-Buttons
  * -----------------------------------------------------*/
@@ -106,13 +114,34 @@ add_shortcode('ks_franchise', function ($atts = []) {
              Ausbildungsphilosophie.</p>
           <p>Gemeinsam fördern wir die Entwicklung junger Talente – seit über 25 Jahren.</p>
         </div>
-        <ul class="ks-list-plus">
-          <li>25 Jahre Erfahrung</li>
-          <li>13 Partner &gt; 10 Trainer</li>
-          <li>&gt; 700 Kinder &amp; 10 Partnervereine</li>
-          <li>Wöchentliche Trainerfortbildungen</li>
-          <li>Streamingportal mit &gt; 1000 Videos</li>
-        </ul>
+
+
+<ul class="ks-list-plus">
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>25 Jahre Erfahrung</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>13 Partner &gt; 10 Trainer</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>&gt; 700 Kinder &amp; 10 Partnervereine</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>Wöchentliche Trainerfortbildungen</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>Streamingportal mit &gt; 1000 Videos</span>
+  </li>
+</ul>
+
+
+
+       
       </div>
     </div>
   </section>
@@ -165,64 +194,42 @@ add_shortcode('ks_franchise', function ($atts = []) {
 
 
 
+  <?php
+ 
+
+
+
+
+// Franchise-FAQ unterhalb der Vorteile – Texte zentral laden
+$fr_faq_items = function_exists('ks_get_faq_items')
+  ? ks_get_faq_items('franchise')   // Context-Key: franchise
+  : [];
+
+if (!empty($fr_faq_items)) {
+  $fr_image = $theme_uri . '/assets/img/franchise/mfs.png';
+
+  echo ks_render_faq_section($fr_faq_items, [
+    'section_id'    => 'fr-faq',
+    'wrapper_class' => 'container fr-faq',
+    'title'         => 'Häufig gestellte Fragen',
+    'kicker'        => 'FAQ',
+    'watermark'     => 'FAQ',
+    'use_video'     => false,          // kein Video
+    'image_src'     => $fr_image,      // Logo rechts
+    'image_class'   => 'fr-faq__image',
+  ]);
+}
+
+
+
+ 
+
+?>
 
 
 
 
 
-
-
-
-
-<!-- FAQ -->
-<?php $theme_uri = get_stylesheet_directory_uri(); ?>
-<section id="fr-faq"
-  class="ks-sec ks-py-56"
-  style="
-    --acc-plus:url('<?php echo $theme_uri; ?>/assets/img/home/plus.png');
-    --acc-minus:url('<?php echo $theme_uri; ?>/assets/img/home/minus.png');
-  ">
-
-  <div class="container fr-faq">
-
-    <!-- Titelblock zentriert + Watermark -->
-    <div class="ks-title-wrap" data-bgword="FAQ">
-      <div class="ks-kicker">FAQ</div>
-      <h2 class="ks-dir__title">Häufig gestellte Fragen</h2>
-    </div>
-
-    <!-- Linke Spalte: Akkordeon -->
-    <div class="fr-faq__left">
-      <details class="ks-acc" open>
-        <summary>Wie hoch sind die Startkosten für ein DFS-Franchise?</summary>
-        <div class="ks-acc__body">Die Höhe hängt vom Standort ab; eine detaillierte Aufstellung erhältst du im persönlichen Austausch.</div>
-      </details>
-
-      <details class="ks-acc">
-        <summary>Welche Qualifikationen sind erforderlich?</summary>
-        <div class="ks-acc__body">Trainererfahrung ist hilfreich; wichtig sind Zuverlässigkeit, Begeisterung &amp; Organisation.</div>
-      </details>
-
-      <details class="ks-acc">
-        <summary>Welche Unterstützung bietet die DFS?</summary>
-        <div class="ks-acc__body">Schulungen, Materialien, Best Practices &amp; Austausch mit Partnern.</div>
-      </details>
-
-      <details class="ks-acc">
-        <summary>Wie erhalte ich weitere Informationen?</summary>
-        <div class="ks-acc__body">Nutze das Kontaktformular – wir melden uns zeitnah.</div>
-      </details>
-    </div>
-
-    <!-- Rechte Spalte: MFS-Logo / Bild -->
-    <figure class="fr-faq__image">
-      <img
-        src="<?php echo esc_url($theme_uri . '/assets/img/franchise/mfs.png'); ?>"
-        alt="MFS Logo" loading="lazy" decoding="async">
-    </figure>
-
-  </div>
-</section>
 
 
 
