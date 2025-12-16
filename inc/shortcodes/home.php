@@ -5,6 +5,8 @@
 //   show_news="1|0"   -> News-Bereich ein/aus
 //   portal_url="URL"  -> Ziel-Link für „MEHR INFOS“ im Video-Portal
 
+
+
 if (!function_exists('ks_register_home_shortcode')) {
   function ks_register_home_shortcode() {
 
@@ -67,15 +69,10 @@ if (file_exists($videos_css)) {
 
 
 
-      /* ==== Feedback CSS/JS laden ==== */
-$fb_css = $theme_dir . '/assets/css/ks-feedback.css';
-if (file_exists($fb_css)) {
-  wp_enqueue_style('ks-feedback', $theme_uri . '/assets/css/ks-feedback.css', ['ks-utils'], filemtime($fb_css));
-}
-$fb_js = $theme_dir . '/assets/js/ks-feedback.js';
-if (file_exists($fb_js)) {
-  wp_enqueue_script('ks-feedback', $theme_uri . '/assets/js/ks-feedback.js', [], filemtime($fb_js), true);
-}
+      /* ==== Feedback CSS/JS laden (global) ==== */
+      if (function_exists('ks_enqueue_feedback_assets')) {
+        ks_enqueue_feedback_assets();
+      }
 
 
 $wa_css = $theme_dir . '/assets/css/ks-wa.css';
@@ -352,44 +349,28 @@ if (file_exists($hero_js)) {
         </div>
       </section>
 
-      <!-- 4) FAQ -->
-      <?php $theme_uri_local = $theme_uri; ?>
-      <section id="faq"
-        class="ks-sec ks-py-56"
-        style="--acc-plus:url('<?php echo $theme_uri_local; ?>/assets/img/home/plus.png');
-               --acc-minus:url('<?php echo $theme_uri_local; ?>/assets/img/home/minus.png');">
+   <?php
+  // FAQ für Startseite (Texte kommen aus inc/faq-texts-home.de.php)
+  $faq_items = ks_get_faq_items('home');
 
-        <div class="container ks-home-faq">
-          <div class="ks-title-wrap" data-bgword="FAQ">
-            <div class="ks-kicker">FAQ</div>
-            <h2 class="ks-dir__title">Häufig gestellte Fragen</h2>
-          </div>
+  if (!empty($faq_items)) {
+    // Video wie bisher
+    $faq_video_embed = wp_oembed_get('https://www.youtube.com/watch?v=KEWP2dELhrY');
+    if (!$faq_video_embed) {
+      $faq_video_embed = '<div class="ks-vid-ph" aria-hidden="true"></div>';
+    }
 
-          <div>
-            <details open class="ks-acc">
-              <summary>Wo finden eure Trainingsangebote statt?</summary>
-              <div class="ks-acc__body">Unsere Trainings finden auf den Sportanlagen unserer Partnervereine und in den Soccerhallen in und um NRW statt.</div>
-            </details>
-
-            <details class="ks-acc">
-              <summary>Wer kann teilnehmen?</summary>
-              <div class="ks-acc__body">Kinder, Jugendliche und Erwachsene – wir haben passende Gruppen für alle Altersstufen.</div>
-            </details>
-
-            <details class="ks-acc">
-              <summary>Wie bekomme ich die neuesten Informationen?</summary>
-              <div class="ks-acc__body">Abonniere unseren Newsletter oder folge uns auf Social Media.</div>
-            </details>
-
-            <details class="ks-acc">
-              <summary>Wie kann ich Mitglied werden?</summary>
-              <div class="ks-acc__body">Buche ein Schnuppertraining – wir erklären dir alles weitere vor Ort.</div>
-            </details>
-          </div>
-
-          <div class="ks-home-faq__image" aria-hidden="true"></div>
-        </div>
-      </section>
+    echo ks_render_faq_section($faq_items, [
+      'section_id'    => 'faq',                    // ID bleibt #faq
+      'wrapper_class' => 'container ks-home-faq',  // Layout wie bisher
+      'title'         => 'Häufig gestellte Fragen',
+      'kicker'        => 'FAQ',
+      'watermark'     => 'FAQ',                    // großes „FAQ“ im Hintergrund
+      'use_video'     => true,
+      'video_embed'   => $faq_video_embed,
+    ]);
+  }
+?>
 
      
 
@@ -517,46 +498,12 @@ if (file_exists($hero_js)) {
 
 
 
-
-
-
-
-        <!-- 2.5) Feedback -->
-<?php
-  $fb_img = $theme_uri . '/assets/img/home/mfs.png'; // Platzhalter
- 
-$feedbacks = [
-  [
-    'img'    => $fb_img,
-    'quote'  => 'Ihr Einsatz, Ihre Energie, verbunden mit zielorientiertem Coaching ist fast unbezahlbar für die Jugendlichen.',
-    'author' => 'Christian Gross',
-    'meta'   => 'Schweizer Profitrainer (Tottenham Hotspur, VfB Stuttgart, Young Boys Bern)',
-    'label'  => 'Trainer',
-  ],
-  [
-    'img'    => $fb_img,
-    'quote'  => 'Die Trainingsqualität und die Organisation sind außergewöhnlich, jedes Detail stimmt.',
-    'author' => 'Muster Coach',
-    'meta'   => 'U17-Trainer, NRW',
-    'label'  => 'Trainer',
-  ],
-  [
-    'img'    => $fb_img,
-    'quote'  => 'Fachlich top und menschlich nah – so macht Förderung Sinn.',
-    'author' => 'Elternstimme',
-    'meta'   => 'Dortmund',
-    'label'  => 'Eltern',
-  ],
-  [
-    'img'    => $fb_img,
-    'quote'  => 'Kindgerecht, motivierend, professionell – klare Empfehlung.',
-    'author' => 'Vereinsvorstand',
-    'meta'   => 'Partnerverein',
-    'label'  => 'Partner',
-  ],
-];
-
-?>
+      <?php
+      // Globale Feedback-Section (selbe Logik/Optik)
+      if (function_exists('ks_render_feedback_section')) {
+        echo ks_render_feedback_section();
+      }
+      ?>
 
 
 
@@ -565,80 +512,18 @@ $feedbacks = [
 
 
 
-<section id="feedback" class="ks-sec ks-py-56 ks-fb" data-watermark="FEEDBACK" aria-label="Feedbacks">
-  <nav class="ks-fb-tabs" aria-label="Feedback Auswahl">
-    <?php foreach ($feedbacks as $i => $f): ?>
-      <button type="button" class="ks-fb-tab<?php echo $i===0 ? ' is-active' : ''; ?>" data-key="fb-<?php echo $i; ?>">
-      
-         <span class="ks-fb-tab__label"><?php echo esc_html($f['label'] ?? 'Feedback'); ?></span>
-        <span class="ks-fb-tab__num"><?php echo sprintf('%02d', $i+1); ?></span>
-      </button>
-    <?php endforeach; ?>
-  </nav>
 
 
-  
 
-  <div class="container ks-fb-grid">
+
+
+
+
+
+<?php echo do_shortcode('[ks_brandbar]'); ?>
+
 
  
-    
-    <?php foreach ($feedbacks as $i => $f): ?>
-      <article class="ks-fb-slide <?php echo $i===0 ? ' is-active' : ''; ?>" data-key="fb-<?php echo $i; ?>">
-      
- 
-      <div class="ks-fb-media">
-          <img src="<?php echo esc_url($f['img']); ?>" alt="" loading="lazy" decoding="async">
-        </div>
-  
-
-        <div class="ks-fb-content">
-          
-
-          
-  <div class="ks-fb-quote">
-    <img
-      class="quote-icon"
-      src="<?php echo get_template_directory_uri(); ?>/assets/img/feedback/quote.svg"
-      alt="" aria-hidden="true"
-      loading="lazy" decoding="async"
-    >
-    <?php echo esc_html($f['quote']); ?>
-  </div>
-
-  
-
-
-          <div class="ks-fb-author">
-            <strong><?php echo esc_html(mb_strtoupper($f['author'])); ?></strong>
-            <div class="ks-fb-meta"><?php echo esc_html($f['meta']); ?></div>
-          </div>
-        </div>
-      </article>
-    <?php endforeach; ?>
-  </div>
-
-
-
-  
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -666,31 +551,6 @@ $feedbacks = [
 
   
 
-      <!-- Brandbar -->
-      <section id="brandbar" class="ks-sec ks-brandbar" aria-label="Partner & Marken"      >
-        <div class="container">
-          <ul class="ks-brandbar__list" role="list">
-            <?php
-              $brands = [
-                [ 'src' => $theme_uri . '/assets/img/brands/bodosee-sportlo.svg', 'label' => 'Bodosee Sportlo' ],
-                [ 'src' => $theme_uri . '/assets/img/home/mfs.png',               'label' => 'Puma' ],
-                [ 'src' => $theme_uri . '/assets/img/brands/dfsberater.svg',      'label' => 'DFS Berater' ],
-                [ 'src' => $theme_uri . '/assets/img/brands/teamstolz.svg',       'label' => 'Teamstolz' ],
-                [ 'src' => $theme_uri . '/assets/img/brands/dfsplayer.svg',       'label' => 'DFS Player' ],
-              ];
-              foreach ($brands as $b):
-                $src   = esc_url($b['src']);
-                $label = esc_html($b['label']);
-            ?>
-              <li class="ks-brandbar__item">
-                <img src="<?php echo $src; ?>" alt="" loading="lazy" decoding="async" aria-hidden="true">
-                <span class="ks-brandbar__label"><?php echo $label; ?></span>
-              </li>
-            <?php endforeach; ?>
-          </ul>
-        </div>
-      </section>
-     
 
       
 
