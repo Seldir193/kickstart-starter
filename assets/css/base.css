@@ -11,10 +11,11 @@
     --mega-backdrop:rgba(0,0,0,.45);
     --mega-bg:#fff;
     --mega-link:#666;
-      --brand-navy:     #0F1E2E;
-
+      --brand-navy:#0F1E2E;
+    --dark-gray:  #f7f7f7;
     /* WP-Adminbar-Offset */
     --wp-admin-bar-h:0px;
+    --light-gray: #fafafafa;
   }
   .admin-bar{ --wp-admin-bar-h:32px; }
 
