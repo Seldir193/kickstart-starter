@@ -1,3 +1,18 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?php
 add_action('wp_enqueue_scripts', function () {
   // Google Fonts
@@ -76,6 +91,13 @@ add_action('wp_enqueue_scripts', function () {
     );
   }
 
+
+
+
+
+
+
+
   // Leaflet
   wp_enqueue_style(
     'leaflet-css',
@@ -91,17 +113,21 @@ add_action('wp_enqueue_scripts', function () {
     true
   );
 
-  // Dialog JS
-  $dlg_js = get_stylesheet_directory() . '/assets/js/offers-dialog.js';
-  if (file_exists($dlg_js)) {
-    wp_enqueue_script(
-      'kickstart-offers-dialog',
-      get_stylesheet_directory_uri() . '/assets/js/offers-dialog.js',
-      [],
-      filemtime($dlg_js),
-      true
-    );
-  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // Offers Directory JS
   $dir_js = get_stylesheet_directory() . '/assets/js/offers-directory.js';
@@ -114,6 +140,38 @@ add_action('wp_enqueue_scripts', function () {
       true
     );
   }
+
+
+  // Booking-Dialog JS (iframe)
+  $book_js = get_stylesheet_directory() . '/assets/js/book-dialog.js';
+  if (file_exists($book_js)) {
+    wp_enqueue_script(
+      'kickstart-book-dialog',
+      get_stylesheet_directory_uri() . '/assets/js/book-dialog.js',
+      [],
+      filemtime($book_js),
+      true
+    );
+  }
+
+  // Offers-Dialog JS (benötigt BookDialog)
+  $dlg_js = get_stylesheet_directory() . '/assets/js/offers-dialog.js';
+  if (file_exists($dlg_js)) {
+    wp_enqueue_script(
+      'kickstart-offers-dialog',
+      get_stylesheet_directory_uri() . '/assets/js/offers-dialog.js',
+      ['kickstart-book-dialog'], // 🔸 WICHTIG: erst book-dialog laden
+      filemtime($dlg_js),
+      true
+    );
+  }
+  
+
+
+
+wp_enqueue_style('ks-offers-dialog', get_stylesheet_directory_uri() . '/assets/css/offers-dialog.css', [], null);
+wp_enqueue_style('ks-book-dialog', get_stylesheet_directory_uri() . '/assets/css/book-dialog.css', [], null);
+
 
   // Newsletter
   $news_js = get_stylesheet_directory() . '/assets/js/newsletter.js';
@@ -140,6 +198,23 @@ add_action('wp_enqueue_scripts', function () {
       filemtime($dir_css)
     );
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
 
 
