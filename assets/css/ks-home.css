@@ -1,16 +1,17 @@
-
-
-
 /* Vollbreit (#fafafa) hinter den Tabs, Content bleibt im Container */
-.ks-hero-tabs::before{
+.ks-hero-tabs::before {
   content: "";
   position: absolute;
-  top: 0; bottom: 0;
-  left: 50%; right: 50%;
-  margin-left: -50vw;          /* 50vw-Trick = Full-bleed */
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  /* 50vw-Trick = Full-bleed */
   margin-right: -50vw;
   background: #f5f5f5;
-  z-index: -1;                 /* liegt hinter den Tabs */
+  z-index: -1;
+  /* liegt hinter den Tabs */
   pointer-events: none;
 }
 
@@ -19,16 +20,18 @@
 
 
 /* Tabs oben – an Containerbreite zentriert (kein absolutes Positionieren) */
-.ks-hero-tabs{
+.ks-hero-tabs {
   position: relative;
   display: flex;
   gap: 14px;
   align-items: center;
-z-index: 1; 
+  z-index: 1;
   max-width: var(--ks-container);
   width: 100%;
-  margin: 0 auto 10px;        /* zentriert */
-  padding-left: 16px;         /* wie .container padding */
+  margin: 0 auto 10px;
+  /* zentriert */
+  padding-left: 16px;
+  /* wie .container padding */
   padding-right: 16px;
 
 }
@@ -45,18 +48,21 @@ z-index: 1;
 
 
 /* === TEAM: Hover-Abdunklung nur fürs Bild ==================== */
-.ks-team__img{
+.ks-team__img {
   transition: filter .25s ease;
 }
 
 .ks-team__card:hover .ks-team__img,
-.ks-team__card a:hover .ks-team__img{
-  filter: brightness(0.78); /* ~22% dunkler */
+.ks-team__card a:hover .ks-team__img {
+  filter: brightness(0.78);
+  /* ~22% dunkler */
 }
 
 /* (optional) weniger Animation für Nutzer mit reduzierten Bewegungen */
-@media (prefers-reduced-motion: reduce){
-  .ks-team__img{ transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .ks-team__img {
+    transition: none;
+  }
 }
 
 
@@ -64,7 +70,7 @@ z-index: 1;
 /*  KS Home (assets/css/ks-home.css)                                          */
 /* ========================================================================== */
 
-:root{
+:root {
   /* Passe das an deine globale .container Breite an (z. B. 1100/1200/1400px) */
   --ks-container: 1440px;
 }
@@ -73,7 +79,7 @@ z-index: 1;
 /* HERO (mit Tabs & Slides)  */
 /* ========================= */
 
-.ks-home-hero{
+.ks-home-hero {
   position: relative;
   padding: clamp(24px, 6vw, 56px) 0;
   background-color: #f5f5f5;
@@ -84,7 +90,7 @@ z-index: 1;
 
 
 
-.ks-hero-tab{
+.ks-hero-tab {
   appearance: none;
   background: transparent;
   border: 0;
@@ -100,20 +106,33 @@ z-index: 1;
   letter-spacing: .08em;
   text-transform: uppercase;
 }
-.ks-hero-tab__num{
+
+.ks-hero-tab__num {
   border-top: 2px solid #111;
   padding: .1em .5em;
   line-height: 1;
 }
-.ks-hero-tab.is-active{ opacity: 1; }
+
+.ks-hero-tab.is-active {
+  opacity: 1;
+}
 
 /* Slides (nur die aktive sichtbar) */
-.ks-hero-slides{ position: relative; }
-.ks-hero-slide{ display: none; }
-.ks-hero-slide.is-active{ display: block;    background: #fafafa;}
+.ks-hero-slides {
+  position: relative;
+}
+
+.ks-hero-slide {
+  display: none;
+}
+
+.ks-hero-slide.is-active {
+  display: block;
+  background:  var(--light-gray);
+}
 
 /* Grid im Hero */
-.ks-home-grid{
+.ks-home-grid {
   display: grid;
   grid-template-columns: 1.1fr .9fr;
   gap: 32px;
@@ -121,7 +140,7 @@ z-index: 1;
 }
 
 /* Stelle sicher, dass die Slide-Container exakt dieselbe Breite verwenden */
-#home-hero .ks-hero-slide > .container{
+#home-hero .ks-hero-slide>.container {
   max-width: var(--ks-container) !important;
   width: 100%;
   margin-left: auto;
@@ -130,16 +149,25 @@ z-index: 1;
   padding-right: 16px;
 }
 
-.ks-home-hero__title{
+.ks-home-hero__title {
   font-size: clamp(36px, 6vw, 72px);
   line-height: 1.05;
   font-weight: 800;
   margin: 8px 0 12px;
 }
-.ks-home-hero__lead{ color:#374151; max-width: 60ch; }
-.ks-home-hero__actions{ display:flex; gap:12px; margin-top:18px; }
 
-.ks-home-hero__img{
+.ks-home-hero__lead {
+  color: #374151;
+  max-width: 60ch;
+}
+
+.ks-home-hero__actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.ks-home-hero__img {
   width: 100%;
   height: clamp(340px, 50vw, 560px);
   object-fit: contain;
@@ -148,15 +176,17 @@ z-index: 1;
 }
 
 /* Großes Wasserzeichen im Hintergrund aus dem data-watermark-Attribut */
-.ks-home-hero::after{
+.ks-home-hero::after {
   content: attr(data-watermark);
   position: absolute;
-  left: 0; right: 0; bottom: 6%;
+  left: 0;
+  right: 0;
+  bottom: 6%;
   text-align: center;
   font-weight: 900;
   letter-spacing: .02em;
   font-size: clamp(64px, 22vw, 240px);
-  color: rgba(0,0,0,.04);
+  color: rgba(0, 0, 0, .04);
   pointer-events: none;
 }
 
@@ -164,17 +194,22 @@ z-index: 1;
 /* „WERTE“-Block  */
 /* ============== */
 
-.ks-home-values{ background:#fafafa; }
+.ks-home-values {
+  background: #fafafa;
+}
 
 /* Icon sanft anheben */
 .ks-value .icon-wrap {
   display: inline-block;
-  transform: translateY(10px);          /* Start etwas unten */
-  transition: transform 0.35s ease;     /* Animation */
+  transform: translateY(10px);
+  /* Start etwas unten */
+  transition: transform 0.35s ease;
+  /* Animation */
 }
 
 .ks-value:hover .icon-wrap {
-  transform: translateY(0);             /* Nach oben fahren */
+  transform: translateY(0);
+  /* Nach oben fahren */
 }
 
 /* Optional: etwas mehr "Float"-Feeling */
@@ -183,7 +218,8 @@ z-index: 1;
 }
 
 .ks-value:hover .icon-wrap img {
-  transform: translateY(-3px);          /* Mini-Feinlift */
+  transform: translateY(-3px);
+  /* Mini-Feinlift */
 }
 
 
@@ -192,45 +228,41 @@ z-index: 1;
 
 
 
-.ks-values .ks-value{
+.ks-values .ks-value {
   display: block;
   text-decoration: none;
-  
+
   cursor: pointer;
 }
 
 
-.ks-values{
+.ks-values {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
   text-align: center;
   margin-top: 24px;
-  
-}
-.ks-value img{
-  height: 100px; width: auto;
-  margin: 0 auto 10px; display: block;
-}
-.ks-value h3{ font-weight: 800; margin: 6px 0 8px;  }
-.ks-value p{ color:#6b7280; max-width: 42ch; margin: 0 auto;  }
 
-/* ======= */
-/*  FAQ    */
-/* ======= */
-
-.ks-home-faq{
-  display: grid;
-  grid-template-columns: 1.15fr .85fr;
-  gap: 24px;
-  align-items: start;
 }
 
-.ks-home-faq__image{
-  background: var(--faq-img) center/contain no-repeat, #edf2f7;
-  border-radius: 12px;
-  min-height: 280px;
+.ks-value img {
+  height: 100px;
+  width: auto;
+  margin: 0 auto 10px;
+  display: block;
 }
+
+.ks-value h3 {
+  font-weight: 800;
+  margin: 6px 0 8px;
+}
+
+.ks-value p {
+  color: #6b7280;
+  max-width: 42ch;
+  margin: 0 auto;
+}
+
 
 /* ====================== */
 /*  VIDEO-PORTAL (Hero 2) */
@@ -251,13 +283,14 @@ z-index: 1;
 /*  Responsive      */
 /* ================ */
 
-@media (max-width: 900px){
+@media (max-width: 900px) {
 
-  .ks-home-hero__img{
+  .ks-home-hero__img {
     height: clamp(260px, 48vw, 420px);
     margin-inline: auto;
   }
-  .ks-home-hero::after{
+
+  .ks-home-hero::after {
     font-size: clamp(64px, 30vw, 180px);
     bottom: 2%;
   }
@@ -265,17 +298,24 @@ z-index: 1;
 
 
 
-  .ks-hero-tabs{
+  .ks-hero-tabs {
     justify-content: center;
     gap: 10px;
   }
-  .ks-hero-tab__label{ display: none; }
 
-  .ks-values{ grid-template-columns: 1fr; }
+  .ks-hero-tab__label {
+    display: none;
+  }
 
-  .ks-home-faq{ grid-template-columns: 1fr; }
+  .ks-values {
+    grid-template-columns: 1fr;
+  }
 
-  .ks-home-portal__grid{ grid-template-columns: 1fr; }
+
+
+  .ks-home-portal__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 
@@ -310,7 +350,10 @@ z-index: 1;
 
 
 
-.ks-home-hero { display:block; width:100%; }
+.ks-home-hero {
+  display: block;
+  width: 100%;
+}
 
 
 
@@ -351,19 +394,22 @@ z-index: 1;
 
 
 
-#coach-portal .ks-home-portal__grid::before{
+#coach-portal .ks-home-portal__grid::before {
   content: "VIDEOS";
   position: absolute;
   inset: 0;
   display: grid;
-  place-items: start center;                /* oben mittig */
+  place-items: start center;
+  /* oben mittig */
   padding-top: clamp(10px, 4vw, 30px);
   z-index: 1;
   font-weight: 900;
   letter-spacing: .02em;
-  font-size: clamp(48px, 9vw, 120px);      /* Größe wie im Referenzbild */
-  color: #fff;                              /* klar weiß wie im Bild #1 */
-  text-shadow: 0 4px 22px rgba(0,0,0,.35);
+  font-size: clamp(48px, 9vw, 120px);
+  /* Größe wie im Referenzbild */
+  color: #fff;
+  /* klar weiß wie im Bild #1 */
+  text-shadow: 0 4px 22px rgba(0, 0, 0, .35);
   pointer-events: none;
 }
 
@@ -371,10 +417,12 @@ z-index: 1;
 
 
 
-:root{
-  --brand-gold:     #FDE100;  /* helles Gold */
-  --brand-gold-700: #E5C300;  /* dunkleres Gold (Basis) */
-  --brand-navy:     #0F1E2E;
+:root {
+  --brand-gold: #FDE100;
+  /* helles Gold */
+  --brand-gold-700: #E5C300;
+  /* dunkleres Gold (Basis) */
+  --brand-navy: #0F1E2E;
 }
 
 
@@ -411,16 +459,22 @@ z-index: 1;
 
 /* === Full-bleed Bänder für Hero + Werte ===================== */
 .ks-home-hero,
-.ks-home-values{
+.ks-home-values {
   position: relative;
-  width: 100vw;                         /* volle Bildschirmbreite */
-  margin-left:  calc(50% - 50vw);       /* aus dem Container „ausbrechen“ */
+  width: 100vw;
+  /* volle Bildschirmbreite */
+  margin-left: calc(50% - 50vw);
+  /* aus dem Container „ausbrechen“ */
   margin-right: calc(50% - 50vw);
 }
 
 /* (nur zur Klarheit – hast du schon, aber hier nochmal) */
-  /* graues Band hinter dem „CAMP“-Hero */
-.ks-home-values{ background:#fafafa; }   /* hellgraues Band für „Unsere Werte“ */
+/* graues Band hinter dem „CAMP“-Hero */
+.ks-home-values {
+  background: #fafafa;
+}
+
+/* hellgraues Band für „Unsere Werte“ */
 
 
 
@@ -443,19 +497,21 @@ z-index: 1;
 
 
 /* ===== News: full-bleed Band + Layout =================================== */
-#news{
+#news {
   position: relative;
-  background: #fafafa;                          /* gewünschtes Full-bleed Grau */
+  background: #fafafa;
+  /* gewünschtes Full-bleed Grau */
   /* aus dem Container ausbrechen */
   width: 100vw;
-  margin-left:  calc(50% - 50vw);
+  margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   padding-block: clamp(32px, 6vw, 72px);
 }
 
 /* Inhalt zentriert auf deine Containerbreite halten */
-#news > .container{
-  max-width: var(--ks-container);               /* du nutzt 1200px */
+#news>.container {
+  max-width: var(--ks-container);
+  /* du nutzt 1200px */
   width: 100%;
   margin-inline: auto;
   padding-left: 16px;
@@ -463,11 +519,11 @@ z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap:0px;
+  gap: 0px;
 }
 
 /* großes, sehr helles Wasserzeichen hinter der Überschrift */
-#news::after{
+#news::after {
   content: "NEWS";
   position: absolute;
   left: 50%;
@@ -476,12 +532,12 @@ z-index: 1;
   font-weight: 900;
   letter-spacing: .03em;
   font-size: clamp(64px, 18vw, 220px);
-  color: rgba(0,0,0,.04);
+  color: rgba(0, 0, 0, .04);
   pointer-events: none;
 }
 
 /* Grid für die 3 News-Karten (wie im Beispiel) */
-.ks-news{
+.ks-news {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(16px, 2.4vw, 36px);
@@ -489,127 +545,35 @@ z-index: 1;
 }
 
 /* optionale Kleinigkeiten für Karten */
-.ks-news__item{ display:flex; flex-direction:column; gap:8px; }
-.ks-news__thumb img{ display:block; width:100%; height:auto; border-radius:8px; }
-.ks-news__meta{ opacity:.6; font-size:.85rem; letter-spacing:.06em; }
+.ks-news__item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ks-news__thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.ks-news__meta {
+  opacity: .6;
+  font-size: .85rem;
+  letter-spacing: .06em;
+}
 
 /* Responsiv: 2 Spalten auf Tablet, 1 auf Mobile */
-@media (max-width: 1024px){
-  .ks-news{ grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 640px){
-  .ks-news{ grid-template-columns: 1fr; }
-}
-
-
-
-
-
-
-
-
-
-/* FAQ: Plus/Minus PNG-Icons ohne JS */
-.ks-acc summary{
-  list-style: none;                 /* Standard-Marker ausblenden */
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;   /* Text links, Icon rechts */
-  gap: 12px;
-  font-weight: 700;
-  color: #111;
-  padding: 8px 0;
-}
-.ks-acc summary::marker { content: ""; }
-.ks-acc summary::-webkit-details-marker { display: none; }
-
-.ks-acc summary::after{
-  content: "";
-  width: 20px; height: 20px; flex: 0 0 20px;
-  background: var(--acc-plus) center / contain no-repeat; /* PLUS */
-  opacity: .9;
-  transition: transform .18s ease, opacity .18s ease, background-image .18s ease;
-}
-.ks-acc[open] summary::after{
-  background-image: var(--acc-minus); /* MINUS wenn geöffnet */
+@media (max-width: 1024px) {
+  .ks-news {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.ks-acc__body{ padding: 8px 0 2px; color: #374151; padding-inline: 12px; }
-
-@media (max-width: 480px){
-  .ks-acc summary{ gap: 8px; }
-  .ks-acc summary::after{ width: 18px; height: 18px; flex-basis: 18px; }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#faq .ks-home-faq__image{ position: relative; z-index:1; }
-
-
-
-
-/* Grid bleibt wie gehabt */
-.ks-home-faq{
-  display:grid;
-  grid-template-columns: 1.15fr .85fr;
-  gap:24px;
-  align-items:start;
-}
-
-/* Titelblock über beide Spalten + zentriert */
-.ks-home-faq > .ks-title-wrap{
-  grid-column: 1 / -1;
-  text-align:center;
-  
-  margin-bottom: 18px;   /* Abstand zu Akkordeon/Bild */
-}
-
-/* Kicker + Headline im Titelblock */
-.ks-home-faq > .ks-title-wrap .ks-kicker{
-  margin:0 0 6px;
-  letter-spacing:.12em;
-}
-
-/* großes, sehr helles „FAQ“ hinter der Headline */
-
-.ks-home-faq > .ks-title-wrap::after{
-  content: attr(data-bgword);
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  top:-10px;                 /* ggf. feintunen */
-  font-weight:900;
-  letter-spacing:.03em;
-  font-size: clamp(72px, 16vw, 180px);
-  color: rgba(0,0,0,.05);
-  pointer-events:none;
-  z-index:-1;                /* liegt hinter dem Titel */
-}
-
-/* Responsive: auf Mobile Einspalter, Titel bleibt zentriert */
-@media (max-width: 900px){
-  .ks-home-faq{ grid-template-columns:1fr; }
-  .ks-home-faq > .ks-title-wrap{ margin-bottom: 12px; }
-  .ks-home-faq > .ks-title-wrap::after{
-    font-size: clamp(64px, 28vw, 140px);
-    top:-6px;
+@media (max-width: 640px) {
+  .ks-news {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -630,10 +594,44 @@ z-index: 1;
 
 
 
-.ks-dir__title{
+
+
+
+
+
+
+
+
+
+#faq .ks-home-faq__image {
+  position: relative;
+  z-index: -1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ks-dir__title {
   font-weight: 800;
-    font-size: 52px;
-    color:var(--text);
+  font-size: 52px;
+  color: var(--text);
   line-height: 1.05;
   margin: 8px 0 12px;
 }
@@ -656,14 +654,14 @@ z-index: 1;
 
 
 /* ==== HOME FAQ: Masken mit garantiert sichtbarem Plus/Minus ==== */
-#faq{
+#faq {
   --acc-mask-size: 62%;
   --acc-size: 30px;
   --acc-gap: 14px;
 }
 
 /* Textzeile + Platz fürs Icon rechts */
-#faq .ks-acc summary{
+#faq .ks-acc summary {
   position: relative;
   padding: 12px 12px;
   padding-right: calc(var(--acc-size) + var(--acc-gap) + 6px);
@@ -674,7 +672,7 @@ z-index: 1;
 
 /* Basiselemente */
 #faq .ks-acc summary::before,
-#faq .ks-acc summary::after{
+#faq .ks-acc summary::after {
   content: "";
   position: absolute;
   right: var(--acc-gap);
@@ -686,43 +684,49 @@ z-index: 1;
 }
 
 /* WICHTIG: alte Background-Bilder hart abschalten, Maske erzwingen */
-#faq .ks-acc summary::after{
-  background-image: none !important;            /* alte Regeln neutralisieren */
+#faq .ks-acc summary::after {
+  background-image: none !important;
+  /* alte Regeln neutralisieren */
   -webkit-mask: var(--acc-plus) center / var(--acc-mask-size) no-repeat !important;
-          mask: var(--acc-plus) center / var(--acc-mask-size) no-repeat !important;
-  background-color: #000 !important;            /* schwarzes Symbol normal */
+  mask: var(--acc-plus) center / var(--acc-mask-size) no-repeat !important;
+  background-color: #000 !important;
+  /* schwarzes Symbol normal */
   z-index: 1;
   transition: transform .18s ease, opacity .18s ease, filter .18s ease, background-color .18s ease;
 }
-#faq .ks-acc[open] summary::after{
+
+#faq .ks-acc[open] summary::after {
   background-image: none !important;
   -webkit-mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
-          mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
+  mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
   background-color: #000 !important;
 }
 
 /* Hover: schwarzer Kreis unten, Symbol oben WEISS (gut sichtbar) */
-#faq .ks-acc summary:hover::before{
-  background:#000;
-  border-radius:50%;
-  z-index:0;
+#faq .ks-acc summary:hover::before {
+  background: #000;
+  border-radius: 50%;
+  z-index: 0;
 }
-#faq .ks-acc summary:hover::after{
-  background-image: none !important;            /* sicher ist sicher */
-  background-color:#fff !important;             /* → WEISSES Symbol */
+
+#faq .ks-acc summary:hover::after {
+  background-image: none !important;
+  /* sicher ist sicher */
+  background-color: #fff !important;
+  /* → WEISSES Symbol */
   transform: translateY(-50%) scale(1.18);
 }
 
 /* kleiner Text-Hover */
-#faq .ks-acc summary:hover{
-  color:#0f172a;
+#faq .ks-acc summary:hover {
+  color: #0f172a;
   background-color: rgba(15, 23, 42, .04);
 }
 
 /* Fokus */
-#faq .ks-acc summary:focus-visible{
-  outline:2px solid #0ea5e9;
-  outline-offset:2px;
+#faq .ks-acc summary:focus-visible {
+  outline: 2px solid #0ea5e9;
+  outline-offset: 2px;
 }
 
 
@@ -750,31 +754,32 @@ z-index: 1;
 /* === FAQ (Home): Persistenter Hover-Look nur wenn geöffnet ([open]) === */
 
 /* Text/Hintergrund wie Hover, wenn offen */
-#faq .ks-acc[open] summary{
-  color:#0f172a;
+#faq .ks-acc[open] summary {
+  color: #0f172a;
   background-color: rgba(15, 23, 42, .04);
 }
 
 /* schwarzer Kreis unter dem Icon */
-#faq .ks-acc[open] summary::before{
-  background:#000;
-  border-radius:50%;
-  z-index:0;
+#faq .ks-acc[open] summary::before {
+  background: #000;
+  border-radius: 50%;
+  z-index: 0;
 }
 
 /* Minus-Icon als weiße Maske (persistiert) */
-#faq .ks-acc[open] summary::after{
+#faq .ks-acc[open] summary::after {
   background-image: none !important;
   -webkit-mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
-          mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
-  background-color:#fff !important;
-  transform: translateY(-50%) scale(1);   /* ruhig ohne Hover */
-  opacity:1 !important;
-  filter:none !important;
+  mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
+  background-color: #fff !important;
+  transform: translateY(-50%) scale(1);
+  /* ruhig ohne Hover */
+  opacity: 1 !important;
+  filter: none !important;
 }
 
 /* optional: bei echtem Hover leicht vergrößern */
-#faq .ks-acc[open] summary:hover::after{
+#faq .ks-acc[open] summary:hover::after {
   transform: translateY(-50%) scale(1.18);
 }
 
@@ -803,67 +808,98 @@ z-index: 1;
 
 
 /* === TEAM CAROUSEL ==================================================== */
-.ks-team-wrap{
+.ks-team-wrap {
   position: relative;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 12px;
 }
-.ks-team{
+
+.ks-team {
   overflow: hidden;
 }
-.ks-team__track{
+
+.ks-team__track {
   list-style: none;
-  padding: 0; margin: 0;
+  padding: 0;
+  margin: 0;
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: calc(25% - 12px); /* 4 Karten sichtbar */
+  grid-auto-columns: calc(25% - 12px);
+  /* 4 Karten sichtbar */
   gap: 16px;
   transition: transform .28s ease;
 }
 
 /* Karten */
-.ks-team__card{
+.ks-team__card {
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .06);
   overflow: hidden;
 }
-.ks-team__img{
+
+.ks-team__img {
   display: block;
-  width: 100%; aspect-ratio: 4/5; object-fit: cover;
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
   background: #f3f4f6;
 }
-.ks-team__meta{
+
+.ks-team__meta {
   padding: 12px 14px 16px;
 }
-.ks-team__role{
-  font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
-  color:#6b7280; margin-bottom: 4px;
+
+.ks-team__role {
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 4px;
 }
-.ks-team__name{
-  font-weight: 800; line-height: 1.1;
+
+.ks-team__name {
+  font-weight: 800;
+  line-height: 1.1;
 }
 
 /* Pfeile */
-.ks-team__nav{
-  appearance: none; border: 0; background: transparent; cursor: pointer;
-  display: inline-grid; place-items: center;
-  width: 42px; height: 42px; border-radius: 50%;
+.ks-team__nav {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
   transition: background-color .18s ease;
 }
-.ks-team__nav:hover{ background: rgba(15,23,42,.06); }
+
+.ks-team__nav:hover {
+  background: rgba(15, 23, 42, .06);
+}
 
 /* Responsiv: 3 / 2 / 1 sichtbare Karten */
-@media (max-width: 1200px){
-  .ks-team__track{ grid-auto-columns: calc(33.333% - 10px); }
+@media (max-width: 1200px) {
+  .ks-team__track {
+    grid-auto-columns: calc(33.333% - 10px);
+  }
 }
-@media (max-width: 900px){
-  .ks-team__track{ grid-auto-columns: calc(50% - 8px); }
+
+@media (max-width: 900px) {
+  .ks-team__track {
+    grid-auto-columns: calc(50% - 8px);
+  }
 }
-@media (max-width: 560px){
-  .ks-team__track{ grid-auto-columns: 100%; }
+
+@media (max-width: 560px) {
+  .ks-team__track {
+    grid-auto-columns: 100%;
+  }
 }
 
 
@@ -927,18 +963,21 @@ z-index: 1;
 
 
 /* === Split-Layout für „Wer wir sind“ === */
-.ks-split{
+.ks-split {
   display: grid;
-  grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: 32px;
   align-items: center;
 }
-@media (max-width:1024px){
-  .ks-split{ grid-template-columns: 1fr; }
+
+@media (max-width:1024px) {
+  .ks-split {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* === 16:9 Ratio-Wrapper (für YouTube/Videos) === */
-.ratio{
+.ratio {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -946,8 +985,9 @@ z-index: 1;
   border-radius: 12px;
   overflow: hidden;
 }
+
 .ratio iframe,
-.ratio video{
+.ratio video {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -970,26 +1010,29 @@ z-index: 1;
 
 
 
-:root{
+:root {
   --brand-gold: #FDE100;
   --brand-gold-700: #E5C200;
   --brand-black: #111111;
   --brand-white: #FFFFFF;
   --brand-muted: #6B7280;
+  --light-gray: #fafafa;
 
   /* falls schon vorhanden, überschreiben: */
   --news-accent: var(--brand-gold);
   --news-title: var(--brand-black);
   --news-muted: var(--brand-muted);
-  --news-line:  var(--brand-black);
+  --news-line: var(--brand-black);
+  --home-background: var(--light-gray);
 }
 
 /* === BUTTONS – DFS Gold Theme (GLOBAL) ===================== */
 /* Basis (entspricht deinem bisherigen .ks-home-hero .ks-btn) */
-.ks-btn{
+.ks-btn {
   --btn-border: var(--brand-gold);
-  --btn-fill:   var(--brand-black);   /* Schwarz wischt rein */
-  --btn-text:   var(--brand-black);
+  --btn-fill: var(--brand-black);
+  /* Schwarz wischt rein */
+  --btn-text: var(--brand-black);
   --btn-text-h: var(--brand-white);
 
   --btn-radius: 8px;
@@ -1018,51 +1061,63 @@ z-index: 1;
 
   transition: background-size .28s ease, color .22s ease, border-color .22s ease;
 }
+
 /* Hover: Schwarz wischt rein, Border verschwindet */
-.ks-btn:hover{
+.ks-btn:hover {
   background-size: 100% 100%;
   color: var(--btn-text-h);
   border-color: transparent;
 }
+
 /* Fokus (A11y) in Gold */
-.ks-btn:focus-visible{
+.ks-btn:focus-visible {
   outline: 2px solid var(--brand-gold);
   outline-offset: 2px;
 }
 
 /* „MEHR LESEN“: feste Gold-Grundfläche (wie vorher .ks-btn--dark) */
-.ks-btn.ks-btn--dark{
+.ks-btn.ks-btn--dark {
   --btn-base: var(--brand-gold);
   background-color: var(--btn-base);
   color: var(--brand-black);
   border-color: var(--brand-gold);
 }
-.ks-btn.ks-btn--dark:hover{
-  color: var(--brand-white);         /* auf schwarzem Wipe */
+
+.ks-btn.ks-btn--dark:hover {
+  color: var(--brand-white);
+  /* auf schwarzem Wipe */
   border-color: transparent;
 }
 
 /* „JETZT BUCHEN“: Ghost mit Gold-Outline, Hover ohne Outline */
-.ks-btn:not(.ks-btn--dark):hover{
+.ks-btn:not(.ks-btn--dark):hover {
   border-color: transparent;
 }
 
 
 
 /* === FAQ: Kicker-Leiste zentriert (unverändert) ============= */
-#faq .ks-title-wrap { text-align: center; }
-#faq .ks-title-wrap .ks-kicker{
-  position: relative;
-  display: inline-block;   /* Breite = Textbreite */
-  padding-left: 12px;      /* Platz für die Leiste */
+#faq .ks-title-wrap {
+  text-align: center;
 }
-#faq .ks-title-wrap .ks-kicker::before{
+
+#faq .ks-title-wrap .ks-kicker {
+  position: relative;
+  display: inline-block;
+  /* Breite = Textbreite */
+  padding-left: 12px;
+  /* Platz für die Leiste */
+}
+
+#faq .ks-title-wrap .ks-kicker::before {
   left: 0;
   transform: translateY(-50%);
 }
 
-@media (prefers-reduced-motion: reduce){
-  .ks-btn{ transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .ks-btn {
+    transition: none;
+  }
 }
 
 
@@ -1095,30 +1150,32 @@ z-index: 1;
 /* Nur in „Unsere Werte“, „Unser Team“ und „Schnell buchen“ zentrieren */
 #werte .ks-kicker,
 #team .ks-kicker,
-#program-cta .ks-kicker{
-  display:block;
-  width:max-content;      /* nur Textbreite */
-  margin:0 auto 6px;      /* mittig */
-  position:relative;      /* für die gelbe Leiste */
-  padding-left:12px;      /* Platz für die Leiste links */
+#program-cta .ks-kicker {
+  display: block;
+  width: max-content;
+  /* nur Textbreite */
+  margin: 0 auto 6px;
+  /* mittig */
+  position: relative;
+  /* für die gelbe Leiste */
+  padding-left: 12px;
+  /* Platz für die Leiste links */
 }
 
 #werte .ks-kicker::before,
 #team .ks-kicker::before,
-#program-cta .ks-kicker::before{
-  left:0;
-  top:50%;
-  transform:translateY(-50%);
+#program-cta .ks-kicker::before {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 #werte .ks-dir__title,
 #team .ks-dir__title,
-#program-cta .ks-dir__title{
-  text-align:center;
-  margin-inline:auto;
+#program-cta .ks-dir__title {
+  text-align: center;
+  margin-inline: auto;
 }
-
-
 
 
 
@@ -1153,12 +1210,16 @@ z-index: 1;
 
 
 /* DFSCOACH – "MEHR INFOS" Button: transparent + weiß, Hover = Gold-Wipe */
-.ks-btn.ks-btn--light{
+.ks-btn.ks-btn--light {
   /* Farben/Variablen */
-  --btn-border: #fff;              /* weißer Rand (idle) */
-  --btn-fill:   var(--brand-gold); /* Wipe-Farbe beim Hover */
-  --btn-text:   #fff;              /* Text idle = weiß */
-  --btn-text-h: #111;              /* Text auf Gold */
+  --btn-border: #fff;
+  /* weißer Rand (idle) */
+  --btn-fill: var(--brand-gold);
+  /* Wipe-Farbe beim Hover */
+  --btn-text: #fff;
+  /* Text idle = weiß */
+  --btn-text-h: #111;
+  /* Text auf Gold */
 
   position: relative;
   display: inline-block;
@@ -1183,14 +1244,18 @@ z-index: 1;
 
   transition: background-size .28s ease, color .22s ease, border-color .22s ease;
 }
-.ks-btn.ks-btn--light:hover{
-  background-size: 100% 100%;  /* Gold füllt */
-  color: var(--btn-text-h);     /* Text wird dunkel */
-  border-color: transparent;    /* Rand verschwindet optisch */
+
+.ks-btn.ks-btn--light:hover {
+  background-size: 100% 100%;
+  /* Gold füllt */
+  color: var(--btn-text-h);
+  /* Text wird dunkel */
+  border-color: transparent;
+  /* Rand verschwindet optisch */
 }
 
 /* Fokus sichtbar (A11y) */
-.ks-btn.ks-btn--light:focus-visible{
+.ks-btn.ks-btn--light:focus-visible {
   outline: 2px solid var(--brand-gold);
   outline-offset: 2px;
 }
@@ -1225,11 +1290,19 @@ z-index: 1;
 
 .ks-fb-tab.is-active,
 .ks-fb-tab:hover {
-  opacity:1;
+  opacity: 1;
 }
 
 
 .ks-hero-tab.is-active,
 .ks-hero-tab:hover {
-  opacity:1;
+  opacity: 1;
 }
+
+
+
+
+
+
+
+
