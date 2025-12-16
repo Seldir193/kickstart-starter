@@ -1,4 +1,5 @@
 <?php
+
 // ==============================
 // Shortcode: [ks_about] – zentral mit ks-utils.css
 // ==============================
@@ -7,7 +8,12 @@ if (!function_exists('ks_register_about_shortcode')) {
     add_shortcode('ks_about', function () {
       $theme_uri = get_stylesheet_directory_uri();
       $hero = get_the_post_thumbnail_url(null, 'full');
-      if (!$hero) $hero = $theme_uri . '/assets/img/mfs.png';
+      if (!$hero) {
+        $hero = $theme_uri . '/assets/img/mfs.png';
+      }
+
+      // globales Plus-Icon für alle Listen auf dieser Seite
+      //$plus_icon = $theme_uri . '/assets/img/home/plus.svg';
 
       $handle = 'ks-utils';
       if (!wp_style_is($handle, 'enqueued')) {
@@ -24,8 +30,12 @@ if (!function_exists('ks_register_about_shortcode')) {
           $handle = 'kickstart-style';
         }
       }
+
       // Hero-Bild per CSS-Variable setzen (kein inline style am HTML)
-      wp_add_inline_style($handle, '#about-hero{--hero-img:url("'.esc_url($hero).'")}');
+      wp_add_inline_style(
+        $handle,
+        '#about-hero{--hero-img:url("'.esc_url($hero).'")}'
+      );
 
       ob_start(); ?>
       <!-- 1) Wer wir sind -->
@@ -49,13 +59,32 @@ if (!function_exists('ks_register_about_shortcode')) {
                 Unsere Angebote sind vereinsunabhängig und folgen einer ganzheitlichen Ausbildungsphilosophie.</p>
               <p>Wir begleiten Kinder und Jugendliche sportlich und persönlich – Jahr für Jahr.</p>
             </div>
+
             <ul class="ks-list-plus">
-              <li>25 Jahre Erfahrung</li>
-              <li>10 Partner und &gt; 10 Trainer</li>
-              <li>&gt; 7000 Kinder &amp; 10 Partnervereine</li>
-              <li>Wöchentliche Trainerfortbildungen</li>
-              <li>Streamingportal mit &gt; 1000 Videos</li>
-            </ul>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>25 Jahre Erfahrung</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>10 Partner und &gt; 10 Trainer</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>&gt; 7000 Kinder &amp; 10 Partnervereine</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>Wöchentliche Trainerfortbildungen</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>Streamingportal mit &gt; 1000 Videos</span>
+  </li>
+</ul>
+
+
+            
           </div>
         </div>
       </section>
@@ -79,14 +108,37 @@ if (!function_exists('ks_register_about_shortcode')) {
               <p>Wir lehren das Fußballspielen mit Fokus auf Freude, Entwicklung und Charakterbildung.
                  Ausbildung geht bei uns vor Ergebnisdenken – wir fördern nachhaltig und altersgerecht.</p>
             </div>
+            
             <ul class="ks-list-plus">
-              <li>Spaß, Freude und Ausbildung vor Ergebnis</li>
-              <li>&gt; 250 Tricks, Ballannahmen und Schusstechniken</li>
-              <li>Komplexes altersgerechtes Athletiktraining</li>
-              <li>Hohe Trainingseffizienz durch kleine Gruppen</li>
-              <li>Perfekte Trainingsstruktur</li>
-              <li>Individual-, Gruppen- und Mannschaftstaktik im Detail</li>
-            </ul>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>Spaß, Freude und Ausbildung vor Ergebnis</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>&gt; 250 Tricks, Ballannahmen und Schusstechniken</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>Komplexes altersgerechtes Athletiktraining</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>Hohe Trainingseffizienz durch kleine Gruppen</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>Perfekte Trainingsstruktur</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>Individual-, Gruppen- und Mannschaftstaktik im Detail</span>
+  </li>
+</ul>
+
+
+
+            
           </div>
         </div>
       </section>
@@ -139,12 +191,29 @@ if (!function_exists('ks_register_about_shortcode')) {
                  Wir fördern soziale Kompetenz, bieten qualitativ hochwertiges Training und achten auf
                  sportwissenschaftliche Kriterien.</p>
             </div>
+
             <ul class="ks-list-plus">
-              <li>Möglichst vielen Menschen bestmögliches Training ermöglichen</li>
-              <li>Vereine inhaltlich &amp; wirtschaftlich unterstützen</li>
-              <li>Stetige Verbesserung und Weiterentwicklung unserer Philosophie</li>
-              <li>Unsere Philosophie in andere Städte &amp; Länder bringen</li>
-            </ul>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>Möglichst vielen Menschen bestmögliches Training ermöglichen</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>Vereine inhaltlich &amp; wirtschaftlich unterstützen</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>Stetige Verbesserung und Weiterentwicklung unserer Philosophie</span>
+  </li>
+  <li>
+    <span class="ks-list-plus__icon" aria-hidden="true"></span>
+    <span>Unsere Philosophie in andere Städte &amp; Länder bringen</span>
+  </li>
+</ul>
+
+
+
+            
           </div>
         </div>
       </section>
@@ -153,7 +222,9 @@ if (!function_exists('ks_register_about_shortcode')) {
       <section id="standorte" class="ks-sec ks-py-32 ks-bg-deep ks-text-light ks-standorte">
         <div class="container container--1200">
           <h2 class="ks-dir__title ks-text-light">Unsere Standorte</h2>
-          <p class="ks-mt-16"><a href="<?php echo esc_url( home_url('/standorte') ); ?>" class="ks-btn">Zu den Standorten</a></p>
+          <p class="ks-mt-16">
+            <a href="<?php echo esc_url(home_url('/standorte')); ?>" class="ks-btn">Zu den Standorten</a>
+          </p>
         </div>
       </section>
       <?php
@@ -162,9 +233,6 @@ if (!function_exists('ks_register_about_shortcode')) {
   }
   add_action('init', 'ks_register_about_shortcode');
 }
-
-
-
 
 
 
