@@ -1,3 +1,4 @@
+
 <?php
 /**
  * KickStart Starter Theme – Bootstrap Loader (modular)
@@ -26,6 +27,8 @@ add_action('wp_enqueue_scripts', function () {
 
 
 
+
+
 add_action('wp_enqueue_scripts', function () {
   $dir = get_stylesheet_directory();
   $uri = get_stylesheet_directory_uri();
@@ -46,7 +49,8 @@ add_action('wp_enqueue_scripts', function () {
 
 require_once get_stylesheet_directory() . '/inc/newsletter.php';
 
-
+// functions.php
+require_once get_stylesheet_directory() . '/inc/ks-faq.php';
 
 /* Core */
 ks_require('setup.php');
@@ -54,12 +58,21 @@ ks_require('assets.php');
 ks_require('helpers.php');
 ks_require('contact-form.php');
 
+ks_require('ks-feedback.php');
+
+
 /* Shortcodes */
 ks_require('shortcodes/hero-page.php');
 ks_require('shortcodes/franchise.php');
 ks_require('shortcodes/offers-directory.php');
 ks_require('shortcodes/home.php');  
 ks_require('shortcodes/trainer.php'); 
+ks_require('shortcodes/brandbar.php');
+
+
+
+
+
 
 /* Bereits vorhanden (aus vorheriger Arbeit) */
 ks_require('shortcodes-about.php');
@@ -69,6 +82,7 @@ ks_require('news-archive.php');
 
 
 ks_require('shortcodes/whatsapp-locations.php');
+
 
 
 
