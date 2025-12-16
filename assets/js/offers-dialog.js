@@ -1,3 +1,6 @@
+
+
+
 // assets/js/offers-dialog.js
 (function () {
   "use strict";
@@ -10,10 +13,9 @@
     );
   const pick = (o, path) => {
     try {
-      return path.reduce(
-        (a, k) => (a && a[k] != null ? a[k] : null),
-        o
-      ) ?? null;
+      return (
+        path.reduce((a, k) => (a && a[k] != null ? a[k] : null), o) ?? null
+      );
     } catch {
       return null;
     }
@@ -149,10 +151,7 @@
       ? `${(+s.price).toFixed(2)}€`
       : s.priceText || "—";
 
-  
-
-
-    function formatDateDE(v) {
+  function formatDateDE(v) {
     if (!v) return "";
     const d = new Date(v);
     if (isNaN(d.getTime())) return String(v);
@@ -165,7 +164,7 @@
 
   function formatRangeDE(from, to) {
     const hasFrom = !!from;
-    const hasTo   = !!to;
+    const hasTo = !!to;
     if (!hasFrom && !hasTo) return "";
     if (hasFrom && hasTo) return `${formatDateDE(from)} - ${formatDateDE(to)}`;
     if (hasFrom) return formatDateDE(from);
@@ -206,9 +205,6 @@
     const combined = (label + rangePart).trim();
     return combined || range;
   }
-
-
-
 
   /* Query-String für Ferieninfos (an Next.js Booking) */
   function buildHolidayQuery(offer) {
@@ -344,7 +340,7 @@
     return normalizeCoachSrc(direct || ph || "");
   }
 
-  /* ========== body lock ========== */
+  /* ========== body lock (einziger style-Zugriff) ========== */
   const LOCK_ATTR = "data-ks-modal-lock";
   const lockBody = () => {
     if (!document.body.hasAttribute(LOCK_ATTR)) {
@@ -360,116 +356,6 @@
     }
     document.body.classList.remove("ks-modal-open");
   };
-
-  /* ========== enforce modal layout ========== */
-  const forceLayout = (modal, overlay, panel, z = 4000) => {
-    if (modal) {
-      modal.style.position = "fixed";
-      modal.style.inset = "0";
-      modal.style.zIndex = String(z);
-      modal.style.display = "grid";
-      modal.style.placeItems = "center";
-    }
-    if (overlay) {
-      overlay.style.position = "absolute";
-      overlay.style.inset = "0";
-      overlay.style.background = "rgba(0,0,0,.45)";
-      overlay.style.display = "block";
-      overlay.style.zIndex = "0";
-    }
-    if (panel) {
-      panel.style.position = "relative";
-      panel.style.zIndex = "1";
-      panel.style.background = "#fff";
-      panel.style.border = "1px solid #eaeaea";
-      panel.style.borderRadius = "12px";
-      panel.style.boxShadow = "0 16px 40px rgba(0,0,0,.18)";
-      panel.style.padding = "16px";
-      panel.style.width = "min(720px, calc(100% - 24px))";
-      panel.style.maxHeight = "calc(100dvh - 24px)";
-      panel.style.overflow = "auto";
-    }
-  };
-
-  /* ========== BOOKING DIALOG (iframe) ========== */
-  const BookDialog = (() => {
-    function ensure() {
-      let modal = $("#ksBookModal");
-      if (!modal) {
-        modal = document.createElement("div");
-        modal.id = "ksBookModal";
-        modal.className = "ks-dir__modal";
-        modal.hidden = true;
-
-        modal.innerHTML = `
-          <div class="ks-dir__overlay" data-close></div>
-          <div class="ks-dir__panel" role="dialog" aria-modal="true" aria-label="Buchung">
-            <button type="button" class="ks-dir__close" data-close aria-label="Schließen">✕</button>
-            <iframe class="ks-book__frame" src="" title="Buchung" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="width:100%;height:80vh;border:0;border-radius:10px;"></iframe>
-          </div>`;
-
-        document.body.appendChild(modal);
-      }
-      return modal;
-    }
-
-    function open(url, opts = {}) {
-      const modal = ensure();
-      const overlay = $(".ks-dir__overlay", modal);
-      const panel = $(".ks-dir__panel", modal);
-      const frame = $(".ks-book__frame", modal);
-      const closeBtn = $(".ks-dir__close", modal);
-
-      const root = $("#ksDir");
-      const icon =
-        opts.closeIcon ||
-        root?.dataset?.closeIcon ||
-        root?.dataset?.closeicon ||
-        "";
-      if (icon)
-        closeBtn.innerHTML = `<img src="${esc(
-          icon
-        )}" alt="Schließen" width="14" height="14">`;
-
-      forceLayout(modal, overlay, panel, 4100);
-
-      frame.src = url || "#";
-      modal.hidden = false;
-      lockBody();
-
-      const doClose = () => {
-        modal.hidden = true;
-        frame.src = "about:blank";
-        overlay.removeEventListener("click", onOverlay);
-        modal.removeEventListener("click", onAny);
-        document.removeEventListener("keydown", onEsc);
-        unlockBody();
-      };
-      const onOverlay = () => doClose();
-      const onAny = (e) => {
-        if (e.target.closest("[data-close]")) doClose();
-      };
-      const onEsc = (e) => {
-        if (e.key === "Escape") doClose();
-      };
-
-      overlay.addEventListener("click", onOverlay);
-      modal.addEventListener("click", onAny);
-      document.addEventListener("keydown", onEsc);
-    }
-
-    function close() {
-      const modal = $("#ksBookModal");
-      if (!modal || modal.hidden) return;
-      const frame = $(".ks-book__frame", modal);
-      if (frame) frame.src = "about:blank";
-      modal.hidden = true;
-      unlockBody();
-    }
-
-    return { open, close };
-  })();
-
 
   /* ========== Session-Cards ========== */
   function buildSessionsHtml(nextBase, sessions, offer, isPowertraining) {
@@ -493,21 +379,18 @@
         const href = bookHref(nextBase, s, offer);
         const price = formatPrice(s);
 
-               // ----- Zeilenaufbau -----
         let topLine = "";
         let middleLine = "";
+
+        const isPower = isPowertraining;
 
         if (isHoliday) {
           const holidayTitle = getHolidayTitle(offer || {}, s);
 
-          if (!isPowertraining) {
-            // CAMP & andere Ferien: nur Ferien + Zeitraum,
-            // KEINE Tage/Zeit im ersten Dialog
+          if (!isPower) {
             topLine = holidayTitle || "—";
             middleLine = "";
           } else {
-            // Powertraining in den Ferien: Ferien + Zeitraum,
-            // darunter Wochentag + Uhrzeit
             topLine = holidayTitle || weekdayLong || "—";
 
             if (weekdayLong && time && time !== "—") {
@@ -519,13 +402,11 @@
             }
           }
         } else {
-          // Normale Weekly / Individual etc.
           topLine = weekdayLong || "—";
           middleLine = time || "—";
         }
 
-        if (isPowertraining) {
-          // Powertraining: Multi-Select, kein Button in der Zeile
+        if (isPower) {
           return `
           <div class="ks-session ks-session--selectable" data-session-index="${idx}">
             <div class="ks-session__left">
@@ -554,7 +435,6 @@
           </div>`;
         }
 
-        // Standard: jede Zeile mit eigenem Weiter-Button
         const btnLabel = "Weiter";
 
         return `
@@ -627,7 +507,7 @@
               row.classList.remove("ks-session--selected");
             }
           }
-          return; // Kein sofortiger Wechsel in zweiten Dialog
+          return;
         }
 
         const cont = e.target.closest("[data-pt-continue]");
@@ -637,7 +517,6 @@
             !LAST.sessions.length ||
             !LAST.selected.length
           ) {
-            // keine Auswahl -> nichts tun (kein alert)
             return;
           }
 
@@ -659,7 +538,6 @@
             const s = LAST.sessions[i];
             if (!s) return;
 
-            // Tag (lang, mit "s")
             const dayCode =
               Array.isArray(s.days) && s.days.length
                 ? normDay(s.days[0])
@@ -668,7 +546,6 @@
 
             if (dayLabel) selectedDays.push(dayLabel);
 
-            // Meta für zweiten Dialog
             ptMeta.push({
               id: s._id || "",
               day: dayCode || "",
@@ -696,13 +573,11 @@
             url += `&days=${encodeURIComponent(selectedDays.join(","))}`;
           }
 
-          // Ferieninfos an 2. Dialog mitgeben (Camp + Powertraining)
           const holidayQuery = buildHolidayQuery(LAST.offer || {});
           if (holidayQuery) {
             url += holidayQuery;
           }
 
-          // Powertraining-Meta (eine Zeile pro gewählter Session)
           if (ptMeta.length) {
             try {
               url += `&ptmeta=${encodeURIComponent(
@@ -728,7 +603,9 @@
       if (book) {
         e.preventDefault();
         const url =
-          book.getAttribute("data-book-href") || book.getAttribute("href") || "";
+          book.getAttribute("data-book-href") ||
+          book.getAttribute("href") ||
+          "";
         const root = $("#ksDir");
         const icon =
           root?.dataset?.closeIcon || root?.dataset?.closeicon || "";
@@ -782,15 +659,14 @@
       modal.appendChild(panel);
     }
 
-    forceLayout(modal, overlay, panel, 4000);
-
     const root = $("#ksDir");
     const closeURL =
       opts.closeIcon ||
       root?.dataset?.closeIcon ||
       root?.dataset?.closeicon ||
       "";
-    const nextBase = opts.nextBase || root?.dataset?.next || "http://localhost:3000";
+    const nextBase =
+      opts.nextBase || root?.dataset?.next || "http://localhost:3000";
 
     const { name, addr } = nameAddr(offer);
     const gHref = googleMapsHref(offer);
@@ -873,29 +749,6 @@
   }
 
   window.KSOffersDialog = { open, close, __last: LAST };
-
-  /* ========== BACK from embedded booking (Next) ========== */
-  window.addEventListener(
-    "message",
-    (e) => {
-      const d = e && e.data;
-      if (
-        !d ||
-        (d.type !== "KS_BOOKING_BACK" && d.type !== "KS_BOOKING_CLOSE")
-      )
-        return;
-      BookDialog.close();
-      if (
-        d.type === "KS_BOOKING_BACK" &&
-        window.KSOffersDialog &&
-        window.KSOffersDialog.__last?.offer
-      ) {
-        const { offer, sessions, opts } = window.KSOffersDialog.__last;
-        window.KSOffersDialog.open(offer, sessions, opts || {});
-      }
-    },
-    false
-  );
 })();
 
 
