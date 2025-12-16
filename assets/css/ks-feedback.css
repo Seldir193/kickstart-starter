@@ -1,19 +1,22 @@
+
+
 .ks-fb {
   position: relative;
-  background: #f7f7f7;
+  background: var(--dark-gray);
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   --fb-pad: clamp(28px, 6vw, 64px);
   --fb-h: clamp(460px, 45vw, 720px);
-  --fb-wm-size: clamp(80px, 18vw, 240px);
+  --fb-wm-size: clamp(80px, 18vw, 160px);
+  
   --fb-bleed: 200px;
   --fb-left-gap: clamp(24px, 3vw, 80px);
   --fb-nudge: -40px;
   --wm-offset: clamp(16px, 4vw, 64px);
   --wm-shift: -6vh;
   --content-lift: -3vh;
-  
+   
 }
 
 .ks-fb::after {
@@ -29,6 +32,11 @@
   pointer-events: none;
   z-index: 0;
 }
+
+
+
+
+
 
 .ks-fb-tabs {
   max-width: var(--ks-container, 1440px);
@@ -106,7 +114,7 @@
 .ks-fb-media img {
   display: block;
   height: calc(var(--fb-h) + var(--fb-pad));
-  margin-bottom: calc(var(--fb-pad) * -1);
+  margin-bottom: calc(var(--fb-pad) * -1.14);
   width: auto;
   max-width: none;
   object-fit: contain;
@@ -310,6 +318,8 @@ body {
     opacity: 1 !important;
   }
 }
+
+
 
 
 
