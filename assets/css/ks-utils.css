@@ -26,9 +26,52 @@
 .ks-bg-deep{background:#0f0f10}
 .ks-bg-fafa{background:#fafafa} /* neu: ersetzt den letzten inline-style im Franchise-FAQ */
 
+
+
+
+
 /* Listen mit Plus-Markierung (rechte Spalte) */
-.ks-list-plus{list-style:none;margin:0;padding:0;line-height:1.8;font-weight:700}
-.ks-list-plus li::before{content:"+";margin-right:.5em;color:#c00}
+.ks-list-plus{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1.1;
+  font-weight: 800;
+  font-size:20px;
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+}
+
+/* Item: Icon + Text nebeneinander */
+.ks-list-plus li{
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+}
+
+/* Plus-Icon – entspricht früherer Größe/Farbe:
+   Datei: assets/img/home/plus.png (rot) */
+.ks-list-plus__icon{
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  display: inline-block;
+background-color: #D71019;
+ /*/ background-color: rgb(205, 23, 25);*/
+  -webkit-mask: url('../img/home/plus.svg') center/contain no-repeat;
+          mask: url('../img/home/plus.svg') center/contain no-repeat;
+}
+
+/* Textteil nach dem Icon */
+.ks-list-plus li span{
+  display: inline-block;
+}
+
+
+
+
+
 
 /* Letzte Sektion leicht absetzen */
 .ks-standorte{border-top:1px solid rgba(255,255,255,.08)}
@@ -173,5 +216,134 @@ html, body {
 
 
 
+#brandbar{
+  position: relative;
+  background: var(--brand-navy);
+  color:#fff;
+  z-index:-1 !important;
+}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================================================== */
+/*  GLOBAL FAQ – Accordion + 2-Spalten-Layout                                 */
+/*  Wird für Home, Offers und Franchise genutzt                               */
+/* ========================================================================== */
+
+/* Basis: Accordion mit Plus/Minus Icons (über CSS-Variablen) */
+.ks-acc summary{
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-weight: 700;
+  color: #111;
+  padding: 8px 0;
+}
+.ks-acc summary::marker { content: ""; }
+.ks-acc summary::-webkit-details-marker { display: none; }
+
+.ks-acc summary::after{
+  content: "";
+  width: 20px; 
+  height: 20px; 
+  flex: 0 0 20px;
+  background: var(--acc-plus) center / contain no-repeat; /* PLUS */
+  opacity: .9;
+  transition: transform .18s ease, opacity .18s ease, background-image .18s ease;
+}
+.ks-acc[open] summary::after{
+  background-image: var(--acc-minus); /* MINUS wenn geöffnet */
+}
+
+.ks-acc__body{
+  padding: 8px 0 2px;
+  padding-inline: 12px;
+  color: #374151;
+}
+
+@media (max-width: 480px){
+  .ks-acc summary{ gap: 8px; }
+  .ks-acc summary::after{ width: 18px; height: 18px; flex-basis: 18px; }
+}
+
+/* 2-Spalten-Layout für FAQ-Section mit Bild/Video rechts */
+.ks-home-faq{
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Standard-Bildbox rechts (kann per --faq-img gesetzt werden) */
+.ks-home-faq__image{
+  background: var(--faq-img) center/contain no-repeat, #edf2f7;
+  border-radius: 12px;
+  min-height: 280px;
+}
+
+/* Titelblock über beide Spalten + zentriert + Watermark aus data-bgword */
+.ks-home-faq > .ks-title-wrap{
+  grid-column: 1 / -1;
+  text-align: center;
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.ks-home-faq > .ks-title-wrap .ks-kicker{
+  margin: 0 0 6px;
+  letter-spacing: .12em;
+}
+
+.ks-home-faq > .ks-title-wrap::after{
+  content: attr(data-bgword);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -10px;
+  font-weight: 900;
+  letter-spacing: .03em;
+  font-size: clamp(72px, 16vw, 180px);
+  color: rgba(0,0,0,.05);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (max-width: 900px){
+  .ks-home-faq{
+    grid-template-columns: 1fr;
+  }
+  .ks-home-faq > .ks-title-wrap{
+    margin-bottom: 12px;
+  }
+  .ks-home-faq > .ks-title-wrap::after{
+    font-size: clamp(64px, 28vw, 140px);
+    top: -6px;
+  }
+}
