@@ -259,3 +259,9 @@
 
 
 
+
+/* Nur Franchise-Seite: Titel verstecken */
+.page-id-269 .entry-title,
+.page-id-269 h1.entry-title {
+    display: none !important;
+}
