@@ -18,6 +18,31 @@ add_action('init', function () {
     $theme_dir = get_stylesheet_directory();
     $theme_uri = get_stylesheet_directory_uri();
 $select_icon = $theme_uri . '/assets/img/offers/select-caret.svg';
+
+
+
+
+
+
+
+add_action('wp_enqueue_scripts', function () {
+  $theme_dir = get_stylesheet_directory();
+  $theme_uri = get_stylesheet_directory_uri();
+
+  $dd_hover_css = $theme_dir . '/assets/css/dropdown-hover.css';
+  if (!file_exists($dd_hover_css)) return;
+
+  // global laden (leichteste Lösung)
+  wp_enqueue_style(
+    'ks-dropdown-hover',
+    $theme_uri . '/assets/css/dropdown-hover.css',
+    ['kickstart-style'],
+    filemtime($dd_hover_css)
+  );
+}, 20);
+
+
+
    
     /* ==== CSS wie auf der Startseite laden ==== */
 
