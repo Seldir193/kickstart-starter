@@ -315,10 +315,14 @@ if (file_exists($hero_js)) {
       </section>
 
       <!-- 3) Unsere Werte -->
-      <section id="werte" class="ks-sec ks-py-56 ks-home-values">
-        <div class="container">
-          <div class="ks-kicker">WOFÜR WIR STEHEN</div>
-          <h2 class="ks-dir__title">Unsere Werte</h2>
+      <section id="werte"  class="ks-sec ks-py-56 ks-home-values">
+        <div class="container" >
+          
+          <div class="ks-title-wrap" data-bgword="WERTE">
+  <div class="ks-kicker">WOFÜR WIR STEHEN</div>
+  <h2 class="ks-dir__title">Unsere Werte</h2>
+</div>
+
 
           <div class="ks-values">
   <a class="ks-value" href="<?php echo esc_url($werte_target); ?>">
@@ -409,8 +413,12 @@ if (file_exists($hero_js)) {
       <!-- 5) Team -->
       <section id="team" class="ks-sec ks-py-56 ks-bg-white">
         <div class="container container--1400">
-          <div class="ks-kicker">Wir sind für dich da</div>
-          <h2 class="ks-dir__title">Unser Team</h2>
+        
+          <div class="ks-title-wrap" data-bgword="TEAM">
+  <div class="ks-kicker">Wir sind für dich da</div>
+  <h2 class="ks-dir__title">Unser Team</h2>
+</div>
+
 
           <div class="ks-team-wrap">
             <button class="ks-team__nav ks-team__nav--prev" aria-label="Zurück">
@@ -541,10 +549,16 @@ if (file_exists($hero_js)) {
 
 
 <?php if ($show_news): ?>
+
 <section id="news" class="ks-sec ks-py-48">
   <div class="container">
-    <div class="ks-kicker">Aktuelles</div>
-    <h2 class="ks-dir__title">Neuigkeiten</h2>
+    
+
+    <div class="ks-title-wrap" data-bgword="NEWS">
+  <div class="ks-kicker">Aktuelles</div>
+  <h2 class="ks-dir__title">Neuigkeiten</h2>
+</div>
+
   </div>
 
   <?php echo do_shortcode('[ks_news_latest limit="3" thumbs="0"]'); ?>
