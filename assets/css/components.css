@@ -1,58 +1,109 @@
 @layer components {
   /* Hero-Blöcke der Start/Programme-Seite */
-  .home-hero,.programme-hero{
+  .home-hero,
+  .programme-hero{
     background:linear-gradient(180deg,#111 0%,#222 100%);
-    color:#fff; border-radius:16px; padding:48px; margin:24px 0; text-align:center;
+    color:#fff;
+    border-radius:16px;
+    padding:48px;
+    margin:24px 0;
+    text-align:center;
   }
-  .home-hero h1,.programme-hero h1{ font-size:clamp(28px,4vw,48px); }
-  .home-hero p,.programme-hero p{ opacity:.9; }
+  .home-hero h1,
+  .programme-hero h1{ font-size:clamp(28px,4vw,48px); }
+  .home-hero p,
+  .programme-hero p{ opacity:.9; }
 
-  /* Buttons */
-  .btn,.btn-primary,.angebot-button,.btn-book,button.btn-primary{
-    display:inline-flex; align-items:center; justify-content:center;
-    padding:10px 16px; border-radius:10px; border:none;
-    cursor:pointer; font-weight:600; background:var(--brand); color:#fff;
+  /* Buttons (nur Legacy-Buttons .btn / .btn-primary / angebot-button / btn-book)
+     NICHT .ks-btn anfassen – das kommt aus ks-home.css */
+  .btn,
+  .btn-primary,
+  .angebot-button,
+  .btn-book,
+  button.btn-primary{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 16px;
+    border-radius:10px;
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+    background:var(--brand);
+    color:#fff;
     text-decoration:none;
   }
-  .btn-primary:hover,.angebot-button:hover,.btn-book:hover,button.btn-primary:hover{
+  .btn-primary:hover,
+  .angebot-button:hover,
+  .btn-book:hover,
+  button.btn-primary:hover{
     background:var(--brand);
   }
 
   /* Karten & Grid (Programme) */
   .programme-grid{
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:16px; margin:24px auto; max-width:1100px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:16px;
+    margin:24px auto;
+    max-width:1100px;
   }
   .programme-card{
-    background:#fff; border:1px solid #eaeaea; border-radius:12px;
-    padding:16px; display:flex; flex-direction:column; gap:12px;
+    background:#fff;
+    border:1px solid #eaeaea;
+    border-radius:12px;
+    padding:16px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
   }
   .programme-card h2{ font-size:18px; margin:0; }
   .programme-card .facts{ list-style:none; padding:0; margin:0; display:grid; gap:4px; }
   .programme-card .price{ font-weight:700; margin:8px 0; }
 
   /* Kontaktformular & Felder */
-  .contact-form{ max-width:600px; margin:40px auto; padding:24px; background:#fff; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,.05); }
+  .contact-form{
+    max-width:600px;
+    margin:40px auto;
+    padding:24px;
+    background:#fff;
+    border-radius:12px;
+    box-shadow:0 2px 6px rgba(0,0,0,.05);
+  }
   .contact-form h2{ margin-bottom:12px; font-size:28px; }
   .contact-form p{ margin-bottom:20px; color:#444; }
   .contact-form div.ok{ margin:10px 0 16px; }
   .form .field{ margin-bottom:16px; }
   .form label{ font-weight:600; display:block; margin-bottom:6px; }
-  .form input,.form textarea{
-    width:100%; border:1px solid #e5e7eb; border-radius:8px; padding:10px; font-size:16px; background:#fff;
+  .form input,
+  .form textarea{
+    width:100%;
+    border:1px solid #e5e7eb;
+    border-radius:8px;
+    padding:10px;
+    font-size:16px;
+    background:#fff;
   }
   .ok{ color:#065f46; font-weight:600; }
 
-  /* Accordion */
+  /* Accordion (nur Struktur – KEIN Plus/Minus per ::after,
+     weil du das inzwischen sauber in ks-home.css masken-basiert steuerst) */
   .ks-page{ max-width:980px; margin:0 auto; padding:24px; }
   .ks-acc details{ border-top:1px solid #e5e7eb; }
   .ks-acc details + details{ border-top:0; }
   .ks-acc summary{
-    cursor:pointer; padding:16px 0; font-weight:700; font-size:28px; line-height:1.2;
-    display:flex; justify-content:space-between; align-items:center;
+    cursor:pointer;
+    padding:16px 0;
+    font-weight:700;
+    font-size:28px;
+    line-height:1.2;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
   }
-  .ks-acc summary::after{ content:'+'; font-weight:700; }
-  .ks-acc details[open] summary::after{ content:'–'; }
+  /* entfernt:
+     .ks-acc summary::after { content:'+'; }
+     .ks-acc details[open] summary::after { content:'–'; } */
   .ks-acc .acc-body{ padding:0 0 18px 0; color:#374151; }
   .ks-acc .acc-body p{ margin:0 0 10px 0; }
 
@@ -72,7 +123,8 @@
   }
   .ks-programs__row{
     max-width:1100px; margin:0 auto; display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr)); gap:24px; padding:16px 12px; text-align:left;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:24px; padding:16px 12px; text-align:left;
   }
   .ks-programs__col{ min-width:0; }
   .ks-programs__heading{ font-weight:700; margin:0 0 6px; }
@@ -102,43 +154,30 @@
   .ks-modal__close:hover{ background:#fafafa; }
   .ks-modal__title{ margin:0 0 10px; font-weight:700; font-size:20px; }
 
-  /* Franchise/JOBS Split + Hilfs-Elemente */
+  /* Split + Video */
   .ks-split{ display:grid; grid-template-columns:1fr 560px; gap:32px; align-items:start; }
   @media (max-width:900px){ .ks-split{ grid-template-columns:1fr; } }
-  
+
   .ks-split h2{ font-size:52px; line-height:1.05; margin:0 0 12px; font-weight:800; }
   .ks-split p{ color:#374151; line-height:1.7; }
   .ks-vid{ width:100%; }
-  .ks-vid iframe,.ks-vid video,.ks-vid img{ width:100%; height:auto; aspect-ratio:16/9; border:0; border-radius:8px; display:block; }
+  .ks-vid iframe,
+  .ks-vid video,
+  .ks-vid img{
+    width:100%;
+    height:auto;
+    aspect-ratio:16/9;
+    border:0;
+    border-radius:8px;
+    display:block;
+  }
   .ks-right-below{ margin-top:16px; color:#374151; line-height:1.7; }
-  .ks-btn{ display:inline-block; border:2px solid #111; padding:10px 18px; border-radius:6px; text-decoration:none; color:#111; font-weight:700; }
-  .ks-btn:hover{ background:#111; color:#fff; }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Kicker: dezente goldene Leiste links */
+/* Kicker (kann bleiben – ist kein Dropdown-State) */
 .ks-kicker{
-  --gold:#FDE100; /* DFS Gold */
-  color:#222;     /* schöner als tiefes Schwarz, wirkt edler */
+  --gold:#FDE100;
+  color:#222;
   font-weight:500;
   letter-spacing:.12em;
   text-transform:uppercase;
@@ -146,7 +185,6 @@
   position:relative;
   font-size:14px;
 }
-
 .ks-kicker::before{
   content:"";
   position:absolute;
@@ -159,22 +197,10 @@
   opacity:.95;
 }
 
-/* Optional: etwas mehr Abstand unter dem Kicker */
-.ks-dir__title{
-  margin-top:8px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
+/* OPTIONAL: das hier würde ich rauslassen, weil es überall Titles beeinflusst.
+   Wenn du es unbedingt brauchst, sag mir wo genau:
+   .ks-dir__title { margin-top: 8px; }
+*/
 
 
 
