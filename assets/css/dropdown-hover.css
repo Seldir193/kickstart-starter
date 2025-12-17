@@ -1,0 +1,195 @@
+/* assets/css/dropdown-hover.css */
+@layer components {
+
+  /* =========================================================
+     GLOBAL DROPDOWN (FULL)
+     - kompletter Look (Button/Caret/Panel/Optionen)
+     - Hover/Focus Farben
+     - dünner Scrollbar (1:1 wie ks-dir.css)
+     Gilt für: .ks-dd + .ks-dir-dd
+     ========================================================= */
+
+  /* ---------- Button (beide Varianten) ---------- */
+  .ks-dd__btn,
+  .ks-dir-dd__btn{
+    width:100%;
+    height:46px;
+    padding:0 44px 0 14px;
+    border-radius:10px;
+    border:1px solid #d9dee6;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    cursor:pointer;
+    text-align:left;
+    white-space:nowrap;
+    overflow:hidden;
+    box-sizing:border-box;
+  }
+
+  .ks-dd__label,
+  .ks-dir-dd__label{
+    flex:1;
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  /* Hover (wie vorher) */
+  .ks-dd__btn:hover,
+  .ks-dir-dd__btn:hover{
+    border-color: var(--text, #111827);
+  }
+
+  /* Focus/Open (wie vorher) */
+  .ks-dd__btn:focus-visible,
+  .ks-dir-dd__btn:focus-visible,
+  .ks-dd[aria-expanded="true"] > .ks-dd__btn,
+  .ks-dir-dd.is-open > .ks-dir-dd__btn{
+    outline:0;
+    border-color: var(--brand-navy);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-navy) 22%, #fff);
+  }
+
+  /* ---------- Caret ---------- */
+  .ks-dd__caret,
+  .ks-dir-dd__caret{
+    flex:0 0 auto;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    transition:transform .18s ease;
+  }
+
+  .ks-dd__caret img,
+  .ks-dir-dd__caret img{
+    width:18px;
+    height:18px;
+    display:block;
+    transition:transform .18s ease;
+  }
+
+  .ks-dd[aria-expanded="true"] .ks-dd__caret,
+  .ks-dir-dd.is-open .ks-dir-dd__caret{
+    transform: rotate(180deg);
+  }
+
+  .ks-dd[aria-expanded="true"] .ks-dd__caret img,
+  .ks-dir-dd.is-open .ks-dir-dd__caret img{
+    transform: rotate(180deg);
+  }
+
+  /* ---------- Panel ---------- */
+  .ks-dd__panel,
+  .ks-dir-dd__panel{
+    position:absolute;
+    left:0;
+    right:0;
+    top:calc(100% + 8px);
+    background:#fff;
+    border:1px solid #e3e6e8;
+    border-radius:12px;
+    box-shadow:0 16px 40px rgba(0,0,0,.14);
+    z-index:50;
+    padding:0;
+
+    /* Scroll (wie im Directory sinnvoll) */
+    max-height:240px;
+    overflow-y:auto;
+    overflow-x:hidden;
+  }
+
+  /* Hidden-Support */
+  .ks-dd__panel[hidden]{ display:none; }
+
+  /* Sichtbar wenn open */
+  .ks-dd[aria-expanded="true"] .ks-dd__panel{ display:block; }
+  .ks-dir-dd.is-open .ks-dir-dd__panel{ display:block; }
+
+  /* ---------- Optionen ---------- */
+  .ks-dd__option,
+  .ks-dir-dd__option{
+    height:44px;
+    padding:0 12px;
+    display:flex;
+    align-items:center;
+    cursor:pointer;
+    user-select:none;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    border-radius:0;
+  }
+
+  /* Hover nur wenn NICHT selected */
+  .ks-dd__option:hover:not([aria-selected="true"]),
+  .ks-dir-dd__option:hover:not([aria-selected="true"]){
+    background: rgba(15,23,42,.06);
+  }
+
+  /* Selected */
+  .ks-dd__option[aria-selected="true"],
+  .ks-dir-dd__option[aria-selected="true"]{
+    background:#111827;
+    color:#fff;
+  }
+
+  .ks-dd__option[aria-selected="true"]:hover,
+  .ks-dir-dd__option[aria-selected="true"]:hover{
+    background:#111827;
+  }
+
+  /* Keyboard-Fokus sichtbar */
+  .ks-dd__option:focus{ outline:0; }
+  .ks-dd__option:focus-visible,
+  .ks-dir-dd__option:focus-visible{
+    box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--brand-navy) 35%, #fff);
+  }
+
+  /* =========================================================
+     Dünner Scrollbalken (1:1 wie ks-dir.css)
+     ========================================================= */
+
+  .ks-dd__panel::-webkit-scrollbar,
+  .ks-dir-dd__panel::-webkit-scrollbar{
+    width: 10px;
+  }
+
+  .ks-dd__panel::-webkit-scrollbar-thumb,
+  .ks-dir-dd__panel::-webkit-scrollbar-thumb{
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+    background-color: rgba(15,23,42,.28);
+  }
+
+  /* Firefox */
+  .ks-dd__panel,
+  .ks-dir-dd__panel{
+    scrollbar-width: thin;
+    scrollbar-color: rgba(15,23,42,.28) transparent;
+  }
+
+  /* Motion reduzieren */
+  @media (prefers-reduced-motion: reduce){
+    .ks-dd__caret,
+    .ks-dd__caret img,
+    .ks-dir-dd__caret,
+    .ks-dir-dd__caret img{ transition:none; }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
