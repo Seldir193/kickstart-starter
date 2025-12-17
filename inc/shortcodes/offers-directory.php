@@ -302,7 +302,13 @@ add_action('wp_enqueue_scripts', function () {
        data-watermark="<?php echo esc_attr($watermark); ?>"
        style="--hero-img:url('<?php echo esc_url($hero_url); ?>')">
     <div class="ks-dir__hero-inner">
-      <div class="ks-dir__crumb">Home <span class="sep">/</span> <?php echo esc_html($heading); ?></div>
+      
+    
+      <div class="ks-dir__crumb">
+  <a class="ks-dir__crumb-home" href="<?php echo esc_url( home_url('/') ); ?>">Home</a>
+  <span class="sep">/</span>
+  <?php echo esc_html($heading); ?>
+</div>
       <h1 class="ks-dir__hero-title"><?php echo esc_html($heading); ?></h1>
     </div>
   </div>
