@@ -1,288 +1,183 @@
-
-/* =========================================================
-   WhatsApp Quick Contact – PRO (komplett)
+/* assets/css/ks-wa.css
+   =========================================================
+   WhatsApp Quick Contact – CLEAN (nur WA-Layout + Button)
+   Dropdown-Look kommt ausschließlich aus GLOBAL .ks-dd CSS
    ========================================================= */
 
-/* Pfad zum WhatsApp-Icon (anpassen, falls nötig) */
+@layer pages {
 
+  /* ===== Full-bleed Streifen ===== */
+  .ks-wa-strip{
+    position: relative;
+    background:#fafafa;
+    width:100vw;
+    margin-left:calc(50% - 50vw);
+    margin-right:calc(50% - 50vw);
+    border-top:1px solid #eee;
+    border-bottom:1px solid #eee;
+  }
 
-
-/* ===== Full-bleed Streifen ===== */
-.ks-wa-strip{
-  position: relative;
-  background:#fafafa;
-  width:100vw;
-  margin-left:calc(50% - 50vw);
-  margin-right:calc(50% - 50vw);
-  border-top:1px solid #eee;
-  border-bottom:1px solid #eee;
-}
-
-/* ===== Innenlayout ===== */
-.ks-wa-inner{
-  max-width:var(--ks-container, 1440px);
-  margin:0 auto;
-  padding:22px 16px;
-  display:flex;
-  justify-content:flex-start;
-  align-items:center;
-  gap:16px;
-}
-
-/* ===== Text ===== */
-.ks-wa-text{
-  margin:0;
-  margin-right:16px;
-  color:#2a3036;
-  font-size:clamp(14px, 1.05vw, 16px);
-  line-height:1.5;
-}
-.ks-wa-text strong{
-  color:#111;
-  font-weight:800;
-  letter-spacing:.01em;
-}
-
-/* ===== Formular-Reihe (Dropdown + Button) ===== */
-.ks-wa-form{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-/* ===== WhatsApp-Button ===== */
-.ks-wa-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  height:46px;
-  padding:0 18px;
-  border-radius:999px;
-  background:#25D366;
-  color:#fff;
-  font-weight:700;
-  text-decoration:none;
-  white-space:nowrap;
-  box-shadow:0 6px 18px rgba(37,211,102,.22);
-  transition:
-    transform .15s cubic-bezier(.22,.61,.36,1),
-    box-shadow .2s ease,
-    background-color .15s ease;
-  border:2px solid #fff; /* weißer Rand */
-  -webkit-appearance:none;
-          appearance:none;
-}
-.ks-wa-btn:hover{
-  background:#1ebe57;
-  transform:translateY(-1px);
-  box-shadow:0 10px 24px rgba(37,211,102,.28);
-  border-color:#fff;
-}
-.ks-wa-btn:active{
-  transform:translateY(1px);
-  box-shadow:0 6px 14px rgba(37,211,102,.25);
-  border-color:#fff;
-}
-.ks-wa-btn:focus,
-.ks-wa-btn:focus-visible{
-  outline:none;
-  box-shadow:
-    0 0 0 3px rgba(255,255,255,.85),
-    0 6px 18px rgba(37,211,102,.22);
-}
-
-
-/* ===== Custom-Dropdown ===== */
-.ks-wa-dd{ position:relative; }
-.ks-wa-dd__btn{
-  height:46px; min-width:220px; padding:0 14px;
-  border:1px solid #e3e6e8; border-radius:10px; background:#fff;
-  display:flex; align-items:center; justify-content:space-between;
-  font-weight:600; color:#2a3036;
-}
-.ks-wa-dd__btn:focus-visible{
-  outline:3px solid rgba(37,211,102,.35);
-  outline-offset:2px;
-}
-
-/* Panel: max. 2 Optionen sichtbar + Scroll; Auto-Drop-Up */
-.ks-wa-dd__panel{
-  position:absolute; left:0; right:0; top:calc(100% + 6px);
-  background:#fff; border:1px solid #e3e6e8; border-radius:12px;
-  box-shadow:0 12px 24px rgba(0,0,0,.08);
-  max-height:calc(2 * 44px);
-  overflow-y:auto;
-  z-index:1000;
-}
-.ks-wa-dd__panel.is-dropup{
-  top:auto; bottom:calc(100% + 6px);
-}
-
-.ks-wa-dd__option{
-  padding:10px 14px; line-height:24px; cursor:pointer;
-}
-.ks-wa-dd__option:hover{ background:#f6f7f8; }
-
-/* ===== Screenreader-Only Utility ===== */
-.screen-reader-only{
-  position:absolute !important;
-  width:1px; height:1px; padding:0; margin:-1px;
-  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
-}
-
-/* ===== Responsive ===== */
-@media (max-width:1024px){
-  .ks-wa-form{ flex-wrap:wrap; }
-}
-
-@media (max-width:992px){
+  /* ===== Innenlayout ===== */
   .ks-wa-inner{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:10px;
+    max-width:var(--ks-container, 1440px);
+    margin:0 auto;
+    padding:22px 16px;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    gap:16px;
   }
+
+  /* ===== Text ===== */
+  .ks-wa-text{
+    margin:0;
+    margin-right:16px;
+    color:#2a3036;
+    font-size:clamp(14px, 1.05vw, 16px);
+    line-height:1.5;
+  }
+  .ks-wa-text strong{
+    color:#111;
+    font-weight:800;
+    letter-spacing:.01em;
+  }
+
+  /* ===== Formular-Reihe (Dropdown + Button) ===== */
   .ks-wa-form{
-    flex-direction:column;
-    align-items:flex-start;
-    width:100%;
-    gap:10px;
+    display:flex;
+    align-items:center;
+    gap:12px;
   }
-  .ks-wa-dd__btn, .ks-wa-btn{ width:100%; }
+
+  /* nur Breite/Platz – Styling kommt global */
+  .ks-wa-strip .ks-dd{
+    min-width:220px;
+    max-width:100%;
+  }
+
+  /* ===== WhatsApp-Button ===== */
+  .ks-wa-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    height:46px;
+    padding:0 18px;
+    border-radius:999px;
+    background:#25D366;
+    color:#fff;
+    font-weight:700;
+    text-decoration:none;
+    white-space:nowrap;
+    box-shadow:0 6px 18px rgba(37,211,102,.22);
+    transition:
+      transform .15s cubic-bezier(.22,.61,.36,1),
+      box-shadow .2s ease,
+      background-color .15s ease;
+    border:2px solid #fff;
+    -webkit-appearance:none;
+            appearance:none;
+    cursor:pointer;
+  }
+  .ks-wa-btn:hover{
+    background:#1ebe57;
+    transform:translateY(-1px);
+    box-shadow:0 10px 24px rgba(37,211,102,.28);
+  }
+  .ks-wa-btn:active{
+    transform:translateY(1px);
+    box-shadow:0 6px 14px rgba(37,211,102,.25);
+  }
+  .ks-wa-btn:focus,
+  .ks-wa-btn:focus-visible{
+    outline:none;
+    box-shadow:
+      0 0 0 3px rgba(255,255,255,.85),
+      0 6px 18px rgba(37,211,102,.22);
+  }
+
+  /* ===== Icon im Button (inline SVG) ===== */
+  .ks-wa-ico{
+    display:inline-flex;
+    width:18px;
+    height:18px;
+    line-height:0;
+  }
+  .ks-wa-ico svg{
+    width:18px;
+    height:18px;
+    display:block;
+    color:currentColor;
+  }
+
+  /* ===== Disabled State (dein aria-disabled) ===== */
+  .ks-wa-form [aria-disabled="true"]{
+    opacity:.55;
+    cursor:not-allowed;
+    pointer-events:none;
+  }
+  .ks-wa-form [aria-disabled="false"]{
+    cursor:pointer;
+  }
+
+  /* ===== Screenreader-Only Utility ===== */
+  .screen-reader-only{
+    position:absolute !important;
+    width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0 0 0 0);
+    white-space:nowrap; border:0;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width:1024px){
+    .ks-wa-form{ flex-wrap:wrap; }
+  }
+
+  @media (max-width:992px){
+    .ks-wa-inner{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:10px;
+    }
+    .ks-wa-form{
+      flex-direction:column;
+      align-items:flex-start;
+      width:100%;
+      gap:10px;
+    }
+    .ks-wa-strip .ks-dd{ width:100%; min-width:0; }
+    .ks-wa-btn{ width:100%; justify-content:center; }
+  }
+
+  @media (max-width:768px){
+    .ks-wa-inner{ padding:20px 16px; }
+    .ks-wa-text{ max-width:60ch; }
+    .ks-wa-btn{ height:44px; padding:0 16px; }
+  }
+
+  /* ===== Reduced Motion ===== */
+  @media (prefers-reduced-motion: reduce){
+    .ks-wa-btn{ transition:none; }
+  }
+
+
+
+
+
+
+
+
+/* WhatsApp: Panel zeigt max 2 Zeilen, Rest scrollbar */
+.ks-wa-strip .ks-dd__panel{
+  max-height: calc(2 * 44px);
+  overflow-y: auto;
+  background: #fff; /* sicher weiß */
 }
 
-@media (max-width:768px){
-  .ks-wa-inner{ padding:20px 16px; }
-  .ks-wa-text{ max-width:60ch; }
-  .ks-wa-btn{ height:44px; padding:0 16px; }
-}
 
-/* ===== Reduced Motion ===== */
-@media (prefers-reduced-motion: reduce){
-  .ks-wa-btn{ transition:none; }
-}
 
 
 
 
-
-
-
-
-
-/* Icon im Button (inline SVG) */
-.ks-wa-btn{ display:inline-flex; align-items:center; gap:10px; cursor:pointer;}
-.ks-wa-ico{ display:inline-flex; width:18px; height:18px; line-height:0; }
-.ks-wa-ico svg{ width:18px; height:18px; display:block; color:currentColor; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* === WhatsApp Dropdown: Klassen-Mapping auf .ks-dd =================== */
-/* Wrapper */
-.ks-dd{ position: relative; }
-
-/* Button (wie .ks-wa-dd__btn) */
-.ks-dd__btn{
-  height:46px; min-width:220px; padding:0 14px;
-  border:1px solid #e3e6e8; border-radius:10px; background:#fff;
-  display:flex; align-items:center; justify-content:space-between;
-  font-weight:600; color:#2a3036;
-}
-.ks-dd__btn:focus-visible{
-  outline:3px solid rgba(37,211,102,.35);
-  outline-offset:2px;
-}
-
-/* Panel (wie .ks-wa-dd__panel) */
-.ks-dd__panel{
-  position:absolute; left:0; right:0; top:calc(100% + 6px);
-  background:#fff; 
-  /*border:1px solid #e3e6e8;*/
-    border-color: color-mix(in oklab, var(--brand-navy) 20%, #d9dee6);
-   border-radius:12px;
-  box-shadow:0 12px 24px rgba(0,0,0,.08);
-  max-height:calc(2 * 44px);
-  overflow-y:auto;
-  z-index:1000;
-}
-/* falls hidden gesetzt ist -> unsichtbar */
-.ks-dd__panel[hidden]{ display:none; }
-
-/* Auto-Dropup wie vorher */
-.ks-dd__panel.is-dropup{ top:auto; bottom:calc(100% + 6px); }
-
-/* Option (wie .ks-wa-dd__option) */
-.ks-dd__option{ padding:10px 14px; line-height:24px; cursor:pointer; }
-.ks-dd__option:hover{ background:#f6f7f8; }
-
-/* optional: wenn JS .is-open setzt, Panel sicher anzeigen */
-.ks-dd.is-open .ks-dd__panel{ display:block; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Caret-Icon animiert drehen, wenn geöffnet */
-.ks-wa-dd__caret{
-  display:inline-block;
-  transition: transform .18s ease;
-}
-
-/* beim Öffnen (Button hat aria-expanded="true") */
-.ks-wa-dd__btn[aria-expanded="true"] .ks-wa-dd__caret{
-  transform: rotate(180deg);
-}
-
-/* (optional) auch für das generische Dropdown verwenden */
-.ks-dd__caret{ transition: transform .18s ease; }
-.ks-dd__btn[aria-expanded="true"] .ks-dd__caret{ transform: rotate(180deg); }
-
-/* (optional) Bewegungen reduzieren, wenn gewünscht */
-@media (prefers-reduced-motion: reduce){
-  .ks-wa-dd__caret,
-  .ks-dd__caret{ transition: none; }
 }
 
 
@@ -303,33 +198,6 @@
 
 
 
-/* Caret-Grundform (falls global nicht vorhanden) */
-.ks-wa-strip .ks-dd__caret{
-  width:0; height:0;
-  border-left:5px solid transparent;
-  border-right:5px solid transparent;
-  border-top:6px solid #5b6472; /* Default */
-  transition: transform .18s ease, border-top-color .18s ease;
-}
-
-/* Hover: Außenrand schwarz + Caret mitziehen */
-.ks-wa-strip .ks-dd__btn:hover{
-  border-color: var(--text);
-}
-.ks-wa-strip .ks-dd__btn:hover .ks-dd__caret{
-  border-top-color: var(--text); /* ← Tippfehler behoben */
-}
-
-/* Focus/Geöffnet: var(--brand-navy) */
-.ks-wa-strip .ks-dd__btn:focus-visible,
-.ks-wa-strip .ks-dd.is-open .ks-dd__btn{
-  outline: 0;
-  border-color: var(--brand-navy);
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-navy) 22%, white);
-}
-.ks-wa-strip .ks-dd.is-open .ks-dd__caret{
-  border-top-color: var(--brand-navy);
-}
 
 
 
@@ -348,15 +216,5 @@
 
 
 
-
-/* WhatsApp-Button Zustände (optional, nicer UX) */
-.ks-wa-strip .ks-wa-form [aria-disabled="true"]{
-  opacity:.55;
-  cursor:not-allowed;
-  pointer-events:none;
-}
-.ks-wa-strip .ks-wa-form [aria-disabled="false"]{
-  cursor:pointer;
-}
 
 
