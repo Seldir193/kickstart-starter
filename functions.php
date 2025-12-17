@@ -21,7 +21,8 @@ add_action('wp_enqueue_scripts', function () {
     'ks-werbung',
     get_stylesheet_directory_uri() . '/assets/css/ks-werbung.css',
     [],
-    '1.0'
+    
+    filemtime(get_stylesheet_directory() . '/assets/css/ks-werbung.css')
   );
 });
 
@@ -44,6 +45,35 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('ks-trainer', get_stylesheet_directory_uri() . '/assets/css/ks-trainer.css', [], filemtime($file));
   }
 }, 30);
+
+    
+
+
+ wp_enqueue_script(
+  'ks-whatsapp-locations',
+  get_stylesheet_directory_uri() . '/assets/js/ks-whatsapp-locations.js',
+  [],
+  '1.0.0',
+  true
+);
+
+
+
+
+// functions.php
+add_action('wp_enqueue_scripts', function () {
+  $file = get_stylesheet_directory() . '/assets/js/ks-dropdown.js';
+  if (file_exists($file)) {
+    wp_enqueue_script(
+      'ks-dropdown',
+      get_stylesheet_directory_uri() . '/assets/js/ks-dropdown.js',
+      [],
+      filemtime($file),
+      true
+    );
+  }
+});
+
 
 
 
