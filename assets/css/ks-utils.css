@@ -1,260 +1,216 @@
-/* === KS Utilities (zentral, schlank) === */
+/* === KS Utilities (zentral, schlank) ===================================== */
 
 /* Spacing */
-.ks-py-32{padding-top:32px;padding-bottom:32px}
-.ks-py-48{padding-top:48px;padding-bottom:48px}
-.ks-py-56{padding-top:56px;padding-bottom:56px}
-.ks-mb-16{margin-bottom:16px}
-.ks-mt-16{margin-top:16px}
-.ks-mt-28{margin-top:28px}
-.ks-fw-700{font-weight:700}
+.ks-py-32 { padding-top: 32px; padding-bottom: 32px; }
+.ks-py-48 { padding-top: 48px; padding-bottom: 48px; }
+.ks-py-56 { padding-top: 56px; padding-bottom: 56px; }
+.ks-mb-16 { margin-bottom: 16px; }
+.ks-mt-16 { margin-top: 16px; }
+.ks-mt-28 { margin-top: 28px; }
+.ks-fw-700 { font-weight: 700; }
 
 /* Text / Align */
-.ks-text-center{text-align:center}
-.ks-text-light{color:#fff !important}
-.ks-text-accent{color:#e25}
-.ks-link-light{color:#fff;text-decoration:underline}
-.ks-link-light:hover{opacity:.9}
+.ks-text-center { text-align: center; }
+.ks-text-light { color: #fff !important; }
+.ks-text-accent { color: #e25; }
+.ks-link-light { color: #fff; text-decoration: underline; }
+.ks-link-light:hover { opacity: .9; }
 
 /* Grids */
-.ks-grid-12-8{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:start}
-.ks-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.ks-grid-12-8 {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 40px;
+  align-items: start;
+}
+.ks-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
 
 /* Hintergründe */
-.ks-bg-white{background:#fff}
-.ks-bg-dark{background:#1f2a33}
-.ks-bg-deep{background:#0f0f10}
-.ks-bg-fafa{background:#fafafa} /* neu: ersetzt den letzten inline-style im Franchise-FAQ */
+.ks-bg-white { background: #fff; }
+.ks-bg-dark { background: #1f2a33; }
+.ks-bg-deep { background: #0f0f10; }
+.ks-bg-fafa { background: #fafafa; }
+
+/* Letzte Sektion leicht absetzen */
+.ks-standorte { border-top: 1px solid rgba(255, 255, 255, .08); }
+
+/* Global: kein horizontales Overflow */
+html, body { overflow-x: clip; }
+@supports not (overflow-x: clip) {
+  html, body { overflow-x: hidden; }
+}
+
+/* =========================================================
+   Kicker (Text + gelbe Linie direkt daneben)
+   ========================================================= */
+.ks-kicker{
+  position: relative;
+  padding-left: 12px;
+  color: var(--text, #222);
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 1.2;
+}
+.ks-kicker::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--brand-gold, #FDE100);
+}
+
+/* Kicker-Linie immer direkt neben dem Wort (zentriert) */
+#faq .ks-title-wrap .ks-kicker,
+#dir-faq .ks-title-wrap .ks-kicker,
+#kontakt .ks-kicker,
+#werte .ks-kicker,
+#news .ks-title-wrap .ks-kicker,
+#team .ks-kicker,
+#program-cta .ks-kicker{
+  display: block;
+  width: max-content;
+  margin: 0 auto 6px;
+  
+}
 
 
 
 
 
-/* Listen mit Plus-Markierung (rechte Spalte) */
+#kontakt .ks-kicker {
+color: var( --mega-bg, #fff);
+}
+
+/* =========================================================
+   Listen mit Plus-Markierung (rechte Spalte)
+   ========================================================= */
 .ks-list-plus{
   list-style: none;
   margin: 0;
   padding: 0;
   line-height: 1.1;
   font-weight: 800;
-  font-size:20px;
+  font-size: 20px;
   display: flex;
   flex-direction: column;
-  gap:10px;
+  gap: 10px;
 }
-
-/* Item: Icon + Text nebeneinander */
 .ks-list-plus li{
   display: flex;
   align-items: flex-start;
-  gap: 0.5em;
+  gap: .5em;
 }
-
-/* Plus-Icon – entspricht früherer Größe/Farbe:
-   Datei: assets/img/home/plus.png (rot) */
 .ks-list-plus__icon{
   width: 26px;
   height: 26px;
   flex: 0 0 26px;
   display: inline-block;
-background-color: #D71019;
- /*/ background-color: rgb(205, 23, 25);*/
-  -webkit-mask: url('../img/home/plus.svg') center/contain no-repeat;
-          mask: url('../img/home/plus.svg') center/contain no-repeat;
+  background-color: #D71019;
+  -webkit-mask: url("../img/home/plus.svg") center/contain no-repeat;
+          mask: url("../img/home/plus.svg") center/contain no-repeat;
 }
-
-/* Textteil nach dem Icon */
-.ks-list-plus li span{
-  display: inline-block;
-}
-
-
-
-
-
-
-/* Letzte Sektion leicht absetzen */
-.ks-standorte{border-top:1px solid rgba(255,255,255,.08)}
-
-
+.ks-list-plus li span{ display: inline-block; }
 
 /* ===========================
    Kontakt-Icons (About & Offers)
    =========================== */
-@layer pages {
-  /* Smooth Scrolling (einmal global) */
-  html { scroll-behavior: smooth; }
+@layer pages{
+  html{ scroll-behavior: smooth; }
 
-  /* Kontakt: Text-Links ohne Unterstreichung/Linie im Kontakt-Block */
-  #kontakt .ks-contact-cards a.ks-link-light { text-decoration: none !important; }
+  #kontakt .ks-contact-cards a.ks-link-light{ text-decoration: none !important; }
+  #kontakt .ks-contact-cards a.ks-contact-iconwrap{ text-decoration: none; }
 
-  /* Runder Icon-Link ohne Unterstreichung */
-  #kontakt .ks-contact-cards a.ks-contact-iconwrap { text-decoration: none; }
-
-  /* Runder Wrapper + weicher Hover/Lift */
   #kontakt .ks-contact-cards .ks-contact-iconwrap{
-    display:inline-flex;justify-content:center;align-items:center;
-    width:56px;height:56px;border-radius:999px;
-    background:#ffffff;cursor:pointer;
-    will-change:transform,background-color,box-shadow;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    background: #fff;
+    cursor: pointer;
+    will-change: transform, background-color, box-shadow;
     transition:
       background-color .28s cubic-bezier(.22,.61,.36,1),
       box-shadow .28s cubic-bezier(.22,.61,.36,1),
       transform .22s cubic-bezier(.22,.61,.36,1);
-    margin-bottom:12px;
+    margin-bottom: 12px;
   }
 
-  /* Icon als Mask – Standardfarbe DFS-Rot */
   #kontakt .ks-contact-cards .ks-contact-icon{
-    width:20px;height:20px;background:#D71019;
+    width: 20px;
+    height: 20px;
+    background: #D71019;
     -webkit-mask: var(--icon) center/contain no-repeat;
             mask: var(--icon) center/contain no-repeat;
-    display:inline-block;
-    transition:background-color .28s cubic-bezier(.22,.61,.36,1);
+    display: inline-block;
+    transition: background-color .28s cubic-bezier(.22,.61,.36,1);
   }
 
-  /* Hover/Focus: Kreis grau, Icon weiß, sanfter Lift */
   #kontakt .ks-contact-cards .ks-contact-iconwrap:hover,
   #kontakt .ks-contact-cards .ks-contact-iconwrap:focus-visible{
-    background:#394248;
-    box-shadow:0 8px 20px rgba(0,0,0,.14);
-    transform:translate3d(0,-2px,0);
+    background: #394248;
+    box-shadow: 0 8px 20px rgba(0,0,0,.14);
+    transform: translate3d(0,-2px,0);
   }
   #kontakt .ks-contact-cards .ks-contact-iconwrap:hover .ks-contact-icon,
   #kontakt .ks-contact-cards .ks-contact-iconwrap:focus-visible .ks-contact-icon{
-    background:#ffffff; /* Icon → weiß */
+    background: #fff;
   }
 
-  /* Active: leicht zurück */
   #kontakt .ks-contact-cards .ks-contact-iconwrap:active{
-    transform:translate3d(0,-1px,0);
-    box-shadow:0 6px 16px rgba(0,0,0,.12);
+    transform: translate3d(0,-1px,0);
+    box-shadow: 0 6px 16px rgba(0,0,0,.12);
   }
 
-  /* Größer auf großen Screens */
-  @media (min-width:992px){
-    #kontakt .ks-contact-cards .ks-contact-iconwrap{width:60px;height:60px}
-    #kontakt .ks-contact-cards .ks-contact-icon{width:22px;height:22px}
+  @media (min-width: 992px){
+    #kontakt .ks-contact-cards .ks-contact-iconwrap{ width: 60px; height: 60px; }
+    #kontakt .ks-contact-cards .ks-contact-icon{ width: 22px; height: 22px; }
   }
 
-  /* Barrierearm: Bewegungen reduzieren */
-  @media (prefers-reduced-motion:reduce){
+  @media (prefers-reduced-motion: reduce){
     #kontakt .ks-contact-cards .ks-contact-iconwrap,
-    #kontakt .ks-contact-cards .ks-contact-icon{transition:none}
+    #kontakt .ks-contact-cards .ks-contact-icon{ transition: none; }
   }
 }
-
-/*html, body { overflow-x:hidden; }*/
-
-
-
-
-/* ks-utils.css – GLOBAL & EINHEITLICH */
-html, body {
-  overflow-x: clip;
-}
-
-/* Fallback für Browser ohne 'clip'-Support */
-@supports not (overflow-x: clip) {
-  html, body { overflow-x: hidden; }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* CTA-Dropdown: Hover/Focus/Offen – nur Randfarbe */
-#program-cta .ks-dd__btn{
-  transition: border-color .2s ease, box-shadow .2s ease;
-}
-
-/* Hover: Rand schwarz */
-#program-cta .ks-dd__btn:hover{
-  border-color: var(--text);                 /* schwarz */
-}
-
-/* Tastatur-Fokus: Rand in Brand-Navy + dezenter Ring */
+#program-cta .ks-dd__btn{ transition: border-color .2s ease, box-shadow .2s ease; }
+#program-cta .ks-dd__btn:hover{ border-color: var(--text, #222); }
 #program-cta .ks-dd__btn:focus-visible{
   outline: none;
   border-color: var(--brand-navy);
   box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-navy) 25%, transparent);
 }
-
-/* Geklickt/aufgeklappt: Navy beibehalten (überstimmt Hover) */
 #program-cta .ks-dd[aria-expanded="true"] .ks-dd__btn{
   border-color: var(--brand-navy);
   box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-navy) 25%, transparent);
 }
+#program-cta .ks-dd[aria-expanded="true"] .ks-dd__btn:hover{ border-color: var(--brand-navy); }
 
-/* Sicherheit: auch bei Hover im offenen Zustand Navy lassen */
-#program-cta .ks-dd[aria-expanded="true"] .ks-dd__btn:hover{
-  border-color: var(--brand-navy);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Brandbar */
 #brandbar{
   position: relative;
   background: var(--brand-navy);
-  color:#fff;
-  z-index:-1 !important;
+  color: #fff;
+  z-index: -1 !important;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ========================================================================== */
-/*  GLOBAL FAQ – Accordion + 2-Spalten-Layout                                 */
-/*  Wird für Home, Offers und Franchise genutzt                               */
+/*  GLOBAL FAQ – Accordion + 2-Spalten-Layout                                  */
 /* ========================================================================== */
 
-/* Basis: Accordion mit Plus/Minus Icons (über CSS-Variablen) */
+/* Basis-Accordion */
 .ks-acc summary{
   list-style: none;
   cursor: pointer;
@@ -266,21 +222,8 @@ html, body {
   color: #111;
   padding: 8px 0;
 }
-.ks-acc summary::marker { content: ""; }
-.ks-acc summary::-webkit-details-marker { display: none; }
-
-.ks-acc summary::after{
-  content: "";
-  width: 20px; 
-  height: 20px; 
-  flex: 0 0 20px;
-  background: var(--acc-plus) center / contain no-repeat; /* PLUS */
-  opacity: .9;
-  transition: transform .18s ease, opacity .18s ease, background-image .18s ease;
-}
-.ks-acc[open] summary::after{
-  background-image: var(--acc-minus); /* MINUS wenn geöffnet */
-}
+.ks-acc summary::marker{ content: ""; }
+.ks-acc summary::-webkit-details-marker{ display: none; }
 
 .ks-acc__body{
   padding: 8px 0 2px;
@@ -288,39 +231,27 @@ html, body {
   color: #374151;
 }
 
-@media (max-width: 480px){
-  .ks-acc summary{ gap: 8px; }
-  .ks-acc summary::after{ width: 18px; height: 18px; flex-basis: 18px; }
-}
-
-/* 2-Spalten-Layout für FAQ-Section mit Bild/Video rechts */
+/* 2-Spalten-FAQ Layout (Home/Offers) */
 .ks-home-faq{
   display: grid;
   grid-template-columns: 1.15fr .85fr;
   gap: 24px;
   align-items: start;
 }
-
-/* Standard-Bildbox rechts (kann per --faq-img gesetzt werden) */
 .ks-home-faq__image{
   background: var(--faq-img) center/contain no-repeat, #edf2f7;
   border-radius: 12px;
   min-height: 280px;
 }
 
-/* Titelblock über beide Spalten + zentriert + Watermark aus data-bgword */
-.ks-home-faq > .ks-title-wrap{
+/* Titelblock + Watermark (wenn data-bgword gesetzt ist) */
+.ks-home-faq > .ks-title-wrap,
+#dir-faq .ks-title-wrap{
   grid-column: 1 / -1;
   text-align: center;
   position: relative;
   margin-bottom: 18px;
 }
-
-.ks-home-faq > .ks-title-wrap .ks-kicker{
-  margin: 0 0 6px;
-  letter-spacing: .12em;
-}
-
 .ks-home-faq > .ks-title-wrap::after{
   content: attr(data-bgword);
   position: absolute;
@@ -336,14 +267,179 @@ html, body {
 }
 
 @media (max-width: 900px){
-  .ks-home-faq{
-    grid-template-columns: 1fr;
-  }
-  .ks-home-faq > .ks-title-wrap{
-    margin-bottom: 12px;
-  }
+  .ks-home-faq{ grid-template-columns: 1fr; }
+  .ks-home-faq > .ks-title-wrap{ margin-bottom: 12px; }
   .ks-home-faq > .ks-title-wrap::after{
     font-size: clamp(64px, 28vw, 140px);
     top: -6px;
   }
+}
+
+/* ========================================================================== */
+/*  FAQ Hover/Mask Look (Home: #faq, Offers: #dir-faq)                         */
+/*  -> Das ist der Hover, der dir im Screenshot fehlte                         */
+/* ========================================================================== */
+
+#faq,
+#dir-faq{
+  --acc-mask-size: 62%;
+  --acc-size: 30px;
+  --acc-gap: 14px;
+}
+
+/* Textzeile + Platz fürs Icon rechts */
+#faq .ks-acc summary,
+#dir-faq .ks-acc summary{
+  position: relative;
+  padding: 12px 12px;
+  padding-right: calc(var(--acc-size) + var(--acc-gap) + 6px);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  transition: color .18s ease, background-color .18s ease;
+}
+
+/* Pseudo-Elemente als Kreis + Icon */
+#faq .ks-acc summary::before,
+#faq .ks-acc summary::after,
+#dir-faq .ks-acc summary::before,
+#dir-faq .ks-acc summary::after{
+  content: "";
+  position: absolute;
+  right: var(--acc-gap);
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--acc-size);
+  height: var(--acc-size);
+  pointer-events: none;
+}
+
+/* Icon (Maske) – normal schwarz */
+#faq .ks-acc summary::after,
+#dir-faq .ks-acc summary::after{
+  background-image: none !important;
+  -webkit-mask: var(--acc-plus) center/var(--acc-mask-size) no-repeat !important;
+          mask: var(--acc-plus) center/var(--acc-mask-size) no-repeat !important;
+  background-color: #000 !important;
+  z-index: 1;
+  transition: transform .18s ease, opacity .18s ease, filter .18s ease, background-color .18s ease;
+}
+
+/* Open: Minus */
+#faq .ks-acc[open] summary::after,
+#dir-faq .ks-acc[open] summary::after{
+  background-image: none !important;
+  -webkit-mask: var(--acc-minus) center/var(--acc-mask-size) no-repeat !important;
+          mask: var(--acc-minus) center/var(--acc-mask-size) no-repeat !important;
+  background-color: #000 !important;
+}
+
+/* Hover: schwarzer Kreis + weißes Icon */
+#faq .ks-acc summary:hover::before,
+#dir-faq .ks-acc summary:hover::before{
+  background: #000;
+  border-radius: 50%;
+  z-index: 0;
+}
+#faq .ks-acc summary:hover::after,
+#dir-faq .ks-acc summary:hover::after{
+  background-color: #fff !important;
+  transform: translateY(-50%) scale(1.18);
+}
+
+#faq .ks-acc summary:hover,
+#dir-faq .ks-acc summary:hover{
+  color: #0f172a;
+  background-color: rgba(15, 23, 42, .04);
+}
+
+#faq .ks-acc summary:focus-visible,
+#dir-faq .ks-acc summary:focus-visible{
+  outline: 2px solid #0ea5e9;
+  outline-offset: 2px;
+}
+
+/* Persistenter Hover-Look, nur wenn geöffnet */
+#faq .ks-acc[open] summary,
+#dir-faq .ks-acc[open] summary{
+  color: #0f172a;
+  background-color: rgba(15, 23, 42, .04);
+}
+#faq .ks-acc[open] summary::before,
+#dir-faq .ks-acc[open] summary::before{
+  background: #000;
+  border-radius: 50%;
+  z-index: 0;
+}
+#faq .ks-acc[open] summary::after,
+#dir-faq .ks-acc[open] summary::after{
+  background-color: #fff !important;
+  transform: translateY(-50%) scale(1);
+  opacity: 1 !important;
+  filter: none !important;
+}
+#faq .ks-acc[open] summary:hover::after,
+#dir-faq .ks-acc[open] summary:hover::after{
+  transform: translateY(-50%) scale(1.18);
+}
+
+/* Mobile Feinjustierung */
+@media (max-width: 480px){
+  #faq, #dir-faq{ --acc-size: 28px; --acc-mask-size: 66%; }
+}
+
+
+
+
+
+/* DIR-FAQ Watermark: etwas tiefer */
+#dir-faq .ks-title-wrap::after{
+  top: -80px; /* vorher -80px -> tiefer */
+}
+
+
+#faq .ks-title-wrap::after{ top: -80px; }
+
+#news .ks-title-wrap::after{ top: -80px; }
+
+
+
+#werte .ks-title-wrap::after{ top: -80px; }
+#team  .ks-title-wrap::after{ top: -80px; }
+
+
+#program-cta .ks-title-wrap::after{
+  top: -80px;
+}
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   GLOBAL Title-Wrap + Watermark (für Werte/Team/News/Faq)
+   ========================================================= */
+.ks-title-wrap{
+  text-align: center;
+  position: relative;
+  margin-bottom: 18px;
+  isolation: isolate; /* wichtig: Watermark bleibt sauber "hinter" dem Titel */
+}
+
+.ks-title-wrap::after{
+  content: attr(data-bgword);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -10px;
+  font-weight: 900;
+  letter-spacing: .03em;
+  font-size: clamp(72px, 16vw, 180px);
+  color: rgba(0,0,0,.05);
+  pointer-events: none;
+  z-index: -1;
 }
