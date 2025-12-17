@@ -54,6 +54,10 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
 
       ob_start();
 
+
+
+
+
       // ---------- SINGLE: Ein Standort => nur 1 Button ----------
       if ($mode === 'single') {
         $label    = $clean[0]['label'];
@@ -131,7 +135,9 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
             Fragen? <strong>Wähle deinen Standort & schreib uns auf WhatsApp.</strong>
           </p>
 
-          <form id="<?php echo esc_attr($uid); ?>_form" class="ks-wa-form" onsubmit="return false;">
+          <form id="<?php echo esc_attr($uid); ?>_form" class="ks-wa-form"  data-ks-wa="1"
+  data-wa-text="<?php echo esc_attr($a['text']); ?>"
+  data-wa-campaign="<?php echo esc_attr($a['campaign']); ?>" onsubmit="return false;">
             <!-- natives Select nur für Screenreader/Form-Sync, UNSICHTBAR -->
             <label for="<?php echo esc_attr($uid); ?>_select" class="screen-reader-only">Standort</label>
             <select id="<?php echo esc_attr($uid); ?>_select" name="wa_location" class="screen-reader-only" tabindex="-1" aria-hidden="true">
@@ -144,15 +150,18 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
             </select>
 
             <!-- sichtbares Custom-Dropdown (vereinheitlicht auf .ks-dd) -->
-            <div class="ks-dd" id="<?php echo esc_attr($uid); ?>_dd">
+            <div class="ks-dd" id="<?php echo esc_attr($uid); ?>_dd"  aria-expanded="false" data-submit="0" data-max-rows="2">
               <button type="button" class="ks-dd__btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="<?php echo esc_attr($uid); ?>_panel">
                 <span class="ks-dd__label"><?php echo esc_html($a['placeholder'] ?? 'Standort wählen…'); ?></span>
-                <span class="ks-dd__caret" aria-hidden="true"></span>
+                <span class="ks-dd__caret" aria-hidden="true">
+                <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/offers/select-caret.svg' ); ?>" alt="">
+                </span>
               </button>
               <div class="ks-dd__panel" id="<?php echo esc_attr($uid); ?>_panel" role="listbox" tabindex="-1" hidden>
                 <?php foreach ($clean as $loc): ?>
                   <div class="ks-dd__option"
                        role="option"
+                       tabindex="-1"
                        data-phone="<?php echo esc_attr($loc['phone']); ?>"
                        data-slug="<?php echo esc_attr(sanitize_title($loc['label'])); ?>"
                        data-label="<?php echo esc_attr($loc['label']); ?>">
@@ -162,7 +171,7 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
               </div>
             </div>
 
-            <button type="button" id="<?php echo esc_attr($uid); ?>_btn" class="<?php echo esc_attr($a['btn_class']); ?>" aria-disabled="true">
+            <button type="button" id="<?php echo esc_attr($uid); ?>_btn" class="<?php echo esc_attr($a['btn_class']); ?>" aria-disabled="true" disabled>
               <span class="ks-wa-ico" aria-hidden="true"><?php echo $wa_icon; ?></span>
               WhatsApp öffnen
             </button>
@@ -170,79 +179,8 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
         </div>
       </section>
 
-      <script>
-      (function(){
-        var uid   = '<?php echo esc_js($uid); ?>';
-        var sel   = document.getElementById(uid + '_select');
-        var dd    = document.getElementById(uid + '_dd');
-        var btn   = document.getElementById(uid + '_btn');
-        var bOpen = dd.querySelector('.ks-dd__btn');
-        var label = dd.querySelector('.ks-dd__label');
-        var panel = document.getElementById(uid + '_panel');
+  
 
-        var text  = <?php echo json_encode($a['text']); ?>;
-        var baseCampaign = <?php echo json_encode($a['campaign']); ?>;
-
-        function setDisabled(dis){ btn.setAttribute('aria-disabled', dis ? 'true' : 'false'); }
-
-        function openPanel(){
-          // Trainer-UI erwartet .is-open am Wrapper + hidden entfernen
-          dd.classList.add('is-open');
-          panel.classList.remove('is-dropup');
-          panel.removeAttribute('hidden');
-
-          // nach Layout-Berechnung Dropup entscheiden
-          requestAnimationFrame(function(){
-            var rect = panel.getBoundingClientRect();
-            var spaceBelow = window.innerHeight - rect.top;
-            var needed = rect.height || 88;
-            if (spaceBelow < needed + 24){ panel.classList.add('is-dropup'); }
-          });
-
-          bOpen.setAttribute('aria-expanded','true');
-          panel.focus();
-        }
-        function closePanel(){
-          dd.classList.remove('is-open');
-          panel.setAttribute('hidden','');
-          bOpen.setAttribute('aria-expanded','false');
-        }
-
-        bOpen.addEventListener('click', function(e){
-          e.stopPropagation();
-          if (dd.classList.contains('is-open')) closePanel();
-          else openPanel();
-        });
-        document.addEventListener('click', function(e){
-          if (!dd.contains(e.target)) closePanel();
-        });
-
-        // ESC zum Schließen (UX)
-        panel.addEventListener('keydown', function(e){
-          if (e.key === 'Escape'){ e.preventDefault(); closePanel(); bOpen.focus(); }
-        });
-
-        panel.addEventListener('click', function(e){
-          var opt = e.target.closest('.ks-dd__option');
-          if(!opt) return;
-          sel.value = opt.dataset.phone;
-          label.textContent = opt.dataset.label;
-          setDisabled(false);
-          closePanel();
-        });
-
-        setDisabled(true);
-
-        btn.addEventListener('click', function(){
-          var phone = sel.value;
-          if(!phone) return;
-          var slug = sel.options[sel.selectedIndex]?.dataset.slug || 'standort';
-          var msg  = encodeURIComponent(text);
-          var utm  = 'utm_source=website&utm_medium=cta&utm_campaign=' + encodeURIComponent(baseCampaign + '_' + slug);
-          window.open('https://wa.me/' + phone + '?text=' + msg + '&' + utm, '_blank');
-        });
-      })();
-      </script>
       <?php
 
       return ob_get_clean();
