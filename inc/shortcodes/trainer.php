@@ -9,6 +9,20 @@
  * - Verwendet ein verstecktes <select> fürs Formular-Submit; UI ist ein eigenes Dropdown
  */
 
+$theme_dir = get_stylesheet_directory();
+$theme_uri = get_stylesheet_directory_uri();
+
+$dd_hover_css = $theme_dir . '/assets/css/dropdown-hover.css';
+if (file_exists($dd_hover_css) && !wp_style_is('ks-dropdown-hover', 'enqueued')) {
+  wp_enqueue_style(
+    'ks-dropdown-hover',
+    $theme_uri . '/assets/css/dropdown-hover.css',
+    ['kickstart-style'],
+    filemtime($dd_hover_css)
+  );
+}
+
+
 /* ==== Next.js Basis-URL (Proxy) ==== */
 if (!function_exists('ks_next_base')) {
   function ks_next_base(): string {
@@ -109,151 +123,7 @@ if (!function_exists('ks_register_trainer_shortcode')) {
       $select_id = 'ks-trainer-select-'   . $uid;
       $dd_id     = 'ks-dd-trainer-'       . $uid;
 
-      // Dummy-Handle registrieren & einreihen
-      wp_register_script('ks-trainer-select-js', false, [], null, true);
-      wp_enqueue_script('ks-trainer-select-js');
-
-      wp_add_inline_script(
-  'ks-trainer-select-js',
-  "(function(){
-    var form = document.getElementById('".esc_js($form_id)."');
-    if(!form) return;
-
-    var nativeSel = form.querySelector('#".esc_js($select_id)."');
-    var dd        = form.querySelector('#".esc_js($dd_id)."');
-    var btn       = dd?.querySelector('.ks-dd__btn');
-    var label     = dd?.querySelector('.ks-dd__label');
-    var panel     = dd?.querySelector('.ks-dd__panel');
-    if(!nativeSel || !dd || !btn || !label || !panel) return;
-
-    // --- Helpers ---
-    function build(){
-      // Aktuell ausgewählten Wert merken
-      var current = nativeSel.value;
-      panel.innerHTML = '';
-
-      // Optionen aufbauen, dabei die aktuell ausgewählte AUSLASSEN
-      Array.from(nativeSel.options).forEach(function(opt){
-        if(opt.value === current) return; // <— ausgewählten nicht anzeigen
-        var el = document.createElement('div');
-        el.className = 'ks-dd__option';
-        el.setAttribute('role','option');
-        el.setAttribute('data-value', opt.value);
-        el.setAttribute('tabindex','-1');
-        el.textContent = opt.textContent;
-        panel.appendChild(el);
-      });
-
-      syncLabel();
-    }
-
-    function syncLabel(){
-      var opt = nativeSel.selectedOptions[0];
-      label.textContent = opt ? opt.textContent : 'Bitte wählen…';
-    }
-
-    function openDD(){
-      // Beim Öffnen immer neu aufbauen (damit der aktuelle nicht erscheint)
-      build();
-
-      dd.setAttribute('aria-expanded','true');
-      btn.setAttribute('aria-expanded','true');
-
-      // Fokus auf erstes Element setzen
-      var first = panel.querySelector('.ks-dd__option');
-      if(first){
-        first.focus({preventScroll:false});
-        panel.scrollTop = 0;
-      }
-
-      // Outside-click: Dropdown schließen
-      setTimeout(function(){
-        document.addEventListener('click', onDocClick, { once:true });
-      }, 0);
-
-      document.addEventListener('keydown', onEscKey, { once:true });
-    }
-
-    function closeDD(){
-      dd.setAttribute('aria-expanded','false');
-      btn.setAttribute('aria-expanded','false');
-      btn.focus();
-    }
-
-    function onDocClick(e){
-      if(!dd.contains(e.target)) closeDD();
-      else {
-        // Wenn innerhalb geklickt: erneut Outside-Listener setzen,
-        // damit ein späterer Klick außerhalb weiterhin schließt.
-        setTimeout(function(){
-          document.addEventListener('click', onDocClick, { once:true });
-        }, 0);
-      }
-    }
-
-    function onEscKey(e){
-      if(e.key === 'Escape') closeDD();
-    }
-
-    // --- Events ---
-    btn.addEventListener('click', function(e){
-      e.stopPropagation();
-      (dd.getAttribute('aria-expanded') === 'true') ? closeDD() : openDD();
-    });
-
-    // Auswahl per Klick
-    panel.addEventListener('click', function(e){
-      var item = e.target.closest('.ks-dd__option');
-      if(!item) return;
-      var val = item.getAttribute('data-value');
-      if(val == null) return;
-
-      // Auswahl setzen
-      nativeSel.value = val;
-      syncLabel();
-
-      // Liste neu aufbauen, damit der neu gewählte verschwindet
-      build();
-
-      // Formular absenden & schließen
-      form.submit();
-      closeDD();
-    });
-
-    // Tastatur-Navigation im Panel
-    panel.addEventListener('keydown', function(e){
-      var items = Array.from(panel.querySelectorAll('.ks-dd__option'));
-      var cur   = document.activeElement;
-      var i     = items.indexOf(cur);
-
-      if(e.key === 'ArrowDown'){
-        e.preventDefault();
-        (items[i+1] || items[0])?.focus();
-      }
-      if(e.key === 'ArrowUp'){
-        e.preventDefault();
-        (items[i-1] || items[items.length-1])?.focus();
-      }
-      if(e.key === 'Enter'){
-        e.preventDefault();
-        cur?.click();
-      }
-      if(e.key === 'Escape'){
-        e.preventDefault();
-        closeDD();
-      }
-    });
-
-    // Falls sich das native Select extern ändert (z.B. durch Server/Navigation)
-    nativeSel.addEventListener('change', function(){
-      syncLabel();
-      build();
-    });
-
-    // Initiales Label setzen
-    syncLabel();
-  })();"
-);
+    
 
 
       
@@ -296,10 +166,12 @@ if (!function_exists('ks_register_trainer_shortcode')) {
                   </select>
 
                   <!-- Custom Dropdown UI -->
-                  <div class="ks-dd" id="<?php echo esc_attr($dd_id); ?>" aria-expanded="false">
+                  <div class="ks-dd" id="<?php echo esc_attr($dd_id); ?>" aria-expanded="false" data-submit="1" data-max-rows="5">
                     <button type="button" class="ks-dd__btn" aria-haspopup="listbox" aria-expanded="false">
                       <span class="ks-dd__label"><?php echo esc_html($full); ?></span>
-                      <span class="ks-dd__caret" aria-hidden="true"></span>
+                      <span class="ks-dd__caret" aria-hidden="true">
+                        <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/offers/select-caret.svg' ); ?>" alt="">
+</span>
                     </button>
                     <div class="ks-dd__panel" role="listbox" tabindex="-1"></div>
                   </div>
