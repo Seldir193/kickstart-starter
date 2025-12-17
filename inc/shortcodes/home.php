@@ -39,17 +39,21 @@ if (!function_exists('ks_register_home_shortcode')) {
 
 
 
-// JS: Program-CTA
-$cta_js = $theme_dir . '/assets/js/ks-program-cta.js';
-if (file_exists($cta_js)) {
-  wp_enqueue_script(
-    'ks-program-cta',
-    $theme_uri . '/assets/js/ks-program-cta.js',
-    [],
-    filemtime($cta_js),
-    true
+
+$dd_hover_css = $theme_dir . '/assets/css/dropdown-hover.css';
+if (file_exists($dd_hover_css)) {
+  wp_enqueue_style(
+    'ks-dropdown-hover',
+    $theme_uri . '/assets/css/dropdown-hover.css',
+    ['kickstart-style', 'ks-utils', 'ks-home'],
+    filemtime($dd_hover_css)
   );
 }
+
+
+
+
+
 
 
 
@@ -567,57 +571,14 @@ if (file_exists($hero_js)) {
 
 
 
-<section id="program-cta" class="ks-sec ks-py-56 ks-cta-strip" aria-label="Programm schnell buchen">
-  <div class="container ks-cta-grid">
-   
+<?php
 
-       <div class="ks-cta-text">
-      <div class="ks-kicker">Schnell buchen</div>
-      <h2 class="ks-dir__title">Dein Programm auswählen</h2>
-      <p>Wähle ein Angebot und starte direkt mit der Anmeldung.</p>
-              </div>
+$program_cta_partial = $theme_dir . '/inc/partials/home/program-cta.php';
+if (file_exists($program_cta_partial)) {
+  include $program_cta_partial;
+}
 
-      <?php
-        $programs = [
-          'Foerdertraining'  => 'Fördertraining',
-          'PersonalTraining' => 'Einzeltraining',
-          'Camp'             => 'Fußballcamp',
-          'Kindergarten'     => 'Kindergarten',
-        ];
-      ?>
-     <form id="ksProgramForm" class="ks-cta-form" action="<?php echo esc_url($offers); ?>" method="get">
-  <!-- natives Select bleibt fürs Submit, wird vollständig versteckt -->
-
-
-<label class="screen-reader-text" for="ksProgramSelect">Programm</label>
-<select id="ksProgramSelect" name="type" class="ks-select" hidden>
-  <option value="" selected disabled>Bitte auswählen …</option>
-  <?php foreach ($programs as $val => $label): ?>
-    <option value="<?php echo esc_attr($val); ?>"><?php echo esc_html($label); ?></option>
-  <?php endforeach; ?>
-</select>
-
-
-
-  <!-- einzig sichtbares Dropdown (Custom UI wie beim Trainer) -->
-  <div class="ks-dd" id="ks-dd-program" aria-expanded="false">
-    <button type="button" class="ks-dd__btn" aria-haspopup="listbox" aria-expanded="false">
-      <span class="ks-dd__label">Bitte wählen…</span>
-      <span class="ks-dd__caret" aria-hidden="true"></span>
-    </button>
-    <div class="ks-dd__panel" role="listbox" tabindex="-1"></div>
-  </div>
-</form>
-
-    </div>
-  </div>
-</section>
-
-
-
-
-
-
+?>
 
 
 
