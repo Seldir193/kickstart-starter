@@ -1,3 +1,5 @@
+
+
 /* === KS Utilities (zentral, schlank) ===================================== */
 
 /* Spacing */
@@ -45,29 +47,6 @@ html, body { overflow-x: clip; }
 }
 
 /* =========================================================
-   GLOBAL Title-Wrap + Watermark (für Werte/Team/News/Faq/CTA)
-   ========================================================= */
-.ks-title-wrap{
-  text-align: center;
-  position: relative;
-  margin-bottom: 18px;
-  isolation: isolate; /* Watermark bleibt sauber "hinter" dem Titel */
-}
-.ks-title-wrap::after{
-  content: attr(data-bgword);
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: -10px;
-  font-weight: 900;
-  letter-spacing: .03em;
-  font-size: clamp(72px, 16vw, 180px);
-  color: rgba(0,0,0,.05);
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* =========================================================
    Kicker (Text + gelbe Linie direkt daneben)
    ========================================================= */
 .ks-kicker{
@@ -95,18 +74,23 @@ html, body { overflow-x: clip; }
 /* Kicker-Linie immer direkt neben dem Wort (zentriert) */
 #faq .ks-title-wrap .ks-kicker,
 #dir-faq .ks-title-wrap .ks-kicker,
-#news .ks-title-wrap .ks-kicker,
 #kontakt .ks-kicker,
 #werte .ks-kicker,
+#news .ks-title-wrap .ks-kicker,
 #team .ks-kicker,
 #program-cta .ks-kicker{
   display: block;
   width: max-content;
   margin: 0 auto 6px;
+  
 }
 
-#kontakt .ks-kicker{
-  color: var(--mega-bg, #fff);
+
+
+
+
+#kontakt .ks-kicker {
+color: var( --mega-bg, #fff);
 }
 
 /* =========================================================
@@ -262,19 +246,40 @@ html, body { overflow-x: clip; }
   min-height: 280px;
 }
 
-/* Titelblock (nur Layout-spezifisch, Watermark kommt global über .ks-title-wrap::after) */
+/* Titelblock + Watermark (wenn data-bgword gesetzt ist) */
 .ks-home-faq > .ks-title-wrap,
 #dir-faq .ks-title-wrap{
   grid-column: 1 / -1;
+  text-align: center;
+  position: relative;
+  margin-bottom: 18px;
+}
+.ks-home-faq > .ks-title-wrap::after{
+  content: attr(data-bgword);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -10px;
+  font-weight: 900;
+  letter-spacing: .03em;
+  font-size: clamp(72px, 16vw, 180px);
+  color: rgba(0,0,0,.05);
+  pointer-events: none;
+  z-index: -1;
 }
 
 @media (max-width: 900px){
   .ks-home-faq{ grid-template-columns: 1fr; }
   .ks-home-faq > .ks-title-wrap{ margin-bottom: 12px; }
+  .ks-home-faq > .ks-title-wrap::after{
+    font-size: clamp(64px, 28vw, 140px);
+    top: -6px;
+  }
 }
 
 /* ========================================================================== */
 /*  FAQ Hover/Mask Look (Home: #faq, Offers: #dir-faq)                         */
+/*  -> Das ist der Hover, der dir im Screenshot fehlte                         */
 /* ========================================================================== */
 
 #faq,
@@ -384,15 +389,63 @@ html, body { overflow-x: clip; }
   #faq, #dir-faq{ --acc-size: 28px; --acc-mask-size: 66%; }
 }
 
-/* =========================================================
-   Watermark-Positionen pro Sektion
-   ========================================================= */
-#dir-faq .ks-title-wrap::after{ top: -80px; }
+
+
+
+
+/* DIR-FAQ Watermark: etwas tiefer */
+#dir-faq .ks-title-wrap::after{
+  top: -80px; /* vorher -80px -> tiefer */
+}
+
+
 #faq .ks-title-wrap::after{ top: -80px; }
+
 #news .ks-title-wrap::after{ top: -80px; }
+
+
+
 #werte .ks-title-wrap::after{ top: -80px; }
-#team .ks-title-wrap::after{ top: -80px; }
-#program-cta .ks-title-wrap::after{ top: -80px; }
+#team  .ks-title-wrap::after{ top: -80px; }
+
+
+#program-cta .ks-title-wrap::after{
+  top: -80px;
+}
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   GLOBAL Title-Wrap + Watermark (für Werte/Team/News/Faq)
+   ========================================================= */
+.ks-title-wrap{
+  text-align: center;
+  position: relative;
+  margin-bottom: 18px;
+  isolation: isolate; /* wichtig: Watermark bleibt sauber "hinter" dem Titel */
+}
+
+.ks-title-wrap::after{
+  content: attr(data-bgword);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -10px;
+  font-weight: 900;
+  letter-spacing: .03em;
+  font-size: clamp(72px, 16vw, 180px);
+  color: rgba(0,0,0,.05);
+  pointer-events: none;
+  z-index: -1;
+}
+
 
 
 

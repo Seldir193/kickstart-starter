@@ -2,7 +2,7 @@
   :root{
     --brand:#0ea5e9;
     --text:#222;
-
+  --ks-container: 1440px;
     /* Header & Mega */
     --header-height:72px;
     --header-bg:#fff;

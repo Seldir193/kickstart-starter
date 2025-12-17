@@ -419,7 +419,6 @@ if (file_exists($hero_js)) {
   <h2 class="ks-dir__title">Unser Team</h2>
 </div>
 
-
           <div class="ks-team-wrap">
             <button class="ks-team__nav ks-team__nav--prev" aria-label="Zurück">
               <img src="<?php echo esc_url($theme_uri . '/assets/img/home/left.png'); ?>" alt="" width="28" height="28" />
