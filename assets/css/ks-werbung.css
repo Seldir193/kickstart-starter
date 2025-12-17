@@ -1,17 +1,17 @@
-
 :root{
-   
-  --brand-gold: #FDE100;
-  --brand-gold-700: #E5C200;
-  
+  /* Ultra-Premium Gold */
+  --brand-gold:     #FFE300;
+  --brand-gold-700: #E6C400;
 }
 
+/* ==========================================================================
+   Partner-Brandbar
+   ========================================================================== */
 
-
-/* ===== Partner-Brandbar ===== */
 .ks-brandbar{
-  background: #19355f;           /* dunkles Blau wie im Screenshot */
+  background:#19355f;
   color:#fff;
+
   /* Vollbreite "Bleed" */
   position:relative;
   width:100vw;
@@ -19,10 +19,12 @@
   margin-right:calc(50% - 50vw);
   padding:28px 0;
 }
+
 .ks-brandbar .container{
   display:flex;
   justify-content:center;
 }
+
 .ks-brandbar__list{
   display:flex;
   align-items:center;
@@ -34,29 +36,16 @@
   list-style:none;
   flex:1;
 }
+
 .ks-brandbar__item img{
   display:block;
-  height:28px;                  /* Logo-Höhe anpassen */
+  height:28px;
   width:auto;
-/*  filter:brightness(0) invert(1); /* auf Weiß “recoloren”, falls PNG/SVG dunkel ist */
+  /* filter:brightness(0) invert(1); */
   opacity:.95;
 }
-@media (min-width: 992px){
-  .ks-brandbar__item img{ height:34px; }
-}
-@media (max-width: 480px){
-  .ks-brandbar__list{ gap:28px; }
-  .ks-brandbar__item img{ height:24px; }
 
-    .ks-brandbar__label { font-size: 13px; }
-}
-
-
-
-
-
-
-/* Text unter dem Logo – wie vorher */
+/* Text unter dem Logo */
 .ks-brandbar__label{
   color:#fff;
   font-weight:600;
@@ -64,40 +53,65 @@
   line-height:1;
 }
 
-
-
-
-
-
-
-
-
-#brandbar{
-  position: relative;
-  background: var(--brand-navy);
-  color:#fff;
-  z-index:-1 !important;
+@media (min-width: 992px){
+  .ks-brandbar__item img{ height:34px; }
 }
 
+@media (max-width: 480px){
+  .ks-brandbar__list{ gap:28px; }
+  .ks-brandbar__item img{ height:24px; }
+  .ks-brandbar__label{ font-size:13px; }
+}
+
+/* ==========================================================================
+   Brandbar (ID) – Basis + Ultra-Premium Accent
+   ========================================================================== */
+
+/* Brandbar muss oben liegen, sonst kommt Hover nicht an */
+section#brandbar.ks-brandbar{
+  position:relative;
+  z-index:10 !important;
+  isolation:isolate;
+}
+
+#brandbar{
+  position:relative;
+  background:var(--brand-navy);
+  color:#fff;
+  z-index:5;
+  isolation:isolate;
+}
 
 #brandbar::before{
   content:"";
   position:absolute;
   left:0; right:0; top:0;
+  z-index:1;
+  pointer-events:none;
+
+  /* Ultra-Premium Gold-Accent */
   height:4px;
-  /* Fallback-Farbe, falls Variable fehlt */
-  background-color: var(--brand-gold-700, #b78300);
-  transition: background-color .25s ease, height .25s ease;
+  background:linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--brand-gold) 55%, #fff),
+    var(--brand-gold),
+    color-mix(in oklab, var(--brand-gold) 65%, #fff)
+  );
+  background-size:180% 100%;
+  background-position:0% 50%;
+  transition:height .22s ease, filter .22s ease, background-position .8s ease;
+  filter:saturate(1.15);
 }
 
-
-/* Hover/Focus: heller & ggf. etwas höher */
+/* Hover/Focus: stärker, leuchtend + dezenter Glow */
 #brandbar:hover::before,
 #brandbar:focus-within::before{
-  background-color: var(--brand-gold); /* heller */
-  /* Alternative mit extra “Glow” (wo unterstützt):
-     background-color: color-mix(in oklab, var(--brand-gold) 85%, white); */
-  height:6px; /* optional, stärkerer Reiz */
+  height:6px;
+  filter:saturate(1.35) brightness(1.12);
+  background-position:100% 50%;
+  box-shadow:
+    0 0 0 1px rgba(255, 227, 0, .25),
+    0 6px 18px rgba(255, 227, 0, .35);
 }
 
 /* Inhalt */
@@ -107,16 +121,25 @@
   justify-content:center;
   gap:16px;
   padding:10px 16px;
+  z-index:2;
 }
 
-#brandbar a{ color:#fff; text-decoration:none; }
-#brandbar a:hover{ text-decoration:underline; }
+#brandbar a{
+  color:#fff;
+  text-decoration:none;
+}
+
+#brandbar a:hover{
+  text-decoration:underline;
+}
 
 /* Bewegungen reduzieren */
 @media (prefers-reduced-motion: reduce){
-  #brandbar::before{ transition: background-color .25s ease; }
+  #brandbar::before{
+    transition:height .22s ease, filter .22s ease;
+    background-position:50% 50%;
+  }
 }
-
 
 
 
