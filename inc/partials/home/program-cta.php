@@ -8,8 +8,10 @@ defined('ABSPATH') || exit;
    
 
        <div class="ks-cta-text">
-      <div class="ks-kicker">Schnell buchen</div>
-      <h2 class="ks-dir__title">Dein Programm auswählen</h2>
+       <div class="ks-title-wrap" data-bgword="BUCHEN">
+    <div class="ks-kicker">Schnell buchen</div>
+    <h2 class="ks-dir__title">Dein Programm auswählen</h2>
+  </div>
       <p>Wähle ein Angebot und starte direkt mit der Anmeldung.</p>
               </div>
 
