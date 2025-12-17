@@ -1,826 +1,575 @@
 
-
-
 /* ========================================================================== */
-/* Offers Directory Styles – Layout, FAQ, Hero, etc.                          */
-/*  (Dialog-Styles liegen in offers-dialog.css + book-dialog.css)            */
+/* Offers Directory Styles – Layout, Map/List, Hero, Directory-spezifisch      */
+/* Globales (FAQ-Hover/Masken + Kicker etc.) liegt in ks-utils                 */
 /* ========================================================================== */
 
-@layer pages {
+@layer pages{
 
-  body.ks-modal-open {
-    overflow: hidden;
-  }
+  body.ks-modal-open{ overflow:hidden; }
 
   /* ===== Layout: Map | Liste ===== */
-  .ks-dir__layout {
-    display: grid;
-    grid-template-columns: minmax(420px, 1fr) 1fr;
-    gap: 16px;
-    align-items: start;
-    margin-top: 12px;
-  }
-  .ks-dir__map {
-    position: sticky;
-    top: calc(var(--header-height, 72px) + 12px);
+  .ks-dir__layout{
+    display:grid;
+    grid-template-columns:minmax(420px,1fr) 1fr;
+    gap:16px;
+    align-items:start;
+    margin-top:12px;
   }
 
-  /* Map: Basis + kompakte Höhe */
-  .ks-map {
-    width: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #e5e7eb;
-  }
-  .ks-dir__map .ks-map {
-    height: min(520px, calc(100dvh - var(--header-height, 72px) - 24px));
+  .ks-dir__map{
+    position:sticky;
+    top:calc(var(--header-height,72px) + 12px);
   }
 
-  @media (max-width: 900px) {
-    .ks-dir__layout {
-      grid-template-columns: 1fr;
+  .ks-map{
+    width:100%;
+    border-radius:12px;
+    overflow:hidden;
+    background:#e5e7eb;
+  }
+
+  .ks-dir__map .ks-map{
+    height:min(520px, calc(100dvh - var(--header-height,72px) - 24px));
+  }
+
+  @media (max-width:900px){
+    .ks-dir__layout{ grid-template-columns:1fr; }
+    .ks-dir__map{ position:static; top:auto; }
+    .ks-dir__map .ks-map{ height:320px; }
+  }
+
+  /* ===== Liste / Scrollbereich ===== */
+  .ks-dir__listwrap{
+    --row-h:120px;
+    --row-gap:12px;
+    max-height:calc(3 * var(--row-h) + 2 * var(--row-gap));
+    overflow-y:auto;
+  }
+
+  .ks-dir__list{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    gap:12px;
+  }
+
+  /* ===== Close-Button (auch Dialoge) ===== */
+  .ks-dir__close{
+    position:absolute;
+    top:10px;
+    right:10px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:36px;
+    height:36px;
+    border-radius:999px;
+    border:1px solid #eaeaea;
+    background:#fff;
+    cursor:pointer;
+  }
+
+  .ks-dir__close img{
+    width:30px;
+    height:30px;
+    display:block;
+  }
+
+  .ks-dir__close:hover{ background:#fafafa; }
+
+  /* ===== Sessions (Card-Layout) ===== */
+  .ks-offer__sessions{
+    display:grid;
+    gap:12px;
+    margin-top:12px;
+  }
+
+  .ks-session{
+    display:grid;
+    grid-template-columns:1fr auto auto;
+    align-items:center;
+    gap:16px;
+    border:1px solid #eaeaea;
+    border-radius:10px;
+    background:#fff;
+    padding:12px 14px;
+  }
+
+  .ks-session__left{ display:grid; gap:2px; }
+
+  .ks-session__row{
+    font-size:14px;
+    color:#111;
+  }
+
+  .ks-session__coach{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    min-width:180px;
+  }
+
+  .ks-coach__avatar{
+    width:50px;
+    height:50px;
+    border-radius:999px;
+    object-fit:cover;
+    background:#f1f5f9;
+    border:1px solid #eaeaea;
+    display:block;
+  }
+
+  .ks-coach__name{
+    display:flex;
+    flex-direction:column;
+    line-height:1.05;
+  }
+
+  .ks-coach__first{ font-weight:700; }
+
+  .ks-coach__last{
+    color:#475569;
+    font-size:13px;
+  }
+
+  .ks-session__actions{
+    display:flex;
+    justify-content:flex-end;
+    flex-direction:row-reverse;
+    align-items:center;
+    gap:20px;
+  }
+
+  .ks-session__btn{
+    transition:transform .08s ease, box-shadow .12s ease, background-color .12s ease;
+  }
+
+  .ks-session__btn:hover{
+    transform:translateY(-1px);
+    box-shadow:0 6px 16px rgba(14,165,233,.25);
+    background:#0c96d2;
+  }
+
+  @media (max-width:560px){
+    .ks-session{ grid-template-columns:1fr; gap:10px; }
+    .ks-session__actions{ justify-content:stretch; }
+    .ks-session__btn{ width:100%; }
+  }
+
+  /* Hover/Selected (Powertraining-Auswahl) */
+  .ks-session.ks-session--selectable:hover{ background:#f5f5f5; }
+  .ks-session.ks-session--selectable.ks-session--selected{
+    background:#e5e5e5;
+    border-color:#d4d4d4;
+  }
+
+  /* ===== Booking Form Helper ===== */
+  .ks-book__h4{
+    margin:12px 0 6px;
+    font-size:16px;
+    font-weight:700;
+  }
+
+  .ks-book__person a{
+    color:#0ea5e9;
+    text-decoration:none;
+  }
+  .ks-book__person a:hover{ text-decoration:underline; }
+
+  .ks-fs{
+    border:1px solid #eaeaea;
+    border-radius:10px;
+    padding:12px;
+    margin:12px 0;
+  }
+
+  .ks-fs > legend{
+    font-weight:700;
+    padding:0 6px;
+  }
+
+  .ks-row{
+    display:flex;
+    gap:16px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+
+  .ks-grid{
+    display:grid;
+    gap:12px;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .ks-field--sm input{ max-width:120px; }
+  .ks-field--btn{ align-self:end; }
+
+  .ks-err{
+    display:none;
+    color:#b91c1c;
+    font-size:12px;
+  }
+
+  .ks-check{
+    display:flex;
+    gap:8px;
+    align-items:flex-start;
+  }
+
+  .dob-group{ display:flex; gap:8px; }
+  .dob-group select{ min-width:80px; }
+
+  .ks-actions{
+    margin-top:10px;
+    display:flex;
+    justify-content:flex-end;
+  }
+
+  /* ===== Directory FAQ: Grid + Media ===== */
+  .ks-dir-faq__grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:24px;
+    align-items:start;
+  }
+
+  .ks-accs{
+    margin-top:12px;
+    display:grid;
+    gap:10px;
+  }
+
+  .ks-acc{
+    border-bottom:1px dotted #e5e7eb;
+    padding:10px 0;
+  }
+
+  .ks-dir-faq__media{
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    margin:0;
+    background:#0f172a;
+    z-index:1;
+  }
+
+  .ks-dir-faq__media img{
+    width:100%;
+    height:auto;
+    display:block;
+    opacity:.9;
+  }
+
+  .ks-dir-faq__play{
+    position:absolute;
+    inset:auto auto 12px 12px;
+    border:0;
+    border-radius:8px;
+    padding:10px 12px;
+    background:#fff;
+    color:#111;
+    cursor:pointer;
+    font-weight:700;
+  }
+
+  @media (max-width:900px){
+    .ks-dir-faq__grid{ grid-template-columns:1fr; }
+  }
+
+  /* ===== Programmbeschreibung ===== */
+  .ks-dir-program__grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:24px;
+    align-items:start;
+  }
+
+  .ks-eyebrow{
+    color:#b91c1c;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-weight:700;
+    font-size:12px;
+  }
+
+  .ks-dir-program__title{
+    margin:6px 0 8px;
+    font-weight:800;
+    line-height:1.1;
+    font-size:clamp(26px,4vw,40px);
+    text-transform:uppercase;
+  }
+
+  .ks-dir-program__body{ color:#374151; }
+
+  .ks-pluslist{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    gap:10px;
+  }
+
+  .ks-pluslist li{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+  }
+
+  .ks-plus{
+    display:inline-block;
+    width:22px;
+    height:22px;
+    min-width:22px;
+    line-height:22px;
+    text-align:center;
+    border-radius:999px;
+    background:#ef4444;
+    color:#fff;
+    font-weight:800;
+  }
+
+  @media (max-width:900px){
+    .ks-dir-program__grid{ grid-template-columns:1fr; }
+  }
+
+  /* =========================================================
+     DFS-Style Hero für Offers Directory – wie Home Hero
+     ========================================================= */
+  .ks-dir__hero{
+    position:relative;
+    width:100vw;
+    margin-left:calc(50% - 50vw);
+    margin-right:calc(50% - 50vw);
+    padding:clamp(24px,6vw,56px) 0;
+    background:var(--light-gray);
+    overflow:hidden;
+  }
+
+  /* Hero Watermark */
+  .ks-dir__hero::after{
+    content:attr(data-watermark);
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:6%;
+    text-align:center;
+    font-weight:900;
+    letter-spacing:.02em;
+    font-size:clamp(64px,22vw,240px);
+    color:rgba(0,0,0,.04);
+    pointer-events:none;
+    white-space:nowrap;
+  }
+
+  /* Inhalt im Container */
+  .ks-dir__hero-inner{
+    position:relative;
+    z-index:1;
+
+    max-width:var(--ks-container);
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+    padding-left:16px;
+    padding-right:16px;
+
+    padding-top:clamp(16px,4vw,62px);
+    padding-bottom:clamp(16px,4vw,32px);
+
+    color:var(--text, #111);
+  }
+
+  .ks-dir__crumb{
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#6b7280;
+    margin-bottom:6px;
+  }
+
+  .ks-dir__crumb .sep{
+    margin:0 .35em;
+    opacity:.7;
+  }
+
+  .ks-dir__crumb-home{
+    color:inherit;
+    text-decoration:none;
+    cursor:pointer;
+  }
+
+  .ks-dir__crumb-home:hover,
+  .ks-dir__crumb-home:focus-visible{
+    color:var(--text, #222);
+    text-decoration:none;
+  }
+
+  .ks-dir__crumb-home:focus-visible{
+    outline:2px solid rgba(14,165,233,.6);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+
+  .ks-dir__hero-title{
+    margin:0 0 8px;
+    font-weight:800;
+    line-height:1.05;
+    font-size:clamp(36px,6vw,72px);
+  }
+
+  /* Hero Bild rechts */
+  .ks-dir__hero-inner::before{
+    content:"";
+    position:absolute;
+    right:40px;
+    top:80%;
+    transform:translateY(-50%);
+    width:min(620px,50vw);
+    height:clamp(320px,55vw,620px);
+    background:var(--hero-img) center right/contain no-repeat;
+    pointer-events:none;
+  }
+
+  @media (max-width:900px){
+    .ks-dir__hero-inner{ padding-bottom:clamp(24px,8vw,40px); }
+    .ks-dir__hero-inner::before{
+      right:50%;
+      transform:translateX(50%);
+      width:min(420px,70vw);
+      height:clamp(220px,60vw,420px);
     }
-    .ks-dir__map {
-      position: static;
-      top: auto;
-    }
-    .ks-dir__map .ks-map {
-      height: 320px;
-    }
   }
 
-  /* ===== Intro & Filter ===== */
-
-  .ks-dir__listwrap {
-    --row-h: 120px;
-    --row-gap: 12px;
-    max-height: calc(3 * var(--row-h) + 2 * var(--row-gap));
-    overflow-y: auto;
-  }
-  .ks-dir__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 12px;
+  /* Intro + Filter + Meta zentriert */
+  .ks-dir__intro,
+  .ks-dir__filters,
+  .ks-dir__meta{
+    max-width:var(--ks-container);
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+    padding-left:16px;
+    padding-right:16px;
   }
 
-  /* ===== HERO (alte, kartenbasierte Version – Basis) ===== */
-  .ks-dir__hero {
-    position: relative;
-    width: 100%;
-    min-height: clamp(220px, 30vw, 360px);
-    background-image: var(--hero-img);
-    background-size: cover;
-    background-position: center;
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 12px;
-   
-  }
-  .ks-dir__hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.55) 0%,
-      rgba(0, 0, 0, 0.25) 40%,
-      rgba(0, 0, 0, 0) 70%
-    );
-  }
-  .ks-dir__hero-inner {
-    position: relative;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: clamp(16px, 4vw, 36px);
-    color: #fff;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .ks-dir__crumb {
-    font-size: 14px;
-    opacity: 0.9;
-  }
-  .ks-dir__crumb .sep {
-    margin: 0 0.35em;
-    opacity: 0.7;
-  }
-  .ks-dir__hero-title {
-    margin: 6px 0 0;
-    font-weight: 800;
-    line-height: 1.1;
-    font-size: clamp(28px, 5vw, 48px);
+  .ks-dir__meta{
+    margin:6px 0 4px;
+    color:#475569;
+    text-align:center;
   }
 
-  /* ===== Close-Button (wird auch von Dialogen genutzt) ===== */
-  .ks-dir__close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 999px;
-    border: 1px solid #eaeaea;
-    background: #fff;
-    cursor: pointer;
-  }
-  .ks-dir__close img {
-    width: 30px;
-    height: 30px;
-    display: block;
-  }
-  .ks-dir__close:hover {
-    background: #fafafa;
+  .ks-dir__intro{
+    margin:10px 0 6px;
+    text-align:center;
+    position:relative;
+    z-index:1;
   }
 
-  /* ===== Sessions (Card-Layout, auch in Dialogen genutzt) ===== */
-  .ks-offer__sessions {
-    display: grid;
-    gap: 12px;
-    margin-top: 12px;
-  }
-  .ks-session {
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    align-items: center;
-    gap: 16px;
-    border: 1px solid #eaeaea;
-    border-radius: 10px;
-    background: #fff;
-    padding: 12px 14px;
-  }
-  .ks-session__left {
-    display: grid;
-    gap: 2px;
-  }
-  .ks-session__row {
-    font-size: 14px;
-    color: #111;
-  }
-  .ks-session__coach {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 180px;
-  }
-  .ks-coach__avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 999px;
-    object-fit: cover;
-    background: #f1f5f9;
-    border: 1px solid #eaeaea;
-    display: block;
-  }
-  .ks-coach__name {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.05;
-  }
-  .ks-coach__first {
-    font-weight: 700;
-  }
-  .ks-coach__last {
-    color: #475569;
-    font-size: 13px;
-  }
-  .ks-session__actions {
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: row-reverse;
-    align-items: center;
-    gap: 20px;
-  }
-  .ks-session__btn {
-    transition:
-      transform 0.08s ease,
-      box-shadow 0.12s ease,
-      background-color 0.12s ease;
-  }
-  .ks-session__btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(14, 165, 233, 0.25);
-    background: #0c96d2;
+  .ks-dir__intro::before{
+    content:"ANGEBOTE";
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    top:10px;
+    font-weight:900;
+    letter-spacing:.03em;
+    font-size:clamp(72px,18vw,120px);
+    color:rgba(0,0,0,.03);
+    pointer-events:none;
+    z-index:-1;
   }
 
-  @media (max-width: 560px) {
-    .ks-session {
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-    .ks-session__actions {
-      justify-content: stretch;
-    }
-    .ks-session__btn {
-      width: 100%;
-    }
+  .ks-dir__kicker{
+    margin:0 0 4px;
+    line-height:1.4;
+    min-height:1.4em;
+    color:#555;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-size:12px;
   }
 
-  /* ===== Form-Helfer (Booking-Formulare im Directory-Kontext) ===== */
-  .ks-book__h4 {
-    margin: 12px 0 6px;
-    font-size: 16px;
-    font-weight: 700;
-  }
-  .ks-book__person a {
-    color: #0ea5e9;
-    text-decoration: none;
-  }
-  .ks-book__person a:hover {
-    text-decoration: underline;
-  }
-  .ks-fs {
-    border: 1px solid #eaeaea;
-    border-radius: 10px;
-    padding: 12px;
-    margin: 12px 0;
-  }
-  .ks-fs > legend {
-    font-weight: 700;
-    padding: 0 6px;
-  }
-  .ks-row {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .ks-grid {
-    display: grid;
-    gap: 12px;
-    grid-template-columns: 1fr 1fr;
-  }
-  .ks-field--sm input {
-    max-width: 120px;
-  }
-  .ks-field--btn {
-    align-self: end;
-  }
-  .ks-err {
-    display: none;
-    color: #b91c1c;
-    font-size: 12px;
-  }
-  .ks-check {
-    display: flex;
-    gap: 8px;
-    align-items: flex-start;
-  }
-  .dob-group {
-    display: flex;
-    gap: 8px;
-  }
-  .dob-group select {
-    min-width: 80px;
-  }
-  .ks-actions {
-    margin-top: 10px;
-    display: flex;
-    justify-content: flex-end;
+  .ks-dir__kicker--hidden{ visibility:hidden; }
+
+  /* Full-Bleed Hintergrund für Offers-Directory */
+  #ksDir{
+    position:relative;
+    z-index:0;
   }
 
-  /* ===== FAQ (Directory) – Grid, Cards, Media ===== */
-  .ks-dir-faq__grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 24px;
-    align-items: start;
-  }
-  .ks-accs {
-    margin-top: 12px;
-    display: grid;
-    gap: 10px;
-  }
-  .ks-acc {
-    border-bottom: 1px dotted #e5e7eb;
-    padding: 10px 0;
+  #ksDir::before{
+    content:"";
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:50%;
+    right:50%;
+    margin-left:-50vw;
+    margin-right:-50vw;
+    background:var(--dark-gray);
+    z-index:-1;
   }
 
-  .ks-dir-faq__media {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    margin: 0;
-    background: #0f172a;
-    z-index: 1;
-  }
-  .ks-dir-faq__media img {
-    width: 100%;
-    height: auto;
-    display: block;
-    opacity: 0.9;
-  }
-  .ks-dir-faq__play {
-    position: absolute;
-    inset: auto auto 12px 12px;
-    border: 0;
-    border-radius: 8px;
-    padding: 10px 12px;
-    background: #fff;
-    color: #111;
-    cursor: pointer;
-    font-weight: 700;
+  /* Program-Text Full */
+  .ks-program-text--full{
+    background:var(--light-gray);
+    width:100vw;
+    margin-left:calc(50% - 50vw);
+    margin-right:calc(50% - 50vw);
   }
 
-  @media (max-width: 900px) {
-    .ks-dir-faq__grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* ===== Programmbeschreibung (Directory) ===== */
-  .ks-dir-program__grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 24px;
-    align-items: start;
-  }
-  .ks-eyebrow {
-    color: #b91c1c;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 12px;
-  }
-  .ks-dir-program__title {
-    margin: 6px 0 8px;
-    font-weight: 800;
-    line-height: 1.1;
-    font-size: clamp(26px, 4vw, 40px);
-    text-transform: uppercase;
-  }
-  .ks-dir-program__body {
-    color: #374151;
-  }
-  .ks-pluslist {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 10px;
-  }
-  .ks-pluslist li {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  .ks-plus {
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    min-width: 22px;
-    line-height: 22px;
-    text-align: center;
-    border-radius: 999px;
-    background: #ef4444;
-    color: #fff;
-    font-weight: 800;
-  }
-
-  @media (max-width: 900px) {
-    .ks-dir-program__grid {
-      grid-template-columns: 1fr;
-    }
+  /* (Legacy) Nur falls genutzt: Franchise-Seite Titel verstecken */
+  .page-id-312 .entry-title,
+  .page-id-312 h1.entry-title{
+    display:none !important;
   }
 }
 
-/* ========================================================================== */
-/*   FAQ: Plus/Minus PNG-Icons NUR für die Directory-FAQ (#dir-faq)          */
-/*   und zentrierter Titelblock mit großem „FAQ“-Watermark                   */
-/* ========================================================================== */
 
-/* Standard-Marker ausblenden */
-#dir-faq .ks-acc summary::marker {
-  content: "";
-}
-#dir-faq .ks-acc summary::-webkit-details-marker {
-  display: none;
-}
 
-/* Plus/Minus-Icon rechts */
-#dir-faq .ks-acc summary::after {
-  content: "";
-  width: 20px;
-  height: 20px;
-  flex: 0 0 20px;
-  background: var(--acc-plus) center/contain no-repeat;
-  opacity: 0.9;
-  transition:
-    transform 0.18s ease,
-    opacity 0.18s ease,
-    background-image 0.18s ease;
-}
-#dir-faq .ks-acc[open] summary::after {
-  background-image: var(--acc-minus);
-}
-@media (max-width: 480px) {
-  #dir-faq .ks-acc summary::after {
-    width: 18px;
-    height: 18px;
-    flex-basis: 18px;
-  }
-}
 
-/* Titelblock in der FAQ mittig über beide Spalten + Watermark */
-#dir-faq .ks-dir-faq__grid {
-  position: relative;
-}
-#dir-faq .ks-title-wrap {
-  grid-column: 1 / -1;
-  text-align: center;
-  position: relative;
-  margin-bottom: 18px;
-}
-#dir-faq .ks-title-wrap .ks-kicker {
-  margin: 0 0 6px;
-  letter-spacing: 0.12em;
-}
-#dir-faq .ks-title-wrap::after {
-  content: attr(data-bgword);
-  position: absolute;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Offers-Hero Watermark: exakt zentrieren + etwas weiter nach unten */
+.ks-dir__hero::after{
   left: 50%;
-  transform: translateX(-50%);
-  top: -80px;
-  font-weight: 900;
-  letter-spacing: 0.03em;
-  font-size: clamp(72px, 16vw, 180px);
-  color: rgba(0, 0, 0, 0.05);
-  pointer-events: none;
-  z-index: 0;
-}
-/* Bild immer über dem Watermark */
-#dir-faq .ks-dir-faq__media {
-  position: relative;
-  z-index: 1;
-}
-
-@media (max-width: 900px) {
-  #dir-faq .ks-title-wrap {
-    margin-bottom: 12px;
-  }
-  #dir-faq .ks-title-wrap::after {
-    font-size: clamp(64px, 28vw, 140px);
-    top: -6px;
-  }
-}
-
-/* ==== DIR-FAQ (Masken only + Hover-Kreis, weißes Icon) =================== */
-#dir-faq {
-  --acc-mask-size: 62%;
-  --acc-size: 30px;
-  --acc-gap: 14px;
-  /* --acc-plus / --acc-minus kommen inline aus PHP */
-}
-
-/* Textzeile + Platz fürs Icon rechts */
-#dir-faq .ks-acc summary {
-  position: relative;
-  padding: 12px 12px;
-  padding-right: calc(var(--acc-size) + var(--acc-gap) + 6px);
-  border: 1px solid transparent;
-  border-radius: 10px;
-  transition:
-    color 0.18s ease,
-    background-color 0.18s ease;
-}
-
-/* Basis der Pseudo-Elemente */
-#dir-faq .ks-acc summary::before,
-#dir-faq .ks-acc summary::after {
-  content: "";
-  position: absolute;
-  right: var(--acc-gap);
-  top: 50%;
-  transform: translateY(-50%);
-  width: var(--acc-size);
-  height: var(--acc-size);
-  pointer-events: none;
-}
-
-/* WICHTIG: alte BG-Bilder ausschalten, Maske erzwingen */
-#dir-faq .ks-acc summary::after {
-  background-image: none !important;
-  -webkit-mask: var(--acc-plus) center / var(--acc-mask-size) no-repeat !important;
-  mask: var(--acc-plus) center / var(--acc-mask-size) no-repeat !important;
-  background-color: #000 !important; /* schwarz im Normalzustand */
-  z-index: 1;
-  transition:
-    transform 0.18s ease,
-    opacity 0.18s ease,
-    filter 0.18s ease,
-    background-color 0.18s ease;
-}
-
-/* Open: Minus-Maske */
-#dir-faq .ks-acc[open] summary::after {
-  background-image: none !important;
-  -webkit-mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
-  mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
-  background-color: #000 !important;
-}
-
-/* Hover: schwarzer Kreis unten, Icon oben WEISS + Scale */
-#dir-faq .ks-acc summary:hover::before {
-  background: #000;
-  border-radius: 50%;
-  z-index: 0;
-}
-#dir-faq .ks-acc summary:hover::after {
-  background-image: none !important;
-  background-color: #fff !important; /* → weißes Plus/Minus */
-  opacity: 1 !important;
-  filter: none !important;
-  transform: translateY(-50%) scale(1.18);
-}
-
-/* dezentes Text-Hover */
-#dir-faq .ks-acc summary:hover {
-  color: #0f172a;
-  background-color: rgba(15, 23, 42, 0.04);
-}
-
-/* Tastaturfokus sichtbar lassen */
-#dir-faq .ks-acc summary:focus-visible {
-  outline: 2px solid #0ea5e9;
-  outline-offset: 2px;
-}
-
-/* Mobile: Icon etwas größer ok */
-@media (max-width: 480px) {
-  #dir-faq {
-    --acc-size: 28px;
-    --acc-mask-size: 66%;
-  }
-}
-
-/* === Persistenter Hover-Look, aber nur wenn geöffnet ([open]) = Minus === */
-
-/* 1) Text-Hintergrund wie Hover */
-#faq .ks-acc[open] summary,
-#dir-faq .ks-acc[open] summary {
-  color: #0f172a;
-  background-color: rgba(15, 23, 42, 0.04);
-}
-
-/* 2) Schwarzer Kreis unter dem Icon dauerhaft anzeigen */
-#faq .ks-acc[open] summary::before,
-#dir-faq .ks-acc[open] summary::before {
-  background: #000;
-  border-radius: 50%;
-  z-index: 0;
-}
-
-/* 3) Minus-Icon in WEISS (persistiert), ohne Scale-Jump im Normalzustand */
-#faq .ks-acc[open] summary::after,
-#dir-faq .ks-acc[open] summary::after {
-  background-image: none !important;
-  -webkit-mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
-  mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
-  background-color: #fff !important; /* weißes Minus */
-  transform: translateY(-50%) scale(1); /* ruhig im Normalzustand */
-  opacity: 1 !important;
-  filter: none !important;
-}
-
-/* 4) Optional: beim echten Hover zusätzlich sanft vergrößern */
-#faq .ks-acc[open] summary:hover::after,
-#dir-faq .ks-acc[open] summary:hover::after {
-  transform: translateY(-50%) scale(1.18);
-}
-
-/* =========================================================
-   DFS-Style Hero für Offers Directory – wie Home Hero
-   ========================================================= */
-
-:root {
-  /* Falls noch nicht global gesetzt – gleiche Breite wie auf home */
-  --ks-container: 1440px;
-}
-
-.ks-dir__hero {
-  position: relative;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  padding: clamp(24px, 6vw, 56px) 0;
- background:    var(--light-gray);;
- 
-  overflow: hidden;
-}
-
-/* Alte dunkle Gradient-Überlagerung killen */
-.ks-dir__hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: none;
-}
-
-/* Großes Wasserzeichen im Offers-Hero – wie auf der Startseite */
-.ks-dir__hero::after {
-  content: attr(data-watermark);
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 6%;
-  text-align: center;
-  padding-left: 0;
-  font-weight: 900;
-  letter-spacing: 0.02em;
-  font-size: clamp(64px, 22vw, 240px);
-  color: rgba(0, 0, 0, 0.04);
-  pointer-events: none;
-  white-space: nowrap;
-}
-
-/* Inhalt wie beim Home-Hero im Container halten */
-.ks-dir__hero-inner {
-  position: relative;
-  z-index: 1;
-
-  max-width: var(--ks-container);
+  right: auto;
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 16px;
-  padding-right: 16px;
-
-  padding-top: clamp(16px, 4vw, 62px);
-  padding-bottom: clamp(16px, 4vw, 32px);
-
-  color: var(--tex);
-}
-
-/* Crumb & Titel an Home-Hero anlehnen */
-.ks-dir__crumb {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #6b7280;
-  margin-bottom: 6px;
-}
-.ks-dir__crumb .sep {
-  margin: 0 0.35em;
-  opacity: 0.7;
-}
-
-.ks-dir__hero-title {
-  margin: 0 0 8px;
-  font-weight: 800;
-  line-height: 1.05;
-  font-size: clamp(36px, 6vw, 72px);
-}
-
-.ks-dir__hero-inner::before {
-  content: "";
-  position: absolute;
-  right: 40px;
-  top: 80%;
-  transform: translateY(-50%);
-  width: min(620px, 50vw);
-  height: clamp(320px, 55vw, 620px);
-  background: var(--hero-img) center right / contain no-repeat;
-  pointer-events: none;
-}
-
-/* Auf kleineren Screens: Bild zentrieren & etwas kleiner */
-@media (max-width: 900px) {
-  .ks-dir__hero-inner {
-    padding-bottom: clamp(24px, 8vw, 40px);
-  }
-  .ks-dir__hero-inner::before {
-    right: 50%;
-    transform: translateX(50%);
-    width: min(420px, 70vw);
-    height: clamp(220px, 60vw, 420px);
-  }
-}
-
-/* Intro + Filter + Meta zentrieren wie im MFS-Layout */
-.ks-dir__intro,
-.ks-dir__filters,
-.ks-dir__meta {
-  max-width: 1440px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-.ks-dir__title {
-  font-weight: 800;
-  font-size: 52px;
-  color: var(--text);
-  line-height: 1.05;
-  margin: 0;
-}
-
-/* Filter-Zeile mittig ausrichten 
-.ks-dir__filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 16px;
-  align-items: flex-end;
-  justify-content: center;
-  margin: 10px 0;
-}
-*/
-
-/*
-.ks-field {
-  display: grid;
-  gap: 6px;
-}
-
-.ks-field select {
-  height: 40px;
-  padding: 0 12px;
-}
-*/
-/* Zähler unter den Filtern ebenfalls mittig */
-.ks-dir__meta {
-  margin: 6px 0 4px;
-  color: #475569;
-  text-align: center;
-}
-
-.ks-dir__intro {
-  margin: 10px 0 6px;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-
-.ks-dir__intro::before {
-  content: "ANGEBOTE";
-  position: absolute;
-  left: 50%;
   transform: translateX(-50%);
-  top: 10px;
-  font-weight: 900;
-  letter-spacing: 0.03em;
-  font-size: clamp(72px, 18vw, 120px);
-  color: rgba(0, 0, 0, 0.03);
-  pointer-events: none;
-  z-index: -1;
+  bottom: -6%; /* vorher 6% -> weiter nach unten */
 }
 
-.ks-dir__kicker {
-  margin: 0 0 4px;
-  line-height: 1.4;
-  min-height: 1.4em;
-  color: #555;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 12px;
-}
-
-.ks-dir__kicker--hidden {
-  visibility: hidden;
-}
-
-/* Full-Bleed-Hintergrund für das Offers-Directory */
-#ksDir {
-  position: relative;
-  z-index: 0;
-}
-#ksDir::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  background: var(--dark-gray);
-  z-index: -1;
-}
-
-.ks-py-56 {
-  padding-block: 56px;
-}
-
-.z-index {
-  z-index: -1;
-}
-
-/* Hover/Selected (Powertraining-Auswahl – bleibt zur Sicherheit auch hier) */
-.ks-session.ks-session--selectable:hover {
-  background: #f5f5f5;
-}
-.ks-session.ks-session--selectable.ks-session--selected {
-  background: #e5e5e5;
-  border-color: #d4d4d4;
+/* Optional: auf Mobile noch minimal tiefer */
+@media (max-width: 900px){
+  .ks-dir__hero::after{ bottom: 1%; }
 }
 
 
@@ -833,19 +582,23 @@
 
 
 
-.ks-program-text--full {
-  background: var(--light-gray);
-  /* full bleed */
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-}
 
 
 
-/* Nur Franchise-Seite: Titel verstecken */
-.page-id-312 .entry-title,
-.page-id-312 h1.entry-title {
-    display: none !important;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
