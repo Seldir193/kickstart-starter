@@ -79,6 +79,18 @@ add_action('wp_enqueue_scripts', function () {
       );
     }
 
+    // OPTIONAL: eigenes Hover-CSS nur für die Directory-Liste
+$dir_hover_abs = $theme_dir . '/assets/css/offers-directory-list-hover.css';
+if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')) {
+  wp_enqueue_style(
+    'ks-dir-list-hover',
+    $theme_uri . '/assets/css/offers-directory-list-hover.css',
+    ['ks-dir'],
+    filemtime($dir_hover_abs)
+  );
+}
+
+
     // FAQ-Bild rechts setzen (wie in home.php)
     if (wp_style_is('ks-home', 'enqueued')) {
       $faq_img = $theme_uri . '/assets/img/home/mfs.png';

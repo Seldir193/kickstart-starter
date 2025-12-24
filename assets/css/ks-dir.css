@@ -3,7 +3,6 @@
 /* ========================================================================== */
 
 @layer pages {
-
   /* ------------------------------------------------------------------------ */
   /* JS-FLAG gegen FOUC (Flash vom nativen Select)                             */
   /* ------------------------------------------------------------------------ */
@@ -21,7 +20,9 @@
   /* Layout: Map | Liste                                                       */
   /* ------------------------------------------------------------------------ */
 
-  body.ks-modal-open { overflow: hidden; }
+  body.ks-modal-open {
+    overflow: hidden;
+  }
 
   .ks-dir__layout {
     display: grid;
@@ -48,9 +49,16 @@
   }
 
   @media (max-width: 900px) {
-    .ks-dir__layout { grid-template-columns: 1fr; }
-    .ks-dir__map { position: static; top: auto; }
-    .ks-dir__map .ks-map { height: 320px; }
+    .ks-dir__layout {
+      grid-template-columns: 1fr;
+    }
+    .ks-dir__map {
+      position: static;
+      top: auto;
+    }
+    .ks-dir__map .ks-map {
+      height: 320px;
+    }
   }
 
   .ks-dir__listwrap {
@@ -72,7 +80,9 @@
   /* Hero (wie Home)                                                           */
   /* ------------------------------------------------------------------------ */
 
-  :root { --ks-container: 1440px; }
+  :root {
+    --ks-container: 1440px;
+  }
 
   .ks-dir__hero {
     position: relative;
@@ -131,7 +141,10 @@
     margin-bottom: 6px;
   }
 
-  .ks-dir__crumb .sep { margin: 0 0.35em; opacity: 0.7; }
+  .ks-dir__crumb .sep {
+    margin: 0 0.35em;
+    opacity: 0.7;
+  }
 
   .ks-dir__hero-title {
     margin: 0 0 8px;
@@ -153,7 +166,9 @@
   }
 
   @media (max-width: 900px) {
-    .ks-dir__hero-inner { padding-bottom: clamp(24px, 8vw, 40px); }
+    .ks-dir__hero-inner {
+      padding-bottom: clamp(24px, 8vw, 40px);
+    }
     .ks-dir__hero-inner::before {
       right: 50%;
       transform: translateX(50%);
@@ -204,7 +219,9 @@
     font-size: 12px;
   }
 
-  .ks-dir__kicker--hidden { visibility: hidden; }
+  .ks-dir__kicker--hidden {
+    visibility: hidden;
+  }
 
   .ks-dir__title {
     font-weight: 800;
@@ -220,15 +237,22 @@
     text-align: center;
   }
 
-  .ks-py-56 { padding-block: 56px; }
+  .ks-py-56 {
+    padding-block: 56px;
+  }
 
-  #ksDir { position: relative; z-index: 0; }
+  #ksDir {
+    position: relative;
+    z-index: 0;
+  }
 
   #ksDir::before {
     content: "";
     position: absolute;
-    top: 0; bottom: 0;
-    left: 50%; right: 50%;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
     background: var(--dark-gray);
@@ -258,10 +282,14 @@
   }
 
   @media (max-width: 520px) {
-    .ks-dir .ks-field { min-width: 220px; }
+    .ks-dir .ks-field {
+      min-width: 220px;
+    }
   }
 
-  .ks-dir .ks-field span { font-weight: 600; }
+  .ks-dir .ks-field span {
+    font-weight: 600;
+  }
 
   /* ------------------------------------------------------------------------ */
   /* Basis-Control                                                             */
@@ -327,7 +355,7 @@
     width: 18px;
     height: 18px;
     display: block;
-    transition: transform .18s ease;
+    transition: transform 0.18s ease;
   }
 
   #ksDir .ks-dir-dd[aria-expanded="true"] .ks-dir-dd__caret img {
@@ -342,7 +370,7 @@
     background: #fff;
     border: 1px solid #e3e6e8;
     border-radius: 12px;
-    box-shadow: 0 16px 40px rgba(0,0,0,.14);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
     display: none;
     z-index: 50;
 
@@ -352,7 +380,9 @@
     overflow-x: hidden;
   }
 
-  #ksDir .ks-dir-dd[aria-expanded="true"] .ks-dir-dd__panel { display: block; }
+  #ksDir .ks-dir-dd[aria-expanded="true"] .ks-dir-dd__panel {
+    display: block;
+  }
 
   #ksDir .ks-dir-dd__option {
     height: 44px;
@@ -382,7 +412,7 @@
 
   #ksDir .ks-dir-dd__option:focus-visible {
     box-shadow: 0 0 0 2px color-mix(in oklab, var(--brand-navy) 35%, #fff);
-    background: rgba(15,23,42,.06);
+    background: rgba(15, 23, 42, 0.06);
   }
 
   #ksDir .ks-dir-dd__option[aria-selected="true"] {
@@ -391,10 +421,14 @@
     border-radius: 0;
   }
 
-  #ksDir .ks-dir-dd__option[data-placeholder="1"] { cursor: default; }
+  #ksDir .ks-dir-dd__option[data-placeholder="1"] {
+    cursor: default;
+  }
 
   @media (prefers-reduced-motion: reduce) {
-    #ksDir .ks-dir-dd__caret img { transition: none; }
+    #ksDir .ks-dir-dd__caret img {
+      transition: none;
+    }
   }
 
   /* ------------------------------------------------------------------------ */
@@ -418,8 +452,14 @@
     padding: 12px 14px;
   }
 
-  .ks-session__left { display: grid; gap: 2px; }
-  .ks-session__row { font-size: 14px; color: #111; }
+  .ks-session__left {
+    display: grid;
+    gap: 2px;
+  }
+  .ks-session__row {
+    font-size: 14px;
+    color: #111;
+  }
 
   .ks-session__coach {
     display: inline-flex;
@@ -438,9 +478,18 @@
     display: block;
   }
 
-  .ks-coach__name { display: flex; flex-direction: column; line-height: 1.05; }
-  .ks-coach__first { font-weight: 700; }
-  .ks-coach__last { color: #475569; font-size: 13px; }
+  .ks-coach__name {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+  }
+  .ks-coach__first {
+    font-weight: 700;
+  }
+  .ks-coach__last {
+    color: #475569;
+    font-size: 13px;
+  }
 
   .ks-session__actions {
     display: flex;
@@ -451,7 +500,8 @@
   }
 
   .ks-session__btn {
-    transition: transform 0.08s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+    transition: transform 0.08s ease, box-shadow 0.12s ease,
+      background-color 0.12s ease;
   }
 
   .ks-session__btn:hover {
@@ -461,12 +511,21 @@
   }
 
   @media (max-width: 560px) {
-    .ks-session { grid-template-columns: 1fr; gap: 10px; }
-    .ks-session__actions { justify-content: stretch; }
-    .ks-session__btn { width: 100%; }
+    .ks-session {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .ks-session__actions {
+      justify-content: stretch;
+    }
+    .ks-session__btn {
+      width: 100%;
+    }
   }
 
-  .ks-session.ks-session--selectable:hover { background: #f5f5f5; }
+  .ks-session.ks-session--selectable:hover {
+    background: #f5f5f5;
+  }
   .ks-session.ks-session--selectable.ks-session--selected {
     background: #e5e5e5;
     border-color: #d4d4d4;
@@ -484,7 +543,9 @@
   }
 
   @media (max-width: 900px) {
-    .ks-dir-faq__grid { grid-template-columns: 1fr; }
+    .ks-dir-faq__grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* ------------------------------------------------------------------------ */
@@ -496,73 +557,3 @@
     display: none !important;
   }
 }
-
-/* ====== BOOK-STYLE Hover/Focus für ks-dir Dropdown ====== */
-
-#ksDir .ks-dir-dd__btn:hover{
-  box-shadow: none;
-}
-
-#ksDir .ks-field__control--select:hover{
-  border-color: var(--text, #111827);
-}
-
-#ksDir .ks-field__control--select:has(.ks-dir-dd__btn:focus),
-#ksDir .ks-field__control--select:has(.ks-dir-dd__btn:focus-visible),
-#ksDir .ks-field__control--select:has(.ks-dir-dd[aria-expanded="true"]),
-#ksDir .ks-field__control--select.is-open{
-  outline: 0;
-  border-color: var(--brand-navy);
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-navy) 22%, #ffffff);
-  border-radius: 10px;
-}
-
-#ksDir .ks-dir-dd__btn:focus,
-#ksDir .ks-dir-dd__btn:focus-visible{
-  outline: none;
-  box-shadow: none;
-}
-
-/* Native Select IMMER verstecken, sobald enhanced – egal welche Klasse gesetzt wurde */
-#ksDir .ks-field__control--select.is-enhanced select {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  appearance: none !important;
-}
-
-.ks-js #ksDir [data-filters] {
-  visibility: hidden;
-}
-
-#ksDir.is-ready [data-filters] {
-  visibility: visible;
-}
-
-/* FIX: verhindert "Icon springt in die Mitte" durch globale Flex-Styles */
-#ksDir .ks-field__control--select {
-  display: block !important;
-  padding: 0 !important;
-  box-sizing: border-box;
-}
-
-#ksDir .ks-dir-dd__btn {
-  position: relative;
-  box-sizing: border-box;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
