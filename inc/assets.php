@@ -1,20 +1,6 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
 add_action('wp_enqueue_scripts', function () {
+
   // Google Fonts
   wp_enqueue_style(
     'kickstart-fonts',
@@ -22,9 +8,6 @@ add_action('wp_enqueue_scripts', function () {
     [],
     null
   );
-
-
-
 
   // Theme CSS (muss zuerst)
   $style_path = get_stylesheet_directory() . '/style.css';
@@ -35,7 +18,7 @@ add_action('wp_enqueue_scripts', function () {
     file_exists($style_path) ? filemtime($style_path) : wp_get_theme()->get('Version')
   );
 
-  // 🔹 ZENTRALE UTILITIES (NEU / WICHTIG für Shortcodes & Layers)
+  // ZENTRALE UTILITIES
   $utils_path = get_stylesheet_directory() . '/assets/css/ks-utils.css';
   if (file_exists($utils_path)) {
     wp_enqueue_style(
@@ -57,7 +40,7 @@ add_action('wp_enqueue_scripts', function () {
       wp_enqueue_style(
         'ks-' . $handle,
         get_stylesheet_directory_uri() . $relPath,
-        ['kickstart-style','ks-utils'],
+        ['kickstart-style', 'ks-utils'],
         filemtime($abs)
       );
     }
@@ -91,14 +74,9 @@ add_action('wp_enqueue_scripts', function () {
     );
   }
 
-
-
-
-
-
-
-
-  // Leaflet
+  // ---------------------------
+  // Leaflet (wie bisher global)
+  // ---------------------------
   wp_enqueue_style(
     'leaflet-css',
     'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
@@ -113,34 +91,11 @@ add_action('wp_enqueue_scripts', function () {
     true
   );
 
+ 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // Offers Directory JS
-  $dir_js = get_stylesheet_directory() . '/assets/js/offers-directory.js';
-  if (file_exists($dir_js)) {
-    wp_enqueue_script(
-      'kickstart-offers-directory',
-      get_stylesheet_directory_uri() . '/assets/js/offers-directory.js',
-      ['leaflet-js','kickstart-offers-dialog'],
-      filemtime($dir_js),
-      true
-    );
-  }
-
+  // ---------------------------------------
+  // Book-Dialog + Offers-Dialog (Reihenfolge FIX)
+  // ---------------------------------------
 
   // Booking-Dialog JS (iframe)
   $book_js = get_stylesheet_directory() . '/assets/js/book-dialog.js';
@@ -160,20 +115,89 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script(
       'kickstart-offers-dialog',
       get_stylesheet_directory_uri() . '/assets/js/offers-dialog.js',
-      ['kickstart-book-dialog'], // 🔸 WICHTIG: erst book-dialog laden
+      ['kickstart-book-dialog'],
       filemtime($dlg_js),
       true
     );
   }
-  
+
+  // Dialog CSS (wie bisher)
+  $offers_dlg_css = get_stylesheet_directory() . '/assets/css/offers-dialog.css';
+  if (file_exists($offers_dlg_css)) {
+    wp_enqueue_style(
+      'ks-offers-dialog',
+      get_stylesheet_directory_uri() . '/assets/css/offers-dialog.css',
+      [],
+      filemtime($offers_dlg_css)
+    );
+  }
+
+  $book_dlg_css = get_stylesheet_directory() . '/assets/css/book-dialog.css';
+  if (file_exists($book_dlg_css)) {
+    wp_enqueue_style(
+      'ks-book-dialog',
+      get_stylesheet_directory_uri() . '/assets/css/book-dialog.css',
+      [],
+      filemtime($book_dlg_css)
+    );
+  }
+
+  // ---------------------------------------
+  // Offers Directory Map + Main (Reihenfolge FIX)
+  // ---------------------------------------
+
+ 
 
 
 
-wp_enqueue_style('ks-offers-dialog', get_stylesheet_directory_uri() . '/assets/css/offers-dialog.css', [], null);
-wp_enqueue_style('ks-book-dialog', get_stylesheet_directory_uri() . '/assets/css/book-dialog.css', [], null);
+$map_js = get_stylesheet_directory() . '/assets/js/offers-directory-map.js';
+if (file_exists($map_js)) {
+  wp_enqueue_script(
+    'ks-offers-dir-map',
+    get_stylesheet_directory_uri() . '/assets/js/offers-directory-map.js',
+    ['leaflet-js'],
+    filemtime($map_js),
+    true
+  );
+
+  $geocode_url = rest_url('ks/v1/geocode');
+  wp_add_inline_script(
+    'ks-offers-dir-map',
+    'window.KS_MAP_GEOCODE_URL = ' . wp_json_encode($geocode_url) . ';',
+    'before'
+  );
+}
 
 
-  // Newsletter
+
+  // Offers Directory JS (kommt NACH Map + Dialog)
+  $dir_js = get_stylesheet_directory() . '/assets/js/offers-directory.js';
+  if (file_exists($dir_js)) {
+    wp_enqueue_script(
+      'kickstart-offers-directory',
+      get_stylesheet_directory_uri() . '/assets/js/offers-directory.js',
+      ['ks-offers-dir-map', 'kickstart-offers-dialog'],
+      filemtime($dir_js),
+      true
+    );
+  }
+
+  // Offers Directory CSS (wie bisher)
+  $dir_css = get_stylesheet_directory() . '/assets/css/offers-directory.css';
+  if (file_exists($dir_css)) {
+    wp_enqueue_style(
+      'kickstart-offers-directory',
+      get_stylesheet_directory_uri() . '/assets/css/offers-directory.css',
+      ['kickstart-style', 'ks-utils', 'ks-components', 'leaflet-css'],
+      filemtime($dir_css)
+    );
+  }
+
+
+
+  // ---------------------------
+  // Newsletter (wie bisher)
+  // ---------------------------
   $news_js = get_stylesheet_directory() . '/assets/js/newsletter.js';
   if (file_exists($news_js)) {
     wp_enqueue_script(
@@ -183,39 +207,13 @@ wp_enqueue_style('ks-book-dialog', get_stylesheet_directory_uri() . '/assets/css
       filemtime($news_js),
       true
     );
+
     wp_localize_script('ks-newsletter', 'KS_NEWS', [
       'api' => 'http://127.0.0.1:5000/api/public/newsletter',
     ]);
   }
-
-  // Offers Directory CSS (kleine Abhängigkeits-Optimierung)
-  $dir_css = get_stylesheet_directory() . '/assets/css/offers-directory.css';
-  if (file_exists($dir_css)) {
-    wp_enqueue_style(
-      'kickstart-offers-directory',
-      get_stylesheet_directory_uri() . '/assets/css/offers-directory.css',
-      ['kickstart-style','ks-utils','ks-components','leaflet-css'],
-      filemtime($dir_css)
-    );
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
+
 
 
 

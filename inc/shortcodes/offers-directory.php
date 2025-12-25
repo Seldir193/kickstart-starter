@@ -22,15 +22,13 @@ $select_icon = $theme_uri . '/assets/img/offers/select-caret.svg';
 
 
 
-
-
-
-add_action('wp_enqueue_scripts', function () {
+    add_action('wp_enqueue_scripts', function () {
   $theme_dir = get_stylesheet_directory();
   $theme_uri = get_stylesheet_directory_uri();
 
   $dd_hover_css = $theme_dir . '/assets/css/dropdown-hover.css';
   if (!file_exists($dd_hover_css)) return;
+
 
   // global laden (leichteste Lösung)
   wp_enqueue_style(
@@ -40,6 +38,8 @@ add_action('wp_enqueue_scripts', function () {
     filemtime($dd_hover_css)
   );
 }, 20);
+
+
 
 
 
@@ -57,6 +57,7 @@ add_action('wp_enqueue_scripts', function () {
       );
     }
 
+
     // ks-home.css (enthält FAQ-Styles: .ks-acc, .ks-home-faq, etc.)
     $home_abs = $theme_dir . '/assets/css/ks-home.css';
     if (file_exists($home_abs) && !wp_style_is('ks-home', 'enqueued')) {
@@ -67,6 +68,9 @@ add_action('wp_enqueue_scripts', function () {
         filemtime($home_abs)
       );
     }
+
+   
+
 
     // OPTIONAL: eigenes Directory-CSS
     $dir_abs = $theme_dir . '/assets/css/ks-dir.css';
@@ -79,7 +83,9 @@ add_action('wp_enqueue_scripts', function () {
       );
     }
 
-    // OPTIONAL: eigenes Hover-CSS nur für die Directory-Liste
+
+
+  // OPTIONAL: eigenes Hover-CSS nur für die Directory-Liste
 $dir_hover_abs = $theme_dir . '/assets/css/offers-directory-list-hover.css';
 if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')) {
   wp_enqueue_style(
@@ -89,6 +95,8 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
     filemtime($dir_hover_abs)
   );
 }
+
+
 
 
     // FAQ-Bild rechts setzen (wie in home.php)
@@ -741,6 +749,33 @@ if ($program_title) : ?>
     return ob_get_clean();
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

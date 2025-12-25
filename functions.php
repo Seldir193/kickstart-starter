@@ -101,6 +101,8 @@ ks_require('shortcodes/brandbar.php');
 
 
 
+ks_require('ks-geocode.php');
+
 
 
 

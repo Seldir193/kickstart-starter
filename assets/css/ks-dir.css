@@ -556,4 +556,27 @@
   .page-id-312 h1.entry-title {
     display: none !important;
   }
+
+  /* =========================================================
+   KS DIR: Rand kommt vom Wrapper, nicht vom Button
+   (verhindert dicken/ grauen Doppel-Rand)
+   ========================================================= */
+
+  #ksDir .ks-dir-dd__btn {
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* Hover: genau wie vorher – aber auf dem Wrapper */
+  #ksDir .ks-field__control--select:hover {
+    border-color: var(--text, #111827);
+  }
+
+  /* Focus/Open: auch Wrapper (kein dicker Doppelrand) */
+  #ksDir .ks-field__control--select:focus-within {
+    outline: 0;
+    border-color: var(--brand-navy);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-navy) 22%, #fff);
+  }
 }
