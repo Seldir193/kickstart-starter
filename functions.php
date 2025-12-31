@@ -49,19 +49,40 @@ add_action('wp_enqueue_scripts', function () {
     
 
 
- wp_enqueue_script(
-  'ks-whatsapp-locations',
-  get_stylesheet_directory_uri() . '/assets/js/ks-whatsapp-locations.js',
-  [],
-  '1.0.0',
-  true
-);
+ //wp_enqueue_script(
+  //'ks-whatsapp-locations',
+  //get_stylesheet_directory_uri() . '/assets/js/ks-whatsapp-locations.js',
+  //[],
+ // '1.0.0',
+ // true
+//);
 
 
-
-
-// functions.php
 add_action('wp_enqueue_scripts', function () {
+  $file = get_stylesheet_directory() . '/assets/js/ks-whatsapp-locations.js';
+  if (file_exists($file)) {
+    wp_enqueue_script(
+      'ks-whatsapp-locations',
+      get_stylesheet_directory_uri() . '/assets/js/ks-whatsapp-locations.js',
+      [],
+      filemtime($file),
+      true
+    );
+  }
+}, 20);
+
+
+
+
+
+
+add_action('wp_enqueue_scripts', function () {
+  if (is_admin()) return;
+
+  global $post;
+  $content = is_object($post) ? (string) $post->post_content : '';
+  if (has_shortcode($content, 'ks_offers_directory')) return;
+
   $file = get_stylesheet_directory() . '/assets/js/ks-dropdown.js';
   if (file_exists($file)) {
     wp_enqueue_script(
@@ -72,7 +93,8 @@ add_action('wp_enqueue_scripts', function () {
       true
     );
   }
-});
+}, 30);
+
 
 
 

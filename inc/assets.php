@@ -147,40 +147,82 @@ add_action('wp_enqueue_scripts', function () {
   // ---------------------------------------
 
  
+// ---------------------------------------
+// Offers Directory Map + Main (Reihenfolge FIX)
+// ---------------------------------------
 
+$map_deps = ['leaflet-js'];
 
-
-$map_js = get_stylesheet_directory() . '/assets/js/offers-directory-map.js';
-if (file_exists($map_js)) {
+// geocode helper (liegt bei dir in assets/js/)
+$map_helper_path = get_stylesheet_directory() . '/assets/js/offers-map-geocode.js';
+if (file_exists($map_helper_path)) {
   wp_enqueue_script(
-    'ks-offers-dir-map',
-    get_stylesheet_directory_uri() . '/assets/js/offers-directory-map.js',
-    ['leaflet-js'],
-    filemtime($map_js),
+    'ks-offers-dir-map-helpers',
+    get_stylesheet_directory_uri() . '/assets/js/offers-map-geocode.js',
+    [],
+    filemtime($map_helper_path),
     true
   );
 
   $geocode_url = rest_url('ks/v1/geocode');
   wp_add_inline_script(
-    'ks-offers-dir-map',
+    'ks-offers-dir-map-helpers',
     'window.KS_MAP_GEOCODE_URL = ' . wp_json_encode($geocode_url) . ';',
     'before'
+  );
+
+  $map_deps[] = 'ks-offers-dir-map-helpers';
+}
+
+// map (liegt bei dir in assets/js/)
+$map_js = get_stylesheet_directory() . '/assets/js/offers-directory-map.js';
+if (file_exists($map_js)) {
+  wp_enqueue_script(
+    'ks-offers-dir-map',
+    get_stylesheet_directory_uri() . '/assets/js/offers-directory-map.js',
+    $map_deps,
+    filemtime($map_js),
+    true
+  );
+}
+
+// core (liegt bei dir in assets/js/)
+$core_path = get_stylesheet_directory() . '/assets/js/offers-directory-core.js';
+if (file_exists($core_path)) {
+  wp_enqueue_script(
+    'ks-offers-dir-core',
+    get_stylesheet_directory_uri() . '/assets/js/offers-directory-core.js',
+    [],
+    filemtime($core_path),
+    true
+  );
+}
+
+// ui (liegt bei dir in assets/js/)
+$ui_path = get_stylesheet_directory() . '/assets/js/offers-directory-ui.js';
+if (file_exists($ui_path)) {
+  wp_enqueue_script(
+    'ks-offers-dir-ui',
+    get_stylesheet_directory_uri() . '/assets/js/offers-directory-ui.js',
+    [],
+    filemtime($ui_path),
+    true
+  );
+}
+
+// main (liegt bei dir in assets/js/)
+$dir_js = get_stylesheet_directory() . '/assets/js/offers-directory.js';
+if (file_exists($dir_js)) {
+  wp_enqueue_script(
+    'ks-offers-directory',
+    get_stylesheet_directory_uri() . '/assets/js/offers-directory.js',
+    ['ks-offers-dir-core', 'ks-offers-dir-ui', 'ks-offers-dir-map'],
+    filemtime($dir_js),
+    true
   );
 }
 
 
-
-  // Offers Directory JS (kommt NACH Map + Dialog)
-  $dir_js = get_stylesheet_directory() . '/assets/js/offers-directory.js';
-  if (file_exists($dir_js)) {
-    wp_enqueue_script(
-      'kickstart-offers-directory',
-      get_stylesheet_directory_uri() . '/assets/js/offers-directory.js',
-      ['ks-offers-dir-map', 'kickstart-offers-dialog'],
-      filemtime($dir_js),
-      true
-    );
-  }
 
   // Offers Directory CSS (wie bisher)
   $dir_css = get_stylesheet_directory() . '/assets/css/offers-directory.css';

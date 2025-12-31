@@ -1,15 +1,8 @@
 (function () {
   "use strict";
 
-  const DEBUG =
-    /[?&]ksMapDebug=1\b/.test(location.search) ||
-    localStorage.getItem("ksMapDebug") === "1";
-
-  const TAG = "[KS MAP]";
-  const log = (...a) => DEBUG && console.log(TAG, ...a);
-  const warn = (...a) => DEBUG && console.warn(TAG, ...a);
-
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
+  const GEO = window.KSOffersMapGeocode || null;
 
   const esc = (s) =>
     String(s ?? "").replace(
@@ -187,13 +180,6 @@
     return pts;
   }
 
-  function geocode_url() {
-    return window.KS_MAP_GEOCODE_URL || "";
-  }
-
-  const geo_cache = new Map();
-  const geo_inflight = new Map();
-
   function geocode_cache_key(q) {
     return (
       normalize_city(q) ||
@@ -201,45 +187,6 @@
         .trim()
         .toLowerCase()
     );
-  }
-
-  function parse_proxy_result(j) {
-    if (j && typeof j === "object" && !Array.isArray(j)) {
-      const lat = parse_coord(j.lat);
-      const lng = parse_coord(j.lon ?? j.lng);
-      return Number.isFinite(lat) && Number.isFinite(lng) ? [lat, lng] : null;
-    }
-    if (Array.isArray(j) && j.length) {
-      const lat = parse_coord(j[0].lat);
-      const lng = parse_coord(j[0].lon);
-      return Number.isFinite(lat) && Number.isFinite(lng) ? [lat, lng] : null;
-    }
-    return null;
-  }
-
-  function set_geo_cache(key, value) {
-    geo_cache.set(key, value);
-    geo_inflight.delete(key);
-    return value;
-  }
-
-  async function geocode_query(q) {
-    const key = geocode_cache_key(q);
-    if (!key) return null;
-    if (geo_cache.has(key)) return geo_cache.get(key);
-    if (geo_inflight.has(key)) return geo_inflight.get(key);
-
-    const proxy = geocode_url();
-    if (!proxy) return set_geo_cache(key, null);
-
-    const url = `${proxy}?q=${encodeURIComponent(q)}`;
-    const p = fetch(url, { headers: { Accept: "application/json" } })
-      .then((r) => r.json())
-      .then((j) => set_geo_cache(key, parse_proxy_result(j)))
-      .catch((e) => (warn("geocode failed", q, e), set_geo_cache(key, null)));
-
-    geo_inflight.set(key, p);
-    return p;
   }
 
   function offer_query(o) {
@@ -265,7 +212,9 @@
       const k = geocode_cache_key(q) || q;
       if (!q || seen.has(k)) continue;
       seen.add(k);
-      const ll = await geocode_query(q);
+
+      const ll = await GEO?.geocode_query?.(geocode_cache_key, q);
+
       if (ll) pts.push(ll);
       if (pts.length >= limit) break;
     }
@@ -366,13 +315,13 @@
       if (is_cancelled(state, state.token)) return;
       const q = offer_query(it.o);
       if (!q) continue;
-      const ll = await geocode_query(q);
+
+      const ll = await GEO?.geocode_query?.(geocode_cache_key, q);
+
       if (is_cancelled(state, state.token)) return;
       if (ll)
         state.markers.push(add_marker(state.map, it.o, it.i, state.root, ll));
     }
-    if ((missing || []).length > MAX)
-      log("Skipped geocoding for", missing.length - MAX, "items (limit)");
   }
 
   function render_markers_impl(state, display_arr) {
@@ -384,18 +333,12 @@
       state.markers.push(add_marker(state.map, x.o, x.i, state.root, x.ll))
     );
     geocode_missing_markers(state, missing);
-    DEBUG &&
-      log("render_markers()", {
-        total: (display_arr || []).length,
-        markers_now: state.markers.length,
-        missing: missing.length,
-      });
   }
 
   async function focus_for_filters_impl(state, args) {
     if (!state.map) return;
     const filtered = Array.isArray(args?.filtered) ? args.filtered : [];
-    const items = Array.isArray(args?.items) ? args.items : [];
+
     if (!filtered.length) return reset_view(state.map, state.all_pts);
 
     const pts = points_from(filtered);
@@ -406,7 +349,8 @@
 
     const loc = String(args?.loc || "").trim();
     if (loc) {
-      const g = await geocode_query(loc);
+      const g = await GEO?.geocode_query?.(geocode_cache_key, loc);
+
       if (g) return fly_to(state.map, [g]);
     }
     reset_view(state.map, state.all_pts);
