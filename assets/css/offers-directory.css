@@ -589,3 +589,18 @@
     bottom: 1%;
   }
 }
+
+/* verhindert Icon/Select-Flicker vor dem JS-Enhance */
+#ksDir [data-filters] {
+  visibility: hidden;
+}
+
+#ksDir.is-ready [data-filters] {
+  visibility: visible;
+}
+
+#ksDir .ks-dir-dd__caret img {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
