@@ -3,7 +3,6 @@
 /* ========================================================================== */
 
 @layer pages {
-
   /* ===============================
      2. Booking-Dialog (zweite Modal)
      – komplett eigene Klassen
@@ -43,8 +42,7 @@
     width: min(760px, 100%);
     opacity: 0;
     transform: translateY(40px) scale(0.95);
-    transition:
-      opacity 0.28s ease-out 0.05s,
+    transition: opacity 0.28s ease-out 0.05s,
       transform 1.25s cubic-bezier(0.22, 1, 0.36, 1) 0.02s;
     max-height: 100%;
     display: flex;
@@ -153,4 +151,31 @@
   body.ks-modal-open {
     overflow: hidden;
   }
+}
+
+.ks-book-modal__panel .ks-book-back {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+
+  border: 1px solid #eaeaea;
+  background: #fff;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.ks-book-modal__panel .ks-book-back:hover {
+  background: #fafafa;
+}
+
+.ks-book-modal__panel .ks-book-back svg {
+  display: block;
 }

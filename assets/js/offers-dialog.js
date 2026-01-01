@@ -1,6 +1,3 @@
-
-
-
 // assets/js/offers-dialog.js
 (function () {
   "use strict";
@@ -8,8 +5,16 @@
   /* ========== tiny helpers ========== */
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const esc = (s) =>
-    String(s).replace(/[&<>"']/g, (m) =>
-      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m])
+    String(s).replace(
+      /[&<>"']/g,
+      (m) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        }[m])
     );
   const pick = (o, path) => {
     try {
@@ -73,10 +78,7 @@
     const l2 = [o.zip || o.postalCode || "", o.city || ""]
       .filter(Boolean)
       .join(", ");
-    const addr =
-      l1 && l2
-        ? `${l1} - ${l2}`
-        : l1 || l2 || (o.location || "");
+    const addr = l1 && l2 ? `${l1} - ${l2}` : l1 || l2 || o.location || "";
     return { name, addr };
   };
 
@@ -410,7 +412,9 @@
           return `
           <div class="ks-session ks-session--selectable" data-session-index="${idx}">
             <div class="ks-session__left">
-              <div class="ks-session__row"><strong>${esc(topLine)}</strong></div>
+              <div class="ks-session__row"><strong>${esc(
+                topLine
+              )}</strong></div>
               <div class="ks-session__row">${esc(middleLine)}</div>
               <div class="ks-session__row">${esc(age)}</div>
             </div>
@@ -418,9 +422,9 @@
             <div class="ks-session__coach">
               ${
                 img
-                  ? `<img class="ks-coach__avatar" src="${esc(
-                      img
-                    )}" alt="${esc(fName)} ${esc(lName)}">`
+                  ? `<img class="ks-coach__avatar" src="${esc(img)}" alt="${esc(
+                      fName
+                    )} ${esc(lName)}">`
                   : ""
               }
               <div class="ks-coach__name">
@@ -450,9 +454,9 @@
           <div class="ks-session__coach">
             ${
               img
-                ? `<img class="ks-coach__avatar" src="${esc(
-                    img
-                  )}" alt="${esc(fName)} ${esc(lName)}">`
+                ? `<img class="ks-coach__avatar" src="${esc(img)}" alt="${esc(
+                    fName
+                  )} ${esc(lName)}">`
                 : ""
             }
             <div class="ks-coach__name">
@@ -462,7 +466,7 @@
           </div>
 
           <div class="ks-session__actions">
-            <a class="btn btn-primary ks-session__btn" href="${esc(
+            <a class="ks-btn ks-btn--dark ks-session__btn" href="${esc(
               href
             )}" data-book-href="${esc(href)}">${esc(btnLabel)}</a>
             <span class="ks-session__price">${esc(price)}</span>
@@ -539,9 +543,7 @@
             if (!s) return;
 
             const dayCode =
-              Array.isArray(s.days) && s.days.length
-                ? normDay(s.days[0])
-                : "";
+              Array.isArray(s.days) && s.days.length ? normDay(s.days[0]) : "";
             const dayLabel = dayCode ? dayLongPlural(dayCode) : "";
 
             if (dayLabel) selectedDays.push(dayLabel);
@@ -549,25 +551,17 @@
             ptMeta.push({
               id: s._id || "",
               day: dayCode || "",
-              dateFrom:
-                s.dateFrom ||
-                s.holidayDateFrom ||
-                s.holidayFrom ||
-                "",
-              dateTo:
-                s.dateTo ||
-                s.holidayDateTo ||
-                s.holidayTo ||
-                "",
+              dateFrom: s.dateFrom || s.holidayDateFrom || s.holidayFrom || "",
+              dateTo: s.dateTo || s.holidayDateTo || s.holidayTo || "",
               timeFrom: s.timeFrom || "",
               timeTo: s.timeTo || "",
               price: s.price,
             });
           });
 
-          let url = `${base || "http://localhost:3000"}/book?offerId=${encodeURIComponent(
-            baseOfferId
-          )}&embed=1`;
+          let url = `${
+            base || "http://localhost:3000"
+          }/book?offerId=${encodeURIComponent(baseOfferId)}&embed=1`;
 
           if (selectedDays.length) {
             url += `&days=${encodeURIComponent(selectedDays.join(","))}`;
@@ -580,9 +574,7 @@
 
           if (ptMeta.length) {
             try {
-              url += `&ptmeta=${encodeURIComponent(
-                JSON.stringify(ptMeta)
-              )}`;
+              url += `&ptmeta=${encodeURIComponent(JSON.stringify(ptMeta))}`;
             } catch {}
           }
 
@@ -607,8 +599,7 @@
           book.getAttribute("href") ||
           "";
         const root = $("#ksDir");
-        const icon =
-          root?.dataset?.closeIcon || root?.dataset?.closeicon || "";
+        const icon = root?.dataset?.closeIcon || root?.dataset?.closeicon || "";
         close();
         BookDialog.open(url, { closeIcon: icon });
         return;
@@ -694,6 +685,7 @@
     LAST.nextBase = nextBase;
 
     const sublineHtml = "";
+    const btnLabel = "Weiter";
 
     let sessionsHtml;
     if (nonTrial) {
@@ -706,9 +698,10 @@
             Dieses Programm ist anfragebasiert. Klicke auf „Weiter“.
           </div>
           <div class="ks-session__actions">
-            <a class="btn btn-primary ks-session__btn" href="${esc(
-              href
-            )}" data-book-href="${esc(href)}">Weiter</a>
+    
+            <a class="ks-btn ks-btn--dark ks-session__btn" href="${esc(href)}" 
+            data-book-href="${esc(href)}">${esc(btnLabel)}</a>
+
           </div>
         </div>`;
     } else {
@@ -717,7 +710,9 @@
 
     const footerHtml = isPowertraining
       ? `<div class="ks-offer__footer">
-           <button type="button" class="btn btn-primary ks-offer__continue" data-pt-continue>Weiter</button>
+          
+           <button type="button" class="ks-btn ks-btn--dark ks-offer__continue" data-pt-continue>Weiter</button>
+
          </div>`
       : "";
 
@@ -750,13 +745,3 @@
 
   window.KSOffersDialog = { open, close, __last: LAST };
 })();
-
-
-
-
-
-
-
-
-
-

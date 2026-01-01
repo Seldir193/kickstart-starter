@@ -1,18 +1,17 @@
-
 /* ========================================================================== */
 /*  KS Home (assets/css/ks-home.css)                                           */
 /* ========================================================================== */
 
-:root{
+:root {
   --ks-container: 1440px;
 
-  --brand-gold: #FDE100;
-  --brand-gold-700: #E5C200;
-  --brand-navy: #0F1E2E;
+  --brand-gold: #fde100;
+  --brand-gold-700: #e5c200;
+  --brand-navy: #0f1e2e;
 
   --brand-black: #111111;
-  --brand-white: #FFFFFF;
-  --brand-muted: #6B7280;
+  --brand-white: #ffffff;
+  --brand-muted: #6b7280;
 
   --light-gray: #fafafa;
 
@@ -28,7 +27,7 @@
 /* HERO (mit Tabs & Slides)  */
 /* ========================= */
 
-.ks-home-hero{
+.ks-home-hero {
   position: relative;
   padding: clamp(24px, 6vw, 56px) 0;
   background-color: #f5f5f5;
@@ -42,7 +41,7 @@
 /* Titel (re-used)   */
 /* ================= */
 
-.ks-dir__title{
+.ks-dir__title {
   font-weight: 800;
   font-size: 52px;
   color: var(--text);
@@ -50,8 +49,7 @@
   margin: 8px 0 12px;
 }
 
-
-.ks-home-hero::after{
+.ks-home-hero::after {
   content: attr(data-watermark);
   position: absolute;
   left: 0;
@@ -59,17 +57,17 @@
   bottom: 6%;
   text-align: center;
   font-weight: 900;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
   font-size: clamp(64px, 22vw, 240px);
-  color: rgba(0, 0, 0, .04);
+  color: rgba(0, 0, 0, 0.04);
   pointer-events: none;
 }
 
 /* Tabs oben – zentriert im Container */
-.ks-hero-tabs{
+.ks-hero-tabs {
   position: relative;
   display: flex;
-  
+
   gap: 14px;
   align-items: center;
   z-index: 1;
@@ -82,7 +80,7 @@
   padding-right: 16px;
 }
 
-.ks-hero-tabs::before{
+.ks-hero-tabs::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -95,7 +93,7 @@
   pointer-events: none;
 }
 
-.ks-hero-tab{
+.ks-hero-tab {
   appearance: none;
   background: transparent;
   border: 0;
@@ -107,52 +105,58 @@
   gap: 8px;
 
   color: #111;
-  opacity: .55;
+  opacity: 0.55;
   font-weight: 800;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 /* Wichtig: Label/Num dürfen NICHT grau bleiben -> erben immer */
 .ks-hero-tab__label,
-.ks-hero-tab__num{
+.ks-hero-tab__num {
   color: inherit !important;
 }
 
-.ks-hero-tab__num{
+.ks-hero-tab__num {
   border-top: 2px solid currentColor;
-  padding: .1em .5em;
+  padding: 0.1em 0.5em;
   line-height: 1;
 }
 
 /* Hover/Fokus: #222 + volle Opacity */
 .ks-hero-tab:hover,
-.ks-hero-tab:focus-visible{
+.ks-hero-tab:focus-visible {
   color: var(--text, #222);
   opacity: 1;
 }
 
 /* Active: volle Opacity */
-.ks-hero-tab.is-active{ opacity: 1; }
+.ks-hero-tab.is-active {
+  opacity: 1;
+}
 
 /* Slides (nur die aktive sichtbar) */
-.ks-hero-slides{ position: relative; }
-.ks-hero-slide{ display: none; }
-.ks-hero-slide.is-active{
+.ks-hero-slides {
+  position: relative;
+}
+.ks-hero-slide {
+  display: none;
+}
+.ks-hero-slide.is-active {
   display: block;
   background: var(--light-gray);
 }
 
 /* Grid im Hero */
-.ks-home-grid{
+.ks-home-grid {
   display: grid;
-  grid-template-columns: 1.1fr .9fr;
+  grid-template-columns: 1.1fr 0.9fr;
   gap: 32px;
   align-items: center;
 }
 
 /* Slide-Container exakt gleiche Breite wie Container */
-#home-hero .ks-hero-slide > .container{
+#home-hero .ks-hero-slide > .container {
   max-width: var(--ks-container) !important;
   width: 100%;
   margin-left: auto;
@@ -161,25 +165,25 @@
   padding-right: 16px;
 }
 
-.ks-home-hero__title{
+.ks-home-hero__title {
   font-size: clamp(36px, 6vw, 72px);
   line-height: 1.05;
   font-weight: 800;
   margin: 8px 0 12px;
 }
 
-.ks-home-hero__lead{
+.ks-home-hero__lead {
   color: #374151;
   max-width: 60ch;
 }
 
-.ks-home-hero__actions{
+.ks-home-hero__actions {
   display: flex;
   gap: 12px;
   margin-top: 18px;
 }
 
-.ks-home-hero__img{
+.ks-home-hero__img {
   width: 100%;
   height: clamp(340px, 50vw, 560px);
   object-fit: contain;
@@ -191,7 +195,7 @@
 /* „WERTE“-Block  */
 /* ============== */
 
-.ks-home-values{
+.ks-home-values {
   background: #fafafa;
 
   width: 100vw;
@@ -201,17 +205,17 @@
 
 /* ✅ Titel/Kicker bei Werte wirklich mittig (dein Screenshot) */
 .ks-home-values .ks-title-wrap,
-#werte .ks-title-wrap{
+#werte .ks-title-wrap {
   text-align: center;
 }
 .ks-home-values .ks-dir__title,
-#werte .ks-dir__title{
+#werte .ks-dir__title {
   text-align: center;
   margin-inline: auto;
 }
 
 /* Werte Layout */
-.ks-values{
+.ks-values {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
@@ -219,35 +223,41 @@
   margin-top: 24px;
 }
 
-.ks-values .ks-value{
+.ks-values .ks-value {
   display: block;
   text-decoration: none;
   cursor: pointer;
 }
 
-.ks-value .icon-wrap{
+.ks-value .icon-wrap {
   display: inline-block;
   transform: translateY(10px);
-  transition: transform .35s ease;
+  transition: transform 0.35s ease;
 }
-.ks-value:hover .icon-wrap{ transform: translateY(0); }
+.ks-value:hover .icon-wrap {
+  transform: translateY(0);
+}
 
-.ks-value .icon-wrap img{ transition: transform .35s ease; }
-.ks-value:hover .icon-wrap img{ transform: translateY(-3px); }
+.ks-value .icon-wrap img {
+  transition: transform 0.35s ease;
+}
+.ks-value:hover .icon-wrap img {
+  transform: translateY(-3px);
+}
 
-.ks-value img{
+.ks-value img {
   height: 100px;
   width: auto;
   margin: 0 auto 10px;
   display: block;
 }
 
-.ks-value h3{
+.ks-value h3 {
   font-weight: 800;
   margin: 6px 0 8px;
 }
 
-.ks-value p{
+.ks-value p {
   color: #6b7280;
   max-width: 42ch;
   margin: 0 auto;
@@ -257,7 +267,7 @@
 /*  News: full-bleed Band */
 /* ====================== */
 
-#news{
+#news {
   position: relative;
   background: #fafafa;
   width: 100vw;
@@ -266,7 +276,7 @@
   padding-block: clamp(32px, 6vw, 72px);
 }
 
-#news > .container{
+#news > .container {
   max-width: var(--ks-container);
   width: 100%;
   margin-inline: auto;
@@ -278,37 +288,41 @@
   gap: 0;
 }
 
-.ks-news{
+.ks-news {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(16px, 2.4vw, 36px);
   align-items: start;
 }
 
-.ks-news__item{
+.ks-news__item {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.ks-news__thumb img{
+.ks-news__thumb img {
   display: block;
   width: 100%;
   height: auto;
   border-radius: 8px;
 }
 
-.ks-news__meta{
-  opacity: .6;
-  font-size: .85rem;
-  letter-spacing: .06em;
+.ks-news__meta {
+  opacity: 0.6;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
 }
 
-@media (max-width: 1024px){
-  .ks-news{ grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 1024px) {
+  .ks-news {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
-@media (max-width: 640px){
-  .ks-news{ grid-template-columns: 1fr; }
+@media (max-width: 640px) {
+  .ks-news {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ================= */
@@ -318,12 +332,12 @@
 /* ✅ Das waren deine Beispiele: "Wir sind für dich da", "Unser Team", "Schnell buchen" */
 #team .ks-title-wrap,
 #program-cta .ks-title-wrap,
-#kontakt .ks-title-wrap{
+#kontakt .ks-title-wrap {
   text-align: center;
 }
 #team .ks-dir__title,
 #program-cta .ks-dir__title,
-#kontakt .ks-dir__title{
+#kontakt .ks-dir__title {
   text-align: center;
   margin-inline: auto;
 }
@@ -332,18 +346,20 @@
 /* TEAM CAROUSEL     */
 /* ================= */
 
-.ks-team-wrap{
+.ks-team-wrap {
   position: relative;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 12px;
-  margin-top:80px;
+  margin-top: 80px;
 }
 
-.ks-team{ overflow: hidden; }
+.ks-team {
+  overflow: hidden;
+}
 
-.ks-team__track{
+.ks-team__track {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -351,46 +367,48 @@
   grid-auto-flow: column;
   grid-auto-columns: calc(25% - 12px);
   gap: 16px;
-  transition: transform .28s ease;
+  transition: transform 0.28s ease;
 }
 
-.ks-team__card{
+.ks-team__card {
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
   overflow: hidden;
 }
 
-.ks-team__img{
+.ks-team__img {
   display: block;
   width: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
   background: #f3f4f6;
-  transition: filter .25s ease;
+  transition: filter 0.25s ease;
 }
 
 .ks-team__card:hover .ks-team__img,
-.ks-team__card a:hover .ks-team__img{
+.ks-team__card a:hover .ks-team__img {
   filter: brightness(0.78);
 }
 
-.ks-team__meta{ padding: 12px 14px 16px; }
+.ks-team__meta {
+  padding: 12px 14px 16px;
+}
 
-.ks-team__role{
+.ks-team__role {
   font-size: 12px;
-  letter-spacing: .12em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #6b7280;
   margin-bottom: 4px;
 }
 
-.ks-team__name{
+.ks-team__name {
   font-weight: 800;
   line-height: 1.1;
 }
 
-.ks-team__nav{
+.ks-team__nav {
   appearance: none;
   border: 0;
   background: transparent;
@@ -400,40 +418,48 @@
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  transition: background-color .18s ease;
+  transition: background-color 0.18s ease;
 }
 
-.ks-team__nav:hover{
-  background: rgba(15, 23, 42, .06);
+.ks-team__nav:hover {
+  background: rgba(15, 23, 42, 0.06);
 }
 
-@media (max-width: 1200px){
-  .ks-team__track{ grid-auto-columns: calc(33.333% - 10px); }
+@media (max-width: 1200px) {
+  .ks-team__track {
+    grid-auto-columns: calc(33.333% - 10px);
+  }
 }
-@media (max-width: 900px){
-  .ks-team__track{ grid-auto-columns: calc(50% - 8px); }
+@media (max-width: 900px) {
+  .ks-team__track {
+    grid-auto-columns: calc(50% - 8px);
+  }
 }
-@media (max-width: 560px){
-  .ks-team__track{ grid-auto-columns: 100%; }
+@media (max-width: 560px) {
+  .ks-team__track {
+    grid-auto-columns: 100%;
+  }
 }
 
 /* ================= */
 /* Split Layout      */
 /* ================= */
 
-.ks-split{
+.ks-split {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: 32px;
   align-items: center;
 }
 
-@media (max-width: 1024px){
-  .ks-split{ grid-template-columns: 1fr; }
+@media (max-width: 1024px) {
+  .ks-split {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* 16:9 Ratio-Wrapper */
-.ratio{
+.ratio {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -443,7 +469,7 @@
 }
 
 .ratio iframe,
-.ratio video{
+.ratio video {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -456,7 +482,7 @@
 /* Buttons (Gold)    */
 /* ================= */
 
-.ks-btn{
+.ks-btn {
   --btn-border: var(--brand-gold);
   --btn-fill: var(--brand-black);
   --btn-text: var(--brand-black);
@@ -485,33 +511,35 @@
   background-clip: padding-box;
   -webkit-background-clip: padding-box;
 
-  transition: background-size .28s ease, color .22s ease, border-color .22s ease;
+  transition: background-size 0.28s ease, color 0.22s ease,
+    border-color 0.22s ease;
 }
 
-.ks-btn:hover{
+.ks-btn:hover {
   background-size: 100% 100%;
   color: var(--btn-text-h);
   border-color: transparent;
 }
 
-.ks-btn:focus-visible{
+.ks-btn:focus-visible {
   outline: 2px solid var(--brand-gold);
   outline-offset: 2px;
 }
 
-.ks-btn.ks-btn--dark{
+.ks-btn.ks-btn--dark {
   background-color: var(--brand-gold);
   color: var(--brand-black);
   border-color: var(--brand-gold);
+  cursor: pointer;
 }
 
-.ks-btn.ks-btn--dark:hover{
+.ks-btn.ks-btn--dark:hover {
   color: var(--brand-white);
   border-color: transparent;
 }
 
 /* Light Variante: nur Variablen */
-.ks-btn.ks-btn--light{
+.ks-btn.ks-btn--light {
   --btn-border: #fff;
   --btn-fill: var(--brand-gold);
   --btn-text: #fff;
@@ -522,71 +550,55 @@
 /* Misc              */
 /* ================= */
 
-#trainer-profile img{
+#trainer-profile img {
   width: 100%;
   height: auto !important;
   object-fit: contain !important;
 }
 
 .ks-fb-tab.is-active,
-.ks-fb-tab:hover{ opacity: 1; }
+.ks-fb-tab:hover {
+  opacity: 1;
+}
 
 /* ================= */
 /* Responsive        */
 /* ================= */
 
-@media (max-width: 900px){
-  .ks-home-hero__img{
+@media (max-width: 900px) {
+  .ks-home-hero__img {
     height: clamp(260px, 48vw, 420px);
     margin-inline: auto;
   }
 
-  .ks-home-hero::after{
+  .ks-home-hero::after {
     font-size: clamp(64px, 30vw, 180px);
     bottom: 2%;
   }
 
-  .ks-hero-tabs{
+  .ks-hero-tabs {
     justify-content: center;
     gap: 10px;
   }
 
-  .ks-hero-tab__label{ display: none; }
+  .ks-hero-tab__label {
+    display: none;
+  }
 
-  .ks-values{ grid-template-columns: 1fr; }
+  .ks-values {
+    grid-template-columns: 1fr;
+  }
 
-  .ks-home-portal__grid{ grid-template-columns: 1fr; }
+  .ks-home-portal__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-@media (prefers-reduced-motion: reduce){
+@media (prefers-reduced-motion: reduce) {
   .ks-btn,
   .ks-value .icon-wrap,
   .ks-value .icon-wrap img,
-  .ks-team__img{
+  .ks-team__img {
     transition: none;
   }
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

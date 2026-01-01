@@ -5,8 +5,16 @@
   /* ========== tiny helpers (nur für diesen Dialog) ========== */
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const esc = (s) =>
-    String(s).replace(/[&<>"']/g, (m) =>
-      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m])
+    String(s).replace(
+      /[&<>"']/g,
+      (m) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        }[m])
     );
 
   /* ========== body lock (eigenständig, aber gleich wie im Offers-Dialog) ========== */
@@ -45,10 +53,27 @@
                role="dialog"
                aria-modal="true"
                aria-label="Buchung">
+
+            <button type="button"
+                    class="ks-book-back"
+                    data-back
+                    aria-label="Zurück"
+                    title="Zurück">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+              </svg>
+            </button>
+
             <button type="button"
                     class="ks-dir__close"
                     data-close
                     aria-label="Schließen">✕</button>
+
             <iframe class="ks-book-modal__frame ks-book__frame"
                     src=""
                     title="Buchung"
@@ -61,8 +86,7 @@
         modal.classList.add("ks-book-modal");
 
         let overlay =
-          $(".ks-book-modal__overlay", modal) ||
-          $(".ks-dir__overlay", modal);
+          $(".ks-book-modal__overlay", modal) || $(".ks-dir__overlay", modal);
         if (!overlay) {
           overlay = document.createElement("div");
           overlay.className = "ks-book-modal__overlay";
@@ -73,8 +97,7 @@
         }
 
         let panel =
-          $(".ks-book-modal__panel", modal) ||
-          $(".ks-dir__panel", modal);
+          $(".ks-book-modal__panel", modal) || $(".ks-dir__panel", modal);
         if (!panel) {
           panel = document.createElement("div");
           panel.className = "ks-book-modal__panel";
@@ -84,8 +107,7 @@
         }
 
         let frame =
-          $(".ks-book-modal__frame", modal) ||
-          $(".ks-book__frame", modal);
+          $(".ks-book-modal__frame", modal) || $(".ks-book__frame", modal);
         if (!frame) {
           frame = document.createElement("iframe");
           frame.className = "ks-book-modal__frame ks-book__frame";
@@ -106,6 +128,25 @@
           btn.textContent = "✕";
           panel.prepend(btn);
         }
+
+        if (!$(".ks-book-back", modal)) {
+          const back = document.createElement("button");
+          back.type = "button";
+          back.className = "ks-book-back";
+          back.setAttribute("data-back", "");
+          back.setAttribute("aria-label", "Zurück");
+          back.setAttribute("title", "Zurück");
+          back.innerHTML = `
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+            </svg>`;
+          panel.prepend(back);
+        }
       }
 
       return modal;
@@ -115,14 +156,11 @@
       const modal = ensure();
 
       const overlay =
-        $(".ks-book-modal__overlay", modal) ||
-        $(".ks-dir__overlay", modal);
+        $(".ks-book-modal__overlay", modal) || $(".ks-dir__overlay", modal);
       const panel =
-        $(".ks-book-modal__panel", modal) ||
-        $(".ks-dir__panel", modal);
+        $(".ks-book-modal__panel", modal) || $(".ks-dir__panel", modal);
       const frame =
-        $(".ks-book-modal__frame", modal) ||
-        $(".ks-book__frame", modal);
+        $(".ks-book-modal__frame", modal) || $(".ks-book__frame", modal);
       const closeBtn = $(".ks-dir__close", modal);
 
       // Zustand vom vorherigen Öffnen zurücksetzen
@@ -182,9 +220,7 @@
 
         if (Number.isFinite(cached) && cached > 0) {
           const viewport =
-            window.innerHeight ||
-            document.documentElement.clientHeight ||
-            600;
+            window.innerHeight || document.documentElement.clientHeight || 600;
 
           // Obergrenze abhängig vom Viewport
           const maxPanelHeight = Math.max(viewport - 160, 460);
@@ -198,17 +234,25 @@
         }
       }
 
+      const reopenOffersIfPossible = () => {
+        if (
+          window.KSOffersDialog &&
+          window.KSOffersDialog.__last &&
+          window.KSOffersDialog.__last.offer
+        ) {
+          const { offer, sessions, opts } = window.KSOffersDialog.__last;
+          window.KSOffersDialog.open(offer, sessions, opts || {});
+        }
+      };
+
       // Schließen-Logik
       const doClose = () => {
         const overlayNow =
-          $(".ks-book-modal__overlay", modal) ||
-          $(".ks-dir__overlay", modal);
+          $(".ks-book-modal__overlay", modal) || $(".ks-dir__overlay", modal);
         const panelNow =
-          $(".ks-book-modal__panel", modal) ||
-          $(".ks-dir__panel", modal);
+          $(".ks-book-modal__panel", modal) || $(".ks-dir__panel", modal);
         const frameNow =
-          $(".ks-book-modal__frame", modal) ||
-          $(".ks-book__frame", modal);
+          $(".ks-book-modal__frame", modal) || $(".ks-book__frame", modal);
 
         modal.hidden = true;
 
@@ -237,6 +281,11 @@
 
       const onOverlay = () => doClose();
       const onAny = (e) => {
+        if (e.target.closest("[data-back]")) {
+          doClose();
+          reopenOffersIfPossible();
+          return;
+        }
         if (e.target.closest("[data-close]")) {
           doClose();
         }
@@ -259,14 +308,11 @@
       if (!modal || modal.hidden) return;
 
       const overlay =
-        $(".ks-book-modal__overlay", modal) ||
-        $(".ks-dir__overlay", modal);
+        $(".ks-book-modal__overlay", modal) || $(".ks-dir__overlay", modal);
       const panel =
-        $(".ks-book-modal__panel", modal) ||
-        $(".ks-dir__panel", modal);
+        $(".ks-book-modal__panel", modal) || $(".ks-dir__panel", modal);
       const frame =
-        $(".ks-book-modal__frame", modal) ||
-        $(".ks-book__frame", modal);
+        $(".ks-book-modal__frame", modal) || $(".ks-book__frame", modal);
 
       modal.hidden = true;
 
@@ -283,8 +329,7 @@
 
       const handlers = modal.__ksBookHandlers;
       if (handlers) {
-        overlay &&
-          overlay.removeEventListener("click", handlers.onOverlay);
+        overlay && overlay.removeEventListener("click", handlers.onOverlay);
         modal.removeEventListener("click", handlers.onAny);
         document.removeEventListener("keydown", handlers.onEsc);
         modal.__ksBookHandlers = null;
@@ -315,11 +360,9 @@
         if (modal.dataset.ksHeightApplied === "1") return;
 
         const panel =
-          $(".ks-book-modal__panel", modal) ||
-          $(".ks-dir__panel", modal);
+          $(".ks-book-modal__panel", modal) || $(".ks-dir__panel", modal);
         const frame =
-          $(".ks-book-modal__frame", modal) ||
-          $(".ks-book__frame", modal);
+          $(".ks-book-modal__frame", modal) || $(".ks-book__frame", modal);
 
         if (!panel || !frame) return;
         if (!frame.src || frame.src === "about:blank") return;
@@ -328,9 +371,7 @@
         if (!Number.isFinite(contentHeight) || contentHeight <= 0) return;
 
         const viewport =
-          window.innerHeight ||
-          document.documentElement.clientHeight ||
-          600;
+          window.innerHeight || document.documentElement.clientHeight || 600;
 
         const maxPanelHeight = Math.max(viewport - 160, 460);
         const frameHeight = Math.min(contentHeight, maxPanelHeight);
@@ -353,10 +394,7 @@
       }
 
       /* --- Zurück / Schließen vom iFrame --- */
-      if (
-        d.type !== "KS_BOOKING_BACK" &&
-        d.type !== "KS_BOOKING_CLOSE"
-      ) {
+      if (d.type !== "KS_BOOKING_BACK" && d.type !== "KS_BOOKING_CLOSE") {
         return;
       }
 
@@ -375,14 +413,3 @@
     false
   );
 })();
-
-
-
-
-
-
-
-
-
-
-

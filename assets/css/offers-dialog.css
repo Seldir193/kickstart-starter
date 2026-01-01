@@ -4,7 +4,6 @@
 /* ========================================================================== */
 
 @layer pages {
-
   /* ===============================
      Offers-Dialog (erste Modal)
      wird für:
@@ -76,12 +75,17 @@
   }
 }
 
+.ks-session__actions {
+  display: flex;
+  flex-direction: row-reverse; /* Button rechts */
+  justify-content: flex-start; /* wichtig bei row-reverse: start = rechts */
+  align-items: center;
+  gap: 20px;
+  white-space: nowrap;
+}
 
-
-
-
-
-
-
-
-
+.ks-offer__footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
