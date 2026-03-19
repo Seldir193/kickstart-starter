@@ -12,8 +12,8 @@
 #philosophie > .container,
 #kontakt > .container,
 #ziele > .container,
-#standorte > .container{
-  max-width: 1440px;        /* wie auf Home */
+#standorte > .container {
+  max-width: 1440px; /* wie auf Home */
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -22,91 +22,141 @@
 }
 
 /* 1) HERO vollbreit – Hintergrund via --hero-img (kommt bei dir inline) */
-#about-hero{
+#about-hero {
   position: relative;
   width: 100vw;
-  margin-left:  calc(50% - 50vw);
+  margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  background: var(--hero-img) center/cover no-repeat, #f7f7f7; /* Fallback wie Home-Hero */
 }
 
 /* 2) MFS – neutral hell (bleibt wie bisher, nur Full-Bleed per ::before) */
-#mfs{
-  position: relative; z-index: 0;
+#mfs {
+  position: relative;
+  z-index: 0;
 }
-#mfs::before{
-  content:"";
-  position:absolute; inset:0;
-  left:50%; right:50%;
-  margin-left:-50vw; margin-right:-50vw;
-  z-index:-1;
-  background:#ffffff;
+#mfs::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  z-index: -1;
+  background: var(--dark-gray); /* Fallback wie Home-Hero */
 }
 
 /* 3) TEAM – weißer Streifen (du nutzt ks-bg-white): full-bleed ergänzen */
-#team{
-  position: relative; z-index: 0;
+#team {
+  position: relative;
+  z-index: 0;
 }
-#team::before{
-  content:"";
-  position:absolute; inset:0;
-  left:50%; right:50%;
-  margin-left:-50vw; margin-right:-50vw;
-  z-index:-1;
-  background:#fafafa;
+#team::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  z-index: -1;
+  background: var(--light-gray);
 }
 
 /* 4) PHILOSOPHIE – sanftes Grau wie Home values */
-#philosophie{ position: relative; z-index: 0; }
-#philosophie::before{
-  content:"";
-  position:absolute; inset:0;
-  left:50%; right:50%;
-  margin-left:-50vw; margin-right:-50vw;
-  z-index:-1;
-  background:#fafafa;
+#philosophie {
+  position: relative;
+  z-index: 0;
+}
+#philosophie::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  z-index: -1;
+  background: var(--dark-gray);
 }
 
 /* 5) KONTAKT – dark block (du nutzt ks-bg-dark): full-bleed, Farbe unverändert */
-#kontakt{ position: relative; z-index: 0; }
-#kontakt::before{
-  content:"";
-  position:absolute; inset:0;
-  left:50%; right:50%;
-  margin-left:-50vw; margin-right:-50vw;
-  z-index:-1;
-  background:#111; /* deckt sich mit ks-bg-dark */
+#kontakt {
+  position: relative;
+  z-index: 0;
+}
+#kontakt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  z-index: -1;
+  background: var(--text); /* deckt sich mit ks-bg-dark */
 }
 
 /* 6) ZIELE – neutral hell */
-#ziele{ position: relative; z-index: 0; }
-#ziele::before{
-  content:"";
-  position:absolute; inset:0;
-  left:50%; right:50%;
-  margin-left:-50vw; margin-right:-50vw;
-  z-index:-1;
-  background:#ffffff;
+#ziele {
+  position: relative;
+  z-index: 0;
+}
+#ziele::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  z-index: -1;
+  background: var(--light-gray);
 }
 
 /* 7) STANDORTE – übernimmt dein ks-bg-deep (nur Bleed) */
-#standorte{ position: relative; z-index: 0; }
-#standorte::before{
-  content:"";
-  position:absolute; inset:0;
-  left:50%; right:50%;
-  margin-left:-50vw; margin-right:-50vw;
-  z-index:-1;
-  background:black; /* falls ks-bg-deep bereits färbt, ist das hier egal */
+#standorte {
+  position: relative;
+  z-index: 0;
+}
+#standorte::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  z-index: -1;
+  background: var(
+    --dark-gray
+  ); /* falls ks-bg-deep bereits färbt, ist das hier egal */
 }
 
 /* Konsistente vertikale Innenabstände für die Bänder */
-#mfs, #team, #philosophie, #kontakt, #ziele, #standorte{
+#mfs,
+#team,
+#philosophie,
+#kontakt,
+#ziele,
+#standorte {
   padding-block: clamp(24px, 4vw, 56px);
 }
 
 /* Nur Franchise-Seite: Titel verstecken */
 .page-id-159 .entry-title,
 .page-id-159 h1.entry-title {
-    display: none !important;
+  display: none !important;
+}
+.ks-text-dark {
+  color: var(--text) !important;
+}
+.ks-mt {
+  display: flex;
+  justify-content: center;
+}
+
+/* About: Standorte – Watermark wie alle anderen (Top -80px) */
+#standorte .ks-title-wrap::after {
+  top: -80px;
 }

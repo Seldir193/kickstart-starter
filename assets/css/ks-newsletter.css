@@ -1,196 +1,98 @@
-/* ===== Newsletter (deine gewünschte Optik) ===== */
-.ks-newsletter-wrap{
+/* ==========================================================================
+   KS Newsletter (Layout-only)
+   UI-Look (Control Hover/Focus + Button) kommt aus globalen Styles.
+   ========================================================================== */
+
+.ks-newsletter-wrap {
   padding: clamp(24px, 5vw, 40px) 0;
 }
 
-.newsletter-box{
-  background:#f7f7f8;
-  border:1px solid #e6e6ea;
-  border-radius:12px;
-  padding:20px;
-  max-width:720px;
-  margin:24px auto;
+.newsletter-box {
+  background: #f7f7f8;
+  border: 1px solid #e6e6ea;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 720px;
+  margin: 24px auto;
 }
 
-.newsletter-box h3{
-  margin:0 0 6px;
-  font-weight:900;
-  letter-spacing:.04em;
+.newsletter-box .ks-kicker {
+  margin: 0 0 6px;
 }
 
-
-/* Thumbnails in Listen (Latest/Archiv) */
-.ks-news-item__thumb { display:block; }
-.ks-news-item__thumb img{
-  display:block;
-  width:100%;
-  aspect-ratio: 16 / 9; /* einheitliches Seitenverhältnis */
-  object-fit: cover;    /* sauberer Zuschnitt ohne Layout-Sprung */
-  height:auto;
+.newsletter-box h3 {
+  margin: 0 0 6px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
 }
 
-/* Bild oben in der Detailseite */
-.ks-news-single header > img{
-  display:block;
-  width:100%;
-  height:auto;
-  /* wenn du auch hier einen Zuschnitt willst:
-     aspect-ratio: 16 / 9; object-fit: cover; */
+.newsletter-box p {
+  margin: 0 0 14px;
+  color: #4b5563;
 }
 
-
-
-.newsletter-box p{
-  margin:0 0 14px;
-  color:#4b5563;
+/* Layout: Feld links, Button rechts – sauber wie Directory */
+.newsletter-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: end;
 }
 
-.newsletter-row{
-  display:flex;
-  gap:8px;
-  align-items:center;
+.newsletter-row .ks-field {
+  margin: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.newsletter-row input[type="email"]{
-  flex:1;
-  padding:.65rem .8rem;
-  border:1px solid #d1d5db;
-  border-radius:8px;
-  font:inherit;
+.newsletter-row .ks-field span {
+  font-weight: 600;
 }
 
-.newsletter-row .hp{
-  position:absolute; left:-9999px; width:1px; height:1px; opacity:0;
+/* Honeypot */
+.newsletter-row .hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
 }
 
-.newsletter-btn{
-  padding:.65rem 1rem;
-  border-radius:8px;
-  border:1px solid #111;
-  background:#111;
-  color:#fff;
-  font-weight:700;
-  cursor:pointer;
-}
-.newsletter-btn:hover{ filter:brightness(1.05); }
-
-.ks-news-msg{
-  display:block;
-  margin-top:.55rem;
-  font-size:.9rem;
-}
-.ks-news-msg.is-ok  { color:#117a3a; }
-.ks-news-msg.is-err { color:#b00020; }
-
-/* ===== Full-bleed Hero ===== */
-:root{
-  --container-wide: 1440px;
-  --gutter: clamp(12px, 2vw, 24px);
+.ks-news-msg {
+  display: block;
+  margin-top: 0.55rem;
+  font-size: 0.9rem;
 }
 
-.full-bleed{
-  width:100vw;
-  margin-left:calc(50% - 50vw);
-  margin-right:calc(50% - 50vw);
+.ks-news-msg.is-ok {
+  color: #117a3a;
 }
 
-/* ⚠️ Wenn deine globale .container bereits im Layout existiert,
-   diesen Block hier weglassen, damit nichts überschrieben wird. */
-/*
-.container{
-  width:min(100% - (2 * var(--gutter)), var(--container-wide));
-  margin-inline:auto;
-}
-*/
-
-.ks-news-hero{
-  position:relative;
-  background:#f7f7f7;
-  padding:clamp(28px, 7vw, 60px) 0;
-  overflow:hidden;
+.ks-news-msg.is-err {
+  color: #b00020;
 }
 
-.ks-news-hero::after{
-  content: attr(data-watermark);
-  position:absolute;
-  inset:auto 0 6% 0;
-  text-align:center;
-  font-weight:900;
-  letter-spacing:.02em;
-  font-size: clamp(64px, 22vw, 240px);
-  color: rgba(0,0,0,.05);
-  pointer-events:none;
+/* Sidebar-Variante */
+.ks-news-sidebar .newsletter-box {
+  margin: 0;
+  max-width: 100%;
 }
 
-.ks-news-hero__inner{
-  display:grid;
-  grid-template-columns: 1.05fr .95fr;
-  align-items:center;
-  gap: clamp(16px, 3vw, 32px);
+.ks-news-sidebar .tagcloud {
+  max-height: 220px;
+  overflow: auto;
+  padding-right: 6px;
 }
 
-.ks-crumbs{
-  font-size:.85rem;
-  letter-spacing:.08em;
-  opacity:.65;
-  margin-bottom:6px;
-  text-transform:uppercase;
-}
+@media (max-width: 520px) {
+  .newsletter-row {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
 
-.ks-news-hero__title{
-  font-weight:900;
-  font-size: clamp(32px, 6vw, 64px);
-  line-height:1.05;
-  margin:0;
-}
-
-.ks-news-hero__art{
-  min-height: clamp(260px, 40vw, 520px);
-  background: var(--news-hero-img) bottom right / contain no-repeat;
-  filter: drop-shadow(0 18px 40px rgba(0,0,0,.25));
-}
-
-@media (max-width: 900px){
-  .ks-news-hero__inner{ grid-template-columns: 1fr; }
-  .ks-news-hero::after{ bottom: 2%; font-size: clamp(64px, 30vw, 180px); }
-}
-
-
-.ks-news-sidebar .widget + .widget { margin-top: 24px; }
-.ks-widget-newsletter .newsletter-box { margin: 0; } /* bündig in der Sidebar */
-
-
-
-
-.ks-news-grid{
-    display: flex;
-    justify-content: space-between;
-}
-
-
-
-
-
-
-
-
-.ks-news-single video { width:100%; height:auto; display:block; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-.ks-news-sidebar .ks-widget-ad img{
-  max-width:100%;
-  height:auto;
-  display:block;
-  border-radius:8px;
+  .newsletter-row .ks-btn {
+    width: 100%;
+  }
 }

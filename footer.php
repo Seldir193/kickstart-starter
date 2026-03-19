@@ -1,4 +1,9 @@
-<?php // schließt den Hauptinhalt ?>
+<?php // schließt den Hauptinhalt 
+// 
+
+
+// 
+// ?>
 </main>
 
 <?php
@@ -7,6 +12,11 @@
   $footer_logo_url = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'full') : '';
   // Basis-Pfad für Icons/Bilder (Weltkarte etc.)
   $asset_base = get_stylesheet_directory_uri() . '/assets/img/offers/';
+
+  $fr_page = get_page_by_path('franchise');
+$fr_url  = $fr_page ? get_permalink($fr_page->ID) : site_url('/franchise/');
+$fr_url  = $fr_url . '#fr-worldwide-map';
+$dfsmanager_url = 'https://selcuk-kocyigit.de/';
 ?>
 
 <footer class="site-footer" role="contentinfo"
@@ -47,18 +57,29 @@
               'fallback_cb'    => false,
               'depth'          => 1,
             ]);
-          } else {
-            echo '<ul class="footer-menu with-plus">
-                    <li><a href="/dfsmanager">DFSMAMAGER</a></li>
-                    <li><a href="/impressum">Impressum</a></li>
-                    <li><a href="/datenschutz">Datenschutz</a></li>
-                    <li><a href="/agb">AGB</a></li>
-                    <li><a href="/faq">FAQ</a></li>
-                  </ul>';
-          }
-        ?>
-      </nav>
+          }  else {
+  ?>
+      <ul class="footer-menu with-plus">
+        
+         <li>
+    <a href="<?php echo esc_url($dfsmanager_url); ?>" target="_blank" rel="noopener">
+      DFSMANAGER
+    </a>
+  </li>
+  <li><a href="<?php echo esc_url(site_url('/abo-kuendigen/')); ?>">Abo kündigen</a></li>
+  <li><a href="<?php echo esc_url(site_url('/widerrufen/')); ?>">Vertrag widerrufen</a></li>
+        <li><a href="<?php echo esc_url(site_url('/impressum/')); ?>">Impressum</a></li>
+        <li><a href="<?php echo esc_url(site_url('/datenschutz/')); ?>">Datenschutz</a></li>
+        <li><a href="<?php echo esc_url(site_url('/agb/')); ?>">AGB</a></li>
+        <li><a href="<?php echo esc_url(site_url('/faq/')); ?>">FAQ</a></li>
 
+       
+      </ul>
+  <?php
+    }
+  ?>
+ 
+   </nav>
   
 
 
@@ -71,7 +92,7 @@
          href="#"
          aria-label="Instagram"
          rel="noopener"
-         target="_blank"
+         target="_blank" 
          style="--icon:url('<?php echo esc_url( $asset_base . 'instagram.svg' ); ?>')">
       </a>
     </li>
@@ -109,9 +130,9 @@
       <!-- 4) Unsere Standorte (Weltkarte klickbar) -->
       <section class="footer-locations">
         <h4 class="footer-head">
-          <a class="world-title" href="<?php echo esc_url( site_url('/standorte') ); ?>">Unsere Standorte</a>
+          <a class="world-title" href="<?php echo esc_url($fr_url); ?>">Unsere Standorte</a>
         </h4>
-        <a class="world-link" href="<?php echo esc_url( site_url('/standorte') ); ?>" aria-label="Standorte ansehen">
+        <a class="world-link" href="<?php echo esc_url($fr_url); ?>" aria-label="Standorte ansehen">
           <img class="world-img" src="<?php echo esc_url( $asset_base . 'world-map.png' ); ?>" alt="Weltkarte – Standorte" loading="lazy">
         </a>
       </section>

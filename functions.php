@@ -1,8 +1,13 @@
 
+
 <?php
 /**
  * KickStart Starter Theme – Bootstrap Loader (modular)
  */
+
+
+
+
 
 function ks_require($rel) {
   $path = get_stylesheet_directory() . '/inc/' . ltrim($rel, '/');
@@ -27,7 +32,7 @@ add_action('wp_enqueue_scripts', function () {
 });
 
 
-
+  
 
 
 add_action('wp_enqueue_scripts', function () {
@@ -39,6 +44,8 @@ add_action('wp_enqueue_scripts', function () {
   }
 }, 20);
 
+
+
 add_action('wp_enqueue_scripts', function () {
   $file = get_stylesheet_directory() . '/assets/css/ks-trainer.css';
   if ( file_exists($file) ) {
@@ -46,7 +53,8 @@ add_action('wp_enqueue_scripts', function () {
   }
 }, 30);
 
-    
+
+
 
 
  //wp_enqueue_script(
@@ -103,12 +111,15 @@ require_once get_stylesheet_directory() . '/inc/newsletter.php';
 
 // functions.php
 require_once get_stylesheet_directory() . '/inc/ks-faq.php';
+require_once get_stylesheet_directory() . '/inc/jobs.php';
+
 
 /* Core */
 ks_require('setup.php');
 ks_require('assets.php');
 ks_require('helpers.php');
 ks_require('contact-form.php');
+
 
 ks_require('ks-feedback.php');
 
@@ -120,11 +131,15 @@ ks_require('shortcodes/offers-directory.php');
 ks_require('shortcodes/home.php');  
 ks_require('shortcodes/trainer.php'); 
 ks_require('shortcodes/brandbar.php');
-
+ks_require('shortcodes/datenschutz.php');
+ks_require('shortcodes/impressum.php');
+ks_require('shortcodes/agb.php');
+ks_require('shortcodes/faq.php');
 
 
 ks_require('ks-geocode.php');
-
+ks_require('shortcodes/membership-cancellation-form.php');
+ks_require('shortcodes/withdrawal-form.php');
 
 
 
@@ -135,9 +150,8 @@ ks_require('navigation-mega-about.php');
 ks_require('news-archive.php');
 
 
+
 ks_require('shortcodes/whatsapp-locations.php');
-
-
 
 
 

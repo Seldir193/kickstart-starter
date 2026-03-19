@@ -1,12 +1,15 @@
+
 <?php
 
 // ==============================
-// Shortcode: [ks_about] – zentral mit ks-utils.css
+// Shortcode: [ks_about] – zentral (Hero identisch zu Offers Directory)
 // ==============================
 if (!function_exists('ks_register_about_shortcode')) {
   function ks_register_about_shortcode() {
     add_shortcode('ks_about', function () {
+      $theme_dir = get_stylesheet_directory();
       $theme_uri = get_stylesheet_directory_uri();
+
       $hero = get_the_post_thumbnail_url(null, 'full');
       if (!$hero) {
         $hero = $theme_uri . '/assets/img/mfs.png';
@@ -15,36 +18,80 @@ if (!function_exists('ks_register_about_shortcode')) {
       // globales Plus-Icon für alle Listen auf dieser Seite
       //$plus_icon = $theme_uri . '/assets/img/home/plus.svg';
 
-      $handle = 'ks-utils';
-      if (!wp_style_is($handle, 'enqueued')) {
-        $utils_path = get_stylesheet_directory() . '/assets/css/ks-utils.css';
-        if (file_exists($utils_path)) {
-          wp_enqueue_style(
-            $handle,
-            $theme_uri . '/assets/css/ks-utils.css',
-            ['kickstart-style'],
-            filemtime($utils_path)
-          );
-        } else {
-          // Fallback: hänge die Variable ans Haupt-Stylesheet
-          $handle = 'kickstart-style';
-        }
+      /* ==== CSS wie im Offers Directory laden (ohne doppelte Styles) ==== */
+
+      // ks-utils.css
+      $utils_abs = $theme_dir . '/assets/css/ks-utils.css';
+      if (file_exists($utils_abs) && !wp_style_is('ks-utils', 'enqueued')) {
+        wp_enqueue_style(
+          'ks-utils',
+          $theme_uri . '/assets/css/ks-utils.css',
+          ['kickstart-style'],
+          filemtime($utils_abs)
+        );
+      }
+
+      // ks-home.css
+      $home_abs = $theme_dir . '/assets/css/ks-home.css';
+      if (file_exists($home_abs) && !wp_style_is('ks-home', 'enqueued')) {
+        wp_enqueue_style(
+          'ks-home',
+          $theme_uri . '/assets/css/ks-home.css',
+          ['kickstart-style', 'ks-utils'],
+          filemtime($home_abs)
+        );
+      }
+
+      // ks-dir.css (WICHTIG für Hero/Watermark)
+      $dir_abs = $theme_dir . '/assets/css/ks-dir.css';
+      if (file_exists($dir_abs) && !wp_style_is('ks-dir', 'enqueued')) {
+        wp_enqueue_style(
+          'ks-dir',
+          $theme_uri . '/assets/css/ks-dir.css',
+          ['ks-home'],
+          filemtime($dir_abs)
+        );
+      }
+
+      // Handle wählen für Inline-Style (CSS-Var)
+      $handle = 'kickstart-style';
+      if (wp_style_is('ks-dir', 'enqueued')) {
+        $handle = 'ks-dir';
+      } elseif (wp_style_is('ks-home', 'enqueued')) {
+        $handle = 'ks-home';
+      } elseif (wp_style_is('ks-utils', 'enqueued')) {
+        $handle = 'ks-utils';
       }
 
       // Hero-Bild per CSS-Variable setzen (kein inline style am HTML)
       wp_add_inline_style(
         $handle,
-        '#about-hero{--hero-img:url("'.esc_url($hero).'")}'
+        '#about-hero{--hero-img:url("' . esc_url($hero) . '")}'
       );
 
+      $coaches      = ks_get_coaches(48);
+$trainer_url  = ks_get_trainer_url();
+$fallback_img = $theme_uri . '/assets/img/mfs.png';
+
+ks_enqueue_team_assets();
+
       ob_start(); ?>
-      <!-- 1) Wer wir sind -->
-      <section id="about-hero" class="ks-dir__hero ks-sec">
-        <div class="ks-dir__hero-inner">
-          <div class="ks-dir__crumb">Home <span class="sep">/</span> Über uns</div>
-          <h1 class="ks-dir__hero-title">Über uns</h1>
+
+      <!-- HERO (identisch zu Offers Directory) -->
+      <div class="ks-dir ks-dir--about">
+        <div id="about-hero"
+             class="ks-dir__hero"
+             data-watermark="ÜBER UNS">
+          <div class="ks-dir__hero-inner">
+            <div class="ks-dir__crumb">
+              <a class="ks-dir__crumb-home" href="<?php echo esc_url(home_url('/')); ?>">Home</a>
+              <span class="sep">/</span>
+              Über uns
+            </div>
+            <h1 class="ks-dir__hero-title">Über uns</h1>
+          </div>
         </div>
-      </section>
+      </div>
 
       <!-- 2) Die MFS -->
       <section id="mfs" class="ks-sec ks-py-48">
@@ -61,41 +108,37 @@ if (!function_exists('ks_register_about_shortcode')) {
             </div>
 
             <ul class="ks-list-plus">
-  <li>
-    <span class="ks-list-plus__icon" aria-hidden="true"></span>
-    <span>25 Jahre Erfahrung</span>
-  </li>
-  <li>
-    <span class="ks-list-plus__icon" aria-hidden="true"></span>
-    <span>10 Partner und &gt; 10 Trainer</span>
-  </li>
-  <li>
-    <span class="ks-list-plus__icon" aria-hidden="true"></span>
-    <span>&gt; 7000 Kinder &amp; 10 Partnervereine</span>
-  </li>
-  <li>
-    <span class="ks-list-plus__icon" aria-hidden="true"></span>
-    <span>Wöchentliche Trainerfortbildungen</span>
-  </li>
-  <li>
-    <span class="ks-list-plus__icon" aria-hidden="true"></span>
-    <span>Streamingportal mit &gt; 1000 Videos</span>
-  </li>
-</ul>
-
-
-            
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span>25 Jahre Erfahrung</span>
+              </li>
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span>10 Partner und &gt; 10 Trainer</span>
+              </li>
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span>&gt; 7000 Kinder &amp; 10 Partnervereine</span>
+              </li>
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span>Wöchentliche Trainerfortbildungen</span>
+              </li>
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span>Streamingportal mit &gt; 1000 Videos</span>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
 
       <!-- 3) Team -->
-      <section id="team" class="ks-sec ks-py-48 ks-bg-white">
-        <div class="container container--1400">
-          <h2 class="ks-dir__title">Unser Team</h2>
-          <div id="ksTeamCarousel" class="ks-team"></div>
-        </div>
-      </section>
+     
+      <?php
+include $theme_dir . '/inc/partials/shared/team-section.php';
+?>
+
 
       <!-- 4) Philosophie -->
       <section id="philosophie" class="ks-sec ks-py-48">
@@ -108,37 +151,33 @@ if (!function_exists('ks_register_about_shortcode')) {
               <p>Wir lehren das Fußballspielen mit Fokus auf Freude, Entwicklung und Charakterbildung.
                  Ausbildung geht bei uns vor Ergebnisdenken – wir fördern nachhaltig und altersgerecht.</p>
             </div>
-            
+
             <ul class="ks-list-plus">
-  <li>
-    <span class="ks-list-plus__icon" aria-hidden="true"></span>
-    <span>Spaß, Freude und Ausbildung vor Ergebnis</span>
-  </li>
-  <li>
-    <span class="ks-list-plus__icon" aria-hidden="true"></span>
-    <span>&gt; 250 Tricks, Ballannahmen und Schusstechniken</span>
-  </li>
-  <li>
-    <span class="ks-list-plus__icon" aria-hidden="true"></span>
-    <span>Komplexes altersgerechtes Athletiktraining</span>
-  </li>
-  <li>
-    <span class="ks-list-plus__icon" aria-hidden="true"></span>
-    <span>Hohe Trainingseffizienz durch kleine Gruppen</span>
-  </li>
-  <li>
-    <span class="ks-list-plus__icon" aria-hidden="true"></span>
-    <span>Perfekte Trainingsstruktur</span>
-  </li>
-  <li>
-    <span class="ks-list-plus__icon" aria-hidden="true"></span>
-    <span>Individual-, Gruppen- und Mannschaftstaktik im Detail</span>
-  </li>
-</ul>
-
-
-
-            
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span>Spaß, Freude und Ausbildung vor Ergebnis</span>
+              </li>
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span>&gt; 250 Tricks, Ballannahmen und Schusstechniken</span>
+              </li>
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span>Komplexes altersgerechtes Athletiktraining</span>
+              </li>
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span>Hohe Trainingseffizienz durch kleine Gruppen</span>
+              </li>
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span>Perfekte Trainingsstruktur</span>
+              </li>
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span>Individual-, Gruppen- und Mannschaftstaktik im Detail</span>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
@@ -193,46 +232,75 @@ if (!function_exists('ks_register_about_shortcode')) {
             </div>
 
             <ul class="ks-list-plus">
-  <li>
-    <span class="ks-list-plus__icon" aria-hidden="true"></span>
-    <span>Möglichst vielen Menschen bestmögliches Training ermöglichen</span>
-  </li>
-  <li>
-    <span class="ks-list-plus__icon" aria-hidden="true"></span>
-    <span>Vereine inhaltlich &amp; wirtschaftlich unterstützen</span>
-  </li>
-  <li>
-    <span class="ks-list-plus__icon" aria-hidden="true"></span>
-    <span>Stetige Verbesserung und Weiterentwicklung unserer Philosophie</span>
-  </li>
-  <li>
-    <span class="ks-list-plus__icon" aria-hidden="true"></span>
-    <span>Unsere Philosophie in andere Städte &amp; Länder bringen</span>
-  </li>
-</ul>
-
-
-
-            
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span>Möglichst vielen Menschen bestmögliches Training ermöglichen</span>
+              </li>
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span>Vereine inhaltlich &amp; wirtschaftlich unterstützen</span>
+              </li>
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span>Stetige Verbesserung und Weiterentwicklung unserer Philosophie</span>
+              </li>
+              <li>
+                <span class="ks-list-plus__icon" aria-hidden="true"></span>
+                <span>Unsere Philosophie in andere Städte &amp; Länder bringen</span>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
 
       <!-- 7) Standorte -->
+      
+
       <section id="standorte" class="ks-sec ks-py-32 ks-bg-deep ks-text-light ks-standorte">
-        <div class="container container--1200">
-          <h2 class="ks-dir__title ks-text-light">Unsere Standorte</h2>
-          <p class="ks-mt-16">
-            <a href="<?php echo esc_url(home_url('/standorte')); ?>" class="ks-btn">Zu den Standorten</a>
-          </p>
-        </div>
-      </section>
+  <div class="container container--1200">
+
+    <div class="ks-title-wrap" data-bgword="STANDORTE">
+      <h2 class="ks-dir__title ks-text-dark">Unsere Standorte</h2>
+    </div>
+
+    <p class="ks-mt">
+      <a href="<?php echo esc_url(home_url('/standorte')); ?>" class="ks-btn">Zu den Standorten</a>
+    </p>
+
+  </div>
+</section>
+
+
       <?php
       return ob_get_clean();
     });
   }
   add_action('init', 'ks_register_about_shortcode');
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

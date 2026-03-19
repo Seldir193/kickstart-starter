@@ -1,267 +1,775 @@
+@layer pages {
+  :root {
+    --ks-news-gap: clamp(20px, 4vw, 56px);
+    --ks-news-sidebar: 340px;
 
+    --ks-card-bg: #fff;
+    --ks-card-border: #eaeaea;
+    --ks-card-radius: 16px;
 
+    --ks-text: rgba(15, 23, 42, 0.86);
+    --ks-muted: rgba(15, 23, 42, 0.65);
+    --ks-muted-2: rgba(15, 23, 42, 0.78);
+  }
 
+  /* ===============================
+     SHARED LAYOUT: Archive + Detail
+     =============================== */
 
-/* =========================================================
-   DFS – NEWS Styles (latest, archive, single)
-   ========================================================= */
+  .ks-news-archive .ks-grid-12-8,
+  #news-detail .ks-grid-12-8 {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) var(--ks-news-sidebar) !important;
+    gap: var(--ks-news-gap) !important;
+    align-items: start !important;
+  }
 
-/* ---------- Design-Variablen ---------- */
-:root{
-  --news-accent:  #0F1E2E;      /* Hoverfarbe für Titel (kräftiges Gelb) */
-  --news-title:  #111111;      /* Standard Titel/Text */
-  --news-muted:  #6B7280;      /* Meta/Excerpt grau */
-  --news-line:   #000000;      /* Linie bei "Mehr lesen" */
-}
+  @media (max-width: 1100px) {
+    .ks-news-archive .ks-grid-12-8,
+    #news-detail .ks-grid-12-8 {
+      grid-template-columns: 1fr !important;
+      gap: 28px !important;
+    }
+  }
 
-/* ---------- Reset/Grundverhalten ---------- */
-.ks-news-item a{
-  text-decoration: none;
-  color: inherit ;
-}
+  .ks-news-main {
+    min-width: 0;
+  }
 
-/* Alle Texte in Cards: weiche Farb-Transition (kein Layout-Shift) */
-.ks-news-item *{
-  transition: color .125s ease-out;  /* 125 ms */
-}
+  #news-detail .container {
+    width: 100%;
+    padding: unset;
+  }
 
-/* =========================================================
-   A) NEWS DETAIL: Medien-Größen
-   ========================================================= */
-.ks-news-single header img{
-  display:block;
-  width:100%;
-  height:auto;
-  max-height:520px;        /* ggf. 420px, wenn kompakter gewünscht */
-  object-fit:cover;
-  border-radius:12px;
-  margin:12px 0 0;
-}
+  /* ===============================
+     SHARED TYPO: Meta, Titles, Links
+     =============================== */
 
-/* Ratio-Wrapper (16:9) für Videos/iframes/Bilder im Content */
-.ks-news-single .ratio{
-  position:relative;
-  width:100%;
-  aspect-ratio:16 / 9;
-  background:#000;
-  border-radius:12px;
-  overflow:hidden;
-  margin:12px 0 0;
-}
-.ks-news-single .ratio > video,
-.ks-news-single .ratio > img,
-.ks-news-single .ratio > iframe{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+  .ks-news-item__meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 12px;
+    color: var(--ks-muted);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
 
-/* Normale Bilder im Content */
-.ks-news-single .ks-news-content img{
-  max-width:100%;
-  height:auto;
-}
+  .ks-news-item__meta::after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 84px;
+    background: color-mix(in srgb, var(--brand-navy, #0f1e2e) 20%, #fff 80%);
+  }
 
-/* =========================================================
-   B) HOME/SEITE – [ks_news_latest] (3er Grid, ohne Bilder)
-   ========================================================= */
-.ks-news-latest .ks-news-grid{
-  max-width:1400px;
-  margin:0 auto;
-  padding:0 16px;
-}
+  .ks-news-item__title {
+    margin: 0 0 10px;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    color: #0b1220;
+  }
 
-.ks-news-latest .ks-news-main{
-  display:grid;
-  grid-template-columns:repeat(3, minmax(0,1fr));
-  gap:28px;
-}
+  .ks-news-item__title a {
+    color: inherit;
+    text-decoration: none !important;
+  }
 
-.ks-news-latest .ks-news-item{
-  display:flex;
-  flex-direction:column;
-}
+  /* Hover nur wenn NICHT focused */
+  .ks-news-item__title a:not(:focus):hover {
+    opacity: 0.88;
+  }
 
-/* Auf HOME: Thumbs AUS (nur Texte zeigen) */
-.ks-news-latest .ks-news-item__thumb{ display:none; }
+  .ks-news-item__excerpt {
+    margin: 0 0 14px;
+    max-width: 78ch;
+    color: var(--ks-muted-2);
+    line-height: 1.75;
+    font-size: 18px;
+  }
 
-/* Typografie */
-.ks-news-latest .ks-news-item__title{
-  margin:10px 0 0;
-  font-size:25px;
-  line-height:1.3;
-  color:var(--news-title);
-}
-.ks-news-latest .ks-news-item__excerpt{ margin-top:8px; color:var(--news-muted); }
-.ks-news-latest .ks-news-item__meta{ color:var(--news-muted); }
+  /* MEHR LESEN – wie vorher: Linie bis Mitte, beim Hover voll */
+  .ks-link-more {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 2px;
+    color: inherit;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 12px;
+    text-decoration: none !important;
+  }
 
-/* Responsive */
-@media (max-width:1024px){
-  .ks-news-latest .ks-news-main{ grid-template-columns:repeat(2, minmax(0,1fr)); }
-}
-@media (max-width:640px){
-  .ks-news-latest .ks-news-main{ grid-template-columns:1fr; }
-}
+  .ks-link-more::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 55%;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.9);
+    transition: width 0.22s ease;
+  }
 
-/* =========================================================
-   C) NEWS ARCHIVE (Liste/Übersicht mit Bildern)
-   ========================================================= */
-.ks-news-archive .ks-news-grid{
-  max-width:1400px;
-  margin:0 auto;
-  padding:0 16px;
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 320px; /* Content + Sidebar */
-  gap:32px;
-}
-@media (max-width:1024px){
-  .ks-news-archive .ks-news-grid{
-    grid-template-columns:1fr; /* Sidebar unter Content */
+  .ks-link-more:not(:focus):hover::after,
+  .ks-link-more:focus-visible::after {
+    width: 100%;
+  }
+
+  .ks-link-more:focus-visible {
+    outline: none;
+    border-radius: 6px;
+    box-shadow: 0 0 0 3px
+      color-mix(in oklab, var(--brand-navy, #111827) 25%, transparent);
+  }
+
+  /* ===============================
+     ARCHIVE PAGE (/new/)
+     =============================== */
+
+  .ks-news-archive .ks-news-item {
+    background: var(--ks-card-bg);
+    border: 1px solid var(--ks-card-border);
+    border-radius: var(--ks-card-radius);
+    padding: clamp(18px, 2vw, 24px);
+    margin-bottom: 18px;
+  }
+
+  .ks-news-archive .ks-news-item__title {
+    font-size: clamp(22px, 2.4vw, 38px);
+  }
+
+  .ks-news-item__thumb {
+    display: block;
+    margin: 12px 0 14px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #eeeeee;
+    background: #f7f7f8;
+  }
+
+  .ks-news-item__thumb img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Pagination inkl. Icons */
+  .ks-pagination {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .ks-pagination .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(15, 23, 42, 0.16);
+    color: rgba(15, 23, 42, 0.85);
+    text-decoration: none !important;
+    font-weight: 800;
+    font-size: 13px;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .ks-pagination .page-numbers:not(:focus):hover {
+    background: rgba(15, 23, 42, 0.04);
+    border-color: rgba(15, 23, 42, 0.26);
+  }
+
+  .ks-pagination .page-numbers:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px
+      color-mix(in oklab, var(--brand-navy, #111827) 25%, transparent);
+  }
+
+  .ks-pagination .page-numbers.current {
+    background: rgba(15, 23, 42, 0.92);
+    color: #fff;
+    border-color: rgba(15, 23, 42, 0.92);
+  }
+
+  .ks-pagination .page-numbers.dots {
+    border-color: transparent;
+    background: transparent;
+    min-width: 18px;
+  }
+
+  .ks-pagination .ks-page-ic {
+    height: 14px;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .ks-pagination .page-numbers.prev,
+  .ks-pagination .page-numbers.next {
+    padding: 0 12px;
+  }
+
+  .ks-pagination .page-numbers.prev:hover .ks-page-ic,
+  .ks-pagination .page-numbers.next:hover .ks-page-ic {
+    transform: none;
+  }
+
+  /* ===============================
+     DETAIL PAGE (/news-detail/)
+     =============================== */
+
+  #news-detail .ks-news-article {
+    background: var(--ks-card-bg);
+    border: 1px solid var(--ks-card-border);
+    border-radius: var(--ks-card-radius);
+    padding: clamp(18px, 2vw, 28px);
+  }
+
+  #news-detail .ks-news-single__title {
+    margin: 0 0 12px;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+    font-size: clamp(34px, 4.6vw, 64px);
+    line-height: 1.02;
+    text-transform: uppercase;
+    color: #0b1220;
+  }
+
+  #news-detail .ks-news-single__lead {
+    margin: 0 0 18px;
+    max-width: 78ch;
+    color: rgba(15, 23, 42, 0.82);
+    line-height: 1.65;
+    font-size: 18px;
+  }
+
+  #news-detail .ks-news-single__lead strong {
+    font-weight: 900;
+  }
+
+  #news-detail .ks-news-single__hero-media {
+    margin: 14px 0 18px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #f7f7f8;
+    border: 1px solid #eeeeee;
+  }
+
+  #news-detail .ks-news-single__hero-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  #news-detail .ks-news-single__gallery {
+    margin: 14px 0 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  #news-detail .ks-news-single__img {
+    margin: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f7f7f8;
+    border: 1px solid #eeeeee;
+  }
+
+  #news-detail .ks-news-single__img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4 / 5;
+  }
+
+  @media (max-width: 900px) {
+    #news-detail .ks-news-single__gallery {
+      grid-template-columns: 1fr;
+    }
+    #news-detail .ks-news-single__img img {
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  #news-detail .ks-news-single__content {
+    max-width: 78ch;
+    color: var(--ks-muted-2);
+    line-height: 1.85;
+    font-size: 18px;
+    word-break: break-word;
+  }
+
+  #news-detail .ks-news-single__content > * + * {
+    margin-top: 14px;
+  }
+
+  #news-detail .ks-news-single__content h2,
+  #news-detail .ks-news-single__content h3 {
+    margin-top: 22px;
+    margin-bottom: 10px;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: #0b1220;
+  }
+
+  #news-detail .ks-news-single__content ul,
+  #news-detail .ks-news-single__content ol {
+    margin: 10px 0 18px;
+    padding-left: 1.25em;
+  }
+
+  #news-detail .ks-news-single__content li {
+    margin: 8px 0;
+  }
+
+  #news-detail .ks-news-single__content a {
+    color: var(--brand-navy, #0f1e2e);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+  }
+
+  #news-detail .ks-news-single__content a:not(:focus):hover {
+    text-decoration-thickness: 3px;
+  }
+
+  #news-detail .ks-news-single__content blockquote {
+    margin: 18px 0;
+    padding-left: 16px;
+    border-left: 3px solid var(--brand-navy, #0f1e2e);
+    background: transparent;
+    border-radius: 0;
+    font-style: italic;
+    font-size: 1.05em;
+    line-height: 1.75;
+    color: rgba(11, 18, 32, 0.82);
+  }
+
+  #news-detail .ks-news-single__content blockquote p {
+    margin: 0;
+  }
+
+  #news-detail .ks-news-single__content blockquote::before {
+    content: "“";
+    display: block;
+    font-style: normal;
+    font-size: 44px;
+    line-height: 1;
+    margin-bottom: -10px;
+    color: color-mix(in srgb, var(--brand-navy, #0f1e2e) 35%, #fff 65%);
+  }
+
+  #news-detail .ks-news-single__content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 14px;
+    border: 1px solid #eeeeee;
+    background: #f7f7f8;
+  }
+
+  #news-detail .ks-news-single__videos {
+    margin: 18px 0 10px;
+    display: grid;
+    gap: 12px;
+  }
+
+  #news-detail .ks-news-single__video {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 16 / 9;
+  }
+
+  #news-detail .ks-news-single__video video {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* ===============================
+     SIDEBAR (Archive + Detail)
+     =============================== */
+
+  .ks-news-sidebar {
+    justify-self: end;
+    width: 100%;
+    max-width: var(--ks-news-sidebar);
+  }
+
+  #news-detail .ks-news-sidebar {
+    position: sticky;
+    top: 18px;
+    align-self: start;
+  }
+
+  @media (max-width: 1100px) {
+    #news-detail .ks-news-sidebar {
+      position: static;
+    }
+  }
+
+  .ks-news-sidebar .widget {
+    background: #fff;
+    border: 1px solid var(--ks-card-border);
+    border-radius: var(--ks-card-radius);
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+
+  .ks-news-sidebar .widget-title {
+    margin: 0 0 12px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: #0b1220;
+  }
+
+  .ks-news-sidebar .widget-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  /* Links: kein underline + Hover nur wenn NICHT focused + NICHT current */
+  .ks-news-sidebar .widget-list a {
+    color: rgba(15, 23, 42, 0.82);
+    text-decoration: none !important;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .ks-news-sidebar .widget-list a:not(.current):not(:focus):hover {
+    opacity: 1 !important;
+    color: #000 !important;
+    filter: contrast(1.3) !important;
+  }
+
+  .ks-news-sidebar .widget-list a.current:hover {
+    opacity: 1 !important;
+  }
+
+  .ks-news-sidebar .widget-list a:focus-visible {
+    outline: none;
+    border-radius: 6px;
+    box-shadow: 0 0 0 3px
+      color-mix(in oklab, var(--brand-navy, #111827) 25%, transparent);
+  }
+
+  .ks-news-sidebar .widget-list a.current {
+    font-weight: 900;
+  }
+
+  .ks-news-sidebar .ks-latest-meta {
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 4px;
+  }
+
+  .ks-news-sidebar .ks-latest-link {
+    color: rgba(15, 23, 42, 0.9);
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    line-height: 1.25;
+  }
+
+  .ks-news-sidebar .ks-latest-link:not(:focus):hover {
+    opacity: 1 !important;
+    color: #000 !important;
+    filter: contrast(1.3) !important;
+  }
+
+  /* ===============================
+     TAGCLOUD + Toggle am Ende
+     =============================== */
+
+  .ks-news-sidebar .tagcloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.35) transparent;
+  }
+
+  .ks-news-sidebar .tagcloud::-webkit-scrollbar {
+    width: 8px;
+  }
+  .ks-news-sidebar .tagcloud::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .ks-news-sidebar .tagcloud::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.28);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  .ks-news-sidebar .tagcloud::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+    background-clip: content-box;
+  }
+
+  .ks-news-sidebar .tagcloud > a,
+  .ks-news-sidebar .tagcloud details a {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    padding: 8px 10px;
+    border: 1px solid rgba(15, 23, 42, 0.14);
+    border-radius: 999px;
+    background: #fff;
+    color: rgba(15, 23, 42, 0.82);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none !important;
+    transition: color 0.15s ease, border-color 0.15s ease, filter 0.15s ease,
+      opacity 0.15s ease, background-color 0.15s ease;
+  }
+
+  /* Hover NUR für NICHT-current (damit aktives Tag nie hover bekommt) */
+  .ks-news-sidebar .tagcloud > a:not(.current):hover,
+  .ks-news-sidebar .tagcloud details a:not(.current):hover {
+    opacity: 1 !important;
+    color: #000 !important;
+    filter: contrast(0.3) !important;
+    border-color: rgba(0, 0, 0, 0.35) !important;
+    background: rgba(0, 0, 0, 0.04) !important;
+  }
+
+  .ks-news-sidebar .tagcloud > a:focus-visible,
+  .ks-news-sidebar .tagcloud details a:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px
+      color-mix(in oklab, var(--brand-navy, #111827) 25%, transparent);
+  }
+
+  .ks-news-sidebar .tagcloud > a.current,
+  .ks-news-sidebar .tagcloud details a.current {
+    font-weight: 900;
+    color: #000 !important;
+    border-color: rgba(0, 0, 0, 0.35) !important;
+    background: rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* Aktives Tag: Hover explizit neutralisieren */
+  .ks-news-sidebar .tagcloud > a.current:hover,
+  .ks-news-sidebar .tagcloud details a.current:hover {
+    opacity: 1 !important;
+    color: #000 !important;
+    filter: none !important;
+    border-color: rgba(0, 0, 0, 0.35) !important;
+    background: rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* Toggle am Ende – immer */
+  .ks-news-sidebar .tagcloud .ks-tag-more {
+    display: contents;
+  }
+
+  .ks-news-sidebar .tagcloud .ks-tag-more > summary {
+    order: 999;
+    flex-basis: 100%;
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 8px 12px;
+    border: 1px solid rgba(15, 23, 42, 0.35);
+    border-radius: 10px;
+    background: #fff;
+
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: rgba(15, 23, 42, 0.9);
+
+    transition: background-color 0.15s ease, border-color 0.15s ease,
+      color 0.15s ease, filter 0.15s ease;
+  }
+
+  .ks-news-sidebar .tagcloud .ks-tag-more > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Summary Hover NUR wenn NICHT focused */
+  .ks-news-sidebar .tagcloud .ks-tag-more > summary:not(:focus):hover {
+    opacity: 1 !important;
+    color: #000 !important;
+    filter: contrast(0.3) !important;
+    border-color: rgba(0, 0, 0, 0.55) !important;
+    background: rgba(0, 0, 0, 0.04) !important;
+  }
+
+  .ks-news-sidebar .tagcloud .ks-tag-more > summary:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px
+      color-mix(in oklab, var(--brand-navy, #111827) 25%, transparent);
+  }
+
+  .ks-tag-more__open {
+    display: none;
+  }
+  details[open] .ks-tag-more__closed {
+    display: none;
+  }
+  details[open] .ks-tag-more__open {
+    display: inline;
+  }
+
+  /* Ad */
+  .ks-widget-ad .ad {
+    display: block;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #eeeeee;
+    background: #f7f7f8;
+  }
+
+  .ks-widget-ad img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  #news-detail [class*="ks-newsletter"] {
+    margin-top: 24px;
+  }
+
+  #news-archive > .container {
+    padding: unset;
+  }
+
+  body.page-id-350,
+  body.page-id-350 .site-main {
+    margin-top: 0 !important;
+  }
+
+  /* Nur Franchise-Seite: Titel verstecken */
+  .page-id-350 .entry-title,
+  .page-id-350 h1.entry-title {
+    display: none !important;
   }
 }
 
-/* Grid der Artikel im Archiv (kann einspaltig sein, passt sich über CSS an) */
-.ks-news-archive .ks-news-main{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:28px;
+/* === News Detail: ANDERE BEITRÄGE + Prev/Next Icons ===================== */
+#news-detail .ks-news-more-wrap {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-/* Auf ARCHIVE: Thumbs AN + 16:9 */
-.ks-news-archive .ks-news-item__thumb{ display:block; }
-.ks-news-archive .ks-news-item__thumb img{
-  display:block;
-  width:100%;
-  aspect-ratio:16 / 9;
-  height:auto;
-  object-fit:cover;
-  border-radius:12px;
+#news-detail .ks-news-more-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
 }
 
-/* Typografie im Archiv */
-.ks-news-archive .ks-news-item__title{
-  margin:10px 0 0;
-  font-size:24px;
-  line-height:1.3;
-  color:var(--news-title);
-}
-.ks-news-archive .ks-news-item__excerpt{ margin-top:8px; color:var(--news-muted); }
-.ks-news-archive .ks-news-item__meta{ color:var(--news-muted); }
-
-/* Sidebar Widgets (optional, minimal) */
-.ks-news-archive .ks-news-sidebar .widget{ margin:0 0 24px; }
-.ks-news-archive .ks-news-sidebar .widget-title{
-  font-size:14px;
-  letter-spacing:.06em;
-  font-weight:700;
-  color:#111;
-  margin:0 0 10px;
-}
-.ks-news-archive .ks-news-sidebar .widget-list{
-  list-style:none;
-  padding:0;
-  margin:0;
-}
-.ks-news-archive .ks-news-sidebar .widget-list li{ margin:6px 0; }
-
-/* =========================================================
-   D) HOVER-VERHALTEN (einheitlich für Cards)
-   ========================================================= */
-
-/* Titel färbt gelb beim Hover der Card */
-.ks-news-item:hover .ks-news-item__title a{
-  color:var(--news-accent);
+#news-detail .ks-news-more-title {
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
-/* Meta + Excerpt leicht dunkler beim Hover (besserer Kontrast) */
-.ks-news-item:hover .ks-news-item__meta,
-.ks-news-item:hover .ks-news-item__excerpt{
-  color:var(--news-accent) ;
+/* Icons rechts neben der Überschrift (wie auf deinem Screenshot) */
+#news-detail .ks-news-more-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* KEIN Transform/Scale – damit nichts springt! */
-
-/* =========================================================
-   E) "MEHR LESEN" – Linie wächst, Text bleibt schwarz
-   ========================================================= */
-.ks-link-more{
-  --u:25%;                                 /* Start: bis zur Mitte */
-  position:relative;
-  display:inline-block;
-  padding-bottom:1px;
-  font-size:14px;
-  font-weight:600;
-  color:var(--news-title) !important;      /* Text immer schwarz */
-  background-image:linear-gradient(var(--news-line), var(--news-line));
-  background-repeat:no-repeat;
-  background-position:0 100%;
-  background-size:var(--u) 2px;            /* animierbare Länge */
-  transition:background-size .125s ease-out; /* 125 ms Länge */
+#news-detail .ks-news-nav-btn {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, 0.02);
+  text-decoration: none;
 }
 
-/* Beim Hover wächst nur die Linie, keine Farbänderung */
-.ks-link-more:hover{
-  --u:100%;
-  color:var(--news-title) !important;      /* bleibt schwarz */
+#news-detail .ks-news-nav-btn img {
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 
-/* Sicherheit: Card-Hover ändert "Mehr lesen" nicht */
-.ks-news-item:hover .ks-link-more{
-  color:var(--news-title) !important;
+#news-detail .ks-news-nav-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.18);
 }
 
-/* =========================================================
-   F) Sonstiges (Pagination etc. – optional dezent)
-   ========================================================= */
-.ks-pagination{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  align-items:center;
-  margin-top:20px;
-}
-.ks-pagination a,
-.ks-pagination span{
-  display:inline-block;
-  min-width:36px;
-  text-align:center;
-  padding:6px 10px;
-  border-radius:8px;
-  text-decoration:none;
-  color:#111;
-  background:#f3f4f6;
-}
-.ks-pagination .current{
-  background:#e5e7eb;
-  font-weight:700;
+/* Wenn kein prev/next vorhanden ist -> optisch disabled */
+#news-detail .ks-news-nav-btn--disabled {
+  opacity: 0.35;
+  pointer-events: none;
 }
 
+/* Cards: andere Optik als der Artikel-Content */
+#news-detail .ks-news-more-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
 
+@media (min-width: 900px) {
+  #news-detail .ks-news-more-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
 
+#news-detail .ks-news-more-card {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  padding: 14px 14px 12px;
+  background: #fff;
+}
 
+/* meta + Titel + excerpt im Card-Look */
+#news-detail .ks-news-more-card .ks-news-item__meta {
+  font-size: 12px;
+  opacity: 0.75;
+  margin-bottom: 10px;
+}
 
+#news-detail .ks-news-more-card .ks-news-item__title {
+  margin: 0 0 10px;
+  line-height: 1.15;
+}
 
+#news-detail .ks-news-more-card .ks-news-item__excerpt {
+  font-size: 14px;
+  opacity: 0.85;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Nur Franchise-Seite: Titel verstecken */
-.page-id-269 .entry-title,
-.page-id-269 h1.entry-title {
-    display: none !important;
+#news-detail .ks-news-more-card .ks-news-item__more {
+  margin: 12px 0 0;
 }

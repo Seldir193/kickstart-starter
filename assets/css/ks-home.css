@@ -1,6 +1,8 @@
-/* ========================================================================== */
-/*  KS Home (assets/css/ks-home.css)                                           */
-/* ========================================================================== */
+/* ==========================================================================
+   KS Home (assets/css/ks-home.css) — BEREINIGT
+   - Shared Werte/Vorteile-Styles sind jetzt in ks-utils.css
+   - Hier bleibt nur Home-spezifisch: Hero, Tabs, News, Team, Split/Ratio, Buttons, Werte-Hover
+   ========================================================================== */
 
 :root {
   --ks-container: 1440px;
@@ -37,10 +39,7 @@
   margin-right: calc(50% - 50vw);
 }
 
-/* ================= */
-/* Titel (re-used)   */
-/* ================= */
-
+/* Titel (re-used) */
 .ks-dir__title {
   font-weight: 800;
   font-size: 52px;
@@ -67,7 +66,6 @@
 .ks-hero-tabs {
   position: relative;
   display: flex;
-
   gap: 14px;
   align-items: center;
   z-index: 1;
@@ -111,7 +109,7 @@
   text-transform: uppercase;
 }
 
-/* Wichtig: Label/Num dürfen NICHT grau bleiben -> erben immer */
+/* Label/Num dürfen nicht grau bleiben */
 .ks-hero-tab__label,
 .ks-hero-tab__num {
   color: inherit !important;
@@ -123,19 +121,19 @@
   line-height: 1;
 }
 
-/* Hover/Fokus: #222 + volle Opacity */
+/* Hover/Fokus */
 .ks-hero-tab:hover,
 .ks-hero-tab:focus-visible {
   color: var(--text, #222);
   opacity: 1;
 }
 
-/* Active: volle Opacity */
+/* Active */
 .ks-hero-tab.is-active {
   opacity: 1;
 }
 
-/* Slides (nur die aktive sichtbar) */
+/* Slides */
 .ks-hero-slides {
   position: relative;
 }
@@ -203,7 +201,7 @@
   margin-right: calc(50% - 50vw);
 }
 
-/* ✅ Titel/Kicker bei Werte wirklich mittig (dein Screenshot) */
+/* Titel/Kicker bei Werte mittig */
 .ks-home-values .ks-title-wrap,
 #werte .ks-title-wrap {
   text-align: center;
@@ -214,17 +212,8 @@
   margin-inline: auto;
 }
 
-/* Werte Layout */
-.ks-values {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  text-align: center;
-  margin-top: 24px;
-}
-
+/* Werte: Home-spezifischer Hover (bleibt hier!) */
 .ks-values .ks-value {
-  display: block;
   text-decoration: none;
   cursor: pointer;
 }
@@ -243,24 +232,6 @@
 }
 .ks-value:hover .icon-wrap img {
   transform: translateY(-3px);
-}
-
-.ks-value img {
-  height: 100px;
-  width: auto;
-  margin: 0 auto 10px;
-  display: block;
-}
-
-.ks-value h3 {
-  font-weight: 800;
-  margin: 6px 0 8px;
-}
-
-.ks-value p {
-  color: #6b7280;
-  max-width: 42ch;
-  margin: 0 auto;
 }
 
 /* ====================== */
@@ -284,7 +255,6 @@
   padding-right: 16px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0;
 }
 
@@ -326,23 +296,6 @@
 }
 
 /* ================= */
-/* Team / CTA Titel  */
-/* ================= */
-
-/* ✅ Das waren deine Beispiele: "Wir sind für dich da", "Unser Team", "Schnell buchen" */
-#team .ks-title-wrap,
-#program-cta .ks-title-wrap,
-#kontakt .ks-title-wrap {
-  text-align: center;
-}
-#team .ks-dir__title,
-#program-cta .ks-dir__title,
-#kontakt .ks-dir__title {
-  text-align: center;
-  margin-inline: auto;
-}
-
-/* ================= */
 /* TEAM CAROUSEL     */
 /* ================= */
 
@@ -377,15 +330,33 @@
   overflow: hidden;
 }
 
-.ks-team__img {
+/* .ks-team__img {
   display: block;
   width: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
   background: #f3f4f6;
   transition: filter 0.25s ease;
+} */
+
+/* Fix: Team-Bilder nicht quetschen */
+
+.ks-team__img {
+  width: 100% !important;
+  height: auto !important; /* <- wichtig */
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+  transition: filter 0.25s ease;
+  background: #f3f4f6;
 }
 
+/* Nur fürs Fallback-Avatar: nicht croppen, sondern sauber zentrieren */
+.ks-team__img[src*="/assets/img/avatar.png"] {
+  object-fit: contain !important;
+  background: #f3f4f6; /* optional, passt zu deinem Stil */
+  padding: 18px; /* optional: macht das Icon “luftiger” */
+}
 .ks-team__card:hover .ks-team__img,
 .ks-team__card a:hover .ks-team__img {
   filter: brightness(0.78);
@@ -583,14 +554,6 @@
 
   .ks-hero-tab__label {
     display: none;
-  }
-
-  .ks-values {
-    grid-template-columns: 1fr;
-  }
-
-  .ks-home-portal__grid {
-    grid-template-columns: 1fr;
   }
 }
 

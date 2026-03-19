@@ -129,7 +129,7 @@
   function fillLocations(selectEl, arr) {
     if (!selectEl) return;
     const cities = Array.from(
-      new Set(arr.map((o) => cityFromOffer(o)).filter(Boolean))
+      new Set(arr.map((o) => cityFromOffer(o)).filter(Boolean)),
     ).sort((a, b) => a.localeCompare(b, "de"));
 
     selectEl.innerHTML =
@@ -180,14 +180,14 @@
       .map(
         (g, i) => `
           <li class="ks-offer" data-offer-index="${i}" data-loc-key="${esc(
-          g.key
-        )}">
+            g.key,
+          )}">
             <article class="card">
               <h3 class="card-title">${esc(g.name)}</h3>
               ${g.addr ? `<div class="offer-meta">${esc(g.addr)}</div>` : ""}
             </article>
           </li>
-        `
+        `,
       )
       .join("");
   }
@@ -236,7 +236,7 @@
         window.KSOffersDialog?.open?.(
           offer,
           sessions.length ? sessions : [offer],
-          { nextBase: NEXT }
+          { nextBase: NEXT },
         );
       });
     });
@@ -249,7 +249,7 @@
     mapManager,
     isPowertrainingPage,
     root,
-    groups
+    groups,
   ) {
     if (!listEl) return;
     if (!displayArr.length) return renderEmpty(listEl);
@@ -331,10 +331,20 @@
   function getProgramGroupFromKey(key) {
     const n = normalizeProgramKey(key);
     if (!n) return "standard";
+
     if (n.includes("rentacoach")) return "rentacoach";
-    if (n.includes("clubprogram")) return "clubprogram";
     if (n.includes("coacheducation")) return "coacheducation";
-    if (n.includes("camp") || n.includes("trainingscamp")) return "camp";
+
+    // ✅ Trainingscamps sind CLUB PROGRAMS (nicht Holiday Camp)
+    if (n.includes("trainingscamp") || n.includes("trainingcamp"))
+      return "clubprogram";
+
+    // ✅ Generic club programs (ClubPrograms / ClubProgram_Generic)
+    if (n.includes("clubprogram")) return "clubprogram";
+
+    // ✅ Holiday camps (type Camp / holiday programs)
+    if (n.includes("camp")) return "camp";
+
     return "standard";
   }
 

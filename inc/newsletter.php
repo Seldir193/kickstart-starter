@@ -1,8 +1,5 @@
 
 
-
-
-
 <?php
 // Markup holen
 function ks_newsletter_markup(): string {
@@ -40,6 +37,12 @@ add_action('init', function () {
     return ks_newsletter_markup();
   });
 });
+
+
+
+
+
+
 
 
 

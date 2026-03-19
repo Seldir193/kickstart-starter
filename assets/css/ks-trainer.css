@@ -3,36 +3,36 @@
    =========================== */
 
 /* --- HERO: Full-Bleed + mittiges Wasserzeichen --- */
-.ks-trainer-hero{
+.ks-trainer-hero {
   position: relative;
-  background:#f7f8fa;
-  padding:48px 0 28px;
+  background: #f7f8fa;
+  padding: 48px 0 28px;
   --kicker-shift: -14px;
 
-  width:100vw;
-  margin-left:calc(50% - 50vw);
-  margin-right:calc(50% - 50vw);
-  overflow:hidden;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
 
   --wm-size: clamp(64px, 22vw, 140px);
 }
 
-.ks-trainer-hero::after{
+.ks-trainer-hero::after {
   content: attr(data-watermark);
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   font-weight: 900;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
   font-size: var(--wm-size);
   line-height: 1;
   white-space: nowrap;
-  color: rgba(0,0,0,.05);
+  color: rgba(0, 0, 0, 0.05);
   pointer-events: none;
 }
 
-.ks-trainer-hero .container{
+.ks-trainer-hero .container {
   max-width: var(--ks-container, 1440px);
   width: 100%;
   margin-inline: auto;
@@ -41,26 +41,26 @@
   z-index: 1;
 }
 
-.ks-trainer-hero .ks-kicker{
-  font-size:12px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:#a0a6b0;
-  margin-bottom:8px;
+.ks-trainer-hero .ks-kicker {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #a0a6b0;
+  margin-bottom: 8px;
   position: relative;
   top: var(--kicker-shift);
 }
 
-.ks-trainer-hero h1{
-  margin:0;
-  font-size:42px;
-  line-height:1.1;
-  font-weight:800;
+.ks-trainer-hero h1 {
+  margin: 0;
+  font-size: 42px;
+  line-height: 1.1;
+  font-weight: 800;
 }
 
 /* === Abschnitt unter dem Hero === */
-.ks-trainer-wrap{
-  padding:36px 0 64px;
+.ks-trainer-wrap {
+  padding: 36px 0 64px;
 
   /* Foto fix (Desktop) über Variablen */
   --photo-w: 290px;
@@ -68,7 +68,7 @@
 }
 
 /* Container: volle 1440px Nutzbreite (ohne Innenabstand) */
-.ks-trainer-wrap .container{
+.ks-trainer-wrap .container {
   max-width: var(--ks-container, 1440px);
   margin: 0 auto;
   padding-inline: 0 !important;
@@ -78,15 +78,15 @@
 /* ------------------------------
    3-Spalten-Grid (Desktop)
 ---------------------------------*/
-.ks-trainer-grid{
+.ks-trainer-grid {
   display: grid;
-  grid-template-columns: 220px var(--photo-w) minmax(0,1fr);
+  grid-template-columns: 220px var(--photo-w) minmax(0, 1fr);
   gap: 40px;
   align-items: start;
 }
 
 /* Linke Spalte: Dropdown */
-.ks-trainer-select{
+.ks-trainer-select {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -94,96 +94,111 @@
 }
 
 /* Native <select> bleibt fürs Submit, aber unsichtbar */
-.ks-trainer-select .ks-select{
-  position:absolute !important;
-  opacity:0 !important;
-  pointer-events:none !important;
-  width:1px;
-  height:1px;
+.ks-trainer-select .ks-select {
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 1px;
+  height: 1px;
 }
 
 /* Mittlere Spalte: Foto fix */
-.ks-trainer-col--photo{
+.ks-trainer-col--photo {
   display: flex;
   align-items: flex-start;
 }
 
-.ks-trainer-photo{
+.ks-trainer-photo {
   width: var(--photo-w);
   max-width: 100%;
   height: var(--photo-h);
-  border-radius:10px;
-  overflow:hidden;
-  box-shadow:0 10px 22px rgba(0,0,0,.06);
-  background:#fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+  background: #fff;
   display: flex;
 }
 
-.ks-trainer-photo img{
-  display:block;
-  width:100%;
-  height:100%;
+.ks-trainer-photo img {
+  /* display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; */
+
+  width: 100% !important;
+  height: auto !important; /* <- wichtig */
+  aspect-ratio: 4 / 5;
   object-fit: cover;
+  display: block;
+  transition: filter 0.25s ease;
+}
+
+/* Nur fürs Fallback-Avatar: nicht croppen, sondern sauber zentrieren */
+.ks-trainer-photo img[src*="/assets/img/avatar.png"] {
+  object-fit: contain !important;
+
+  background-color: var(--light-gray);
+  padding: 18px; /* optional: macht das Icon “luftiger” */
 }
 
 /* Rechte Spalte: Tabelle (flexibel) */
-.ks-trainer-col--right{
+.ks-trainer-col--right {
   min-width: 0;
 }
 
-.ks-trainer-table{
-  width:100%;
-  border-collapse:collapse;
-  font-size:14px;
-  background:#fff;
-  box-shadow:0 10px 22px rgba(0,0,0,.06);
-  border-radius:10px;
-  overflow:hidden;
+.ks-trainer-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: #fff;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.ks-trainer-table thead th{
-  background:#22375d;
-  color:#fff;
-  text-transform:uppercase;
-  font-size:12px;
-  letter-spacing:.12em;
-  text-align:left;
-  padding:14px 18px;
+.ks-trainer-table thead th {
+  background: #22375d;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-align: left;
+  padding: 14px 18px;
 }
 
-.ks-trainer-table tbody th{
-  width:220px;
-  color:#6b7280;
-  font-weight:600;
-  text-transform:uppercase;
-  font-size:12px;
-  letter-spacing:.06em;
-  padding:14px 18px;
-  border-bottom:1px solid #eef0f3;
-  background:#fafbfc;
+.ks-trainer-table tbody th {
+  width: 220px;
+  color: #6b7280;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 14px 18px;
+  border-bottom: 1px solid #eef0f3;
+  background: #fafbfc;
 }
 
-.ks-trainer-table tbody td{
-  padding:14px 18px;
-  border-bottom:1px solid #eef0f3;
+.ks-trainer-table tbody td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #eef0f3;
 }
 
 .ks-trainer-table tbody tr:last-child th,
-.ks-trainer-table tbody tr:last-child td{
-  border-bottom:none;
+.ks-trainer-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 /* ------------------------------
    Custom Dropdown (UI-Ersatz) – NUR Layout
    Styling (hover/focus/open/colors/rotation/glow) kommt global aus dropdown-hover.css
 ---------------------------------*/
-.ks-dd{
+.ks-dd {
   position: relative;
   width: 100%;
   max-width: 100%;
 }
 
-.ks-dd__btn{
+.ks-dd__btn {
   height: 50px;
   padding: 0 14px 0 16px;
   width: 100%;
@@ -197,7 +212,7 @@
   line-height: 1;
 }
 
-.ks-dd__label{
+.ks-dd__label {
   flex: 1;
   min-width: 0;
   overflow: hidden;
@@ -205,7 +220,7 @@
   white-space: nowrap;
 }
 
-.ks-dd__panel{
+.ks-dd__panel {
   position: absolute;
   left: 0;
   right: 0;
@@ -219,7 +234,7 @@
   display: none;
 }
 
-.ks-dd__option{
+.ks-dd__option {
   padding: 0 14px 0 16px;
   height: var(--row-h);
   display: flex;
@@ -231,42 +246,48 @@
 }
 
 /* Anzeige des Panels bei open bleibt (Layout/Visibility) */
-.ks-dd[aria-expanded="true"] .ks-dd__panel{
+.ks-dd[aria-expanded="true"] .ks-dd__panel {
   display: block;
 }
 
 /* ------------------------------
    Breakpoints
 ---------------------------------*/
-@media (max-width: 1280px){
-  .ks-trainer-grid{
+@media (max-width: 1280px) {
+  .ks-trainer-grid {
     gap: 28px;
-    grid-template-columns: 200px var(--photo-w) minmax(0,1fr);
+    grid-template-columns: 200px var(--photo-w) minmax(0, 1fr);
   }
 }
 
-@media (max-width: 1024px){
-  .ks-trainer-grid{
+@media (max-width: 1024px) {
+  .ks-trainer-grid {
     gap: 24px;
-    grid-template-columns: 200px 260px minmax(0,1fr);
+    grid-template-columns: 200px 260px minmax(0, 1fr);
   }
 }
 
-@media (max-width: 900px){
-  .ks-trainer-wrap .container{
+@media (max-width: 900px) {
+  .ks-trainer-wrap .container {
     padding-inline: 16px !important;
   }
 
-  .ks-trainer-grid{
+  .ks-trainer-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
 
-  .ks-trainer-col--left{ order: 1; }
-  .ks-trainer-col--photo{ order: 2; }
-  .ks-trainer-col--right{ order: 3; }
+  .ks-trainer-col--left {
+    order: 1;
+  }
+  .ks-trainer-col--photo {
+    order: 2;
+  }
+  .ks-trainer-col--right {
+    order: 3;
+  }
 
-  .ks-trainer-photo{
+  .ks-trainer-photo {
     width: min(100%, 340px);
     height: clamp(260px, 52vw, var(--photo-h));
     margin-inline: auto;
@@ -274,6 +295,20 @@
 }
 
 /* Optional: auf sehr kleinen Screens nicht verschieben */
-@media (max-width: 600px){
-  .ks-trainer-hero .ks-kicker{ top: 0; }
+@media (max-width: 600px) {
+  .ks-trainer-hero .ks-kicker {
+    top: 0;
+  }
+}
+
+/* ✅ Wenn viel Bildschirmhöhe (z.B. Zoom 25%): Restfläche hellgrau wie Kontaktbereich */
+body.page-id-356,
+body.page-id-356 .site-main {
+  margin-top: 0 !important;
+}
+
+/* Nur Franchise-Seite: Titel verstecken */
+.page-id-356 .entry-title,
+.page-id-356 h1.entry-title {
+  display: none !important;
 }

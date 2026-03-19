@@ -1,0 +1,88 @@
+@layer pages {
+  .ks-agb {
+    width: 100%;
+  }
+
+  .ks-agb__head {
+    padding-top: 28px;
+    padding-bottom: 18px;
+  }
+
+  .ks-agb__title {
+    margin: 0;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    font-size: clamp(32px, 3.2vw, 54px);
+  }
+
+  .ks-agb__body {
+    padding-top: 12px;
+    padding-bottom: 32px;
+  }
+
+  .ks-agb__content {
+    width: 100%;
+    line-height: 1.75;
+    color: #111;
+  }
+
+  .ks-agb__content h1,
+  .ks-agb__content h2,
+  .ks-agb__content h3,
+  .ks-agb__content h4 {
+    line-height: 1.25;
+    color: #0f172a;
+    margin: 22px 0 10px;
+  }
+
+  .ks-agb__content h2 {
+    font-size: 26px;
+    font-weight: 900;
+  }
+
+  .ks-agb__content h3 {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+  }
+
+  .ks-agb__content h4 {
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .ks-agb__content p {
+    margin: 0 0 14px;
+    color: #1f2937;
+  }
+
+  .ks-agb__content a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .ks-agb__content a:hover {
+    opacity: 0.9;
+  }
+
+  .ks-agb__content ul,
+  .ks-agb__content ol {
+    margin: 0 0 14px;
+    padding-left: 18px;
+    color: #1f2937;
+  }
+
+  .ks-agb__content li {
+    margin: 6px 0;
+  }
+
+  .ks-agb__hr {
+    border: 0;
+    height: 1px;
+    background: #e5e7eb;
+    margin: 22px 0;
+  }
+}

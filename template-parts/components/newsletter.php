@@ -1,46 +1,72 @@
+
+
+
 <?php
 /**
- * Template Part: Newsletter (nur Markup)
- * JS:  assets/js/ks-newsletter.js  (unverändert)
- * CSS: assets/css/ks-newsletter.css
+ * Template Part: Newsletter
+ * Wird via Shortcode [ks_newsletter] gerendert.
+ * JS bleibt unverändert (ks-newsletter.js).
  */
 ?>
-<section class="ks-newsletter-wrap">
-  <div class="container">
-    <div id="newsletter" class="newsletter-box" role="region" aria-labelledby="newsletter-title">
-      <h3 id="newsletter-title">NEWSLETTER</h3>
 
-      <p>
-        Unser kostenloser Newsletter informiert Sie über aktuelle Kurse und Angebote der
-        Münchner Fußballschule. Die Daten werden selbstverständlich nicht an Dritte
-        weitergegeben. Eine Abmeldung ist jederzeit möglich.
-      </p>
+<section id="ksNewsletter" class="ks-newsletter-wrap" aria-label="Newsletter">
+  <div class="newsletter-box">
+    <div class="ks-kicker">NEWSLETTER</div>
 
-      <form id="ksNewsletterForm" class="newsletter-form" novalidate>
-        <label for="nlEmail" class="screen-reader-text">Ihre E-Mail</label>
+    <h3>Newsletter</h3>
+    <p>
+      Jetzt kostenlos Newsletter informieren. Siehe aktuelle News und Angebote der Münchner
+      Fußballschule. Du kannst wenn du möchtest jederzeit nicht an News teilnehmen. Eine
+      Abmeldung ist jederzeit möglich.
+    </p>
 
-        <div class="newsletter-row">
-          <input
-            id="nlEmail"
-            name="email"
-            type="email"
-            required
-            autocomplete="email"
-            placeholder="Ihre E-Mail"
-          />
-          <!-- Honeypot (muss leer bleiben) -->
-          <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" />
-          <button type="submit" class="newsletter-btn">Anmelden</button>
-        </div>
+    <form id="ksNewsletterForm" class="ks-news-form" novalidate>
+      <div class="newsletter-row">
+       
 
-        <small
-          id="ksNewsletterMsg"
-          class="ks-news-msg"
-          aria-live="polite"
-          aria-atomic="true"></small>
-      </form>
-    </div>
+        <!-- Honeypot (Spam-Schutz) -->
+<label class="hp" aria-hidden="true">
+  Nicht ausfüllen
+  <input type="text" name="website" tabindex="-1" autocomplete="off">
+</label>
+
+
+        <!-- Feld: gleiche Struktur/Klassen wie Directory-Controls -->
+        <label class="ks-field">
+          <span>E-Mail</span>
+          <div class="ks-field__control ks-field__control--select">
+            <input
+              id="ksNewsletterEmail"
+              type="email"
+              name="email"
+              inputmode="email"
+              autocomplete="email"
+              placeholder="Ihre E-Mail"
+              required
+            >
+          </div>
+        </label>
+
+        <!-- Button: wie Home/Offers -->
+        <button type="submit" class="ks-btn ks-btn--dark">
+          Anmelden
+        </button>
+      </div>
+
+      <span id="ksNewsletterMsg" class="ks-news-msg" role="status" aria-live="polite"></span>
+    </form>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
 
 

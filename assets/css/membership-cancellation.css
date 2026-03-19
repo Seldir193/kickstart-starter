@@ -1,0 +1,181 @@
+.membership-cancellation {
+  padding: 40px 16px;
+}
+
+.membership-cancellation__card {
+  max-width: 760px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
+}
+
+.membership-cancellation__badge {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #111827;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.membership-cancellation__title {
+  margin: 0 0 12px;
+  font-size: 32px;
+  line-height: 1.2;
+  color: #111827;
+}
+
+.membership-cancellation__intro {
+  margin: 0 0 24px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
+.membership-cancellation__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.membership-cancellation__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.membership-cancellation__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.membership-cancellation__field--hidden {
+  display: none;
+}
+
+.membership-cancellation__label,
+.membership-cancellation__legend {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.membership-cancellation__input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  background: #fff;
+  color: #111827;
+  font-size: 15px;
+}
+
+.membership-cancellation__input:focus {
+  outline: none;
+  border-color: #111827;
+}
+
+.membership-cancellation__choices {
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.membership-cancellation__choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #111827;
+  font-size: 15px;
+}
+
+.membership-cancellation__hint {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.membership-cancellation__actions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.membership-cancellation__button {
+  border: 0;
+  border-radius: 12px;
+  background: #111827;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 22px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.membership-cancellation__button:hover {
+  background: #1f2937;
+  transform: translateY(-1px);
+}
+
+.membership-cancellation__button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+  transform: none;
+}
+
+.membership-cancellation__result {
+  border-radius: 16px;
+  padding: 16px 18px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.membership-cancellation__result--hidden {
+  display: none;
+}
+
+.membership-cancellation__result--loading {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.membership-cancellation__result--success {
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.membership-cancellation__result--error {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.membership-cancellation__end-date {
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+@media (max-width: 767px) {
+  .membership-cancellation__card {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .membership-cancellation__title {
+    font-size: 26px;
+  }
+
+  .membership-cancellation__grid {
+    grid-template-columns: 1fr;
+  }
+}

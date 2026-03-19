@@ -1,0 +1,57 @@
+{
+  "brand": "Dortmunder Fussballschule",
+  "apply_email": "fussballschule@selcuk-kocyigit.de",
+  "positions": [
+    {
+      "title": "KURS ANTRENÖRÜ",
+      "requirements": [
+        "(Genç) antrenörlük deneyimi",
+        "DFB antrenör lisansı veya lisans hedefi",
+        "Hareketlilik (tercihen ehliyet/araç)",
+        "Çocuklar ve velilerle çalışmaktan keyif almak",
+        "DFS felsefesiyle özdeşleşmek",
+        "Takım çalışması, detaylara dikkat ve öğrenmeye açıklık",
+        "Antrenmanları gösterebilecek futbol temel becerileri",
+        "Temiz genişletilmiş adli sicil kaydı (Führungszeugnis)"
+      ],
+      "tasks": [
+        "DFS programlarının yürütülmesi (futbol anaokulu, gelişim antrenmanı, kamp desteği)",
+        "Gelişim antrenmanlarını bağımsız yürütmek",
+        "Antrenmanların hazırlanması ve uygulanması (DFS felsefesine göre)"
+      ],
+      "benefits": [
+        "Kendi antrenörlük felsefen",
+        "Esnek çalışma saatleri",
+        "Esnek çalışma modelleri: mini-job’dan kadroluya",
+        "Antrenman kıyafeti ve ekipman",
+        "Harika bir ekipte keyifli çalışma ortamı",
+        "Kurum içi antrenör eğitimleri",
+        "Perspektif: tam zamanlı istihdam"
+      ]
+    },
+    {
+      "title": "KAMP ANTRENÖRÜ",
+      "requirements": [
+        "Çocuklar ve velilerle çalışmaktan keyif almak",
+        "Okul tatillerinde esneklik ve zaman",
+        "DFS felsefesiyle özdeşleşmek",
+        "Tercihen (genç) antrenörlük deneyimi",
+        "Takım çalışması, detaylara dikkat ve öğrenmeye açıklık",
+        "Antrenmanları gösterebilecek futbol temel becerileri",
+        "Temiz genişletilmiş adli sicil kaydı (Führungszeugnis)"
+      ],
+      "tasks": [
+        "DFS futbol kamplarının yürütülmesi",
+        "Antrenmanların hazırlanması ve uygulanması (DFS felsefesine göre)",
+        "Kamp süresince çocukların gözetimi (konaklama yok)"
+      ],
+      "benefits": [
+        "Kendi antrenörlük felsefen",
+        "Çalışma kapsamı: haftada 30 saat",
+        "Antrenman kıyafeti ve ekipman",
+        "Harika bir ekipte keyifli çalışma ortamı",
+        "Perspektif: kadrolu pozisyon"
+      ]
+    }
+  ]
+}

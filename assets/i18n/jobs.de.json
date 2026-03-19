@@ -1,0 +1,57 @@
+{
+  "brand": "Dortmunder Fussballschule",
+  "apply_email": "fussballschule@selcuk-kocyigit.de",
+  "positions": [
+    {
+      "title": "KURSTRAINER:IN",
+      "requirements": [
+        "(Jugend)-Trainererfahrung",
+        "DFB – Trainerlizenz bzw. Anstreben einer Lizenz",
+        "Mobilität, idealerweise mit Führerschein/Auto",
+        "Spaß und Freude im Umgang mit Kindern und Eltern",
+        "Identifikation mit der besonderen DFS Philosophie",
+        "Teamfähigkeit, Auge für das Detail und Lernbereitschaft",
+        "Fußballerische Grundkompetenzen, um Übungen vorzumachen",
+        "Einwandfreies erweitertes Führungszeugnis"
+      ],
+      "tasks": [
+        "Durchführung von Leistungsangeboten der DFS (Fußballkindergarten, Fördertraining, Campbetreuung)",
+        "Eigenständiges Leiten von Förderkursen",
+        "Vorbereitung und Durchführung von Trainings (nach DFS Philosophie)"
+      ],
+      "benefits": [
+        "Eigene Trainingsphilosophie",
+        "Flexible Arbeitszeiten",
+        "Flexible Anstellungsverhältnisse: Von Minijob bis Festanstellung",
+        "Trainingskleidung und Material",
+        "Angenehme Arbeitsatmosphäre in einem tollen Team",
+        "Interne Trainerfortbildungen",
+        "Perspektive: Vollzeitanstellung"
+      ]
+    },
+    {
+      "title": "CAMPTRAINER:IN",
+      "requirements": [
+        "Spaß und Freude im Umgang mit Kindern und Eltern",
+        "Flexibilität und Zeit während der Schulferien",
+        "Identifikation mit der besonderen DFS Philosophie",
+        "Bestenfalls Erfahrung als (Jugend)-Trainer",
+        "Teamfähigkeit, Auge für das Detail und Lernbereitschaft",
+        "Fußballerische Grundkompetenzen, um Übungen vorzumachen",
+        "Einwandfreies erweitertes Führungszeugnis"
+      ],
+      "tasks": [
+        "Durchführung von Fußballcamps der DFS",
+        "Vorbereiten und Durchführen von Trainingseinheiten (nach DFS Philosophie)",
+        "Betreuung der Kinder während des Camps (keine Übernachtungen)"
+      ],
+      "benefits": [
+        "Eigene Trainingsphilosophie",
+        "Arbeitsumfang 30 Std. pro Woche",
+        "Trainingskleidung und Material",
+        "Angenehme Arbeitsatmosphäre in einem tollen Team",
+        "Perspektive: Festanstellung"
+      ]
+    }
+  ]
+}

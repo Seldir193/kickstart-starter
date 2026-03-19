@@ -1,0 +1,50 @@
+/* assets/css/ks-faq.css */
+
+#faq-page-hero {
+  margin-bottom: 0;
+}
+
+.ks-faq-page__acc {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* FAQ auf der FAQ-Seite: volle Breite, keine rechte Spalte */
+.ks-faq-page--full {
+  display: block !important;
+}
+
+.ks-faq-page--full .ks-title-wrap {
+  margin-bottom: 18px;
+}
+
+@media (max-width: 900px) {
+  #faq.ks-sec {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+@layer pages {
+  body.page-faq :is(h1.entry-title, .entry-title) {
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body.page-faq
+    :is(
+      main#primary.container.content,
+      #primary.container.content,
+      #primary,
+      .site-main
+    ) {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  body.page-faq .entry-content > :first-child {
+    margin-top: 0 !important;
+  }
+}

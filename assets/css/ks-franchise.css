@@ -1,508 +1,48 @@
+/* ==========================================================================
+   KS Franchise (assets/css/ks-franchise.css) – BEREINIGT
+   - Shared Styles (Grid/Icons/H3/P) liegen jetzt in ks-utils.css
+   - Hier bleiben nur Franchise-spezifische Sachen: Full-Bleed, Intro, FAQ-Layout,
+     Worldmap, kleine Feinheiten
+   ========================================================================== */
 
-/* Abschnitt-Hintergründe etc. werden über Utility-Klassen gelöst.
-   Falls du individuelle Feinheiten brauchst, hier ergänzen. */
-
-/* Beispiel-Feinschliff (optional): */
-#fr-intro .ks-kicker{letter-spacing:.02em}
-#fr-benefits img{object-fit:cover}
-
-
-
-/* === Franchise Vorteile (3er-Grid) === */
-.ks-section--soft{background:#f5f6f7}
-
-.ks-title-wrap{position:relative;text-align:center;margin-bottom:32px}
-.ks-title-wrap .ks-dir__title{position:relative;z-index:2}
-
-
-.ks-benefits{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:56px;text-align:center;align-items:start
-}
-.ks-benefit__icon{width:140px;max-width:60%;height:auto;margin:0 auto 16px;display:block}
-.ks-benefit h3{
-  margin:6px 0 10px;font-size:28px;line-height:1.2;
-  text-transform:uppercase;letter-spacing:.02em
-}
-.ks-benefit p{
-  margin:0 auto;max-width:420px;color:#7d8288;line-height:1.6
+/* Feinschliff */
+#fr-intro .ks-kicker {
+  letter-spacing: 0.02em;
 }
 
-/* responsive */
-@media (max-width: 980px){
-  .ks-benefits{grid-template-columns:1fr;gap:36px}
-  .ks-title-wrap::after{font-size:96px}
+/* Icons in Benefits: niemals cover (sonst wirkt es beschnitten) */
+#fr-benefits img {
+  object-fit: contain;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Franchise FAQ: Plus/Minus Icons über CSS-Variablen vom Abschnitt */
-#fr-faq .ks-acc summary::marker{ content:""; }
-#fr-faq .ks-acc summary::-webkit-details-marker{ display:none; }
-
-#fr-faq .ks-acc summary{
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-  cursor:pointer; font-weight:700; color:#111;
-  padding:8px 0;
-  position:relative;
-  padding-right:40px;              /* Platz fürs Icon rechts */
-}
-
-#fr-faq .ks-acc summary::after{
-  content:"";
-  position:absolute; right:0; top:50%; transform:translateY(-50%);
-  width:20px; height:20px;
-  background: var(--acc-plus) center/contain no-repeat;
-  opacity:.9;
-}
-
-#fr-faq .ks-acc[open] summary::after{
-  background: var(--acc-minus) center/contain no-repeat;
-}
-
-#fr-faq .ks-acc{ border-bottom:1px dotted #e5e7eb; padding:10px 0; }
-#fr-faq .ks-acc__body{ padding:8px 0 2px; color:#374151; padding-inline: 12px; }
-#fr-faq .ks-acc summary:focus-visible{ outline:2px solid #0ea5e9; outline-offset:2px; }
-#fr-faq .ks-acc summary:hover{ color:#0f172a; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ===== Franchise: FAQ Layout (zentrierter Titel + Watermark + Logo rechts) ===== */
-.fr-faq{
-  display:grid;
-  grid-template-columns: 1.15fr .85fr; /* links Akkordeon | rechts Bild/Logo */
-  gap:24px;
-  align-items:start;
-  position:relative;
-}
-
-/* Titelblock über beide Spalten, mittig, mit großem Watermark 'FAQ' */
-.fr-faq > .ks-title-wrap{
-  grid-column:1 / -1;
-  text-align:center;
-  margin-bottom:18px;
-  position:relative;
-}
-.fr-faq > .ks-title-wrap .ks-kicker{
-  margin:0 0 6px;
-  letter-spacing:.12em;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-.fr-faq > .ks-title-wrap::after{
-  content:attr(data-bgword);
-  position:absolute;left:50%;top:-80px;transform:translateX(-50%);
-  font-weight:900;
-  letter-spacing:.03em;
-  font-size: clamp(72px, 16vw, 180px);
-  color:#000;opacity:.05;pointer-events:none;z-index:1;white-space:nowrap;
-}
-
-
-
-
-
-/* Nur Franchise-Seite: Titel verstecken */
+/* Franchise: Seite Titel verstecken */
 .page-id-397 .entry-title,
 .page-id-307 h1.entry-title {
-    display: none !important;
+  display: none !important;
 }
 
+/* ==========================================================
+   FRANCHISE – FULL BLEED (Hero + alle Sections darunter)
+   ========================================================== */
 
-
-
-/* Rechte Spalte (Logo/Grafik) */
-.fr-faq__image{
-  position:relative;
-  border-radius:12px;
-  overflow:hidden;
-  margin:0;
-  background:#0f172a;                /* sanfter Kontrast wie im Beispiel */
-  display:grid;
-  place-items:center;
-  min-height:280px;
-  z-index:1;                         /* über dem Watermark */
-}
-.fr-faq__image img{
-  max-width:82%;
-  height:auto;
-  display:block;
-  filter: drop-shadow(0 16px 36px rgba(0,0,0,.28));
+#fr-hero,
+#fr-intro,
+#fr-worldwide,
+#fr-worldwide-map,
+#fr-benefits,
+#fr-faq {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
-/* Responsive */
-@media (max-width: 900px){
-  .fr-faq{ grid-template-columns:1fr; }
-  .fr-faq > .ks-title-wrap{ margin-bottom:12px; }
-  .fr-faq > .ks-title-wrap::after{
-    font-size: clamp(64px, 28vw, 140px);
-    top:-6px;
-  }
-  .fr-faq__image img{ max-width:68%; }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ===================== FR-FAQ: Icon + Abstände ===================== */
-/* Konfiguration */
-#fr-faq{
-  --acc-mask-size: 62%;  /* Symbolgröße relativ zu 30x30 (55–70%) */
-  --acc-size: 30px;      /* Durchmesser Icon/Kreis */
-  --acc-gap: 14px;       /* Abstand Icon zur rechten Kante */
-}
-
-/* Platz für das Icon rechts freihalten (Text kollidiert nie mit dem Icon) */
-#fr-faq .ks-acc summary{
-  position: relative;
-  padding-right: calc(var(--acc-size) + var(--acc-gap) + 6px);
-}
-
-/* Gemeinsame Basis der Pseudo-Elemente */
-#fr-faq .ks-acc summary::before,
-#fr-faq .ks-acc summary::after{
-  content:"";
-  position:absolute; 
-  right: var(--acc-gap); 
-  top:50%; 
-  transform:translateY(-50%);
-  width: var(--acc-size); 
-  height: var(--acc-size); 
-  pointer-events:none;
-}
-
-/* NORMAL: Symbol per Maske in SCHWARZ (kein Kreis) */
-#fr-faq .ks-acc summary::after{
-  background-image: none !important; /* kein Bild-Background */
-  -webkit-mask: var(--acc-plus) center / var(--acc-mask-size) no-repeat !important;
-          mask: var(--acc-plus) center / var(--acc-mask-size) no-repeat !important;
-  background-color:#000 !important;  /* schwarz im Normalzustand */
-  z-index:1;
-}
-#fr-faq .ks-acc[open] summary::after{
-  -webkit-mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
-          mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
-  background-color:#000 !important;
-}
-
-/* HOVER: unten schwarzer Kreis, oben dasselbe Symbol in WEISS */
-#fr-faq .ks-acc summary:hover::before{
-  background:#000; 
-  border-radius:50%; 
-  z-index:0;
-}
-#fr-faq .ks-acc summary:hover::after{
-  /* gleiche Maske/Größe wie normal, nur Farbe tauschen */
-  -webkit-mask: var(--acc-plus) center / var(--acc-mask-size) no-repeat !important;
-          mask: var(--acc-plus) center / var(--acc-mask-size) no-repeat !important;
-  background-color:#fff !important; 
-  z-index:1;
-}
-#fr-faq .ks-acc[open] summary:hover::after{
-  -webkit-mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
-          mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
-  background-color:#fff !important; 
-  z-index:1;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* === FAQ Hover: Text + Icon deutlich sichtbar (Franchise) === */
-#fr-faq .ks-acc summary{
-  /* weiche Animationen + größere Hoverfläche */
-   border: 1px solid transparent;
-  border-radius: 10px; 
-  padding-block: 12px;
-  padding-inline: 12px;
-  transition: color .18s ease, background-color .18s ease;
-}
-
-#fr-faq .ks-acc summary::after{
-  transition: transform .18s ease, opacity .18s ease, filter .18s ease, background-image .18s ease;
-}
-
-/* Hover: Text dunkler + dezenter Hintergrund */
-#fr-faq .ks-acc summary:hover{
-  color: #0f172a;
-  background-color: rgba(15, 23, 42, .04);
-}
-
-/* Hover: Icon skaliert + leicht heller (sichtbarer Effekt auch ohne Hover-Asset) */
-#fr-faq .ks-acc summary:hover::after{
-  transform: translateY(-50%) scale(1.18);
-  opacity: 1;
-  /* macht PNG sichtbar heller/kontrastreicher, falls du keine Hover-Datei hast */
-  filter: brightness(1.2) contrast(1.1) saturate(1.1);
-  /* falls Hover-Asset vorhanden, wird es automatisch genommen */
-  background-image: var(--acc-plus-hov, var(--acc-plus));
-}
-
-/* Geöffnet: MINUS-Variante – gleicher Hover-Effekt */
-#fr-faq .ks-acc[open] summary::after{
-  background: var(--acc-minus) center/contain no-repeat;
-}
-#fr-faq .ks-acc[open] summary:hover::after{
-  background-image: var(--acc-minus-hov, var(--acc-minus));
-  transform: translateY(-50%) scale(1.18);
-   filter: brightness(1.2) contrast(1.1) saturate(1.1); 
-}
-
-/* Tastatur: Fokus sichtbar lassen */
-#fr-faq .ks-acc summary:focus-visible{
-  outline: 2px solid #0ea5e9;
-  outline-offset: 2px;
-}
-
-/* Falls Motion reduziert: keine Animationen */
-@media (prefers-reduced-motion: reduce){
-  #fr-faq .ks-acc summary,
-  #fr-faq .ks-acc summary::after{ transition: none; }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* === FAQ (Franchise): Persistenter Hover-Look nur wenn geöffnet ([open]) === */
-
-/* Text/Hintergrund wie Hover, wenn offen */
-#fr-faq .ks-acc[open] summary{
-  color:#0f172a;
-  background-color: rgba(15, 23, 42, .04);
-}
-
-/* schwarzer Kreis unter dem Icon */
-#fr-faq .ks-acc[open] summary::before{
-  background:#000;
-  border-radius:50%;
-  z-index:0;
-}
-
-/* Minus-Icon als weiße Maske (persistiert) */
-#fr-faq .ks-acc[open] summary::after{
-  background-image: none !important;
-  -webkit-mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
-          mask: var(--acc-minus) center / var(--acc-mask-size) no-repeat !important;
-  background-color:#fff !important;
-  transform: translateY(-50%) scale(1);
-  opacity:1 !important;
-  filter:none !important;
-}
-
-/* optional: bei echtem Hover leicht vergrößern */
-#fr-faq .ks-acc[open] summary:hover::after{
-  transform: translateY(-50%) scale(1.18);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ===============================
-   Full-Bleed Bänder (Franchise)
-   =============================== */
-
-/* Sicherheit gegen horizontales Scrollen */
-/*html, body { overflow-x: clip; }*/
-
-/* 0) Gemeinsame Container-Politur für die Franchise-Sections */
 #fr-hero .ks-dir__hero-inner,
-#fr-intro > .container,
+#fr-intro > .ks-split,
 #fr-worldwide > .container,
+#fr-worldwide-map > .container,
 #fr-benefits > .container,
 #fr-faq > .container {
-  max-width: 1440px; /* wie auf home */
+  max-width: 1440px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -510,72 +50,416 @@
   padding-right: 16px;
 }
 
-/* 1) HERO vollbreit – Hintergrund via --hero-img (kommt bei dir bereits inline) */
-#fr-hero {
+/* ==========================================================
+   Franchise Section Backgrounds (nur wenn du sie wirklich nutzt)
+   ========================================================== */
+
+.ks-section--soft {
+  background: var(--light-gray);
+}
+
+/* Falls du den Watermark-Top-Abstand nur auf Franchise willst */
+.ks-wm-top-80 .ks-title-wrap::after {
+  top: -80px;
+}
+
+/* ==========================================================
+   FRANCHISE FAQ – Layout + Icon Look (Franchise-only)
+   ========================================================== */
+
+/* 2-Spalten-Layout: links Akkordeon | rechts Bild */
+.fr-faq {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+  align-items: start;
   position: relative;
-  width: 100vw;
-  margin-left:  calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  background:var(--light-gray);
-  /* Fallback-Farbe wie auf home-hero */
-  /*background: var(--hero-img) center/cover no-repeat, #f7f7f7;*/
 }
 
-/* 2) „Wer wir sind“ (fr-intro) – falls neutraler Hintergrund bleiben soll:
-      NUR aus dem Container ausbrechen, aber keine Farbe ändern */
+/* Titel über beide Spalten, Watermark via ks-utils (.ks-title-wrap::after) */
+.fr-faq > .ks-title-wrap {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 18px;
+}
 
-
-/* 3) WORLDWIDE (heller Block) – Full-Bleed Grau/Weiß per ::before */
-#fr-worldwide {
+/* Rechte Spalte (Logo/Grafik) */
+.fr-faq__image {
   position: relative;
-  z-index: 0;
-}
-#fr-worldwide::before {
-  content: "";
-  position: absolute;
-  top: 0; bottom: 0;
-  left: 50%; right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  z-index: -1;
-  background: #ffffff; /* war bei dir hell – identisch beibehalten */
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 0;
+  background: #0f172a;
+  display: grid;
+  place-items: center;
+  min-height: 280px;
+  z-index: 1;
 }
 
-/* 4) BENEFITS – sanfter Abschnitt-Hintergrund (wie home values) */
-#fr-benefits {
-  position: relative;
-  z-index: 0;
-}
-#fr-benefits::before {
-  content: "";
-  position: absolute;
-  top: 0; bottom: 0;
-  left: 50%; right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  z-index: -1;
-  background: #fafafa; /* hellgrau wie auf home values */
+.fr-faq__image img {
+  max-width: 82%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.28));
 }
 
-/* 5) FAQ (Franchise) – Full-Bleed, Inhalt bleibt zentriert */
+/* ---------- Franchise FAQ: Plus/Minus Mask-Icons ---------- */
+
+/* Konfiguration (nur Franchise FAQ) */
 #fr-faq {
-  position: relative;
-  z-index: 0;
-}
-#fr-faq::before {
-  content: "";
-  position: absolute;
-  top: 0; bottom: 0;
-  left: 50%; right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  z-index: -1;
-  background: #f3f4f6; /* wie #faq auf home */
+  --acc-mask-size: 62%;
+  --acc-size: 30px;
+  --acc-gap: 14px;
 }
 
-/* 6) (Optional) Einheitliche vertikale Innenabstände für die Full-Bleed-Bänder */
-#fr-worldwide,
-#fr-benefits,
-#fr-faq {
-  padding-block: clamp(24px, 4vw, 56px);
+/* Marker ausblenden */
+#fr-faq .ks-acc summary::marker {
+  content: "";
+}
+#fr-faq .ks-acc summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Summary: Platz rechts fürs Icon + Hoverfläche */
+#fr-faq .ks-acc summary {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  font-weight: 700;
+  color: #111;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 12px 12px;
+
+  padding-right: calc(var(--acc-size) + var(--acc-gap) + 6px);
+  transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+/* Pseudo-Elemente als Kreis + Icon */
+#fr-faq .ks-acc summary::before,
+#fr-faq .ks-acc summary::after {
+  content: "";
+  position: absolute;
+  right: var(--acc-gap);
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--acc-size);
+  height: var(--acc-size);
+  pointer-events: none;
+}
+
+/* Icon (Maske) – normal schwarz */
+#fr-faq .ks-acc summary::after {
+  background-image: none !important;
+  -webkit-mask: var(--acc-plus) center/var(--acc-mask-size) no-repeat !important;
+  mask: var(--acc-plus) center/var(--acc-mask-size) no-repeat !important;
+  background-color: #000 !important;
+  z-index: 1;
+  transition: transform 0.18s ease, opacity 0.18s ease,
+    background-color 0.18s ease;
+}
+
+/* Open: Minus (normal schwarz) */
+#fr-faq .ks-acc[open] summary::after {
+  -webkit-mask: var(--acc-minus) center/var(--acc-mask-size) no-repeat !important;
+  mask: var(--acc-minus) center/var(--acc-mask-size) no-repeat !important;
+  background-color: #000 !important;
+}
+
+/* Hover: schwarzer Kreis + weißes Icon */
+#fr-faq .ks-acc summary:hover {
+  color: #0f172a;
+  background-color: rgba(15, 23, 42, 0.04);
+}
+
+#fr-faq .ks-acc summary:hover::before {
+  background: #000;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+#fr-faq .ks-acc summary:hover::after {
+  background-color: #fff !important;
+  transform: translateY(-50%) scale(1.18);
+}
+
+/* Persistenter Hover-Look, wenn offen */
+#fr-faq .ks-acc[open] summary {
+  color: #0f172a;
+  background-color: rgba(15, 23, 42, 0.04);
+}
+
+#fr-faq .ks-acc[open] summary::before {
+  background: #000;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+#fr-faq .ks-acc[open] summary::after {
+  background-color: #fff !important;
+  transform: translateY(-50%) scale(1);
+  opacity: 1 !important;
+}
+
+/* Body */
+#fr-faq .ks-acc {
+  border-bottom: 1px dotted #e5e7eb;
+  padding: 10px 0;
+}
+
+#fr-faq .ks-acc__body {
+  padding: 8px 0 2px;
+  padding-inline: 12px;
+  color: #374151;
+}
+
+/* Fokus */
+#fr-faq .ks-acc summary:focus-visible {
+  outline: 2px solid #0ea5e9;
+  outline-offset: 2px;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  #fr-faq .ks-acc summary,
+  #fr-faq .ks-acc summary::after {
+    transition: none;
+  }
+}
+
+/* Responsive: FAQ Layout */
+@media (max-width: 900px) {
+  .fr-faq {
+    grid-template-columns: 1fr;
+  }
+  .fr-faq > .ks-title-wrap {
+    margin-bottom: 12px;
+  }
+  .fr-faq__image img {
+    max-width: 68%;
+  }
+}
+
+/* ==========================================================
+   DFS WORLDWIDE – World Map + Tooltips
+   ========================================================== */
+
+.fr-worldwide__wrap {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+}
+
+.fr-worldwide__loading {
+  padding: 14px 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.fr-worldwide__stage svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 440px;
+}
+
+/* Standard-Look */
+.fr-worldwide__stage [data-iso] {
+  fill: #e6e9ef;
+  stroke: #ffffff;
+  stroke-width: 0.8;
+}
+
+/* Länder mit Standorten */
+.fr-worldwide__stage .frw__has {
+  fill: #0b2a4a !important;
+  cursor: pointer;
+}
+
+/* Hover + Active */
+.fr-worldwide__stage .frw__has:hover,
+.fr-worldwide__stage .frw__active {
+  fill: #d11f2b !important;
+}
+
+.fr-worldwide__stage .frw__has,
+.fr-worldwide__stage .frw__active,
+.fr-worldwide__stage [data-iso] {
+  transition: fill 140ms ease, filter 140ms ease;
+}
+
+/* Tooltips */
+.fr-worldwide__tooltip,
+.fr-worldwide__tooltip2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+
+  padding: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+
+.fr-worldwide__tooltip {
+  width: 280px;
+}
+.fr-worldwide__tooltip2 {
+  width: 340px;
+  z-index: 11;
+}
+
+.fr-worldwide__tooltip.is-open,
+.fr-worldwide__tooltip2.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Tooltip 1: Liste */
+.frw__t1Title {
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #0f172a;
+}
+.frw__t1Sub {
+  font-size: 12px;
+  opacity: 0.75;
+  margin-top: 2px;
+  color: #0f172a;
+}
+.frw__t1List {
+  margin-top: 10px;
+  display: grid;
+  gap: 6px;
+}
+.frw__cityItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.04);
+  cursor: pointer;
+}
+.frw__cityItem:hover {
+  background: rgba(15, 23, 42, 0.08);
+}
+.frw__cityName {
+  font-size: 13px;
+  font-weight: 800;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.frw__cityCount {
+  min-width: 24px;
+  height: 20px;
+  border-radius: 999px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+  font-weight: 900;
+  color: #0f172a;
+  background: rgba(15, 23, 42, 0.1);
+}
+
+/* Tooltip 2: Details */
+.frw__t2Title {
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #0f172a;
+}
+.frw__t2Sub {
+  font-size: 12px;
+  opacity: 0.75;
+  margin-top: 2px;
+  color: #0f172a;
+}
+.frw__t2Body {
+  margin-top: 10px;
+  display: grid;
+  gap: 10px;
+
+  max-height: 260px;
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.frw__t2Body::-webkit-scrollbar {
+  width: 8px;
+}
+.frw__t2Body::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.16);
+  border-radius: 999px;
+}
+
+.frw__card {
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 12px;
+  padding: 10px;
+  background: #f8fafc;
+}
+
+.frw__name {
+  font-weight: 900;
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #0f172a;
+}
+
+.frw__row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 8px;
+  font-size: 12px;
+  padding: 4px 0;
+}
+
+.frw__row strong {
+  opacity: 0.75;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.frw__row div {
+  color: #111827;
+  overflow-wrap: anywhere;
+}
+
+/* Mobile: Tooltips unter die Karte (statisch) */
+@media (max-width: 860px) {
+  .fr-worldwide__tooltip,
+  .fr-worldwide__tooltip2 {
+    position: static;
+    width: auto;
+    opacity: 1;
+    pointer-events: auto;
+    margin: 10px;
+    transform: none !important;
+  }
+
+  .fr-worldwide__stage svg {
+    max-height: none;
+  }
 }

@@ -1,3 +1,6 @@
+
+
+
 <?php
 /**
  * Zentrale FAQ-Helfer
@@ -85,6 +88,10 @@ if (!function_exists('ks_get_faq_items')) {
         }
         return [];
 
+
+  
+
+
       /* ===========================================================
        * 3) FRANCHISE – FAQ-Texte aus inc/shortcodes/faq-texts-franchise.de.php
        *    akzeptiert:
@@ -159,9 +166,10 @@ if (!function_exists('ks_render_faq_section')) {
 
     ob_start(); ?>
     <section id="<?php echo esc_attr($args['section_id']); ?>"
-      class="ks-sec ks-py-56"
-      style="--acc-plus:url('<?php echo esc_url($theme_uri . '/assets/img/home/plus.png'); ?>');
-             --acc-minus:url('<?php echo esc_url($theme_uri . '/assets/img/home/minus.png'); ?>');">
+    
+  class="ks-sec ks-py-56">
+
+      
 
       <div class="<?php echo esc_attr($args['wrapper_class']); ?>">
 
@@ -180,6 +188,7 @@ if (!function_exists('ks_render_faq_section')) {
               <summary><?php echo esc_html($question); ?></summary>
               <div class="ks-acc__body">
                 <?php echo nl2br( esc_html($answer) ); ?>
+                
               </div>
             </details>
           <?php endforeach; ?>
@@ -208,6 +217,15 @@ if (!function_exists('ks_render_faq_section')) {
     return ob_get_clean();
   }
 }
+
+
+
+
+
+
+
+
+
 
 
 

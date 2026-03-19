@@ -16,6 +16,34 @@
     display: none !important;
   }
 
+  #ksNewsletter .ks-field__control--select {
+    position: relative;
+    height: 40px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid #e3e6e8;
+  }
+
+  #ksNewsletter .ks-field__control--select:hover {
+    border-color: var(--text, #111827);
+  }
+
+  #ksNewsletter .ks-field__control--select:focus-within {
+    outline: 0;
+    border-color: var(--brand-navy);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-navy) 22%, #fff);
+  }
+
+  #ksNewsletter .ks-field__control--select input[type="email"] {
+    width: 100%;
+    height: 38px;
+    border: 0;
+    background: transparent;
+    padding: 0 14px;
+    font: inherit;
+    outline: none;
+  }
+
   /* ------------------------------------------------------------------------ */
   /* Layout: Map | Liste                                                       */
   /* ------------------------------------------------------------------------ */
@@ -579,4 +607,42 @@
     border-color: var(--brand-navy);
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-navy) 22%, #fff);
   }
+}
+
+:root {
+  --ks-scrollbar-thumb: rgba(0, 0, 0, 0.28);
+  --ks-scrollbar-thumb-hover: rgba(0, 0, 0, 0.38);
+  --ks-scrollbar-track: transparent;
+  --ks-scrollbar-size: 8px;
+}
+
+.ks-dir__listwrap,
+.book-embed {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ks-scrollbar-thumb) var(--ks-scrollbar-track);
+}
+
+.ks-dir__listwrap::-webkit-scrollbar,
+.book-embed::-webkit-scrollbar {
+  width: var(--ks-scrollbar-size);
+  height: var(--ks-scrollbar-size);
+}
+
+.ks-dir__listwrap::-webkit-scrollbar-track,
+.book-embed::-webkit-scrollbar-track {
+  background: var(--ks-scrollbar-track);
+}
+
+.ks-dir__listwrap::-webkit-scrollbar-thumb,
+.book-embed::-webkit-scrollbar-thumb {
+  background: var(--ks-scrollbar-thumb);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.ks-dir__listwrap::-webkit-scrollbar-thumb:hover,
+.book-embed::-webkit-scrollbar-thumb:hover {
+  background: var(--ks-scrollbar-thumb-hover);
+  background-clip: content-box;
 }

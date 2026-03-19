@@ -118,7 +118,7 @@
   .site-main > .entry,
   .site-main > .page {
     /*margin-block:auto;*/
-    margin-block: auto;
+    margin-block: 0;
     width: 100%;
 
     padding-top: 0;
@@ -177,6 +177,11 @@
 
   body:not(.home) .site-main {
     padding-bottom: 0; /* falls irgendwo noch Padding dran hängt */
+  }
+
+  /* Contact: Section muss volle Breite haben (sonst shrink-to-fit wegen .site-main align-items:center) */
+  .site-main > section#kontakt {
+    width: 100%;
   }
 }
 
@@ -249,4 +254,58 @@ html {
    nicht noch einen extra Bottom-Abstand macht */
 .entry-content > *:last-child {
   margin-bottom: 0 !important;
+}
+
+/* --- WP Header Nav Hover (Profi-Standard) --- */
+.site-header .main-nav .menu > li > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  text-decoration: none;
+
+  /* Profi: smooth curve + nicht zu kurz */
+  transition-property: background-color;
+  transition-duration: 240ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* sehr üblich */
+  transition-delay: 70ms; /* ✨ pro: verhindert nervöses flackern */
+}
+
+/* Hover nur für NICHT-aktive Menüpunkte UND NICHT wenn focus/focus-visible */
+.site-header
+  .main-nav
+  .menu
+  > li:not(.current-menu-item):not(.current_page_item)
+  > a:not(:focus):not(:focus-visible):hover {
+  background: rgba(0, 0, 0, 0.04);
+
+  /* Profi: beim echten Hover keine Verzögerung mehr */
+  transition-delay: 0ms;
+}
+
+/* Sicherheitsnetz: wenn Link fokussiert ist, kein Hover-Background */
+.site-header .main-nav .menu > li > a:focus:hover,
+.site-header .main-nav .menu > li > a:focus-visible:hover {
+  background: transparent;
+}
+
+/* Focus */
+.site-header .main-nav .menu > li > a:focus {
+  outline: none;
+}
+.site-header .main-nav .menu > li > a:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* Für dunkle Seiten lieber: */
+/* mix-blend-mode: screen; */
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .site-header .main-nav .menu > li > a,
+  .site-header .brand {
+    transition: none;
+  }
 }

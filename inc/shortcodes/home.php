@@ -40,15 +40,15 @@ if (!function_exists('ks_register_home_shortcode')) {
 
 
 
-$dd_hover_css = $theme_dir . '/assets/css/dropdown-hover.css';
-if (file_exists($dd_hover_css)) {
-  wp_enqueue_style(
-    'ks-dropdown-hover',
-    $theme_uri . '/assets/css/dropdown-hover.css',
-    ['kickstart-style', 'ks-utils', 'ks-home'],
-    filemtime($dd_hover_css)
-  );
-}
+// $dd_hover_css = $theme_dir . '/assets/css/dropdown-hover.css';
+// if (file_exists($dd_hover_css)) {
+//   wp_enqueue_style(
+//     'ks-dropdown-hover',
+//     $theme_uri . '/assets/css/dropdown-hover.css',
+//     ['kickstart-style', 'ks-utils', 'ks-home'],
+//     filemtime($dd_hover_css)
+//   );
+// }
 
 
 
@@ -127,6 +127,8 @@ if (file_exists($hero_js)) {
       $ball_img      = $theme_uri . '/assets/img/home/mfs.png';
       $portal_bg     = $theme_uri . '/assets/img/home/mfs.png';
       $portal_laptop = $theme_uri . '/assets/img/home/mfs.png';
+
+     
     
 
       wp_add_inline_style(
@@ -139,9 +141,9 @@ if (file_exists($hero_js)) {
 
 
       // Platzhalter-Icons – gern ersetzen
-      $icon1 = $theme_uri . '/assets/img/home/soccer.svg';
-      $icon2 = $theme_uri . '/assets/img/home/know_how.svg';
-      $icon3 = $theme_uri . '/assets/img/home/football-game.svg';
+      $icon1 = $theme_uri . '/assets/img/home/dfs-home-1.png';
+      $icon2 = $theme_uri . '/assets/img/home/dfs-home-4.png';
+      $icon3 = $theme_uri . '/assets/img/home/dfs-home-5.png';
       $werte_target = home_url('/');
 
       /* ==== Video (oEmbed) ==== */
@@ -193,59 +195,11 @@ if (file_exists($hero_js)) {
         ],
       ];
 
-    
-      /* ==== TEAM Daten serverseitig laden ==== */
-      $next_base = function_exists('ks_next_base') ? ks_next_base() : '';
-      // Kandidaten: öffentliche API, dann Admin-API
-      $team_api_candidates = [];
-      if ($next_base) {
-        $team_api_candidates[] = trailingslashit($next_base) . 'api/coaches?limit=48';
-        $team_api_candidates[] = trailingslashit($next_base) . 'api/admin/coaches?limit=48';
-      }
-      $coaches = [];
-      foreach ($team_api_candidates as $api) {
-        $res = wp_remote_get($api, ['timeout'=>10, 'headers'=>['Accept'=>'application/json']]);
-        if (!is_wp_error($res) && wp_remote_retrieve_response_code($res) === 200) {
-          $json = json_decode(wp_remote_retrieve_body($res), true);
-          if (isset($json['items']) && is_array($json['items'])) {
-            $coaches = $json['items'];
-            break;
-          } elseif (is_array($json)) {
-            $coaches = $json;
-            break;
-          }
-        }
-      }
+  
+ $coaches      = ks_get_coaches(48);
+$trainer_url  = ks_get_trainer_url();
+ks_enqueue_team_assets();
 
-      /* ==== Team-Karussell-JS (separate Datei, optional) ==== */
-      $team_js = $theme_dir . '/assets/js/ks-team.js';
-      if (file_exists($team_js)) {
-        wp_enqueue_script('ks-team', $theme_uri . '/assets/js/ks-team.js', [], filemtime($team_js), true);
-      }
-
-      // Helper zum Normalisieren der Bild-URL (http/https ODER data:image/ erlauben)
-      if (!function_exists('ks_normalize_next_img')) {
-        function ks_normalize_next_img($u) {
-          $u = trim((string)$u);
-          if ($u === '') return '';
-
-          // Absolut (http/https) ODER Base64-Data-URL → direkt zurückgeben
-          if (preg_match('~^(https?://|data:image/)~i', $u)) {
-            return $u;
-          }
-
-          // führendes "admin/" entfernen
-          $u = preg_replace('#^/?admin/#i', '', $u);
-
-          // relative Pfade an NEXT-Base anhängen
-          $base = function_exists('ks_next_base') ? rtrim(ks_next_base(), '/') : '';
-          if ($base) {
-            if ($u[0] !== '/') $u = '/'.$u;
-            return $base.$u;
-          }
-          return $u;
-        }
-      }
 
       /* ==== Markup ==== */
       ob_start(); ?>
@@ -407,104 +361,13 @@ if (file_exists($hero_js)) {
 
 
 
+<?php
+include $theme_dir . '/inc/partials/shared/team-section.php';
+?>
 
 
 
-      <!-- 5) Team -->
-      <section id="team" class="ks-sec ks-py-56 ks-bg-white">
-        <div class="container container--1400">
-        
-          <div class="ks-title-wrap" data-bgword="TEAM">
-  <div class="ks-kicker">Wir sind für dich da</div>
-  <h2 class="ks-dir__title">Unser Team</h2>
-</div>
-
-          <div class="ks-team-wrap">
-            <button class="ks-team__nav ks-team__nav--prev" aria-label="Zurück">
-              <img src="<?php echo esc_url($theme_uri . '/assets/img/home/left.png'); ?>" alt="" width="28" height="28" />
-            </button>
-
-            <div id="ksTeamCarousel" class="ks-team">
-
-              <?php
-                // Trainer-Seite finden (erst per Slug, dann per Shortcode), Fallback /trainer/
-                $trainer_url = '';
-                $page_by_path = get_page_by_path('trainer');
-                if ($page_by_path) {
-                  $trainer_url = get_permalink($page_by_path->ID);
-                }
-                if (!$trainer_url) {
-                  $pages = get_posts([
-                    'post_type'      => 'page',
-                    's'              => '[ks_trainer_profile]',
-                    'posts_per_page' => 1,
-                  ]);
-                  if (!empty($pages)) {
-                    $trainer_url = get_permalink($pages[0]->ID);
-                  }
-                }
-                if (!$trainer_url) {
-                  $trainer_url = home_url('/trainer/');
-                }
-              ?>
-
-              <ul class="ks-team__track" aria-live="polite">
-                <?php if (!empty($coaches)): ?>
-                  <?php foreach ($coaches as $c):
-                    $first = isset($c['firstName']) ? $c['firstName'] : '';
-                    $last  = isset($c['lastName'])  ? $c['lastName']  : '';
-                    $full  = trim(($c['name'] ?? '') ?: trim($first . ' ' . $last));
-                    if ($full === '') $full = 'Trainer';
-
-                    $slug = isset($c['slug']) && $c['slug'] !== '' ? $c['slug'] : sanitize_title($full);
-
-                    // Bild-URL robust normalisieren (http/https ODER data:image/)
-                    $rawImg = isset($c['photoUrl']) ? $c['photoUrl'] : '';
-                    $img    = $rawImg ? ks_normalize_next_img($rawImg) : '';
-                    if ($img === '') $img = $fallback_img;
-
-                    $role = isset($c['position']) && $c['position'] ? $c['position'] : 'Trainer';
-
-                    // Link auf Trainer-Seite mit Query ?c=<slug>
-                    $href = add_query_arg('c', rawurlencode($slug), $trainer_url);
-                  ?>
-                    <li class="ks-team__card">
-                      <a href="<?php echo esc_url($href); ?>">
-                        <img
-                          class="ks-team__img"
-                          src="<?php echo esc_attr($img); ?>"
-                          alt="<?php echo esc_attr($full); ?>"
-                          loading="lazy"
-                          decoding="async" />
-                      </a>
-                      <div class="ks-team__meta">
-                        <div class="ks-team__role"><?php echo esc_html($role); ?></div>
-                        <div class="ks-team__name"><a href="<?php echo esc_url($href); ?>"><?php echo esc_html($full); ?></a></div>
-                      </div>
-                    </li>
-                  <?php endforeach; ?>
-                <?php else: ?>
-                  <li class="ks-team__card">
-                    <div class="ks-team__meta">
-                      <div class="ks-team__name">Keine Trainer gefunden.</div>
-                    </div>
-                  </li>
-                <?php endif; ?>
-              </ul>
-            </div>
-
-            <button class="ks-team__nav ks-team__nav--next" aria-label="Weiter">
-              <img src="<?php echo esc_url($theme_uri . '/assets/img/home/right.png'); ?>" alt="" width="28" height="28" />
-            </button>
-          </div>
-        </div>
-
-
-      </section>
-
-
-
-
+    
 
 
 
@@ -606,7 +469,12 @@ echo do_shortcode('[ks_whatsapp_locations]');
 
 
       return ob_get_clean();
-    });
+    }
+  
+  
+  
+  
+  );
 
   }
 

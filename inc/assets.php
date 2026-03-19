@@ -1,3 +1,5 @@
+
+
 <?php
 add_action('wp_enqueue_scripts', function () {
 
@@ -254,10 +256,206 @@ if (file_exists($dir_js)) {
       'api' => 'http://127.0.0.1:5000/api/public/newsletter',
     ]);
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // ---------------------------------------
+  // Conditional Assets (nur wenn Shortcode auf der Seite)
+  // ---------------------------------------
+  $has_shortcode = function (string $tag): bool {
+    if (!is_singular()) return false;
+    global $post;
+    if (!$post) return false;
+    return has_shortcode($post->post_content ?? '', $tag);
+  };
+ // 1) Dropdown Hover (nur für Seiten, die es brauchen)
+  if ($has_shortcode('ks_home') || $has_shortcode('ks_franchise')) {
+    $dd_hover_css = get_stylesheet_directory() . '/assets/css/dropdown-hover.css';
+    if (file_exists($dd_hover_css) && !wp_style_is('ks-dropdown-hover', 'enqueued')) {
+      wp_enqueue_style(
+        'ks-dropdown-hover',
+        get_stylesheet_directory_uri() . '/assets/css/dropdown-hover.css',
+        ['kickstart-style', 'ks-utils'], // ks-home ist evtl. nicht global - daher minimal sicher
+        filemtime($dd_hover_css)
+      );
+    }
+  }
+
+
+// 3) ks-dir.css auch für Trainer (damit Hero identisch ist wie Offers)
+// if ($has_shortcode('ks_trainer_profile')) {
+//   $ks_dir_css = get_stylesheet_directory() . '/assets/css/ks-dir.css';
+//   if (file_exists($ks_dir_css) && !wp_style_is('ks-dir', 'enqueued')) {
+//     wp_enqueue_style(
+//       'ks-dir',
+//       get_stylesheet_directory_uri() . '/assets/css/ks-dir.css',
+//       ['kickstart-style', 'ks-utils'],
+//       filemtime($ks_dir_css)
+//     );
+//   }
+// }
+
+ 
+  // 2) Franchise Worldmap Script (nur auf Franchise-Seite)
+  if ($has_shortcode('ks_franchise')) {
+    $wm_js = get_stylesheet_directory() . '/assets/js/ks-franchise-worldmap.js';
+    if (file_exists($wm_js) && !wp_script_is('ks-franchise-worldmap', 'enqueued')) {
+      wp_enqueue_script(
+        'ks-franchise-worldmap',
+        get_stylesheet_directory_uri() . '/assets/js/ks-franchise-worldmap.js',
+        [],
+        filemtime($wm_js),
+        true
+      );
+    }
+  }
+
+
+
+
+// Contact CSS (global)
+$contact_css = get_stylesheet_directory() . '/assets/css/ks-contact.css';
+if (file_exists($contact_css)) {
+  wp_enqueue_style(
+    'ks-contact',
+    get_stylesheet_directory_uri() . '/assets/css/ks-contact.css',
+    ['kickstart-style', 'ks-utils'], // nutzt dein System
+    filemtime($contact_css)
+  );
+}
+
+
+
+
+// Contact Form JS (Validation + sent auto-hide)
+$contact_js = get_stylesheet_directory() . '/assets/js/ks-contact-form.js';
+if (file_exists($contact_js)) {
+  wp_enqueue_script(
+    'ks-contact-form',
+    get_stylesheet_directory_uri() . '/assets/js/ks-contact-form.js',
+    [],
+    filemtime($contact_js),
+    true
+  );
+}
+
+
+$sb_path = get_stylesheet_directory() . '/assets/css/ks-scrollbars.css';
+if (file_exists($sb_path)) {
+  wp_enqueue_style(
+    'ks-scrollbars',
+    get_stylesheet_directory_uri() . '/assets/css/ks-scrollbars.css',
+    ['ks-utils'],
+    filemtime($sb_path)
+  );
+}
+
+
+
+
+
+add_action('wp_enqueue_scripts', function () {
+  if (is_admin()) return;
+
+  if (!is_page('impressum')) return;
+
+  $file = get_stylesheet_directory() . '/assets/css/ks-impressum.css';
+  if (file_exists($file)) {
+    wp_enqueue_style(
+      'ks-impressum',
+      get_stylesheet_directory_uri() . '/assets/css/ks-impressum.css',
+      ['kickstart-style', 'ks-utils'],
+      filemtime($file)
+    );
+  }
+}, 40);
+
+
+
+// add_action('wp_enqueue_scripts', function () {
+//   if (is_admin()) return;
+
+//   // slug: /datenschutz/
+//   if (!is_page('datenschutz')) return;
+
+//   $file = get_stylesheet_directory() . '/assets/css/ks-privacy.css';
+//   if (file_exists($file)) {
+//     wp_enqueue_style(
+//       'ks-privacy',
+//       get_stylesheet_directory_uri() . '/assets/css/ks-privacy.css',
+//       ['kickstart-style', 'ks-utils'],
+//       filemtime($file)
+//     );
+//   }
+// }, 40);
+
+
+
+add_action('wp_enqueue_scripts', function () {
+  if (is_admin()) return;
+
+  if (!is_page(['datenschutz'])) return;
+
+  $file = get_stylesheet_directory() . '/assets/css/ks-privacy.css';
+  if (file_exists($file)) {
+    wp_enqueue_style(
+      'ks-privacy',
+      get_stylesheet_directory_uri() . '/assets/css/ks-privacy.css',
+      ['kickstart-style', 'ks-utils'],
+      filemtime($file)
+    );
+  }
+}, 40);
+
+
+
+
+add_action('wp_enqueue_scripts', function () {
+  if (is_admin()) return;
+
+  // slug: /agb/
+  if (!is_page('agb')) return;
+
+  $file = get_stylesheet_directory() . '/assets/css/ks-agb.css';
+  if (file_exists($file)) {
+    wp_enqueue_style(
+      'ks-agb',
+      get_stylesheet_directory_uri() . '/assets/css/ks-agb.css',
+      ['kickstart-style', 'ks-utils'],
+      filemtime($file)
+    );
+  }
+}, 40);
+
+
+
+
+//   $file = get_stylesheet_directory() . '/assets/css/ks-faq.css';
+//   if (file_exists($file)) {
+//     wp_enqueue_style(
+//       'ks-faq',
+//       get_stylesheet_directory_uri() . '/assets/css/ks-faq.css',
+//       ['ks-home'],
+//       filemtime($file)
+//     );
+//   }
+// }, 40);
+
+
 });
-
-
-
 
 
 
