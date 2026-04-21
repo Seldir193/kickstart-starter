@@ -43,8 +43,10 @@
           aria-haspopup="menu"
           aria-expanded="false"
           aria-label="Change language"
+           data-i18n-attr="aria-label"
+  data-i18n="language.label"
         >
-          <span class="language-switcher__label">English</span>
+          <span class="language-switcher__label" data-i18n="language.en">English</span>
         
 
           <span class="ks-selectbox__chevron" aria-hidden="true">
@@ -64,6 +66,7 @@
             role="menuitemradio"
             aria-checked="false"
             data-language="de"
+             data-i18n="language.de"
           >
             Deutsch
           </button>
@@ -74,6 +77,7 @@
             role="menuitemradio"
             aria-checked="true"
             data-language="en"
+             data-i18n="language.en"
           >
             English
           </button>
@@ -84,6 +88,7 @@
             role="menuitemradio"
             aria-checked="false"
             data-language="tr"
+             data-i18n="language.tr"
           >
             Türkçe
           </button>
