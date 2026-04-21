@@ -238,31 +238,51 @@ if (file_exists($hero_split_abs)) {
   </div>
 </div>
 </section>
-      <section id="wer-wir-sind" class="ks-sec ks-py-48">
-        <div class="container ks-split">
-          <div>
-            <div class="ks-kicker">Unsere Philosophie</div>
-            <h2 class="ks-dir__title">Die Dortmunder Fussball Schule</h2>
-            <p>
-              Wir begleiten Kinder, Jugendliche und Vereine mit einem klaren Trainingsansatz,
-              der sportliche Entwicklung, Freude am Spiel und eine positive Lernumgebung verbindet.
-            </p>
-            <p>
-              Unser Konzept vereint strukturierte Inhalte, moderne Trainingsorganisation und
-              individuelle Förderung, damit jede Spielerin und jeder Spieler mit Sicherheit die
-              nächsten Schritte gehen kann.
-            </p>
-            <p>
-              Neben Technik und Spielverständnis legen wir großen Wert auf Teamgeist,
-              Verantwortung und eine nachhaltige Entwicklung auf und neben dem Platz.
-            </p>
-            <p class="ks-mt-16">
-              <a class="ks-btn" href="<?php echo esc_url($about_url); ?>">Mehr erfahren</a>
-            </p>
-          </div>
-          <div class="ks-vid ratio"><?php echo $video_embed; ?></div>
+      
+
+<section id="wer-wir-sind" class="ks-sec ks-py-48 ks-home-about">
+  <div class="container ks-home-about__grid">
+    <div class="ks-home-about__content">
+      <div class="ks-kicker">Unsere Philosophie</div>
+      <h2 class="ks-dir__title">Die Dortmunder Fussballschule</h2>
+
+      <p class="ks-home-about__lead">
+        Wir begleiten Kinder, Jugendliche und Vereine mit einem klaren Trainingsansatz,
+        der sportliche Entwicklung, Freude am Spiel und eine positive Lernumgebung verbindet.
+      </p>
+
+      <div class="ks-home-about__points">
+        <div class="ks-home-about__point">
+          <strong>Strukturiert</strong>
+          <span>Klare Inhalte, moderne Trainingsorganisation und verständliche Abläufe.</span>
         </div>
-      </section>
+        <div class="ks-home-about__point">
+          <strong>Individuell</strong>
+          <span>Förderung mit Blick auf Alter, Niveau und Entwicklung.</span>
+        </div>
+      </div>
+
+      <div class="ks-home-about__actions">
+        <a class="ks-btn" href="<?php echo esc_url($about_url); ?>">Mehr erfahren</a>
+      </div>
+    </div>
+
+    <div class="ks-home-about__media">
+      <div class="ks-home-about__badge">Einblick in unsere Arbeit</div>
+      <div class="ks-vid ratio"><?php echo $video_embed; ?></div>
+
+      <p class="ks-home-about__caption">
+    Einblicke in unsere Arbeit mit Kindern, Jugendlichen und Vereinen.
+  </p>
+
+  <div class="ks-home-about__chips" aria-label="Schwerpunkte">
+    <span class="ks-home-about__chip">Kinder &amp; Jugendliche</span>
+    <span class="ks-home-about__chip">Individuelle Förderung</span>
+    <span class="ks-home-about__chip">Vereine &amp; Teams</span>
+  </div>
+    </div>
+  </div>
+</section>
 
       <section id="werte" class="ks-sec ks-py-56 ks-home-values">
         <div class="container">
