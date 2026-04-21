@@ -1,9 +1,9 @@
 @layer base {
-  :root {
+  /* :root {
     --brand: #0ea5e9;
     --text: #222;
     --ks-container: 1440px;
-    /* Header & Mega */
+   
     --header-height: 72px;
     --header-bg: #fff;
     --mega-gap: 8px;
@@ -13,11 +13,66 @@
     --mega-link: #666;
     --brand-navy: #0f1e2e;
     --dark-gray: #f5f5f5;
-    /* WP-Adminbar-Offset */
+    
     --wp-admin-bar-h: 0px;
     --light-gray: #fafafafa;
     --accent-red: #d71019;
+  }  */
+
+  :root {
+    --brand: #0ea5e9;
+    --ks-container: 1440px;
+
+    --color-white: #ffffff;
+    --color-black: #111111;
+    --color-text: #222222;
+    --color-text-strong: #111111;
+    --color-text-nav: #333333;
+    --color-text-muted: #666666;
+    --color-text-soft: #6b7280;
+
+    --color-surface-page: #f5f5f5;
+    --color-surface-soft: #fafafa;
+    --color-surface-warm: #fbf6df;
+    --color-surface-header: #ffffff;
+    --color-surface-mega: #ffffff;
+
+    --color-border-soft: #eaeaea;
+    --color-border-light: rgba(17, 17, 17, 0.05);
+    --color-border-subtle: rgba(17, 17, 17, 0.08);
+    --color-border-strong: rgba(17, 17, 17, 0.14);
+
+    --color-overlay-dark: rgba(0, 0, 0, 0.45);
+    --color-hover-soft: rgba(0, 0, 0, 0.04);
+
+    --brand-gold: #fde100;
+    --brand-gold-700: #e5c200;
+    --brand-navy: #0f1e2e;
+    --brand-black: #111111;
+    --brand-white: #ffffff;
+    --brand-muted: #6b7280;
+    --accent-red: #d71019;
+
+    --news-accent: var(--brand-gold);
+    --news-title: var(--brand-black);
+    --news-muted: var(--brand-muted);
+    --news-line: var(--brand-black);
+    --home-background: var(--color-surface-soft);
+
+    --text: var(--color-text);
+    --header-height: 72px;
+    --header-bg: var(--color-surface-header);
+    --mega-gap: 8px;
+    --mega-z: 1000;
+    --mega-backdrop: var(--color-overlay-dark);
+    --mega-bg: var(--color-surface-mega);
+    --mega-link: var(--color-text-muted);
+    --dark-gray: var(--color-surface-page);
+    --light-gray: var(--color-surface-soft);
+
+    --wp-admin-bar-h: 0px;
   }
+
   .admin-bar {
     --wp-admin-bar-h: 32px;
   }
@@ -40,7 +95,8 @@
       Ubuntu,
       Cantarell,
       Arial;
-    background: #f5f5f5;
+    /* background: #f5f5f5; */
+    background: var(--color-surface-page);
     color: var(--text);
   }
   h1,
