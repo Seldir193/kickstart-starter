@@ -1,250 +1,67 @@
-/* ==========================================================================
-   KS Home (assets/css/ks-home.css) — BEREINIGT
-   - Shared Werte/Vorteile-Styles sind jetzt in ks-utils.css
-   - Hier bleibt nur Home-spezifisch: Hero, Tabs, News, Team, Split/Ratio, Buttons, Werte-Hover
-   ========================================================================== */
-
-:root {
-  --ks-container: 1440px;
-
-  --brand-gold: #fde100;
-  --brand-gold-700: #e5c200;
-  --brand-navy: #0f1e2e;
-
-  --brand-black: #111111;
-  --brand-white: #ffffff;
-  --brand-muted: #6b7280;
-
-  --light-gray: #fafafa;
-
-  --news-accent: var(--brand-gold);
-  --news-title: var(--brand-black);
-  --news-muted: var(--brand-muted);
-  --news-line: var(--brand-black);
-
-  --home-background: var(--light-gray);
-}
-
-/* ========================= */
-/* HERO (mit Tabs & Slides)  */
-/* ========================= */
-
-.ks-home-hero {
-  position: relative;
-  padding: clamp(24px, 6vw, 56px) 0;
-  background-color: #f5f5f5;
-
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-}
-
-/* Titel (re-used) */
 .ks-dir__title {
   font-weight: 800;
-  font-size: 52px;
+  font-size: clamp(36px, 4vw, 52px);
   color: var(--text);
-  line-height: 1.05;
-  margin: 8px 0 12px;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin: 10px 0 14px;
 }
-
-.ks-home-hero::after {
-  content: attr(data-watermark);
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 6%;
-  text-align: center;
-  font-weight: 900;
-  letter-spacing: 0.02em;
-  font-size: clamp(64px, 22vw, 240px);
-  color: rgba(0, 0, 0, 0.04);
-  pointer-events: none;
-}
-
-/* Tabs oben – zentriert im Container */
-.ks-hero-tabs {
-  position: relative;
-  display: flex;
-  gap: 14px;
-  align-items: center;
-  z-index: 1;
-
-  max-width: var(--ks-container);
-  width: 100%;
-  margin: 0 auto 10px;
-
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-.ks-hero-tabs::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  background: #f5f5f5;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.ks-hero-tab {
-  appearance: none;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  text-decoration: none;
-
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-
-  color: #111;
-  opacity: 0.55;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* Label/Num dürfen nicht grau bleiben */
-.ks-hero-tab__label,
-.ks-hero-tab__num {
-  color: inherit !important;
-}
-
-.ks-hero-tab__num {
-  border-top: 2px solid currentColor;
-  padding: 0.1em 0.5em;
-  line-height: 1;
-}
-
-/* Hover/Fokus */
-.ks-hero-tab:hover,
-.ks-hero-tab:focus-visible {
-  color: var(--text, #222);
-  opacity: 1;
-}
-
-/* Active */
-.ks-hero-tab.is-active {
-  opacity: 1;
-}
-
-/* Slides */
-.ks-hero-slides {
-  position: relative;
-}
-.ks-hero-slide {
-  display: none;
-}
-.ks-hero-slide.is-active {
-  display: block;
-  background: var(--light-gray);
-}
-
-/* Grid im Hero */
-.ks-home-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 32px;
-  align-items: center;
-}
-
-/* Slide-Container exakt gleiche Breite wie Container */
-#home-hero .ks-hero-slide > .container {
-  max-width: var(--ks-container) !important;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-.ks-home-hero__title {
-  font-size: clamp(36px, 6vw, 72px);
-  line-height: 1.05;
-  font-weight: 800;
-  margin: 8px 0 12px;
-}
-
-.ks-home-hero__lead {
-  color: #374151;
-  max-width: 60ch;
-}
-
-.ks-home-hero__actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 18px;
-}
-
-.ks-home-hero__img {
-  width: 100%;
-  height: clamp(340px, 50vw, 560px);
-  object-fit: contain;
-  object-position: bottom right;
-  display: block;
-}
-
-/* ============== */
-/* „WERTE“-Block  */
-/* ============== */
 
 .ks-home-values {
-  background: #fafafa;
-
+  position: relative;
+  background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
 }
 
-/* Titel/Kicker bei Werte mittig */
 .ks-home-values .ks-title-wrap,
 #werte .ks-title-wrap {
   text-align: center;
 }
+
 .ks-home-values .ks-dir__title,
 #werte .ks-dir__title {
   text-align: center;
   margin-inline: auto;
 }
 
-/* Werte: Home-spezifischer Hover (bleibt hier!) */
 .ks-values .ks-value {
+  position: relative;
   text-decoration: none;
   cursor: pointer;
 }
 
 .ks-value .icon-wrap {
-  display: inline-block;
-  transform: translateY(10px);
-  transition: transform 0.35s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(8px);
+  transition:
+    transform var(--transition-base),
+    filter var(--transition-base);
 }
+
 .ks-value:hover .icon-wrap {
   transform: translateY(0);
+  filter: saturate(1.06);
 }
 
 .ks-value .icon-wrap img {
-  transition: transform 0.35s ease;
-}
-.ks-value:hover .icon-wrap img {
-  transform: translateY(-3px);
+  transition: transform var(--transition-base);
 }
 
-/* ====================== */
-/*  News: full-bleed Band */
-/* ====================== */
+.ks-value:hover .icon-wrap img {
+  transform: translateY(-4px) scale(1.02);
+}
 
 #news {
   position: relative;
-  background: #fafafa;
+  background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  padding-block: clamp(32px, 6vw, 72px);
+  padding-block: clamp(40px, 6vw, 84px);
 }
 
 #news > .container {
@@ -260,51 +77,36 @@
 
 .ks-news {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(16px, 2.4vw, 36px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 36px);
   align-items: start;
 }
 
 .ks-news__item {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .ks-news__thumb img {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 .ks-news__meta {
-  opacity: 0.6;
+  opacity: 0.62;
   font-size: 0.85rem;
   letter-spacing: 0.06em;
 }
-
-@media (max-width: 1024px) {
-  .ks-news {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 640px) {
-  .ks-news {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ================= */
-/* TEAM CAROUSEL     */
-/* ================= */
 
 .ks-team-wrap {
   position: relative;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin-top: 80px;
 }
 
@@ -324,26 +126,16 @@
 }
 
 .ks-team__card {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  background: #ffffff;
+  border: 1px solid rgba(17, 17, 17, 0.06);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
   overflow: hidden;
 }
 
-/* .ks-team__img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4/5;
-  object-fit: cover;
-  background: #f3f4f6;
-  transition: filter 0.25s ease;
-} */
-
-/* Fix: Team-Bilder nicht quetschen */
-
 .ks-team__img {
   width: 100% !important;
-  height: auto !important; /* <- wichtig */
+  height: auto !important;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   display: block;
@@ -351,19 +143,19 @@
   background: #f3f4f6;
 }
 
-/* Nur fürs Fallback-Avatar: nicht croppen, sondern sauber zentrieren */
 .ks-team__img[src*="/assets/img/avatar.png"] {
   object-fit: contain !important;
-  background: #f3f4f6; /* optional, passt zu deinem Stil */
-  padding: 18px; /* optional: macht das Icon “luftiger” */
+  background: #f3f4f6;
+  padding: 18px;
 }
+
 .ks-team__card:hover .ks-team__img,
 .ks-team__card a:hover .ks-team__img {
-  filter: brightness(0.78);
+  filter: brightness(0.84);
 }
 
 .ks-team__meta {
-  padding: 12px 14px 16px;
+  padding: 14px 16px 18px;
 }
 
 .ks-team__role {
@@ -381,40 +173,27 @@
 
 .ks-team__nav {
   appearance: none;
-  border: 0;
-  background: transparent;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  background: rgba(255, 255, 255, 0.9);
   cursor: pointer;
   display: inline-grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  transition: background-color 0.18s ease;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .ks-team__nav:hover {
-  background: rgba(15, 23, 42, 0.06);
+  background: #ffffff;
+  border-color: rgba(17, 17, 17, 0.12);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-1px);
 }
-
-@media (max-width: 1200px) {
-  .ks-team__track {
-    grid-auto-columns: calc(33.333% - 10px);
-  }
-}
-@media (max-width: 900px) {
-  .ks-team__track {
-    grid-auto-columns: calc(50% - 8px);
-  }
-}
-@media (max-width: 560px) {
-  .ks-team__track {
-    grid-auto-columns: 100%;
-  }
-}
-
-/* ================= */
-/* Split Layout      */
-/* ================= */
 
 .ks-split {
   display: grid;
@@ -423,20 +202,14 @@
   align-items: center;
 }
 
-@media (max-width: 1024px) {
-  .ks-split {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* 16:9 Ratio-Wrapper */
 .ratio {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   background: #000;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
+  box-shadow: var(--shadow-medium);
 }
 
 .ratio iframe,
@@ -449,30 +222,101 @@
   display: block;
 }
 
-/* ================= */
-/* Buttons (Gold)    */
-/* ================= */
-
 .ks-btn {
   --btn-border: var(--brand-gold);
   --btn-fill: var(--brand-black);
   --btn-text: var(--brand-black);
   --btn-text-h: var(--brand-white);
-
-  --btn-radius: 8px;
+  --btn-radius: 999px;
   --btn-bw: 2px;
-
   position: relative;
-  display: inline-block;
-  padding: 10px 18px;
-  font-weight: 700;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 22px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: var(--btn-bw) solid var(--btn-border);
+  border-radius: var(--btn-radius);
+  background: transparent;
+  color: var(--btn-text);
+  text-decoration: none;
+  font-weight: 800;
   line-height: 1;
+  letter-spacing: 0.02em;
+  transform: translateY(0);
+  transition:
+    color 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    transform 0.28s ease;
+}
+.ks-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--btn-fill);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ks-btn:hover::before,
+.ks-btn:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.ks-btn:hover,
+.ks-btn:focus-visible {
+  color: var(--btn-text-h);
+  border-color: transparent;
+  box-shadow: 0 10px 24px rgba(17, 17, 17, 0.12);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.ks-btn.ks-btn--dark {
+  --btn-border: var(--brand-gold);
+  --btn-fill: var(--brand-black);
+  --btn-text: var(--brand-black);
+  --btn-text-h: var(--brand-white);
+  background: var(--brand-gold);
+  cursor: pointer;
+}
+
+.ks-btn.ks-btn--light {
+  --btn-border: var(--brand-gold);
+  --btn-fill: var(--brand-black);
+  --btn-text: var(--brand-black);
+  --btn-text-h: var(--brand-white);
+  background: transparent;
+}
+
+/* .ks-btn {
+  --btn-border: var(--brand-gold);
+  --btn-fill: var(--brand-black);
+  --btn-text: var(--brand-black);
+  --btn-text-h: var(--brand-white);
+  --btn-radius: 999px;
+  --btn-bw: 2px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 22px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.02em;
   text-decoration: none;
   color: var(--btn-text);
   border: var(--btn-bw) solid var(--btn-border);
   border-radius: var(--btn-radius);
   box-sizing: border-box;
-
   background: transparent;
   overflow: hidden;
   background-image: linear-gradient(var(--btn-fill), var(--btn-fill));
@@ -481,20 +325,25 @@
   background-position: left center;
   background-clip: padding-box;
   -webkit-background-clip: padding-box;
-
-  transition: background-size 0.28s ease, color 0.22s ease,
-    border-color 0.22s ease;
+  transition:
+    background-size var(--transition-base),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .ks-btn:hover {
   background-size: 100% 100%;
   color: var(--btn-text-h);
   border-color: transparent;
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-1px);
 }
 
 .ks-btn:focus-visible {
-  outline: 2px solid var(--brand-gold);
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: var(--shadow-focus);
 }
 
 .ks-btn.ks-btn--dark {
@@ -509,17 +358,12 @@
   border-color: transparent;
 }
 
-/* Light Variante: nur Variablen */
 .ks-btn.ks-btn--light {
-  --btn-border: #fff;
+  --btn-border: #ffffff;
   --btn-fill: var(--brand-gold);
-  --btn-text: #fff;
-  --btn-text-h: #111;
-}
-
-/* ================= */
-/* Misc              */
-/* ================= */
+  --btn-text: #ffffff;
+  --btn-text-h: #111111;
+} */
 
 #trainer-profile img {
   width: 100%;
@@ -532,28 +376,41 @@
   opacity: 1;
 }
 
-/* ================= */
-/* Responsive        */
-/* ================= */
+@media (max-width: 1200px) {
+  .ks-team__track {
+    grid-auto-columns: calc(33.333% - 10px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .ks-news {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ks-split {
+    grid-template-columns: 1fr;
+  }
+}
 
 @media (max-width: 900px) {
-  .ks-home-hero__img {
-    height: clamp(260px, 48vw, 420px);
-    margin-inline: auto;
+  .ks-team__track {
+    grid-auto-columns: calc(50% - 8px);
+  }
+}
+
+@media (max-width: 640px) {
+  .ks-news {
+    grid-template-columns: 1fr;
   }
 
-  .ks-home-hero::after {
-    font-size: clamp(64px, 30vw, 180px);
-    bottom: 2%;
+  .ks-btn {
+    width: 100%;
   }
+}
 
-  .ks-hero-tabs {
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .ks-hero-tab__label {
-    display: none;
+@media (max-width: 560px) {
+  .ks-team__track {
+    grid-auto-columns: 100%;
   }
 }
 
@@ -561,7 +418,8 @@
   .ks-btn,
   .ks-value .icon-wrap,
   .ks-value .icon-wrap img,
-  .ks-team__img {
+  .ks-team__img,
+  .ks-team__nav {
     transition: none;
   }
 }
