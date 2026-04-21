@@ -32,27 +32,6 @@
     } catch (e) {}
   }
 
-  // function openPanel(state) {
-  //   if (state.isOpen) return;
-  //   state.isOpen = true;
-  //   state.wrap.classList.add("is-open");
-  //   state.toggle.setAttribute("aria-expanded", "true");
-  //   focusFirst(state.panel);
-  // }
-
-  // function closePanel(state) {
-  //   if (!state.isOpen) return;
-  //   state.isOpen = false;
-  //   state.wrap.classList.remove("is-open");
-  //   state.toggle.setAttribute("aria-expanded", "false");
-  // }
-
-  // function togglePanel(state, event) {
-  //   if (event && event.preventDefault) event.preventDefault();
-  //   if (state.isOpen) closePanel(state);
-  //   else openPanel(state);
-  // }
-
   function openPanel(state, moveFocus) {
     if (state.isOpen) return;
     state.isOpen = true;
@@ -90,10 +69,6 @@
   }
 
   function bindEvents(state) {
-    // state.toggle.addEventListener("click", function (event) {
-    //   togglePanel(state, event);
-    // });
-
     state.toggle.addEventListener("click", function (event) {
       togglePanel(state, event, false);
     });
