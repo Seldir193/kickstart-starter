@@ -1,108 +1,35 @@
 @layer layout {
-  /* Body als 3-Zeilen-Grid: Header | Main | Footer */
-
   body {
     min-height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr auto;
   }
+
   @supports (min-height: 100dvh) {
     body {
       min-height: 100dvh;
     }
   }
 
-  /* Header fixiert, mit Adminbar-Offset */
-  .site-header {
-    /*position:fixed;*/
-    position: sticky;
-    top: var(--wp-admin-bar-h);
-    left: 0;
-    right: 0;
-    z-index: calc(var(--mega-z) + 1);
-    background: var(--header-bg);
-    border-bottom: 1px solid #eaeaea;
-  }
-
-  /* Inhalt unter fixen Header schieben */
-  /*body{ padding-top:calc(var(--header-height) + var(--wp-admin-bar-h)); }*/
-
-  /* Header-Innenleben */
-  .header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 64px;
-  }
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 700;
-    font-size: 20px;
-  }
-  .custom-logo {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-  }
-  .site-title {
-    font-weight: 700;
-    text-decoration: none;
-    color: #111;
-    font-size: 20px;
-  }
-
-  /* Menü */
-  .menu {
-    display: flex;
-    gap: 12px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .menu a {
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 8px;
-    color: #333;
-  }
-  .menu a:hover {
-    color: #333;
-    background: transparent;
-  }
-  .menu .current-menu-item a {
-    background: #111;
-    color: #fff;
-  }
-
-  /* Container */
   .container {
     max-width: 1440px;
     margin: 0 auto;
-    /* padding:16px;*/
     padding: 16px;
     gap: 20px;
   }
 
-  /* Main scrollt, Rest nicht */
   .site-main {
-    /* frühere Scroll-Container-Eigenschaften entfernen */
     overflow: visible;
     min-height: auto;
     -webkit-overflow-scrolling: auto;
     overscroll-behavior: auto;
-
-    /* Layout beibehalten */
     display: flex;
     flex-direction: column;
-    align-items: center; /* horizontal */
-    justify-content: flex-start; /* lange Seiten starten oben */
+    align-items: center;
+    justify-content: flex-start;
   }
 
-  /* Nur Startseite: oben Luft für 01/02/03, unten keine Extra-Lücke */
   .home .site-main {
-    /* padding-top: 30px;  */
     padding-bottom: 0;
   }
 
@@ -111,36 +38,32 @@
     height: 0;
   }
 
-  /* Kurze Seiten vertikal zentrieren */
   .site-main > .container,
   .site-main > .container.content,
   .site-main > .contact-form,
   .site-main > .entry,
   .site-main > .page {
-    /*margin-block:auto;*/
     margin-block: 0;
     width: 100%;
-
     padding-top: 0;
     padding-bottom: 0;
     padding-left: 16px;
     padding-right: 16px;
   }
+
   .site-main .programme-grid {
     margin-block: 0;
   }
-
-  /* Startseite zentrieren, außer bei langen Rastern */
 
   body.home
     .site-main:has(.programme-grid, .wp-block-gallery, .posts, .entry-list) {
     justify-content: flex-start;
   }
+
   .site-main:has(> .home-hero):not(:has(.programme-grid, .wp-block-gallery)) {
     justify-content: center;
   }
 
-  /* Footer */
   .site-footer {
     border-top: 1px solid #eaeaea;
     padding: 20px 0;
@@ -153,84 +76,66 @@
     margin-top: 0;
     width: 100%;
   }
+
   .site-footer a {
     text-decoration: none;
     color: #666;
   }
+
   .site-footer a:hover {
     text-decoration: underline;
   }
 
-  /*html, body { overflow-x: hidden; }*/
-
-  /* Scrollbar unsichtbar, Scrollen bleibt möglich */
   html {
     scrollbar-width: none;
-  } /* Firefox */
+  }
+
   body {
     -ms-overflow-style: none;
-  } /* IE/alt Edge */
+  }
+
   html::-webkit-scrollbar {
     width: 0;
     height: 0;
-  } /* Chrome/Safari/Edge */
-
-  body:not(.home) .site-main {
-    padding-bottom: 0; /* falls irgendwo noch Padding dran hängt */
   }
 
-  /* Contact: Section muss volle Breite haben (sonst shrink-to-fit wegen .site-main align-items:center) */
+  body:not(.home) .site-main {
+    padding-bottom: 0;
+  }
+
   .site-main > section#kontakt {
     width: 100%;
   }
 }
 
-/* === Container-System + Full-bleed Utilities ===================== */
 :root {
-  /* Standard-Container fürs ganze Projekt */
   --container-max: 1200px;
-
-  /* Optionaler Wide-Container (z. B. für Portfolio-Hero) */
   --container-wide: 1440px;
-
-  /* Randabstand links/rechts – responsive */
   --gutter: clamp(12px, 2vw, 24px);
 }
 
-/* Basis-Container (wie dein Header) */
 .container {
-  /* exakt wie dein Header: max 1200, aber mit dynamischem Padding */
-  /*width: min(100% - (2 * var(--gutter)), var(--container-max));*/
   margin-inline: auto;
 }
 
-/* Breiter Container für ausgewählte Sektionen */
 .container--wide {
   width: min(100% - (2 * var(--gutter)), var(--container-wide));
 }
 
-/* Full-bleed: Element zieht auf Viewport-Breite,
-   egal ob es in einem .container steckt */
 .full-bleed {
   margin-inline: calc(50% - 50vw);
   width: 100vw;
 }
 
-/* Band-Section: Hintergrund geht über volle Breite,
-   Inhalt bleibt im Container */
 .section-band {
-  background: var(--band-bg, #102a52); /* z. B. Sponsor-Band */
+  background: var(--band-bg, #102a52);
   padding-block: clamp(20px, 3vw, 40px);
 }
 
-/* Dünne Trennlinie über volle Breite */
 .hr-bleed {
   height: 1px;
   background: var(--hr, #e5e7eb);
 }
-
-/* Sicherheit gegen horizontale Scroll-Leiste bei 100vw */
-/*html, body { overflow-x: clip; }*/ /* (clip verhindert chrome-scrollbug) */
 
 html {
   margin-top: 0 !important;
@@ -244,68 +149,11 @@ html {
   gap: 0 !important;
 }
 
-/* Leere Absätze im Seiteninhalt sollen keinen Abstand erzeugen */
 .entry-content p:empty {
   margin-block: 0 !important;
   padding-block: 0 !important;
 }
 
-/* Sicherstellen, dass das letzte Element im Content
-   nicht noch einen extra Bottom-Abstand macht */
 .entry-content > *:last-child {
   margin-bottom: 0 !important;
-}
-
-/* --- WP Header Nav Hover (Profi-Standard) --- */
-.site-header .main-nav .menu > li > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  text-decoration: none;
-
-  /* Profi: smooth curve + nicht zu kurz */
-  transition-property: background-color;
-  transition-duration: 240ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* sehr üblich */
-  transition-delay: 70ms; /* ✨ pro: verhindert nervöses flackern */
-}
-
-/* Hover nur für NICHT-aktive Menüpunkte UND NICHT wenn focus/focus-visible */
-.site-header
-  .main-nav
-  .menu
-  > li:not(.current-menu-item):not(.current_page_item)
-  > a:not(:focus):not(:focus-visible):hover {
-  background: rgba(0, 0, 0, 0.04);
-
-  /* Profi: beim echten Hover keine Verzögerung mehr */
-  transition-delay: 0ms;
-}
-
-/* Sicherheitsnetz: wenn Link fokussiert ist, kein Hover-Background */
-.site-header .main-nav .menu > li > a:focus:hover,
-.site-header .main-nav .menu > li > a:focus-visible:hover {
-  background: transparent;
-}
-
-/* Focus */
-.site-header .main-nav .menu > li > a:focus {
-  outline: none;
-}
-.site-header .main-nav .menu > li > a:focus-visible {
-  outline: 2px solid #000;
-  outline-offset: 2px;
-}
-
-/* Für dunkle Seiten lieber: */
-/* mix-blend-mode: screen; */
-
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-  .site-header .main-nav .menu > li > a,
-  .site-header .brand {
-    transition: none;
-  }
 }
