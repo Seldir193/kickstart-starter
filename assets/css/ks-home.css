@@ -489,3 +489,15 @@
     transition: none;
   }
 }
+
+.ks-dir__title--split {
+  display: block;
+}
+
+.ks-dir__title-line {
+  display: block;
+}
+
+.ks-home-about {
+  width: 100%;
+}

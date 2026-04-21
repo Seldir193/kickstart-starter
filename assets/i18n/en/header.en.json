@@ -30,7 +30,7 @@
       "athletik": "Development Training · Athletik"
     },
     "individual": {
-      "heading": "Individual Courses",
+      "heading": "Individual Training",
       "basic": "Football Individual Training",
       "athletik": "Athletic Individual Training",
       "goalkeeper": "Goalkeeper Individual Training"
@@ -40,25 +40,25 @@
       "rent": "Rent-a-Coach",
       "camps": "Club Training Camp",
       "education": "Coach Education"
-    },
-    "home": {
-      "aboutPreview": {
-        "kicker": "Our Philosophy",
-        "titleLine1": "The Dortmund",
-        "titleLine2": "Football School",
-        "lead": "We support children, young people, and clubs with a clear training approach that combines athletic development, enjoyment of the game, and a positive learning environment.",
-        "point1Title": "Structured",
-        "point1Text": "Clear content, modern training organization, and easy-to-understand processes.",
-        "point2Title": "Individual",
-        "point2Text": "Support tailored to age, level, and development.",
-        "button": "Learn more",
-        "mediaBadge": "Insight into our work",
-        "mediaCaption": "Insights into our work with children, young people, and clubs.",
-        "chipsLabel": "Focus areas",
-        "chip1": "Children & Young People",
-        "chip2": "Individual Support",
-        "chip3": "Clubs & Teams"
-      }
+    }
+  },
+  "home": {
+    "aboutPreview": {
+      "kicker": "Our Philosophy",
+      "titleLine1": "Dortmund",
+      "titleLine2": "Football School",
+      "lead": "We support children, young people, and clubs with a clear training approach that combines athletic development, enjoyment of the game, and a positive learning environment.",
+      "point1Title": "Structured",
+      "point1Text": "Clear content, modern training organization, and easy-to-understand processes.",
+      "point2Title": "Individual",
+      "point2Text": "Support tailored to age, level, and development.",
+      "button": "Learn more",
+      "mediaBadge": "Insight into our work",
+      "mediaCaption": "Insights into our work with children, young people, and clubs.",
+      "chipsLabel": "Focus areas",
+      "chip1": "Children & Young People",
+      "chip2": "Individual Support",
+      "chip3": "Clubs & Teams"
     }
   }
 }

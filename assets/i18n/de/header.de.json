@@ -30,7 +30,7 @@
       "athletik": "Fördertraining · Athletik"
     },
     "individual": {
-      "heading": "Eimzeltraining",
+      "heading": "Einzeltraining",
       "basic": "Fußball Einzeltraining",
       "athletik": "Athletik Einzeltraining",
       "goalkeeper": "Torwart Einzeltraining"
@@ -40,25 +40,25 @@
       "rent": "Rent-a-Coach",
       "camps": "Vereins-Trainingslager",
       "education": "Trainerausbildung"
-    },
-    "home": {
-      "aboutPreview": {
-        "kicker": "Unsere Philosophie",
-        "titleLine1": "Die Dortmunder",
-        "titleLine2": "Fussballschule",
-        "lead": "Wir begleiten Kinder, Jugendliche und Vereine mit einem klaren Trainingsansatz, der sportliche Entwicklung, Freude am Spiel und eine positive Lernumgebung verbindet.",
-        "point1Title": "Strukturiert",
-        "point1Text": "Klare Inhalte, moderne Trainingsorganisation und verständliche Abläufe.",
-        "point2Title": "Individuell",
-        "point2Text": "Förderung mit Blick auf Alter, Niveau und Entwicklung.",
-        "button": "Mehr erfahren",
-        "mediaBadge": "Einblick in unsere Arbeit",
-        "mediaCaption": "Einblicke in unsere Arbeit mit Kindern, Jugendlichen und Vereinen.",
-        "chipsLabel": "Schwerpunkte",
-        "chip1": "Kinder & Jugendliche",
-        "chip2": "Individuelle Förderung",
-        "chip3": "Vereine & Teams"
-      }
+    }
+  },
+  "home": {
+    "aboutPreview": {
+      "kicker": "Unsere Philosophie",
+      "titleLine1": "Die Dortmunder",
+      "titleLine2": "Fussballschule",
+      "lead": "Wir begleiten Kinder, Jugendliche und Vereine mit einem klaren Trainingsansatz, der sportliche Entwicklung, Freude am Spiel und eine positive Lernumgebung verbindet.",
+      "point1Title": "Strukturiert",
+      "point1Text": "Klare Inhalte, moderne Trainingsorganisation und verständliche Abläufe.",
+      "point2Title": "Individuell",
+      "point2Text": "Förderung mit Blick auf Alter, Niveau und Entwicklung.",
+      "button": "Mehr erfahren",
+      "mediaBadge": "Einblick in unsere Arbeit",
+      "mediaCaption": "Einblicke in unsere Arbeit mit Kindern, Jugendlichen und Vereinen.",
+      "chipsLabel": "Schwerpunkte",
+      "chip1": "Kinder & Jugendliche",
+      "chip2": "Individuelle Förderung",
+      "chip3": "Vereine & Teams"
     }
   }
 }

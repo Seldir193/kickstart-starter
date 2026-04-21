@@ -30,7 +30,7 @@
       "athletik": "Gelişim Antrenmanı · Atletik"
     },
     "individual": {
-      "heading": "Bireysel Kurslar",
+      "heading": "Bireysel Antrenman",
       "basic": "Bireysel Futbol Antrenmanı",
       "athletik": "Bireysel Atletik Antrenman",
       "goalkeeper": "Bireysel Kaleci Antrenmanı"
@@ -40,25 +40,25 @@
       "rent": "Rent-a-Coach",
       "camps": "Kulüp Antrenman Kampı",
       "education": "Antrenör Eğitimi"
-    },
-    "home": {
-      "aboutPreview": {
-        "kicker": "Felsefemiz",
-        "titleLine1": "Dortmund",
-        "titleLine2": "Futbol Okulu",
-        "lead": "Çocukları, gençleri ve kulüpleri; sportif gelişimi, oyundan alınan keyfi ve olumlu bir öğrenme ortamını birleştiren net bir antrenman anlayışıyla destekliyoruz.",
-        "point1Title": "Yapılı",
-        "point1Text": "Net içerikler, modern antrenman organizasyonu ve anlaşılır süreçler.",
-        "point2Title": "Bireysel",
-        "point2Text": "Yaşa, seviyeye ve gelişime uygun destek.",
-        "button": "Daha fazla bilgi",
-        "mediaBadge": "Çalışmalarımıza bakış",
-        "mediaCaption": "Çocuklar, gençler ve kulüplerle yürüttüğümüz çalışmalardan kısa izlenimler.",
-        "chipsLabel": "Odak alanları",
-        "chip1": "Çocuklar & Gençler",
-        "chip2": "Bireysel Destek",
-        "chip3": "Kulüpler & Takımlar"
-      }
+    }
+  },
+  "home": {
+    "aboutPreview": {
+      "kicker": "Felsefemiz",
+      "titleLine1": "Dortmund",
+      "titleLine2": "Futbol Okulu",
+      "lead": "Çocukları, gençleri ve kulüpleri; sportif gelişimi, oyundan alınan keyfi ve olumlu bir öğrenme ortamını birleştiren net bir antrenman anlayışıyla destekliyoruz.",
+      "point1Title": "Planlı",
+      "point1Text": "Net içerikler, modern antrenman organizasyonu ve anlaşılır süreçler.",
+      "point2Title": "Bireysel",
+      "point2Text": "Yaşa, seviyeye ve gelişime uygun destek.",
+      "button": "Daha fazla bilgi",
+      "mediaBadge": "Çalışmalarımıza bakış",
+      "mediaCaption": "Çocuklar, gençler ve kulüplerle yürüttüğümüz çalışmalardan kısa izlenimler.",
+      "chipsLabel": "Odak alanları",
+      "chip1": "Çocuklar & Gençler",
+      "chip2": "Bireysel Destek",
+      "chip3": "Kulüpler & Takımlar"
     }
   }
 }

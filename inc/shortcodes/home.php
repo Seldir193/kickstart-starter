@@ -239,16 +239,24 @@ if (file_exists($hero_split_abs)) {
 </div>
 </section>
       
-
 <section id="wer-wir-sind" class="ks-sec ks-py-48 ks-home-about">
   <div class="container ks-home-about__grid">
     <div class="ks-home-about__content">
       <div class="ks-kicker" data-i18n="home.aboutPreview.kicker">Unsere Philosophie</div>
+      
 
-      <h2 class="ks-dir__title">
-        <span data-i18n="home.aboutPreview.titleLine1">Die Dortmunder</span><br>
-        <span data-i18n="home.aboutPreview.titleLine2">Fussballschule</span>
-      </h2>
+     <!-- <h2 class="ks-dir__title ks-dir__title--about" data-i18n="home.aboutPreview.title">
+  Die Dortmunder Fussballschule
+</h2> -->
+
+<h2 class="ks-dir__title ks-dir__title--split">
+  <span class="ks-dir__title-line" data-i18n="home.aboutPreview.titleLine1">
+    Die Dortmunder
+  </span>
+  <span class="ks-dir__title-line" data-i18n="home.aboutPreview.titleLine2">
+    Fussballschule
+  </span>
+</h2>
 
       <p class="ks-home-about__lead" data-i18n="home.aboutPreview.lead">
         Wir begleiten Kinder, Jugendliche und Vereine mit einem klaren Trainingsansatz,
@@ -258,31 +266,25 @@ if (file_exists($hero_split_abs)) {
       <div class="ks-home-about__points">
         <div class="ks-home-about__point">
           <strong data-i18n="home.aboutPreview.point1Title">Strukturiert</strong>
-          <span data-i18n="home.aboutPreview.point1Text">
-            Klare Inhalte, moderne Trainingsorganisation und verständliche Abläufe.
-          </span>
+          <span data-i18n="home.aboutPreview.point1Text">Klare Inhalte, moderne Trainingsorganisation und verständliche Abläufe.</span>
         </div>
-
         <div class="ks-home-about__point">
           <strong data-i18n="home.aboutPreview.point2Title">Individuell</strong>
-          <span data-i18n="home.aboutPreview.point2Text">
-            Förderung mit Blick auf Alter, Niveau und Entwicklung.
-          </span>
+          <span data-i18n="home.aboutPreview.point2Text">Förderung mit Blick auf Alter, Niveau und Entwicklung.</span>
         </div>
       </div>
 
       <div class="ks-home-about__actions">
-        <a class="ks-btn" href="<?php echo esc_url($about_url); ?>" data-i18n="home.aboutPreview.button">
-          Mehr erfahren
-        </a>
+        <a
+          class="ks-btn"
+          href="<?php echo esc_url($about_url); ?>"
+          data-i18n="home.aboutPreview.button"
+        >Mehr erfahren</a>
       </div>
     </div>
 
     <div class="ks-home-about__media">
-      <div class="ks-home-about__badge" data-i18n="home.aboutPreview.mediaBadge">
-        Einblick in unsere Arbeit
-      </div>
-
+      <div class="ks-home-about__badge" data-i18n="home.aboutPreview.mediaBadge">Einblick in unsere Arbeit</div>
       <div class="ks-vid ratio"><?php echo $video_embed; ?></div>
 
       <p class="ks-home-about__caption" data-i18n="home.aboutPreview.mediaCaption">
@@ -295,15 +297,9 @@ if (file_exists($hero_split_abs)) {
         data-i18n-attr="aria-label"
         data-i18n="home.aboutPreview.chipsLabel"
       >
-        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip1">
-          Kinder &amp; Jugendliche
-        </span>
-        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip2">
-          Individuelle Förderung
-        </span>
-        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip3">
-          Vereine &amp; Teams
-        </span>
+        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip1">Kinder &amp; Jugendliche</span>
+        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip2">Individuelle Förderung</span>
+        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip3">Vereine &amp; Teams</span>
       </div>
     </div>
   </div>
