@@ -102,7 +102,7 @@
 
   /* Nur Startseite: oben Luft für 01/02/03, unten keine Extra-Lücke */
   .home .site-main {
-    padding-top: 30px; /* dein alter Wert von vorher */
+    /* padding-top: 30px;  */
     padding-bottom: 0;
   }
 
