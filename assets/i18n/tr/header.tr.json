@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "home": "ANA SAYFA",
+    "about": "HAKKIMIZDA",
+    "programs": "PROGRAMLAR",
+    "jobs": "İŞLER",
+    "news": "HABERLER",
+    "franchise": "FRANCHISE",
+    "shop": "MAĞAZA",
+    "contact": "İLETİŞİM"
+  },
+  "language": {
+    "label": "Dili değiştir",
+    "de": "Deutsch",
+    "en": "English",
+    "tr": "Türkçe"
+  }
+}

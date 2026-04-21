@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "home": "HOME",
+    "about": "ABOUT",
+    "programs": "PROGRAMS",
+    "jobs": "JOBS",
+    "news": "NEWS",
+    "franchise": "FRANCHISE",
+    "shop": "SHOP",
+    "contact": "CONTACT"
+  },
+  "language": {
+    "label": "Change language",
+    "de": "Deutsch",
+    "en": "English",
+    "tr": "Türkçe"
+  }
+}
