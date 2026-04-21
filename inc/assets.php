@@ -28,44 +28,51 @@ add_action('wp_enqueue_scripts', function () {
     );
   }
 
+
+
+
   $styles = [
-    'base' => [
-      'path' => '/assets/css/base.css',
-      'deps' => ['kickstart-style', 'ks-utils'],
-    ],
-    'layout' => [
-      'path' => '/assets/css/layout.css',
-      'deps' => ['kickstart-style', 'ks-utils'],
-    ],
-    'components' => [
-      'path' => '/assets/css/components.css',
-      'deps' => ['kickstart-style', 'ks-utils'],
-    ],
-    'header' => [
-      'path' => '/assets/css/header.css',
-      'deps' => ['kickstart-style', 'ks-utils', 'ks-layout'],
-    ],
-    'language' => [
-      'path' => '/assets/css/language.css',
-      'deps' => ['kickstart-style', 'ks-utils', 'ks-header'],
-    ],
-    'footer' => [
-      'path' => '/assets/css/footer.css',
-      'deps' => ['kickstart-style', 'ks-utils'],
-    ],
-    'werbung' => [
-      'path' => '/assets/css/ks-werbung.css',
-      'deps' => ['kickstart-style', 'ks-utils'],
-    ],
-    'about' => [
-      'path' => '/assets/css/ks-about.css',
-      'deps' => ['kickstart-style', 'ks-utils'],
-    ],
-    'trainer' => [
-      'path' => '/assets/css/ks-trainer.css',
-      'deps' => ['kickstart-style', 'ks-utils'],
-    ],
-  ];
+  'base' => [
+    'path' => '/assets/css/base.css',
+    'deps' => ['kickstart-style', 'ks-utils'],
+  ],
+  'layout' => [
+    'path' => '/assets/css/layout.css',
+    'deps' => ['kickstart-style', 'ks-utils'],
+  ],
+  'components' => [
+    'path' => '/assets/css/components.css',
+    'deps' => ['kickstart-style', 'ks-utils'],
+  ],
+  'header' => [
+    'path' => '/assets/css/header.css',
+    'deps' => ['kickstart-style', 'ks-utils', 'ks-layout'],
+  ],
+  'header-dropdown' => [
+    'path' => '/assets/css/header-dropdown.css',
+    'deps' => ['kickstart-style', 'ks-utils', 'ks-layout', 'ks-header'],
+  ],
+  'language' => [
+    'path' => '/assets/css/language.css',
+    'deps' => ['kickstart-style', 'ks-utils', 'ks-header', 'ks-header-dropdown'],
+  ],
+  'footer' => [
+    'path' => '/assets/css/footer.css',
+    'deps' => ['kickstart-style', 'ks-utils'],
+  ],
+  'werbung' => [
+    'path' => '/assets/css/ks-werbung.css',
+    'deps' => ['kickstart-style', 'ks-utils'],
+  ],
+  'about' => [
+    'path' => '/assets/css/ks-about.css',
+    'deps' => ['kickstart-style', 'ks-utils'],
+  ],
+  'trainer' => [
+    'path' => '/assets/css/ks-trainer.css',
+    'deps' => ['kickstart-style', 'ks-utils'],
+  ],
+];
 
   foreach ($styles as $handle => $config) {
     $abs = get_stylesheet_directory() . $config['path'];
