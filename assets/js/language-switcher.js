@@ -62,8 +62,9 @@
 
   function detectHeaderKey(anchor) {
     var item = anchor.closest("li");
-    if (item && item.classList.contains("ks-programs-toggle"))
+    if (item && item.classList.contains("ks-programs-toggle")) {
       return "programs";
+    }
     var map = getHeaderPathMap();
     var path = getLinkPath(anchor);
     if (map[path]) return map[path];
@@ -91,6 +92,8 @@
       menu: qs(switcher, ".language-switcher__menu"),
       items: qsa(switcher, ".language-switcher__item"),
       navLinks: qsa(document, ".main-nav .menu > li > a"),
+      i18nNodes: qsa(document, "[data-i18n]"),
+      i18nAttrNodes: qsa(document, "[data-i18n-attr][data-i18n]"),
       fallback: switcher.getAttribute("data-fallback-language") || "en",
       base: switcher.getAttribute("data-i18n-base") || "",
     };
@@ -160,6 +163,43 @@
     link.textContent = data.nav[key];
   }
 
+  function getNestedValue(data, key) {
+    return String(key || "")
+      .split(".")
+      .reduce(function (result, part) {
+        if (!result || typeof result !== "object") return null;
+        if (!(part in result)) return null;
+        return result[part];
+      }, data);
+  }
+
+  function translateNodeText(node, data) {
+    var key = node.getAttribute("data-i18n") || "";
+    if (!key) return;
+    if (node.hasAttribute("data-i18n-attr")) return;
+    var value = getNestedValue(data, key);
+    if (typeof value !== "string") return;
+    node.textContent = value;
+  }
+
+  function translateNodeAttr(node, data) {
+    var key = node.getAttribute("data-i18n") || "";
+    var attr = node.getAttribute("data-i18n-attr") || "";
+    if (!key || !attr) return;
+    var value = getNestedValue(data, key);
+    if (typeof value !== "string") return;
+    node.setAttribute(attr, value);
+  }
+
+  function applyGenericTranslations(state, data) {
+    state.i18nNodes.forEach(function (node) {
+      translateNodeText(node, data);
+    });
+    state.i18nAttrNodes.forEach(function (node) {
+      translateNodeAttr(node, data);
+    });
+  }
+
   function applyHeaderTranslations(state, language, data) {
     if (!data) return;
     setDocumentLanguage(language);
@@ -168,6 +208,7 @@
     state.navLinks.forEach(function (link) {
       translateNavLink(link, data);
     });
+    applyGenericTranslations(state, data);
   }
 
   function getCachedLanguage(state, language) {
@@ -191,13 +232,6 @@
     return loadLanguage(state, state.fallback);
   }
 
-  function loadLanguage(state, language) {
-    var nextLanguage = normalizeLanguage(language, state.fallback);
-    var cached = getCachedLanguage(state, nextLanguage);
-    if (cached) return applyCachedLanguage(state, nextLanguage, cached);
-    return fetchAndApplyLanguage(state, nextLanguage);
-  }
-
   function applyCachedLanguage(state, language, data) {
     applyHeaderTranslations(state, language, data);
     return Promise.resolve(true);
@@ -213,6 +247,13 @@
       .catch(function () {
         return loadFallback(state, language);
       });
+  }
+
+  function loadLanguage(state, language) {
+    var nextLanguage = normalizeLanguage(language, state.fallback);
+    var cached = getCachedLanguage(state, nextLanguage);
+    if (cached) return applyCachedLanguage(state, nextLanguage, cached);
+    return fetchAndApplyLanguage(state, nextLanguage);
   }
 
   function getSavedLanguage() {
