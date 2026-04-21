@@ -49,6 +49,22 @@ add_action('wp_enqueue_scripts', function () {
       'path' => '/assets/css/language.css',
       'deps' => ['kickstart-style', 'ks-utils', 'ks-header'],
     ],
+    'footer' => [
+      'path' => '/assets/css/footer.css',
+      'deps' => ['kickstart-style', 'ks-utils'],
+    ],
+    'werbung' => [
+      'path' => '/assets/css/ks-werbung.css',
+      'deps' => ['kickstart-style', 'ks-utils'],
+    ],
+    'about' => [
+      'path' => '/assets/css/ks-about.css',
+      'deps' => ['kickstart-style', 'ks-utils'],
+    ],
+    'trainer' => [
+      'path' => '/assets/css/ks-trainer.css',
+      'deps' => ['kickstart-style', 'ks-utils'],
+    ],
   ];
 
   foreach ($styles as $handle => $config) {
@@ -78,7 +94,7 @@ add_action('wp_enqueue_scripts', function () {
       e.preventDefault();
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
-  "
+    "
   );
 
   wp_add_inline_style('kickstart-style', '.ks-sec{scroll-margin-top:90px}');
@@ -93,6 +109,59 @@ add_action('wp_enqueue_scripts', function () {
       filemtime($mega_js),
       true
     );
+  }
+
+  $language_js = get_stylesheet_directory() . '/assets/js/language-switcher.js';
+
+  if (file_exists($language_js)) {
+    wp_enqueue_script(
+      'kickstart-language-switcher',
+      get_stylesheet_directory_uri() . '/assets/js/language-switcher.js',
+      [],
+      filemtime($language_js),
+      true
+    );
+  }
+
+  $whatsapp_js = get_stylesheet_directory() . '/assets/js/ks-whatsapp-locations.js';
+
+  if (file_exists($whatsapp_js)) {
+    wp_enqueue_script(
+      'ks-whatsapp-locations',
+      get_stylesheet_directory_uri() . '/assets/js/ks-whatsapp-locations.js',
+      [],
+      filemtime($whatsapp_js),
+      true
+    );
+  }
+
+  $should_enqueue_dropdown = true;
+
+  if (is_admin()) {
+    $should_enqueue_dropdown = false;
+  }
+
+  if ($should_enqueue_dropdown) {
+    global $post;
+    $content = is_object($post) ? (string) $post->post_content : '';
+
+    if (has_shortcode($content, 'ks_offers_directory')) {
+      $should_enqueue_dropdown = false;
+    }
+  }
+
+  if ($should_enqueue_dropdown) {
+    $dropdown_js = get_stylesheet_directory() . '/assets/js/ks-dropdown.js';
+
+    if (file_exists($dropdown_js)) {
+      wp_enqueue_script(
+        'ks-dropdown',
+        get_stylesheet_directory_uri() . '/assets/js/ks-dropdown.js',
+        [],
+        filemtime($dropdown_js),
+        true
+      );
+    }
   }
 
   wp_enqueue_style(
@@ -255,6 +324,40 @@ add_action('wp_enqueue_scripts', function () {
     ]);
   }
 
+  $contact_css = get_stylesheet_directory() . '/assets/css/ks-contact.css';
+
+  if (file_exists($contact_css)) {
+    wp_enqueue_style(
+      'ks-contact',
+      get_stylesheet_directory_uri() . '/assets/css/ks-contact.css',
+      ['kickstart-style', 'ks-utils'],
+      filemtime($contact_css)
+    );
+  }
+
+  $contact_js = get_stylesheet_directory() . '/assets/js/ks-contact-form.js';
+
+  if (file_exists($contact_js)) {
+    wp_enqueue_script(
+      'ks-contact-form',
+      get_stylesheet_directory_uri() . '/assets/js/ks-contact-form.js',
+      [],
+      filemtime($contact_js),
+      true
+    );
+  }
+
+  $sb_path = get_stylesheet_directory() . '/assets/css/ks-scrollbars.css';
+
+  if (file_exists($sb_path)) {
+    wp_enqueue_style(
+      'ks-scrollbars',
+      get_stylesheet_directory_uri() . '/assets/css/ks-scrollbars.css',
+      ['ks-utils'],
+      filemtime($sb_path)
+    );
+  }
+
   $has_shortcode = function (string $tag): bool {
     if (!is_singular()) {
       return false;
@@ -294,40 +397,6 @@ add_action('wp_enqueue_scripts', function () {
         true
       );
     }
-  }
-
-  $contact_css = get_stylesheet_directory() . '/assets/css/ks-contact.css';
-
-  if (file_exists($contact_css)) {
-    wp_enqueue_style(
-      'ks-contact',
-      get_stylesheet_directory_uri() . '/assets/css/ks-contact.css',
-      ['kickstart-style', 'ks-utils'],
-      filemtime($contact_css)
-    );
-  }
-
-  $contact_js = get_stylesheet_directory() . '/assets/js/ks-contact-form.js';
-
-  if (file_exists($contact_js)) {
-    wp_enqueue_script(
-      'ks-contact-form',
-      get_stylesheet_directory_uri() . '/assets/js/ks-contact-form.js',
-      [],
-      filemtime($contact_js),
-      true
-    );
-  }
-
-  $sb_path = get_stylesheet_directory() . '/assets/css/ks-scrollbars.css';
-
-  if (file_exists($sb_path)) {
-    wp_enqueue_style(
-      'ks-scrollbars',
-      get_stylesheet_directory_uri() . '/assets/css/ks-scrollbars.css',
-      ['ks-utils'],
-      filemtime($sb_path)
-    );
   }
 });
 
@@ -393,6 +462,7 @@ add_action('wp_enqueue_scripts', function () {
     );
   }
 }, 40);
+
 
 
 
