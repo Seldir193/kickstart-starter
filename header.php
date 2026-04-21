@@ -1,20 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -35,20 +18,79 @@
     </div>
 
     <nav class="main-nav" aria-label="<?php esc_attr_e('Primary', 'kickstart-starter'); ?>">
-  <?php
-    wp_nav_menu([
-      'theme_location' => 'primary',
-      'container'      => false,
-      'menu_class'     => 'menu',
-      'fallback_cb'    => false,
-    ]);
-  ?>
-  <div class="ks-programs" data-mega>
-    <?php get_template_part('template-parts/mega-programs'); ?>
+      <?php
+        wp_nav_menu([
+          'theme_location' => 'primary',
+          'container'      => false,
+          'menu_class'     => 'menu',
+          'fallback_cb'    => false,
+        ]);
+      ?>
+      <div class="ks-programs" data-mega>
+        <?php get_template_part('template-parts/mega-programs'); ?>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <div
+        class="language-switcher"
+        data-i18n-base="<?php echo esc_attr(trailingslashit(get_stylesheet_directory_uri()) . 'assets/i18n'); ?>"
+        data-fallback-language="en"
+      >
+        <button
+          type="button"
+          class="language-switcher__trigger"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          aria-label="Change language"
+        >
+          <span class="language-switcher__label">English</span>
+        
+
+          <span class="ks-selectbox__chevron" aria-hidden="true">
+  <img
+    src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/header/select-caret.svg'); ?>"
+    alt=""
+    width="14"
+    height="14"
+  >
+</span>
+        </button>
+
+        <div class="language-switcher__menu" role="menu" hidden>
+          <button
+            type="button"
+            class="language-switcher__item"
+            role="menuitemradio"
+            aria-checked="false"
+            data-language="de"
+          >
+            Deutsch
+          </button>
+
+          <button
+            type="button"
+            class="language-switcher__item is-active"
+            role="menuitemradio"
+            aria-checked="true"
+            data-language="en"
+          >
+            English
+          </button>
+
+          <button
+            type="button"
+            class="language-switcher__item"
+            role="menuitemradio"
+            aria-checked="false"
+            data-language="tr"
+          >
+            Türkçe
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
-</nav>
-
-
 </header>
 
 <main class="site-main">
