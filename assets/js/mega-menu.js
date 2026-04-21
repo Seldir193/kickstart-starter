@@ -1,105 +1,117 @@
 // @ts-nocheck
 (function () {
-  'use strict';
+  "use strict";
 
-  function qs(root, sel) { return (root || document).querySelector(sel); }
+  function qs(root, sel) {
+    return (root || document).querySelector(sel);
+  }
 
-  document.addEventListener('DOMContentLoaded', function () {
-    // Toggle-Ziel: <li class="ks-programs-toggle"><a>PROGRAMS</a></li>
-    var toggle =
-      qs(document, '.menu .ks-programs-toggle > a') ||
-      qs(document, '.menu .ks-programs-toggle');
+  function findToggle() {
+    return (
+      qs(document, ".menu .ks-programs-toggle > a") ||
+      qs(document, ".menu .ks-programs-toggle")
+    );
+  }
 
-    // Wrapper: <div class="ks-programs" data-mega>…</div>
-    var wrap = qs(document, '[data-mega].ks-programs');
+  function setPanelAria(toggle, panel) {
+    toggle.setAttribute("role", "button");
+    toggle.setAttribute("aria-expanded", "false");
+    if (!panel) return;
+    panel.id = "mega-programs-panel";
+    toggle.setAttribute("aria-controls", panel.id);
+  }
 
-    if (!toggle || !wrap) return;
+  function focusFirst(panel) {
+    if (!panel) return;
+    var first = panel.querySelector(
+      "a,button,input,select,textarea,[tabindex]",
+    );
+    if (!first || !first.focus) return;
+    try {
+      first.focus({ preventScroll: true });
+    } catch (e) {}
+  }
 
-    var backdrop = qs(wrap, '.ks-programs__backdrop');
-    var panel    = qs(wrap, '.ks-programs__panel');
+  function openPanel(state) {
+    if (state.isOpen) return;
+    state.isOpen = true;
+    state.wrap.classList.add("is-open");
+    state.toggle.setAttribute("aria-expanded", "true");
+    focusFirst(state.panel);
+  }
 
-    // ARIA setup
-    toggle.setAttribute('role', 'button');
-    toggle.setAttribute('aria-expanded', 'false');
-    if (panel) {
-      var pid = 'mega-programs-panel';
-      panel.id = pid;
-      toggle.setAttribute('aria-controls', pid);
-    }
+  function closePanel(state) {
+    if (!state.isOpen) return;
+    state.isOpen = false;
+    state.wrap.classList.remove("is-open");
+    state.toggle.setAttribute("aria-expanded", "false");
+  }
 
-    var isOpen = false;
+  function togglePanel(state, event) {
+    if (event && event.preventDefault) event.preventDefault();
+    if (state.isOpen) closePanel(state);
+    else openPanel(state);
+  }
 
-    function openPanel() {
-      if (isOpen) return;
-      isOpen = true;
-      wrap.classList.add('is-open');
-      toggle.setAttribute('aria-expanded', 'true');
+  function clickedOutside(state, event) {
+    var target = event.target;
+    if (!target) return false;
+    if (state.wrap.contains(target)) return false;
+    return !state.toggle.contains(target);
+  }
 
-      // Fokus ins Panel (erstes fokussierbares Element)
-      if (panel) {
-        var first = panel.querySelector('a,button,input,select,textarea,[tabindex]');
-        if (first && first.focus) {
-          try { first.focus({ preventScroll: true }); } catch (e) { /* noop */ }
-        }
-      }
-    }
+  function handlePanelClick(state, event) {
+    var link =
+      event && event.target && event.target.closest
+        ? event.target.closest("a")
+        : null;
+    if (link) closePanel(state);
+  }
 
-    function closePanel() {
-      if (!isOpen) return;
-      isOpen = false;
-      wrap.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-
-    function togglePanel(ev) {
-      if (ev && ev.preventDefault) ev.preventDefault();
-      if (isOpen) closePanel(); else openPanel();
-    }
-
-    // Klick auf den Menü-Button
-    toggle.addEventListener('click', togglePanel);
-
-    // Klick auf Backdrop schließt
-    if (backdrop) {
-      backdrop.addEventListener('click', closePanel);
-    }
-
-    // Outside-Click schließt
-    document.addEventListener('pointerdown', function (e) {
-      var t = e.target;
-      if (!t) return;
-      if (wrap.contains(t)) return;   // Klick IN der Mega
-      if (toggle.contains(t)) return; // Klick am Button
-      closePanel();
+  function bindEvents(state) {
+    state.toggle.addEventListener("click", function (event) {
+      togglePanel(state, event);
     });
 
-    // ESC schließt
-    document.addEventListener('keydown', function (e) {
-      if (e && e.key === 'Escape') closePanel();
-    });
-
-    // Link-Klicks im Panel schließen ebenfalls
-    if (panel) {
-      panel.addEventListener('click', function (e) {
-        var a = (e && e.target && e.target.closest) ? e.target.closest('a') : null;
-        if (a) closePanel();
+    if (state.backdrop) {
+      state.backdrop.addEventListener("click", function () {
+        closePanel(state);
       });
     }
-  });
+
+    document.addEventListener("pointerdown", function (event) {
+      if (clickedOutside(state, event)) closePanel(state);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event && event.key === "Escape") closePanel(state);
+    });
+
+    if (state.panel) {
+      state.panel.addEventListener("click", function (event) {
+        handlePanelClick(state, event);
+      });
+    }
+  }
+
+  function createState(toggle, wrap) {
+    return {
+      isOpen: false,
+      toggle: toggle,
+      wrap: wrap,
+      backdrop: qs(wrap, ".ks-programs__backdrop"),
+      panel: qs(wrap, ".ks-programs__panel"),
+    };
+  }
+
+  function initMegaMenu() {
+    var toggle = findToggle();
+    var wrap = qs(document, "[data-mega].ks-programs");
+    if (!toggle || !wrap) return;
+    var state = createState(toggle, wrap);
+    setPanelAria(state.toggle, state.panel);
+    bindEvents(state);
+  }
+
+  document.addEventListener("DOMContentLoaded", initMegaMenu);
 })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
