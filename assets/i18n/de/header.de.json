@@ -14,5 +14,32 @@
     "de": "Deutsch",
     "en": "English",
     "tr": "Türkçe"
+  },
+  "mega": {
+    "label": "Programme",
+    "holiday": {
+      "heading": "Ferienprogramme",
+      "camps": "Camps (Indoor/Outdoor)",
+      "power": "Power Training"
+    },
+    "weekly": {
+      "heading": "Wöchentliche Kurse",
+      "development": "Fördertraining",
+      "kindergarten": "Fußballkindergarten",
+      "goalkeeper": "Torwarttraining",
+      "athletik": "Fördertraining · Athletik"
+    },
+    "individual": {
+      "heading": "Individualkurse",
+      "basic": "1:1 Training",
+      "athletik": "1:1 Training Athletik",
+      "goalkeeper": "1:1 Training Torwart"
+    },
+    "club": {
+      "heading": "Vereinsprogramme",
+      "rent": "Rent-a-Coach",
+      "camps": "Trainingslager",
+      "education": "Trainerausbildung"
+    }
   }
 }

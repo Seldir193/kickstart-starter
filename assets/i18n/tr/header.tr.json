@@ -3,7 +3,7 @@
     "home": "ANA SAYFA",
     "about": "HAKKIMIZDA",
     "programs": "PROGRAMLAR",
-    "jobs": "İŞLER",
+    "jobs": "İŞ İLANLARI",
     "news": "HABERLER",
     "franchise": "FRANCHISE",
     "shop": "MAĞAZA",
@@ -11,8 +11,35 @@
   },
   "language": {
     "label": "Dili değiştir",
-    "de": "Deutsch",
-    "en": "English",
+    "de": "Almanca",
+    "en": "İngilizce",
     "tr": "Türkçe"
+  },
+  "mega": {
+    "label": "Programlar",
+    "holiday": {
+      "heading": "Tatil Programları",
+      "camps": "Kamplar (Salon/Açık Alan)",
+      "power": "Power Training"
+    },
+    "weekly": {
+      "heading": "Haftalık Kurslar",
+      "development": "Gelişim Antrenmanı",
+      "kindergarten": "Futbol Anaokulu",
+      "goalkeeper": "Kaleci Antrenmanı",
+      "athletik": "Gelişim Antrenmanı · Atletik"
+    },
+    "individual": {
+      "heading": "Bireysel Kurslar",
+      "basic": "1:1 Antrenman",
+      "athletik": "1:1 Atletik Antrenman",
+      "goalkeeper": "1:1 Kaleci Antrenmanı"
+    },
+    "club": {
+      "heading": "Kulüp Programları",
+      "rent": "Rent-a-Coach",
+      "camps": "Antrenman Kampları",
+      "education": "Antrenör Eğitimi"
+    }
   }
 }

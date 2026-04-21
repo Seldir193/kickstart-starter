@@ -11,8 +11,35 @@
   },
   "language": {
     "label": "Change language",
-    "de": "Deutsch",
+    "de": "German",
     "en": "English",
-    "tr": "Türkçe"
+    "tr": "Turkish"
+  },
+  "mega": {
+    "label": "Programs",
+    "holiday": {
+      "heading": "Holiday Programs",
+      "camps": "Camps (Indoor/Outdoor)",
+      "power": "Power Training"
+    },
+    "weekly": {
+      "heading": "Weekly Courses",
+      "development": "Development Training",
+      "kindergarten": "Soccer Kindergarten",
+      "goalkeeper": "Goalkeeper Training",
+      "athletik": "Development Training · Athletik"
+    },
+    "individual": {
+      "heading": "Individual Courses",
+      "basic": "1:1 Training",
+      "athletik": "1:1 Training Athletik",
+      "goalkeeper": "1:1 Training Goalkeeper"
+    },
+    "club": {
+      "heading": "Club Programs",
+      "rent": "Rent-a-Coach",
+      "camps": "Training Camps",
+      "education": "Coach Education"
+    }
   }
 }
