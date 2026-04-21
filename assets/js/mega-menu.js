@@ -1,4 +1,4 @@
-// @ts-nocheck
+//@ts-nocheck
 (function () {
   "use strict";
 
@@ -32,12 +32,33 @@
     } catch (e) {}
   }
 
-  function openPanel(state) {
+  // function openPanel(state) {
+  //   if (state.isOpen) return;
+  //   state.isOpen = true;
+  //   state.wrap.classList.add("is-open");
+  //   state.toggle.setAttribute("aria-expanded", "true");
+  //   focusFirst(state.panel);
+  // }
+
+  // function closePanel(state) {
+  //   if (!state.isOpen) return;
+  //   state.isOpen = false;
+  //   state.wrap.classList.remove("is-open");
+  //   state.toggle.setAttribute("aria-expanded", "false");
+  // }
+
+  // function togglePanel(state, event) {
+  //   if (event && event.preventDefault) event.preventDefault();
+  //   if (state.isOpen) closePanel(state);
+  //   else openPanel(state);
+  // }
+
+  function openPanel(state, moveFocus) {
     if (state.isOpen) return;
     state.isOpen = true;
     state.wrap.classList.add("is-open");
     state.toggle.setAttribute("aria-expanded", "true");
-    focusFirst(state.panel);
+    if (moveFocus) focusFirst(state.panel);
   }
 
   function closePanel(state) {
@@ -47,10 +68,10 @@
     state.toggle.setAttribute("aria-expanded", "false");
   }
 
-  function togglePanel(state, event) {
+  function togglePanel(state, event, moveFocus) {
     if (event && event.preventDefault) event.preventDefault();
     if (state.isOpen) closePanel(state);
-    else openPanel(state);
+    else openPanel(state, moveFocus);
   }
 
   function clickedOutside(state, event) {
@@ -69,8 +90,23 @@
   }
 
   function bindEvents(state) {
+    // state.toggle.addEventListener("click", function (event) {
+    //   togglePanel(state, event);
+    // });
+
     state.toggle.addEventListener("click", function (event) {
-      togglePanel(state, event);
+      togglePanel(state, event, false);
+    });
+
+    state.toggle.addEventListener("keydown", function (event) {
+      if (!event) return;
+      if (event.key === "Enter" || event.key === " ") {
+        togglePanel(state, event, true);
+      }
+      if (event.key === "ArrowDown" && !state.isOpen) {
+        openPanel(state, true);
+        event.preventDefault();
+      }
     });
 
     if (state.backdrop) {
