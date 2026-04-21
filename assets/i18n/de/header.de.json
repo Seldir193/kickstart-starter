@@ -20,7 +20,7 @@
     "holiday": {
       "heading": "Ferienprogramme",
       "camps": "Camps (Indoor/Outdoor)",
-      "power": "Power Training"
+      "power": "PowerTraining"
     },
     "weekly": {
       "heading": "Wöchentliche Kurse",
@@ -30,15 +30,15 @@
       "athletik": "Fördertraining · Athletik"
     },
     "individual": {
-      "heading": "Individualkurse",
-      "basic": "1:1 Training",
-      "athletik": "1:1 Training Athletik",
-      "goalkeeper": "1:1 Training Torwart"
+      "heading": "Eimzeltraining",
+      "basic": "Fußball Einzeltraining",
+      "athletik": "Athletik Einzeltraining",
+      "goalkeeper": "Torwart Einzeltraining"
     },
     "club": {
       "heading": "Vereinsprogramme",
       "rent": "Rent-a-Coach",
-      "camps": "Trainingslager",
+      "camps": "Vereins-Trainingslager",
       "education": "Trainerausbildung"
     }
   }

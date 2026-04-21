@@ -20,7 +20,7 @@
     "holiday": {
       "heading": "Holiday Programs",
       "camps": "Camps (Indoor/Outdoor)",
-      "power": "Power Training"
+      "power": "PowerTraining"
     },
     "weekly": {
       "heading": "Weekly Courses",
@@ -31,14 +31,14 @@
     },
     "individual": {
       "heading": "Individual Courses",
-      "basic": "1:1 Training",
-      "athletik": "1:1 Training Athletik",
-      "goalkeeper": "1:1 Training Goalkeeper"
+      "basic": "Football Individual Training",
+      "athletik": "Athletic Individual Training",
+      "goalkeeper": "Goalkeeper Individual Training"
     },
     "club": {
       "heading": "Club Programs",
       "rent": "Rent-a-Coach",
-      "camps": "Training Camps",
+      "camps": "Club Training Camp",
       "education": "Coach Education"
     }
   }

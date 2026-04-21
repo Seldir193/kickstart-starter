@@ -36,7 +36,7 @@ function ks_offers_link_with($base, $params) {
         data-i18n="mega.holiday.power"
         href="<?php echo ks_offers_link_with($offers_url, ['category' => 'Holiday', 'sub_type' => 'Powertraining']); ?>"
       >
-        Power Training
+        PowerTraining
       </a>
     </div>
 
@@ -93,7 +93,7 @@ function ks_offers_link_with($base, $params) {
         data-i18n="mega.individual.basic"
         href="<?php echo ks_offers_link_with($offers_url, ['type' => 'PersonalTraining']); ?>"
       >
-        1:1 Training
+        Fußball Einzeltraining
       </a>
 
       <a
@@ -102,7 +102,7 @@ function ks_offers_link_with($base, $params) {
         data-i18n="mega.individual.athletik"
         href="<?php echo ks_offers_link_with($offers_url, ['category' => 'Individual', 'sub_type' => 'Einzeltraining_Athletik']); ?>"
       >
-        1:1 Training Athletik
+        Athletik Einzeltraining
       </a>
 
       <a
@@ -111,7 +111,7 @@ function ks_offers_link_with($base, $params) {
         data-i18n="mega.individual.goalkeeper"
         href="<?php echo ks_offers_link_with($offers_url, ['category' => 'Individual', 'sub_type' => 'Einzeltraining_Torwart']); ?>"
       >
-        1:1 Training Torwart
+        Torwart Einzeltraining
       </a>
     </div>
 
@@ -135,7 +135,7 @@ function ks_offers_link_with($base, $params) {
         data-i18n="mega.club.camps"
         href="<?php echo ks_offers_link_with($offers_url, ['category' => 'ClubPrograms', 'sub_type' => 'ClubProgram_Generic']); ?>"
       >
-        Training Camps
+        Vereins-Trainingslager
       </a>
 
       <a

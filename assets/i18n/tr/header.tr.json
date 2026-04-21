@@ -20,7 +20,7 @@
     "holiday": {
       "heading": "Tatil Programları",
       "camps": "Kamplar (Salon/Açık Alan)",
-      "power": "Power Training"
+      "power": "PowerTraining"
     },
     "weekly": {
       "heading": "Haftalık Kurslar",
@@ -31,14 +31,14 @@
     },
     "individual": {
       "heading": "Bireysel Kurslar",
-      "basic": "1:1 Antrenman",
-      "athletik": "1:1 Atletik Antrenman",
-      "goalkeeper": "1:1 Kaleci Antrenmanı"
+      "basic": "Bireysel Futbol Antrenmanı",
+      "athletik": "Bireysel Atletik Antrenman",
+      "goalkeeper": "Bireysel Kaleci Antrenmanı"
     },
     "club": {
       "heading": "Kulüp Programları",
       "rent": "Rent-a-Coach",
-      "camps": "Antrenman Kampları",
+      "camps": "Kulüp Antrenman Kampı",
       "education": "Antrenör Eğitimi"
     }
   }
