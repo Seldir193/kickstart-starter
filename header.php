@@ -46,8 +46,8 @@
            data-i18n-attr="aria-label"
   data-i18n="language.label"
         >
-          <span class="language-switcher__label" data-i18n="language.en">English</span>
-        
+          
+        <span class="language-switcher__label">English</span>
 
           <span class="ks-selectbox__chevron" aria-hidden="true">
   <img
