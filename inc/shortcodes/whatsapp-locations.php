@@ -71,7 +71,8 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
           rawurlencode($a['text']),
           rawurlencode($campaign)
         ); ?>
-        <section class="ks-sec ks-wa-strip ks-wa-single" aria-label="<?php echo esc_attr(sprintf('WhatsApp Kontakt %s', $label)); ?>">
+        <!-- <section class="ks-sec ks-wa-strip ks-wa-single" aria-label="<?php echo esc_attr(sprintf('WhatsApp Kontakt %s', $label)); ?>"> -->
+          <section id="whatsapp-locations" class="ks-sec ks-wa-strip ks-wa-single" aria-label="<?php echo esc_attr(sprintf('WhatsApp Kontakt %s', $label)); ?>">
           <div class="container ks-wa-grid">
             <p class="ks-wa-text">
               Fragen? <strong>Schreib uns auf WhatsApp.</strong>
@@ -92,7 +93,8 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
 
       // ---------- LIST: (falls du die alte Listen-Ansicht brauchst) ----------
       if ($mode === 'list') { ?>
-        <section class="ks-sec ks-wa-strip ks-wa-multi" aria-label="WhatsApp Kontakt je Standort">
+        <!-- <section class="ks-sec ks-wa-strip ks-wa-multi" aria-label="WhatsApp Kontakt je Standort"> -->
+          <section id="whatsapp-locations" class="ks-sec ks-wa-strip ks-wa-multi" aria-label="WhatsApp Kontakt je Standort">
           <div class="container ks-wa-grid">
             <p class="ks-wa-text">
               Fragen? <strong>Wähle deinen Standort & schreib uns auf WhatsApp.</strong>
@@ -129,7 +131,8 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
       // ---------- DROPDOWN: Custom-Dropdown + Button ----------
       $uid = 'wa_'.wp_generate_uuid4();
       ?>
-      <section class="ks-sec ks-wa-strip ks-wa-dropdown" aria-label="WhatsApp Kontakt je Standort">
+      <!-- <section class="ks-sec ks-wa-strip ks-wa-dropdown" aria-label="WhatsApp Kontakt je Standort"> -->
+        <section id="whatsapp-locations" class="ks-sec ks-wa-strip ks-wa-dropdown" aria-label="WhatsApp Kontakt je Standort">
         <div class="container ks-wa-inner">
           <p class="ks-wa-text">
             Fragen? <strong>Wähle deinen Standort & schreib uns auf WhatsApp.</strong>

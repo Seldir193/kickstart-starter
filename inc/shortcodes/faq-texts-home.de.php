@@ -1,24 +1,23 @@
 <?php
-// FAQ-Texte NUR für Startseite (ks_home)
 
 return [
   [
-    'Wo finden eure Trainingsangebote statt?',
-    'Unsere Trainings finden auf den Sportanlagen unserer Partnervereine und in den Soccerhallen in und um NRW statt.'
+    'An welchen Standorten trainieren wir?',
+    'Unsere Trainingsangebote finden an ausgewählten Standorten, auf Sportanlagen von Partnervereinen sowie in geeigneten Hallen in NRW statt. Je nach Kursformat, Altersgruppe und Saison wählen wir die Trainingsumgebung so, dass Kinder und Jugendliche unter guten Bedingungen trainieren können.'
   ],
 
   [
-    'Wer kann teilnehmen?',
-    'Kinder, Jugendliche und Erwachsene – wir haben passende Gruppen für alle Altersstufen.'
+    'Für wen sind unsere Angebote geeignet?',
+    'Unsere Angebote richten sich an Kinder und Jugendliche in unterschiedlichen Alters- und Leistungsstufen. Je nach Format gibt es passende Gruppen für Einsteigerinnen und Einsteiger sowie für Kinder, die sich gezielt sportlich weiterentwickeln möchten.'
   ],
 
   [
-    'Wie bekomme ich die neuesten Informationen?',
-    'Abonniere unseren Newsletter oder folge uns auf Social Media.'
+    'Wie bleibe ich über neue Angebote informiert?',
+    'Aktuelle Informationen zu Kursen, Camps, freien Plätzen und organisatorischen Änderungen findest du direkt auf unserer Website. Zusätzlich informieren wir regelmäßig über neue Angebote und wichtige Hinweise in unseren Kanälen.'
   ],
 
   [
-    'Wie kann ich Mitglied werden?',
-    'Buche ein Schnuppertraining – wir erklären dir alles weitere vor Ort.'
+    'Wie funktioniert der Einstieg bei uns?',
+    'Der Einstieg ist unkompliziert. Du kannst zunächst ein passendes Angebot auswählen und eine Anfrage oder Buchung absenden. Anschließend erhältst du alle wichtigen Informationen zum Ablauf, zu Terminen und zu den nächsten Schritten.'
   ],
 ];

@@ -150,17 +150,35 @@ if (!function_exists('ks_render_faq_section')) {
 
     $theme_uri = get_stylesheet_directory_uri();
 
+    // $defaults = [
+    //   'section_id'    => 'faq',
+    //   'wrapper_class' => 'container ks-home-faq',
+    //   'title'         => 'Häufig gestellte Fragen',
+    //   'kicker'        => 'FAQ',
+    //   'watermark'     => 'FAQ',
+    //   'use_video'     => false,
+    //   'video_embed'   => '',
+    //   'image_src'     => '',               
+    //   'image_class'   => 'fr-faq__image',  
+    // ];
+
     $defaults = [
-      'section_id'    => 'faq',
-      'wrapper_class' => 'container ks-home-faq',
-      'title'         => 'Häufig gestellte Fragen',
-      'kicker'        => 'FAQ',
-      'watermark'     => 'FAQ',
-      'use_video'     => false,
-      'video_embed'   => '',
-      'image_src'     => '',               // optionales Bild
-      'image_class'   => 'fr-faq__image',  // Standard-Klasse fürs Bild
-    ];
+  'section_id'         => 'faq',
+  'wrapper_class'      => 'container ks-home-faq',
+  'title'              => 'Häufige Fragen',
+  'kicker'             => 'Gut zu wissen',
+  'watermark'          => 'FAQ',
+  'use_video'          => false,
+  'video_embed'        => '',
+  'image_src'          => '',
+  'image_class'        => 'fr-faq__image',
+  'side_card_enabled'  => true,
+  'side_card_kicker'   => 'Fragen offen?',
+  'side_card_title'    => 'Wir helfen dir gerne weiter',
+  'side_card_text'     => 'Wenn noch etwas unklar ist, melde dich direkt bei uns. Wir unterstützen dich gerne bei Fragen zu Angeboten, Anmeldung und Organisation.',
+  'side_card_button'   => 'Kontakt aufnehmen',
+  'side_card_href'     => '#kontakt',
+];
 
     $args = array_merge($defaults, $args);
 
@@ -179,7 +197,8 @@ if (!function_exists('ks_render_faq_section')) {
         </div>
 
         <!-- Linke Spalte: Akkordeon -->
-        <div>
+        <!-- <div> -->
+        <div class="ks-faq-section__acc">
           <?php foreach ($items as $index => $item):
             $question = $item[0] ?? '';
             $answer   = $item[1] ?? '';
@@ -195,21 +214,44 @@ if (!function_exists('ks_render_faq_section')) {
         </div>
 
         <!-- Rechte Spalte: Video ODER Bild -->
-        <?php if (!empty($args['use_video'])): ?>
-          <figure class="ks-dir-faq__media">
-            <div class="ks-vid ratio">
-              <?php echo $args['video_embed']; ?>
-            </div>
-          </figure>
-        <?php elseif (!empty($args['image_src'])): ?>
-          <figure class="<?php echo esc_attr($args['image_class']); ?>">
-            <img
-              src="<?php echo esc_url($args['image_src']); ?>"
-              alt=""
-              loading="lazy"
-              decoding="async">
-          </figure>
-        <?php endif; ?>
+         
+
+
+        <?php if (!empty($args['side_card_enabled'])): ?>
+  <aside class="ks-faq-section__side">
+    <div class="ks-faq-section__card">
+      <div class="ks-kicker ks-faq-section__card-kicker">
+        <?php echo esc_html($args['side_card_kicker']); ?>
+      </div>
+      <h3 class="ks-faq-section__card-title">
+        <?php echo esc_html($args['side_card_title']); ?>
+      </h3>
+      <p class="ks-faq-section__card-text">
+        <?php echo esc_html($args['side_card_text']); ?>
+      </p>
+      <a
+        class="ks-btn"
+        href="<?php echo esc_url($args['side_card_href']); ?>"
+      >
+        <?php echo esc_html($args['side_card_button']); ?>
+      </a>
+    </div>
+  </aside>
+<?php elseif (!empty($args['use_video'])): ?>
+  <figure class="ks-dir-faq__media">
+    <div class="ks-vid ratio">
+      <?php echo $args['video_embed']; ?>
+    </div>
+  </figure>
+<?php elseif (!empty($args['image_src'])): ?>
+  <figure class="<?php echo esc_attr($args['image_class']); ?>">
+    <img
+      src="<?php echo esc_url($args['image_src']); ?>"
+      alt=""
+      loading="lazy"
+      decoding="async">
+  </figure>
+<?php endif; ?>
 
       </div>
     </section>

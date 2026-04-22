@@ -1,25 +1,19 @@
 <?php
-
-/**
- * FAQ-Texte für die Franchise-Seite
- * Wird von ks_franchise / ks_render_faq_section genutzt.
- */
-
 return [
   [
-    'WIE HOCH SIND DIE STARTKOSTEN FÜR EIN MFS-FRANCHISE?',
-    'Die Höhe der Startkosten hängt vom jeweiligen Standort ab. Eine ausführliche Kostenaufstellung erhältst Du nach persönlichem Austausch.',
+    'WIE HOCH IST DIE ANFANGSINVESTITION FÜR EINEN STANDORT?',
+    'Die Höhe der Anfangsinvestition richtet sich nach Region, Umfang und geplanter Umsetzung. In einem persönlichen Gespräch zeigen wir transparent auf, welche Bausteine relevant sind und mit welchem Rahmen realistisch zu rechnen ist.',
   ],
   [
-    'WELCHE QUALIFIKATIONEN SIND ERFORDERLICH, UM FRANCHISE-PARTNER ZU WERDEN?',
-    'Eine Leidenschaft für Fußball, Erfahrung im Sport sowie in der Unternehmensführung und Freude am Umgang mit Kindern sind entscheidende Voraussetzungen.',
+    'WELCHE VORAUSSETZUNGEN SOLLTE ICH ALS PARTNER MITBRINGEN?',
+    'Wichtig sind Begeisterung für Fußball, ein professioneller Umgang mit Menschen, unternehmerisches Denken und die Bereitschaft, ein nachhaltiges Angebot für Kinder und Jugendliche aufzubauen. Erfahrungen im Sportbereich sind hilfreich, aber nicht der einzige entscheidende Faktor.',
   ],
   [
-    'WELCHE UNTERSTÜTZUNG BIETET DIE MFS IHREN FRANCHISE-PARTNERN?',
-    'Die MFS stellt umfassende Unterstützung bereit, darunter Schulungen, Marketingmaterialien, ein ausführliches Betriebshandbuch sowie kontinuierliche Beratung.',
+    'WIE WERDE ICH BEIM AUFBAU MEINES STANDORTS UNTERSTÜTZT?',
+    'Wir begleiten unsere Partner beim Aufbau ihres Standorts mit klaren Prozessen, Schulungen, erprobten Konzepten und laufendem Austausch. Dazu gehören unter anderem organisatorische Unterstützung, inhaltliche Leitlinien und Hilfe bei der Positionierung vor Ort.',
   ],
   [
-    'WIE KANN ICH WEITERE INFORMATIONEN ERHALTEN ODER EINEN FRANCHISE-ANTRAG STELLEN?',
-    'Besuchen Sie unsere Website und füllen Sie das Kontaktformular aus. Unser Team steht Ihnen gerne zur Verfügung, um Ihre Fragen zu beantworten.',
+    'WIE KANN ICH DEN NÄCHSTEN SCHRITT GEHEN?',
+    'Wenn du mehr erfahren möchtest, kannst du uns direkt über das Kontaktformular schreiben. Nach einem ersten Austausch besprechen wir gemeinsam, ob eine Partnerschaft zu deinen Zielen und zu unserem Konzept passt.',
   ],
 ];

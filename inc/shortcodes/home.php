@@ -382,15 +382,30 @@ if (!function_exists('ks_register_home_shortcode')) {
           $faq_video_embed = '<div class="ks-vid-ph" aria-hidden="true"></div>';
         }
 
+        // echo ks_render_faq_section($faq_items, [
+        //   'section_id' => 'faq',
+        //   'wrapper_class' => 'container ks-home-faq',
+        //   'title' => 'Antworten auf einen Blick',
+        //   'kicker' => 'Service',
+        //   'watermark' => 'SERVICE',
+        //   'use_video' => true,
+        //   'video_embed' => $faq_video_embed,
+        // ]);
+
         echo ks_render_faq_section($faq_items, [
-          'section_id' => 'faq',
-          'wrapper_class' => 'container ks-home-faq',
-          'title' => 'Antworten auf einen Blick',
-          'kicker' => 'Service',
-          'watermark' => 'SERVICE',
-          'use_video' => true,
-          'video_embed' => $faq_video_embed,
-        ]);
+  'section_id'         => 'faq',
+  'wrapper_class'      => 'container ks-home-faq',
+  'title'              => 'Häufige Fragen zur Fußballschule',
+  'kicker'             => 'Gut zu wissen',
+  'watermark'          => 'FAQ',
+  'side_card_enabled'  => true,
+  'side_card_kicker'   => 'Fragen offen?',
+  'side_card_title'    => 'Wir helfen dir gerne weiter',
+  'side_card_text'     => 'Wenn du Fragen zu Trainingsformaten, Anmeldung oder Abläufen hast, kannst du dich jederzeit direkt bei uns melden.',
+  'side_card_button'   => 'Kontakt aufnehmen',
+
+ 'side_card_href'     => esc_url(home_url('/#whatsapp-locations')),
+]);
       }
       ?>
 

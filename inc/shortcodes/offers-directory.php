@@ -549,16 +549,31 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
     $faq_video_embed = '<div class="ks-vid-ph" aria-hidden="true"></div>';
   }
 
-  if (!empty($faq_items)) {
+   if (!empty($faq_items)) {
+    // echo ks_render_faq_section($faq_items, [
+    //   'section_id'    => 'dir-faq',                             
+    //   'wrapper_class' => 'container ks-home-faq ks-dir-faq__grid',
+    //   'title'         => 'Häufig gestellte Fragen',
+    //   'kicker'        => 'FAQ',
+    //   'watermark'     => 'FAQ',                                 
+    //   'use_video'     => true,
+    //   'video_embed'   => $faq_video_embed,
+    // ]);
+
     echo ks_render_faq_section($faq_items, [
-      'section_id'    => 'dir-faq',                             // eigene ID
-      'wrapper_class' => 'container ks-home-faq ks-dir-faq__grid',
-      'title'         => 'Häufig gestellte Fragen',
-      'kicker'        => 'FAQ',
-      'watermark'     => 'FAQ',                                 // immer „FAQ“
-      'use_video'     => true,
-      'video_embed'   => $faq_video_embed,
-    ]);
+  'section_id'         => 'dir-faq',
+  'wrapper_class'      => 'container ks-home-faq ks-dir-faq__grid',
+  'title'              => 'Wichtige Fragen zum Angebot',
+  'kicker'             => 'Gut zu wissen',
+  'watermark'          => 'FAQ',
+  'side_card_enabled'  => true,
+  'side_card_kicker'   => 'Noch unsicher?',
+  'side_card_title'    => 'Wir beraten dich gerne',
+  'side_card_text'     => 'Wenn du Fragen zum Ablauf, zum passenden Format oder zur Buchung hast, unterstützen wir dich gerne persönlich.',
+  'side_card_button'   => 'Zum Kontakt',
+  'side_card_href'     => '#kontakt',
+]);
+
   }
 ?>
 
