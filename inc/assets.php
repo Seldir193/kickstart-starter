@@ -409,6 +409,20 @@ add_action('wp_enqueue_scripts', function () {
       );
     }
   }
+
+
+
+  $accordion_js = get_stylesheet_directory() . '/assets/js/ks-accordion.js';
+
+if (file_exists($accordion_js)) {
+  wp_enqueue_script(
+    'ks-accordion',
+    get_stylesheet_directory_uri() . '/assets/js/ks-accordion.js',
+    [],
+    filemtime($accordion_js),
+    true
+  );
+}
 });
 
 add_action('wp_enqueue_scripts', function () {

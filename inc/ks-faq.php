@@ -203,7 +203,9 @@ if (!function_exists('ks_render_faq_section')) {
             $question = $item[0] ?? '';
             $answer   = $item[1] ?? '';
           ?>
-            <details class="ks-acc" <?php echo $index === 0 ? 'open' : ''; ?>>
+            <!-- <details class="ks-acc" <?php echo $index === 0 ? 'open' : ''; ?>> -->
+            <details class="ks-acc"<?php echo $index === 0 ? ' open data-open-first="true"' : ''; ?>>
+                
               <summary><?php echo esc_html($question); ?></summary>
               <div class="ks-acc__body">
                 <?php echo nl2br( esc_html($answer) ); ?>
