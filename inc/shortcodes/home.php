@@ -112,6 +112,7 @@ if (file_exists($hero_split_abs)) {
       $icon1 = $theme_uri . '/assets/img/home/dfs-home-1.png';
       $icon2 = $theme_uri . '/assets/img/home/dfs-home-4.png';
       $icon3 = $theme_uri . '/assets/img/home/dfs-home-5.png';
+      $icon4 = $theme_uri . '/assets/img/home/individual-development.svg';
       $werte_target = home_url('/');
 
       $video_embed = wp_oembed_get('https://www.youtube.com/watch?v=KEWP2dELhrY');
@@ -305,6 +306,51 @@ if (file_exists($hero_split_abs)) {
   </div>
 </section>
 
+
+<section id="werte" class="ks-sec ks-py-56 ks-home-values">
+  <div class="container">
+    <div class="ks-title-wrap ks-home-values__title-wrap" data-bgword="HALTUNG">
+      <div class="ks-kicker">Unsere Haltung</div>
+      <h2 class="ks-dir__title">Was uns auszeichnet</h2>
+    </div>
+
+    <div class="ks-values ks-home-values__grid">
+      <a class="ks-value ks-home-values__card" href="<?php echo esc_url($werte_target); ?>">
+        <div class="icon-wrap ks-home-values__icon-wrap">
+          <img src="<?php echo esc_url($icon1); ?>" alt="" loading="lazy">
+        </div>
+       <h3>Spaß am Spiel</h3>
+<p>Fußball soll Freude machen und motivieren.</p>
+      </a>
+
+      <a class="ks-value ks-home-values__card" href="<?php echo esc_url($werte_target); ?>">
+        <div class="icon-wrap ks-home-values__icon-wrap">
+          <img src="<?php echo esc_url($icon2); ?>" alt="" loading="lazy">
+        </div>
+        <h3>Fachliche Qualität</h3>
+        <p>Wir arbeiten mit Struktur und Qualität.</p>
+      </a>
+
+      <a class="ks-value ks-home-values__card" href="<?php echo esc_url($werte_target); ?>">
+        <div class="icon-wrap ks-home-values__icon-wrap">
+          <img src="<?php echo esc_url($icon3); ?>" alt="" loading="lazy">
+        </div>
+        <h3>Starke Werte</h3>
+        <p>Wir stärken Kinder sportlich und menschlich.</p>
+      </a>
+
+      <a class="ks-value ks-home-values__card" href="<?php echo esc_url($werte_target); ?>">
+        <div class="icon-wrap ks-home-values__icon-wrap">
+          <img src="<?php echo esc_url($icon4); ?>" alt="" loading="lazy">
+        </div>
+        <h3>Gezielte Förderung</h3>
+        <p>Jedes Kind wird passend begleitet.</p>
+      </a>
+    </div>
+  </div>
+</section>
+    
+<!-- 
       <section id="werte" class="ks-sec ks-py-56 ks-home-values">
         <div class="container">
           <div class="ks-title-wrap" data-bgword="HALTUNG">
@@ -338,7 +384,7 @@ if (file_exists($hero_split_abs)) {
             </a>
           </div>
         </div>
-      </section>
+      </section>  -->
 
       <?php
       $faq_items = ks_get_faq_items('home');

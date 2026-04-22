@@ -68,6 +68,10 @@ add_action('wp_enqueue_scripts', function () {
     'path' => '/assets/css/ks-about.css',
     'deps' => ['kickstart-style', 'ks-utils'],
   ],
+  'home-values' => [
+  'path' => '/assets/css/ks-home-values.css',
+  'deps' => ['kickstart-style', 'ks-utils', 'ks-base'],
+],
   'trainer' => [
     'path' => '/assets/css/ks-trainer.css',
     'deps' => ['kickstart-style', 'ks-utils'],
