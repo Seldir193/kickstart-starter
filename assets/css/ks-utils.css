@@ -378,8 +378,8 @@ body {
 #faq,
 #dir-faq,
 #fr-faq {
-  --acc-plus: url("../img/home/plus.svg");
-  --acc-minus: url("../img/home/minus.svg");
+  --acc-plus: url("../img/home/chevron-down.svg");
+  --acc-minus: url("../img/home/chevron-up.svg");
 }
 
 #faq .ks-acc summary,
