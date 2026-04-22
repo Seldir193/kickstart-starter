@@ -27,14 +27,14 @@ if (!function_exists('ks_register_home_shortcode')) {
       }
 
       $hero_split_abs = $theme_dir . '/assets/css/ks-home-hero.css';
-if (file_exists($hero_split_abs)) {
-  wp_enqueue_style(
-    'ks-home-hero',
-    $theme_uri . '/assets/css/ks-home-hero.css',
-    ['ks-home'],
-    filemtime($hero_split_abs)
-  );
-}
+      if (file_exists($hero_split_abs)) {
+        wp_enqueue_style(
+          'ks-home-hero',
+          $theme_uri . '/assets/css/ks-home-hero.css',
+          ['ks-home'],
+          filemtime($hero_split_abs)
+        );
+      }
 
       $videos_css = $theme_dir . '/assets/css/ks-videos.css';
       if (file_exists($videos_css)) {
@@ -182,96 +182,92 @@ if (file_exists($hero_split_abs)) {
 <section id="home-hero" class="ks-home-hero ks-sec">
   <div class="container ks-home-hero__shell">
     <div class="ks-home-hero__intro">
-      <div class="ks-kicker">Dortmunder Fussball Schule</div>
-      <h1 class="ks-home-hero__brand-title">Fussball fördern. Kinder stärken.</h1>
-      <p class="ks-home-hero__brand-lead">
-        Moderne Trainingsangebote für Camps, Fördertraining, Kindergarten und Einzeltraining –
-        mit klarer Struktur, Freude am Spiel und persönlicher Entwicklung.
+      <div class="ks-kicker" data-i18n="home.hero.kicker">Dortmund Football School</div>
+      <h1 class="ks-home-hero__brand-title" data-i18n="home.hero.title">Build football skills. Strengthen children.</h1>
+      <p class="ks-home-hero__brand-lead" data-i18n="home.hero.lead">
+        Modern training programs for camps, development training, kindergarten and individual training –
+        with clear structure, joy of the game and personal growth.
       </p>
       <div class="ks-home-hero__brand-actions">
-        <a class="ks-btn ks-btn--dark" href="#wer-wir-sind">Mehr erfahren</a>
-        <a class="ks-btn" href="<?php echo esc_url($offers); ?>">Angebote entdecken</a>
+        <a class="ks-btn ks-btn--dark" href="#wer-wir-sind" data-i18n="home.hero.primaryButton">Learn more</a>
+        <a class="ks-btn" href="<?php echo esc_url($offers); ?>" data-i18n="home.hero.secondaryButton">Explore programs</a>
       </div>
     </div>
 
- <div class="ks-home-hero__side">
-  <nav class="ks-hero-tabs" aria-label="Programm-Auswahl">
-    <?php foreach ($slides as $i => $s): ?>
-      <button
-        type="button"
-        class="ks-hero-tab<?php echo $i === 0 ? ' is-active' : ''; ?>"
-        data-key="<?php echo esc_attr($s['key']); ?>"
-        data-title="<?php echo esc_attr($s['title']); ?>"
-        data-text="<?php echo esc_attr($s['detail']); ?>"
-        data-link="<?php echo esc_url($s['book']); ?>"
-        aria-selected="<?php echo $i === 0 ? 'true' : 'false'; ?>"
-      >
-        <span class="ks-hero-tab__label"><?php echo esc_html($s['label']); ?></span>
-      </button>
-    <?php endforeach; ?>
-  </nav>
+    <div class="ks-home-hero__side">
+      <nav class="ks-hero-tabs" aria-label="Program selection">
+        <?php foreach ($slides as $i => $s): ?>
+          <button
+            type="button"
+            class="ks-hero-tab<?php echo $i === 0 ? ' is-active' : ''; ?>"
+            data-key="<?php echo esc_attr($s['key']); ?>"
+            data-title="<?php echo esc_attr($s['title']); ?>"
+            data-text="<?php echo esc_attr($s['detail']); ?>"
+            data-link="<?php echo esc_url($s['book']); ?>"
+            aria-selected="<?php echo $i === 0 ? 'true' : 'false'; ?>"
+          >
+            <span class="ks-hero-tab__label"><?php echo esc_html($s['label']); ?></span>
+          </button>
+        <?php endforeach; ?>
+      </nav>
 
-  <div class="ks-home-hero__media">
-    <div class="ks-home-hero__overlay">
-      <div class="ks-kicker">Aktives Angebot</div>
-      <h2 class="ks-home-hero__course-title"><?php echo esc_html($first_slide['title']); ?></h2>
-      <p class="ks-home-hero__course-text"><?php echo esc_html($first_slide['detail']); ?></p>
-      <div class="ks-home-hero__course-actions">
-        <a
-          class="ks-btn ks-btn--dark ks-home-hero__course-link"
-          href="<?php echo esc_url($first_slide['book']); ?>"
-        >Jetzt buchen</a>
+      <div class="ks-home-hero__media">
+        <div class="ks-home-hero__overlay">
+          <div class="ks-kicker" data-i18n="home.hero.activeOffer">Active offer</div>
+          <h2 class="ks-home-hero__course-title"><?php echo esc_html($first_slide['title']); ?></h2>
+          <p class="ks-home-hero__course-text"><?php echo esc_html($first_slide['detail']); ?></p>
+          <div class="ks-home-hero__course-actions">
+            <a
+              class="ks-btn ks-btn--dark ks-home-hero__course-link"
+              href="<?php echo esc_url($first_slide['book']); ?>"
+              data-i18n="home.hero.bookButton"
+            >Book now</a>
+          </div>
+        </div>
+
+        <?php foreach ($slides as $i => $s): ?>
+          <div
+            class="ks-home-hero__media-item<?php echo $i === 0 ? ' is-active' : ''; ?>"
+            data-key="<?php echo esc_attr($s['key']); ?>"
+          >
+            <img
+              class="ks-home-hero__img"
+              src="<?php echo esc_url($s['img']); ?>"
+              alt="<?php echo esc_attr($s['title']); ?>"
+            >
+          </div>
+        <?php endforeach; ?>
       </div>
     </div>
-
-    <?php foreach ($slides as $i => $s): ?>
-      <div
-        class="ks-home-hero__media-item<?php echo $i === 0 ? ' is-active' : ''; ?>"
-        data-key="<?php echo esc_attr($s['key']); ?>"
-      >
-        <img
-          class="ks-home-hero__img"
-          src="<?php echo esc_url($s['img']); ?>"
-          alt="<?php echo esc_attr($s['title']); ?>"
-        >
-      </div>
-    <?php endforeach; ?>
   </div>
-</div>
 </section>
       
 <section id="wer-wir-sind" class="ks-sec ks-py-48 ks-home-about">
   <div class="container ks-home-about__grid">
     <div class="ks-home-about__content">
-      <div class="ks-kicker" data-i18n="home.aboutPreview.kicker">Unsere Philosophie</div>
-      
+      <div class="ks-kicker" data-i18n="home.aboutPreview.kicker">Our Philosophy</div>
 
-     <!-- <h2 class="ks-dir__title ks-dir__title--about" data-i18n="home.aboutPreview.title">
-  Die Dortmunder Fussballschule
-</h2> -->
-
-<h2 class="ks-dir__title ks-dir__title--split">
-  <span class="ks-dir__title-line" data-i18n="home.aboutPreview.titleLine1">
-    Die Dortmunder
-  </span>
-  <span class="ks-dir__title-line" data-i18n="home.aboutPreview.titleLine2">
-    Fussballschule
-  </span>
-</h2>
+      <h2 class="ks-dir__title ks-dir__title--split">
+        <span class="ks-dir__title-line" data-i18n="home.aboutPreview.titleLine1">
+          Dortmund
+        </span>
+        <span class="ks-dir__title-line" data-i18n="home.aboutPreview.titleLine2">
+          Football School
+        </span>
+      </h2>
 
       <p class="ks-home-about__lead" data-i18n="home.aboutPreview.lead">
-        Wir begleiten Kinder, Jugendliche und Vereine mit einem klaren Trainingsansatz,
-        der sportliche Entwicklung, Freude am Spiel und eine positive Lernumgebung verbindet.
+        We support children, young people, and clubs with a clear training approach that combines athletic development, enjoyment of the game, and a positive learning environment.
       </p>
 
       <div class="ks-home-about__points">
         <div class="ks-home-about__point">
-          <strong data-i18n="home.aboutPreview.point1Title">Strukturiert</strong>
-          <span data-i18n="home.aboutPreview.point1Text">Klare Inhalte, moderne Trainingsorganisation und verständliche Abläufe.</span>
+          <strong data-i18n="home.aboutPreview.point1Title">Structured</strong>
+          <span data-i18n="home.aboutPreview.point1Text">Clear content, modern training organization, and easy-to-understand processes.</span>
         </div>
         <div class="ks-home-about__point">
-          <strong data-i18n="home.aboutPreview.point2Title">Individuell</strong>
-          <span data-i18n="home.aboutPreview.point2Text">Förderung mit Blick auf Alter, Niveau und Entwicklung.</span>
+          <strong data-i18n="home.aboutPreview.point2Title">Individual</strong>
+          <span data-i18n="home.aboutPreview.point2Text">Support tailored to age, level, and development.</span>
         </div>
       </div>
 
@@ -280,112 +276,102 @@ if (file_exists($hero_split_abs)) {
           class="ks-btn"
           href="<?php echo esc_url($about_url); ?>"
           data-i18n="home.aboutPreview.button"
-        >Mehr erfahren</a>
+        >Learn more</a>
       </div>
     </div>
 
     <div class="ks-home-about__media">
-      <div class="ks-home-about__badge" data-i18n="home.aboutPreview.mediaBadge">Einblick in unsere Arbeit</div>
+      <div class="ks-home-about__badge" data-i18n="home.aboutPreview.mediaBadge">Insight into our work</div>
       <div class="ks-vid ratio"><?php echo $video_embed; ?></div>
 
       <p class="ks-home-about__caption" data-i18n="home.aboutPreview.mediaCaption">
-        Einblicke in unsere Arbeit mit Kindern, Jugendlichen und Vereinen.
+        Insights into our work with children, young people, and clubs.
       </p>
 
       <div
         class="ks-home-about__chips"
-        aria-label="Schwerpunkte"
+        aria-label="Focus areas"
         data-i18n-attr="aria-label"
         data-i18n="home.aboutPreview.chipsLabel"
       >
-        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip1">Kinder &amp; Jugendliche</span>
-        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip2">Individuelle Förderung</span>
-        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip3">Vereine &amp; Teams</span>
+        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip1">Children &amp; Young People</span>
+        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip2">Individual Support</span>
+        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip3">Clubs &amp; Teams</span>
       </div>
     </div>
   </div>
 </section>
 
-
 <section id="werte" class="ks-sec ks-py-56 ks-home-values">
   <div class="container">
-    <div class="ks-title-wrap ks-home-values__title-wrap" data-bgword="HALTUNG">
-      <div class="ks-kicker">Unsere Haltung</div>
-      <h2 class="ks-dir__title">Was uns auszeichnet</h2>
+    <div
+      class="ks-title-wrap ks-home-values__title-wrap"
+      data-bgword="HALTUNG"
+    >
+      <div class="ks-kicker" data-i18n="home.values.kicker">
+        Our mindset
+      </div>
+      <h2 class="ks-dir__title" data-i18n="home.values.title">
+        What defines us
+      </h2>
     </div>
 
     <div class="ks-values ks-home-values__grid">
-      <a class="ks-value ks-home-values__card" href="<?php echo esc_url($werte_target); ?>">
+      <a
+        class="ks-value ks-home-values__card"
+        href="<?php echo esc_url($werte_target); ?>"
+      >
         <div class="icon-wrap ks-home-values__icon-wrap">
           <img src="<?php echo esc_url($icon1); ?>" alt="" loading="lazy">
         </div>
-       <h3>Spaß am Spiel</h3>
-<p>Fußball soll Freude machen und motivieren.</p>
+        <h3 data-i18n="home.values.card1Title">Joy of the game</h3>
+        <p data-i18n="home.values.card1Text">
+          Football should inspire and motivate.
+        </p>
       </a>
 
-      <a class="ks-value ks-home-values__card" href="<?php echo esc_url($werte_target); ?>">
+      <a
+        class="ks-value ks-home-values__card"
+        href="<?php echo esc_url($werte_target); ?>"
+      >
         <div class="icon-wrap ks-home-values__icon-wrap">
           <img src="<?php echo esc_url($icon2); ?>" alt="" loading="lazy">
         </div>
-        <h3>Fachliche Qualität</h3>
-        <p>Wir arbeiten mit Struktur und Qualität.</p>
+        <h3 data-i18n="home.values.card2Title">Professional quality</h3>
+        <p data-i18n="home.values.card2Text">
+          We work with structure and quality.
+        </p>
       </a>
 
-      <a class="ks-value ks-home-values__card" href="<?php echo esc_url($werte_target); ?>">
+      <a
+        class="ks-value ks-home-values__card"
+        href="<?php echo esc_url($werte_target); ?>"
+      >
         <div class="icon-wrap ks-home-values__icon-wrap">
           <img src="<?php echo esc_url($icon3); ?>" alt="" loading="lazy">
         </div>
-        <h3>Starke Werte</h3>
-        <p>Wir stärken Kinder sportlich und menschlich.</p>
+        <h3 data-i18n="home.values.card3Title">Strong values</h3>
+        <p data-i18n="home.values.card3Text">
+          We strengthen children in sport and life.
+        </p>
       </a>
 
-      <a class="ks-value ks-home-values__card" href="<?php echo esc_url($werte_target); ?>">
+      <a
+        class="ks-value ks-home-values__card"
+        href="<?php echo esc_url($werte_target); ?>"
+      >
         <div class="icon-wrap ks-home-values__icon-wrap">
           <img src="<?php echo esc_url($icon4); ?>" alt="" loading="lazy">
         </div>
-        <h3>Gezielte Förderung</h3>
-        <p>Jedes Kind wird passend begleitet.</p>
+        <h3 data-i18n="home.values.card4Title">Targeted support</h3>
+        <p data-i18n="home.values.card4Text">
+          Every child is supported appropriately.
+        </p>
       </a>
     </div>
   </div>
 </section>
     
-<!-- 
-      <section id="werte" class="ks-sec ks-py-56 ks-home-values">
-        <div class="container">
-          <div class="ks-title-wrap" data-bgword="HALTUNG">
-            <div class="ks-kicker">Unser Anspruch</div>
-            <h2 class="ks-dir__title">Wofür wir stehen</h2>
-          </div>
-
-          <div class="ks-values">
-            <a class="ks-value" href="<?php echo esc_url($werte_target); ?>">
-              <div class="icon-wrap">
-                <img src="<?php echo esc_url($icon1); ?>" alt="" loading="lazy">
-              </div>
-              <h3>Spass &amp; Freude</h3>
-              <p>Der Spaß am Fußball steht bei uns an erster Stelle und prägt jede Trainingseinheit.</p>
-            </a>
-
-            <a class="ks-value" href="<?php echo esc_url($werte_target); ?>">
-              <div class="icon-wrap">
-                <img src="<?php echo esc_url($icon2); ?>" alt="" loading="lazy">
-              </div>
-              <h3>Sportliches Know-how</h3>
-              <p>Wir arbeiten mit Struktur, Qualität und regelmäßiger Weiterbildung für modernes Training.</p>
-            </a>
-
-            <a class="ks-value" href="<?php echo esc_url($werte_target); ?>">
-              <div class="icon-wrap">
-                <img src="<?php echo esc_url($icon3); ?>" alt="" loading="lazy">
-              </div>
-              <h3>Vorbilder</h3>
-              <p>Unsere Arbeit soll Kinder und Jugendliche sportlich fördern und menschlich stärken.</p>
-            </a>
-          </div>
-        </div>
-      </section>  -->
-
       <?php
       $faq_items = ks_get_faq_items('home');
 
@@ -469,3 +455,19 @@ if (file_exists($hero_split_abs)) {
 
   add_action('init', 'ks_register_home_shortcode');
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

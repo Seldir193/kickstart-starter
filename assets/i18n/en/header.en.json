@@ -59,6 +59,27 @@
       "chip1": "Children & Young People",
       "chip2": "Individual Support",
       "chip3": "Clubs & Teams"
+    },
+    "hero": {
+      "kicker": "Dortmund Football School",
+      "title": "Build football skills. Strengthen children.",
+      "lead": "Modern training programs for camps, development training, kindergarten and individual training – with clear structure, joy of the game and personal growth.",
+      "primaryButton": "Learn more",
+      "secondaryButton": "Explore programs",
+      "activeOffer": "Active offer",
+      "bookButton": "Book now"
+    },
+    "values": {
+      "kicker": "Our mindset",
+      "title": "What defines us",
+      "card1Title": "Joy of the game",
+      "card1Text": "Football should inspire and motivate.",
+      "card2Title": "Professional quality",
+      "card2Text": "We work with structure and quality.",
+      "card3Title": "Strong values",
+      "card3Text": "We strengthen children in sport and life.",
+      "card4Title": "Targeted support",
+      "card4Text": "Every child is supported appropriately."
     }
   }
 }

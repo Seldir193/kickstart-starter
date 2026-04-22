@@ -59,6 +59,27 @@
       "chip1": "Kinder & Jugendliche",
       "chip2": "Individuelle Förderung",
       "chip3": "Vereine & Teams"
+    },
+    "hero": {
+      "kicker": "Dortmunder Fussball Schule",
+      "title": "Fussball fördern. Kinder stärken.",
+      "lead": "Moderne Trainingsangebote für Camps, Fördertraining, Kindergarten und Einzeltraining – mit klarer Struktur, Freude am Spiel und persönlicher Entwicklung.",
+      "primaryButton": "Mehr erfahren",
+      "secondaryButton": "Angebote entdecken",
+      "activeOffer": "Aktives Angebot",
+      "bookButton": "Jetzt buchen"
+    },
+    "values": {
+      "kicker": "Unsere Haltung",
+      "title": "Was uns auszeichnet",
+      "card1Title": "Freude am Spiel",
+      "card1Text": "Fußball soll Freude machen und motivieren.",
+      "card2Title": "Fachliche Qualität",
+      "card2Text": "Wir arbeiten mit Struktur und Qualität.",
+      "card3Title": "Starke Werte",
+      "card3Text": "Wir stärken Kinder sportlich und menschlich.",
+      "card4Title": "Gezielte Förderung",
+      "card4Text": "Jedes Kind wird passend begleitet."
     }
   }
 }

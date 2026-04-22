@@ -59,6 +59,27 @@
       "chip1": "Çocuklar & Gençler",
       "chip2": "Bireysel Destek",
       "chip3": "Kulüpler & Takımlar"
+    },
+    "hero": {
+      "kicker": "Dortmund Futbol Okulu",
+      "title": "Futbolu geliştir. Çocukları güçlendir.",
+      "lead": "Kamplar, gelişim antrenmanı, anaokulu ve bireysel antrenman için modern programlar – net yapı, oyundan keyif alma ve kişisel gelişim ile.",
+      "primaryButton": "Daha fazla bilgi",
+      "secondaryButton": "Programları keşfet",
+      "activeOffer": "Aktif program",
+      "bookButton": "Şimdi rezervasyon yap"
+    },
+    "values": {
+      "kicker": "Yaklaşımımız",
+      "title": "Bizi öne çıkaran",
+      "card1Title": "Oyundan keyif",
+      "card1Text": "Futbol motive etmeli ve keyif vermeli.",
+      "card2Title": "Profesyonel kalite",
+      "card2Text": "Planlı ve kaliteli şekilde çalışıyoruz.",
+      "card3Title": "Güçlü değerler",
+      "card3Text": "Çocukları sportif ve kişisel yönden güçlendiriyoruz.",
+      "card4Title": "Hedefli destek",
+      "card4Text": "Her çocuk uygun şekilde desteklenir."
     }
   }
 }
