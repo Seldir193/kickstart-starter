@@ -43,6 +43,34 @@
           "text": "Develop your location through exchange, standards and collaboration."
         }
       }
+    },
+    "faq": {
+      "title": "Questions About the Partnership",
+      "kicker": "Good to know",
+      "sideCard": {
+        "kicker": "Interested?",
+        "title": "Let’s start a conversation",
+        "text": "If you would like to learn more about a partnership, we will gladly guide you through the next step.",
+        "button": "Contact us"
+      },
+      "items": [
+        {
+          "question": "HOW HIGH IS THE INITIAL INVESTMENT FOR A LOCATION?",
+          "answer": "The amount of the initial investment depends on the region, scope, and planned implementation. In a personal conversation, we transparently explain which building blocks are relevant and what kind of framework can realistically be expected."
+        },
+        {
+          "question": "WHAT REQUIREMENTS SHOULD I BRING AS A PARTNER?",
+          "answer": "Important qualities include enthusiasm for football, a professional approach to working with people, entrepreneurial thinking, and the willingness to build a sustainable offer for children and young people. Experience in sports is helpful, but not the only decisive factor."
+        },
+        {
+          "question": "HOW WILL I BE SUPPORTED WHEN BUILDING MY LOCATION?",
+          "answer": "We support our partners in building their location with clear processes, training, proven concepts, and ongoing exchange. This includes organisational support, content guidelines, and help with local positioning."
+        },
+        {
+          "question": "HOW CAN I TAKE THE NEXT STEP?",
+          "answer": "If you would like to learn more, you can contact us directly through the contact form. After an initial conversation, we will discuss together whether a partnership fits your goals and our concept."
+        }
+      ]
     }
   }
 }

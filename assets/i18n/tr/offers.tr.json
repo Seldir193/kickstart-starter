@@ -1,0 +1,316 @@
+{
+  "offers": {
+    "faq": {
+      "common": {
+        "title": "Program hakkında önemli sorular",
+        "kicker": "Bilmekte fayda var",
+        "sideCard": {
+          "kicker": "Hâlâ emin değil misiniz?",
+          "title": "Size memnuniyetle yardımcı oluruz",
+          "text": "Süreç, uygun format veya rezervasyonla ilgili sorularınız varsa size memnuniyetle kişisel olarak yardımcı oluruz.",
+          "button": "İletişime geç"
+        }
+      },
+      "foerdertraining": {
+        "items": [
+          {
+            "question": "Gelişim antrenmanı nerede, ne zaman ve ne kadar sürer?",
+            "answer": "Lokasyon ve saat bilgilerini yukarıdaki program kartımızda bulabilirsiniz. Size yakın antrenmanı seçin ve deneme antrenmanı talebi gönderin. En kısa sürede sizinle iletişime geçip bir deneme tarihi ayarlıyoruz. Gelişim antrenmanımız haftada bir kez 60 dakika sürer. Tatil dönemlerinde ve resmi tatillerde antrenman yapılmaz."
+          },
+          {
+            "question": "Gelişim antrenmanının ücreti nedir?",
+            "answer": "Antrenmanın aylık ücreti 50€’dur. Kardeş çocuklar için ücret aylık 40€’ya düşer."
+          },
+          {
+            "question": "Hangi ekipmana ihtiyacım var?",
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+          },
+          {
+            "question": "Kayıt ve iptal şartları nasıldır?",
+            "answer": "Deneme antrenmanı ücretsizdir. Deneme için kayıt formu eksiksiz doldurulup imzalanmalı ve antrenöre teslim edilmeli ya da e-posta ile gönderilmelidir. Sözleşme ancak katılımı yazılı olarak onayladığımızda geçerli olur. İptal süresi, iptalin bize ulaşmasından itibaren 2 aydır."
+          },
+          {
+            "question": "Hasta veya sakat olursam ne olur?",
+            "answer": "Lütfen bize e-posta veya telefonla bilgi verin. Çocuğunuzun devamsızlığını birlikte değerlendiririz."
+          },
+          {
+            "question": "Resmi tatillerde, okul tatillerinde veya okul olmayan günlerde ne olur?",
+            "answer": "Resmi tatillerde, okul olmayan günlerde ve okul tatillerinde düzenli kurs programı yapılmaz."
+          }
+        ]
+      },
+      "kindergarten": {
+        "items": [
+          {
+            "question": "Futbol anaokulu nerede, ne zaman ve ne kadar sürer?",
+            "answer": "Lokasyon ve saat bilgilerini yukarıdaki program kartımızda bulabilirsiniz. Size yakın antrenmanı seçin ve deneme talebi gönderin. En kısa sürede sizinle iletişime geçip bir deneme tarihi ayarlıyoruz. Futbol anaokulumuz haftada bir kez 60 dakika sürer. Tatil dönemlerinde ve resmi tatillerde antrenman yapılmaz."
+          },
+          {
+            "question": "Futbol anaokulunun ücreti nedir?",
+            "answer": "Antrenmanın aylık ücreti 40€’dur. Kardeş çocuklar için ücret aylık 30€’ya düşer."
+          },
+          {
+            "question": "Ebeveynler izleyebilir mi?",
+            "answer": "Özellikle en küçük çocuklar için güven ve yön bulma açısından ebeveynlerin antrenmanda bulunması çok faydalıdır. Çocuklar antrenmanda serbestçe hareket edebilir ve anne babalarını görmek isteyip istemediklerine ya da tamamen antrenmana odaklanacaklarına kendileri karar verebilir."
+          },
+          {
+            "question": "Hangi ekipmana ihtiyacım var?",
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+          },
+          {
+            "question": "Kayıt ve iptal şartları nasıldır?",
+            "answer": "Deneme antrenmanı ücretsizdir. Deneme için kayıt formu eksiksiz doldurulmalıdır. Sözleşme ancak katılımı yazılı olarak onayladığımızda geçerli olur. İptal süresi, iptalin bize ulaşmasından itibaren 2 aydır."
+          },
+          {
+            "question": "Hasta veya sakat olursam ne olur?",
+            "answer": "Lütfen bize e-posta veya telefonla bilgi verin. Çocuğun devamsızlığını birlikte değerlendiririz."
+          },
+          {
+            "question": "Resmi tatillerde, okul olmayan günlerde ve okul tatillerinde ne olur?",
+            "answer": "Resmi tatillerde, okul olmayan günlerde ve okul tatillerinde düzenli kurs programı yapılmaz."
+          }
+        ]
+      },
+      "powertraining": {
+        "items": [
+          {
+            "question": "Powertraining nasıl işler?",
+            "answer": "Antrenman 120 dakika sürer ve her biri 30 dakikalık dört bölüme ayrılır. İçerikler dayanıklılık çalışması, şutlarla koordinasyon, şutlarla teknik, bire bir antrenman ve oyun formlarıdır. Tüm bölümler alçak ve yarı yüksek şutlar ile yüksek ve alçak topların kontrolünü de içerir."
+          },
+          {
+            "question": "Powertraining ücreti nedir ve neler dahildir?",
+            "answer": "Powertraining ücreti 35€’dur."
+          },
+          {
+            "question": "Hangi ekipman gerekir?",
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı (gerektiğinde suni çim ayakkabısı veya salon ayakkabısı) ve yeterli içecek."
+          },
+          {
+            "question": "Bir grupta kaç çocuk olur?",
+            "answer": "Maksimum 10 oyuncu."
+          },
+          {
+            "question": "Kısa süre kala iptal edersem ne olur?",
+            "answer": "Powertraining katılımı 1 günden daha önce iptal edilirse ücretsizdir. Randevudan 24 saatten daha az süre önce yapılan iptallerde kısa sürede yedek oyuncu bulunamadığı için 35€ tutarın tamamı tahsil edilir."
+          }
+        ]
+      },
+      "camp": {
+        "items": [
+          {
+            "question": "Kamp nasıl işler?",
+            "answer": "Antrenman saatleri 09:00–13:30 arasındadır ve teknik, taktik ile oyun formlarını içerir. Öğle arası 11:15–12:00 arasındadır. Son gün final antrenmanı veya turnuva yapılır. Kampa göre süre 3 ila 5 gündür."
+          },
+          {
+            "question": "Kampın ücreti nedir ve neler dahildir?",
+            "answer": "Fiyat teklife göre değişir. Tipik hizmetler arasında 09:00–13:30 antrenman programı, günlük gözetim, teklife bağlı forma veya antrenman tişörtü ve son gün final turnuvası bulunur."
+          },
+          {
+            "question": "Çocuğumu en erken ne zaman bırakabilirim?",
+            "answer": "Çocuklar genelde 08:45’ten itibaren alanda gözetim altına alınabilir. Ayrıntılar ilgili kamp teklifinde yer alır."
+          },
+          {
+            "question": "Hangi ekipman gerekir?",
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı veya salon ayakkabısı, havlu, su matarası ve güneş koruması. Çocuklar yiyeceklerini kendileri getirir."
+          },
+          {
+            "question": "Bir grupta kaç çocuk olur? Arkadaşlar aynı grupta kalabilir mi?",
+            "answer": "Lokasyona göre bir grupta yaklaşık 10–12 çocuk bulunur. Grup taleplerini mümkün olduğunca dikkate almaya çalışırız."
+          },
+          {
+            "question": "Kısa süre kala iptal edersem ne olur?",
+            "answer": "Başarılı kayıt sonrası kamp başlangıcından 7 gün öncesine kadar ücretsiz iptal mümkündür. Daha geç iptallerde yerler kısa sürede yeniden verilemediği için tutarın tamamı tahsil edilir."
+          }
+        ]
+      },
+      "torwarttraining": {
+        "items": [
+          {
+            "question": "Kaleci antrenmanı nerede ve ne zaman yapılır?",
+            "answer": "Hem yer hem de zaman telefonla bireysel olarak ayarlanabilir."
+          },
+          {
+            "question": "Bunun için hangi ekipmana ihtiyacım var?",
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, kaleci eldiveni, futbol ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+          },
+          {
+            "question": "Kaleci antrenörümü seçebilir miyim?",
+            "answer": "Elbette, tercih ettiğiniz antrenörü mümkün olduğunca karşılamaya çalışırız."
+          },
+          {
+            "question": "Hasta veya sakat olursam ne olur?",
+            "answer": "Bireysel kaleci antrenmanı randevudan 24 saat öncesine kadar ücretsiz iptal edilebilir. Aksi halde, antrenörleri bu kadar kısa sürede başka yerde görevlendiremediğimiz için tam ücret tahsil edilir."
+          }
+        ]
+      },
+      "personaltraining": {
+        "items": [
+          {
+            "question": "Bireysel antrenman nerede ve ne zaman yapılır?",
+            "answer": "Hem yer hem de zaman telefonla bireysel olarak ayarlanabilir."
+          },
+          {
+            "question": "Bunun için hangi ekipmana ihtiyacım var?",
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol veya suni çim ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+          },
+          {
+            "question": "Antrenörümü seçebilir miyim?",
+            "answer": "Elbette, tercih ettiğiniz antrenörü mümkün olduğunca karşılamaya çalışırız."
+          },
+          {
+            "question": "Hasta veya sakat olursam ne olur?",
+            "answer": "Bireysel antrenman randevudan 24 saat öncesine kadar ücretsiz iptal edilebilir. Aksi halde, antrenörleri bu kadar kısa sürede başka yerde görevlendiremediğimiz için tam ücret tahsil edilir."
+          }
+        ]
+      },
+      "foerdertraining_torwart": {
+        "items": [
+          {
+            "question": "Kaleci gelişim antrenmanı nerede, ne zaman ve ne kadar sürer?",
+            "answer": "Lokasyon ve saat bilgilerini yukarıdaki program kartımızda bulabilirsiniz. Size yakın antrenmanı seçin ve deneme talebi gönderin. En kısa sürede sizinle iletişime geçip bir deneme tarihi ayarlıyoruz. Kaleci antrenmanımız haftada bir kez 60 dakika sürer. Tatil dönemlerinde ve resmi tatillerde antrenman yapılmaz."
+          },
+          {
+            "question": "Kaleci antrenmanının ücreti nedir?",
+            "answer": "Kaleci antrenmanı aylık 80€’dur."
+          },
+          {
+            "question": "Bir grupta kaç kaleci olur?",
+            "answer": "Bir grupta en fazla 5 kaleci olur."
+          },
+          {
+            "question": "Hangi ekipmana ihtiyacım var?",
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, kaleci eldiveni, futbol ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+          },
+          {
+            "question": "Kayıt ve iptal şartları nasıldır?",
+            "answer": "Deneme antrenmanı ücretsizdir. Deneme için kayıt formu eksiksiz doldurulup imzalanmalı ve antrenöre teslim edilmeli ya da e-posta ile gönderilmelidir. Sözleşme ancak katılımı yazılı olarak onayladığımızda geçerli olur. İptal süresi, iptalin bize ulaşmasından itibaren 2 aydır."
+          },
+          {
+            "question": "Resmi tatillerde, okul olmayan günlerde ve okul tatillerinde ne olur?",
+            "answer": "Resmi tatillerde, okul olmayan günlerde ve okul tatillerinde düzenli kurs programı yapılmaz."
+          }
+        ]
+      },
+      "foerdertraining_athletik": {
+        "items": [
+          {
+            "question": "Atletik gelişim antrenmanı nerede, ne zaman ve ne kadar sürer?",
+            "answer": "Lokasyon ve saat bilgilerini yukarıdaki program kartımızda bulabilirsiniz. Size yakın antrenmanı seçin ve deneme talebi gönderin. En kısa sürede sizinle iletişime geçip bir deneme tarihi ayarlıyoruz. Atletik gelişim antrenmanımız haftada bir kez 60 dakika sürer. Tatil dönemlerinde ve resmi tatillerde antrenman yapılmaz."
+          },
+          {
+            "question": "Atletik gelişim antrenmanının ücreti nedir?",
+            "answer": "Antrenman aylık 50€’dur. Kardeş çocuklar için ücret aylık 40€’ya düşer."
+          },
+          {
+            "question": "Hangi ekipmana ihtiyacım var?",
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+          },
+          {
+            "question": "Kayıt ve iptal şartları nasıldır?",
+            "answer": "Deneme antrenmanı ücretsizdir. Deneme için kayıt formu eksiksiz doldurulup imzalanmalı ve antrenöre teslim edilmeli ya da e-posta ile gönderilmelidir. Sözleşme ancak katılımı yazılı olarak onayladığımızda geçerli olur. İptal süresi, iptalin bize ulaşmasından itibaren 2 aydır."
+          },
+          {
+            "question": "Hasta veya sakat olursam ne olur?",
+            "answer": "Lütfen bize e-posta veya telefonla bilgi verin. Çocuğunuzun devamsızlığını birlikte değerlendiririz."
+          },
+          {
+            "question": "Resmi tatillerde, okul olmayan günlerde ve okul tatillerinde ne olur?",
+            "answer": "Resmi tatillerde, okul olmayan günlerde ve okul tatillerinde düzenli kurs programı yapılmaz."
+          }
+        ]
+      },
+      "coacheducation": {
+        "items": [
+          {
+            "question": "Eğitimler kimler için uygundur?",
+            "answer": "Felsefemizle ilgilenen tüm çocuk ve büyük saha antrenörleri için uygundur."
+          },
+          {
+            "question": "Eğitimin ücreti nedir ve neler dahildir?",
+            "answer": "Talep üzerine paylaşılır."
+          },
+          {
+            "question": "Hangi ekipman gerekir?",
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı (antrenman salonda ise salon ayakkabısı) ve içecek."
+          },
+          {
+            "question": "Kaç antrenör katılabilir?",
+            "answer": "Katılımcı sayısında sınırlama yoktur."
+          },
+          {
+            "question": "Hangi içerikler öğretilir?",
+            "answer": "Felsefe eğitimi. Antrenman yapısı. Antrenman verimliliği. MFS antrenman içerikleri. Uygulamalı bölüm."
+          },
+          {
+            "question": "Eğitim kısa süre kala iptal edilirse ne olur?",
+            "answer": "Etkinlik randevudan 7 gün öncesine kadar ücretsiz iptal edilebilir. Başlangıçtan 7 ila 1 gün önce iptal edilirse katılım ücretinin %50’si alınır. Başlangıçtan 24 saatten az önce yapılan iptallerde ücretin tamamı tahsil edilir. Ancak doktor raporu sunulursa kaçırılan bölüm telafi edilebilir."
+          }
+        ]
+      },
+      "trainingscamp": {
+        "items": [
+          {
+            "question": "Süreç nasıl işler?",
+            "answer": "Süreç isteklerinize göre uyarlanabilir. Size memnuniyetle bir öneri sunar ve danışmanlık yaparız."
+          },
+          {
+            "question": "MFS hangi hizmetleri sunar?",
+            "answer": "MFS felsefesine uygun şekilde eğitilmiş ve deneyimli bir antrenör sağlıyoruz. Ekipman bireysel olarak planlanabilir."
+          },
+          {
+            "question": "Oyuncular hangi ekipmana ihtiyaç duyar?",
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+          },
+          {
+            "question": "Antrenman kampını kısa süre kala iptal edersem ne olur?",
+            "answer": "Randevu, randevudan 24 saat öncesine kadar ücretsiz iptal edilebilir. Aksi halde, antrenörü bu kadar kısa sürede başka yerde görevlendiremediğimiz için tam ücret tahsil edilir."
+          }
+        ]
+      },
+      "rentacoach": {
+        "items": [
+          {
+            "question": "Rent-a-Coach programı nerede, ne zaman ve ne kadar sürer?",
+            "answer": "Antrenman, takımınızın normal çalışma saatlerinde kulüp tesisinizde gerçekleşir. Tatil dönemlerinde antrenman partner kulüplerimizin sahalarında yapılabilir."
+          },
+          {
+            "question": "Rent-a-Coach programının ücreti nedir?",
+            "answer": "60 dakika 89 €’dur, her ek 30 dakika için 30 € eklenir."
+          },
+          {
+            "question": "Antrenman neleri kapsar?",
+            "answer": "Antrenman içeriği antrenörün ve takımın isteklerine göre uyarlanabilir."
+          },
+          {
+            "question": "Kendi toplarımıza ve malzememize ihtiyaç var mı?",
+            "answer": "Antrenörümüz toplar, huniler ve yelekler gibi tüm malzemeleri beraberinde getirir."
+          },
+          {
+            "question": "Kısa süre kala iptal edersem ne olur?",
+            "answer": "Randevu, randevudan 24 saat öncesine kadar ücretsiz iptal edilebilir. Aksi halde, antrenörü bu kadar kısa sürede başka yerde görevlendiremediğimiz için tam ücret tahsil edilir."
+          }
+        ]
+      },
+      "einzeltraining_athletik": {
+        "items": [
+          {
+            "question": "Bireysel atletik antrenman nerede ve ne zaman yapılır?",
+            "answer": "Hem yer hem de zaman telefonla bireysel olarak ayarlanabilir."
+          },
+          {
+            "question": "Bunun için hangi ekipmana ihtiyacım var?",
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol veya suni çim ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+          },
+          {
+            "question": "Antrenörümü seçebilir miyim?",
+            "answer": "Elbette, tercih ettiğiniz antrenörü mümkün olduğunca karşılamaya çalışırız."
+          },
+          {
+            "question": "Hasta veya sakat olursam ne olur?",
+            "answer": "Bireysel atletik antrenman randevudan 24 saat öncesine kadar ücretsiz iptal edilebilir. Aksi halde, antrenörleri bu kadar kısa sürede başka yerde görevlendiremediğimiz için tam ücret tahsil edilir."
+          }
+        ]
+      }
+    }
+  }
+}

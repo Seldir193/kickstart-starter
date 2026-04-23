@@ -37,6 +37,34 @@
       "card3Text": "Çocukları sportif ve kişisel yönden güçlendiriyoruz.",
       "card4Title": "Hedefli destek",
       "card4Text": "Her çocuk uygun şekilde desteklenir."
+    },
+    "faq": {
+      "title": "Futbol okulu hakkında sık sorulan sorular",
+      "kicker": "Bilmekte fayda var",
+      "sideCard": {
+        "kicker": "Sorularınız mı var?",
+        "title": "Size memnuniyetle yardımcı oluruz",
+        "text": "Antrenman formatları, kayıt veya süreçlerle ilgili sorularınız varsa bizimle dilediğiniz zaman doğrudan iletişime geçebilirsiniz.",
+        "button": "İletişime geç"
+      },
+      "items": [
+        {
+          "question": "Hangi lokasyonlarda antrenman yapıyoruz?",
+          "answer": "Antrenman programlarımız seçilmiş lokasyonlarda, partner kulüplerin spor tesislerinde ve NRW genelindeki uygun salonlarda gerçekleşir. Program türüne, yaş grubuna ve sezona bağlı olarak çocukların ve gençlerin iyi koşullarda çalışabileceği ortamı seçiyoruz."
+        },
+        {
+          "question": "Programlarımız kimler için uygundur?",
+          "answer": "Programlarımız farklı yaş ve performans seviyelerindeki çocuklar ve gençler için uygundur. Formata göre hem yeni başlayanlar hem de sportif gelişimini hedefli şekilde ilerletmek isteyen çocuklar için uygun gruplar vardır."
+        },
+        {
+          "question": "Yeni programlardan nasıl haberdar olurum?",
+          "answer": "Kurslar, kamplar, boş kontenjanlar ve organizasyonel değişikliklerle ilgili güncel bilgileri doğrudan web sitemizde bulabilirsiniz. Ayrıca kanallarımız üzerinden düzenli olarak yeni teklifler ve önemli duyurular paylaşıyoruz."
+        },
+        {
+          "question": "Bizimle başlangıç süreci nasıl işler?",
+          "answer": "Başlangıç oldukça kolaydır. Önce uygun bir program seçip talep veya rezervasyon gönderebilirsiniz. Sonrasında süreç, tarihler ve sonraki adımlar hakkında gerekli tüm bilgileri alırsınız."
+        }
+      ]
     }
   }
 }

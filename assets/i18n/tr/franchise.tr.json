@@ -42,6 +42,34 @@
           "text": "Lokasyonunu iletişim, standartlar ve iş birliğiyle geliştir."
         }
       }
+    },
+    "faq": {
+      "title": "Ortaklık hakkında sorular",
+      "kicker": "Bilmekte fayda var",
+      "sideCard": {
+        "kicker": "İlginizi çekti mi?",
+        "title": "Gelin birlikte konuşalım",
+        "text": "Bir ortaklık hakkında daha fazla bilgi almak istiyorsanız, sizi bir sonraki adımda memnuniyetle yönlendiririz.",
+        "button": "İletişime geç"
+      },
+      "items": [
+        {
+          "question": "BİR LOKASYON İÇİN BAŞLANGIÇ YATIRIMI NE KADARDIR?",
+          "answer": "Başlangıç yatırımının tutarı bölgeye, kapsama ve planlanan uygulamaya göre değişir. Kişisel bir görüşmede hangi unsurların önemli olduğunu ve gerçekçi olarak hangi çerçevenin beklenebileceğini şeffaf şekilde açıklarız."
+        },
+        {
+          "question": "ORTAK OLARAK HANGİ ÖZELLİKLERE SAHİP OLMALIYIM?",
+          "answer": "Futbola ilgi, insanlarla profesyonel iletişim, girişimci düşünce yapısı ve çocuklar ile gençler için sürdürülebilir bir yapı kurma isteği önemlidir. Spor alanındaki deneyim faydalıdır, ancak tek belirleyici unsur değildir."
+        },
+        {
+          "question": "LOKASYONUMU KURARKEN NASIL DESTEKLENİRİM?",
+          "answer": "Ortaklarımızı lokasyonlarını kurarken net süreçler, eğitimler, denenmiş konseptler ve sürekli iletişim ile destekliyoruz. Buna organizasyonel destek, içerik rehberleri ve yerel konumlandırma yardımı dahildir."
+        },
+        {
+          "question": "SONRAKİ ADIMI NASIL ATABİLİRİM?",
+          "answer": "Daha fazla bilgi almak isterseniz bizimle doğrudan iletişim formu üzerinden yazabilirsiniz. İlk görüşmeden sonra, bir ortaklığın sizin hedeflerinize ve bizim konseptimize uygun olup olmadığını birlikte değerlendiririz."
+        }
+      ]
     }
   }
 }

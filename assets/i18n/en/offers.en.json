@@ -1,0 +1,316 @@
+{
+  "offers": {
+    "faq": {
+      "common": {
+        "title": "Important Questions About the Program",
+        "kicker": "Good to know",
+        "sideCard": {
+          "kicker": "Still unsure?",
+          "title": "We are happy to advise you",
+          "text": "If you have questions about the process, the right format, or booking, we are happy to support you personally.",
+          "button": "Contact us"
+        }
+      },
+      "foerdertraining": {
+        "items": [
+          {
+            "question": "Where, when, and how long does the development training take place?",
+            "answer": "You can find the location and time above in our program card. Choose the training near you and send us a trial training request. We will contact you as quickly as possible and arrange a trial appointment. Our development training takes place once a week for 60 minutes. Training does not take place during school holidays or on public holidays."
+          },
+          {
+            "question": "How much does the development training cost?",
+            "answer": "The training costs €50 per month. For siblings, the fee is reduced to €40 per month."
+          },
+          {
+            "question": "What equipment do I need?",
+            "answer": "Weather-appropriate sportswear, football boots (indoor shoes if the training takes place indoors), and enough drinks."
+          },
+          {
+            "question": "What are the registration and cancellation conditions?",
+            "answer": "The trial training is free of charge. For the trial session, the registration form must be fully completed and signed and handed in to the coach or sent by email. The contract only becomes valid once we confirm participation in writing. The cancellation period is 2 months after receipt of the cancellation."
+          },
+          {
+            "question": "What happens if I am sick or injured?",
+            "answer": "Please let us know by email or phone. We will then decide together how to handle your child’s absence."
+          },
+          {
+            "question": "What happens on public holidays, during school holidays, or on school-free days?",
+            "answer": "As a rule, no regular course program takes place on public holidays, school-free days, or during school holidays."
+          }
+        ]
+      },
+      "kindergarten": {
+        "items": [
+          {
+            "question": "Where, when, and how long does the football kindergarten take place?",
+            "answer": "You can find the location and time above in our program card. Choose the training near you and send us a trial request. We will contact you as quickly as possible and arrange a trial appointment. Our football kindergarten takes place once a week for 60 minutes. Training does not take place during school holidays or on public holidays."
+          },
+          {
+            "question": "How much does the football kindergarten cost?",
+            "answer": "The training costs €40 per month. For siblings, the fee is reduced to €30 per month."
+          },
+          {
+            "question": "May parents watch?",
+            "answer": "Parents are very welcome to attend the training, because especially for the youngest children this is an important factor for security and orientation. The children may move freely during training and decide for themselves whether they want to keep an eye on their parents or focus fully on the session."
+          },
+          {
+            "question": "What equipment do I need?",
+            "answer": "Weather-appropriate sportswear, football boots (indoor shoes if the training takes place indoors), and enough drinks."
+          },
+          {
+            "question": "What are the registration and cancellation conditions?",
+            "answer": "The trial training is free of charge. For the trial session, the registration form must be fully completed. The contract only becomes valid once we confirm participation in writing. The cancellation period is 2 months after receipt of the cancellation."
+          },
+          {
+            "question": "What happens if I am sick or injured?",
+            "answer": "Please let us know by email or phone. We will decide together how to handle the child’s absence."
+          },
+          {
+            "question": "What happens on public holidays, school-free days, and during school holidays?",
+            "answer": "As a rule, no regular course program takes place on public holidays, school-free days, or during school holidays."
+          }
+        ]
+      },
+      "powertraining": {
+        "items": [
+          {
+            "question": "How does the power training work?",
+            "answer": "The training lasts 120 minutes and is divided into four 30-minute blocks. The content includes endurance training, coordination with shooting, technique with shooting, one-on-one training, and game forms. All training blocks also include work on low and medium-height shots as well as controlling high and low balls."
+          },
+          {
+            "question": "How much does the power training cost and what is included?",
+            "answer": "The power training costs €35."
+          },
+          {
+            "question": "What equipment is needed?",
+            "answer": "Weather-appropriate sportswear, football boots (artificial turf shoes if the training takes place outdoors, indoor shoes if indoors), and enough drinks."
+          },
+          {
+            "question": "How many children are in one group?",
+            "answer": "A maximum of 10 players."
+          },
+          {
+            "question": "What happens if I have to cancel at short notice?",
+            "answer": "If participation in the power training is cancelled more than 1 day in advance, this is free of charge. Cancellations less than 24 hours before the appointment mean that the full amount of €35 will be charged, as no replacement player can be organised at short notice."
+          }
+        ]
+      },
+      "camp": {
+        "items": [
+          {
+            "question": "How does the camp work?",
+            "answer": "Training times are from 09:00 to 13:30 with technique, tactics, and game forms. Lunch break is from 11:15 to 12:00. There is a final training session or tournament on the last day. Depending on the camp, the duration is 3 to 5 days."
+          },
+          {
+            "question": "How much does the camp cost and what is included?",
+            "answer": "The price varies depending on the offer. Typical services include the training program from 09:00 to 13:30, daily supervision, a jersey or training shirt depending on the offer, and a final tournament on the last day."
+          },
+          {
+            "question": "From what time can I drop off my child?",
+            "answer": "Children can usually be supervised on site from 08:45. Details can be found in the respective camp offer."
+          },
+          {
+            "question": "What equipment is needed?",
+            "answer": "Weather-appropriate sportswear, football boots or indoor shoes, a towel, drinking bottle, and sun protection. Children bring their own food."
+          },
+          {
+            "question": "How many children are in one group? Can friends stay together?",
+            "answer": "Depending on the location, there are around 10 to 12 children per group. We try to take group wishes into account where possible."
+          },
+          {
+            "question": "What happens if I have to cancel at short notice?",
+            "answer": "After successful registration, cancellation is free of charge up to 7 days before the start of the camp. In the case of later cancellations, the full amount becomes due because places can rarely be reassigned at short notice."
+          }
+        ]
+      },
+      "torwarttraining": {
+        "items": [
+          {
+            "question": "Where and when does the goalkeeper training take place?",
+            "answer": "Both the location and the appointment can be arranged individually by phone."
+          },
+          {
+            "question": "What equipment do I need for it?",
+            "answer": "Weather-appropriate sportswear, goalkeeper gloves, football boots (indoor shoes if the training takes place indoors), and enough drinks."
+          },
+          {
+            "question": "Can I choose my goalkeeper coach?",
+            "answer": "Of course, we try to accommodate your preferred coach."
+          },
+          {
+            "question": "What happens if I am sick or injured?",
+            "answer": "The individual goalkeeper session can be cancelled free of charge up to 24 hours before the appointment. Otherwise, the full amount becomes due because we cannot deploy the coaches elsewhere at such short notice."
+          }
+        ]
+      },
+      "personaltraining": {
+        "items": [
+          {
+            "question": "Where and when does the individual training take place?",
+            "answer": "Both the location and the appointment can be arranged individually by phone."
+          },
+          {
+            "question": "What equipment do I need for it?",
+            "answer": "Weather-appropriate sportswear, football or artificial turf shoes (indoor shoes if the training takes place indoors), and enough drinks."
+          },
+          {
+            "question": "Can I choose my coach?",
+            "answer": "Of course, we try to accommodate your preferred coach."
+          },
+          {
+            "question": "What happens if I am sick or injured?",
+            "answer": "The individual training can be cancelled free of charge up to 24 hours before the appointment. Otherwise, the full amount becomes due because we cannot deploy the coaches elsewhere at such short notice."
+          }
+        ]
+      },
+      "foerdertraining_torwart": {
+        "items": [
+          {
+            "question": "Where, when, and how long does the goalkeeper development training take place?",
+            "answer": "You can find the location and time above in our program card. Choose the training near you and send us a trial request. We will contact you as quickly as possible and arrange a trial appointment. Our goalkeeper training takes place once a week for 60 minutes. Training does not take place during school holidays or on public holidays."
+          },
+          {
+            "question": "How much does the goalkeeper training cost?",
+            "answer": "The goalkeeper training costs €80 per month."
+          },
+          {
+            "question": "How many goalkeepers are in one group?",
+            "answer": "A maximum of 5 goalkeepers are in one group."
+          },
+          {
+            "question": "What equipment do I need?",
+            "answer": "Weather-appropriate sportswear, goalkeeper gloves, football boots (indoor shoes if the training takes place indoors), and enough drinks."
+          },
+          {
+            "question": "What are the registration and cancellation conditions?",
+            "answer": "The trial training is free of charge. For the trial session, the registration form must be fully completed and signed and handed in to the coach or sent by email. The contract only becomes valid once we confirm participation in writing. The cancellation period is 2 months after receipt of the cancellation."
+          },
+          {
+            "question": "What happens on public holidays, school-free days, and during school holidays?",
+            "answer": "As a rule, no regular course program takes place on public holidays, school-free days, or during school holidays."
+          }
+        ]
+      },
+      "foerdertraining_athletik": {
+        "items": [
+          {
+            "question": "Where, when, and how long does the athletic development training take place?",
+            "answer": "You can find the location and time above in our program card. Choose the training near you and send us a trial request. We will contact you as quickly as possible and arrange a trial appointment. Our athletic development training takes place once a week for 60 minutes. Training does not take place during school holidays or on public holidays."
+          },
+          {
+            "question": "How much does the athletic development training cost?",
+            "answer": "The training costs €50 per month. For siblings, the fee is reduced to €40 per month."
+          },
+          {
+            "question": "What equipment do I need?",
+            "answer": "Weather-appropriate sportswear, football boots (indoor shoes if the training takes place indoors), and enough drinks."
+          },
+          {
+            "question": "What are the registration and cancellation conditions?",
+            "answer": "The trial training is free of charge. For the trial session, the registration form must be fully completed and signed and handed in to the coach or sent by email. The contract only becomes valid once we confirm participation in writing. The cancellation period is 2 months after receipt of the cancellation."
+          },
+          {
+            "question": "What happens if I am sick or injured?",
+            "answer": "Please let us know by email or phone. We will then decide together how to handle your child’s absence."
+          },
+          {
+            "question": "What happens on public holidays, school-free days, and during school holidays?",
+            "answer": "As a rule, no regular course program takes place on public holidays, school-free days, or during school holidays."
+          }
+        ]
+      },
+      "coacheducation": {
+        "items": [
+          {
+            "question": "Who are the training courses suitable for?",
+            "answer": "For all youth and full-field coaches who are interested in our philosophy."
+          },
+          {
+            "question": "How much does the training course cost and what is included?",
+            "answer": "On request."
+          },
+          {
+            "question": "What equipment is needed?",
+            "answer": "Weather-appropriate sportswear, football boots (indoor shoes if the training takes place indoors), and drinks."
+          },
+          {
+            "question": "How many coaches can take part?",
+            "answer": "The number of participants is unlimited."
+          },
+          {
+            "question": "What content is taught?",
+            "answer": "Training in philosophy. Training structure. Training efficiency. MFS training content. Practical section."
+          },
+          {
+            "question": "What happens if the training course has to be cancelled at short notice?",
+            "answer": "The event can be cancelled free of charge up to 7 days before the appointment. Within 7 to 1 day before the start, 50% of the participation fee becomes due. For cancellations within 24 hours before the start, the full amount becomes due. However, missed participation can be made up on presentation of a medical certificate."
+          }
+        ]
+      },
+      "trainingscamp": {
+        "items": [
+          {
+            "question": "How does the training camp work?",
+            "answer": "The process can be adapted according to your wishes. We are happy to make a proposal and advise you."
+          },
+          {
+            "question": "What services does MFS offer?",
+            "answer": "We provide you with a coach specially trained in the MFS philosophy and experienced in practice. Equipment can be agreed individually."
+          },
+          {
+            "question": "What equipment do the players need?",
+            "answer": "Weather-appropriate sportswear, football boots (indoor shoes if the training takes place indoors), and enough drinks."
+          },
+          {
+            "question": "What happens if I have to cancel the training camp at short notice?",
+            "answer": "The appointment can be cancelled free of charge up to 24 hours before the appointment. Otherwise, the full amount becomes due because we cannot deploy the coach elsewhere at such short notice."
+          }
+        ]
+      },
+      "rentacoach": {
+        "items": [
+          {
+            "question": "Where, when, and how long does the Rent-a-Coach program take place?",
+            "answer": "The training takes place at your club facilities during the usual training times of your team. During holiday periods, the training can take place at the grounds of our partner clubs."
+          },
+          {
+            "question": "How much does the Rent-a-Coach program cost?",
+            "answer": "60 minutes cost €89, every additional 30 minutes cost €30 extra."
+          },
+          {
+            "question": "What does the training include?",
+            "answer": "The training content can be adapted to the wishes of the coach and the team."
+          },
+          {
+            "question": "Do we need our own balls and training equipment?",
+            "answer": "Our coach brings all equipment such as balls, cones, and bibs."
+          },
+          {
+            "question": "What happens if I have to cancel at short notice?",
+            "answer": "The appointment can be cancelled free of charge up to 24 hours before the appointment. Otherwise, the full amount becomes due because we cannot deploy the coach elsewhere at such short notice."
+          }
+        ]
+      },
+      "einzeltraining_athletik": {
+        "items": [
+          {
+            "question": "Where and when does the athletic individual training take place?",
+            "answer": "Both the location and the appointment can be arranged individually by phone."
+          },
+          {
+            "question": "What equipment do I need for it?",
+            "answer": "Weather-appropriate sportswear, football or artificial turf shoes (indoor shoes if the training takes place indoors), and enough drinks."
+          },
+          {
+            "question": "Can I choose my coach?",
+            "answer": "Of course, we try to accommodate your preferred coach."
+          },
+          {
+            "question": "What happens if I am sick or injured?",
+            "answer": "The athletic individual training can be cancelled free of charge up to 24 hours before the appointment. Otherwise, the full amount becomes due because we cannot deploy the coaches elsewhere at such short notice."
+          }
+        ]
+      }
+    }
+  }
+}

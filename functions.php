@@ -11,7 +11,7 @@ function ks_require($rel) {
 }
 
 require_once get_stylesheet_directory() . '/inc/newsletter.php';
-require_once get_stylesheet_directory() . '/inc/ks-faq.php';
+
 require_once get_stylesheet_directory() . '/inc/jobs.php';
 
 ks_require('setup.php');

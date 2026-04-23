@@ -37,6 +37,34 @@
       "card3Text": "We strengthen children in sport and life.",
       "card4Title": "Targeted support",
       "card4Text": "Every child is supported appropriately."
+    },
+    "faq": {
+      "title": "Frequently Asked Questions About the Football School",
+      "kicker": "Good to know",
+      "sideCard": {
+        "kicker": "Still have questions?",
+        "title": "We are happy to help",
+        "text": "If you have questions about training formats, registration, or processes, feel free to contact us directly at any time.",
+        "button": "Get in touch"
+      },
+      "items": [
+        {
+          "question": "Where do we train?",
+          "answer": "Our training programs take place at selected locations, on sports grounds of partner clubs, and in suitable indoor facilities across NRW. Depending on the format, age group, and season, we choose the training environment so that children and young people can train under good conditions."
+        },
+        {
+          "question": "Who are our programs suitable for?",
+          "answer": "Our programs are designed for children and young people of different age groups and performance levels. Depending on the format, there are suitable groups both for beginners and for children who want to improve their sporting development in a targeted way."
+        },
+        {
+          "question": "How do I stay informed about new programs?",
+          "answer": "You can find current information about courses, camps, available spots, and organisational updates directly on our website. In addition, we regularly share new offers and important updates through our channels."
+        },
+        {
+          "question": "How does getting started with us work?",
+          "answer": "Getting started is simple. You can first choose a suitable program and send an enquiry or booking. After that, you will receive all important information about the process, dates, and the next steps."
+        }
+      ]
     }
   }
 }
