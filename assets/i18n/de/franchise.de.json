@@ -24,23 +24,23 @@
       "items": {
         "model": {
           "titleLine1": "Bewährtes",
-          "titleLine2": "Geschäftsmodell",
-          "text": "Franchise-Partner nutzen ein erprobtes Konzept mit klarer Struktur und starker Basis für nachhaltiges Wachstum."
+          "titleLine2": "Konzept",
+          "text": "Ein klares Franchise-System mit starker Basis für nachhaltiges Wachstum."
         },
         "support": {
-          "titleLine1": "Umfassende",
-          "titleLine2": "Unterstützung",
-          "text": "Profitiere von Trainings-Know-how, Marketing-Support und laufender Begleitung für deine lokale Entwicklung."
+          "titleLine1": "Starke",
+          "titleLine2": "Begleitung",
+          "text": "Profitiere von Know-how, Marketing-Support und persönlicher Unterstützung."
         },
         "market": {
           "titleLine1": "Schneller",
-          "titleLine2": "Marktzugang",
-          "text": "Nutze die Stärke einer etablierten Marke und starte mit einem klaren Konzept in deinen regionalen Markt."
+          "titleLine2": "Start",
+          "text": "Starte mit Struktur, Marke und klaren Prozessen in deine Region."
         },
         "partner": {
-          "titleLine1": "Starke",
+          "titleLine1": "Langfristige",
           "titleLine2": "Partnerschaft",
-          "text": "Baue mit langfristiger Zusammenarbeit, klaren Standards und verlässlichem Austausch deine Franchise-Region auf."
+          "text": "Entwickle deinen Standort mit Austausch, Standards und Zusammenarbeit."
         }
       }
     }

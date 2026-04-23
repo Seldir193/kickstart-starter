@@ -24,23 +24,23 @@
       "items": {
         "model": {
           "titleLine1": "Proven",
-          "titleLine2": "Model",
-          "text": "Benefit from a structured concept and a strong foundation for sustainable growth."
+          "titleLine2": "Concept",
+          "text": "A clear franchise system with a strong base for sustainable growth."
         },
         "support": {
           "titleLine1": "Strong",
-          "titleLine2": "Support",
-          "text": "Use training know-how, marketing support and ongoing guidance for local development."
+          "titleLine2": "Guidance",
+          "text": "Benefit from know-how, marketing support and personal guidance."
         },
         "market": {
           "titleLine1": "Fast",
-          "titleLine2": "Market Entry",
-          "text": "Start with a clear concept and benefit from the strength of an established brand."
+          "titleLine2": "Start",
+          "text": "Launch in your region with structure, brand and clear processes."
         },
         "partner": {
-          "titleLine1": "Strong",
+          "titleLine1": "Long-term",
           "titleLine2": "Partnership",
-          "text": "Build your region through long-term collaboration, clear standards and reliable exchange."
+          "text": "Develop your location through exchange, standards and collaboration."
         }
       }
     }

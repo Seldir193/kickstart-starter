@@ -23,23 +23,23 @@
       "items": {
         "model": {
           "titleLine1": "Kanıtlanmış",
-          "titleLine2": "Sistem",
-          "text": "Sürdürülebilir büyüme için net yapılı ve güçlü temelli bir konseptten yararlan."
+          "titleLine2": "Konsept",
+          "text": "Sürdürülebilir büyüme için güçlü temelli net bir franchise sistemi."
         },
         "support": {
           "titleLine1": "Güçlü",
           "titleLine2": "Destek",
-          "text": "Antrenman bilgisi, pazarlama desteği ve sürekli rehberlikle yerel gelişimini güçlendir."
+          "text": "Bilgi birikimi, pazarlama desteği ve kişisel rehberlikten yararlan."
         },
         "market": {
           "titleLine1": "Hızlı",
-          "titleLine2": "Pazar Girişi",
-          "text": "Yerleşik bir markanın gücü ve net bir konseptle bölgesel pazara daha hızlı başla."
+          "titleLine2": "Başlangıç",
+          "text": "Yapı, marka ve net süreçlerle bölgesel başlangıcını güçlendir."
         },
         "partner": {
-          "titleLine1": "Güçlü",
+          "titleLine1": "Uzun Vadeli",
           "titleLine2": "Ortaklık",
-          "text": "Uzun vadeli iş birliği, net standartlar ve güvenilir iletişimle bölgeni geliştir."
+          "text": "Lokasyonunu iletişim, standartlar ve iş birliğiyle geliştir."
         }
       }
     }

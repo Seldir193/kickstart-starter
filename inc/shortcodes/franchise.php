@@ -291,13 +291,90 @@ if (!function_exists('ks_register_franchise_shortcode')) {
 
 
 
+<section id="fr-benefits" class="ks-sec ks-py-48 ks-section--soft ks-wm-top-80">
+  <div class="container container--1100">
+    <div class="ks-title-wrap" data-bgword="VORTEILE">
+      <div class="ks-kicker" data-i18n="franchise.benefits.kicker">WOFÜR WIR STEHEN</div>
+      <h2 class="ks-dir__title" data-i18n="franchise.benefits.title">Franchise Vorteile</h2>
+    </div>
+
+    <div class="ks-fr-benefits">
+      <article class="ks-fr-benefit">
+        <div class="ks-fr-benefit__icon-wrap">
+          <img
+            src="<?php echo esc_url($theme_uri . '/assets/img/franchise/cup.png'); ?>"
+            alt=""
+            loading="lazy"
+          >
+        </div>
+        <h3 class="ks-fr-benefit__title">
+          <span data-i18n="franchise.benefits.items.model.titleLine1">BEWÄHRTES</span>
+          <span data-i18n="franchise.benefits.items.model.titleLine2">KONZEPT</span>
+        </h3>
+        <p data-i18n="franchise.benefits.items.model.text">
+          Ein klares Franchise-System mit starker Basis für nachhaltiges Wachstum.
+        </p>
+      </article>
+
+      <article class="ks-fr-benefit">
+        <div class="ks-fr-benefit__icon-wrap">
+          <img
+            src="<?php echo esc_url($theme_uri . '/assets/img/franchise/handshake.png'); ?>"
+            alt=""
+            loading="lazy"
+          >
+        </div>
+        <h3 class="ks-fr-benefit__title">
+          <span data-i18n="franchise.benefits.items.support.titleLine1">STARKE</span>
+          <span data-i18n="franchise.benefits.items.support.titleLine2">BEGLEITUNG</span>
+        </h3>
+        <p data-i18n="franchise.benefits.items.support.text">
+          Profitiere von Know-how, Marketing-Support und persönlicher Unterstützung.
+        </p>
+      </article>
+
+      <article class="ks-fr-benefit">
+        <div class="ks-fr-benefit__icon-wrap">
+          <img
+            src="<?php echo esc_url($theme_uri . '/assets/img/franchise/wachs.png'); ?>"
+            alt=""
+            loading="lazy"
+          >
+        </div>
+        <h3 class="ks-fr-benefit__title">
+          <span data-i18n="franchise.benefits.items.market.titleLine1">SCHNELLER</span>
+          <span data-i18n="franchise.benefits.items.market.titleLine2">START</span>
+        </h3>
+        <p data-i18n="franchise.benefits.items.market.text">
+          Starte mit Struktur, Marke und klaren Prozessen in deine Region.
+        </p>
+      </article>
+
+      <article class="ks-fr-benefit">
+        <div class="ks-fr-benefit__icon-wrap">
+          <img
+            src="<?php echo esc_url($theme_uri . '/assets/img/franchise/partnership.svg'); ?>"
+            alt=""
+            loading="lazy"
+          >
+        </div>
+        <h3 class="ks-fr-benefit__title">
+          <span data-i18n="franchise.benefits.items.partner.titleLine1">LANGFRISTIGE</span>
+          <span data-i18n="franchise.benefits.items.partner.titleLine2">PARTNERSCHAFT</span>
+        </h3>
+        <p data-i18n="franchise.benefits.items.partner.text">
+          Entwickle deinen Standort mit Austausch, Standards und Zusammenarbeit.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
 
 
 
 
 
-
-      <section id="fr-benefits" class="ks-sec ks-py-48 ks-section--soft ks-wm-top-80">
+      <!-- <section id="fr-benefits" class="ks-sec ks-py-48 ks-section--soft ks-wm-top-80">
   <div class="container container--1100">
     <div class="ks-title-wrap" data-bgword="VORTEILE">
       <div class="ks-kicker" data-i18n="franchise.benefits.kicker">WOFÜR WIR STEHEN</div>
@@ -374,7 +451,7 @@ if (!function_exists('ks_register_franchise_shortcode')) {
       </article>
     </div>
   </div>
-</section>
+</section> -->
 
       <?php
       
