@@ -2,9 +2,7 @@
 
 <?php
 
-/* -------------------------------------------------------
- * [ks_offers_directory] – Hero + Filter + Map + Liste + Modal + Brandbar + FAQ (pro Kurs)
- * -----------------------------------------------------*/
+
 add_action('init', function () {
   add_shortcode('ks_offers_directory', function () {
 
@@ -14,7 +12,6 @@ add_action('init', function () {
 
 
 
-    /* ==== Theme-Pfade ==== */
     $theme_dir = get_stylesheet_directory();
     $theme_uri = get_stylesheet_directory_uri();
 $select_icon = $theme_uri . '/assets/img/offers/select-caret.svg';
@@ -30,7 +27,6 @@ $select_icon = $theme_uri . '/assets/img/offers/select-caret.svg';
   if (!file_exists($dd_hover_css)) return;
 
 
-  // global laden (leichteste Lösung)
   wp_enqueue_style(
     'ks-dropdown-hover',
     $theme_uri . '/assets/css/dropdown-hover.css',
@@ -44,9 +40,6 @@ $select_icon = $theme_uri . '/assets/img/offers/select-caret.svg';
 
 
    
-    /* ==== CSS wie auf der Startseite laden ==== */
-
-    // ks-utils.css
     $utils_abs = $theme_dir . '/assets/css/ks-utils.css';
     if (file_exists($utils_abs) && !wp_style_is('ks-utils', 'enqueued')) {
       wp_enqueue_style(
@@ -58,7 +51,7 @@ $select_icon = $theme_uri . '/assets/img/offers/select-caret.svg';
     }
 
 
-    // ks-home.css (enthält FAQ-Styles: .ks-acc, .ks-home-faq, etc.)
+    
     $home_abs = $theme_dir . '/assets/css/ks-home.css';
     if (file_exists($home_abs) && !wp_style_is('ks-home', 'enqueued')) {
       wp_enqueue_style(
@@ -72,7 +65,7 @@ $select_icon = $theme_uri . '/assets/img/offers/select-caret.svg';
    
 
 
-    // OPTIONAL: eigenes Directory-CSS
+   
     $dir_abs = $theme_dir . '/assets/css/ks-dir.css';
     if (file_exists($dir_abs) && !wp_style_is('ks-dir', 'enqueued')) {
       wp_enqueue_style(
@@ -85,7 +78,7 @@ $select_icon = $theme_uri . '/assets/img/offers/select-caret.svg';
 
 
 
-  // OPTIONAL: eigenes Hover-CSS nur für die Directory-Liste
+ 
 $dir_hover_abs = $theme_dir . '/assets/css/offers-directory-list-hover.css';
 if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')) {
   wp_enqueue_style(
@@ -99,7 +92,7 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
 
 
 
-    // FAQ-Bild rechts setzen (wie in home.php)
+    
     if (wp_style_is('ks-home', 'enqueued')) {
       $faq_img = $theme_uri . '/assets/img/home/mfs.png';
       wp_add_inline_style(
@@ -108,7 +101,7 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
       );
     }
 
-    /* ==== bisheriger Code ==== */
+
 
     $media     = $theme_uri . '/assets/img/mfs.png';
 
@@ -153,7 +146,7 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
     $headingKey = $sub_type ?: $type;
     $heading    = $mapTitles[$headingKey] ?? 'Powertraining';
 
-    // Normalize Kurs-Schlüssel für dyn. Logik
+    
     $normalize = function (string $k = null) {
       if (!$k) return 'Generic';
       switch ($k) {
@@ -167,9 +160,7 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
     };
     $courseKey = $normalize($headingKey);
 
-       // =====================================================
-    // FAQ-KEY für diesen Kurs bestimmen (für ks_get_faq_items)
-    // =====================================================
+      
     $faqKey = $headingKey ?: $courseKey;
 
     switch ($headingKey) {
@@ -199,18 +190,18 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
 
     $next_base = ks_next_base();
 
-    // Für diese Kursarten KEINE Filter anzeigen
+    
     $noFilterCourses = ['RentACoach', 'ClubProgram', 'CoachEducation'];
     $showFilters = !in_array($courseKey, $noFilterCourses, true);
 
-    // Holiday-Programm? (Camp & Powertraining)
+   
     $catLower        = strtolower($category);
     $isHolidayCourse =
       $catLower === 'holiday' ||
       $catLower === 'holidayprograms' ||
       in_array($courseKey, ['Camp', 'AthleticTraining', 'Powertraining'], true);
 
-    // Schnupper-Kicker nur bei Weekly Courses
+    
     $showKicker = in_array($courseKey, [
       'Foerdertraining',
       'Kindergarten',
@@ -228,7 +219,7 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
       $hero_url = $theme_uri . '/assets/img/mfs.png';
     }
 
-    // Altersbereich initial serverseitig (optional)
+    
     $api_base = ks_api_base();
     $query    = ['limit' => '200'];
     if ($type !== '')     $query['type']     = $type;
@@ -238,7 +229,7 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
 
     $url = add_query_arg($query, $api_base . '/api/offers');
 
-    // 1) Dynamisch aus den Angeboten
+   
     $ageMin = null; $ageMax = null;
     $res = wp_remote_get($url, ['timeout'=>10, 'headers'=>['Accept'=>'application/json']]);
     if (!is_wp_error($res) && wp_remote_retrieve_response_code($res) === 200) {
@@ -257,7 +248,7 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
       }
     }
 
-    // 2) Standard-Fallback aus den Daten
+    
     $ageText = ($ageMin !== null && $ageMax !== null)
       ? ($ageMin . '–' . $ageMax . ' Jahre')
       : 'alle Altersstufen';
@@ -265,9 +256,9 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
     if ($headingKey === 'Einzeltraining_Torwart') {
       $ageText = '6–25 Jahre';
     } else {
-      // 3) HARTE Bereiche pro Kurs – GLEICH wie im JS
+      
       switch ($courseKey) {
-        // Weekly Courses
+        
         case 'Kindergarten':
           $ageText = '4–6 Jahre';
           break;
@@ -279,7 +270,7 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
           $ageText = '7–17 Jahre';
           break;
 
-        // Holiday Programs
+        
         case 'Camp':
           $ageText = '6–13 Jahre';
           break;
@@ -290,14 +281,14 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
           $ageText = '7–17 Jahre';
           break;
 
-        // Individual Courses
+        
         case 'PersonalTraining':
         case 'Einzeltraining_Athletik':
         case 'Einzeltraining_Torwart':
           $ageText = '6–25 Jahre';
           break;
 
-        // Coach Education
+        
         case 'CoachEducation':
           $ageText = 'alle Altersstufen';
           break;
@@ -317,7 +308,7 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
      data-close-icon="<?php echo esc_url( $theme_uri . '/assets/img/close.png' ); ?>"
      data-coachph="<?php echo esc_url( $theme_uri . '/assets/img/avatar.png' ); ?>">
 
-  <!-- HERO -->
+  
   <div class="ks-dir__hero"
        data-watermark="<?php echo esc_attr($watermark); ?>"
        style="--hero-img:url('<?php echo esc_url($hero_url); ?>')">
@@ -333,7 +324,7 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
     </div>
   </div>
 
-  <!-- Intro -->
+ 
   <header class="ks-dir__intro ks-py-56">
     <p class="<?php echo esc_attr($kickerClass); ?>">
       Hier kannst du dein kostenfreies Schnuppertraining ganz einfach buchen
@@ -485,7 +476,7 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
 
 <?php endif; ?>
 
-  <!-- 2-Spalten: Map | Liste -->
+  
   <div class="ks-dir__layout ks-py-56">
     <div class="ks-dir__map"><div id="ksMap" class="ks-map"></div></div>
     <div class="ks-dir__listwrap" aria-live="polite">
@@ -493,7 +484,7 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
     </div>
   </div>
 
-  <!-- Booking Modal (iframe) -->
+ 
   <div id="ksBookModal" class="ks-dir__modal" hidden>
     <div class="ks-dir__overlay" data-close></div>
     <div class="ks-dir__panel" role="dialog" aria-modal="true" aria-label="Buchung">
@@ -511,7 +502,7 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
     </div>
   </div>
 
-  <!-- Offer Modal (wird von JS aktuell nicht mehr genutzt, aber gelassen) -->
+  
   <div id="ksOfferModal" class="ks-dir__modal" hidden>
     <div class="ks-dir__overlay" data-close></div>
     <div class="ks-dir__panel" role="dialog" aria-modal="true" aria-labelledby="ksOfferTitle">
@@ -530,48 +521,61 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
       </div>
     </div>
   </div>
-</div> <!-- /#ksDir -->
+</div> 
 
 <?php echo do_shortcode('[ks_brandbar]'); ?>
 
 <?php
  
 
-    // Kurs-bezogene FAQ-Items über zentralen Helper laden
+    
   $faq_items = $faqKey
     ? ks_get_faq_items('offers', $faqKey)
     : [];
 
 
-  // Video wie bisher
+  
   $faq_video_embed = wp_oembed_get('https://www.youtube.com/watch?v=KEWP2dELhrY');
   if (!$faq_video_embed) {
     $faq_video_embed = '<div class="ks-vid-ph" aria-hidden="true"></div>';
   }
 
    if (!empty($faq_items)) {
-    // echo ks_render_faq_section($faq_items, [
-    //   'section_id'    => 'dir-faq',                             
-    //   'wrapper_class' => 'container ks-home-faq ks-dir-faq__grid',
-    //   'title'         => 'Häufig gestellte Fragen',
-    //   'kicker'        => 'FAQ',
-    //   'watermark'     => 'FAQ',                                 
-    //   'use_video'     => true,
-    //   'video_embed'   => $faq_video_embed,
-    // ]);
+    
 
-    echo ks_render_faq_section($faq_items, [
-  'section_id'         => 'dir-faq',
-  'wrapper_class'      => 'container ks-home-faq ks-dir-faq__grid',
-  'title'              => 'Wichtige Fragen zum Angebot',
-  'kicker'             => 'Gut zu wissen',
-  'watermark'          => 'FAQ',
-  'side_card_enabled'  => true,
-  'side_card_kicker'   => 'Noch unsicher?',
-  'side_card_title'    => 'Wir beraten dich gerne',
-  'side_card_text'     => 'Wenn du Fragen zum Ablauf, zum passenden Format oder zur Buchung hast, unterstützen wir dich gerne persönlich.',
-  'side_card_button'   => 'Zum Kontakt',
-  'side_card_href'     => '#kontakt',
+//     echo ks_render_faq_section($faq_items, [
+//   'section_id'         => 'dir-faq',
+//   'wrapper_class'      => 'container ks-home-faq ks-dir-faq__grid',
+//   'title'              => 'Wichtige Fragen zum Angebot',
+//   'kicker'             => 'Gut zu wissen',
+//   'watermark'          => 'FAQ',
+//   'side_card_enabled'  => true,
+//   'side_card_kicker'   => 'Noch unsicher?',
+//   'side_card_title'    => 'Wir beraten dich gerne',
+//   'side_card_text'     => 'Wenn du Fragen zum Ablauf, zum passenden Format oder zur Buchung hast, unterstützen wir dich gerne persönlich.',
+//   'side_card_button'   => 'Zum Kontakt',
+//   'side_card_href'     => '#kontakt',
+// ]);
+
+echo ks_render_faq_section($faq_items, [
+  'section_id'              => 'dir-faq',
+  'wrapper_class'           => 'container ks-home-faq ks-dir-faq__grid',
+  'title'                   => 'Wichtige Fragen zum Angebot',
+  'kicker'                  => 'Gut zu wissen',
+  'watermark'               => 'FAQ',
+  'title_i18n'              => 'offers.faq.common.title',
+  'kicker_i18n'             => 'offers.faq.common.kicker',
+  'items_i18n_prefix'       => 'offers.faq.' . ks_get_faq_slug($faqKey),
+  'side_card_enabled'       => true,
+  'side_card_kicker'        => 'Noch unsicher?',
+  'side_card_title'         => 'Wir beraten dich gerne',
+  'side_card_text'          => 'Wenn du Fragen zum Ablauf, zum passenden Format oder zur Buchung hast, unterstützen wir dich gerne persönlich.',
+  'side_card_button'        => 'Zum Kontakt',
+  'side_card_href'          => '#kontakt',
+  'side_card_kicker_i18n'   => 'offers.faq.common.sideCard.kicker',
+  'side_card_title_i18n'    => 'offers.faq.common.sideCard.title',
+  'side_card_text_i18n'     => 'offers.faq.common.sideCard.text',
+  'side_card_button_i18n'   => 'offers.faq.common.sideCard.button',
 ]);
 
   }
@@ -588,8 +592,6 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
 
 
 
-
-<!-- Kontakt-Bereich unter den FAQ -->
 <section id="kontakt" class="ks-sec ks-py-56 ks-bg-dark ks-text-light">
   <div class="container container--1100 ks-text-center">
     <div class="ks-kicker ks-text-accent">Kontakt</div>
@@ -641,10 +643,6 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
 
 <?php
 
-// ---------------------------------------------------------
-// Programm-Textblock unterhalb "Hast du Fragen?"
-// Steuert Text je nach Kurs (type / sub_type)
-// ---------------------------------------------------------
 
 $courseKey = '';
 if (!empty($sub_type)) {
@@ -658,17 +656,17 @@ $program_age     = '';
 $program_text    = [];
 $program_bullets = [];
 
-// Wir vereinheitlichen Key ein bisschen fürs Lookup
+
 $normKey = strtolower(trim($courseKey));
 
-// Spezialfälle aus der API / Mongo normalisieren
+
 if ($normKey === 'rentacoach_generic') {
   $normKey = 'rentacoach';
 } elseif ($normKey === 'clubprogram_generic') {
   $normKey = 'clubprogram';
 }
 
-// Mapping für Schreibvarianten
+
 $aliasMap = [
   'fördertraining'          => 'foerdertraining',
   'fördertraining_athletik' => 'foerdertraining_athletik',
@@ -679,7 +677,7 @@ if (isset($aliasMap[$normKey])) {
   $normKey = $aliasMap[$normKey];
 }
 
-// Programmtexte aus externer Datei laden
+
 $prog_file = $theme_dir . '/inc/shortcodes/offer-program-texts.php';
 $programs  = [];
 
@@ -693,9 +691,9 @@ if (file_exists($prog_file)) {
 if (!empty($programs[$normKey]) && is_array($programs[$normKey])) {
   $cfg = $programs[$normKey];
 
-  // Falls manche Keys null sind (Alias), auf Zielkey mappen
+ 
   if ($cfg === null) {
-    // Alias-Ziel suchen
+    
     foreach ($programs as $key => $val) {
       if ($val !== null && $key === $aliasMap[$normKey]) {
         $cfg = $val;

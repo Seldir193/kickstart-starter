@@ -124,6 +124,10 @@
       scopes.push("franchise");
     }
 
+    if (hasI18nPrefix("offers.")) {
+      scopes.push("offers");
+    }
+
     return scopes;
   }
 
@@ -385,6 +389,11 @@
     try {
       localStorage.setItem("wpFrontendLng", language);
     } catch (e) {}
+
+    document.cookie =
+      "wpFrontendLng=" +
+      encodeURIComponent(language) +
+      "; path=/; max-age=31536000; SameSite=Lax";
   }
 
   function changeLanguage(state, language) {

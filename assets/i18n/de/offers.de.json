@@ -1,0 +1,32 @@
+{
+  "offers": {
+    "faq": {
+      "common": {
+        "title": "Wichtige Fragen zum Angebot",
+        "kicker": "Gut zu wissen",
+        "sideCard": {
+          "kicker": "Noch unsicher?",
+          "title": "Wir beraten dich gerne",
+          "text": "Wenn du Fragen zum Ablauf, zum passenden Format oder zur Buchung hast, unterstützen wir dich gerne persönlich.",
+          "button": "Zum Kontakt"
+        }
+      },
+      "foerdertraining": {
+        "items": [
+          {
+            "question": "...",
+            "answer": "..."
+          }
+        ]
+      },
+      "camp": {
+        "items": [
+          {
+            "question": "...",
+            "answer": "..."
+          }
+        ]
+      }
+    }
+  }
+}

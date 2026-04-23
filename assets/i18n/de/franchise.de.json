@@ -43,6 +43,22 @@
           "text": "Entwickle deinen Standort mit Austausch, Standards und Zusammenarbeit."
         }
       }
+    },
+    "faq": {
+      "title": "Fragen zur Partnerschaft",
+      "kicker": "Gut zu wissen",
+      "sideCard": {
+        "kicker": "Interesse geweckt?",
+        "title": "Lass uns ins Gespräch kommen",
+        "text": "Wenn du mehr über eine Partnerschaft erfahren möchtest, begleiten wir dich gerne im nächsten Schritt.",
+        "button": "Kontakt aufnehmen"
+      },
+      "items": [
+        {
+          "question": "...",
+          "answer": "..."
+        }
+      ]
     }
   }
 }

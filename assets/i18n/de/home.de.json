@@ -37,6 +37,22 @@
       "card3Text": "Wir stärken Kinder sportlich und menschlich.",
       "card4Title": "Gezielte Förderung",
       "card4Text": "Jedes Kind wird passend begleitet."
+    },
+    "faq": {
+      "title": "Häufige Fragen zur Fußballschule",
+      "kicker": "Gut zu wissen",
+      "sideCard": {
+        "kicker": "Fragen offen?",
+        "title": "Wir helfen dir gerne weiter",
+        "text": "Wenn du Fragen zu Trainingsformaten, Anmeldung oder Abläufen hast, kannst du dich jederzeit direkt bei uns melden.",
+        "button": "Kontakt aufnehmen"
+      },
+      "items": [
+        {
+          "question": "...",
+          "answer": "..."
+        }
+      ]
     }
   }
 }

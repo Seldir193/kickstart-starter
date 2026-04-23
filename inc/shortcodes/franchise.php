@@ -372,87 +372,6 @@ if (!function_exists('ks_register_franchise_shortcode')) {
 
 
 
-
-
-      <!-- <section id="fr-benefits" class="ks-sec ks-py-48 ks-section--soft ks-wm-top-80">
-  <div class="container container--1100">
-    <div class="ks-title-wrap" data-bgword="VORTEILE">
-      <div class="ks-kicker" data-i18n="franchise.benefits.kicker">WOFÜR WIR STEHEN</div>
-      <h2 class="ks-dir__title" data-i18n="franchise.benefits.title">Franchise Vorteile</h2>
-    </div>
-
-    <div class="ks-fr-benefits">
-      <article class="ks-fr-benefit">
-        <div class="ks-fr-benefit__icon">
-          <img
-            src="<?php echo esc_url($theme_uri . '/assets/img/franchise/cup.png'); ?>"
-            alt=""
-            loading="lazy"
-          >
-        </div>
-        <h3 class="ks-fr-benefit__title">
-          <span data-i18n="franchise.benefits.items.model.titleLine1">BEWÄHRTES</span>
-          <span data-i18n="franchise.benefits.items.model.titleLine2">GESCHÄFTSMODELL</span>
-        </h3>
-        <p data-i18n="franchise.benefits.items.model.text">
-          Franchise-Partner nutzen ein erprobtes Konzept mit klarer Struktur und starker Basis für nachhaltiges Wachstum.
-        </p>
-      </article>
-
-      <article class="ks-fr-benefit">
-        <div class="ks-fr-benefit__icon">
-          <img
-            src="<?php echo esc_url($theme_uri . '/assets/img/franchise/handshake.png'); ?>"
-            alt=""
-            loading="lazy"
-          >
-        </div>
-        <h3 class="ks-fr-benefit__title">
-          <span data-i18n="franchise.benefits.items.support.titleLine1">UMFASSENDE</span>
-          <span data-i18n="franchise.benefits.items.support.titleLine2">UNTERSTÜTZUNG</span>
-        </h3>
-        <p data-i18n="franchise.benefits.items.support.text">
-          Profitiere von Trainings-Know-how, Marketing-Support und laufender Begleitung für deine lokale Entwicklung.
-        </p>
-      </article>
-
-      <article class="ks-fr-benefit">
-        <div class="ks-fr-benefit__icon">
-          <img
-            src="<?php echo esc_url($theme_uri . '/assets/img/franchise/wachs.png'); ?>"
-            alt=""
-            loading="lazy"
-          >
-        </div>
-        <h3 class="ks-fr-benefit__title">
-          <span data-i18n="franchise.benefits.items.market.titleLine1">SCHNELLER</span>
-          <span data-i18n="franchise.benefits.items.market.titleLine2">MARKTZUGANG</span>
-        </h3>
-        <p data-i18n="franchise.benefits.items.market.text">
-          Nutze die Stärke einer etablierten Marke und starte mit einem klaren Konzept in deinen regionalen Markt.
-        </p>
-      </article>
-
-      <article class="ks-fr-benefit">
-        <div class="ks-fr-benefit__icon">
-          <img
-            src="<?php echo esc_url($theme_uri . '/assets/img/franchise/partnership.svg'); ?>"
-            alt=""
-            loading="lazy"
-          >
-        </div>
-        <h3 class="ks-fr-benefit__title">
-          <span data-i18n="franchise.benefits.items.partner.titleLine1">STARKE</span>
-          <span data-i18n="franchise.benefits.items.partner.titleLine2">PARTNERSCHAFT</span>
-        </h3>
-        <p data-i18n="franchise.benefits.items.partner.text">
-          Baue mit langfristiger Zusammenarbeit, klaren Standards und verlässlichem Austausch deine Franchise-Region auf.
-        </p>
-      </article>
-    </div>
-  </div>
-</section> -->
-
       <?php
       
       $fr_faq_items = function_exists('ks_get_faq_items')
@@ -460,34 +379,47 @@ if (!function_exists('ks_register_franchise_shortcode')) {
         : [];
 
       if (!empty($fr_faq_items)) {
-        // $fr_image = $theme_uri . '/assets/img/franchise/mfs.png';
+        
 
-        // echo ks_render_faq_section($fr_faq_items, [
-        //   'section_id'    => 'fr-faq',
-        //   'wrapper_class' => 'container fr-faq',
-        //   'title'         => 'Häufig gestellte Fragen',
-        //   'kicker'        => 'FAQ',
-        //   'watermark'     => 'FAQ',
-        //   'use_video'     => false,
-        //   'image_src'     => $fr_image,
-        //   'image_class'   => 'fr-faq__image',
-        // ]);
+// echo ks_render_faq_section($fr_faq_items, [
+//   'section_id'         => 'fr-faq',
+//   'wrapper_class'      => 'container fr-faq',
+//   'title'              => 'Fragen zur Partnerschaft',
+//   'kicker'             => 'Gut zu wissen',
+//   'watermark'          => 'FAQ',
+//   'side_card_enabled'  => true,
+//   'side_card_kicker'   => 'Interesse geweckt?',
+//   'side_card_title'    => 'Lass uns ins Gespräch kommen',
+//   'side_card_text'     => 'Wenn du mehr über eine Partnerschaft erfahren möchtest, begleiten wir dich gerne im nächsten Schritt.',
+//   'side_card_button'   => 'Kontakt aufnehmen',
+//   'side_card_href'     => '#kontakt',
+//   'use_video'          => false,
+//   'image_src'          => '',
+//   'image_class'        => 'fr-faq__image',
+// ]);
 
 echo ks_render_faq_section($fr_faq_items, [
-  'section_id'         => 'fr-faq',
-  'wrapper_class'      => 'container fr-faq',
-  'title'              => 'Fragen zur Partnerschaft',
-  'kicker'             => 'Gut zu wissen',
-  'watermark'          => 'FAQ',
-  'side_card_enabled'  => true,
-  'side_card_kicker'   => 'Interesse geweckt?',
-  'side_card_title'    => 'Lass uns ins Gespräch kommen',
-  'side_card_text'     => 'Wenn du mehr über eine Partnerschaft erfahren möchtest, begleiten wir dich gerne im nächsten Schritt.',
-  'side_card_button'   => 'Kontakt aufnehmen',
-  'side_card_href'     => '#kontakt',
-  'use_video'          => false,
-  'image_src'          => '',
-  'image_class'        => 'fr-faq__image',
+  'section_id'              => 'fr-faq',
+  'wrapper_class'           => 'container fr-faq',
+  'title'                   => 'Fragen zur Partnerschaft',
+  'kicker'                  => 'Gut zu wissen',
+  'watermark'               => 'FAQ',
+  'title_i18n'              => 'franchise.faq.title',
+  'kicker_i18n'             => 'franchise.faq.kicker',
+  'items_i18n_prefix'       => 'franchise.faq',
+  'side_card_enabled'       => true,
+  'side_card_kicker'        => 'Interesse geweckt?',
+  'side_card_title'         => 'Lass uns ins Gespräch kommen',
+  'side_card_text'          => 'Wenn du mehr über eine Partnerschaft erfahren möchtest, begleiten wir dich gerne im nächsten Schritt.',
+  'side_card_button'        => 'Kontakt aufnehmen',
+  'side_card_href'          => '#kontakt',
+  'side_card_kicker_i18n'   => 'franchise.faq.sideCard.kicker',
+  'side_card_title_i18n'    => 'franchise.faq.sideCard.title',
+  'side_card_text_i18n'     => 'franchise.faq.sideCard.text',
+  'side_card_button_i18n'   => 'franchise.faq.sideCard.button',
+  'use_video'               => false,
+  'image_src'               => '',
+  'image_class'             => 'fr-faq__image',
 ]);
       }
       ?>

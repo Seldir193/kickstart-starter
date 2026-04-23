@@ -314,6 +314,10 @@ body {
   overflow: hidden;
 }
 
+.ks-acc__body {
+  white-space: pre-line;
+}
+
 .ks-acc__body > * {
   margin-top: 0;
 }
