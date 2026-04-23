@@ -111,16 +111,48 @@
     });
   }
 
+  //   function openMenu(state) {
+  //     state.isOpen = true;
+  //     state.menu.hidden = false;
+  //     state.trigger.setAttribute("aria-expanded", "true");
+  //   }
+
+  //   function closeMenu(state) {
+  //     state.isOpen = false;
+  //     state.menu.hidden = true;
+  //     state.trigger.setAttribute("aria-expanded", "false");
+  //   }
+
   function openMenu(state) {
     state.isOpen = true;
-    state.menu.hidden = false;
     state.trigger.setAttribute("aria-expanded", "true");
+
+    if (window.KSDropdownMotion) {
+      window.KSDropdownMotion.animateOpen(state.menu, {
+        duration: 360,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        useHiddenAttr: true,
+      });
+      return;
+    }
+
+    state.menu.hidden = false;
   }
 
   function closeMenu(state) {
     state.isOpen = false;
-    state.menu.hidden = true;
     state.trigger.setAttribute("aria-expanded", "false");
+
+    if (window.KSDropdownMotion) {
+      window.KSDropdownMotion.animateClose(state.menu, {
+        duration: 260,
+        easing: "ease-out",
+        useHiddenAttr: true,
+      });
+      return;
+    }
+
+    state.menu.hidden = true;
   }
 
   function toggleMenu(state) {

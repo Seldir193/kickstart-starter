@@ -2,8 +2,12 @@
 (function () {
   "use strict";
 
-  function $(sel, ctx) { return (ctx || document).querySelector(sel); }
-  function $all(sel, ctx) { return Array.from((ctx || document).querySelectorAll(sel)); }
+  function $(sel, ctx) {
+    return (ctx || document).querySelector(sel);
+  }
+  function $all(sel, ctx) {
+    return Array.from((ctx || document).querySelectorAll(sel));
+  }
 
   function getMaxRows(dd) {
     var v = dd.getAttribute("data-max-rows");
@@ -23,7 +27,10 @@
       if (s) return s;
     }
     // fallback: select neben dropdown oder im form
-    return $("select", dd.parentElement) || dd.closest("form")?.querySelector("select");
+    return (
+      $("select", dd.parentElement) ||
+      dd.closest("form")?.querySelector("select")
+    );
   }
 
   function syncLabelFromSelect(dd, nativeSel) {
@@ -33,27 +40,91 @@
     label.textContent = opt ? opt.textContent : "Bitte auswählen …";
   }
 
+  // function setPanelMaxHeight(dd, panel) {
+  //   var rows = getMaxRows(dd);
+  //   var rowH = 44;
+
+  //   var first = panel.firstElementChild;
+  //   if (first) {
+  //     var h = first.getBoundingClientRect().height;
+  //     if (h > 0) rowH = Math.round(h);
+  //   } else {
+  //     var cssVar = getComputedStyle(panel).getPropertyValue("--row-h");
+  //     var parsed = parseFloat(cssVar);
+  //     if (!isNaN(parsed) && parsed > 0) rowH = parsed;
+  //   }
+
+  //   panel.style.maxHeight = rowH * rows + "px";
+  //   panel.style.overflowY = "auto";
+  //   panel.style.overflowX = "hidden";
+  // }
+
   function setPanelMaxHeight(dd, panel) {
+    var inner = getPanelInner(panel);
+    if (!inner) return;
+
     var rows = getMaxRows(dd);
     var rowH = 44;
 
-    var first = panel.firstElementChild;
+    var first = inner.firstElementChild;
     if (first) {
       var h = first.getBoundingClientRect().height;
       if (h > 0) rowH = Math.round(h);
     } else {
-      var cssVar = getComputedStyle(panel).getPropertyValue("--row-h");
+      var cssVar = getComputedStyle(inner).getPropertyValue("--row-h");
       var parsed = parseFloat(cssVar);
       if (!isNaN(parsed) && parsed > 0) rowH = parsed;
     }
 
-    panel.style.maxHeight = (rowH * rows) + "px";
-    panel.style.overflowY = "auto";
-    panel.style.overflowX = "hidden";
+    inner.style.maxHeight = rowH * rows + "px";
+    inner.style.overflowY = "auto";
+    inner.style.overflowX = "hidden";
   }
+  function ensurePanelInner(panel) {
+    if (!panel) return null;
+
+    var existing = panel.querySelector(".ks-dd__inner");
+    if (existing) return existing;
+
+    var inner = document.createElement("div");
+    inner.className = "ks-dd__inner";
+
+    while (panel.firstChild) {
+      inner.appendChild(panel.firstChild);
+    }
+
+    panel.appendChild(inner);
+    return inner;
+  }
+
+  function getPanelInner(panel) {
+    return ensurePanelInner(panel);
+  }
+
+  // function buildPanelFromSelect(dd, nativeSel, panel) {
+  //   panel.innerHTML = "";
+  //   var current = nativeSel.value;
+
+  //   Array.from(nativeSel.options).forEach(function (opt) {
+  //     if (opt.disabled || opt.value === "") return;
+
+  //     var item = document.createElement("div");
+  //     item.className = "ks-dd__option";
+  //     item.setAttribute("role", "option");
+  //     item.setAttribute("tabindex", "-1");
+  //     item.setAttribute("data-value", opt.value);
+  //     item.textContent = opt.textContent;
+
+  //     if (opt.value === current) item.setAttribute("aria-selected", "true");
+  //     panel.appendChild(item);
+  //   });
+
+  //   setPanelMaxHeight(dd, panel);
+  // }
 
   function buildPanelFromSelect(dd, nativeSel, panel) {
     panel.innerHTML = "";
+    var inner = ensurePanelInner(panel);
     var current = nativeSel.value;
 
     Array.from(nativeSel.options).forEach(function (opt) {
@@ -67,7 +138,7 @@
       item.textContent = opt.textContent;
 
       if (opt.value === current) item.setAttribute("aria-selected", "true");
-      panel.appendChild(item);
+      inner.appendChild(item);
     });
 
     setPanelMaxHeight(dd, panel);
@@ -79,32 +150,54 @@
 
     $all(".ks-dd__option", panel).forEach(function (x) {
       x.removeAttribute("aria-selected");
-      var v = x.getAttribute("data-value") || x.dataset.value || x.dataset.phone;
+      var v =
+        x.getAttribute("data-value") || x.dataset.value || x.dataset.phone;
       if (v === current) x.setAttribute("aria-selected", "true");
     });
   }
 
+  // function focusSelectedOrFirst(panel) {
+  //   var sel = panel.querySelector('.ks-dd__option[aria-selected="true"]');
+  //   var first = panel.querySelector(".ks-dd__option");
+  //   var target = sel || first;
+  //   if (!target) return;
+
+  //   // Fokus setzen ohne Page-Scroll
+  //   try {
+  //     target.focus({ preventScroll: true });
+  //   } catch (e) {}
+
+  //   // Nur IM Panel scrollen (kein Springen der Seite)
+  //   var r = target.getBoundingClientRect();
+  //   var pr = panel.getBoundingClientRect();
+
+  //   if (r.top < pr.top) {
+  //     panel.scrollTop -= pr.top - r.top;
+  //   } else if (r.bottom > pr.bottom) {
+  //     panel.scrollTop += r.bottom - pr.bottom;
+  //   }
+  // }
+
   function focusSelectedOrFirst(panel) {
-  var sel = panel.querySelector('.ks-dd__option[aria-selected="true"]');
-  var first = panel.querySelector(".ks-dd__option");
-  var target = sel || first;
-  if (!target) return;
+    var inner = getPanelInner(panel) || panel;
+    var sel = inner.querySelector('.ks-dd__option[aria-selected="true"]');
+    var first = inner.querySelector(".ks-dd__option");
+    var target = sel || first;
+    if (!target) return;
 
-  // Fokus setzen ohne Page-Scroll
-  try { target.focus({ preventScroll: true }); } catch (e) {}
+    try {
+      target.focus({ preventScroll: true });
+    } catch (e) {}
 
-  // Nur IM Panel scrollen (kein Springen der Seite)
-  var r = target.getBoundingClientRect();
-  var pr = panel.getBoundingClientRect();
+    var r = target.getBoundingClientRect();
+    var pr = inner.getBoundingClientRect();
 
-  if (r.top < pr.top) {
-    panel.scrollTop -= (pr.top - r.top);
-  } else if (r.bottom > pr.bottom) {
-    panel.scrollTop += (r.bottom - pr.bottom);
+    if (r.top < pr.top) {
+      inner.scrollTop -= pr.top - r.top;
+    } else if (r.bottom > pr.bottom) {
+      inner.scrollTop += r.bottom - pr.bottom;
+    }
   }
-}
-
-
 
   function closeDD(dd, focusBtn) {
     var btn = $(".ks-dd__btn", dd);
@@ -113,17 +206,64 @@
     dd.classList.remove("is-open");
     dd.setAttribute("aria-expanded", "false");
     if (btn) btn.setAttribute("aria-expanded", "false");
-    if (panel) panel.setAttribute("hidden", "");
+
+    if (panel) {
+      animateDropdownInnerClose(panel, function () {
+        panel.setAttribute("hidden", "");
+      });
+    }
 
     if (dd.__onOutsidePointerDown) {
-      document.removeEventListener("pointerdown", dd.__onOutsidePointerDown, true);
+      document.removeEventListener(
+        "pointerdown",
+        dd.__onOutsidePointerDown,
+        true,
+      );
       dd.__onOutsidePointerDown = null;
     }
 
     if (focusBtn !== false) {
-      try { btn && btn.focus({ preventScroll: true }); } catch (e) {}
+      try {
+        btn && btn.focus({ preventScroll: true });
+      } catch (e) {}
     }
   }
+
+  // function closeDD(dd, focusBtn) {
+  //   var btn = $(".ks-dd__btn", dd);
+  //   var panel = $(".ks-dd__panel", dd);
+
+  //   dd.classList.remove("is-open");
+  //   dd.setAttribute("aria-expanded", "false");
+  //   if (btn) btn.setAttribute("aria-expanded", "false");
+
+  //   if (panel) {
+  //     if (window.KSDropdownMotion) {
+  //       window.KSDropdownMotion.animateClose(panel, {
+  //         duration: 260,
+  //         easing: "ease-out",
+  //         useHiddenAttr: true,
+  //       });
+  //     } else {
+  //       panel.setAttribute("hidden", "");
+  //     }
+  //   }
+
+  //   if (dd.__onOutsidePointerDown) {
+  //     document.removeEventListener(
+  //       "pointerdown",
+  //       dd.__onOutsidePointerDown,
+  //       true,
+  //     );
+  //     dd.__onOutsidePointerDown = null;
+  //   }
+
+  //   if (focusBtn !== false) {
+  //     try {
+  //       btn && btn.focus({ preventScroll: true });
+  //     } catch (e) {}
+  //   }
+  // }
 
   function closeAllDropdowns(exceptDd) {
     $all(".ks-dd.is-open").forEach(function (dd) {
@@ -139,7 +279,6 @@
 
     closeAllDropdowns(dd);
 
-    // Panel bauen, wenn leer (Programs/Trainer). WA hat oft schon Options im HTML.
     if (panel && nativeSel && panel.children.length === 0) {
       buildPanelFromSelect(dd, nativeSel, panel);
     }
@@ -151,29 +290,58 @@
     if (nativeSel) syncLabelFromSelect(dd, nativeSel);
 
     dd.classList.add("is-open");
-dd.setAttribute("aria-expanded", "true");
-if (btn) btn.setAttribute("aria-expanded", "true");
+    dd.setAttribute("aria-expanded", "true");
+    if (btn) btn.setAttribute("aria-expanded", "true");
 
-if (panel) {
-  // Erst sichtbar machen, aber noch "unsichtbar" rendern -> kein Flackern
-  panel.style.visibility = "hidden";
-  panel.removeAttribute("hidden");
+    // if (panel) {
+    //   panel.style.visibility = "hidden";
+    //   panel.removeAttribute("hidden");
 
-  requestAnimationFrame(function () {
-    // jetzt sind Maße stabil
-    setPanelMaxHeight(dd, panel);
-    if (nativeSel) ensureSelectedState(dd, nativeSel, panel);
+    //   requestAnimationFrame(function () {
+    //     setPanelMaxHeight(dd, panel);
+    //     if (nativeSel) ensureSelectedState(nativeSel, panel);
 
-    panel.style.visibility = "";
-    focusSelectedOrFirst(panel);
-  });
-}
+    //     panel.style.visibility = "";
 
+    //     if (window.KSDropdownMotion) {
+    //       window.KSDropdownMotion.animateOpen(panel, {
+    //         duration: 340,
+    //         easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+    //         useHiddenAttr: true,
+    //       }).then(function () {
+    //         focusSelectedOrFirst(panel);
+    //       });
+    //       return;
+    //     }
 
+    //     focusSelectedOrFirst(panel);
+    //   });
+    // }
+
+    if (panel) {
+      panel.style.visibility = "hidden";
+      panel.removeAttribute("hidden");
+
+      requestAnimationFrame(function () {
+        ensurePanelInner(panel);
+        setPanelMaxHeight(dd, panel);
+        if (nativeSel) ensureSelectedState(nativeSel, panel);
+
+        panel.style.visibility = "";
+
+        animateDropdownInnerOpen(panel, dd, function () {
+          focusSelectedOrFirst(panel);
+        });
+      });
+    }
 
     // ✅ NEU: outside pointerdown erst "nach dem Klick" binden (verhindert 2-Klick Bugs)
     if (dd.__onOutsidePointerDown) {
-      document.removeEventListener("pointerdown", dd.__onOutsidePointerDown, true);
+      document.removeEventListener(
+        "pointerdown",
+        dd.__onOutsidePointerDown,
+        true,
+      );
       dd.__onOutsidePointerDown = null;
     }
 
@@ -186,9 +354,13 @@ if (panel) {
     }, 0);
 
     // ESC (once)
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeDD(dd, true);
-    }, { once: true });
+    document.addEventListener(
+      "keydown",
+      function (e) {
+        if (e.key === "Escape") closeDD(dd, true);
+      },
+      { once: true },
+    );
   }
 
   function bindOne(dd) {
@@ -202,8 +374,12 @@ if (panel) {
     if (nativeSel) syncLabelFromSelect(dd, nativeSel);
 
     // ✅ NEU: pointerdown stoppen (damit globale capture-listener nix "frisst")
-    btn?.addEventListener("pointerdown", function (e) { e.stopPropagation(); });
-    panel?.addEventListener("pointerdown", function (e) { e.stopPropagation(); });
+    btn?.addEventListener("pointerdown", function (e) {
+      e.stopPropagation();
+    });
+    panel?.addEventListener("pointerdown", function (e) {
+      e.stopPropagation();
+    });
 
     btn?.addEventListener("click", function (e) {
       e.preventDefault();
@@ -215,11 +391,16 @@ if (panel) {
       var item = e.target.closest(".ks-dd__option");
       if (!item) return;
 
-      var val = item.getAttribute("data-value") ?? item.dataset.value ?? item.dataset.phone;
+      var val =
+        item.getAttribute("data-value") ??
+        item.dataset.value ??
+        item.dataset.phone;
       if (!val) return;
 
       // aria-selected
-      $all(".ks-dd__option", panel).forEach(function (x) { x.removeAttribute("aria-selected"); });
+      $all(".ks-dd__option", panel).forEach(function (x) {
+        x.removeAttribute("aria-selected");
+      });
       item.setAttribute("aria-selected", "true");
 
       if (nativeSel) {
@@ -228,15 +409,32 @@ if (panel) {
         syncLabelFromSelect(dd, nativeSel);
       } else {
         var label = $(".ks-dd__label", dd);
-        if (label) label.textContent = item.dataset.label || item.textContent || "Bitte auswählen …";
+        if (label)
+          label.textContent =
+            item.dataset.label || item.textContent || "Bitte auswählen …";
       }
 
-      closeDD(dd, true);
+      // closeDD(dd, true);
+
+      // if (shouldSubmit(dd)) {
+      //   var form = dd.closest("form");
+      //   if (form) form.submit();
+      // }
 
       if (shouldSubmit(dd)) {
         var form = dd.closest("form");
-        if (form) form.submit();
+        closeDD(dd, false);
+
+        if (form) {
+          setTimeout(function () {
+            if (form.requestSubmit) form.requestSubmit();
+            else form.submit();
+          }, 0);
+        }
+        return;
       }
+
+      closeDD(dd, true);
     });
 
     panel?.addEventListener("keydown", function (e) {
@@ -244,10 +442,22 @@ if (panel) {
       var cur = document.activeElement;
       var i = items.indexOf(cur);
 
-      if (e.key === "ArrowDown") { e.preventDefault(); (items[i + 1] || items[0])?.focus(); }
-      if (e.key === "ArrowUp") { e.preventDefault(); (items[i - 1] || items[items.length - 1])?.focus(); }
-      if (e.key === "Enter") { e.preventDefault(); cur?.click(); }
-      if (e.key === "Escape") { e.preventDefault(); closeDD(dd, true); }
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        (items[i + 1] || items[0])?.focus();
+      }
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        (items[i - 1] || items[items.length - 1])?.focus();
+      }
+      if (e.key === "Enter") {
+        e.preventDefault();
+        cur?.click();
+      }
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeDD(dd, true);
+      }
     });
 
     nativeSel?.addEventListener("change", function () {
@@ -265,18 +475,51 @@ if (panel) {
   });
 
   window.KSDropdown = { init: init };
+
+  // nez
+
+  function animateDropdownInnerOpen(panel, dd, done) {
+    var inner = getPanelInner(panel);
+    if (!inner) {
+      if (done) done();
+      return;
+    }
+
+    setPanelMaxHeight(dd, panel);
+
+    if (window.KSDropdownMotion && window.KSDropdownMotion.innerOpen) {
+      window.KSDropdownMotion.innerOpen(inner, {
+        duration: 320,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        afterOpen: function () {
+          setPanelMaxHeight(dd, panel);
+          if (done) done();
+        },
+      });
+      return;
+    }
+
+    if (done) done();
+  }
+
+  function animateDropdownInnerClose(panel, done) {
+    var inner = getPanelInner(panel);
+    if (!inner) {
+      if (done) done();
+      return;
+    }
+
+    if (window.KSDropdownMotion && window.KSDropdownMotion.innerClose) {
+      window.KSDropdownMotion.innerClose(inner, {
+        duration: 240,
+        easing: "ease-out",
+        afterClose: function () {
+          if (done) done();
+        },
+      });
+      return;
+    }
+
+    if (done) done();
+  }
 })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-

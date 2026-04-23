@@ -71,6 +71,23 @@
   transform: translateY(1px) rotate(180deg);
 }
 
+/* .language-switcher__menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  min-width: 220px;
+  max-height: 248px;
+  overflow-y: auto;
+  padding: 8px;
+  display: grid;
+  gap: 4px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  z-index: calc(var(--mega-z) + 2);
+} */
+
 .language-switcher__menu {
   position: absolute;
   top: calc(100% + 12px);
@@ -86,6 +103,9 @@
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   z-index: calc(var(--mega-z) + 2);
+  overflow: hidden;
+  transform-origin: top right;
+  will-change: height, opacity, transform;
 }
 
 .language-switcher__menu[hidden] {

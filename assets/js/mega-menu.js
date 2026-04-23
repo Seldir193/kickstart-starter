@@ -32,20 +32,180 @@
     } catch (e) {}
   }
 
+  // function openPanel(state, moveFocus) {
+  //   if (state.isOpen) return;
+  //   state.isOpen = true;
+  //   state.wrap.classList.add("is-open");
+  //   state.toggle.setAttribute("aria-expanded", "true");
+  //   if (moveFocus) focusFirst(state.panel);
+  // }
+
+  // function closePanel(state) {
+  //   if (!state.isOpen) return;
+  //   state.isOpen = false;
+  //   state.wrap.classList.remove("is-open");
+  //   state.toggle.setAttribute("aria-expanded", "false");
+  // }
+
+  function animateRowOpen(panel, done) {
+    if (!panel) return;
+    var row = panel.querySelector(".ks-programs__row");
+    if (!row) {
+      if (done) done();
+      return;
+    }
+
+    row.getAnimations().forEach(function (a) {
+      a.cancel();
+    });
+
+    row.style.height = "0px";
+    row.style.opacity = "0";
+    row.style.overflow = "hidden";
+
+    var targetHeight = row.scrollHeight;
+
+    requestAnimationFrame(function () {
+      row
+        .animate(
+          [
+            { height: "0px", opacity: 0 },
+            { height: targetHeight + "px", opacity: 1 },
+          ],
+          {
+            duration: 360,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            fill: "forwards",
+          },
+        )
+        .finished.finally(function () {
+          row.style.height = "";
+          row.style.opacity = "";
+          row.style.overflow = "";
+          if (done) done();
+        });
+    });
+  }
+
+  function animateRowClose(panel, done) {
+    if (!panel) return;
+    var row = panel.querySelector(".ks-programs__row");
+    if (!row) {
+      if (done) done();
+      return;
+    }
+
+    row.getAnimations().forEach(function (a) {
+      a.cancel();
+    });
+
+    var startHeight = row.scrollHeight;
+
+    row.style.height = startHeight + "px";
+    row.style.opacity = "1";
+    row.style.overflow = "hidden";
+
+    requestAnimationFrame(function () {
+      row
+        .animate(
+          [
+            { height: startHeight + "px", opacity: 1 },
+            { height: "0px", opacity: 0 },
+          ],
+          {
+            duration: 260,
+            easing: "ease-out",
+            fill: "forwards",
+          },
+        )
+        .finished.finally(function () {
+          row.style.height = "0px";
+          row.style.opacity = "0";
+          row.style.overflow = "hidden";
+          if (done) done();
+        });
+    });
+  }
+
   function openPanel(state, moveFocus) {
     if (state.isOpen) return;
     state.isOpen = true;
     state.wrap.classList.add("is-open");
     state.toggle.setAttribute("aria-expanded", "true");
-    if (moveFocus) focusFirst(state.panel);
+
+    if (state.backdrop && window.KSDropdownMotion) {
+      window.KSDropdownMotion.fadeOpen(state.backdrop, 220);
+    }
+
+    animateRowOpen(state.panel, function () {
+      if (moveFocus) focusFirst(state.panel);
+    });
   }
 
   function closePanel(state) {
     if (!state.isOpen) return;
     state.isOpen = false;
-    state.wrap.classList.remove("is-open");
     state.toggle.setAttribute("aria-expanded", "false");
+
+    if (state.backdrop && window.KSDropdownMotion) {
+      window.KSDropdownMotion.fadeClose(state.backdrop, 180);
+    }
+
+    animateRowClose(state.panel, function () {
+      state.wrap.classList.remove("is-open");
+    });
   }
+  // function openPanel(state, moveFocus) {
+  //   if (state.isOpen) return;
+  //   state.isOpen = true;
+  //   state.wrap.classList.add("is-open");
+  //   state.toggle.setAttribute("aria-expanded", "true");
+
+  //   if (window.KSDropdownMotion) {
+  //     window.KSDropdownMotion.fadeOpen(state.backdrop, 220);
+
+  //     state.panel.style.opacity = "0";
+
+  //     requestAnimationFrame(function () {
+  //       state.panel
+  //         .animate([{ opacity: 0 }, { opacity: 1 }], {
+  //           duration: 260,
+  //           easing: "ease-out",
+  //           fill: "both",
+  //         })
+  //         .finished.finally(function () {
+  //           state.panel.style.opacity = "";
+  //           if (moveFocus) focusFirst(state.panel);
+  //         });
+  //     });
+  //     return;
+  //   }
+
+  //   if (moveFocus) focusFirst(state.panel);
+  // }
+
+  // function closePanel(state) {
+  //   if (!state.isOpen) return;
+  //   state.isOpen = false;
+  //   state.toggle.setAttribute("aria-expanded", "false");
+
+  //   if (window.KSDropdownMotion) {
+  //     Promise.all([
+  //       window.KSDropdownMotion.fadeClose(state.backdrop, 180),
+  //       state.panel.animate([{ opacity: 1 }, { opacity: 0 }], {
+  //         duration: 180,
+  //         easing: "ease-out",
+  //         fill: "both",
+  //       }).finished,
+  //     ]).finally(function () {
+  //       state.panel.style.opacity = "";
+  //       state.wrap.classList.remove("is-open");
+  //     });
+  //     return;
+  //   }
+
+  //   state.wrap.classList.remove("is-open");
+  // }
 
   function togglePanel(state, event, moveFocus) {
     if (event && event.preventDefault) event.preventDefault();

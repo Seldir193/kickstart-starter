@@ -108,6 +108,19 @@ add_action('wp_enqueue_scripts', function () {
     "
   );
 
+
+  $dropdown_motion_js = get_stylesheet_directory() . '/assets/js/ks-dropdown-motion.js';
+
+if (file_exists($dropdown_motion_js)) {
+  wp_enqueue_script(
+    'ks-dropdown-motion',
+    get_stylesheet_directory_uri() . '/assets/js/ks-dropdown-motion.js',
+    [],
+    filemtime($dropdown_motion_js),
+    true
+  );
+}
+
   wp_add_inline_style('kickstart-style', '.ks-sec{scroll-margin-top:90px}');
 
   $mega_js = get_stylesheet_directory() . '/assets/js/mega-menu.js';
@@ -116,7 +129,7 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script(
       'kickstart-mega-menu',
       get_stylesheet_directory_uri() . '/assets/js/mega-menu.js',
-      [],
+      ['ks-dropdown-motion'],
       filemtime($mega_js),
       true
     );
@@ -128,7 +141,7 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script(
       'kickstart-language-switcher',
       get_stylesheet_directory_uri() . '/assets/js/language-switcher.js',
-      [],
+      ['ks-dropdown-motion'],
       filemtime($language_js),
       true
     );
@@ -168,7 +181,7 @@ add_action('wp_enqueue_scripts', function () {
       wp_enqueue_script(
         'ks-dropdown',
         get_stylesheet_directory_uri() . '/assets/js/ks-dropdown.js',
-        [],
+        ['ks-dropdown-motion'],
         filemtime($dropdown_js),
         true
       );
