@@ -90,7 +90,8 @@
 
 .language-switcher__menu {
   position: absolute;
-  top: calc(100% + 12px);
+  top: calc(100% + 22px);
+
   right: 0;
   min-width: 220px;
   max-height: 248px;
