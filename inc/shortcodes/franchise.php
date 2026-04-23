@@ -176,6 +176,71 @@ if (!function_exists('ks_register_franchise_shortcode')) {
         </div>
       </section>
 
+      <section id="fr-intro" class="ks-sec ks-py-48 ks-home-about">
+  <div class="container ks-home-about__grid">
+    <div class="ks-home-about__content">
+      <div class="ks-kicker" data-i18n="franchise.intro.kicker">
+        Shared success
+      </div>
+
+      <h2 class="ks-dir__title ks-dir__title--split">
+        <span class="ks-dir__title-line" data-i18n="franchise.intro.titleLine1">
+          Franchise with the
+        </span>
+        <span class="ks-dir__title-line" data-i18n="franchise.intro.titleLine2">
+          Dortmund Football School
+        </span>
+      </h2>
+
+      <p class="ks-home-about__lead" data-i18n="franchise.intro.lead">
+        The franchise model of Dortmund Football School gives you the opportunity to combine your passion for football with a profitable business concept built on practical experience and a clear football philosophy.
+      </p>
+
+      <div class="ks-home-about__points">
+        <div class="ks-home-about__point">
+          <strong data-i18n="franchise.intro.point1Title">Proven model</strong>
+          <span data-i18n="franchise.intro.point1Text">Benefit from a structured concept, practical experience and a strong foundation for sustainable growth.</span>
+        </div>
+        <div class="ks-home-about__point">
+          <strong data-i18n="franchise.intro.point2Title">Strong support</strong>
+          <span data-i18n="franchise.intro.point2Text">Use training know-how, marketing support and ongoing guidance for your local development.</span>
+        </div>
+      </div>
+
+      <div class="ks-home-about__actions">
+        <a
+          href="#fr-worldwide"
+          class="ks-btn js-scroll"
+          data-i18n="franchise.intro.button"
+        >Learn more</a>
+      </div>
+    </div>
+
+    <div class="ks-home-about__media">
+      <div class="ks-home-about__badge" data-i18n="franchise.intro.mediaBadge">
+        Insight into our franchise model
+      </div>
+
+      <div class="ks-vid ratio"><?php echo $video_embed; ?></div>
+
+      <p class="ks-home-about__caption" data-i18n="franchise.intro.mediaCaption">
+        Discover how our concept combines football know-how, structure and long-term partnership.
+      </p>
+
+      <div
+        class="ks-home-about__chips"
+        data-i18n-attr="aria-label"
+        data-i18n="franchise.intro.chipsLabel"
+        aria-label="Franchise highlights"
+      >
+        <span class="ks-home-about__chip" data-i18n="franchise.intro.chip1">Proven concept</span>
+        <span class="ks-home-about__chip" data-i18n="franchise.intro.chip2">Marketing support</span>
+        <span class="ks-home-about__chip" data-i18n="franchise.intro.chip3">Long-term partnership</span>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 
       <section class="ks-sec ks-py-56" id="fr-intro">
         <div class="ks-split">
           <div class="ks-split__left">
@@ -206,7 +271,7 @@ if (!function_exists('ks_register_franchise_shortcode')) {
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
 
       <section id="fr-worldwide" class="ks-sec ks-py-48 ks-bg-white">
         <div class="container container--1100">

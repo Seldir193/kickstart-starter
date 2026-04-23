@@ -81,5 +81,25 @@
       "card4Title": "Hedefli destek",
       "card4Text": "Her çocuk uygun şekilde desteklenir."
     }
+  },
+
+  "franchise": {
+    "intro": {
+      "kicker": "Birlikte başarıya",
+      "titleLine1": "Dortmund Futbol Okulu ile",
+      "titleLine2": "Franchise fırsatı",
+      "lead": "Dortmund Futbol Okulu franchise modeli, futbola olan tutkunuzu; pratik deneyime ve net bir futbol anlayışına dayanan kârlı bir iş modeliyle birleştirme fırsatı sunar.",
+      "point1Title": "Kanıtlanmış model",
+      "point1Text": "Sürdürülebilir büyüme için güçlü temelli yapılandırılmış konsept.",
+      "point2Title": "Güçlü destek",
+      "point2Text": "Antrenman bilgisi, pazarlama desteği ve sürekli rehberlik.",
+      "button": "Daha fazla bilgi",
+      "mediaBadge": "Franchise modelimize bakış",
+      "mediaCaption": "Konseptimizin futbol bilgisi, yapı ve uzun vadeli ortaklığı nasıl bir araya getirdiğini keşfedin.",
+      "chipsLabel": "Franchise öne çıkanlar",
+      "chip1": "Kanıtlanmış konsept",
+      "chip2": "Pazarlama desteği",
+      "chip3": "Uzun vadeli ortaklık"
+    }
   }
 }

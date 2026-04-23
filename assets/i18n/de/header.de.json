@@ -81,5 +81,24 @@
       "card4Title": "Gezielte Förderung",
       "card4Text": "Jedes Kind wird passend begleitet."
     }
+  },
+  "franchise": {
+    "intro": {
+      "kicker": "Gemeinsam zum Erfolg",
+      "titleLine1": "Franchising an der",
+      "titleLine2": "Dortmunder Fussball Schule",
+      "lead": "Das Franchise-Modell der Dortmunder Fussball Schule bietet dir die Möglichkeit, deine Leidenschaft für Fußball mit einem profitablen Geschäftskonzept zu verbinden, das auf praktischer Erfahrung und einer klaren Fußballphilosophie basiert.",
+      "point1Title": "Bewährtes Modell",
+      "point1Text": "Strukturiertes Konzept mit starker Basis für nachhaltiges Wachstum.",
+      "point2Title": "Starke Unterstützung",
+      "point2Text": "Trainings-Know-how, Marketing-Support und laufende Begleitung.",
+      "button": "Mehr erfahren",
+      "mediaBadge": "Einblick in unser Franchise-Modell",
+      "mediaCaption": "Erfahre, wie unser Konzept Fußball-Know-how, Struktur und langfristige Partnerschaft verbindet.",
+      "chipsLabel": "Franchise Highlights",
+      "chip1": "Bewährtes Konzept",
+      "chip2": "Marketing-Support",
+      "chip3": "Langfristige Partnerschaft"
+    }
   }
 }
