@@ -1,0 +1,48 @@
+{
+  "franchise": {
+    "intro": {
+      "kicker": "Shared success",
+      "titleLine1": "Franchise with the",
+      "titleLine2": "Dortmund Football School",
+      "lead": "The franchise model of Dortmund Football School lets you combine your passion for football with a profitable business concept based on practical experience and a clear football philosophy.",
+      "point1Title": "Proven model",
+      "point1Text": "Structured concept with a strong base for sustainable growth.",
+      "point2Title": "Strong support",
+      "point2Text": "Training know-how, marketing support and ongoing guidance.",
+      "button": "Learn more",
+      "mediaBadge": "Insight into our franchise model",
+      "mediaCaption": "Discover how our concept combines football know-how, structure and long-term partnership.",
+      "chipsLabel": "Franchise highlights",
+      "chip1": "Proven concept",
+      "chip2": "Marketing support",
+      "chip3": "Long-term partnership"
+    },
+
+    "benefits": {
+      "kicker": "What we stand for",
+      "title": "Franchise Benefits",
+      "items": {
+        "model": {
+          "titleLine1": "Proven",
+          "titleLine2": "Model",
+          "text": "Benefit from a structured concept and a strong foundation for sustainable growth."
+        },
+        "support": {
+          "titleLine1": "Strong",
+          "titleLine2": "Support",
+          "text": "Use training know-how, marketing support and ongoing guidance for local development."
+        },
+        "market": {
+          "titleLine1": "Fast",
+          "titleLine2": "Market Entry",
+          "text": "Start with a clear concept and benefit from the strength of an established brand."
+        },
+        "partner": {
+          "titleLine1": "Strong",
+          "titleLine2": "Partnership",
+          "text": "Build your region through long-term collaboration, clear standards and reliable exchange."
+        }
+      }
+    }
+  }
+}

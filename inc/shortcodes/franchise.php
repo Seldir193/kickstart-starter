@@ -240,38 +240,6 @@ if (!function_exists('ks_register_franchise_shortcode')) {
     </div>
   </div>
 </section>
-<!-- 
-      <section class="ks-sec ks-py-56" id="fr-intro">
-        <div class="ks-split">
-          <div class="ks-split__left">
-            <div class="ks-kicker">Gemeinsam zum Erfolg</div>
-            <h2>Franchising an der Dortmunder Fussball Schule</h2>
-
-            <p>Das Franchising-Modell der Dortmunder Fussball Schule (DFS) bietet dir eine einzigartige Gelegenheit,
-              deine Leidenschaft für Fußball mit einer profitablen Geschäftsmöglichkeit zu verbinden. Durch die
-              Zusammenarbeit mit der DFS profitierst du von einem bewährten Geschäftsmodell, das auf jahrelanger
-              Erfahrung in der professionellen Fußballausbildung basiert.</p>
-
-            <p>Franchising bei der DFS bedeutet, Teil einer dynamischen Community zu sein. Du lernst Best Practices,
-              profitierst vom Netzwerk und schaffst eine positive Lernumgebung für Kinder und Jugendliche.</p>
-
-            <p>Werde Teil der Dortmunder Fussball Schule und inspiriere die nächste Generation – gemeinsam zum Erfolg!</p>
-
-            <p class="ks-mt-16">
-              <a href="#fr-worldwide" class="ks-btn js-scroll">MEHR</a>
-            </p>
-          </div>
-
-          <div class="ks-split__right">
-            <div class="ks-vid">
-              <?php echo $video_embed; ?>
-            </div>
-            <div class="ks-right-below">
-              <p><strong>Warum DFS?</strong> Erprobtes Konzept, Trainings-Know-how, Marketing-Support und laufende Beratung.</p>
-            </div>
-          </div>
-        </div>
-      </section> -->
 
       <section id="fr-worldwide" class="ks-sec ks-py-48 ks-bg-white">
         <div class="container container--1100">
@@ -317,43 +285,96 @@ if (!function_exists('ks_register_franchise_shortcode')) {
   </div>
 </section>
 
-      
-        <section id="fr-benefits" class="ks-sec ks-py-48 ks-section--soft ks-wm-top-80">
-        <div class="container container--1100">
 
-          <div class="ks-title-wrap" data-bgword="VORTEILE">
-            <div class="ks-kicker">WOFÜR WIR STEHEN</div>
-            <h2 class="ks-dir__title">Franchise Vorteile</h2>
-          </div>
 
-          <div class="ks-benefits">
-            <div class="ks-benefit">
-              <img class="ks-benefit__icon"
-                   src="<?php echo esc_url($theme_uri . '/assets/img/franchise/cup.png'); ?>"
-                   alt="Bewährtes Geschäftsmodell" loading="lazy">
-              <h3>Bewährtes Geschäftsmodell</h3>
-              <p>Franchise-Partner nutzen ein erprobtes Konzept, das bereits erfolgreich ist.</p>
-            </div>
 
-            <div class="ks-benefit">
-              <img class="ks-benefit__icon"
-                   src="<?php echo esc_url($theme_uri . '/assets/img/franchise/handshake.png'); ?>"
-                   alt="Umfassende Unterstützung" loading="lazy">
-              <h3>Umfassende Unterstützung</h3>
-              <p>Schulungen, Marketingressourcen und laufende Beratung fördern den Erfolg der Partner.</p>
-            </div>
 
-            <div class="ks-benefit">
-              <img class="ks-benefit__icon"
-                   src="<?php echo esc_url($theme_uri . '/assets/img/franchise/wachs.png'); ?>"
-                   alt="Schneller Marktzugang" loading="lazy">
-              <h3>Schneller Marktzugang</h3>
-              <p>Von einer etablierten Marke und einem bestehenden Kundenstamm profitieren.</p>
-            </div>
-          </div>
 
+
+
+
+
+
+
+
+      <section id="fr-benefits" class="ks-sec ks-py-48 ks-section--soft ks-wm-top-80">
+  <div class="container container--1100">
+    <div class="ks-title-wrap" data-bgword="VORTEILE">
+      <div class="ks-kicker" data-i18n="franchise.benefits.kicker">WOFÜR WIR STEHEN</div>
+      <h2 class="ks-dir__title" data-i18n="franchise.benefits.title">Franchise Vorteile</h2>
+    </div>
+
+    <div class="ks-fr-benefits">
+      <article class="ks-fr-benefit">
+        <div class="ks-fr-benefit__icon">
+          <img
+            src="<?php echo esc_url($theme_uri . '/assets/img/franchise/cup.png'); ?>"
+            alt=""
+            loading="lazy"
+          >
         </div>
-      </section>
+        <h3 class="ks-fr-benefit__title">
+          <span data-i18n="franchise.benefits.items.model.titleLine1">BEWÄHRTES</span>
+          <span data-i18n="franchise.benefits.items.model.titleLine2">GESCHÄFTSMODELL</span>
+        </h3>
+        <p data-i18n="franchise.benefits.items.model.text">
+          Franchise-Partner nutzen ein erprobtes Konzept mit klarer Struktur und starker Basis für nachhaltiges Wachstum.
+        </p>
+      </article>
+
+      <article class="ks-fr-benefit">
+        <div class="ks-fr-benefit__icon">
+          <img
+            src="<?php echo esc_url($theme_uri . '/assets/img/franchise/handshake.png'); ?>"
+            alt=""
+            loading="lazy"
+          >
+        </div>
+        <h3 class="ks-fr-benefit__title">
+          <span data-i18n="franchise.benefits.items.support.titleLine1">UMFASSENDE</span>
+          <span data-i18n="franchise.benefits.items.support.titleLine2">UNTERSTÜTZUNG</span>
+        </h3>
+        <p data-i18n="franchise.benefits.items.support.text">
+          Profitiere von Trainings-Know-how, Marketing-Support und laufender Begleitung für deine lokale Entwicklung.
+        </p>
+      </article>
+
+      <article class="ks-fr-benefit">
+        <div class="ks-fr-benefit__icon">
+          <img
+            src="<?php echo esc_url($theme_uri . '/assets/img/franchise/wachs.png'); ?>"
+            alt=""
+            loading="lazy"
+          >
+        </div>
+        <h3 class="ks-fr-benefit__title">
+          <span data-i18n="franchise.benefits.items.market.titleLine1">SCHNELLER</span>
+          <span data-i18n="franchise.benefits.items.market.titleLine2">MARKTZUGANG</span>
+        </h3>
+        <p data-i18n="franchise.benefits.items.market.text">
+          Nutze die Stärke einer etablierten Marke und starte mit einem klaren Konzept in deinen regionalen Markt.
+        </p>
+      </article>
+
+      <article class="ks-fr-benefit">
+        <div class="ks-fr-benefit__icon">
+          <img
+            src="<?php echo esc_url($theme_uri . '/assets/img/franchise/partnership.svg'); ?>"
+            alt=""
+            loading="lazy"
+          >
+        </div>
+        <h3 class="ks-fr-benefit__title">
+          <span data-i18n="franchise.benefits.items.partner.titleLine1">STARKE</span>
+          <span data-i18n="franchise.benefits.items.partner.titleLine2">PARTNERSCHAFT</span>
+        </h3>
+        <p data-i18n="franchise.benefits.items.partner.text">
+          Baue mit langfristiger Zusammenarbeit, klaren Standards und verlässlichem Austausch deine Franchise-Region auf.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
 
       <?php
       

@@ -71,15 +71,85 @@
     return getTextKey(anchor.textContent);
   }
 
-  function buildJsonUrl(base, language) {
+  //   function buildJsonUrl(base, language) {
+  //     return (
+  //       base.replace(/\/+$/, "") +
+  //       "/" +
+  //       language +
+  //       "/header." +
+  //       language +
+  //       ".json"
+  //     );
+  //   }
+
+  function buildJsonUrl(base, language, scope) {
     return (
       base.replace(/\/+$/, "") +
       "/" +
       language +
-      "/header." +
+      "/" +
+      scope +
+      "." +
       language +
       ".json"
     );
+  }
+
+  //   function getPageScopes() {
+  //     var path = normalizePath(window.location.pathname);
+
+  //     if (path === "/" || path === "") {
+  //       return ["header", "home"];
+  //     }
+
+  //     if (path === "/franchise-2" || path === "/franchise") {
+  //       return ["header", "franchise"];
+  //     }
+
+  //     return ["header"];
+  //   }
+
+  function hasI18nPrefix(prefix) {
+    return !!document.querySelector('[data-i18n^="' + prefix + '"]');
+  }
+
+  function getPageScopes() {
+    var scopes = ["header"];
+
+    if (hasI18nPrefix("home.")) {
+      scopes.push("home");
+    }
+
+    if (hasI18nPrefix("franchise.")) {
+      scopes.push("franchise");
+    }
+
+    return scopes;
+  }
+
+  function mergeDeep(target, source) {
+    var output = Object.assign({}, target);
+
+    Object.keys(source || {}).forEach(function (key) {
+      var sourceValue = source[key];
+      var targetValue = output[key];
+
+      if (
+        sourceValue &&
+        typeof sourceValue === "object" &&
+        !Array.isArray(sourceValue)
+      ) {
+        output[key] = mergeDeep(
+          targetValue && typeof targetValue === "object" ? targetValue : {},
+          sourceValue,
+        );
+        return;
+      }
+
+      output[key] = sourceValue;
+    });
+
+    return output;
   }
 
   function createState(switcher) {
@@ -110,18 +180,6 @@
       link.setAttribute("data-i18n-key", detectHeaderKey(link));
     });
   }
-
-  //   function openMenu(state) {
-  //     state.isOpen = true;
-  //     state.menu.hidden = false;
-  //     state.trigger.setAttribute("aria-expanded", "true");
-  //   }
-
-  //   function closeMenu(state) {
-  //     state.isOpen = false;
-  //     state.menu.hidden = true;
-  //     state.trigger.setAttribute("aria-expanded", "false");
-  //   }
 
   function openMenu(state) {
     state.isOpen = true;
@@ -251,11 +309,28 @@
     state.cache[language] = data;
   }
 
+  //   function fetchLanguageData(state, language) {
+  //     var url = buildJsonUrl(state.base, language);
+  //     return fetch(url, { cache: "no-store" }).then(function (response) {
+  //       if (!response.ok) throw new Error("Failed to load " + url);
+  //       return response.json();
+  //     });
+  //   }
   function fetchLanguageData(state, language) {
-    var url = buildJsonUrl(state.base, language);
-    return fetch(url, { cache: "no-store" }).then(function (response) {
-      if (!response.ok) throw new Error("Failed to load " + url);
-      return response.json();
+    var scopes = getPageScopes();
+    var requests = scopes.map(function (scope) {
+      var url = buildJsonUrl(state.base, language, scope);
+
+      return fetch(url, { cache: "no-store" }).then(function (response) {
+        if (!response.ok) throw new Error("Failed to load " + url);
+        return response.json();
+      });
+    });
+
+    return Promise.all(requests).then(function (results) {
+      return results.reduce(function (acc, part) {
+        return mergeDeep(acc, part);
+      }, {});
     });
   }
 

@@ -1,0 +1,47 @@
+{
+  "franchise": {
+    "intro": {
+      "kicker": "Birlikte başarıya",
+      "titleLine1": "Dortmund Futbol Okulu ile",
+      "titleLine2": "Franchise fırsatı",
+      "lead": "Dortmund Futbol Okulu franchise modeli, futbola olan tutkunuzu pratik deneyim ve net bir futbol anlayışına dayanan kârlı bir iş modeliyle birleştirir.",
+      "point1Title": "Kanıtlanmış model",
+      "point1Text": "Sürdürülebilir büyüme için güçlü temelli yapılandırılmış konsept.",
+      "point2Title": "Güçlü destek",
+      "point2Text": "Antrenman bilgisi, pazarlama desteği ve sürekli rehberlik.",
+      "button": "Daha fazla bilgi",
+      "mediaBadge": "Franchise modelimize bakış",
+      "mediaCaption": "Konseptimizin futbol bilgisi, yapı ve uzun vadeli ortaklığı nasıl bir araya getirdiğini keşfedin.",
+      "chipsLabel": "Franchise öne çıkanlar",
+      "chip1": "Kanıtlanmış konsept",
+      "chip2": "Pazarlama desteği",
+      "chip3": "Uzun vadeli ortaklık"
+    },
+    "benefits": {
+      "kicker": "Neyi temsil ediyoruz",
+      "title": "Franchise Avantajları",
+      "items": {
+        "model": {
+          "titleLine1": "Kanıtlanmış",
+          "titleLine2": "Sistem",
+          "text": "Sürdürülebilir büyüme için net yapılı ve güçlü temelli bir konseptten yararlan."
+        },
+        "support": {
+          "titleLine1": "Güçlü",
+          "titleLine2": "Destek",
+          "text": "Antrenman bilgisi, pazarlama desteği ve sürekli rehberlikle yerel gelişimini güçlendir."
+        },
+        "market": {
+          "titleLine1": "Hızlı",
+          "titleLine2": "Pazar Girişi",
+          "text": "Yerleşik bir markanın gücü ve net bir konseptle bölgesel pazara daha hızlı başla."
+        },
+        "partner": {
+          "titleLine1": "Güçlü",
+          "titleLine2": "Ortaklık",
+          "text": "Uzun vadeli iş birliği, net standartlar ve güvenilir iletişimle bölgeni geliştir."
+        }
+      }
+    }
+  }
+}
