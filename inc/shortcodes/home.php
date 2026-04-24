@@ -427,10 +427,12 @@ echo ks_render_faq_section($faq_items, [
         </div>
       </section> -->
 
-      <section
+     <section
   id="coach-portal"
   class="ks-sec ks-home-portal"
   aria-label="DFS Trainingsbibliothek"
+  data-i18n-attr="aria-label"
+  data-i18n="home.portal.ariaLabel"
 >
   <div class="ks-home-portal__bg" aria-hidden="true">
     <img
@@ -442,15 +444,25 @@ echo ks_render_faq_section($faq_items, [
 
   <div class="container ks-home-portal__grid">
     <div class="ks-home-portal__text">
-      <div class="ks-eyebrow">Digitale Inhalte für Trainer, Teams und ambitionierte Spieler</div>
-      <h2 class="ks-home-portal__title"><span>DFSCOACH</span> Trainingsbibliothek</h2>
-      <p>
-        Greife auf Übungen, Trainingsideen und strukturierte Inhalte zu. Nutze die Bibliothek
-        zur Vorbereitung deiner Einheiten und entwickle deine Trainingsarbeit gezielt weiter.
-      </p>
-      <p class="ks-home-portal__actions">
-        <a class="ks-btn ks-btn--light" href="<?php echo esc_url($portal_url); ?>">Mehr erfahren</a>
-      </p>
+      <div class="ks-eyebrow" data-i18n="home.portal.eyebrow">
+  Digitale Inhalte für Trainer, Teams und ambitionierte Spieler
+</div>
+
+<h2 class="ks-home-portal__title">
+  <span data-i18n="home.portal.titlePrefix">DFSCOACH</span>
+  <span data-i18n="home.portal.titleSuffix">Trainingsbibliothek</span>
+</h2>
+
+<p data-i18n="home.portal.text">
+  Greife auf Übungen, Trainingsideen und strukturierte Inhalte zu. Nutze die Bibliothek
+  zur Vorbereitung deiner Einheiten und entwickle deine Trainingsarbeit gezielt weiter.
+</p>
+
+<p class="ks-home-portal__actions">
+  <a class="ks-btn ks-btn--light" href="<?php echo esc_url($portal_url); ?>" data-i18n="home.portal.button">
+    Mehr erfahren
+  </a>
+</p>
     </div>
 
     <div class="ks-home-portal__media" role="presentation" aria-hidden="true"></div>

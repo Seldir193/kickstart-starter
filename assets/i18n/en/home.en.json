@@ -65,6 +65,14 @@
           "answer": "Getting started is simple. You can first choose a suitable program and send an enquiry or booking. After that, you will receive all important information about the process, dates, and the next steps."
         }
       ]
+    },
+    "portal": {
+      "eyebrow": "Digital content for coaches, teams, and ambitious players",
+      "titlePrefix": "DFSCOACH",
+      "titleSuffix": "Training Library",
+      "text": "Access drills, training ideas, and structured content. Use the library to prepare your sessions and develop your coaching work step by step.",
+      "button": "Learn more",
+      "ariaLabel": "DFS Training Library"
     }
   }
 }

@@ -65,6 +65,14 @@
           "answer": "Der Einstieg ist unkompliziert. Du kannst zunächst ein passendes Angebot auswählen und eine Anfrage oder Buchung absenden. Anschließend erhältst du alle wichtigen Informationen zum Ablauf, zu Terminen und zu den nächsten Schritten."
         }
       ]
+    },
+    "portal": {
+      "eyebrow": "Digitale Inhalte für Trainer, Teams und ambitionierte Spieler",
+      "titlePrefix": "DFSCOACH",
+      "titleSuffix": "Trainingsbibliothek",
+      "text": "Greife auf Übungen, Trainingsideen und strukturierte Inhalte zu. Nutze die Bibliothek zur Vorbereitung deiner Einheiten und entwickle deine Trainingsarbeit gezielt weiter.",
+      "button": "Mehr erfahren",
+      "ariaLabel": "DFS Trainingsbibliothek"
     }
   }
 }

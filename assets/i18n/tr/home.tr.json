@@ -65,6 +65,14 @@
           "answer": "Başlangıç oldukça kolaydır. Önce uygun bir program seçip talep veya rezervasyon gönderebilirsiniz. Sonrasında süreç, tarihler ve sonraki adımlar hakkında gerekli tüm bilgileri alırsınız."
         }
       ]
+    },
+    "portal": {
+      "eyebrow": "Antrenörler, takımlar ve hedefli oyuncular için dijital içerikler",
+      "titlePrefix": "DFSCOACH",
+      "titleSuffix": "Antrenman Kütüphanesi",
+      "text": "Egzersizlere, antrenman fikirlerine ve yapılandırılmış içeriklere eriş. Kütüphaneyi antrenmanlarını hazırlamak ve çalışmalarını adım adım geliştirmek için kullan.",
+      "button": "Daha fazla bilgi",
+      "ariaLabel": "DFS Antrenman Kütüphanesi"
     }
   }
 }

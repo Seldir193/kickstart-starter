@@ -79,6 +79,9 @@
   z-index: 2;
   max-width: 780px;
   padding-left: clamp(10px, 1.4vw, 22px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .ks-home-portal__text .ks-eyebrow {
