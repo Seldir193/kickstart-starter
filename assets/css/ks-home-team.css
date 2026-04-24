@@ -210,14 +210,18 @@
   margin-top: 6px;
 }
 
-.ks-home-team__cta svg {
+.ks-home-team__cta-icon {
   width: 18px;
   height: 18px;
-  stroke: currentColor;
-  stroke-width: 2;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  display: block;
+  flex: 0 0 18px;
+  filter: invert(1);
+  transition: filter 0.28s ease;
+}
+
+.ks-home-team__cta:hover .ks-home-team__cta-icon,
+.ks-home-team__cta:focus-visible .ks-home-team__cta-icon {
+  filter: none;
 }
 
 .ks-home-team__side-shell {
@@ -366,16 +370,12 @@
   transform: translateX(-50%) scaleX(1);
   opacity: 0.92;
 }
-
 .ks-home-team__mini-arrow {
   width: 18px;
   height: 18px;
+  display: block;
   flex: 0 0 18px;
-  stroke: currentColor;
-  stroke-width: 2;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  object-fit: contain;
   opacity: 0.82;
   transition:
     transform 0.22s ease,

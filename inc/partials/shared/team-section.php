@@ -39,6 +39,8 @@ if (empty($team_items)) {
   return;
 }
 
+$team_arrow_icon = get_stylesheet_directory_uri() . '/assets/img/team/arrow_right_alt.svg';
+
 $featured = null;
 $side_items = [];
 
@@ -115,10 +117,12 @@ $side_items = array_slice($side_items, 0, 3);
 
             <a class="ks-btn ks-home-team__cta" data-team-featured-link href="<?php echo esc_url($featured['href']); ?>">
               <span data-i18n="home.team.cta">Profil ansehen</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M5 12h13"></path>
-                <path d="M13 6l6 6-6 6"></path>
-              </svg>
+              <img
+  class="ks-home-team__cta-icon"
+  src="<?php echo esc_url($team_arrow_icon); ?>"
+  alt=""
+  aria-hidden="true"
+/>
             </a>
           </div>
         </article>
@@ -157,10 +161,12 @@ $side_items = array_slice($side_items, 0, 3);
 
                   <span class="ks-home-team__side-linkline">
                     <span class="ks-home-team__side-linktext" data-i18n="home.team.more">Mehr erfahren</span>
-                    <svg class="ks-home-team__mini-arrow" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M5 12h13"></path>
-                      <path d="M13 6l6 6-6 6"></path>
-                    </svg>
+                    <img
+  class="ks-home-team__mini-arrow"
+  src="<?php echo esc_url($team_arrow_icon); ?>"
+  alt=""
+  aria-hidden="true"
+/>
                   </span>
                 </span>
               </a>
