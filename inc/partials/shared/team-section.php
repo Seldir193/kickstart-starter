@@ -1,3 +1,6 @@
+
+
+
 <?php
 
 $team_items = array_values(is_array($coaches ?? null) ? $coaches : []);
@@ -218,6 +221,15 @@ $side_items = array_slice($team_items, 1, 5);
     </div>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
 
 
 

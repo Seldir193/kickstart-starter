@@ -1,5 +1,45 @@
 <?php
 
+if (!function_exists('ks_enqueue_team_assets')) {
+  function ks_enqueue_team_assets() {
+    $theme_dir = get_stylesheet_directory();
+    $theme_uri = get_stylesheet_directory_uri();
+
+    $deps = ['kickstart-style', 'ks-utils'];
+
+    if (wp_style_is('ks-home', 'enqueued') || wp_style_is('ks-home', 'registered')) {
+      $deps[] = 'ks-home';
+    }
+
+    if (wp_style_is('ks-dir', 'enqueued') || wp_style_is('ks-dir', 'registered')) {
+      $deps[] = 'ks-dir';
+    }
+
+    $team_css = $theme_dir . '/assets/css/ks-home-team.css';
+
+    if (file_exists($team_css) && !wp_style_is('ks-home-team', 'enqueued')) {
+      wp_enqueue_style(
+        'ks-home-team',
+        $theme_uri . '/assets/css/ks-home-team.css',
+        $deps,
+        filemtime($team_css)
+      );
+    }
+
+    $team_js = $theme_dir . '/assets/js/ks-home-team.js';
+
+    if (file_exists($team_js) && !wp_script_is('ks-home-team', 'enqueued')) {
+      wp_enqueue_script(
+        'ks-home-team',
+        $theme_uri . '/assets/js/ks-home-team.js',
+        [],
+        filemtime($team_js),
+        true
+      );
+    }
+  }
+}
+
 add_action('wp_enqueue_scripts', function () {
   wp_enqueue_style(
     'kickstart-fonts',
@@ -28,59 +68,56 @@ add_action('wp_enqueue_scripts', function () {
     );
   }
 
-
-
-
   $styles = [
-  'base' => [
-    'path' => '/assets/css/base.css',
-    'deps' => ['kickstart-style', 'ks-utils'],
-  ],
-  'layout' => [
-    'path' => '/assets/css/layout.css',
-    'deps' => ['kickstart-style', 'ks-utils'],
-  ],
-  'components' => [
-    'path' => '/assets/css/components.css',
-    'deps' => ['kickstart-style', 'ks-utils'],
-  ],
-  'header' => [
-    'path' => '/assets/css/header.css',
-    'deps' => ['kickstart-style', 'ks-utils', 'ks-layout'],
-  ],
-  'header-dropdown' => [
-    'path' => '/assets/css/header-dropdown.css',
-    'deps' => ['kickstart-style', 'ks-utils', 'ks-layout', 'ks-header'],
-  ],
-  'language' => [
-    'path' => '/assets/css/language.css',
-    'deps' => ['kickstart-style', 'ks-utils', 'ks-header', 'ks-header-dropdown'],
-  ],
-  'footer' => [
-    'path' => '/assets/css/footer.css',
-    'deps' => ['kickstart-style', 'ks-utils'],
-  ],
-  'werbung' => [
-    'path' => '/assets/css/ks-werbung.css',
-    'deps' => ['kickstart-style', 'ks-utils'],
-  ],
-  'about' => [
-    'path' => '/assets/css/ks-about.css',
-    'deps' => ['kickstart-style', 'ks-utils'],
-  ],
-  'home-values' => [
-  'path' => '/assets/css/ks-home-values.css',
-  'deps' => ['kickstart-style', 'ks-utils', 'ks-base'],
-],
-'home-team' => [
+    'base' => [
+      'path' => '/assets/css/base.css',
+      'deps' => ['kickstart-style', 'ks-utils'],
+    ],
+    'layout' => [
+      'path' => '/assets/css/layout.css',
+      'deps' => ['kickstart-style', 'ks-utils'],
+    ],
+    'components' => [
+      'path' => '/assets/css/components.css',
+      'deps' => ['kickstart-style', 'ks-utils'],
+    ],
+    'header' => [
+      'path' => '/assets/css/header.css',
+      'deps' => ['kickstart-style', 'ks-utils', 'ks-layout'],
+    ],
+    'header-dropdown' => [
+      'path' => '/assets/css/header-dropdown.css',
+      'deps' => ['kickstart-style', 'ks-utils', 'ks-layout', 'ks-header'],
+    ],
+    'language' => [
+      'path' => '/assets/css/language.css',
+      'deps' => ['kickstart-style', 'ks-utils', 'ks-header', 'ks-header-dropdown'],
+    ],
+    'footer' => [
+      'path' => '/assets/css/footer.css',
+      'deps' => ['kickstart-style', 'ks-utils'],
+    ],
+    'werbung' => [
+      'path' => '/assets/css/ks-werbung.css',
+      'deps' => ['kickstart-style', 'ks-utils'],
+    ],
+    'about' => [
+      'path' => '/assets/css/ks-about.css',
+      'deps' => ['kickstart-style', 'ks-utils'],
+    ],
+    'home-values' => [
+      'path' => '/assets/css/ks-home-values.css',
+      'deps' => ['kickstart-style', 'ks-utils', 'ks-base'],
+    ],
+    'home-team' => [
   'path' => '/assets/css/ks-home-team.css',
-  'deps' => ['kickstart-style', 'ks-utils', 'ks-home'],
+  'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components'],
 ],
-  'trainer' => [
-    'path' => '/assets/css/ks-trainer.css',
-    'deps' => ['kickstart-style', 'ks-utils'],
-  ],
-];
+    'trainer' => [
+      'path' => '/assets/css/ks-trainer.css',
+      'deps' => ['kickstart-style', 'ks-utils'],
+    ],
+  ];
 
   foreach ($styles as $handle => $config) {
     $abs = get_stylesheet_directory() . $config['path'];
@@ -112,18 +149,17 @@ add_action('wp_enqueue_scripts', function () {
     "
   );
 
-
   $dropdown_motion_js = get_stylesheet_directory() . '/assets/js/ks-dropdown-motion.js';
 
-if (file_exists($dropdown_motion_js)) {
-  wp_enqueue_script(
-    'ks-dropdown-motion',
-    get_stylesheet_directory_uri() . '/assets/js/ks-dropdown-motion.js',
-    [],
-    filemtime($dropdown_motion_js),
-    true
-  );
-}
+  if (file_exists($dropdown_motion_js)) {
+    wp_enqueue_script(
+      'ks-dropdown-motion',
+      get_stylesheet_directory_uri() . '/assets/js/ks-dropdown-motion.js',
+      [],
+      filemtime($dropdown_motion_js),
+      true
+    );
+  }
 
   wp_add_inline_style('kickstart-style', '.ks-sec{scroll-margin-top:90px}');
 
@@ -427,19 +463,17 @@ if (file_exists($dropdown_motion_js)) {
     }
   }
 
-
-
   $accordion_js = get_stylesheet_directory() . '/assets/js/ks-accordion.js';
 
-if (file_exists($accordion_js)) {
-  wp_enqueue_script(
-    'ks-accordion',
-    get_stylesheet_directory_uri() . '/assets/js/ks-accordion.js',
-    [],
-    filemtime($accordion_js),
-    true
-  );
-}
+  if (file_exists($accordion_js)) {
+    wp_enqueue_script(
+      'ks-accordion',
+      get_stylesheet_directory_uri() . '/assets/js/ks-accordion.js',
+      [],
+      filemtime($accordion_js),
+      true
+    );
+  }
 });
 
 add_action('wp_enqueue_scripts', function () {
@@ -504,6 +538,16 @@ add_action('wp_enqueue_scripts', function () {
     );
   }
 }, 40);
+
+
+
+
+
+
+
+
+
+
 
 
 
