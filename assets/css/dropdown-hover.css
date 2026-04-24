@@ -1,14 +1,5 @@
 /* assets/css/dropdown-hover.css */
 @layer components {
-  /* =========================================================
-     GLOBAL DROPDOWN (FULL)
-     - kompletter Look (Button/Caret/Panel/Optionen)
-     - Hover/Focus Farben
-     - dünner Scrollbar (1:1 wie ks-dir.css)
-     Gilt für: .ks-dd + .ks-dir-dd
-     ========================================================= */
-
-  /* ---------- Button (beide Varianten) ---------- */
   .ks-dd__btn,
   .ks-dir-dd__btn {
     width: 100%;
@@ -38,13 +29,11 @@
     white-space: nowrap;
   }
 
-  /* Hover (wie vorher) */
   .ks-dd__btn:hover,
   .ks-dir-dd__btn:hover {
     border-color: var(--text, #111827);
   }
 
-  /* Focus/Open (wie vorher) */
   .ks-dd__btn:focus-visible,
   .ks-dir-dd__btn:focus-visible,
   .ks-dd[aria-expanded="true"] > .ks-dd__btn,
@@ -54,7 +43,6 @@
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-navy) 22%, #fff);
   }
 
-  /* ---------- Caret ---------- */
   .ks-dd__caret,
   .ks-dir-dd__caret {
     flex: 0 0 auto;
@@ -82,26 +70,6 @@
     transform: rotate(180deg);
   }
 
-  /*   
-   .ks-dd__panel,
-  .ks-dir-dd__panel {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: calc(100% + 8px);
-    background: #fff;
-    border: 1px solid #e3e6e8;
-    border-radius: 12px;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
-    z-index: 50;
-    padding: 0;
-
-  
-    max-height: 240px;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }  */
-
   .ks-dd__panel,
   .ks-dir-dd__panel {
     position: absolute;
@@ -124,12 +92,10 @@
     overflow-x: hidden;
   }
 
-  /* Hidden-Support */
   .ks-dd__panel[hidden] {
     display: none;
   }
 
-  /* Sichtbar wenn open */
   .ks-dd[aria-expanded="true"] .ks-dd__panel {
     display: block;
   }
@@ -137,7 +103,6 @@
     display: block;
   }
 
-  /* ---------- Optionen ---------- */
   .ks-dd__option,
   .ks-dir-dd__option {
     height: 44px;
@@ -152,13 +117,11 @@
     border-radius: 0;
   }
 
-  /* Hover nur wenn NICHT selected */
   .ks-dd__option:hover:not([aria-selected="true"]),
   .ks-dir-dd__option:hover:not([aria-selected="true"]) {
     background: rgba(15, 23, 42, 0.06);
   }
 
-  /* Selected */
   .ks-dd__option[aria-selected="true"],
   .ks-dir-dd__option[aria-selected="true"] {
     background: #111827;
@@ -170,7 +133,6 @@
     background: #111827;
   }
 
-  /* Keyboard-Fokus sichtbar */
   .ks-dd__option:focus {
     outline: 0;
   }
@@ -178,30 +140,6 @@
   .ks-dir-dd__option:focus-visible {
     box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--brand-navy) 35%, #fff);
   }
-
-  /* =========================================================
-     Dünner Scrollbalken (1:1 wie ks-dir.css)
-     ========================================================= */
-
-  /* .ks-dd__panel::-webkit-scrollbar,
-  .ks-dir-dd__panel::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  .ks-dd__panel::-webkit-scrollbar-thumb,
-  .ks-dir-dd__panel::-webkit-scrollbar-thumb {
-    border-radius: 999px;
-    border: 3px solid transparent;
-    background-clip: content-box;
-    background-color: rgba(15, 23, 42, 0.28);
-  }
-
-  
-  .ks-dd__panel,
-  .ks-dir-dd__panel {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(15, 23, 42, 0.28) transparent;
-  } */
 
   .ks-dd__inner::-webkit-scrollbar,
   .ks-dir-dd__inner::-webkit-scrollbar {
@@ -222,7 +160,6 @@
     scrollbar-color: rgba(15, 23, 42, 0.28) transparent;
   }
 
-  /* Motion reduzieren */
   @media (prefers-reduced-motion: reduce) {
     .ks-dd__caret,
     .ks-dd__caret img,

@@ -1,162 +1,208 @@
-/* ========================================================================== */
-/*  DFS Coach Portal (assets/css/ks-videos.css)                                */
-/*  – Vollbleed, dunkles Grau (nicht pures Schwarz), BW-Hintergrundfoto       */
-/*  – Großer "VIDEOS" Schriftzug                                              */
-/*  – Device-Bild rechts: smartes Bleed bis Viewportrand                      */
-/* ========================================================================== */
-
-/* Sicherheitsnetz gegen horizontales Scrollen bei Full-Bleed */
-/*html, body { overflow-x: clip; }*/
-
-/* ---------------------------------------------- */
-/* Section-Wrapper (Vollbleed + Höhe + Typo)      */
-/* ---------------------------------------------- */
 #coach-portal {
   position: relative;
   z-index: 0;
-  padding: clamp(56px, 8vw, 128px) 0;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: clamp(56px, 8vw, 116px) 0;
   color: #fff;
+  overflow: hidden;
 }
-
-/* Vollbleed-Layer: ::before Bühne, ::after Foto */
 #coach-portal::before,
 #coach-portal::after {
   content: "";
   position: absolute;
   inset: 0;
-
-  /* 50vw-Trick: macht die Pseudolayer viewport-breit, ohne Markup zu ändern */
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-
-  z-index: -2;
 }
 
-/* Bühne (nicht pures Schwarz) + leichte Vignette */
 #coach-portal::before {
+  z-index: -2;
   background:
     radial-gradient(
-      1200px 600px at 20% 40%,
-      rgba(0, 0, 0, 0.28),
-      rgba(0, 0, 0, 0.65)
+      900px 540px at 18% 42%,
+      rgba(253, 225, 0, 0.08),
+      rgba(0, 0, 0, 0)
     ),
-    linear-gradient(180deg, #222 0%, #1a1a1a 100%);
+    linear-gradient(180deg, #232323 0%, #171717 100%);
 }
-
-/* Großes Hintergrundbild in BW, standardmäßig „cover“ */
 
 #coach-portal::after {
+  display: none;
+}
+
+.ks-home-portal__bg {
+  position: absolute;
+  inset: 0;
   z-index: -1;
-
-  background: var(--portal-bg) center right / cover no-repeat;
-  filter: grayscale(100%) brightness(0.72) contrast(1.05);
-  opacity: 0.95;
+  overflow: hidden;
+  pointer-events: none;
 }
 
-/* Bei sehr breiten Viewports (oder Zoom 25%) auf „contain“ umschalten,
-   damit das Motiv vollständig sichtbar bleibt und nicht oben abgeschnitten wirkt. */
-@media (min-width: 1800px) {
-  #coach-portal::after {
-    background-size: contain; /* komplette Figur sichtbar */
-    background-position: center left; /* rechts ausrichten */
-  }
+.ks-home-portal__bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 42% 58%;
+  filter: grayscale(100%) brightness(0.52) contrast(1.03);
+  opacity: 0.58;
 }
-
-/* ---------------------------------------------- */
-/* Inhalt/Grid                                     */
-/* ---------------------------------------------- */
 .ks-home-portal__grid {
   position: relative;
-  isolation: isolate; /* "VIDEOS" sauber darüber */
-  max-width: var(--ks-container);
-  width: 100%;
+  isolation: isolate;
+  width: min(100% - 32px, 1720px);
   margin: 0 auto;
-  padding: 0 16px;
-
+  padding: 0 clamp(20px, 2.4vw, 36px);
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: clamp(18px, 3vw, 28px);
+  grid-template-columns: minmax(0, 1fr) minmax(520px, 0.96fr);
+  gap: clamp(28px, 4vw, 72px);
   align-items: center;
-  min-height: clamp(480px, 48vw, 780px);
+  min-height: clamp(520px, 46vw, 760px);
 }
-
-/* Großer Schriftzug "VIDEOS" */
 #coach-portal .ks-home-portal__grid::before {
-  content: "VIDEOS";
+  content: "DFSCOACH";
   position: absolute;
   inset: 0;
   display: grid;
   place-items: start center;
-  padding-top: clamp(8px, 4vw, 32px);
+  padding-top: clamp(8px, 3vw, 24px);
   z-index: 1;
   font-weight: 900;
-  letter-spacing: 0.02em;
-  font-size: clamp(56px, 9vw, 140px);
-  color: rgba(255, 255, 255, 0.94);
-  text-shadow: 0 4px 22px rgba(0, 0, 0, 0.35);
+  letter-spacing: 0.12em;
+  font-size: clamp(52px, 8vw, 132px);
+  color: rgba(255, 255, 255, 0.11);
   pointer-events: none;
 }
-
-/* ---------------------------------------------- */
-/* Typo & CTA                                      */
-/* ---------------------------------------------- */
-.ks-home-portal__title {
-  margin: 0 0 8px;
-  font-weight: 900;
-  line-height: 1.05;
-  font-size: clamp(28px, 5vw, 52px);
+.ks-home-portal__text {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  padding-left: clamp(10px, 1.4vw, 22px);
 }
+
+.ks-home-portal__text .ks-eyebrow {
+  margin-bottom: 12px;
+  color: var(--brand-gold);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ks-home-portal__title {
+  margin: 0 0 14px;
+  font-weight: 900;
+  line-height: 1.02;
+  font-size: clamp(34px, 4.8vw, 68px);
+  color: #ffffff;
+}
+
 .ks-home-portal__title span {
   display: block;
-  font-size: 0.6em;
-  opacity: 0.85;
-  letter-spacing: 0.18em;
+  margin-bottom: 8px;
+  font-size: 0.34em;
+  line-height: 1.1;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.78);
 }
+
+.ks-home-portal__text p {
+  margin: 0;
+  max-width: 58ch;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: clamp(15px, 1vw, 17px);
+  line-height: 1.72;
+}
+
 .ks-home-portal__actions {
-  margin-top: 14px;
+  margin-top: 20px;
 }
 
-/* ---------------------------------------------- */
-/* Rechtes „Geräte“-Bild                          */
-/*  – steht im Grid (Spalte 2)                    */
-/*  – bleedet bei breitem Viewport bis zum Rand   */
-/*  – kehrt bei schmalem Viewport sauber zurück   */
-/* ---------------------------------------------- */
 .ks-home-portal__media {
-  width: 100%;
-  min-height: clamp(260px, 34vw, 460px);
-  background: var(--portal-img) bottom left / contain no-repeat;
-  filter: drop-shadow(0 16px 40px rgba(0, 0, 0, 0.35));
+  position: relative;
+  z-index: 2;
+  width: min(100%, 880px);
+  min-height: clamp(340px, 35vw, 560px);
   justify-self: end;
-
-  /* Magie: ziehe das Element genau um die „Bleed“-Breite nach rechts heraus.
-     Wenn 100vw <= Container -> 0px (kein Bleed).
-     Wenn 100vw > Container  -> negativer Rand zieht bis Viewportrand. */
-  margin-right: calc(0px - max(0px, (100vw - var(--ks-container)) / 2));
+  background: var(--portal-img) right 8% bottom / contain no-repeat;
+  filter: drop-shadow(0 22px 50px rgba(0, 0, 0, 0.38));
+  margin-right: calc(-1 * clamp(0px, 4vw, 72px));
+}
+#coach-portal .ks-btn.ks-btn--light {
+  --btn-border: var(--brand-gold);
+  --btn-fill: var(--brand-gold);
+  --btn-text: var(--brand-white);
+  --btn-text-h: var(--brand-black);
+  background: transparent;
 }
 
-/* Optional: wenig Puffer, damit es bei Ultra-Wide nicht „zu weit“ rausfliegt */
-@media (min-width: 2200px) {
-  .ks-home-portal__media {
-    margin-right: calc(-1 * ((100vw - var(--ks-container)) / 3 - 24px));
+@media (min-width: 1600px) {
+  .ks-home-portal__bg-image {
+    object-position: 46% 54%;
   }
 }
 
-/* ---------------------------------------------- */
-/* Responsive                                      */
-/* ---------------------------------------------- */
-@media (max-width: 900px) {
+@media (min-width: 1900px) {
+  .ks-home-portal__bg-image {
+    object-fit: contain;
+    object-position: center 55%;
+  }
+}
+
+@media (min-width: 2200px) {
+  .ks-home-portal__bg-image {
+    object-fit: contain;
+    object-position: center 58%;
+  }
+}
+
+@media (min-width: 1800px) {
+  #coach-portal::after {
+    background-size: cover;
+    background-position: left center;
+  }
+}
+
+@media (max-width: 1100px) {
   .ks-home-portal__grid {
     grid-template-columns: 1fr;
-    min-height: clamp(420px, 64vw, 600px);
-    text-align: left;
+    min-height: auto;
+    gap: 28px;
   }
+
+  .ks-home-portal__text {
+    max-width: none;
+    padding-left: 0;
+  }
+
   .ks-home-portal__media {
-    min-height: clamp(220px, 50vw, 360px);
-    margin-top: 8px;
-    /* bei schmalen Viewports kein Bleed */
+    width: min(100%, 640px);
+    min-height: clamp(260px, 52vw, 420px);
+    justify-self: start;
     margin-right: 0;
+  }
+
+  #coach-portal .ks-home-portal__grid::before {
+    place-items: start left;
+    padding-top: 0;
+    font-size: clamp(40px, 11vw, 78px);
+  }
+}
+
+@media (max-width: 900px) {
+  #coach-portal {
+    padding: 48px 0 64px;
+  }
+
+  .ks-home-portal__grid {
+    width: min(100% - 24px, 100%);
+    padding: 0 8px;
+  }
+
+  .ks-home-portal__media {
+    width: 100%;
+    min-height: clamp(220px, 56vw, 340px);
+    max-width: 100%;
   }
 }

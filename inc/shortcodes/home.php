@@ -382,22 +382,6 @@ if (!function_exists('ks_register_home_shortcode')) {
           $faq_video_embed = '<div class="ks-vid-ph" aria-hidden="true"></div>';
         }
 
-       
-
-//         echo ks_render_faq_section($faq_items, [
-//   'section_id'         => 'faq',
-//   'wrapper_class'      => 'container ks-home-faq',
-//   'title'              => 'Häufige Fragen zur Fußballschule',
-//   'kicker'             => 'Gut zu wissen',
-//   'watermark'          => 'FAQ',
-//   'side_card_enabled'  => true,
-//   'side_card_kicker'   => 'Fragen offen?',
-//   'side_card_title'    => 'Wir helfen dir gerne weiter',
-//   'side_card_text'     => 'Wenn du Fragen zu Trainingsformaten, Anmeldung oder Abläufen hast, kannst du dich jederzeit direkt bei uns melden.',
-//   'side_card_button'   => 'Kontakt aufnehmen',
-
-//  'side_card_href'     => esc_url(home_url('/#whatsapp-locations')),
-// ]);
 echo ks_render_faq_section($faq_items, [
   'section_id'              => 'faq',
   'wrapper_class'           => 'container ks-home-faq',
@@ -421,7 +405,7 @@ echo ks_render_faq_section($faq_items, [
       }
       ?>
 
-      <section
+      <!-- <section
         id="coach-portal"
         class="ks-sec ks-home-portal"
         aria-label="DFS Trainingsbibliothek"
@@ -441,7 +425,37 @@ echo ks_render_faq_section($faq_items, [
 
           <div class="ks-home-portal__media" role="presentation" aria-hidden="true"></div>
         </div>
-      </section>
+      </section> -->
+
+      <section
+  id="coach-portal"
+  class="ks-sec ks-home-portal"
+  aria-label="DFS Trainingsbibliothek"
+>
+  <div class="ks-home-portal__bg" aria-hidden="true">
+    <img
+      class="ks-home-portal__bg-image"
+      src="<?php echo esc_url($portal_bg); ?>"
+      alt=""
+    >
+  </div>
+
+  <div class="container ks-home-portal__grid">
+    <div class="ks-home-portal__text">
+      <div class="ks-eyebrow">Digitale Inhalte für Trainer, Teams und ambitionierte Spieler</div>
+      <h2 class="ks-home-portal__title"><span>DFSCOACH</span> Trainingsbibliothek</h2>
+      <p>
+        Greife auf Übungen, Trainingsideen und strukturierte Inhalte zu. Nutze die Bibliothek
+        zur Vorbereitung deiner Einheiten und entwickle deine Trainingsarbeit gezielt weiter.
+      </p>
+      <p class="ks-home-portal__actions">
+        <a class="ks-btn ks-btn--light" href="<?php echo esc_url($portal_url); ?>">Mehr erfahren</a>
+      </p>
+    </div>
+
+    <div class="ks-home-portal__media" role="presentation" aria-hidden="true"></div>
+  </div>
+</section>
 
       <?php include $theme_dir . '/inc/partials/shared/team-section.php'; ?>
 
