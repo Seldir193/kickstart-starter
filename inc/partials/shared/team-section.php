@@ -58,6 +58,14 @@ if ($featured === null) {
 }
 
 $side_items = array_slice($side_items, 0, 3);
+
+
+
+$team_fact_icons = [
+  get_stylesheet_directory_uri() . '/assets/img/team/trophy.svg',
+  get_stylesheet_directory_uri() . '/assets/img/team/license.svg',
+  get_stylesheet_directory_uri() . '/assets/img/team/group.svg',
+];
 ?>
 
 <section id="team" class="ks-sec ks-py-56 ks-bg-white">
@@ -100,7 +108,7 @@ $side_items = array_slice($side_items, 0, 3);
               </a>
             </h3>
 
-            <ul class="ks-home-team__facts">
+            <!-- <ul class="ks-home-team__facts">
               <li class="ks-home-team__fact">
                 <strong data-i18n="home.team.fact1Title">Individuelle Entwicklung</strong>
                 <span data-i18n="home.team.fact1Text">Gezielte Förderung mit Blick auf Technik, Haltung und Spielverständnis.</span>
@@ -113,7 +121,48 @@ $side_items = array_slice($side_items, 0, 3);
                 <strong data-i18n="home.team.fact3Title">Praxisnahe Förderung</strong>
                 <span data-i18n="home.team.fact3Text">Begleitung nah am Spieler – auf und neben dem Platz.</span>
               </li>
-            </ul>
+            </ul> -->
+
+         <ul class="ks-home-team__facts">
+  <li class="ks-home-team__fact">
+    <img
+      class="ks-home-team__fact-icon"
+      src="<?php echo esc_url($team_fact_icons[0]); ?>"
+      alt=""
+      aria-hidden="true"
+    />
+    <span class="ks-home-team__fact-copy">
+      <strong data-i18n="home.team.fact1Title">Individuelle Entwicklung</strong>
+      <span data-i18n="home.team.fact1Text">Gezielte Förderung mit Blick auf Technik, Haltung und Spielverständnis.</span>
+    </span>
+  </li>
+
+  <li class="ks-home-team__fact">
+    <img
+      class="ks-home-team__fact-icon"
+      src="<?php echo esc_url($team_fact_icons[1]); ?>"
+      alt=""
+      aria-hidden="true"
+    />
+    <span class="ks-home-team__fact-copy">
+      <strong data-i18n="home.team.fact2Title">Strukturiertes Coaching</strong>
+      <span data-i18n="home.team.fact2Text">Klare Inhalte, moderne Trainingsmethoden und nachvollziehbare Abläufe.</span>
+    </span>
+  </li>
+
+  <li class="ks-home-team__fact">
+    <img
+      class="ks-home-team__fact-icon"
+      src="<?php echo esc_url($team_fact_icons[2]); ?>"
+      alt=""
+      aria-hidden="true"
+    />
+    <span class="ks-home-team__fact-copy">
+      <strong data-i18n="home.team.fact3Title">Praxisnahe Förderung</strong>
+      <span data-i18n="home.team.fact3Text">Begleitung nah am Spieler – auf und neben dem Platz.</span>
+    </span>
+  </li>
+</ul>
 
             <a class="ks-btn ks-home-team__cta" data-team-featured-link href="<?php echo esc_url($featured['href']); ?>">
               <span data-i18n="home.team.cta">Profil ansehen</span>
