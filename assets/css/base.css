@@ -5,11 +5,13 @@
 
     --color-white: #ffffff;
     --color-black: #111111;
-    --color-text: #222222;
+    --color-text: #374151;
     --color-text-strong: #111111;
     --color-text-nav: #333333;
     --color-text-muted: #666666;
-    --color-text-soft: #6b7280;
+    --color-text-soft: #7d8288;
+
+    --color-text-heading-sm: #0f172a;
 
     --color-surface-page: #f5f5f5;
     --color-surface-soft: #fafafa;

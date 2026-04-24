@@ -100,12 +100,13 @@
   letter-spacing: 0.01em;
   font-weight: 800;
   white-space: nowrap;
+  color: var(--color-text-heading-sm);
 }
 
 .ks-home-values__card p {
   margin-top: auto;
   margin-bottom: 0;
-  color: #7d8288;
+  color: var(--color-text);
   line-height: 1.6;
   white-space: nowrap;
   align-self: center;

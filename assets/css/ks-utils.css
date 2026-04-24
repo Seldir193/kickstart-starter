@@ -100,9 +100,7 @@ body {
   position: relative;
   padding-left: 12px;
   color: var(--text, #222);
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  /* color: (var(--color-text-heading-sm)); */
   font-size: 14px;
   line-height: 1.2;
 }
@@ -310,7 +308,7 @@ body {
 .ks-acc__body {
   padding: 8px 0 2px;
   padding-inline: 12px;
-  color: #374151;
+  color: var(--color-text-soft);
   overflow: hidden;
 }
 
@@ -481,7 +479,7 @@ body {
 #faq .ks-acc[open] summary,
 #dir-faq .ks-acc[open] summary,
 #jobs .ks-acc[open] summary {
-  color: #0f172a;
+  color: var(--color-text-heading-sm);
   background-color: rgba(15, 23, 42, 0.04);
 }
 
@@ -734,7 +732,7 @@ body {
 
 .ks-faq-section__card-text {
   margin: 0;
-  color: #4b5563;
+  color: var(--color-text-soft);
   font-size: 16px;
   line-height: 1.7;
 }

@@ -67,7 +67,7 @@
 
 .ks-home-hero__brand-lead {
   margin: 0;
-  color: var(--text-soft);
+  color: var(--color-text);
   font-size: clamp(15px, 1vw, 17px);
   line-height: 1.68;
 }
@@ -229,7 +229,7 @@
 
 .ks-home-hero__course-text {
   margin: 0;
-  color: var(--text-soft);
+  color: var(--color-text-soft);
   font-size: clamp(12px, 0.8vw, 14px);
   line-height: 1.55;
 }

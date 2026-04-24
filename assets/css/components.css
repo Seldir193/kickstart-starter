@@ -272,7 +272,8 @@
 }
 
 .ks-kicker {
-  --kicker-color: #222;
+  /* --kicker-color: #222; */
+  color: (var(--color-text-heading-sm));
 }
 
 .ks-text-light .ks-kicker {
