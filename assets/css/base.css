@@ -25,6 +25,13 @@
     --color-overlay-dark: rgba(0, 0, 0, 0.45);
     --color-hover-soft: rgba(0, 0, 0, 0.04);
 
+    --color-surface-dark-1: #232323;
+    --color-surface-dark-2: #171717;
+    --color-text-inverse-soft: rgba(255, 255, 255, 0.84);
+    --color-text-inverse-muted: rgba(255, 255, 255, 0.78);
+    --color-watermark-inverse: rgba(255, 255, 255, 0.11);
+    --color-shadow-dark-strong: rgba(0, 0, 0, 0.38);
+
     --brand-gold: #fde100;
     --brand-gold-700: #e5c200;
     --brand-navy: #0f1e2e;
