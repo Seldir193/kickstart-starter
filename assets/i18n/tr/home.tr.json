@@ -77,10 +77,17 @@
     "team": {
       "kicker": "Antrenörlerimiz",
       "title": "Antrenör ekibimizi tanıyın",
-      "watermark": "COACHES",
-      "prev": "Geri",
-      "next": "İleri",
+      "intro": "Deneyimli antrenörler. Gerçek tutku. Tek bir ortak hedef: her oyuncunun potansiyelini saha içinde ve dışında ortaya çıkarmak.",
+      "watermark": "DFS",
       "roleFallback": "Antrenör",
+      "fact1Title": "Bireysel Gelişim",
+      "fact1Text": "Teknik, duruş ve oyun anlayışına odaklanan hedefli destek.",
+      "fact2Title": "Planlı Antrenörlük",
+      "fact2Text": "Net içerikler, modern antrenman yöntemleri ve anlaşılır süreçler.",
+      "fact3Title": "Sahaya Yakın Destek",
+      "fact3Text": "Her oyuncuya saha içinde ve dışında yakın rehberlik.",
+      "cta": "Profili görüntüle",
+      "more": "Daha fazla bilgi",
       "empty": "Antrenör bulunamadı."
     }
   }

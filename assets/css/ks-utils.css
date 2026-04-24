@@ -122,11 +122,23 @@ body {
   top: -80px;
 }
 
-#faq .ks-title-wrap .ks-kicker,
+/* #faq .ks-title-wrap .ks-kicker,
 #dir-faq .ks-title-wrap .ks-kicker,
 #kontakt .ks-kicker,
 #news .ks-title-wrap .ks-kicker,
 #team .ks-kicker,
+#program-cta .ks-kicker,
+#fr-faq .ks-title-wrap .ks-kicker,
+#fr-benefits .ks-kicker {
+  display: block;
+  width: max-content;
+  margin: 0 auto 6px;
+} */
+
+#faq .ks-title-wrap .ks-kicker,
+#dir-faq .ks-title-wrap .ks-kicker,
+#kontakt .ks-kicker,
+#news .ks-title-wrap .ks-kicker,
 #program-cta .ks-kicker,
 #fr-faq .ks-title-wrap .ks-kicker,
 #fr-benefits .ks-kicker {

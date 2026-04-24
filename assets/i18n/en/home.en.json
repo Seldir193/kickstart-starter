@@ -77,10 +77,17 @@
     "team": {
       "kicker": "Our Coaches",
       "title": "Meet our coaching team",
-      "watermark": "COACHES",
-      "prev": "Previous",
-      "next": "Next",
+      "intro": "Experienced coaches. Real passion. One shared mission: unlocking every player's potential – on and off the pitch.",
+      "watermark": "DFS",
       "roleFallback": "Coach",
+      "fact1Title": "Individual Development",
+      "fact1Text": "Targeted support with a clear focus on technique, attitude, and game understanding.",
+      "fact2Title": "Structured Coaching",
+      "fact2Text": "Clear content, modern training methods, and easy-to-follow processes.",
+      "fact3Title": "Practical Support",
+      "fact3Text": "Close guidance for every player – on and off the pitch.",
+      "cta": "View profile",
+      "more": "Learn more",
       "empty": "No coaches found."
     }
   }

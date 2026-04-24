@@ -77,10 +77,17 @@
     "team": {
       "kicker": "Unsere Trainer",
       "title": "Lerne unser Trainerteam kennen",
-      "watermark": "COACHES",
-      "prev": "Zurück",
-      "next": "Weiter",
+      "intro": "Erfahrene Coaches. Echte Leidenschaft. Eine gemeinsame Mission: das Potenzial jedes Spielers zu entfalten – auf und neben dem Platz.",
+      "watermark": "DFS",
       "roleFallback": "Trainer",
+      "fact1Title": "Individuelle Entwicklung",
+      "fact1Text": "Gezielte Förderung mit Blick auf Technik, Haltung und Spielverständnis.",
+      "fact2Title": "Strukturiertes Coaching",
+      "fact2Text": "Klare Inhalte, moderne Trainingsmethoden und nachvollziehbare Abläufe.",
+      "fact3Title": "Praxisnahe Förderung",
+      "fact3Text": "Begleitung nah am Spieler – auf und neben dem Platz.",
+      "cta": "Profil ansehen",
+      "more": "Mehr erfahren",
       "empty": "Keine Trainer gefunden."
     }
   }
