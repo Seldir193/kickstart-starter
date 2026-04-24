@@ -73,6 +73,15 @@
       "text": "Greife auf Übungen, Trainingsideen und strukturierte Inhalte zu. Nutze die Bibliothek zur Vorbereitung deiner Einheiten und entwickle deine Trainingsarbeit gezielt weiter.",
       "button": "Mehr erfahren",
       "ariaLabel": "DFS Trainingsbibliothek"
+    },
+    "team": {
+      "kicker": "Unsere Trainer",
+      "title": "Lerne unser Trainerteam kennen",
+      "watermark": "COACHES",
+      "prev": "Zurück",
+      "next": "Weiter",
+      "roleFallback": "Trainer",
+      "empty": "Keine Trainer gefunden."
     }
   }
 }

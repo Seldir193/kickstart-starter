@@ -73,6 +73,15 @@
       "text": "Egzersizlere, antrenman fikirlerine ve yapılandırılmış içeriklere eriş. Kütüphaneyi antrenmanlarını hazırlamak ve çalışmalarını adım adım geliştirmek için kullan.",
       "button": "Daha fazla bilgi",
       "ariaLabel": "DFS Antrenman Kütüphanesi"
+    },
+    "team": {
+      "kicker": "Antrenörlerimiz",
+      "title": "Antrenör ekibimizi tanıyın",
+      "watermark": "COACHES",
+      "prev": "Geri",
+      "next": "İleri",
+      "roleFallback": "Antrenör",
+      "empty": "Antrenör bulunamadı."
     }
   }
 }
