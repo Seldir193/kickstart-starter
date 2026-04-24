@@ -157,7 +157,12 @@ $side_items = array_slice($team_items, 1, 3);
 
             <div class="ks-home-team__side">
               <?php foreach ($side_items as $item): ?>
-                <a class="ks-home-team__side-card" data-team-side-card href="<?php echo esc_url($item['href']); ?>">
+                <!-- <a class="ks-home-team__side-card" data-team-side-card href="<?php echo esc_url($item['href']); ?>"> -->
+                  <button
+  type="button"
+  class="ks-home-team__side-card"
+  data-team-side-card
+>
                   <span class="ks-home-team__side-media">
                     <img
                       class="ks-home-team__side-image"
@@ -188,7 +193,8 @@ $side_items = array_slice($team_items, 1, 3);
                       />
                     </span>
                   </span>
-                </a>
+                <!-- </a> -->
+                </button>
               <?php endforeach; ?>
             </div>
 

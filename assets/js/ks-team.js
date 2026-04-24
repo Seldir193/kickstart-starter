@@ -85,7 +85,6 @@
     var role = card.querySelector("[data-team-side-role]");
     var name = card.querySelector("[data-team-side-name]");
 
-    card.setAttribute("href", coach.href);
     setImage(image, coach);
 
     if (role) {
@@ -96,6 +95,23 @@
       name.textContent = coach.name || "Trainer";
     }
   }
+
+  // function setSideCard(card, coach) {
+  //   var image = card.querySelector("[data-team-side-image]");
+  //   var role = card.querySelector("[data-team-side-role]");
+  //   var name = card.querySelector("[data-team-side-name]");
+
+  //   card.setAttribute("href", coach.href);
+  //   setImage(image, coach);
+
+  //   if (role) {
+  //     role.textContent = coach.role || "Trainer";
+  //   }
+
+  //   if (name) {
+  //     name.textContent = coach.name || "Trainer";
+  //   }
+  // }
 
   function renderSide() {
     var i;
@@ -115,6 +131,21 @@
     render();
   }
 
+  function bindSideCards() {
+    var i;
+
+    for (i = 0; i < sideCards.length; i += 1) {
+      bindSideCard(sideCards[i], i);
+    }
+  }
+
+  function bindSideCard(card, cardIndex) {
+    card.addEventListener("click", function () {
+      index = wrapIndex(index + cardIndex + 1);
+      render();
+    });
+  }
+
   if (prev) {
     prev.addEventListener("click", function () {
       move(-1);
@@ -131,6 +162,8 @@
     if (prev) prev.hidden = true;
     if (next) next.hidden = true;
   }
+
+  bindSideCards();
 
   render();
 })();

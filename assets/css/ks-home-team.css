@@ -267,7 +267,7 @@
   gap: 14px;
 }
 
-.ks-home-team__side-card {
+/* .ks-home-team__side-card {
   min-width: 0;
   min-height: 0;
   height: 100%;
@@ -282,6 +282,31 @@
   box-shadow: 0 10px 24px rgba(17, 24, 39, 0.04);
   text-decoration: none;
   color: inherit;
+  transition:
+    transform 0.26s ease,
+    border-color 0.26s ease,
+    box-shadow 0.26s ease;
+} */
+
+.ks-home-team__side-card {
+  appearance: none;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 98px minmax(0, 1fr);
+  gap: 14px;
+  align-items: stretch;
+  padding: 12px;
+  border-radius: 22px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.04);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
   transition:
     transform 0.26s ease,
     border-color 0.26s ease,
