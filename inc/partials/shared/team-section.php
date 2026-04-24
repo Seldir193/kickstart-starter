@@ -38,7 +38,7 @@ $build_team_item = function (array $coach) use ($trainer_url, $fallback_src) {
 
 $team_items = array_map($build_team_item, $team_items);
 $featured = !empty($team_items) ? $team_items[0] : null;
-$side_items = array_slice($team_items, 1, 3);
+$side_items = array_slice($team_items, 1, 5);
 ?>
 
 <section id="team" class="ks-sec ks-py-56 ks-bg-white">
