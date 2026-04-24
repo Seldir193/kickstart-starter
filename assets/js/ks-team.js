@@ -5,14 +5,8 @@
   var dataNode = root.querySelector(".ks-home-team__data");
   if (!dataNode) return;
 
-  var coaches = [];
-  try {
-    coaches = JSON.parse(dataNode.textContent || "[]");
-  } catch (error) {
-    coaches = [];
-  }
-
-  if (!Array.isArray(coaches) || !coaches.length) return;
+  var coaches = getCoaches(dataNode);
+  if (!coaches.length) return;
 
   var featuredImage = root.querySelector("[data-team-featured-image]");
   var featuredRole = root.querySelector("[data-team-featured-role]");
@@ -21,32 +15,69 @@
   var sideCards = root.querySelectorAll("[data-team-side-card]");
   var prev = root.querySelector(".ks-home-team__side-nav--up");
   var next = root.querySelector(".ks-home-team__side-nav--down");
-  var index = 0;
+  var featuredSlug = root.getAttribute("data-featured-slug") || "";
+  var index = findFeaturedIndex(featuredSlug);
+
+  function getCoaches(node) {
+    try {
+      var parsedCoaches = JSON.parse(node.textContent || "[]");
+      return Array.isArray(parsedCoaches) ? parsedCoaches : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function findFeaturedIndex(slug) {
+    var i;
+
+    if (!slug) return 0;
+
+    for (i = 0; i < coaches.length; i += 1) {
+      if (coaches[i].slug === slug) return i;
+    }
+
+    return 0;
+  }
 
   function wrapIndex(value) {
     var total = coaches.length;
     return ((value % total) + total) % total;
   }
 
-  function setFeatured(coach) {
+  function getImageUrl(coach) {
+    if (!coach || typeof coach.img !== "string") return "";
+    return coach.img.trim();
+  }
+
+  function setImage(image, coach) {
+    var imageUrl = getImageUrl(coach);
+
+    if (!image || !imageUrl) return;
+
+    image.src = imageUrl;
+    image.alt = coach.name || "Trainer";
+  }
+
+  function setFeaturedLinks(coach) {
     var i;
 
-    if (featuredImage) {
-      featuredImage.src = coach.img;
-      featuredImage.alt = coach.name;
+    for (i = 0; i < featuredLinks.length; i += 1) {
+      featuredLinks[i].setAttribute("href", coach.href);
     }
+  }
+
+  function setFeatured(coach) {
+    setImage(featuredImage, coach);
 
     if (featuredRole) {
       featuredRole.textContent = coach.role || "Trainer";
     }
 
     if (featuredName) {
-      featuredName.textContent = coach.name;
+      featuredName.textContent = coach.name || "Trainer";
     }
 
-    for (i = 0; i < featuredLinks.length; i += 1) {
-      featuredLinks[i].setAttribute("href", coach.href);
-    }
+    setFeaturedLinks(coach);
   }
 
   function setSideCard(card, coach) {
@@ -55,18 +86,14 @@
     var name = card.querySelector("[data-team-side-name]");
 
     card.setAttribute("href", coach.href);
-
-    if (image) {
-      image.src = coach.img;
-      image.alt = coach.name;
-    }
+    setImage(image, coach);
 
     if (role) {
       role.textContent = coach.role || "Trainer";
     }
 
     if (name) {
-      name.textContent = coach.name;
+      name.textContent = coach.name || "Trainer";
     }
   }
 
@@ -107,6 +134,166 @@
 
   render();
 })();
+
+// (function () {
+//   var root = document.getElementById("ksHomeTeam");
+//   if (!root) return;
+
+//   var dataNode = root.querySelector(".ks-home-team__data");
+//   if (!dataNode) return;
+
+//   var coaches = [];
+//   try {
+//     coaches = JSON.parse(dataNode.textContent || "[]");
+//   } catch (error) {
+//     coaches = [];
+//   }
+
+//   if (!Array.isArray(coaches) || !coaches.length) return;
+
+//   var featuredImage = root.querySelector("[data-team-featured-image]");
+//   var featuredRole = root.querySelector("[data-team-featured-role]");
+//   var featuredName = root.querySelector("[data-team-featured-name]");
+//   var featuredLinks = root.querySelectorAll("[data-team-featured-link]");
+//   var sideCards = root.querySelectorAll("[data-team-side-card]");
+//   var prev = root.querySelector(".ks-home-team__side-nav--up");
+//   var next = root.querySelector(".ks-home-team__side-nav--down");
+//   var index = 0;
+
+//   function wrapIndex(value) {
+//     var total = coaches.length;
+//     return ((value % total) + total) % total;
+//   }
+
+//   // function setFeatured(coach) {
+//   //   var i;
+
+//   //   if (featuredImage) {
+//   //     featuredImage.src = coach.img;
+//   //     featuredImage.alt = coach.name;
+//   //   }
+
+//   //   if (featuredRole) {
+//   //     featuredRole.textContent = coach.role || "Trainer";
+//   //   }
+
+//   //   if (featuredName) {
+//   //     featuredName.textContent = coach.name;
+//   //   }
+
+//   //   for (i = 0; i < featuredLinks.length; i += 1) {
+//   //     featuredLinks[i].setAttribute("href", coach.href);
+//   //   }
+//   // }
+
+//   function getImageUrl(coach) {
+//     if (!coach || typeof coach.img !== "string") return "";
+//     return coach.img.trim();
+//   }
+
+//   function setFeatured(coach) {
+//     var i;
+//     var imageUrl = getImageUrl(coach);
+
+//     if (featuredImage && imageUrl) {
+//       featuredImage.src = imageUrl;
+//       featuredImage.alt = coach.name || "Trainer";
+//     }
+
+//     if (featuredRole) {
+//       featuredRole.textContent = coach.role || "Trainer";
+//     }
+
+//     if (featuredName) {
+//       featuredName.textContent = coach.name || "Trainer";
+//     }
+
+//     for (i = 0; i < featuredLinks.length; i += 1) {
+//       featuredLinks[i].setAttribute("href", coach.href);
+//     }
+//   }
+
+//   // function setSideCard(card, coach) {
+//   //   var image = card.querySelector("[data-team-side-image]");
+//   //   var role = card.querySelector("[data-team-side-role]");
+//   //   var name = card.querySelector("[data-team-side-name]");
+
+//   //   card.setAttribute("href", coach.href);
+
+//   //   if (image) {
+//   //     image.src = coach.img;
+//   //     image.alt = coach.name;
+//   //   }
+
+//   //   if (role) {
+//   //     role.textContent = coach.role || "Trainer";
+//   //   }
+
+//   //   if (name) {
+//   //     name.textContent = coach.name;
+//   //   }
+//   // }
+
+//   function setSideCard(card, coach) {
+//     var image = card.querySelector("[data-team-side-image]");
+//     var role = card.querySelector("[data-team-side-role]");
+//     var name = card.querySelector("[data-team-side-name]");
+//     var imageUrl = getImageUrl(coach);
+
+//     card.setAttribute("href", coach.href);
+
+//     if (image && imageUrl) {
+//       image.src = imageUrl;
+//       image.alt = coach.name || "Trainer";
+//     }
+
+//     if (role) {
+//       role.textContent = coach.role || "Trainer";
+//     }
+
+//     if (name) {
+//       name.textContent = coach.name || "Trainer";
+//     }
+//   }
+
+//   function renderSide() {
+//     var i;
+
+//     for (i = 0; i < sideCards.length; i += 1) {
+//       setSideCard(sideCards[i], coaches[wrapIndex(index + i + 1)]);
+//     }
+//   }
+
+//   function render() {
+//     setFeatured(coaches[index]);
+//     renderSide();
+//   }
+
+//   function move(step) {
+//     index = wrapIndex(index + step);
+//     render();
+//   }
+
+//   if (prev) {
+//     prev.addEventListener("click", function () {
+//       move(-1);
+//     });
+//   }
+
+//   if (next) {
+//     next.addEventListener("click", function () {
+//       move(1);
+//     });
+//   }
+
+//   if (coaches.length <= 1) {
+//     if (prev) prev.hidden = true;
+//     if (next) next.hidden = true;
+//   }
+
+//   render();
+// })();
+
 // (function () {
 //   var root = document.getElementById("ksTeamCarousel");
 //   if (!root) return;
@@ -161,5 +348,4 @@
 
 //   // Start
 //   update();
-
 // })();
