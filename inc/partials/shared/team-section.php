@@ -152,10 +152,17 @@ $side_items = array_slice($team_items, 1, 5);
               data-i18n="home.team.navUp"
               data-i18n-attr="aria-label"
             >
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <!-- <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path d="M12 18V6"></path>
                 <path d="M6 12l6-6 6 6"></path>
-              </svg>
+              </svg> -->
+
+               <img
+  class="ks-home-team__side-nav-icon"
+  src="<?php echo esc_url($team_arrow_icon); ?>"
+  alt=""
+  aria-hidden="true"
+/>
             </button>
 
             <div class="ks-home-team__side">
@@ -208,10 +215,17 @@ $side_items = array_slice($team_items, 1, 5);
               data-i18n="home.team.navDown"
               data-i18n-attr="aria-label"
             >
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <!-- <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path d="M12 6v12"></path>
                 <path d="M6 12l6 6 6-6"></path>
-              </svg>
+              </svg> -->
+
+              <img
+  class="ks-home-team__side-nav-icon"
+  src="<?php echo esc_url($team_arrow_icon); ?>"
+  alt=""
+  aria-hidden="true"
+/>
             </button>
           </div>
         </div>

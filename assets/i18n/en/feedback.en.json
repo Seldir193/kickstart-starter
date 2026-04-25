@@ -1,0 +1,48 @@
+{
+  "feedback": {
+    "aria": {
+      "section": "Testimonials",
+      "tabs": "Feedback categories",
+      "controls": "Feedback navigation",
+      "prev": "Previous feedback",
+      "next": "Next feedback"
+    },
+    "watermark": "VOICES",
+    "kicker": "Feedback",
+    "title": "Real voices from DFS",
+    "lead": "Experiences that drive us. Development that lasts.",
+    "sideLabel": "Dortmund Football School",
+    "tabs": {
+      "parents": "Parents",
+      "players": "Players",
+      "coaches": "Coaches",
+      "partners": "Partners"
+    },
+    "items": {
+      "1": {
+        "quote": "Your commitment, your energy, combined with focused coaching, is almost priceless for young players.",
+        "author": "CHRISTIAN GROSS",
+        "meta": "Swiss professional coach (Tottenham Hotspur, VfB Stuttgart, Young Boys Bern)"
+      },
+      "2": {
+        "quote": "The training quality and organization are exceptional; every detail is right.",
+        "author": "SAMPLE COACH",
+        "meta": "U17 coach, NRW"
+      },
+      "3": {
+        "quote": "Technically excellent and personally close — this is what meaningful development looks like.",
+        "author": "PARENT VOICE",
+        "meta": "Dortmund"
+      },
+      "4": {
+        "quote": "Child-friendly, motivating, professional — a clear recommendation.",
+        "author": "CLUB REPRESENTATIVE",
+        "meta": "Partner club"
+      }
+    },
+    "footer": {
+      "left": "Football is development.",
+      "right": "We provide the framework."
+    }
+  }
+}

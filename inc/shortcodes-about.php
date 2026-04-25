@@ -271,7 +271,8 @@ if (!function_exists('ks_register_about_shortcode')) {
           </div>
 
           <p class="ks-mt">
-            <a href="<?php echo esc_url(home_url('/standorte')); ?>" class="ks-btn">Zu den Standorten</a>
+            
+            <a href="<?php echo esc_url(home_url('/franchise-2/#fr-worldwide-map')); ?>" class="ks-btn">Zu den Standorten</a>
           </p>
         </div>
       </section>

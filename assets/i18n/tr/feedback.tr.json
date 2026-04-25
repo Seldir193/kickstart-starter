@@ -1,0 +1,48 @@
+{
+  "feedback": {
+    "aria": {
+      "section": "Geri bildirimler",
+      "tabs": "Geri bildirim kategorileri",
+      "controls": "Geri bildirim navigasyonu",
+      "prev": "Önceki geri bildirim",
+      "next": "Sonraki geri bildirim"
+    },
+    "watermark": "YORUMLAR",
+    "kicker": "Geri bildirim",
+    "title": "DFS’den gerçek yorumlar",
+    "lead": "Bizi motive eden deneyimler. Kalıcı gelişim.",
+    "sideLabel": "Dortmund Futbol Okulu",
+    "tabs": {
+      "parents": "Veliler",
+      "players": "Oyuncular",
+      "coaches": "Antrenörler",
+      "partners": "Partnerler"
+    },
+    "items": {
+      "1": {
+        "quote": "Gösterdiğiniz emek ve enerji, hedef odaklı antrenörlükle birleşince genç oyuncular için neredeyse paha biçilemez hale geliyor.",
+        "author": "CHRISTIAN GROSS",
+        "meta": "İsviçreli profesyonel antrenör (Tottenham Hotspur, VfB Stuttgart, Young Boys Bern)"
+      },
+      "2": {
+        "quote": "Antrenman kalitesi ve organizasyon olağanüstü; her detay yerli yerinde.",
+        "author": "ÖRNEK ANTRENÖR",
+        "meta": "U17 antrenörü, NRW"
+      },
+      "3": {
+        "quote": "Teknik açıdan çok güçlü ve insani olarak çok yakın — gelişim tam olarak böyle anlam kazanır.",
+        "author": "VELİ GÖRÜŞÜ",
+        "meta": "Dortmund"
+      },
+      "4": {
+        "quote": "Çocuklara uygun, motive edici ve profesyonel — kesinlikle tavsiye ederiz.",
+        "author": "KULÜP YÖNETİCİSİ",
+        "meta": "Partner kulüp"
+      }
+    },
+    "footer": {
+      "left": "Futbol gelişimdir.",
+      "right": "Biz doğru çerçeveyi sunarız."
+    }
+  }
+}

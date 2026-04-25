@@ -71,17 +71,6 @@
     return getTextKey(anchor.textContent);
   }
 
-  //   function buildJsonUrl(base, language) {
-  //     return (
-  //       base.replace(/\/+$/, "") +
-  //       "/" +
-  //       language +
-  //       "/header." +
-  //       language +
-  //       ".json"
-  //     );
-  //   }
-
   function buildJsonUrl(base, language, scope) {
     return (
       base.replace(/\/+$/, "") +
@@ -94,20 +83,6 @@
       ".json"
     );
   }
-
-  //   function getPageScopes() {
-  //     var path = normalizePath(window.location.pathname);
-
-  //     if (path === "/" || path === "") {
-  //       return ["header", "home"];
-  //     }
-
-  //     if (path === "/franchise-2" || path === "/franchise") {
-  //       return ["header", "franchise"];
-  //     }
-
-  //     return ["header"];
-  //   }
 
   function hasI18nPrefix(prefix) {
     return !!document.querySelector('[data-i18n^="' + prefix + '"]');
@@ -126,6 +101,10 @@
 
     if (hasI18nPrefix("offers.")) {
       scopes.push("offers");
+    }
+
+    if (hasI18nPrefix("feedback.")) {
+      scopes.push("feedback");
     }
 
     return scopes;

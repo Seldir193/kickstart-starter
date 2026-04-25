@@ -1,0 +1,48 @@
+{
+  "feedback": {
+    "aria": {
+      "section": "Feedbacks",
+      "tabs": "Feedback Kategorien",
+      "controls": "Feedback Navigation",
+      "prev": "Vorheriges Feedback",
+      "next": "Nächstes Feedback"
+    },
+    "watermark": "STIMMEN",
+    "kicker": "Feedback",
+    "title": "Echte Stimmen aus der DFS",
+    "lead": "Erfahrungen, die uns antreiben. Entwicklung, die bleibt.",
+    "sideLabel": "Dortmunder Fussball Schule",
+    "tabs": {
+      "parents": "Eltern",
+      "players": "Spieler",
+      "coaches": "Trainer",
+      "partners": "Partner"
+    },
+    "items": {
+      "1": {
+        "quote": "Ihr Einsatz, Ihre Energie, verbunden mit zielorientiertem Coaching ist fast unbezahlbar für die Jugendlichen.",
+        "author": "CHRISTIAN GROSS",
+        "meta": "Schweizer Profitrainer (Tottenham Hotspur, VfB Stuttgart, Young Boys Bern)"
+      },
+      "2": {
+        "quote": "Die Trainingsqualität und die Organisation sind außergewöhnlich, jedes Detail stimmt.",
+        "author": "MUSTER COACH",
+        "meta": "U17-Trainer, NRW"
+      },
+      "3": {
+        "quote": "Fachlich top und menschlich nah – so macht Förderung Sinn.",
+        "author": "ELTERNSTIMME",
+        "meta": "Dortmund"
+      },
+      "4": {
+        "quote": "Kindgerecht, motivierend, professionell – klare Empfehlung.",
+        "author": "VEREINSVORSTAND",
+        "meta": "Partnerverein"
+      }
+    },
+    "footer": {
+      "left": "Fussball ist Entwicklung.",
+      "right": "Wir geben den Rahmen."
+    }
+  }
+}
