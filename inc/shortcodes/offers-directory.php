@@ -523,7 +523,9 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
   </div>
 </div> 
 
-<?php echo do_shortcode('[ks_brandbar]'); ?>
+
+
+<?php echo do_shortcode('[ks_partner_network]'); ?>
 
 <?php
  

@@ -477,7 +477,9 @@ echo ks_render_faq_section($faq_items, [
       }
       ?>
 
-      <?php echo do_shortcode('[ks_brandbar]'); ?>
+      
+
+      <?php echo do_shortcode('[ks_partner_network]'); ?>
 
       <?php if ($show_news): ?>
         <section id="news" class="ks-sec ks-py-48">

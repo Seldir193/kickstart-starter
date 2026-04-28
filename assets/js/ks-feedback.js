@@ -17,22 +17,20 @@
 
   if (!slides.length) return;
 
-  let activeIndex = slides.findIndex((slide) =>
-    slide.classList.contains("is-active"),
-  );
+  let activeFilter = getInitialFilter();
+  let activePosition = 0;
 
-  if (activeIndex < 0) {
-    activeIndex = 0;
+  function getInitialFilter() {
+    const activeTab = tabs.find((tab) => tab.classList.contains("is-active"));
+
+    if (activeTab?.dataset.feedbackFilter) {
+      return activeTab.dataset.feedbackFilter;
+    }
+
+    return tabs[0]?.dataset.feedbackFilter || "";
   }
 
-  let activeFilter = tabs.find((tab) => tab.classList.contains("is-active"))
-    ?.dataset.feedbackFilter;
-
-  if (!activeFilter && tabs[0]) {
-    activeFilter = tabs[0].dataset.feedbackFilter;
-  }
-
-  function filteredSlides() {
+  function getFilteredSlides() {
     if (!activeFilter) return slides;
 
     return slides.filter((slide) => {
@@ -54,14 +52,16 @@
     });
   }
 
-  function setProgress(activePosition, total) {
-    progressNodes.forEach((node, index) => {
-      node.hidden = index >= total;
-      node.classList.toggle("is-active", index === activePosition);
+  function setSlides(list) {
+    slides.forEach((slide) => {
+      const isActive = list[activePosition] === slide;
+
+      slide.classList.toggle("is-active", isActive);
+      slide.setAttribute("aria-hidden", String(!isActive));
     });
   }
 
-  function setCounter(activePosition, total) {
+  function setCounter(total) {
     currentNodes.forEach((node) => {
       node.textContent = padNumber(activePosition + 1);
     });
@@ -71,60 +71,70 @@
     });
   }
 
-  function setSlides(nextIndex) {
-    slides.forEach((slide, index) => {
-      const isActive = index === nextIndex;
-
-      slide.classList.toggle("is-active", isActive);
-      slide.setAttribute("aria-hidden", String(!isActive));
+  function setProgress(total) {
+    progressNodes.forEach((node, index) => {
+      node.hidden = index >= total;
+      node.classList.toggle("is-active", index === activePosition);
     });
   }
 
-  function activePositionInFiltered(list) {
-    const position = list.findIndex((slide) => {
-      return Number(slide.dataset.feedbackIndex) === activeIndex;
-    });
-
-    return Math.max(position, 0);
-  }
-
-  function render(nextIndex) {
-    activeIndex = nextIndex;
-
-    const list = filteredSlides();
-    const position = activePositionInFiltered(list);
-
-    setTabs();
-    setSlides(activeIndex);
-    setCounter(position, list.length);
-    setProgress(position, list.length);
-  }
-
-  function activateByPosition(position) {
-    const list = filteredSlides();
+  function render() {
+    const list = getFilteredSlides();
 
     if (!list.length) return;
 
-    const safePosition = (position + list.length) % list.length;
-    const nextIndex = Number(list[safePosition].dataset.feedbackIndex);
+    activePosition = clampPosition(activePosition, list.length);
 
-    render(nextIndex);
+    setTabs();
+    setSlides(list);
+    setCounter(list.length);
+    setProgress(list.length);
+  }
+
+  function clampPosition(position, total) {
+    if (position < 0) return total - 1;
+    if (position >= total) return 0;
+    return position;
   }
 
   function activateFilter(filter) {
     activeFilter = filter;
-
-    const list = filteredSlides();
-    const firstIndex = list.length ? Number(list[0].dataset.feedbackIndex) : 0;
-
-    render(firstIndex);
+    activePosition = 0;
+    render();
   }
 
   function move(step) {
-    const list = filteredSlides();
-    const currentPosition = activePositionInFiltered(list);
+    const list = getFilteredSlides();
 
-    activateByPosition(currentPosition + step);
+    if (!list.length) return;
+
+    activePosition = clampPosition(activePosition + step, list.length);
+    render();
+  }
+
+  function activateTabByIndex(index) {
+    const tab = tabs[index];
+
+    if (!tab) return;
+
+    tab.focus();
+    activateFilter(tab.dataset.feedbackFilter);
+  }
+
+  function onTabKeydown(event, index) {
+    if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (event.key === "Home") return activateTabByIndex(0);
+    if (event.key === "End") return activateTabByIndex(tabs.length - 1);
+
+    const direction = event.key === "ArrowRight" ? 1 : -1;
+    const nextIndex = (index + direction + tabs.length) % tabs.length;
+
+    activateTabByIndex(nextIndex);
   }
 
   tabs.forEach((tab, index) => {
@@ -133,32 +143,7 @@
     });
 
     tab.addEventListener("keydown", (event) => {
-      if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) {
-        return;
-      }
-
-      event.preventDefault();
-
-      if (event.key === "Home") {
-        tabs[0].focus();
-        activateFilter(tabs[0].dataset.feedbackFilter);
-        return;
-      }
-
-      if (event.key === "End") {
-        const lastTab = tabs[tabs.length - 1];
-
-        lastTab.focus();
-        activateFilter(lastTab.dataset.feedbackFilter);
-        return;
-      }
-
-      const direction = event.key === "ArrowRight" ? 1 : -1;
-      const nextIndex = (index + direction + tabs.length) % tabs.length;
-      const nextTab = tabs[nextIndex];
-
-      nextTab.focus();
-      activateFilter(nextTab.dataset.feedbackFilter);
+      onTabKeydown(event, index);
     });
   });
 
@@ -174,8 +159,187 @@
     });
   });
 
-  render(activeIndex);
+  render();
 })();
+
+// (function () {
+//   const root = document.querySelector("[data-feedback-root]");
+
+//   if (!root) return;
+
+//   const tabs = Array.from(root.querySelectorAll("[data-feedback-filter]"));
+//   const slides = Array.from(root.querySelectorAll("[data-feedback-slide]"));
+//   const prevButtons = Array.from(root.querySelectorAll("[data-feedback-prev]"));
+//   const nextButtons = Array.from(root.querySelectorAll("[data-feedback-next]"));
+//   const currentNodes = Array.from(
+//     root.querySelectorAll("[data-feedback-current]"),
+//   );
+//   const totalNodes = Array.from(root.querySelectorAll("[data-feedback-total]"));
+//   const progressNodes = Array.from(
+//     root.querySelectorAll("[data-feedback-progress]"),
+//   );
+
+//   if (!slides.length) return;
+
+//   let activeIndex = slides.findIndex((slide) =>
+//     slide.classList.contains("is-active"),
+//   );
+
+//   if (activeIndex < 0) {
+//     activeIndex = 0;
+//   }
+
+//   let activeFilter = tabs.find((tab) => tab.classList.contains("is-active"))
+//     ?.dataset.feedbackFilter;
+
+//   if (!activeFilter && tabs[0]) {
+//     activeFilter = tabs[0].dataset.feedbackFilter;
+//   }
+
+//   function filteredSlides() {
+//     if (!activeFilter) return slides;
+
+//     return slides.filter((slide) => {
+//       return slide.dataset.feedbackLabel === activeFilter;
+//     });
+//   }
+
+//   function padNumber(value) {
+//     return String(value).padStart(2, "0");
+//   }
+
+//   function setTabs() {
+//     tabs.forEach((tab) => {
+//       const isActive = tab.dataset.feedbackFilter === activeFilter;
+
+//       tab.classList.toggle("is-active", isActive);
+//       tab.setAttribute("aria-selected", String(isActive));
+//       tab.setAttribute("tabindex", isActive ? "0" : "-1");
+//     });
+//   }
+
+//   function setProgress(activePosition, total) {
+//     progressNodes.forEach((node, index) => {
+//       node.hidden = index >= total;
+//       node.classList.toggle("is-active", index === activePosition);
+//     });
+//   }
+
+//   function setCounter(activePosition, total) {
+//     currentNodes.forEach((node) => {
+//       node.textContent = padNumber(activePosition + 1);
+//     });
+
+//     totalNodes.forEach((node) => {
+//       node.textContent = padNumber(total);
+//     });
+//   }
+
+//   function setSlides(nextIndex) {
+//     slides.forEach((slide, index) => {
+//       const isActive = index === nextIndex;
+
+//       slide.classList.toggle("is-active", isActive);
+//       slide.setAttribute("aria-hidden", String(!isActive));
+//     });
+//   }
+
+//   function activePositionInFiltered(list) {
+//     const position = list.findIndex((slide) => {
+//       return Number(slide.dataset.feedbackIndex) === activeIndex;
+//     });
+
+//     return Math.max(position, 0);
+//   }
+
+//   function render(nextIndex) {
+//     activeIndex = nextIndex;
+
+//     const list = filteredSlides();
+//     const position = activePositionInFiltered(list);
+
+//     setTabs();
+//     setSlides(activeIndex);
+//     setCounter(position, list.length);
+//     setProgress(position, list.length);
+//   }
+
+//   function activateByPosition(position) {
+//     const list = filteredSlides();
+
+//     if (!list.length) return;
+
+//     const safePosition = (position + list.length) % list.length;
+//     const nextIndex = Number(list[safePosition].dataset.feedbackIndex);
+
+//     render(nextIndex);
+//   }
+
+//   function activateFilter(filter) {
+//     activeFilter = filter;
+
+//     const list = filteredSlides();
+//     const firstIndex = list.length ? Number(list[0].dataset.feedbackIndex) : 0;
+
+//     render(firstIndex);
+//   }
+
+//   function move(step) {
+//     const list = filteredSlides();
+//     const currentPosition = activePositionInFiltered(list);
+
+//     activateByPosition(currentPosition + step);
+//   }
+
+//   tabs.forEach((tab, index) => {
+//     tab.addEventListener("click", () => {
+//       activateFilter(tab.dataset.feedbackFilter);
+//     });
+
+//     tab.addEventListener("keydown", (event) => {
+//       if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) {
+//         return;
+//       }
+
+//       event.preventDefault();
+
+//       if (event.key === "Home") {
+//         tabs[0].focus();
+//         activateFilter(tabs[0].dataset.feedbackFilter);
+//         return;
+//       }
+
+//       if (event.key === "End") {
+//         const lastTab = tabs[tabs.length - 1];
+
+//         lastTab.focus();
+//         activateFilter(lastTab.dataset.feedbackFilter);
+//         return;
+//       }
+
+//       const direction = event.key === "ArrowRight" ? 1 : -1;
+//       const nextIndex = (index + direction + tabs.length) % tabs.length;
+//       const nextTab = tabs[nextIndex];
+
+//       nextTab.focus();
+//       activateFilter(nextTab.dataset.feedbackFilter);
+//     });
+//   });
+
+//   prevButtons.forEach((button) => {
+//     button.addEventListener("click", () => {
+//       move(-1);
+//     });
+//   });
+
+//   nextButtons.forEach((button) => {
+//     button.addEventListener("click", () => {
+//       move(1);
+//     });
+//   });
+
+//   render(activeIndex);
+// })();
 
 // (function () {
 //   const fb = document.getElementById('feedback');

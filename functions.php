@@ -28,7 +28,7 @@ ks_require('shortcodes/franchise.php');
 ks_require('shortcodes/offers-directory.php');
 ks_require('shortcodes/home.php');
 ks_require('shortcodes/trainer.php');
-ks_require('shortcodes/brandbar.php');
+ks_require('shortcodes/partner-network.php');
 ks_require('shortcodes/datenschutz.php');
 ks_require('shortcodes/impressum.php');
 ks_require('shortcodes/agb.php');
