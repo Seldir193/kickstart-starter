@@ -16,8 +16,6 @@ if (!function_exists('ks_render_partner_network_shortcode')) {
       return '';
     }
 
-    usort($partners, 'ks_sort_partner_network_items');
-
     return ks_partner_network_markup($partners);
   }
 }
@@ -83,11 +81,13 @@ if (!function_exists('ks_partner_network_items')) {
   function ks_partner_network_items(): array {
     $items = ks_fetch_partner_network_items();
 
-    if (!empty($items)) {
-      return $items;
+    if (empty($items)) {
+      return [];
     }
 
-    return ks_partner_network_fallback_items();
+    usort($items, 'ks_sort_partner_network_items');
+
+    return $items;
   }
 }
 
@@ -155,26 +155,6 @@ if (!function_exists('ks_normalize_partner_network_item')) {
   }
 }
 
-if (!function_exists('ks_partner_network_fallback_items')) {
-  function ks_partner_network_fallback_items(): array {
-    $theme_uri = get_stylesheet_directory_uri();
-
-    return [
-      ['logo' => $theme_uri . '/assets/img/partner-network/bodosee-sportlo.svg', 'label' => 'Bodosee Sportlo', 'url' => '', 'sortOrder' => 10],
-      ['logo' => $theme_uri . '/assets/img/partner-network/mfs.png', 'label' => 'Puma', 'url' => '', 'sortOrder' => 20],
-      ['logo' => $theme_uri . '/assets/img/partner-network/dfsberater.svg', 'label' => 'DFS Berater', 'url' => '', 'sortOrder' => 30],
-      ['logo' => $theme_uri . '/assets/img/partner-network/teamstolz.svg', 'label' => 'Teamstolz', 'url' => '', 'sortOrder' => 40],
-      ['logo' => $theme_uri . '/assets/img/partner-network/dfsplayer.svg', 'label' => 'DFS Player', 'url' => '', 'sortOrder' => 50],
-      [
-  'logo' => $theme_uri . '/assets/img/partner-network/dfsplayer.svg',
-  'label' => 'Test Partner',
-  'url' => '',
-  'sortOrder' => 60,
-],
-    ];
-  }
-}
-
 if (!function_exists('ks_partner_network_item_markup')) {
   function ks_partner_network_item_markup(array $partner): string {
     $content = ks_partner_network_item_content($partner);
@@ -206,11 +186,11 @@ if (!function_exists('ks_partner_network_item_content')) {
 if (!function_exists('ks_partner_network_logo_markup')) {
   function ks_partner_network_logo_markup(array $partner): string {
     if (empty($partner['logo'])) {
-      return '';
+      return '<span class="ks-partner-network__logo-placeholder" aria-hidden="true"></span>';
     }
 
     return sprintf(
-      '<img src="%s" alt="" loading="lazy" decoding="async" aria-hidden="true">',
+      '<span class="ks-partner-network__logo-wrap"><img src="%s" alt="" loading="lazy" decoding="async" aria-hidden="true"></span>',
       esc_url($partner['logo'])
     );
   }
