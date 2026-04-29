@@ -403,9 +403,13 @@ if (!function_exists('ks_register_news_shortcodes')) {
 
                   <div class="ks-news-item__excerpt"><?= $excerpt ?></div>
 
-                  <p class="ks-news-item__more">
-                    <a class="ks-link-more" href="<?= $detail ?>">MEHR LESEN</a>
-                  </p>
+                 
+
+     <p class="ks-news-item__more">
+  <a class="ks-link-more" href="<?= $detail ?>">
+    <span class="ks-link-more__text">MEHR LESEN</span>
+  </a>
+</p>
                 </article>
               <?php endforeach; ?>
             </div>
