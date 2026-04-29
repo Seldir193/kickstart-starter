@@ -26,6 +26,16 @@ if (!function_exists('ks_register_home_shortcode')) {
         );
       }
 
+      $home_news_abs = $theme_dir . '/assets/css/ks-home-news.css';
+if (file_exists($home_news_abs)) {
+  wp_enqueue_style(
+    'ks-home-news',
+    $theme_uri . '/assets/css/ks-home-news.css',
+    ['ks-home'],
+    filemtime($home_news_abs)
+  );
+}
+
       $hero_split_abs = $theme_dir . '/assets/css/ks-home-hero.css';
       if (file_exists($hero_split_abs)) {
         wp_enqueue_style(
@@ -481,18 +491,40 @@ echo ks_render_faq_section($faq_items, [
 
       <?php echo do_shortcode('[ks_partner_network]'); ?>
 
-      <?php if ($show_news): ?>
-        <section id="news" class="ks-sec ks-py-48">
-          <div class="container">
-            <div class="ks-title-wrap" data-bgword="UPDATE">
-              <div class="ks-kicker">Aktuelles</div>
-              <h2 class="ks-dir__title">Neues aus der Fussballschule</h2>
-            </div>
-          </div>
 
-          <?php echo do_shortcode('[ks_news_latest limit="3" thumbs="0"]'); ?>
-        </section>
-      <?php endif; ?>
+
+      <?php if ($show_news): ?>
+  <?php
+    $news_archive_url = function_exists('ks_news_archive_url')
+      ? ks_news_archive_url()
+      : home_url('/new/');
+  ?>
+
+  <section id="news" class="ks-sec ks-home-news">
+    <div class="container ks-home-news__shell">
+      <div class="ks-home-news__intro">
+        <div class="ks-kicker">Aktuelles</div>
+        <h2 class="ks-dir__title ks-home-news__title">Neues aus der Fussballschule</h2>
+        <p class="ks-home-news__lead">
+          Spannende Einblicke, aktuelle Entwicklungen und Geschichten aus unserem Alltag auf und neben dem Platz.
+        </p>
+        <a class="ks-btn ks-home-news__archive-link" href="<?php echo esc_url($news_archive_url); ?>">
+          <span>Alle News ansehen</span>
+          <img
+            class="ks-home-news__archive-icon"
+            src="<?php echo esc_url($theme_uri . '/assets/img/team/arrow_right_alt.svg'); ?>"
+            alt=""
+            loading="lazy"
+          >
+        </a>
+      </div>
+
+      <div class="ks-home-news__list">
+        <?php echo do_shortcode('[ks_news_latest limit="3" thumbs="1"]'); ?>
+      </div>
+    </div>
+  </section>
+<?php endif; ?>
 
       <?php
       $program_cta_partial = $theme_dir . '/inc/partials/home/program-cta.php';

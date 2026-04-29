@@ -67,60 +67,60 @@ add_action('wp_enqueue_scripts', function () {
       filemtime($utils_path)
     );
   }
-
-  $styles = [
-    'base' => [
-      'path' => '/assets/css/base.css',
-      'deps' => ['kickstart-style', 'ks-utils'],
-    ],
-    'layout' => [
-      'path' => '/assets/css/layout.css',
-      'deps' => ['kickstart-style', 'ks-utils'],
-    ],
-    'components' => [
-      'path' => '/assets/css/components.css',
-      'deps' => ['kickstart-style', 'ks-utils'],
-    ],
-    'header' => [
-      'path' => '/assets/css/header.css',
-      'deps' => ['kickstart-style', 'ks-utils', 'ks-layout'],
-    ],
-    'header-dropdown' => [
-      'path' => '/assets/css/header-dropdown.css',
-      'deps' => ['kickstart-style', 'ks-utils', 'ks-layout', 'ks-header'],
-    ],
-    'language' => [
-      'path' => '/assets/css/language.css',
-      'deps' => ['kickstart-style', 'ks-utils', 'ks-header', 'ks-header-dropdown'],
-    ],
-    'footer' => [
-      'path' => '/assets/css/footer.css',
-      'deps' => ['kickstart-style', 'ks-utils'],
-    ],
-    
-
-    'partner-network' => [
-  'path' => '/assets/css/partner-network.css',
-  'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components'],
-],
-    'about' => [
-      'path' => '/assets/css/ks-about.css',
-      'deps' => ['kickstart-style', 'ks-utils'],
-    ],
-    'home-values' => [
-      'path' => '/assets/css/ks-home-values.css',
-      'deps' => ['kickstart-style', 'ks-utils', 'ks-base'],
-    ],
-    'home-team' => [
-  'path' => '/assets/css/ks-home-team.css',
-  'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components'],
-],
-    'trainer' => [
-      'path' => '/assets/css/ks-trainer.css',
-      'deps' => ['kickstart-style', 'ks-utils'],
-    ],
-  ];
-
+$styles = [
+  'base' => [
+    'path' => '/assets/css/base.css',
+    'deps' => ['kickstart-style', 'ks-utils'],
+  ],
+  'layout' => [
+    'path' => '/assets/css/layout.css',
+    'deps' => ['kickstart-style', 'ks-utils'],
+  ],
+  'components' => [
+    'path' => '/assets/css/components.css',
+    'deps' => ['kickstart-style', 'ks-utils'],
+  ],
+  'header' => [
+    'path' => '/assets/css/header.css',
+    'deps' => ['kickstart-style', 'ks-utils', 'ks-layout'],
+  ],
+  'header-dropdown' => [
+    'path' => '/assets/css/header-dropdown.css',
+    'deps' => ['kickstart-style', 'ks-utils', 'ks-layout', 'ks-header'],
+  ],
+  'language' => [
+    'path' => '/assets/css/language.css',
+    'deps' => ['kickstart-style', 'ks-utils', 'ks-header', 'ks-header-dropdown'],
+  ],
+  'footer' => [
+    'path' => '/assets/css/footer.css',
+    'deps' => ['kickstart-style', 'ks-utils'],
+  ],
+  'partner-network' => [
+    'path' => '/assets/css/partner-network.css',
+    'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components'],
+  ],
+  'about' => [
+    'path' => '/assets/css/ks-about.css',
+    'deps' => ['kickstart-style', 'ks-utils'],
+  ],
+  'home-values' => [
+    'path' => '/assets/css/ks-home-values.css',
+    'deps' => ['kickstart-style', 'ks-utils', 'ks-base'],
+  ],
+  'home-news' => [
+    'path' => '/assets/css/ks-home-news.css',
+    'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components'],
+  ],
+  'home-team' => [
+    'path' => '/assets/css/ks-home-team.css',
+    'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components'],
+  ],
+  'trainer' => [
+    'path' => '/assets/css/ks-trainer.css',
+    'deps' => ['kickstart-style', 'ks-utils'],
+  ],
+];
   foreach ($styles as $handle => $config) {
     $abs = get_stylesheet_directory() . $config['path'];
 
