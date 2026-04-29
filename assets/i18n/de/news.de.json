@@ -1,0 +1,16 @@
+{
+  "news": {
+    "kicker": "Aktuelles",
+    "title": "Neues aus der Fussballschule",
+    "lead": "Spannende Einblicke, aktuelle Entwicklungen und Geschichten aus unserem Alltag auf und neben dem Platz.",
+    "archiveButton": "Alle News ansehen",
+    "readMore": "MEHR LESEN",
+    "empty": "Keine Beiträge gefunden.",
+    "category": {
+      "general": "Allgemein",
+      "news": "News",
+      "partnerClub": "Partnerverein",
+      "projects": "Projekte"
+    }
+  }
+}

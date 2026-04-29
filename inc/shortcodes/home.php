@@ -491,9 +491,7 @@ echo ks_render_faq_section($faq_items, [
 
       <?php echo do_shortcode('[ks_partner_network]'); ?>
 
-
-
-      <?php if ($show_news): ?>
+<?php if ($show_news): ?>
   <?php
     $news_archive_url = function_exists('ks_news_archive_url')
       ? ks_news_archive_url()
@@ -503,13 +501,24 @@ echo ks_render_faq_section($faq_items, [
   <section id="news" class="ks-sec ks-home-news">
     <div class="container ks-home-news__shell">
       <div class="ks-home-news__intro">
-        <div class="ks-kicker">Aktuelles</div>
-        <h2 class="ks-dir__title ks-home-news__title">Neues aus der Fussballschule</h2>
-        <p class="ks-home-news__lead">
+        <div class="ks-kicker" data-i18n="news.kicker">Aktuelles</div>
+
+        <h2
+          class="ks-dir__title ks-home-news__title"
+          data-i18n="news.title"
+        >
+          Neues aus der Fussballschule
+        </h2>
+
+        <p class="ks-home-news__lead" data-i18n="news.lead">
           Spannende Einblicke, aktuelle Entwicklungen und Geschichten aus unserem Alltag auf und neben dem Platz.
         </p>
-        <a class="ks-btn ks-home-news__archive-link" href="<?php echo esc_url($news_archive_url); ?>">
-          <span>Alle News ansehen</span>
+
+        <a
+          class="ks-btn ks-home-news__archive-link"
+          href="<?php echo esc_url($news_archive_url); ?>"
+        >
+          <span data-i18n="news.archiveButton">Alle News ansehen</span>
           <img
             class="ks-home-news__archive-icon"
             src="<?php echo esc_url($theme_uri . '/assets/img/team/arrow_right_alt.svg'); ?>"

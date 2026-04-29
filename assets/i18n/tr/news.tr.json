@@ -1,0 +1,16 @@
+{
+  "news": {
+    "kicker": "Güncel",
+    "title": "Futbol okulundan haberler",
+    "lead": "Saha içinde ve dışında günlük çalışmalarımızdan heyecan verici izlenimler, güncel gelişmeler ve hikâyeler.",
+    "archiveButton": "Tüm haberleri gör",
+    "readMore": "DEVAMINI OKU",
+    "empty": "Hiç gönderi bulunamadı.",
+    "category": {
+      "general": "Genel",
+      "news": "Haberler",
+      "partnerClub": "Partner kulüp",
+      "projects": "Projeler"
+    }
+  }
+}

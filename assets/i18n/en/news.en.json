@@ -1,0 +1,16 @@
+{
+  "news": {
+    "kicker": "Latest",
+    "title": "News from the Football School",
+    "lead": "Exciting insights, current updates, and stories from our everyday work on and off the pitch.",
+    "archiveButton": "View all news",
+    "readMore": "READ MORE",
+    "empty": "No posts found.",
+    "category": {
+      "general": "General",
+      "news": "News",
+      "partnerClub": "Partner club",
+      "projects": "Projects"
+    }
+  }
+}

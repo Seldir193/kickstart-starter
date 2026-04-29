@@ -21,6 +21,7 @@ ks_require('contact-form.php');
 ks_require('ks-feedback.php');
 ks_require('ks-geocode.php');
 ks_require('navigation-mega-about.php');
+ks_require('news/news-latest.php');
 ks_require('news-archive.php');
 
 ks_require('shortcodes/hero-page.php');

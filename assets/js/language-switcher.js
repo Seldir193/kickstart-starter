@@ -95,6 +95,10 @@
       scopes.push("home");
     }
 
+    if (hasI18nPrefix("news.")) {
+      scopes.push("news");
+    }
+
     if (hasI18nPrefix("franchise.")) {
       scopes.push("franchise");
     }
@@ -147,6 +151,7 @@
       navLinks: qsa(document, ".main-nav .menu > li > a"),
       i18nNodes: qsa(document, "[data-i18n]"),
       i18nAttrNodes: qsa(document, "[data-i18n-attr][data-i18n]"),
+      i18nDateNodes: qsa(document, "[data-i18n-date]"),
       fallback: switcher.getAttribute("data-fallback-language") || "en",
       base: switcher.getAttribute("data-i18n-base") || "",
     };
@@ -264,6 +269,36 @@
     node.setAttribute(attr, value);
   }
 
+  function getDateLocale(language) {
+    if (language === "tr") return "tr-TR";
+    if (language === "en") return "en-US";
+    return "de-DE";
+  }
+
+  function formatI18nDate(value, language) {
+    var date = new Date(String(value || "") + "T00:00:00");
+    if (Number.isNaN(date.getTime())) return "";
+
+    return new Intl.DateTimeFormat(getDateLocale(language), {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    }).format(date);
+  }
+
+  function translateDateNode(node, language) {
+    var value = node.getAttribute("data-i18n-date") || "";
+    var formattedDate = formatI18nDate(value, language);
+    if (!formattedDate) return;
+    node.textContent = formattedDate;
+  }
+
+  function applyDateTranslations(state, language) {
+    state.i18nDateNodes.forEach(function (node) {
+      translateDateNode(node, language);
+    });
+  }
+
   function applyGenericTranslations(state, data) {
     state.i18nNodes.forEach(function (node) {
       translateNodeText(node, data);
@@ -282,6 +317,7 @@
       translateNavLink(link, data);
     });
     applyGenericTranslations(state, data);
+    applyDateTranslations(state, language);
   }
 
   function getCachedLanguage(state, language) {
@@ -292,13 +328,6 @@
     state.cache[language] = data;
   }
 
-  //   function fetchLanguageData(state, language) {
-  //     var url = buildJsonUrl(state.base, language);
-  //     return fetch(url, { cache: "no-store" }).then(function (response) {
-  //       if (!response.ok) throw new Error("Failed to load " + url);
-  //       return response.json();
-  //     });
-  //   }
   function fetchLanguageData(state, language) {
     var scopes = getPageScopes();
     var requests = scopes.map(function (scope) {
