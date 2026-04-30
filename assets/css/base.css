@@ -395,6 +395,7 @@
       );
 
     --ks-feedback-nav-shadow: 0 12px 24px var(--color-shadow-feedback-nav);
+    --color-overlay-white-faint: rgba(255, 255, 255, 0.02);
   }
 
   .admin-bar {
