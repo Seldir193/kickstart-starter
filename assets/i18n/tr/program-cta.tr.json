@@ -1,0 +1,11 @@
+{
+  "programCta": {
+    "ariaLabel": "Programı hızlıca rezerve et",
+    "kicker": "Hızlı rezervasyon",
+    "title": "Programını seç",
+    "lead": "Bir teklif seç ve kayıt sürecine hemen başla.",
+    "selectLabel": "Program",
+    "placeholder": "Lütfen seç …",
+    "hint": "Programını daha sonra istediğin zaman değiştirebilirsin."
+  }
+}
