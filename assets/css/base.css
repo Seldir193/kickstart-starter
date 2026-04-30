@@ -410,6 +410,61 @@
     --ks-whatsapp-shadow-focus:
       0 0 0 3px var(--color-focus-ring-light),
       0 6px 18px var(--color-shadow-whatsapp-soft);
+
+    --color-surface-partner-nav: rgba(7, 17, 29, 0.9);
+    --color-surface-partner-card-1: rgba(255, 255, 255, 0.06);
+    --color-surface-partner-card-2: rgba(255, 255, 255, 0.025);
+    --color-surface-partner-card-hover-1: rgba(255, 255, 255, 0.075);
+    --color-surface-partner-card-hover-2: rgba(255, 255, 255, 0.03);
+
+    --color-border-partner-card: rgba(255, 255, 255, 0.1);
+    --color-border-partner-card-hover: rgba(253, 225, 0, 0.38);
+
+    --color-text-inverse-strong: rgba(255, 255, 255, 0.94);
+    --color-text-inverse-label: rgba(255, 255, 255, 0.88);
+    --color-placeholder-inverse: rgba(255, 255, 255, 0.28);
+
+    --color-shadow-gold-line: rgba(255, 227, 0, 0.25);
+    --color-shadow-gold-line-strong: rgba(255, 227, 0, 0.28);
+    --color-shadow-partner-card: rgba(0, 0, 0, 0.12);
+    --color-shadow-partner-card-hover: rgba(0, 0, 0, 0.18);
+
+    --ks-partner-line-bg: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--brand-gold) 50%, var(--brand-white)),
+      var(--brand-gold),
+      color-mix(in oklab, var(--brand-gold) 60%, var(--brand-white))
+    );
+
+    --ks-partner-line-shadow:
+      0 0 0 1px var(--color-shadow-gold-line),
+      0 6px 18px var(--color-shadow-gold-line-strong);
+
+    --ks-partner-card-bg: linear-gradient(
+      180deg,
+      var(--color-surface-partner-card-1),
+      var(--color-surface-partner-card-2)
+    );
+
+    --ks-partner-card-shadow:
+      inset 0 1px 0 var(--color-border-inverse-soft),
+      0 16px 32px var(--color-shadow-partner-card);
+
+    --ks-partner-card-bg-hover:
+      radial-gradient(
+        circle at top right,
+        var(--color-gold-hover-soft),
+        transparent 40%
+      ),
+      linear-gradient(
+        180deg,
+        var(--color-surface-partner-card-hover-1),
+        var(--color-surface-partner-card-hover-2)
+      );
+
+    --ks-partner-card-shadow-hover:
+      inset 0 1px 0 var(--color-border-partner-card),
+      0 20px 42px var(--color-shadow-partner-card-hover);
   }
 
   .admin-bar {

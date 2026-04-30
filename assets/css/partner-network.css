@@ -1,4 +1,364 @@
-:root {
+/* assets\css\partner-network.css */
+/* assets\css\partner-network.css */
+section#partner-network.ks-partner-network {
+  position: relative;
+  z-index: 10;
+  isolation: isolate;
+}
+
+.ks-partner-network {
+  --partner-network-gap: clamp(12px, 1.4vw, 18px);
+  --partner-network-card-width: clamp(156px, 13vw, 180px);
+
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 0;
+  overflow: hidden;
+  color: var(--brand-white);
+  background: var(--ks-section-bg-partner);
+}
+
+.ks-partner-network::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  height: 4px;
+  pointer-events: none;
+  background: var(--ks-partner-line-bg);
+  background-size: 180% 100%;
+  background-position: 0% 50%;
+  filter: saturate(1.15);
+  transition:
+    height 0.22s ease,
+    filter 0.22s ease,
+    background-position 0.8s ease;
+}
+
+.ks-partner-network:hover::before,
+.ks-partner-network:focus-within::before {
+  height: 6px;
+  filter: saturate(1.35) brightness(1.12);
+  background-position: 100% 50%;
+  box-shadow: var(--ks-partner-line-shadow);
+}
+
+.ks-partner-network > .container {
+  position: relative;
+  z-index: 2;
+}
+
+.ks-partner-network__inner {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.34fr) minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 44px);
+  align-items: center;
+  padding: clamp(28px, 3.5vw, 46px) 0;
+}
+
+.ks-partner-network__intro {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+
+.ks-partner-network__eyebrow {
+  color: var(--brand-gold);
+  font-size: 11px;
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.ks-partner-network__title {
+  color: var(--color-text-inverse-strong);
+  font-size: clamp(18px, 1.7vw, 26px);
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.ks-partner-network__slider {
+  position: relative;
+  min-width: 0;
+}
+
+.ks-partner-network__viewport {
+  min-width: 0;
+  overflow: hidden;
+  padding: 10px 0 18px;
+  margin: -10px 0 -18px;
+}
+
+.ks-partner-network__list {
+  display: flex;
+  align-items: stretch;
+  gap: var(--partner-network-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.42s ease;
+  will-change: transform;
+}
+
+.ks-partner-network__item {
+  flex: 0 0 var(--partner-network-card-width);
+  width: var(--partner-network-card-width);
+  min-width: var(--partner-network-card-width);
+  max-width: var(--partner-network-card-width);
+}
+
+.ks-partner-network__item,
+.ks-partner-network__link {
+  height: 88px;
+  min-height: 88px;
+  display: grid;
+  place-items: center;
+  gap: 9px;
+  padding: 14px 14px 13px;
+  border: 1px solid var(--color-border-partner-card);
+  border-radius: 18px;
+  background: var(--ks-partner-card-bg);
+  box-shadow: var(--ks-partner-card-shadow);
+  box-sizing: border-box;
+  overflow: hidden;
+  text-decoration: none;
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    background-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.ks-partner-network__item:has(.ks-partner-network__link) {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.ks-partner-network__link {
+  width: 100%;
+}
+
+.ks-partner-network__item:hover,
+.ks-partner-network__link:hover,
+.ks-partner-network__link:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--color-border-partner-card-hover);
+  background: var(--ks-partner-card-bg-hover);
+  box-shadow: var(--ks-partner-card-shadow-hover);
+}
+
+.ks-partner-network__link:focus-visible {
+  outline: 2px solid var(--brand-gold);
+  outline-offset: 3px;
+}
+
+.ks-partner-network__logo-wrap {
+  width: 120px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.ks-partner-network__logo-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 120px;
+  max-height: 34px;
+  object-fit: contain;
+  opacity: 0.94;
+}
+
+.ks-partner-network__logo-placeholder {
+  width: 42px;
+  height: 6px;
+  display: block;
+  border-radius: 999px;
+  background: var(--color-placeholder-inverse);
+}
+
+.ks-partner-network__label {
+  width: 100%;
+  max-width: 128px;
+  overflow: hidden;
+  color: var(--color-text-inverse-label);
+  font-size: 12px;
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ks-partner-network__nav {
+  appearance: none;
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  width: 54px;
+  height: 54px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--brand-gold-700);
+  border-radius: 999px;
+  background: var(--color-surface-partner-nav);
+  color: var(--brand-gold);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition:
+    transform 0.24s ease,
+    background-color 0.24s ease,
+    border-color 0.24s ease,
+    color 0.24s ease,
+    box-shadow 0.24s ease,
+    opacity 0.24s ease;
+}
+
+.ks-partner-network__nav:hover,
+.ks-partner-network__nav:focus-visible {
+  transform: translateY(-50%) translateY(-1px);
+  border-color: var(--brand-gold);
+  background: var(--color-gold-hover-soft);
+  color: var(--brand-gold);
+  box-shadow: var(--ks-feedback-nav-shadow);
+  outline: none;
+}
+
+.ks-partner-network__nav[hidden] {
+  display: none;
+}
+
+.ks-partner-network__nav:disabled {
+  opacity: 0.34;
+  cursor: default;
+  pointer-events: none;
+}
+
+.ks-partner-network__nav-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  object-fit: contain;
+  filter: var(--icon-filter-brand-gold);
+  opacity: 0.9;
+  transition:
+    opacity 0.24s ease,
+    transform 0.24s ease;
+}
+
+.ks-partner-network__nav:hover .ks-partner-network__nav-icon,
+.ks-partner-network__nav:focus-visible .ks-partner-network__nav-icon {
+  opacity: 1;
+}
+
+.ks-partner-network__nav--prev {
+  left: -27px;
+}
+
+.ks-partner-network__nav--prev .ks-partner-network__nav-icon {
+  transform: rotate(180deg);
+}
+
+.ks-partner-network__nav--prev:hover .ks-partner-network__nav-icon,
+.ks-partner-network__nav--prev:focus-visible .ks-partner-network__nav-icon {
+  transform: rotate(180deg) translateX(2px);
+}
+
+.ks-partner-network__nav--next {
+  right: -27px;
+}
+
+.ks-partner-network__nav--next:hover .ks-partner-network__nav-icon,
+.ks-partner-network__nav--next:focus-visible .ks-partner-network__nav-icon {
+  transform: translateX(2px);
+}
+
+@media (max-width: 980px) {
+  .ks-partner-network__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .ks-partner-network__intro {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .ks-partner-network__nav--prev {
+    left: -14px;
+  }
+
+  .ks-partner-network__nav--next {
+    right: -14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .ks-partner-network {
+    --partner-network-card-width: clamp(140px, 42vw, 170px);
+  }
+
+  .ks-partner-network__inner {
+    padding: 30px 0;
+  }
+
+  .ks-partner-network__item,
+  .ks-partner-network__link {
+    height: 82px;
+    min-height: 82px;
+    border-radius: 16px;
+  }
+
+  .ks-partner-network__logo-wrap {
+    width: 108px;
+    height: 30px;
+  }
+
+  .ks-partner-network__logo-wrap img {
+    max-width: 108px;
+    max-height: 30px;
+  }
+
+  .ks-partner-network__label {
+    font-size: 11px;
+  }
+
+  .ks-partner-network__nav {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+@media (max-width: 420px) {
+  .ks-partner-network {
+    --partner-network-card-width: min(100%, 180px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ks-partner-network::before,
+  .ks-partner-network__item,
+  .ks-partner-network__link,
+  .ks-partner-network__list,
+  .ks-partner-network__nav {
+    transition: none;
+  }
+
+  .ks-partner-network__item:hover,
+  .ks-partner-network__link:hover,
+  .ks-partner-network__link:focus-visible {
+    transform: none;
+  }
+}
+/* :root {
   --brand-gold: #ffe300;
   --brand-gold-700: #e6c400;
 }
@@ -386,4 +746,4 @@ section#partner-network.ks-partner-network {
   .ks-partner-network__link:focus-visible {
     transform: none;
   }
-}
+} */
