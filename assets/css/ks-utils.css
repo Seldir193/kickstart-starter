@@ -693,6 +693,12 @@ body {
   line-height: 1.7;
 }
 
+html:not(.i18n-ready) .ks-title-wrap::after,
+html:not(.i18n-ready) .ks-title-wrap--team::before,
+html:not(.i18n-ready) .ks-dir__hero::before {
+  opacity: 0;
+}
+
 @media (max-width: 900px) {
   .ks-faq-section__card {
     padding: 20px;

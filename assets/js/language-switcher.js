@@ -333,6 +333,7 @@
     });
     applyGenericTranslations(state, data);
     applyDateTranslations(state, language);
+    document.documentElement.classList.add("i18n-ready");
   }
 
   function getCachedLanguage(state, language) {
@@ -480,7 +481,14 @@
     setNavKeys(state);
     closeMenu(state);
     bindEvents(state);
-    loadLanguage(state, getInitialLanguage(state));
+
+    var initialLanguage = getInitialLanguage(state);
+
+    if (initialLanguage === "de") {
+      document.documentElement.classList.add("i18n-ready");
+    }
+
+    loadLanguage(state, initialLanguage);
   }
 
   document.addEventListener("DOMContentLoaded", initLanguageSwitcher);
