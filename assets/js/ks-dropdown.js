@@ -1,4 +1,5 @@
 // assets/js/ks-dropdown.js
+
 (function () {
   "use strict";
 
@@ -19,14 +20,13 @@
     return dd.getAttribute("data-submit") === "1";
   }
 
-  // ✅ NEU: eindeutiges Select pro Dropdown (data-select="#id")
   function getNativeSelect(dd) {
     var selRef = dd.getAttribute("data-select");
     if (selRef) {
       var s = $(selRef, document);
       if (s) return s;
     }
-    // fallback: select neben dropdown oder im form
+
     return (
       $("select", dd.parentElement) ||
       dd.closest("form")?.querySelector("select")
@@ -39,25 +39,6 @@
     var opt = nativeSel.selectedOptions && nativeSel.selectedOptions[0];
     label.textContent = opt ? opt.textContent : "Bitte auswählen …";
   }
-
-  // function setPanelMaxHeight(dd, panel) {
-  //   var rows = getMaxRows(dd);
-  //   var rowH = 44;
-
-  //   var first = panel.firstElementChild;
-  //   if (first) {
-  //     var h = first.getBoundingClientRect().height;
-  //     if (h > 0) rowH = Math.round(h);
-  //   } else {
-  //     var cssVar = getComputedStyle(panel).getPropertyValue("--row-h");
-  //     var parsed = parseFloat(cssVar);
-  //     if (!isNaN(parsed) && parsed > 0) rowH = parsed;
-  //   }
-
-  //   panel.style.maxHeight = rowH * rows + "px";
-  //   panel.style.overflowY = "auto";
-  //   panel.style.overflowX = "hidden";
-  // }
 
   function setPanelMaxHeight(dd, panel) {
     var inner = getPanelInner(panel);
@@ -101,27 +82,6 @@
     return ensurePanelInner(panel);
   }
 
-  // function buildPanelFromSelect(dd, nativeSel, panel) {
-  //   panel.innerHTML = "";
-  //   var current = nativeSel.value;
-
-  //   Array.from(nativeSel.options).forEach(function (opt) {
-  //     if (opt.disabled || opt.value === "") return;
-
-  //     var item = document.createElement("div");
-  //     item.className = "ks-dd__option";
-  //     item.setAttribute("role", "option");
-  //     item.setAttribute("tabindex", "-1");
-  //     item.setAttribute("data-value", opt.value);
-  //     item.textContent = opt.textContent;
-
-  //     if (opt.value === current) item.setAttribute("aria-selected", "true");
-  //     panel.appendChild(item);
-  //   });
-
-  //   setPanelMaxHeight(dd, panel);
-  // }
-
   function buildPanelFromSelect(dd, nativeSel, panel) {
     panel.innerHTML = "";
     var inner = ensurePanelInner(panel);
@@ -155,28 +115,6 @@
       if (v === current) x.setAttribute("aria-selected", "true");
     });
   }
-
-  // function focusSelectedOrFirst(panel) {
-  //   var sel = panel.querySelector('.ks-dd__option[aria-selected="true"]');
-  //   var first = panel.querySelector(".ks-dd__option");
-  //   var target = sel || first;
-  //   if (!target) return;
-
-  //   // Fokus setzen ohne Page-Scroll
-  //   try {
-  //     target.focus({ preventScroll: true });
-  //   } catch (e) {}
-
-  //   // Nur IM Panel scrollen (kein Springen der Seite)
-  //   var r = target.getBoundingClientRect();
-  //   var pr = panel.getBoundingClientRect();
-
-  //   if (r.top < pr.top) {
-  //     panel.scrollTop -= pr.top - r.top;
-  //   } else if (r.bottom > pr.bottom) {
-  //     panel.scrollTop += r.bottom - pr.bottom;
-  //   }
-  // }
 
   function focusSelectedOrFirst(panel) {
     var inner = getPanelInner(panel) || panel;
@@ -229,42 +167,6 @@
     }
   }
 
-  // function closeDD(dd, focusBtn) {
-  //   var btn = $(".ks-dd__btn", dd);
-  //   var panel = $(".ks-dd__panel", dd);
-
-  //   dd.classList.remove("is-open");
-  //   dd.setAttribute("aria-expanded", "false");
-  //   if (btn) btn.setAttribute("aria-expanded", "false");
-
-  //   if (panel) {
-  //     if (window.KSDropdownMotion) {
-  //       window.KSDropdownMotion.animateClose(panel, {
-  //         duration: 260,
-  //         easing: "ease-out",
-  //         useHiddenAttr: true,
-  //       });
-  //     } else {
-  //       panel.setAttribute("hidden", "");
-  //     }
-  //   }
-
-  //   if (dd.__onOutsidePointerDown) {
-  //     document.removeEventListener(
-  //       "pointerdown",
-  //       dd.__onOutsidePointerDown,
-  //       true,
-  //     );
-  //     dd.__onOutsidePointerDown = null;
-  //   }
-
-  //   if (focusBtn !== false) {
-  //     try {
-  //       btn && btn.focus({ preventScroll: true });
-  //     } catch (e) {}
-  //   }
-  // }
-
   function closeAllDropdowns(exceptDd) {
     $all(".ks-dd.is-open").forEach(function (dd) {
       if (exceptDd && dd === exceptDd) return;
@@ -293,31 +195,6 @@
     dd.setAttribute("aria-expanded", "true");
     if (btn) btn.setAttribute("aria-expanded", "true");
 
-    // if (panel) {
-    //   panel.style.visibility = "hidden";
-    //   panel.removeAttribute("hidden");
-
-    //   requestAnimationFrame(function () {
-    //     setPanelMaxHeight(dd, panel);
-    //     if (nativeSel) ensureSelectedState(nativeSel, panel);
-
-    //     panel.style.visibility = "";
-
-    //     if (window.KSDropdownMotion) {
-    //       window.KSDropdownMotion.animateOpen(panel, {
-    //         duration: 340,
-    //         easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-    //         useHiddenAttr: true,
-    //       }).then(function () {
-    //         focusSelectedOrFirst(panel);
-    //       });
-    //       return;
-    //     }
-
-    //     focusSelectedOrFirst(panel);
-    //   });
-    // }
-
     if (panel) {
       panel.style.visibility = "hidden";
       panel.removeAttribute("hidden");
@@ -335,7 +212,6 @@
       });
     }
 
-    // ✅ NEU: outside pointerdown erst "nach dem Klick" binden (verhindert 2-Klick Bugs)
     if (dd.__onOutsidePointerDown) {
       document.removeEventListener(
         "pointerdown",
@@ -353,7 +229,6 @@
       document.addEventListener("pointerdown", dd.__onOutsidePointerDown, true);
     }, 0);
 
-    // ESC (once)
     document.addEventListener(
       "keydown",
       function (e) {
@@ -373,7 +248,6 @@
 
     if (nativeSel) syncLabelFromSelect(dd, nativeSel);
 
-    // ✅ NEU: pointerdown stoppen (damit globale capture-listener nix "frisst")
     btn?.addEventListener("pointerdown", function (e) {
       e.stopPropagation();
     });
@@ -397,7 +271,6 @@
         item.dataset.phone;
       if (!val) return;
 
-      // aria-selected
       $all(".ks-dd__option", panel).forEach(function (x) {
         x.removeAttribute("aria-selected");
       });
@@ -413,13 +286,6 @@
           label.textContent =
             item.dataset.label || item.textContent || "Bitte auswählen …";
       }
-
-      // closeDD(dd, true);
-
-      // if (shouldSubmit(dd)) {
-      //   var form = dd.closest("form");
-      //   if (form) form.submit();
-      // }
 
       if (shouldSubmit(dd)) {
         var form = dd.closest("form");
@@ -475,8 +341,6 @@
   });
 
   window.KSDropdown = { init: init };
-
-  // nez
 
   function animateDropdownInnerOpen(panel, dd, done) {
     var inner = getPanelInner(panel);
