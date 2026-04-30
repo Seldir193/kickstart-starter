@@ -41,13 +41,7 @@ if (!function_exists('ks_enqueue_team_assets')) {
 }
 
 add_action('wp_enqueue_scripts', function () {
-  // wp_enqueue_style(
-  //   'kickstart-fonts',
-  //   'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Roboto:wght@400;500;700&display=swap',
-  //   [],
-  //   null
-  // );
-
+  
   $fonts_path = get_stylesheet_directory() . '/assets/css/fonts.css';
 
 if (file_exists($fonts_path)) {
@@ -79,10 +73,6 @@ if (file_exists($fonts_path)) {
     );
   }
 $styles = [
-  // 'base' => [
-  //   'path' => '/assets/css/base.css',
-  //   'deps' => ['kickstart-style', 'ks-utils'],
-  // ],
   'base' => [
   'path' => '/assets/css/base.css',
   'deps' => ['kickstart-fonts', 'kickstart-style', 'ks-utils'],
@@ -119,6 +109,11 @@ $styles = [
     'path' => '/assets/css/ks-home-values.css',
     'deps' => ['kickstart-style', 'ks-utils', 'ks-base'],
   ],
+  'faq' => [
+  'path' => '/assets/css/ks-faq.css',
+  'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components'],
+],
+
   'home-news' => [
     'path' => '/assets/css/ks-home-news.css',
     'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components'],

@@ -522,6 +522,24 @@
 
     --ks-contact-form-shadow: 0 2px 6px var(--color-shadow-contact-form);
     --ks-modal-panel-shadow: 0 10px 25px var(--color-shadow-modal-panel);
+
+    --ks-faq-card-bg:
+      radial-gradient(
+        circle at top left,
+        var(--color-gold-glow-soft),
+        transparent 32%
+      ),
+      linear-gradient(
+        180deg,
+        var(--brand-white) 0%,
+        var(--color-surface-soft) 100%
+      );
+
+    --ks-faq-card-shadow: 0 16px 40px var(--color-shadow-slate-medium);
+    --ks-title-watermark-color: rgba(0, 0, 0, 0.05);
+
+    --ks-title-watermark-color: rgba(0, 0, 0, 0.05);
+    --color-hover-dropdown-option: rgba(15, 23, 42, 0.06);
   }
 
   .admin-bar {

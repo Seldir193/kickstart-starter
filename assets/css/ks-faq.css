@@ -1,6 +1,283 @@
 /* assets/css/ks-faq.css */
+/* assets/css/ks-faq.css */
 
 #faq-page-hero {
+  margin-bottom: 0;
+}
+
+#faq,
+#dir-faq,
+#fr-faq {
+  --acc-plus: url("../img/home/chevron-down.svg");
+  --acc-minus: url("../img/home/chevron-up.svg");
+}
+
+#faq,
+#dir-faq {
+  --acc-mask-size: 52%;
+  --acc-size: 30px;
+  --acc-gap: 14px;
+}
+
+#faq {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  background: var(--ks-section-bg-default);
+}
+
+#faq .ks-title-wrap .ks-kicker,
+#dir-faq .ks-title-wrap .ks-kicker,
+#fr-faq .ks-title-wrap .ks-kicker {
+  display: block;
+  width: max-content;
+  margin: 0 auto 6px;
+}
+
+#dir-faq .ks-title-wrap::after,
+#faq .ks-title-wrap::after {
+  top: -80px;
+}
+
+.ks-faq-page__acc {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ks-faq-page--full {
+  display: block !important;
+}
+
+.ks-faq-page--full .ks-title-wrap {
+  margin-bottom: 18px;
+}
+
+.ks-home-faq {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.ks-home-faq > .ks-title-wrap,
+#dir-faq .ks-title-wrap {
+  grid-column: 1 / -1;
+  text-align: center;
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.ks-home-faq > .ks-title-wrap::after {
+  content: attr(data-bgword);
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  z-index: -1;
+  transform: translateX(-50%);
+  color: var(--ks-title-watermark-color);
+  font-size: clamp(72px, 16vw, 180px);
+  font-weight: var(--font-weight-black);
+  letter-spacing: 0.03em;
+  pointer-events: none;
+}
+
+.ks-home-faq__image {
+  min-height: 280px;
+  border-radius: 12px;
+  background:
+    var(--faq-img) center/contain no-repeat,
+    var(--color-surface-image-soft-2);
+}
+
+.ks-faq-section__acc {
+  display: grid;
+  gap: 14px;
+}
+
+.ks-faq-section__side {
+  display: block;
+}
+
+.ks-faq-section__card {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  min-height: 100%;
+  padding: 24px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 20px;
+  background: var(--ks-faq-card-bg);
+  box-shadow: var(--ks-faq-card-shadow);
+}
+
+.ks-faq-section__card-kicker {
+  width: max-content;
+}
+
+.ks-faq-section__card-title {
+  margin: 0;
+  color: var(--brand-black);
+  font-size: clamp(24px, 2.1vw, 34px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: var(--font-weight-extrabold);
+}
+
+.ks-faq-section__card-text {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+#faq .ks-acc summary,
+#dir-faq .ks-acc summary {
+  position: relative;
+  padding: 12px 12px;
+  padding-right: calc(var(--acc-size) + var(--acc-gap) + 6px);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  transition:
+    color 0.18s ease,
+    background-color 0.18s ease;
+}
+
+#faq .ks-acc summary::before,
+#faq .ks-acc summary::after,
+#dir-faq .ks-acc summary::before,
+#dir-faq .ks-acc summary::after {
+  content: "";
+  position: absolute;
+  right: var(--acc-gap);
+  top: 50%;
+  width: var(--acc-size);
+  height: var(--acc-size);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+#faq .ks-acc summary::after,
+#dir-faq .ks-acc summary::after {
+  z-index: 1;
+  background-color: var(--brand-black) !important;
+  background-image: none !important;
+  -webkit-mask: var(--acc-plus) center/var(--acc-mask-size) no-repeat !important;
+  mask: var(--acc-plus) center/var(--acc-mask-size) no-repeat !important;
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease,
+    filter 0.18s ease,
+    background-color 0.18s ease;
+}
+
+#faq .ks-acc[open] summary::after,
+#dir-faq .ks-acc[open] summary::after {
+  background-color: var(--brand-black) !important;
+  background-image: none !important;
+  -webkit-mask: var(--acc-minus) center/var(--acc-mask-size) no-repeat !important;
+  mask: var(--acc-minus) center/var(--acc-mask-size) no-repeat !important;
+}
+
+#faq .ks-acc summary:hover::before,
+#dir-faq .ks-acc summary:hover::before,
+#faq .ks-acc[open] summary::before,
+#dir-faq .ks-acc[open] summary::before {
+  z-index: 0;
+  border-radius: 50%;
+  background: var(--brand-black);
+}
+
+#faq .ks-acc summary:hover::after,
+#dir-faq .ks-acc summary:hover::after {
+  transform: translateY(-50%) scale(1.18);
+  background-color: var(--brand-white) !important;
+}
+
+#faq .ks-acc summary:hover,
+#dir-faq .ks-acc summary:hover,
+#faq .ks-acc[open] summary,
+#dir-faq .ks-acc[open] summary {
+  color: var(--color-text-heading-sm);
+  background-color: var(--color-hover-dropdown-option);
+}
+
+#faq .ks-acc summary:focus-visible,
+#dir-faq .ks-acc summary:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+#faq .ks-acc[open] summary::after,
+#dir-faq .ks-acc[open] summary::after {
+  transform: translateY(-50%) scale(1);
+  opacity: 1 !important;
+  filter: none !important;
+  background-color: var(--brand-white) !important;
+}
+
+#faq .ks-acc[open] summary:hover::after,
+#dir-faq .ks-acc[open] summary:hover::after {
+  transform: translateY(-50%) scale(1.18);
+}
+
+@media (max-width: 900px) {
+  #faq.ks-sec {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .ks-home-faq {
+    grid-template-columns: 1fr;
+  }
+
+  .ks-home-faq > .ks-title-wrap {
+    margin-bottom: 12px;
+  }
+
+  .ks-home-faq > .ks-title-wrap::after {
+    top: -6px;
+    font-size: clamp(64px, 28vw, 140px);
+  }
+
+  .ks-faq-section__card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  #faq,
+  #dir-faq {
+    --acc-size: 28px;
+    --acc-mask-size: 66%;
+  }
+}
+
+@layer pages {
+  body.page-faq :is(h1.entry-title, .entry-title) {
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body.page-faq
+    :is(
+      main#primary.container.content,
+      #primary.container.content,
+      #primary,
+      .site-main
+    ) {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  body.page-faq .entry-content > :first-child {
+    margin-top: 0 !important;
+  }
+}
+
+/* #faq-page-hero {
   margin-bottom: 0;
 }
 
@@ -54,4 +331,4 @@
   body.page-faq .entry-content > :first-child {
     margin-top: 0 !important;
   }
-}
+} */
