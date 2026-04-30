@@ -258,10 +258,10 @@
 .ks-dir__title-line {
   display: block;
 }
-
+/* 
 .ks-home-about {
   width: 100%;
-}
+} */
 
 @media (max-width: 1024px) {
   .ks-home-about__grid {

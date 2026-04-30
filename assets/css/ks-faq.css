@@ -19,6 +19,14 @@
   margin-bottom: 18px;
 }
 
+#faq {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  background: var(--ks-section-bg-default);
+}
+
 @media (max-width: 900px) {
   #faq.ks-sec {
     padding-top: 40px;

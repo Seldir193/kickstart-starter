@@ -5,9 +5,7 @@
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   padding-block: clamp(54px, 7vw, 108px);
-  background:
-    radial-gradient(circle at 8% 82%, rgba(253, 225, 0, 0.12), transparent 24%),
-    linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+  background: var(--ks-section-bg-highlight-soft);
 }
 
 .ks-home-news::before {

@@ -5,7 +5,7 @@
   margin-right: calc(50% - 50vw);
   padding: clamp(56px, 7vw, 96px) 0;
   overflow: hidden;
-  background:
+  /* background:
     radial-gradient(
       circle at top left,
       rgba(253, 225, 0, 0.09),
@@ -15,7 +15,8 @@
       180deg,
       var(--color-surface-soft) 0%,
       var(--brand-white) 100%
-    );
+    ); */
+  background: var(--ks-section-bg-highlight);
 }
 
 .ks-feedback > .container {

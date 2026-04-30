@@ -1,4 +1,11 @@
 /* assets/css/ks-home-team.css */
+#team.ks-bg-white {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  background: var(--ks-section-bg-white);
+}
 
 .ks-home-team {
   display: grid;
