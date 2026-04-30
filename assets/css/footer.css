@@ -423,6 +423,15 @@
   filter: brightness(0) saturate(100%);
 }
 
+.footer-locations .footer-head {
+  max-width: 340px;
+}
+
+.footer-locations .footer-head a {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 @media (max-width: 1100px) {
   .footer-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -34,7 +34,8 @@ $provider_login_url = 'http://localhost:3000/admin/login';
         <ul class="footer-list">
           <li class="footer-contact-item">
             <span class="footer-contact-icon" style="--icon:url('<?php echo esc_url($offers_img . 'location.png'); ?>')"></span>
-            <span>Dortmund &amp; Umgebung</span>
+            
+            <a href="<?php echo esc_url($fr_url); ?>">Dortmund &amp; Umgebung</a>
           </li>
 
           <li class="footer-contact-item">
