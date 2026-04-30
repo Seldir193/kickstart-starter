@@ -123,6 +123,9 @@
       scopes.push("whatsapp");
     }
 
+    if (hasI18nPrefix("partnerNetwork.")) {
+      scopes.push("partner-network");
+    }
     return scopes;
   }
 

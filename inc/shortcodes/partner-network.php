@@ -35,8 +35,8 @@ if (!function_exists('ks_partner_network_markup')) {
       <div class="container container--1400">
         <div class="ks-partner-network__inner">
           <div class="ks-partner-network__intro">
-            <span class="ks-partner-network__eyebrow">Netzwerk</span>
-            <strong class="ks-partner-network__title">Partner & Marken</strong>
+            <span class="ks-partner-network__eyebrow" data-i18n="partnerNetwork.eyebrow">Netzwerk</span>
+            <strong class="ks-partner-network__title"  data-i18n="partnerNetwork.title">Partner &amp; Marken</strong>
           </div>
 
           <div class="ks-partner-network__slider" data-partner-slider>
