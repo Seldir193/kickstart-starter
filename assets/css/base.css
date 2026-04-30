@@ -498,7 +498,7 @@
     --color-border-dropdown: #d9dee6;
     --color-border-dropdown-panel: #e3e6e8;
     --color-surface-dropdown-selected: #111827;
-    --color-hover-dropdown-option: rgba(15, 23, 42, 0.06);
+
     --color-scrollbar-thumb: rgba(15, 23, 42, 0.28);
     --color-shadow-dropdown-panel: rgba(0, 0, 0, 0.14);
 
@@ -536,7 +536,6 @@
       );
 
     --ks-faq-card-shadow: 0 16px 40px var(--color-shadow-slate-medium);
-    --ks-title-watermark-color: rgba(0, 0, 0, 0.05);
 
     --ks-title-watermark-color: rgba(0, 0, 0, 0.05);
     --color-hover-dropdown-option: rgba(15, 23, 42, 0.06);

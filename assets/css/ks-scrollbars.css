@@ -1,4 +1,34 @@
 /* assets/css/ks-scrollbars.css */
+/* assets/css/ks-scrollbars.css */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ks-scrollbar-thumb) var(--ks-scrollbar-track);
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: var(--ks-scrollbar-size);
+  height: var(--ks-scrollbar-size);
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: var(--ks-scrollbar-track);
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: var(--ks-scrollbar-thumb);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: var(--ks-scrollbar-thumb-hover);
+  background-clip: content-box;
+}
 
 .ks-dir__listwrap,
 .book-embed {
@@ -30,41 +60,3 @@
   background: var(--ks-scrollbar-thumb-hover);
   background-clip: content-box;
 }
-
-/* :root {
-  --ks-scrollbar-thumb: rgba(0, 0, 0, 0.28);
-  --ks-scrollbar-thumb-hover: rgba(0, 0, 0, 0.38);
-  --ks-scrollbar-track: transparent;
-  --ks-scrollbar-size: 8px;
-}
-
-.ks-dir__listwrap,
-.book-embed {
-  scrollbar-width: thin;
-  scrollbar-color: var(--ks-scrollbar-thumb) var(--ks-scrollbar-track);
-}
-
-.ks-dir__listwrap::-webkit-scrollbar,
-.book-embed::-webkit-scrollbar {
-  width: var(--ks-scrollbar-size);
-  height: var(--ks-scrollbar-size);
-}
-
-.ks-dir__listwrap::-webkit-scrollbar-track,
-.book-embed::-webkit-scrollbar-track {
-  background: var(--ks-scrollbar-track);
-}
-
-.ks-dir__listwrap::-webkit-scrollbar-thumb,
-.book-embed::-webkit-scrollbar-thumb {
-  background: var(--ks-scrollbar-thumb);
-  border-radius: 999px;
-  border: 2px solid transparent;
-  background-clip: content-box;
-}
-
-.ks-dir__listwrap::-webkit-scrollbar-thumb:hover,
-.book-embed::-webkit-scrollbar-thumb:hover {
-  background: var(--ks-scrollbar-thumb-hover);
-  background-clip: content-box;
-} */
