@@ -310,7 +310,8 @@ if (!function_exists('ks_register_home_shortcode')) {
   <div class="container">
     <div
       class="ks-title-wrap ks-home-values__title-wrap"
-      data-bgword="HALTUNG"
+      data-bgword="HALTUNG" data-i18n="home.values.watermark"
+  data-i18n-attr="data-bgword"
     >
       <div class="ks-kicker" data-i18n="home.values.kicker">
         Our mindset
@@ -409,27 +410,7 @@ echo ks_render_faq_section($faq_items, [
       }
       ?>
 
-      <!-- <section
-        id="coach-portal"
-        class="ks-sec ks-home-portal"
-        aria-label="DFS Trainingsbibliothek"
-      >
-        <div class="container ks-home-portal__grid">
-          <div class="ks-home-portal__text">
-            <div class="ks-eyebrow">Digitale Inhalte für Trainer, Teams und ambitionierte Spieler</div>
-            <h2 class="ks-home-portal__title"><span>DFSCOACH</span> Trainingsbibliothek</h2>
-            <p>
-              Greife auf Übungen, Trainingsideen und strukturierte Inhalte zu. Nutze die Bibliothek
-              zur Vorbereitung deiner Einheiten und entwickle deine Trainingsarbeit gezielt weiter.
-            </p>
-            <p class="ks-home-portal__actions">
-              <a class="ks-btn ks-btn--light" href="<?php echo esc_url($portal_url); ?>">Mehr erfahren</a>
-            </p>
-          </div>
-
-          <div class="ks-home-portal__media" role="presentation" aria-hidden="true"></div>
-        </div>
-      </section> -->
+      
 
      <section
   id="coach-portal"
