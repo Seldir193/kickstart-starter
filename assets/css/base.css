@@ -503,6 +503,25 @@
     --color-shadow-dropdown-panel: rgba(0, 0, 0, 0.14);
 
     --ks-dropdown-panel-shadow: 0 16px 40px var(--color-shadow-dropdown-panel);
+
+    --color-surface-hero-dark-1: #111111;
+    --color-surface-hero-dark-2: #222222;
+    --color-text-form-muted: #444444;
+    --color-success: #065f46;
+
+    --color-border-form: #e5e7eb;
+
+    --color-shadow-contact-form: rgba(0, 0, 0, 0.05);
+    --color-shadow-modal-panel: rgba(17, 24, 39, 0.1);
+
+    --ks-legacy-hero-bg: linear-gradient(
+      180deg,
+      var(--color-surface-hero-dark-1) 0%,
+      var(--color-surface-hero-dark-2) 100%
+    );
+
+    --ks-contact-form-shadow: 0 2px 6px var(--color-shadow-contact-form);
+    --ks-modal-panel-shadow: 0 10px 25px var(--color-shadow-modal-panel);
   }
 
   .admin-bar {
