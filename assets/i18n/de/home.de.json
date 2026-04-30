@@ -77,7 +77,7 @@
     "team": {
       "kicker": "Unsere Trainer",
       "title": "Lerne unser Trainerteam kennen",
-      "intro": "Erfahrene Coaches. Echte Leidenschaft. Eine gemeinsame Mission: das Potenzial jedes Spielers zu entfalten – auf und neben dem Platz.",
+      "lead": "Erfahrene Coaches. Echte Leidenschaft. Eine gemeinsame Mission: das Potenzial jedes Spielers zu entfalten – auf und neben dem Platz.",
       "watermark": "DFS",
       "roleFallback": "Trainer",
       "fact1Title": "Individuelle Entwicklung",

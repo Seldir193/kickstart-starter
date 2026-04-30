@@ -77,7 +77,7 @@
     "team": {
       "kicker": "Our Coaches",
       "title": "Meet our coaching team",
-      "intro": "Experienced coaches. Real passion. One shared mission: unlocking every player's potential – on and off the pitch.",
+      "lead": "Experienced coaches. Real passion. One shared mission: unlocking every player's potential – on and off the pitch.",
       "watermark": "DFS",
       "roleFallback": "Coach",
       "fact1Title": "Individual Development",

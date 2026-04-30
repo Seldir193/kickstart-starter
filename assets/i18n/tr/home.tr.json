@@ -77,7 +77,7 @@
     "team": {
       "kicker": "Antrenörlerimiz",
       "title": "Antrenör ekibimizi tanıyın",
-      "intro": "Deneyimli antrenörler. Gerçek tutku. Tek bir ortak hedef: her oyuncunun potansiyelini saha içinde ve dışında ortaya çıkarmak.",
+      "lead": "Deneyimli antrenörler. Gerçek tutku. Tek bir ortak hedef: her oyuncunun potansiyelini saha içinde ve dışında ortaya çıkarmak.",
       "watermark": "DFS",
       "roleFallback": "Antrenör",
       "fact1Title": "Bireysel Gelişim",
