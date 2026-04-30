@@ -1,0 +1,15 @@
+{
+  "whatsapp": {
+    "aria": {
+      "single": "WhatsApp Kontakt",
+      "byLocation": "WhatsApp Kontakt je Standort"
+    },
+    "question": "Fragen?",
+    "singleText": "Schreib uns auf WhatsApp.",
+    "multiText": "Wähle deinen Standort & schreib uns auf WhatsApp.",
+    "locationLabel": "Standort:",
+    "selectLabel": "Standort",
+    "placeholder": "Standort wählen...",
+    "button": "WhatsApp öffnen"
+  }
+}

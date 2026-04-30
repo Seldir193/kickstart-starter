@@ -1,0 +1,41 @@
+{
+  "footer": {
+    "ariaLabel": "Footer",
+    "contact": {
+      "kicker": "We are here for you",
+      "title": "Contact",
+      "region": "Dortmund & surrounding area"
+    },
+    "service": {
+      "kicker": "Important links",
+      "title": "Service",
+      "dfsManager": "DFS Manager",
+      "cancelSubscription": "Cancel subscription",
+      "withdrawContract": "Withdraw contract",
+      "helpContact": "Help & Contact",
+      "legalNotice": "Legal Notice",
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions"
+    },
+    "social": {
+      "kicker": "Stay connected",
+      "title": "DFS Online",
+      "text": "Stay connected with us.",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "tiktok": "TikTok"
+    },
+    "region": {
+      "kicker": "Active in the region",
+      "title": "Locations & service area",
+      "text": "Dortmund · NRW · partner clubs",
+      "cardAria": "View locations",
+      "mapAlt": "Locations & service area"
+    },
+    "bottom": {
+      "brand": "Dortmund Football School",
+      "providerLogin": "Provider Login"
+    }
+  }
+}

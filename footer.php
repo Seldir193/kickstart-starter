@@ -19,32 +19,51 @@ $provider_login_url = 'http://localhost:3000/admin/login';
 <footer
   class="site-footer"
   role="contentinfo"
-  style="--footer-link-icon:url('<?php echo esc_url($theme_uri . '/assets/img/team/arrow_right_alt.svg'); ?>')"
+  aria-label="Fußzeile"
+  data-i18n="footer.ariaLabel"
+  data-i18n-attr="aria-label"
+  style="--footer-link-icon:url('<?php echo esc_url($theme_uri . '/assets/img/team/arrow_right_alt.svg'); ?>');"
 >
   <div class="footer-top">
     <div class="container footer-grid">
       <section class="footer-column footer-contact">
         <div class="footer-kicker">
-          <img src="<?php echo esc_url($footer_img . 'footer-contact.svg'); ?>" alt="" loading="lazy">
-          <span>Wir sind für dich da</span>
+          <img
+            src="<?php echo esc_url($footer_img . 'footer-contact.svg'); ?>"
+            alt=""
+            loading="lazy"
+          >
+          <span data-i18n="footer.contact.kicker">Wir sind für dich da</span>
         </div>
 
-        <h4 class="footer-head">Kontakt</h4>
+        <h4 class="footer-head" data-i18n="footer.contact.title">Kontakt</h4>
 
         <ul class="footer-list">
           <li class="footer-contact-item">
-            <span class="footer-contact-icon" style="--icon:url('<?php echo esc_url($offers_img . 'location.png'); ?>')"></span>
-            
-            <a href="<?php echo esc_url($fr_url); ?>">Dortmund &amp; Umgebung</a>
+            <span
+              class="footer-contact-icon"
+              style="--icon:url('<?php echo esc_url($offers_img . 'location.png'); ?>')"
+            ></span>
+            <a href="<?php echo esc_url($fr_url); ?>" data-i18n="footer.contact.region">
+              Dortmund &amp; Umgebung
+            </a>
           </li>
 
           <li class="footer-contact-item">
-            <span class="footer-contact-icon" style="--icon:url('<?php echo esc_url($offers_img . 'mail.png'); ?>')"></span>
-            <a href="mailto:info@dortmunder-fussballschule.de">info@dortmunder-fussballschule.de</a>
+            <span
+              class="footer-contact-icon"
+              style="--icon:url('<?php echo esc_url($offers_img . 'mail.png'); ?>')"
+            ></span>
+            <a href="mailto:info@dortmunder-fussballschule.de">
+              info@dortmunder-fussballschule.de
+            </a>
           </li>
 
           <li class="footer-contact-item">
-            <span class="footer-contact-icon" style="--icon:url('<?php echo esc_url($offers_img . 'phone.png'); ?>')"></span>
+            <span
+              class="footer-contact-icon"
+              style="--icon:url('<?php echo esc_url($offers_img . 'phone.png'); ?>')"
+            ></span>
             <a href="tel:+4917643203362">+49 176 4320 3362</a>
           </li>
         </ul>
@@ -52,11 +71,15 @@ $provider_login_url = 'http://localhost:3000/admin/login';
 
       <nav class="footer-column footer-links" aria-label="Quicklinks">
         <div class="footer-kicker">
-          <img src="<?php echo esc_url($footer_img . 'footer-links.svg'); ?>" alt="" loading="lazy">
-          <span>Wichtige Links</span>
+          <img
+            src="<?php echo esc_url($footer_img . 'footer-links.svg'); ?>"
+            alt=""
+            loading="lazy"
+          >
+          <span data-i18n="footer.service.kicker">Wichtige Links</span>
         </div>
 
-        <h4 class="footer-head">Service</h4>
+        <h4 class="footer-head" data-i18n="footer.service.title">Service</h4>
 
         <?php if (has_nav_menu('footer')): ?>
           <?php
@@ -71,31 +94,88 @@ $provider_login_url = 'http://localhost:3000/admin/login';
         <?php else: ?>
           <ul class="footer-menu">
             <li>
-              <a href="<?php echo esc_url($dfsmanager_url); ?>" target="_blank" rel="noopener">
+              <a
+                href="<?php echo esc_url($dfsmanager_url); ?>"
+                target="_blank"
+                rel="noopener"
+                data-i18n="footer.service.dfsManager"
+              >
                 DFS Manager
               </a>
             </li>
-            <li><a href="<?php echo esc_url(site_url('/abo-kuendigen/')); ?>">Abo kündigen</a></li>
-            <li><a href="<?php echo esc_url(site_url('/widerrufen/')); ?>">Vertrag widerrufen</a></li>
+
             <li>
-  <a href="<?php echo esc_url(site_url('/?page_id=143')); ?>">Hilfe &amp; Kontakt</a>
-</li>
-            <li><a href="<?php echo esc_url(site_url('/impressum/')); ?>">Impressum</a></li>
-            <li><a href="<?php echo esc_url(site_url('/datenschutz/')); ?>">Datenschutz</a></li>
-            <li><a href="<?php echo esc_url(site_url('/agb/')); ?>">AGB</a></li>
+              <a
+                href="<?php echo esc_url(site_url('/abo-kuendigen/')); ?>"
+                data-i18n="footer.service.cancelSubscription"
+              >
+                Abo kündigen
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="<?php echo esc_url(site_url('/widerrufen/')); ?>"
+                data-i18n="footer.service.withdrawContract"
+              >
+                Vertrag widerrufen
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="<?php echo esc_url(site_url('/?page_id=143')); ?>"
+                data-i18n="footer.service.helpContact"
+              >
+                Hilfe &amp; Kontakt
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="<?php echo esc_url(site_url('/impressum/')); ?>"
+                data-i18n="footer.service.legalNotice"
+              >
+                Impressum
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="<?php echo esc_url(site_url('/datenschutz/')); ?>"
+                data-i18n="footer.service.privacy"
+              >
+                Datenschutz
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="<?php echo esc_url(site_url('/agb/')); ?>"
+                data-i18n="footer.service.terms"
+              >
+                AGB
+              </a>
+            </li>
           </ul>
         <?php endif; ?>
       </nav>
 
       <section class="footer-column footer-social">
         <div class="footer-kicker">
-          <img src="<?php echo esc_url($footer_img . 'footer-social.svg'); ?>" alt="" loading="lazy">
-          <span>Bleib verbunden</span>
+          <img
+            src="<?php echo esc_url($footer_img . 'footer-social.svg'); ?>"
+            alt=""
+            loading="lazy"
+          >
+          <span data-i18n="footer.social.kicker">Bleib verbunden</span>
         </div>
 
-        <h4 class="footer-head">DFS Online</h4>
+        <h4 class="footer-head" data-i18n="footer.social.title">DFS Online</h4>
 
-        <p class="footer-text">Bleib mit uns verbunden.</p>
+        <p class="footer-text" data-i18n="footer.social.text">
+          Bleib mit uns verbunden.
+        </p>
 
         <ul class="social-list">
           <li>
@@ -103,36 +183,47 @@ $provider_login_url = 'http://localhost:3000/admin/login';
               class="social-icon"
               href="#"
               aria-label="Instagram"
+              data-i18n="footer.social.instagram"
+              data-i18n-attr="aria-label"
               target="_blank"
               rel="noopener"
               style="--icon:url('<?php echo esc_url($offers_img . 'instagram.svg'); ?>')"
             ></a>
           </li>
+
           <li>
             <a
               class="social-icon"
               href="#"
               aria-label="Facebook"
+              data-i18n="footer.social.facebook"
+              data-i18n-attr="aria-label"
               target="_blank"
               rel="noopener"
               style="--icon:url('<?php echo esc_url($offers_img . 'facebook.svg'); ?>')"
             ></a>
           </li>
+
           <li>
             <a
               class="social-icon"
               href="#"
               aria-label="YouTube"
+              data-i18n="footer.social.youtube"
+              data-i18n-attr="aria-label"
               target="_blank"
               rel="noopener"
               style="--icon:url('<?php echo esc_url($offers_img . 'youtube.svg'); ?>')"
             ></a>
           </li>
+
           <li>
             <a
               class="social-icon"
               href="#"
               aria-label="TikTok"
+              data-i18n="footer.social.tiktok"
+              data-i18n-attr="aria-label"
               target="_blank"
               rel="noopener"
               style="--icon:url('<?php echo esc_url($offers_img . 'tiktok.svg'); ?>')"
@@ -143,18 +234,38 @@ $provider_login_url = 'http://localhost:3000/admin/login';
 
       <section class="footer-column footer-locations">
         <div class="footer-kicker">
-          <img src="<?php echo esc_url($footer_img . 'footer-region.svg'); ?>" alt="" loading="lazy">
-          <span>Aktiv in der Region</span>
+          <img
+            src="<?php echo esc_url($footer_img . 'footer-region.svg'); ?>"
+            alt=""
+            loading="lazy"
+          >
+          <span data-i18n="footer.region.kicker">Aktiv in der Region</span>
         </div>
 
         <h4 class="footer-head">
-          <a href="<?php echo esc_url($fr_url); ?>">Standorte &amp; Einsatzgebiet</a>
+          <a href="<?php echo esc_url($fr_url); ?>" data-i18n="footer.region.title">
+            Standorte &amp; Einsatzgebiet
+          </a>
         </h4>
 
-        <p class="footer-text">Dortmund · NRW · Partnervereine</p>
+        <p class="footer-text" data-i18n="footer.region.text">
+          Dortmund · NRW · Partnervereine
+        </p>
 
-        <a class="footer-region-card" href="<?php echo esc_url($fr_url); ?>" aria-label="Standorte ansehen">
-          <img src="<?php echo esc_url($offers_img . 'world-map.png'); ?>" alt="Standorte & Einsatzgebiet" loading="lazy">
+        <a
+          class="footer-region-card"
+          href="<?php echo esc_url($fr_url); ?>"
+          aria-label="Standorte ansehen"
+          data-i18n="footer.region.cardAria"
+          data-i18n-attr="aria-label"
+        >
+          <img
+            src="<?php echo esc_url($offers_img . 'world-map.png'); ?>"
+            alt="Standorte & Einsatzgebiet"
+            data-i18n="footer.region.mapAlt"
+            data-i18n-attr="alt"
+            loading="lazy"
+          >
         </a>
       </section>
     </div>
@@ -163,7 +274,10 @@ $provider_login_url = 'http://localhost:3000/admin/login';
   <div class="footer-bottom">
     <div class="container footer-bottom-inner">
       <div class="copyright-wrap">
-        <small>© <?php echo esc_html(date('Y')); ?> Dortmunder Fussballschule</small>
+        <small>
+          © <?php echo esc_html(date('Y')); ?>
+          <span data-i18n="footer.bottom.brand">Dortmunder Fussballschule</span>
+        </small>
 
         <?php if ($footer_logo_url): ?>
           <img
@@ -175,9 +289,18 @@ $provider_login_url = 'http://localhost:3000/admin/login';
         <?php endif; ?>
       </div>
 
-      <a class="anbieter-login" href="<?php echo esc_url($provider_login_url); ?>" target="_blank" rel="noopener">
-        <img src="<?php echo esc_url($footer_img . 'footer-login.svg'); ?>" alt="" loading="lazy">
-        <span>Anbieter-Login</span>
+      <a
+        class="anbieter-login"
+        href="<?php echo esc_url($provider_login_url); ?>"
+        target="_blank"
+        rel="noopener"
+      >
+        <img
+          src="<?php echo esc_url($footer_img . 'footer-login.svg'); ?>"
+          alt=""
+          loading="lazy"
+        >
+        <span data-i18n="footer.bottom.providerLogin">Anbieter-Login</span>
       </a>
     </div>
   </div>
@@ -186,6 +309,7 @@ $provider_login_url = 'http://localhost:3000/admin/login';
 <?php wp_footer(); ?>
 </body>
 </html>
+
 
 
 

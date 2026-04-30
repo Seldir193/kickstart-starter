@@ -1,0 +1,41 @@
+{
+  "footer": {
+    "ariaLabel": "Alt bilgi",
+    "contact": {
+      "kicker": "Senin için buradayız",
+      "title": "İletişim",
+      "region": "Dortmund ve çevresi"
+    },
+    "service": {
+      "kicker": "Önemli bağlantılar",
+      "title": "Servis",
+      "dfsManager": "DFS Manager",
+      "cancelSubscription": "Aboneliği iptal et",
+      "withdrawContract": "Sözleşmeden cay",
+      "helpContact": "Yardım & İletişim",
+      "legalNotice": "Künye",
+      "privacy": "Gizlilik Politikası",
+      "terms": "Şartlar ve Koşullar"
+    },
+    "social": {
+      "kicker": "Bağlantıda kal",
+      "title": "DFS Online",
+      "text": "Bizimle bağlantıda kal.",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "tiktok": "TikTok"
+    },
+    "region": {
+      "kicker": "Bölgede aktif",
+      "title": "Lokasyonlar & hizmet bölgesi",
+      "text": "Dortmund · NRW · partner kulüpler",
+      "cardAria": "Lokasyonları görüntüle",
+      "mapAlt": "Lokasyonlar & hizmet bölgesi"
+    },
+    "bottom": {
+      "brand": "Dortmund Futbol Okulu",
+      "providerLogin": "Sağlayıcı Girişi"
+    }
+  }
+}

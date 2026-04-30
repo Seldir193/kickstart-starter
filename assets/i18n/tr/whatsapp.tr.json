@@ -1,0 +1,15 @@
+{
+  "whatsapp": {
+    "aria": {
+      "single": "WhatsApp iletişimi",
+      "byLocation": "Lokasyona göre WhatsApp iletişimi"
+    },
+    "question": "Soruların mı var?",
+    "singleText": "Bize WhatsApp üzerinden yaz.",
+    "multiText": "Lokasyonunu seç & bize WhatsApp üzerinden yaz.",
+    "locationLabel": "Lokasyon:",
+    "selectLabel": "Lokasyon",
+    "placeholder": "Lokasyon seç...",
+    "button": "WhatsApp'ı aç"
+  }
+}

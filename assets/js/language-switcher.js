@@ -115,6 +115,14 @@
       scopes.push("feedback");
     }
 
+    if (hasI18nPrefix("footer.")) {
+      scopes.push("footer");
+    }
+
+    if (hasI18nPrefix("whatsapp.")) {
+      scopes.push("whatsapp");
+    }
+
     return scopes;
   }
 

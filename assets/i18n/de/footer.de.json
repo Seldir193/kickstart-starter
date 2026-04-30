@@ -1,0 +1,41 @@
+{
+  "footer": {
+    "ariaLabel": "Fußzeile",
+    "contact": {
+      "kicker": "Wir sind für dich da",
+      "title": "Kontakt",
+      "region": "Dortmund & Umgebung"
+    },
+    "service": {
+      "kicker": "Wichtige Links",
+      "title": "Service",
+      "dfsManager": "DFS Manager",
+      "cancelSubscription": "Abo kündigen",
+      "withdrawContract": "Vertrag widerrufen",
+      "helpContact": "Hilfe & Kontakt",
+      "legalNotice": "Impressum",
+      "privacy": "Datenschutz",
+      "terms": "AGB"
+    },
+    "social": {
+      "kicker": "Bleib verbunden",
+      "title": "DFS Online",
+      "text": "Bleib mit uns verbunden.",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "tiktok": "TikTok"
+    },
+    "region": {
+      "kicker": "Aktiv in der Region",
+      "title": "Standorte & Einsatzgebiet",
+      "text": "Dortmund · NRW · Partnervereine",
+      "cardAria": "Standorte ansehen",
+      "mapAlt": "Standorte & Einsatzgebiet"
+    },
+    "bottom": {
+      "brand": "Dortmunder Fussballschule",
+      "providerLogin": "Anbieter-Login"
+    }
+  }
+}
