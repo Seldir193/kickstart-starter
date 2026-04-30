@@ -19,7 +19,7 @@
 
 #coach-portal::before {
   z-index: -2;
-  background:
+  /* background:
     radial-gradient(
       900px 540px at 18% 42%,
       rgba(253, 225, 0, 0.08),
@@ -34,7 +34,9 @@
       180deg,
       var(--color-surface-dark-1) 0%,
       var(--color-surface-dark-2) 100%
-    );
+    ); */
+
+  background: var(--ks-section-bg-portal);
 }
 
 #coach-portal::after {
