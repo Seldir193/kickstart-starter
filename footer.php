@@ -307,6 +307,22 @@ $provider_login_url = 'http://localhost:3000/admin/login';
 </footer>
 
 <?php wp_footer(); ?>
+<button
+  class="ks-back-top"
+  type="button"
+  aria-label="Nach oben scrollen"
+  data-i18n="common.backToTop"
+  data-i18n-attr="aria-label"
+>
+  <span class="ks-back-top__icon" aria-hidden="true">
+    <img
+      src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/home/back-to-top.svg'); ?>"
+      alt=""
+      loading="lazy"
+      decoding="async"
+    >
+  </span>
+</button>
 </body>
 </html>
 

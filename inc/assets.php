@@ -134,6 +134,10 @@ $styles = [
   'path' => '/assets/css/footer.css',
   'deps' => ['kickstart-style', 'ks-utils', 'ks-base'],
 ],
+'back-top' => [
+  'path' => '/assets/css/ks-back-top.css',
+  'deps' => ['kickstart-style', 'ks-utils', 'ks-base'],
+],
 ];
   foreach ($styles as $handle => $config) {
     $abs = get_stylesheet_directory() . $config['path'];
@@ -255,6 +259,18 @@ if (file_exists($partner_network_js)) {
       );
     }
   }
+
+  $back_top_js = get_stylesheet_directory() . '/assets/js/ks-back-top.js';
+
+if (file_exists($back_top_js)) {
+  wp_enqueue_script(
+    'ks-back-top',
+    get_stylesheet_directory_uri() . '/assets/js/ks-back-top.js',
+    [],
+    filemtime($back_top_js),
+    true
+  );
+}
 
   wp_enqueue_style(
     'leaflet-css',
