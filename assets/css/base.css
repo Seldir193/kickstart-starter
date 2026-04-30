@@ -396,6 +396,20 @@
 
     --ks-feedback-nav-shadow: 0 12px 24px var(--color-shadow-feedback-nav);
     --color-overlay-white-faint: rgba(255, 255, 255, 0.02);
+
+    --whatsapp-green: #25d366;
+    --whatsapp-green-hover: #1ebe57;
+    --color-shadow-whatsapp-soft: rgba(37, 211, 102, 0.22);
+    --color-shadow-whatsapp-medium: rgba(37, 211, 102, 0.25);
+    --color-shadow-whatsapp-strong: rgba(37, 211, 102, 0.28);
+    --color-focus-ring-light: rgba(255, 255, 255, 0.85);
+
+    --ks-whatsapp-shadow: 0 6px 18px var(--color-shadow-whatsapp-soft);
+    --ks-whatsapp-shadow-hover: 0 10px 24px var(--color-shadow-whatsapp-strong);
+    --ks-whatsapp-shadow-active: 0 6px 14px var(--color-shadow-whatsapp-medium);
+    --ks-whatsapp-shadow-focus:
+      0 0 0 3px var(--color-focus-ring-light),
+      0 6px 18px var(--color-shadow-whatsapp-soft);
   }
 
   .admin-bar {
