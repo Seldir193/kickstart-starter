@@ -99,6 +99,10 @@
       scopes.push("news");
     }
 
+    if (hasI18nPrefix("programCta.")) {
+      scopes.push("program-cta");
+    }
+
     if (hasI18nPrefix("franchise.")) {
       scopes.push("franchise");
     }
