@@ -4,6 +4,251 @@
     --brand: #0ea5e9;
     --ks-container: 1440px;
 
+    --font-sans:
+      system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, Arial,
+      sans-serif;
+
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    --font-weight-black: 900;
+
+    --color-white: #ffffff;
+    --color-black: #111111;
+    --color-text: #374151;
+    --color-text-strong: #111111;
+    --color-text-nav: #333333;
+    --color-text-muted: #666666;
+    --color-text-soft: #7d8288;
+    --color-text-heading-sm: #0f172a;
+
+    --color-surface-page: #f5f5f5;
+    --color-surface-soft: #fafafa;
+    --color-surface-warm: #fbf6df;
+    --color-surface-header: #ffffff;
+    --color-surface-mega: #ffffff;
+
+    --color-border-soft: #eaeaea;
+    --color-border-light: rgba(17, 17, 17, 0.05);
+    --color-border-subtle: rgba(17, 17, 17, 0.08);
+    --color-border-strong: rgba(17, 17, 17, 0.14);
+
+    --color-overlay-dark: rgba(0, 0, 0, 0.45);
+    --color-hover-soft: rgba(0, 0, 0, 0.04);
+
+    --color-surface-dark-1: #232323;
+    --color-surface-dark-2: #171717;
+    --color-partner-dark-1: #07111d;
+    --color-partner-dark-2: #0d2135;
+    --color-footer-dark-1: #101114;
+    --color-footer-dark-2: #09090b;
+
+    --color-text-inverse-soft: rgba(255, 255, 255, 0.84);
+    --color-text-inverse-muted: rgba(255, 255, 255, 0.78);
+    --color-watermark-inverse: rgba(255, 255, 255, 0.11);
+    --color-shadow-dark-strong: rgba(0, 0, 0, 0.38);
+
+    --brand-gold: #fde100;
+    --brand-gold-700: #e5c200;
+    --brand-navy: #0f1e2e;
+    --brand-black: var(--color-black);
+    --brand-white: var(--color-white);
+    --brand-muted: #6b7280;
+    --accent-red: #d71019;
+
+    --news-accent: var(--brand-gold);
+    --news-title: var(--brand-black);
+    --news-muted: var(--brand-muted);
+    --news-line: var(--brand-black);
+
+    --home-background: var(--color-surface-soft);
+    --text: var(--color-text);
+
+    --header-height: 72px;
+    --header-bg: var(--color-surface-header);
+    --mega-gap: 8px;
+    --mega-z: 1000;
+    --mega-backdrop: var(--color-overlay-dark);
+    --mega-bg: var(--color-surface-mega);
+    --mega-link: var(--color-text-muted);
+
+    --dark-gray: var(--color-surface-page);
+    --light-gray: var(--color-surface-soft);
+
+    --wp-admin-bar-h: 0px;
+
+    --ks-section-bg-hero:
+      radial-gradient(
+        circle at top left,
+        rgba(253, 225, 0, 0.14),
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at right center,
+        rgba(15, 30, 46, 0.05),
+        transparent 26%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.94),
+        rgba(255, 255, 255, 0.98)
+      ),
+      var(--color-surface-page);
+
+    --ks-section-overlay-hero:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0)),
+      linear-gradient(180deg, rgba(17, 17, 17, 0.02), rgba(17, 17, 17, 0));
+
+    --ks-section-bg-default: var(--color-surface-soft);
+    --ks-section-bg-white: var(--brand-white);
+
+    --ks-section-bg-highlight:
+      radial-gradient(
+        circle at 8% 70%,
+        rgba(253, 225, 0, 0.065),
+        transparent 26%
+      ),
+      linear-gradient(
+        180deg,
+        var(--brand-white) 0%,
+        var(--color-surface-soft) 46%,
+        var(--brand-white) 100%
+      );
+
+    --ks-section-bg-highlight-soft:
+      radial-gradient(
+        circle at 8% 82%,
+        rgba(253, 225, 0, 0.1),
+        transparent 24%
+      ),
+      linear-gradient(
+        180deg,
+        var(--color-surface-soft) 0%,
+        var(--brand-white) 100%
+      );
+
+    --ks-section-bg-dark: linear-gradient(
+      135deg,
+      var(--color-surface-dark-2) 0%,
+      var(--brand-navy) 100%
+    );
+
+    --ks-section-bg-portal:
+      radial-gradient(
+        900px 540px at 18% 42%,
+        rgba(253, 225, 0, 0.08),
+        rgba(0, 0, 0, 0)
+      ),
+      radial-gradient(
+        780px 420px at 82% 58%,
+        rgba(15, 30, 46, 0.18),
+        rgba(0, 0, 0, 0)
+      ),
+      linear-gradient(
+        180deg,
+        var(--color-surface-dark-1) 0%,
+        var(--color-surface-dark-2) 100%
+      );
+
+    --ks-section-bg-partner:
+      radial-gradient(
+        circle at 18% 0%,
+        rgba(253, 225, 0, 0.1),
+        transparent 28%
+      ),
+      linear-gradient(
+        135deg,
+        var(--color-partner-dark-1) 0%,
+        var(--color-partner-dark-2) 48%,
+        var(--color-partner-dark-1) 100%
+      );
+
+    --ks-section-bg-footer:
+      radial-gradient(
+        circle at 12% 100%,
+        rgba(253, 225, 0, 0.055),
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at 88% 100%,
+        rgba(255, 255, 255, 0.045),
+        transparent 26%
+      ),
+      linear-gradient(
+        180deg,
+        var(--color-footer-dark-1) 0%,
+        var(--color-footer-dark-2) 100%
+      );
+
+    --color-surface-cream: #fffdf6;
+    --color-media-black: #000000;
+
+    --color-shadow-slate-soft: rgba(17, 24, 39, 0.04);
+    --color-shadow-slate-medium: rgba(17, 24, 39, 0.08);
+    --color-shadow-button-hover: rgba(17, 17, 17, 0.12);
+
+    --ks-home-point-bg: linear-gradient(
+      180deg,
+      var(--color-surface-cream) 0%,
+      var(--brand-white) 100%
+    );
+
+    --ks-home-media-bg:
+      radial-gradient(
+        circle at top left,
+        rgba(253, 225, 0, 0.12),
+        transparent 30%
+      ),
+      linear-gradient(
+        180deg,
+        var(--brand-white) 0%,
+        var(--color-surface-soft) 100%
+      );
+
+    --ks-home-point-shadow: 0 6px 18px var(--color-shadow-slate-soft);
+    --ks-home-media-shadow: 0 16px 40px var(--color-shadow-slate-medium);
+    --ks-button-hover-shadow: 0 10px 24px var(--color-shadow-button-hover);
+  }
+
+  .admin-bar {
+    --wp-admin-bar-h: 32px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-surface-page);
+    color: var(--text);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0 0 8px;
+  }
+
+  a {
+    color: inherit;
+  }
+}
+
+/* @layer base {
+  :root {
+    --brand: #0ea5e9;
+    --ks-container: 1440px;
+
     --color-white: #ffffff;
     --color-black: #111111;
     --color-text: #374151;
@@ -88,18 +333,6 @@
     --ks-section-bg-default: var(--light-gray);
     --ks-section-bg-white: var(--brand-white);
 
-    /* --ks-section-bg-highlight:
-      radial-gradient(
-        circle at top left,
-        rgba(253, 225, 0, 0.08),
-        transparent 30%
-      ),
-      linear-gradient(
-        180deg,
-        var(--color-surface-soft) 0%,
-        var(--brand-white) 100%
-      ); */
-
     --ks-section-bg-highlight:
       radial-gradient(
         circle at 8% 70%,
@@ -156,8 +389,6 @@
       ),
       linear-gradient(135deg, #07111d 0%, #0d2135 48%, #07111d 100%);
 
-    /* --ks-section-bg-footer: linear-gradient(180deg, #0e0e10 0%, #09090b 100%); */
-
     --ks-section-bg-footer:
       radial-gradient(
         circle at 12% 100%,
@@ -205,4 +436,4 @@
   a {
     color: inherit;
   }
-}
+} */

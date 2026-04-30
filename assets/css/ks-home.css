@@ -1,5 +1,6 @@
+/* assets\css\ks-home.css */
 .ks-dir__title {
-  font-weight: 800;
+  font-weight: var(--font-weight-extrabold);
   font-size: clamp(36px, 4vw, 52px);
   color: var(--brand-black);
   line-height: 1.04;
@@ -20,11 +21,11 @@
   min-height: 32px;
   padding: 0 12px;
   border-radius: 999px;
-  background: #fbf6df;
-  border: 1px solid rgba(17, 17, 17, 0.05);
-  color: #111111;
+  background: var(--color-surface-warm);
+  border: 1px solid var(--color-border-light);
+  color: var(--brand-black);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   line-height: 1;
   white-space: nowrap;
 }
@@ -62,10 +63,10 @@
   display: grid;
   gap: 4px;
   padding: 12px 14px;
-  background: linear-gradient(180deg, #fffdf6 0%, #ffffff 100%);
-  border: 1px solid rgba(17, 17, 17, 0.06);
+  background: var(--ks-home-point-bg);
+  border: 1px solid var(--color-border-subtle);
   border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(17, 24, 39, 0.04);
+  box-shadow: var(--ks-home-point-shadow);
 }
 
 .ks-home-about__point strong {
@@ -91,16 +92,10 @@
   align-content: start;
   height: 100%;
   padding: 14px;
-  background:
-    radial-gradient(
-      circle at top left,
-      rgba(253, 225, 0, 0.12),
-      transparent 30%
-    ),
-    linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
-  border: 1px solid rgba(17, 17, 17, 0.08);
+  background: var(--ks-home-media-bg);
+  border: 1px solid var(--color-border-strong);
   border-radius: 24px;
-  box-shadow: 0 16px 40px rgba(17, 24, 39, 0.08);
+  box-shadow: var(--ks-home-media-shadow);
 }
 
 .ks-home-about__badge {
@@ -110,11 +105,11 @@
   min-height: 32px;
   padding: 0 12px;
   border-radius: 999px;
-  background: #fbf6df;
-  border: 1px solid rgba(17, 17, 17, 0.05);
-  color: #111111;
+  background: var(--color-surface-warm);
+  border: 1px solid var(--color-border-light);
+  color: var(--brand-black);
   font-size: 11px;
-  font-weight: 800;
+  font-weight: var(--font-weight-extrabold);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -142,7 +137,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: #000;
+  background: var(--color-media-black);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-medium);
@@ -165,6 +160,7 @@
   --btn-text-h: var(--brand-white);
   --btn-radius: 999px;
   --btn-bw: 2px;
+
   position: relative;
   isolation: isolate;
   display: inline-flex;
@@ -179,7 +175,7 @@
   background: transparent;
   color: var(--btn-text);
   text-decoration: none;
-  font-weight: 800;
+  font-weight: var(--font-weight-extrabold);
   line-height: 1;
   letter-spacing: 0.02em;
   transform: translateY(0);
@@ -211,7 +207,7 @@
 .ks-btn:focus-visible {
   color: var(--btn-text-h);
   border-color: transparent;
-  box-shadow: 0 10px 24px rgba(17, 17, 17, 0.12);
+  box-shadow: var(--ks-button-hover-shadow);
   transform: translateY(-1px);
   outline: none;
 }
@@ -221,6 +217,7 @@
   --btn-fill: var(--brand-black);
   --btn-text: var(--brand-black);
   --btn-text-h: var(--brand-white);
+
   background: var(--brand-gold);
   cursor: pointer;
 }
@@ -230,6 +227,7 @@
   --btn-fill: var(--brand-black);
   --btn-text: var(--brand-black);
   --btn-text-h: var(--brand-white);
+
   background: transparent;
 }
 
@@ -258,10 +256,6 @@
 .ks-dir__title-line {
   display: block;
 }
-/* 
-.ks-home-about {
-  width: 100%;
-} */
 
 @media (max-width: 1024px) {
   .ks-home-about__grid {
@@ -284,9 +278,7 @@
     transition: none;
   }
 }
-
-/* 
-.ks-dir__title {
+/* .ks-dir__title {
   font-weight: 800;
   font-size: clamp(36px, 4vw, 52px);
   color: var(--brand-black);
@@ -419,52 +411,6 @@
   font-size: 14px;
 }
 
-#news {
-  position: relative;
-  background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  padding-block: clamp(40px, 6vw, 84px);
-}
-
-#news > .container {
-  max-width: var(--ks-container);
-  width: 100%;
-  margin-inline: auto;
-  padding-left: 16px;
-  padding-right: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.ks-news {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(18px, 2.4vw, 36px);
-  align-items: start;
-}
-
-.ks-news__item {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.ks-news__thumb img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-md);
-}
-
-.ks-news__meta {
-  opacity: 0.62;
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
-}
-
 .ks-split {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
@@ -593,17 +539,9 @@
   display: block;
 }
 
-.ks-home-about {
-  width: 100%;
-}
-
 @media (max-width: 1024px) {
   .ks-home-about__grid {
     grid-template-columns: 1fr;
-  }
-
-  .ks-news {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .ks-split {
@@ -612,10 +550,6 @@
 }
 
 @media (max-width: 640px) {
-  .ks-news {
-    grid-template-columns: 1fr;
-  }
-
   .ks-btn {
     width: 100%;
   }
