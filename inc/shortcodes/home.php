@@ -26,15 +26,9 @@ if (!function_exists('ks_register_home_shortcode')) {
         );
       }
 
-      $home_news_abs = $theme_dir . '/assets/css/ks-home-news.css';
-if (file_exists($home_news_abs)) {
-  wp_enqueue_style(
-    'ks-home-news',
-    $theme_uri . '/assets/css/ks-home-news.css',
-    ['ks-home'],
-    filemtime($home_news_abs)
-  );
-}
+ 
+
+   
 
       $hero_split_abs = $theme_dir . '/assets/css/ks-home-hero.css';
       if (file_exists($hero_split_abs)) {
