@@ -112,6 +112,10 @@ $styles = [
     'path' => '/assets/css/ks-home-news.css',
     'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components'],
   ],
+  'home-program-cta' => [
+  'path' => '/assets/css/ks-home-program-cta.css',
+  'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components'],
+],
   'home-team' => [
     'path' => '/assets/css/ks-home-team.css',
     'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components'],
