@@ -315,6 +315,86 @@
     --ks-hero-image-shadow: drop-shadow(
       0 18px 28px var(--color-shadow-media-drop)
     );
+
+    --color-surface-feedback-dark: #161616;
+    --color-surface-feedback-deep: #080808;
+    --color-surface-feedback-media-1: #242424;
+    --color-surface-feedback-media-2: #101010;
+
+    --color-border-tab: rgba(17, 17, 17, 0.12);
+    --color-border-tab-divider: rgba(17, 17, 17, 0.1);
+    --color-border-inverse-soft: rgba(255, 255, 255, 0.08);
+    --color-border-inverse-medium: rgba(255, 255, 255, 0.3);
+    --color-border-inverse-strong: rgba(255, 255, 255, 0.36);
+
+    --color-surface-glass-light: rgba(255, 255, 255, 0.72);
+    --color-surface-inverse-muted: rgba(255, 255, 255, 0.03);
+    --color-surface-inverse-glow: rgba(255, 255, 255, 0.1);
+
+    --color-text-inverse: rgba(255, 255, 255, 0.92);
+    --color-text-inverse-faded: rgba(255, 255, 255, 0.48);
+
+    --color-gold-glow-tab: rgba(253, 225, 0, 0.16);
+    --color-gold-glow-slide: rgba(253, 225, 0, 0.13);
+    --color-gold-hover-soft: rgba(253, 225, 0, 0.1);
+    --color-gold-line-soft: rgba(229, 194, 0, 0.6);
+
+    --color-shadow-feedback-tabs: rgba(17, 24, 39, 0.06);
+    --color-shadow-feedback-tab-active: rgba(17, 17, 17, 0.18);
+    --color-shadow-feedback-slide: rgba(17, 24, 39, 0.2);
+    --color-shadow-feedback-nav: rgba(0, 0, 0, 0.22);
+
+    --icon-filter-brand-gold: brightness(0) saturate(100%) invert(88%)
+      sepia(91%) saturate(1184%) hue-rotate(359deg) brightness(105%)
+      contrast(103%);
+
+    --ks-feedback-tabs-bg: var(--color-surface-glass-light);
+    --ks-feedback-tabs-shadow:
+      0 16px 40px var(--color-shadow-feedback-tabs),
+      inset 0 1px 0 var(--color-surface-glass-strong);
+
+    --ks-feedback-tab-active-bg:
+      radial-gradient(
+        circle at top right,
+        var(--color-gold-glow-tab),
+        transparent 32%
+      ),
+      linear-gradient(
+        180deg,
+        var(--color-surface-feedback-dark) 0%,
+        var(--brand-black) 100%
+      );
+
+    --ks-feedback-slide-bg:
+      radial-gradient(
+        circle at top right,
+        var(--color-gold-glow-slide),
+        transparent 28%
+      ),
+      linear-gradient(
+        135deg,
+        var(--brand-navy) 0%,
+        var(--brand-black) 48%,
+        var(--color-surface-feedback-deep) 100%
+      );
+
+    --ks-feedback-slide-shadow:
+      0 26px 70px var(--color-shadow-feedback-slide),
+      inset 0 1px 0 var(--color-border-inverse-soft);
+
+    --ks-feedback-media-bg:
+      radial-gradient(
+        circle at top left,
+        var(--color-surface-inverse-glow),
+        transparent 30%
+      ),
+      linear-gradient(
+        135deg,
+        var(--color-surface-feedback-media-1) 0%,
+        var(--color-surface-feedback-media-2) 100%
+      );
+
+    --ks-feedback-nav-shadow: 0 12px 24px var(--color-shadow-feedback-nav);
   }
 
   .admin-bar {
