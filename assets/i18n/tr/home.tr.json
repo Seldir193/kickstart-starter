@@ -42,6 +42,7 @@
     "faq": {
       "title": "Futbol okulu hakkında sık sorulan sorular",
       "kicker": "Bilmekte fayda var",
+      "watermark": "SSS",
       "sideCard": {
         "kicker": "Sorularınız mı var?",
         "title": "Size memnuniyetle yardımcı oluruz",

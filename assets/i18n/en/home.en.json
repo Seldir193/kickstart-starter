@@ -42,6 +42,7 @@
     "faq": {
       "title": "Frequently Asked Questions About the Football School",
       "kicker": "Good to know",
+      "watermark": "FAQ",
       "sideCard": {
         "kicker": "Still have questions?",
         "title": "We are happy to help",

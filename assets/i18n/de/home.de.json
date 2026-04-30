@@ -42,6 +42,7 @@
     "faq": {
       "title": "Häufige Fragen zur Fußballschule",
       "kicker": "Gut zu wissen",
+      "watermark": "FAQ",
       "sideCard": {
         "kicker": "Fragen offen?",
         "title": "Wir helfen dir gerne weiter",
