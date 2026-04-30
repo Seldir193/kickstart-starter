@@ -20,9 +20,7 @@ section#partner-network.ks-partner-network {
   padding: 0;
   overflow: hidden;
   color: #fff;
-  background:
-    radial-gradient(circle at 18% 0%, rgba(253, 225, 0, 0.1), transparent 28%),
-    linear-gradient(135deg, #07111d 0%, #0d2135 48%, #07111d 100%);
+  background: var(--ks-section-bg-partner);
 }
 
 .ks-partner-network::before {
