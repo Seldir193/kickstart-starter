@@ -77,10 +77,12 @@ $provider_login_url = 'http://localhost:3000/admin/login';
             </li>
             <li><a href="<?php echo esc_url(site_url('/abo-kuendigen/')); ?>">Abo kündigen</a></li>
             <li><a href="<?php echo esc_url(site_url('/widerrufen/')); ?>">Vertrag widerrufen</a></li>
+            <li>
+  <a href="<?php echo esc_url(site_url('/?page_id=143')); ?>">Hilfe &amp; Kontakt</a>
+</li>
             <li><a href="<?php echo esc_url(site_url('/impressum/')); ?>">Impressum</a></li>
             <li><a href="<?php echo esc_url(site_url('/datenschutz/')); ?>">Datenschutz</a></li>
             <li><a href="<?php echo esc_url(site_url('/agb/')); ?>">AGB</a></li>
-            <li><a href="<?php echo esc_url(site_url('/faq/')); ?>">FAQ</a></li>
           </ul>
         <?php endif; ?>
       </nav>
