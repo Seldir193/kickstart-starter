@@ -10,7 +10,6 @@
   gap: 10px;
 }
 
-/* FAQ auf der FAQ-Seite: volle Breite, keine rechte Spalte */
 .ks-faq-page--full {
   display: block !important;
 }
