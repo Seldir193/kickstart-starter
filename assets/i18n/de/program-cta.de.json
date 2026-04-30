@@ -6,6 +6,7 @@
     "lead": "Wähle ein Angebot und starte direkt mit der Anmeldung.",
     "selectLabel": "Programm",
     "placeholder": "Bitte auswählen …",
-    "hint": "Du kannst dein Programm später jederzeit ändern."
+    "hint": "Du kannst dein Programm später jederzeit ändern.",
+    "watermark": "BUCHEN"
   }
 }

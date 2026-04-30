@@ -6,6 +6,7 @@
     "lead": "Bir teklif seç ve kayıt sürecine hemen başla.",
     "selectLabel": "Program",
     "placeholder": "Lütfen seç …",
-    "hint": "Programını daha sonra istediğin zaman değiştirebilirsin."
+    "hint": "Programını daha sonra istediğin zaman değiştirebilirsin.",
+    "watermark": "REZERVASYON"
   }
 }

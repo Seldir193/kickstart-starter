@@ -6,6 +6,7 @@
     "lead": "Select an offer and start your registration right away.",
     "selectLabel": "Program",
     "placeholder": "Please select …",
-    "hint": "You can change your program later at any time."
+    "hint": "You can change your program later at any time.",
+    "watermark": "BOOKING"
   }
 }

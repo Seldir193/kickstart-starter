@@ -18,7 +18,8 @@ $programs = [
 >
   <div class="container ks-cta-grid">
     <div class="ks-cta-text">
-      <div class="ks-title-wrap" data-bgword="BUCHEN">
+      <div class="ks-title-wrap" data-bgword="BUCHEN" data-i18n="programCta.watermark"
+  data-i18n-attr="data-bgword">
         <div class="ks-kicker" data-i18n="programCta.kicker">
           Schnell buchen
         </div>
