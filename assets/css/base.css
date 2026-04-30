@@ -540,6 +540,15 @@
 
     --ks-title-watermark-color: rgba(0, 0, 0, 0.05);
     --color-hover-dropdown-option: rgba(15, 23, 42, 0.06);
+
+    --color-scrollbar-thumb-dark: rgba(0, 0, 0, 0.28);
+    --color-scrollbar-thumb-dark-hover: rgba(0, 0, 0, 0.38);
+    --color-scrollbar-track: transparent;
+
+    --ks-scrollbar-thumb: var(--color-scrollbar-thumb-dark);
+    --ks-scrollbar-thumb-hover: var(--color-scrollbar-thumb-dark-hover);
+    --ks-scrollbar-track: var(--color-scrollbar-track);
+    --ks-scrollbar-size: 8px;
   }
 
   .admin-bar {
