@@ -465,6 +465,35 @@
     --ks-partner-card-shadow-hover:
       inset 0 1px 0 var(--color-border-partner-card),
       0 20px 42px var(--color-shadow-partner-card-hover);
+
+    --color-footer-gold-soft: rgba(253, 225, 0, 0.72);
+    --color-footer-muted: rgba(255, 255, 255, 0.64);
+    --color-footer-border: rgba(255, 255, 255, 0.1);
+    --color-footer-card: rgba(255, 255, 255, 0.045);
+    --color-footer-card-soft: rgba(255, 255, 255, 0.055);
+    --color-footer-card-hover: rgba(255, 255, 255, 0.075);
+    --color-footer-card-deep: rgba(255, 255, 255, 0.025);
+
+    --color-footer-dot: rgba(255, 255, 255, 0.2);
+    --color-footer-social-border: rgba(253, 225, 0, 0.38);
+    --color-footer-social-hover: rgba(253, 225, 0, 0.08);
+    --color-footer-region-border: rgba(253, 225, 0, 0.64);
+    --color-footer-region-border-hover: rgba(253, 225, 0, 0.42);
+    --color-footer-bottom-border: rgba(253, 225, 0, 0.55);
+    --color-footer-bottom-bg: rgba(0, 0, 0, 0.16);
+    --color-footer-login-border: rgba(253, 225, 0, 0.62);
+    --color-footer-login-bg: rgba(253, 225, 0, 0.035);
+
+    --color-shadow-footer-card: rgba(0, 0, 0, 0.22);
+    --color-surface-footer-badge: rgba(0, 0, 0, 0.42);
+
+    --ks-footer-region-card-bg: linear-gradient(
+      180deg,
+      var(--color-footer-card-soft),
+      var(--color-footer-card-deep)
+    );
+
+    --ks-footer-region-card-shadow: 0 20px 42px var(--color-shadow-footer-card);
   }
 
   .admin-bar {
