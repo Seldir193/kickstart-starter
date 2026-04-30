@@ -124,6 +124,10 @@ $styles = [
     'path' => '/assets/css/ks-trainer.css',
     'deps' => ['kickstart-style', 'ks-utils'],
   ],
+ 'footer' => [
+  'path' => '/assets/css/footer.css',
+  'deps' => ['kickstart-style', 'ks-utils', 'ks-base'],
+],
 ];
   foreach ($styles as $handle => $config) {
     $abs = get_stylesheet_directory() . $config['path'];

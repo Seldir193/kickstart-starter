@@ -1,0 +1,221 @@
+#program-cta.ks-cta-strip {
+  position: relative;
+  overflow: visible;
+  z-index: 3;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  background: var(--ks-section-bg-default);
+}
+
+#program-cta .ks-cta-grid {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+#program-cta .ks-cta-text {
+  width: min(100%, 720px);
+}
+
+#program-cta .ks-cta-note__icon img {
+  width: 30px;
+  height: 30px;
+  display: block;
+  filter: brightness(0) saturate(100%) invert(78%) sepia(93%) saturate(809%)
+    hue-rotate(359deg) brightness(105%) contrast(104%);
+}
+
+#program-cta .ks-title-wrap {
+  margin: 0;
+}
+
+#program-cta .ks-title-wrap::after {
+  top: -80px;
+}
+
+#program-cta .ks-kicker {
+  display: block;
+  width: max-content;
+  margin: 0 auto 6px;
+}
+
+#program-cta .ks-dir__title {
+  margin-bottom: 10px;
+}
+
+#program-cta .ks-cta-text p {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(15px, 1vw, 17px);
+  line-height: 1.7;
+}
+
+#program-cta .ks-cta-form {
+  position: relative;
+  width: min(100%, 560px);
+  margin-top: 18px;
+}
+
+#program-cta .ks-dd {
+  position: relative;
+  width: 100%;
+}
+
+#program-cta .ks-dd__btn {
+  width: 100%;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 0 18px;
+  border: 1px solid rgba(17, 17, 17, 0.16);
+  border-radius: 10px;
+  background: var(--brand-white);
+  color: var(--brand-black);
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#program-cta .ks-dd__btn:hover {
+  border-color: var(--text, #222);
+}
+
+#program-cta .ks-dd__btn:focus-visible {
+  outline: none;
+  border-color: var(--brand-navy);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-navy) 25%, transparent);
+}
+
+#program-cta .ks-dd[aria-expanded="true"] .ks-dd__btn {
+  border-color: var(--brand-navy);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-navy) 25%, transparent);
+}
+
+#program-cta .ks-dd[aria-expanded="true"] .ks-dd__btn:hover {
+  border-color: var(--brand-navy);
+}
+
+#program-cta .ks-dd__label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#program-cta .ks-dd__caret {
+  width: 18px;
+  height: 18px;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 18px;
+}
+
+#program-cta .ks-dd__caret img {
+  width: 14px;
+  height: 14px;
+  display: block;
+  object-fit: contain;
+}
+
+#program-cta .ks-dd__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 80;
+  overflow: hidden;
+  border: 1px solid rgba(17, 17, 17, 0.14);
+  border-radius: 10px;
+  background: var(--brand-white);
+  box-shadow: 0 14px 34px rgba(17, 24, 39, 0.12);
+}
+#program-cta .ks-dd__option {
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  color: var(--brand-black);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+#program-cta .ks-dd__option:hover,
+#program-cta .ks-dd__option:focus-visible,
+#program-cta .ks-dd__option.is-active {
+  background: rgba(17, 17, 17, 0.04);
+  color: var(--brand-black);
+  outline: none;
+}
+
+#program-cta .ks-cta-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: min(100%, 560px);
+  margin: 16px auto 0;
+  color: var(--color-text-soft, #6b7280);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+#program-cta .ks-cta-note__icon {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#program-cta .ks-cta-note__icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--brand-gold, #fde100);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#program-cta .ks-cta-note__text {
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  #program-cta .ks-cta-note {
+    gap: 10px;
+    font-size: 14px;
+  }
+
+  #program-cta .ks-cta-note__icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  #program-cta .ks-cta-form {
+    width: 100%;
+  }
+
+  #program-cta .ks-dd__btn {
+    min-height: 50px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #program-cta .ks-dd__btn,
+  #program-cta .ks-dd__option {
+    transition: none;
+  }
+}
