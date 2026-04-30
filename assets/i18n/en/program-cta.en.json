@@ -1,0 +1,11 @@
+{
+  "programCta": {
+    "ariaLabel": "Quick program booking",
+    "kicker": "Quick booking",
+    "title": "Choose your program",
+    "lead": "Select an offer and start your registration right away.",
+    "selectLabel": "Program",
+    "placeholder": "Please select …",
+    "hint": "You can change your program later at any time."
+  }
+}
