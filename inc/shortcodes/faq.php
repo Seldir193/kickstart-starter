@@ -182,9 +182,15 @@ if (!function_exists('ks_render_faq_section')) {
     ?>
     <section id="<?php echo esc_attr($args['section_id']); ?>" class="ks-sec ks-py-56">
       <div class="<?php echo esc_attr($args['wrapper_class']); ?>">
-        <div class="ks-title-wrap" <?php echo esc_attr($args['watermark']); ?>"
-           data-i18n="home.faq.watermark"
-  data-i18n-attr="data-bgword">
+       
+
+
+<div
+  class="ks-title-wrap"
+  data-bgword="FAQ"
+  data-i18n="home.faq.watermark"
+  data-i18n-attr="data-bgword"
+>
           <div
             class="ks-kicker"
             <?php if ($args['kicker_i18n'] !== ''): ?>
