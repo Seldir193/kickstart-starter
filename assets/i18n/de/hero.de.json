@@ -35,5 +35,12 @@
       "subtitle": "Aktuelles aus der Dortmunder Fussball Schule",
       "watermark": "NEWS"
     }
+  },
+  "franchise": {
+    "hero": {
+      "title": "Franchise",
+      "subtitle": "Baue deinen eigenen Standort mit einem klaren Fußballschul-Konzept, starken Standards und langfristiger Unterstützung auf.",
+      "watermark": "FRANCHISE"
+    }
   }
 }

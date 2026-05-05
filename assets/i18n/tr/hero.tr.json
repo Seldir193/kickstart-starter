@@ -35,5 +35,12 @@
       "subtitle": "Dortmund Futbol Okulu’ndan güncel gelişmeler",
       "watermark": "HABERLER"
     }
+  },
+  "franchise": {
+    "hero": {
+      "title": "Franchise",
+      "subtitle": "Net bir futbol okulu konsepti, güçlü standartlar ve uzun vadeli destekle kendi lokasyonunu kur.",
+      "watermark": "FRANCHISE"
+    }
   }
 }

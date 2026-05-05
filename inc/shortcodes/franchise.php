@@ -99,10 +99,10 @@ if (!function_exists('ks_register_franchise_shortcode')) {
       $theme_uri = get_stylesheet_directory_uri();
 
      
-      $hero = get_the_post_thumbnail_url(null, 'full');
-      if (!$hero) {
-        $hero = $theme_uri . '/assets/img/mfs.png';
-      }
+      // $hero = get_the_post_thumbnail_url(null, 'full');
+      // if (!$hero) {
+      //   $hero = $theme_uri . '/assets/img/mfs.png';
+      // }
 
       
       $atts = shortcode_atts([
@@ -140,28 +140,36 @@ if (!function_exists('ks_register_franchise_shortcode')) {
 
       $fr_abs = $theme_dir . '/assets/css/ks-franchise.css';
       if (file_exists($fr_abs) && !wp_style_is('ks-franchise', 'enqueued')) {
+        // wp_enqueue_style(
+        //   'ks-franchise',
+        //   $theme_uri . '/assets/css/ks-franchise.css',
+        //   ['kickstart-style', 'ks-utils', 'ks-home'],
+        //   filemtime($fr_abs)
+
         wp_enqueue_style(
-          'ks-franchise',
-          $theme_uri . '/assets/css/ks-franchise.css',
-          ['kickstart-style', 'ks-utils', 'ks-home'],
-          filemtime($fr_abs)
-        );
+  'ks-franchise',
+  $theme_uri . '/assets/css/ks-franchise.css',
+  ['kickstart-style', 'ks-utils', 'ks-home', 'ks-page-hero'],
+  filemtime($fr_abs)
+);
+        // );
       }
 
+      
     
-      $inline_handle = wp_style_is('ks-franchise', 'enqueued')
-        ? 'ks-franchise'
-        : (wp_style_is('ks-home', 'enqueued') ? 'ks-home' : 'kickstart-style');
+      // $inline_handle = wp_style_is('ks-franchise', 'enqueued')
+      //   ? 'ks-franchise'
+      //   : (wp_style_is('ks-home', 'enqueued') ? 'ks-home' : 'kickstart-style');
 
-      wp_add_inline_style(
-        $inline_handle,
-        '#fr-hero{--hero-img:url("' . esc_url($hero) . '")}'
-      );
+      // wp_add_inline_style(
+      //   $inline_handle,
+      //   '#fr-hero{--hero-img:url("' . esc_url($hero) . '")}'
+      // );
 
       ob_start(); ?>
 
       
-      <section id="fr-hero"
+      <!-- <section id="fr-hero"
                class="ks-dir__hero ks-sec"
                data-watermark="FRANCHISE">
         <div class="ks-dir__hero-inner">
@@ -174,7 +182,15 @@ if (!function_exists('ks_register_franchise_shortcode')) {
           <h1 class="ks-dir__hero-title">Franchise</h1>
          
         </div>
-      </section>
+      </section> -->
+
+      <?php
+$franchise_hero_image = esc_url($theme_uri . '/assets/img/hero/page-hero-child.png');
+
+echo do_shortcode(
+  '[ks_hero_page title="Franchise" subtitle="Baue deinen eigenen Standort mit einem klaren Fußballschul-Konzept, starken Standards und langfristiger Unterstützung auf." breadcrumb="Home" watermark="FRANCHISE" image="' . $franchise_hero_image . '" variant="franchise" title_i18n="franchise.hero.title" subtitle_i18n="franchise.hero.subtitle" breadcrumb_i18n="common.home" watermark_i18n="franchise.hero.watermark"]'
+);
+?>
 
       <section id="fr-intro" class="ks-sec ks-py-48 ks-home-about">
   <div class="container ks-home-about__grid">

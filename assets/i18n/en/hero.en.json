@@ -35,5 +35,12 @@
       "subtitle": "Latest updates from Dortmund Football School",
       "watermark": "NEWS"
     }
+  },
+  "franchise": {
+    "hero": {
+      "title": "Franchise",
+      "subtitle": "Build your own location with a clear football school concept, strong standards, and long-term support.",
+      "watermark": "FRANCHISE"
+    }
   }
 }
