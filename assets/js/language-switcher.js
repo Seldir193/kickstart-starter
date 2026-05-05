@@ -88,8 +88,23 @@
     return !!document.querySelector('[data-i18n^="' + prefix + '"]');
   }
 
+  function shouldLoadHeroScope() {
+    return (
+      hasI18nPrefix("about.hero.") ||
+      hasI18nPrefix("news.hero.") ||
+      hasI18nPrefix("franchise.hero.") ||
+      hasI18nPrefix("jobs.hero.") ||
+      hasI18nPrefix("pageHero.") ||
+      hasI18nPrefix("offersHero.")
+    );
+  }
+
   function getPageScopes() {
     var scopes = ["header"];
+
+    if (shouldLoadHeroScope()) {
+      scopes.push("hero");
+    }
 
     if (hasI18nPrefix("home.")) {
       scopes.push("home");

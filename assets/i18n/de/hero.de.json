@@ -42,5 +42,47 @@
       "subtitle": "Baue deinen eigenen Standort mit einem klaren Fußballschul-Konzept, starken Standards und langfristiger Unterstützung auf.",
       "watermark": "FRANCHISE"
     }
+  },
+  "jobs": {
+    "hero": {
+      "title": "Aktuelle Jobangebote",
+      "subtitle": "Arbeiten bei der Dortmunder Fussball Schule",
+      "watermark": "JOBS"
+    }
+  },
+
+  "offersHero": {
+    "titles": {
+      "Kindergarten": "Fußballkindergarten",
+      "Foerdertraining": "Fördertraining",
+      "PersonalTraining": "Individualtraining",
+      "AthleticTraining": "Powertraining",
+      "Powertraining": "Powertraining",
+      "Camp": "Ferienprogramme",
+      "Torwarttraining": "Torwarttraining",
+      "Foerdertraining_Athletik": "Fördertraining · Athletik",
+      "Einzeltraining_Athletik": "Einzeltraining · Athletik",
+      "Einzeltraining_Torwart": "Einzeltraining · Torwart",
+      "RentACoach_Generic": "Rent-a-Coach",
+      "ClubProgram_Generic": "Vereinsprogramme",
+      "CoachEducation": "Trainerausbildung",
+      "Generic": "Programme"
+    },
+    "watermarks": {
+      "Kindergarten": "KINDERGARTEN",
+      "Foerdertraining": "FÖRDERTRAINING",
+      "PersonalTraining": "EINZELTRAINING",
+      "AthleticTraining": "POWERTRAINING",
+      "Powertraining": "POWERTRAINING",
+      "Camp": "CAMPS",
+      "Torwarttraining": "TORWART",
+      "Foerdertraining_Athletik": "ATHLETIK",
+      "Einzeltraining_Athletik": "ATHLETIK",
+      "Einzeltraining_Torwart": "TORWART",
+      "RentACoach_Generic": "RENT A COACH",
+      "ClubProgram_Generic": "VEREINSPROGRAMME",
+      "CoachEducation": "TRAINERAUSBILDUNG",
+      "Generic": "PROGRAMME"
+    }
   }
 }

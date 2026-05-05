@@ -42,5 +42,46 @@
       "subtitle": "Net bir futbol okulu konsepti, güçlü standartlar ve uzun vadeli destekle kendi lokasyonunu kur.",
       "watermark": "FRANCHISE"
     }
+  },
+  "jobs": {
+    "hero": {
+      "title": "Güncel iş ilanları",
+      "subtitle": "Dortmund Futbol Okulu’nda çalış",
+      "watermark": "İŞLER"
+    }
+  },
+  "offersHero": {
+    "titles": {
+      "Kindergarten": "Futbol Anaokulu",
+      "Foerdertraining": "Gelişim Antrenmanı",
+      "PersonalTraining": "Bireysel Antrenman",
+      "AthleticTraining": "Power Antrenmanı",
+      "Powertraining": "Power Antrenmanı",
+      "Camp": "Tatil Programları",
+      "Torwarttraining": "Kaleci Antrenmanı",
+      "Foerdertraining_Athletik": "Gelişim Antrenmanı · Atletik",
+      "Einzeltraining_Athletik": "Bireysel Antrenman · Atletik",
+      "Einzeltraining_Torwart": "Bireysel Kaleci Antrenmanı",
+      "RentACoach_Generic": "Antrenör Kirala",
+      "ClubProgram_Generic": "Kulüp Programları",
+      "CoachEducation": "Antrenör Eğitimi",
+      "Generic": "Programlar"
+    },
+    "watermarks": {
+      "Kindergarten": "ANAOKULU",
+      "Foerdertraining": "GELİŞİM",
+      "PersonalTraining": "BİREYSEL",
+      "AthleticTraining": "POWER",
+      "Powertraining": "POWER",
+      "Camp": "KAMPLAR",
+      "Torwarttraining": "KALECİ",
+      "Foerdertraining_Athletik": "ATLETİK",
+      "Einzeltraining_Athletik": "ATLETİK",
+      "Einzeltraining_Torwart": "KALECİ",
+      "RentACoach_Generic": "ANTRENÖR",
+      "ClubProgram_Generic": "KULÜP PROGRAMLARI",
+      "CoachEducation": "ANTRENÖR EĞİTİMİ",
+      "Generic": "PROGRAMLAR"
+    }
   }
 }

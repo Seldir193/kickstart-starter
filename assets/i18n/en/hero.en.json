@@ -42,5 +42,46 @@
       "subtitle": "Build your own location with a clear football school concept, strong standards, and long-term support.",
       "watermark": "FRANCHISE"
     }
+  },
+  "jobs": {
+    "hero": {
+      "title": "Current job openings",
+      "subtitle": "Work at Dortmund Football School",
+      "watermark": "JOBS"
+    }
+  },
+  "offersHero": {
+    "titles": {
+      "Kindergarten": "Soccer Kindergarten",
+      "Foerdertraining": "Development Training",
+      "PersonalTraining": "Individual Training",
+      "AthleticTraining": "Power Training",
+      "Powertraining": "Power Training",
+      "Camp": "Holiday Programs",
+      "Torwarttraining": "Goalkeeper Training",
+      "Foerdertraining_Athletik": "Development Training · Athletic",
+      "Einzeltraining_Athletik": "Individual Training · Athletic",
+      "Einzeltraining_Torwart": "Individual Goalkeeper Training",
+      "RentACoach_Generic": "Rent-a-Coach",
+      "ClubProgram_Generic": "Club Programs",
+      "CoachEducation": "Coach Education",
+      "Generic": "Programs"
+    },
+    "watermarks": {
+      "Kindergarten": "KINDERGARTEN",
+      "Foerdertraining": "DEVELOPMENT",
+      "PersonalTraining": "INDIVIDUAL",
+      "AthleticTraining": "POWER TRAINING",
+      "Powertraining": "POWER TRAINING",
+      "Camp": "CAMPS",
+      "Torwarttraining": "GOALKEEPER",
+      "Foerdertraining_Athletik": "ATHLETIC",
+      "Einzeltraining_Athletik": "ATHLETIC",
+      "Einzeltraining_Torwart": "GOALKEEPER",
+      "RentACoach_Generic": "RENT A COACH",
+      "ClubProgram_Generic": "CLUB PROGRAMS",
+      "CoachEducation": "COACH EDUCATION",
+      "Generic": "PROGRAMS"
+    }
   }
 }
