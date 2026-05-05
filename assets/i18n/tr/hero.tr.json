@@ -33,7 +33,11 @@
     "hero": {
       "title": "Haberler",
       "subtitle": "Dortmund Futbol Okulu’ndan güncel gelişmeler",
-      "eyebrow": "Güncel"
+      "eyebrow": "Güncel",
+      "actions": {
+        "read": "Yazıları oku",
+        "newsletter": "Bülten"
+      }
     }
   },
   "franchise": {

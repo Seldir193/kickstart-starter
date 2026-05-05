@@ -33,7 +33,11 @@
     "hero": {
       "title": "News",
       "subtitle": "Aktuelles aus der Dortmunder Fussball Schule",
-      "eyebrow": "Aktuelles"
+      "eyebrow": "Aktuelles",
+      "actions": {
+        "read": "Beiträge lesen",
+        "newsletter": "Newsletter"
+      }
     }
   },
   "franchise": {

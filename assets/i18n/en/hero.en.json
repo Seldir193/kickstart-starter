@@ -33,7 +33,11 @@
     "hero": {
       "title": "News",
       "subtitle": "Latest updates from Dortmund Football School",
-      "eyebrow": "Latest news"
+      "eyebrow": "Latest news",
+      "actions": {
+        "read": "Read articles",
+        "newsletter": "Newsletter"
+      }
     }
   },
   "franchise": {

@@ -318,7 +318,7 @@ if (!function_exists('ks_news_hero_shortcode_string')) {
     return '[ks_hero_page title="' . esc_attr($data['title']) .
       '" subtitle="' . esc_attr($data['subtitle']) .
       '" breadcrumb="Home" image="' . $image .
-      '" variant="news" features="0" eyebrow="Aktuelles" primary_label="" secondary_label="" title_i18n="news.hero.title" subtitle_i18n="news.hero.subtitle" eyebrow_i18n="news.hero.eyebrow"]';
+      '" variant="news" features="0" eyebrow="Aktuelles" primary_label="Beiträge lesen" primary_href="#news-archive" secondary_label="Newsletter" secondary_href="#ksNewsletter" title_i18n="news.hero.title" subtitle_i18n="news.hero.subtitle" eyebrow_i18n="news.hero.eyebrow" primary_i18n="news.hero.actions.read" secondary_i18n="news.hero.actions.newsletter"]';
   }
 }
 
@@ -765,7 +765,8 @@ if (!function_exists('ks_news_single_markup')) {
       '<div class="ks-grid-12-8"><main class="ks-news-main">' .
       ks_news_single_article($item) . ks_news_more_section($adjacent) .
       '</main>' . ks_news_render_sidebar($api, $active_category, $active_tag) .
-      '</div>' . do_shortcode('[ks_newsletter]') . '</div></section>';
+     
+      '</div><div id="ks-newsletter">' . do_shortcode('[ks_newsletter]') . '</div></div></section>';
   }
 }
 
