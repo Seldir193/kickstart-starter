@@ -212,7 +212,13 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
       ? 'ks-dir__kicker'
       : 'ks-dir__kicker ks-dir__kicker--hidden';
 
-    $watermark = $mapWatermarks[$courseKey] ?? $heading;
+    // $watermark = $mapWatermarks[$courseKey] ?? $heading;
+
+    $hero_i18n_key = $headingKey ?: $courseKey ?: 'Generic';
+$watermark = $mapWatermarks[$hero_i18n_key] ?? $mapWatermarks[$courseKey] ?? $heading;
+
+$title_i18n = 'offersHero.titles.' . $hero_i18n_key;
+$watermark_i18n = 'offersHero.watermarks.' . $hero_i18n_key;
 
     // $hero_url = get_the_post_thumbnail_url(null, 'full');
     // if (!$hero_url) {
@@ -329,8 +335,15 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
 <?php
 $page_hero_image = esc_url($theme_uri . '/assets/img/hero/mfs.png');
 
+
+
 echo do_shortcode(
-  '[ks_hero_page title="' . esc_attr($heading) . '" breadcrumb="Home" watermark="' . esc_attr($watermark) . '" image="' . $page_hero_image . '" variant="offers" features="0" breadcrumb_i18n="common.home"]'
+  '[ks_hero_page title="' . esc_attr($heading) .
+  '" breadcrumb="Home" watermark="' . esc_attr($watermark) .
+  '" image="' . $page_hero_image .
+  '" variant="offers" features="0" breadcrumb_i18n="common.home" title_i18n="' .
+  esc_attr($title_i18n) . '" watermark_i18n="' .
+  esc_attr($watermark_i18n) . '"]'
 );
 ?>
   <header class="ks-dir__intro ks-py-56">
