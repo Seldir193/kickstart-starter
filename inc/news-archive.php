@@ -311,29 +311,14 @@ if (!function_exists('ks_news_hero_shortcode')) {
   }
 }
 
-// if (!function_exists('ks_news_hero_markup')) {
-//   function ks_news_hero_markup(string $image, string $title, string $watermark): string {
-//     return '<div class="ks-dir__hero" data-watermark="' . $watermark . '" style="--hero-img:url(\'' . $image . '\')">' .
-//       '<div class="ks-dir__hero-inner"><div class="ks-dir__crumb">' .
-//       '<a class="ks-dir__crumb-home" href="' . esc_url(home_url('/')) . '">Home</a>' .
-//       '<span class="sep">/</span>' . $title . '</div>' .
-//       '<h1 class="ks-dir__hero-title">' . $title . '</h1></div></div>';
-//   }
-// }
-
 if (!function_exists('ks_news_hero_shortcode_string')) {
   function ks_news_hero_shortcode_string(array $data): string {
-    $image = esc_url(get_stylesheet_directory_uri() . '/assets/img/hero/page-hero-child.png');
+    $image = esc_url(get_stylesheet_directory_uri() . '/assets/img/hero/mfs.png');
 
-    return '[ks_hero_page title="' . esc_attr($data['title']) . '" subtitle="' . esc_attr($data['subtitle']) . '" breadcrumb="Home" watermark="' . esc_attr($data['watermark']) . '" image="' . $image . '" variant="news" features="0" title_i18n="news.hero.title" subtitle_i18n="news.hero.subtitle" breadcrumb_i18n="common.home" watermark_i18n="news.hero.watermark"]';
-  }
-}
-
-if (!function_exists('ks_news_hero_shortcode_string')) {
-  function ks_news_hero_shortcode_string(array $data): string {
-    $image = esc_url(get_stylesheet_directory_uri() . '/assets/img/hero/page-hero-child.png');
-
-    return '[ks_hero_page title="' . esc_attr($data['title']) . '" subtitle="' . esc_attr($data['subtitle']) . '" breadcrumb="Home" watermark="' . esc_attr($data['watermark']) . '" image="' . $image . '" variant="news" features="0" title_i18n="news.hero.title" subtitle_i18n="news.hero.subtitle" breadcrumb_i18n="common.home" watermark_i18n="news.hero.watermark"]';
+    return '[ks_hero_page title="' . esc_attr($data['title']) .
+      '" subtitle="' . esc_attr($data['subtitle']) .
+      '" breadcrumb="Home" image="' . $image .
+      '" variant="news" features="0" eyebrow="Aktuelles" primary_label="" secondary_label="" title_i18n="news.hero.title" subtitle_i18n="news.hero.subtitle" eyebrow_i18n="news.hero.eyebrow"]';
   }
 }
 

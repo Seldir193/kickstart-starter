@@ -33,7 +33,7 @@
     "hero": {
       "title": "Haberler",
       "subtitle": "Dortmund Futbol Okulu’ndan güncel gelişmeler",
-      "watermark": "HABERLER"
+      "eyebrow": "Güncel"
     }
   },
   "franchise": {
