@@ -70,7 +70,6 @@
     text-transform: uppercase;
   }
 
-  .ks-page-hero__crumb span:last-child,
   .ks-page-hero__crumb strong {
     color: var(--brand-gold);
   }
@@ -325,7 +324,7 @@
 
     .ks-page-hero__feature {
       flex: 0 0 78%;
-      border-right: 1px solid var(--color-border-subtle);
+      border-right: 1px solid var(--color-border-subtle) !important;
       border-bottom: 0 !important;
       scroll-snap-align: start;
     }

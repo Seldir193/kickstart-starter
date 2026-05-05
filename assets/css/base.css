@@ -1,7 +1,8 @@
 /* assets\css\base.css */
 @layer base {
   :root {
-    --brand: #0ea5e9;
+    /* --brand: #0ea5e9; */
+    --brand: var(--brand-gold);
     --ks-container: 1440px;
 
     --font-sans:
@@ -552,7 +553,30 @@
     --ks-shadow-soft: 0 6px 18px var(--color-shadow-slate-soft);
     --ks-shadow-medium: 0 16px 40px var(--color-shadow-slate-medium);
 
+    --ks-transition-fast: 0.28s ease;
+    --ks-transition-ui: 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ks-transition-ui-short: 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
     --ks-transition-medium: 0.32s ease;
+
+    --ks-focus-outline: 2px solid var(--brand-gold);
+    --ks-focus-outline-offset: 2px;
+
+    --ks-focus-ring-navy: 0 0 0 3px
+      color-mix(in oklab, var(--brand-navy) 22%, var(--brand-white));
+
+    --ks-focus-ring-navy-inset: inset 0 0 0 2px
+      color-mix(in oklab, var(--brand-navy) 35%, var(--brand-white));
+
+    --container-max: 1200px;
+    --container-wide: 1440px;
+    --gutter: clamp(12px, 2vw, 24px);
+
+    --ks-section-band-bg: var(--brand-navy);
+    --ks-hr-bg: var(--color-border-form);
+
+    --ks-feature-icon-w: 216px;
+    --ks-feature-icon-h: 183px;
+    --ks-feature-icon-gap: 16px;
   }
 
   .admin-bar {
