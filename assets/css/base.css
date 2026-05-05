@@ -548,6 +548,11 @@
     --ks-scrollbar-thumb-hover: var(--color-scrollbar-thumb-dark-hover);
     --ks-scrollbar-track: var(--color-scrollbar-track);
     --ks-scrollbar-size: 8px;
+
+    --ks-shadow-soft: 0 6px 18px var(--color-shadow-slate-soft);
+    --ks-shadow-medium: 0 16px 40px var(--color-shadow-slate-medium);
+
+    --ks-transition-medium: 0.32s ease;
   }
 
   .admin-bar {

@@ -1,0 +1,32 @@
+{
+  "common": {
+    "home": "Home"
+  },
+  "about": {
+    "hero": {
+      "title": "Über uns",
+      "subtitle": "Wir fördern Kinder durch Fußball. Mit Leidenschaft, Kompetenz und Herz.",
+      "watermark": "ÜBER UNS"
+    }
+  },
+  "pageHero": {
+    "features": {
+      "trophy": {
+        "title": "Ganzheitliche Förderung",
+        "text": "Sportlich. Sozial. Persönlich."
+      },
+      "trainer": {
+        "title": "Erfahrene Trainer",
+        "text": "Lizenzierte Experten mit Herz."
+      },
+      "location": {
+        "title": "Regional aktiv",
+        "text": "Training an starken Standorten."
+      },
+      "shield": {
+        "title": "Werte, die bleiben",
+        "text": "Respekt, Teamgeist, Fairness."
+      }
+    }
+  }
+}

@@ -101,10 +101,14 @@ $styles = [
     'path' => '/assets/css/partner-network.css',
     'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components'],
   ],
+  'page-hero' => [
+  'path' => '/assets/css/ks-page-hero.css',
+  'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components'],
+],
   'about' => [
-    'path' => '/assets/css/ks-about.css',
-    'deps' => ['kickstart-style', 'ks-utils'],
-  ],
+  'path' => '/assets/css/ks-about.css',
+  'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components', 'ks-page-hero'],
+],
   'home-values' => [
     'path' => '/assets/css/ks-home-values.css',
     'deps' => ['kickstart-style', 'ks-utils', 'ks-base'],

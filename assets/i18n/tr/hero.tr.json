@@ -1,0 +1,32 @@
+{
+  "common": {
+    "home": "Ana sayfa"
+  },
+  "about": {
+    "hero": {
+      "title": "Hakkımızda",
+      "subtitle": "Çocukları futbol yoluyla destekliyoruz. Tutku, uzmanlık ve gönülden bağlılıkla.",
+      "watermark": "HAKKIMIZDA"
+    }
+  },
+  "pageHero": {
+    "features": {
+      "trophy": {
+        "title": "Bütünsel gelişim",
+        "text": "Sportif. Sosyal. Kişisel."
+      },
+      "trainer": {
+        "title": "Deneyimli antrenörler",
+        "text": "Gönülden çalışan lisanslı uzmanlar."
+      },
+      "location": {
+        "title": "Bölgede aktif",
+        "text": "Güçlü lokasyonlarda antrenman."
+      },
+      "shield": {
+        "title": "Kalıcı değerler",
+        "text": "Saygı, takım ruhu, fair play."
+      }
+    }
+  }
+}

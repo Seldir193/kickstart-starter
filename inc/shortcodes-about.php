@@ -2,299 +2,311 @@
 
 if (!function_exists('ks_register_about_shortcode')) {
   function ks_register_about_shortcode() {
-    add_shortcode('ks_about', function () {
-      $theme_dir = get_stylesheet_directory();
-      $theme_uri = get_stylesheet_directory_uri();
-
-      $hero = get_the_post_thumbnail_url(null, 'full');
-      $hero = $hero ?: $theme_uri . '/assets/img/mfs.png';
-
-      $utils_abs = $theme_dir . '/assets/css/ks-utils.css';
-      if (file_exists($utils_abs) && !wp_style_is('ks-utils', 'enqueued')) {
-        wp_enqueue_style(
-          'ks-utils',
-          $theme_uri . '/assets/css/ks-utils.css',
-          ['kickstart-style'],
-          filemtime($utils_abs)
-        );
-      }
-
-      $home_abs = $theme_dir . '/assets/css/ks-home.css';
-      if (file_exists($home_abs) && !wp_style_is('ks-home', 'enqueued')) {
-        wp_enqueue_style(
-          'ks-home',
-          $theme_uri . '/assets/css/ks-home.css',
-          ['kickstart-style', 'ks-utils'],
-          filemtime($home_abs)
-        );
-      }
-
-      $dir_abs = $theme_dir . '/assets/css/ks-dir.css';
-      if (file_exists($dir_abs) && !wp_style_is('ks-dir', 'enqueued')) {
-        wp_enqueue_style(
-          'ks-dir',
-          $theme_uri . '/assets/css/ks-dir.css',
-          ['ks-home'],
-          filemtime($dir_abs)
-        );
-      }
-
-      $about_abs = $theme_dir . '/assets/css/ks-about.css';
-      if (file_exists($about_abs) && !wp_style_is('ks-about', 'enqueued')) {
-        wp_enqueue_style(
-          'ks-about',
-          $theme_uri . '/assets/css/ks-about.css',
-          ['kickstart-style', 'ks-utils', 'ks-home', 'ks-dir'],
-          filemtime($about_abs)
-        );
-      }
-
-      if (function_exists('ks_enqueue_team_assets')) {
-        ks_enqueue_team_assets();
-      }
-
-      $handle = 'kickstart-style';
-      if (wp_style_is('ks-about', 'enqueued')) {
-        $handle = 'ks-about';
-      } elseif (wp_style_is('ks-dir', 'enqueued')) {
-        $handle = 'ks-dir';
-      } elseif (wp_style_is('ks-home', 'enqueued')) {
-        $handle = 'ks-home';
-      } elseif (wp_style_is('ks-utils', 'enqueued')) {
-        $handle = 'ks-utils';
-      }
-
-      wp_add_inline_style(
-        $handle,
-        '#about-hero{--hero-img:url("' . esc_url($hero) . '")}'
-      );
-
-      $coaches = ks_get_coaches(48);
-      $trainer_url = ks_get_trainer_url();
-      $fallback_img = $theme_uri . '/assets/img/avatar.png';
-      $team_section = locate_template('inc/partials/shared/team-section.php');
-
-      ob_start();
-      ?>
-
-      <div class="ks-dir ks-dir--about">
-        <div
-          id="about-hero"
-          class="ks-dir__hero"
-          data-watermark="ÜBER UNS"
-        >
-          <div class="ks-dir__hero-inner">
-            <div class="ks-dir__crumb">
-              <a class="ks-dir__crumb-home" href="<?php echo esc_url(home_url('/')); ?>">Home</a>
-              <span class="sep">/</span>
-              Über uns
-            </div>
-            <h1 class="ks-dir__hero-title">Über uns</h1>
-          </div>
-        </div>
-      </div>
-
-      <section id="mfs" class="ks-sec ks-py-48">
-        <div class="container container--1100">
-          <div class="ks-kicker">25 Jahre Fußballerfahrung</div>
-          <h2 class="ks-dir__title ks-mb-16">Die Dortmunder Fussball Schule</h2>
-
-          <div class="ks-grid-12-8">
-            <div>
-              <p>
-                Die Dortmunder Fussball Schule wurde 2025 gegründet. Inzwischen ist unser Unternehmen gewachsen –
-                mit über 10 Trainer*innen und Kooperationen mit mehr als 90 Vereinen im Großraum NRW &amp; Dortmund.
-                Unsere Angebote sind vereinsunabhängig und folgen einer ganzheitlichen Ausbildungsphilosophie.
-              </p>
-              <p>
-                Wir begleiten Kinder und Jugendliche sportlich und persönlich – Jahr für Jahr.
-              </p>
-            </div>
-
-            <ul class="ks-list-plus">
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span>25 Jahre Erfahrung</span>
-              </li>
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span>10 Partner und &gt; 10 Trainer</span>
-              </li>
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span>&gt; 7000 Kinder &amp; 10 Partnervereine</span>
-              </li>
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span>Wöchentliche Trainerfortbildungen</span>
-              </li>
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span>Streamingportal mit &gt; 1000 Videos</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <?php
-      if ($team_section) {
-        include $team_section;
-      }
-      ?>
-
-      <section id="philosophie" class="ks-sec ks-py-48">
-        <div class="container container--1100">
-          <div class="ks-kicker">Wofür wir stehen</div>
-          <h2 class="ks-dir__title">Unsere Philosophie</h2>
-
-          <div class="ks-grid-12-8">
-            <div>
-              <p>
-                Wir lehren das Fußballspielen mit Fokus auf Freude, Entwicklung und Charakterbildung.
-                Ausbildung geht bei uns vor Ergebnisdenken – wir fördern nachhaltig und altersgerecht.
-              </p>
-            </div>
-
-            <ul class="ks-list-plus">
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span>Spaß, Freude und Ausbildung vor Ergebnis</span>
-              </li>
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span>&gt; 250 Tricks, Ballannahmen und Schusstechniken</span>
-              </li>
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span>Komplexes altersgerechtes Athletiktraining</span>
-              </li>
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span>Hohe Trainingseffizienz durch kleine Gruppen</span>
-              </li>
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span>Perfekte Trainingsstruktur</span>
-              </li>
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span>Individual-, Gruppen- und Mannschaftstaktik im Detail</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="kontakt" class="ks-sec ks-py-56 ks-bg-dark ks-text-light">
-        <div class="container container--1100 ks-text-center">
-          <div class="ks-kicker ks-text-accent">Kontakt</div>
-          <h2 class="ks-dir__title ks-text-light">Hast du Fragen?</h2>
-          <p>Bei Interesse kannst du uns folgendermaßen erreichen:</p>
-
-          <?php $icon_base = $theme_uri . '/assets/img/offers/'; ?>
-
-          <div class="ks-grid-3 ks-mt-28 ks-contact-cards">
-            <div class="ks-text-center">
-              <a class="ks-contact-iconwrap" href="tel:+4917643203362" aria-label="Anrufen">
-                <span class="ks-contact-icon" style="--icon:url('<?php echo esc_url($icon_base . 'phone.png'); ?>')"></span>
-              </a>
-              <div class="ks-fw-700 ks-mb-16">Ruf uns an:</div>
-              <div>
-                <a class="ks-link-light" href="tel:+4917643203362">+49 (176) 43 20 33 62</a>
-              </div>
-            </div>
-
-            <div class="ks-text-center">
-              <a class="ks-contact-iconwrap" href="mailto:fussballschule@selcuk-kocyigit.de" aria-label="E-Mail schreiben">
-                <span class="ks-contact-icon" style="--icon:url('<?php echo esc_url($icon_base . 'mail.png'); ?>')"></span>
-              </a>
-              <div class="ks-fw-700 ks-mb-16">Schreib uns:</div>
-              <div>
-                <a class="ks-link-light" href="mailto:fussballschule@selcuk-kocyigit.de">fussballschule@selcuk-kocyigit.de</a>
-              </div>
-            </div>
-
-            <div class="ks-text-center">
-              <a class="ks-contact-iconwrap" href="#about-hero" aria-label="Nach oben scrollen">
-                <span class="ks-contact-icon" style="--icon:url('<?php echo esc_url($icon_base . 'clock.png'); ?>')"></span>
-              </a>
-              <div class="ks-fw-700 ks-mb-16">Telefonzeiten:</div>
-              <div>
-                <a class="ks-link-light" href="#about-hero">Mo.–Fr. 09:00–20:00 Uhr</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="ziele" class="ks-sec ks-py-48">
-        <div class="container container--1100">
-          <div class="ks-kicker">Unsere Philosophie</div>
-          <h2 class="ks-dir__title">Unsere Ziele</h2>
-
-          <div class="ks-grid-12-8">
-            <div>
-              <p>
-                Im Mittelpunkt stehen Spaß und Freude am Fußball – das ist die Basis für Leistung und Erfolg.
-                Wir fördern soziale Kompetenz, bieten qualitativ hochwertiges Training und achten auf
-                sportwissenschaftliche Kriterien.
-              </p>
-            </div>
-
-            <ul class="ks-list-plus">
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span>Möglichst vielen Menschen bestmögliches Training ermöglichen</span>
-              </li>
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span>Vereine inhaltlich &amp; wirtschaftlich unterstützen</span>
-              </li>
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span>Stetige Verbesserung und Weiterentwicklung unserer Philosophie</span>
-              </li>
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span>Unsere Philosophie in andere Städte &amp; Länder bringen</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="standorte" class="ks-sec ks-py-32 ks-bg-deep ks-text-light ks-standorte">
-        <div class="container container--1200">
-          <div class="ks-title-wrap" data-bgword="STANDORTE">
-            <h2 class="ks-dir__title ks-text-dark">Unsere Standorte</h2>
-          </div>
-
-          <p class="ks-mt">
-            
-            <a href="<?php echo esc_url(home_url('/franchise-2/#fr-worldwide-map')); ?>" class="ks-btn">Zu den Standorten</a>
-          </p>
-        </div>
-      </section>
-
-      <?php
-      return ob_get_clean();
-    });
+    add_shortcode('ks_about', 'ks_render_about_shortcode');
   }
 
   add_action('init', 'ks_register_about_shortcode');
 }
 
+if (!function_exists('ks_render_about_shortcode')) {
+  function ks_render_about_shortcode() {
+    ks_enqueue_about_team_assets();
+    $context = ks_get_about_context();
 
+    ob_start();
+    ks_print_about_page($context);
 
+    return ob_get_clean();
+  }
+}
 
+if (!function_exists('ks_enqueue_about_team_assets')) {
+  function ks_enqueue_about_team_assets() {
+    if (function_exists('ks_enqueue_team_assets')) {
+      ks_enqueue_team_assets();
+    }
+  }
+}
 
+if (!function_exists('ks_get_about_context')) {
+  function ks_get_about_context() {
+    $theme_uri = get_stylesheet_directory_uri();
 
+    return [
+      'theme_uri' => $theme_uri,
+      'coaches' => ks_get_coaches(48),
+      'trainer_url' => ks_get_trainer_url(),
+      'fallback_img' => $theme_uri . '/assets/img/avatar.png',
+      'team_section' => locate_template('inc/partials/shared/team-section.php'),
+    ];
+  }
+}
 
+if (!function_exists('ks_print_about_page')) {
+  function ks_print_about_page($context) {
+    ks_print_about_hero();
+    ks_print_about_intro_section();
+    ks_print_about_team_section($context);
+    ks_print_about_philosophy_section();
+    ks_print_about_contact_section($context['theme_uri']);
+    ks_print_about_goals_section();
+    ks_print_about_locations_section();
+  }
+}
 
+if (!function_exists('ks_print_about_hero')) {
+  function ks_print_about_hero() {
+    echo do_shortcode(ks_get_about_hero_shortcode());
+  }
+}
 
+if (!function_exists('ks_get_about_hero_shortcode')) {
+  function ks_get_about_hero_shortcode() {
+    return '[ks_hero_page title="Über uns" subtitle="Wir fördern Kinder durch Fußball. Mit Leidenschaft, Kompetenz und Herz." breadcrumb="Home" watermark="ÜBER UNS" variant="about" title_i18n="about.hero.title" subtitle_i18n="about.hero.subtitle" breadcrumb_i18n="common.home" watermark_i18n="about.hero.watermark"]';
+  }
+}
 
+if (!function_exists('ks_print_about_intro_section')) {
+  function ks_print_about_intro_section() {
+    ks_print_about_text_list_section(
+      'mfs',
+      '25 Jahre Fußballerfahrung',
+      'Die Dortmunder Fussball Schule',
+      ks_get_about_intro_paragraphs(),
+      ks_get_about_intro_items()
+    );
+  }
+}
 
+if (!function_exists('ks_get_about_intro_paragraphs')) {
+  function ks_get_about_intro_paragraphs() {
+    return [
+      'Die Dortmunder Fussball Schule wurde 2025 gegründet. Inzwischen ist unser Unternehmen gewachsen – mit über 10 Trainer*innen und Kooperationen mit mehr als 90 Vereinen im Großraum NRW & Dortmund. Unsere Angebote sind vereinsunabhängig und folgen einer ganzheitlichen Ausbildungsphilosophie.',
+      'Wir begleiten Kinder und Jugendliche sportlich und persönlich – Jahr für Jahr.',
+    ];
+  }
+}
 
+if (!function_exists('ks_get_about_intro_items')) {
+  function ks_get_about_intro_items() {
+    return [
+      '25 Jahre Erfahrung',
+      '10 Partner und > 10 Trainer',
+      '> 7000 Kinder & 10 Partnervereine',
+      'Wöchentliche Trainerfortbildungen',
+      'Streamingportal mit > 1000 Videos',
+    ];
+  }
+}
+
+if (!function_exists('ks_print_about_team_section')) {
+  function ks_print_about_team_section($context) {
+    $coaches = $context['coaches'];
+    $trainer_url = $context['trainer_url'];
+    $fallback_img = $context['fallback_img'];
+
+    if ($context['team_section']) {
+      include $context['team_section'];
+    }
+  }
+}
+
+if (!function_exists('ks_print_about_philosophy_section')) {
+  function ks_print_about_philosophy_section() {
+    ks_print_about_text_list_section(
+      'philosophie',
+      'Wofür wir stehen',
+      'Unsere Philosophie',
+      ks_get_about_philosophy_paragraphs(),
+      ks_get_about_philosophy_items()
+    );
+  }
+}
+
+if (!function_exists('ks_get_about_philosophy_paragraphs')) {
+  function ks_get_about_philosophy_paragraphs() {
+    return [
+      'Wir lehren das Fußballspielen mit Fokus auf Freude, Entwicklung und Charakterbildung. Ausbildung geht bei uns vor Ergebnisdenken – wir fördern nachhaltig und altersgerecht.',
+    ];
+  }
+}
+
+if (!function_exists('ks_get_about_philosophy_items')) {
+  function ks_get_about_philosophy_items() {
+    return [
+      'Spaß, Freude und Ausbildung vor Ergebnis',
+      '> 250 Tricks, Ballannahmen und Schusstechniken',
+      'Komplexes altersgerechtes Athletiktraining',
+      'Hohe Trainingseffizienz durch kleine Gruppen',
+      'Perfekte Trainingsstruktur',
+      'Individual-, Gruppen- und Mannschaftstaktik im Detail',
+    ];
+  }
+}
+
+if (!function_exists('ks_print_about_goals_section')) {
+  function ks_print_about_goals_section() {
+    ks_print_about_text_list_section(
+      'ziele',
+      'Unsere Philosophie',
+      'Unsere Ziele',
+      ks_get_about_goal_paragraphs(),
+      ks_get_about_goal_items()
+    );
+  }
+}
+
+if (!function_exists('ks_get_about_goal_paragraphs')) {
+  function ks_get_about_goal_paragraphs() {
+    return [
+      'Im Mittelpunkt stehen Spaß und Freude am Fußball – das ist die Basis für Leistung und Erfolg. Wir fördern soziale Kompetenz, bieten qualitativ hochwertiges Training und achten auf sportwissenschaftliche Kriterien.',
+    ];
+  }
+}
+
+if (!function_exists('ks_get_about_goal_items')) {
+  function ks_get_about_goal_items() {
+    return [
+      'Möglichst vielen Menschen bestmögliches Training ermöglichen',
+      'Vereine inhaltlich & wirtschaftlich unterstützen',
+      'Stetige Verbesserung und Weiterentwicklung unserer Philosophie',
+      'Unsere Philosophie in andere Städte & Länder bringen',
+    ];
+  }
+}
+
+if (!function_exists('ks_print_about_text_list_section')) {
+  function ks_print_about_text_list_section($id, $kicker, $title, $paragraphs, $items) {
+    ?>
+    <section id="<?php echo esc_attr($id); ?>" class="ks-sec ks-py-48">
+      <div class="container container--1100">
+        <div class="ks-kicker"><?php echo esc_html($kicker); ?></div>
+        <h2 class="ks-dir__title ks-mb-16"><?php echo esc_html($title); ?></h2>
+        <div class="ks-grid-12-8">
+          <?php ks_print_about_paragraphs($paragraphs); ?>
+          <?php ks_print_about_list($items); ?>
+        </div>
+      </div>
+    </section>
+    <?php
+  }
+}
+
+if (!function_exists('ks_print_about_paragraphs')) {
+  function ks_print_about_paragraphs($paragraphs) {
+    ?>
+    <div>
+      <?php foreach ($paragraphs as $paragraph): ?>
+        <p><?php echo esc_html($paragraph); ?></p>
+      <?php endforeach; ?>
+    </div>
+    <?php
+  }
+}
+
+if (!function_exists('ks_print_about_list')) {
+  function ks_print_about_list($items) {
+    ?>
+    <ul class="ks-list-plus">
+      <?php foreach ($items as $item): ?>
+        <?php ks_print_about_list_item($item); ?>
+      <?php endforeach; ?>
+    </ul>
+    <?php
+  }
+}
+
+if (!function_exists('ks_print_about_list_item')) {
+  function ks_print_about_list_item($item) {
+    ?>
+    <li>
+      <span class="ks-list-plus__icon" aria-hidden="true"></span>
+      <span><?php echo esc_html($item); ?></span>
+    </li>
+    <?php
+  }
+}
+
+if (!function_exists('ks_print_about_contact_section')) {
+  function ks_print_about_contact_section($theme_uri) {
+    ?>
+    <section id="kontakt" class="ks-sec ks-py-56 ks-bg-dark ks-text-light">
+      <div class="container container--1100 ks-text-center">
+        <div class="ks-kicker ks-text-accent">Kontakt</div>
+        <h2 class="ks-dir__title ks-text-light">Hast du Fragen?</h2>
+        <p>Bei Interesse kannst du uns folgendermaßen erreichen:</p>
+        <?php ks_print_about_contact_cards($theme_uri); ?>
+      </div>
+    </section>
+    <?php
+  }
+}
+
+if (!function_exists('ks_print_about_contact_cards')) {
+  function ks_print_about_contact_cards($theme_uri) {
+    ?>
+    <div class="ks-grid-3 ks-mt-28 ks-contact-cards">
+      <?php foreach (ks_get_about_contact_cards($theme_uri) as $card): ?>
+        <?php ks_print_about_contact_card($card); ?>
+      <?php endforeach; ?>
+    </div>
+    <?php
+  }
+}
+
+if (!function_exists('ks_get_about_contact_cards')) {
+  function ks_get_about_contact_cards($theme_uri) {
+    return [
+      ks_get_about_contact_card('tel:+4917643203362', 'Anrufen', 'phone.png', 'Ruf uns an:', '+49 (176) 43 20 33 62', $theme_uri),
+      ks_get_about_contact_card('mailto:fussballschule@selcuk-kocyigit.de', 'E-Mail schreiben', 'mail.png', 'Schreib uns:', 'fussballschule@selcuk-kocyigit.de', $theme_uri),
+      ks_get_about_contact_card('#top', 'Nach oben scrollen', 'clock.png', 'Telefonzeiten:', 'Mo.–Fr. 09:00–20:00 Uhr', $theme_uri),
+    ];
+  }
+}
+
+if (!function_exists('ks_get_about_contact_card')) {
+  function ks_get_about_contact_card($url, $label, $icon, $title, $text, $theme_uri) {
+    return [
+      'url' => $url,
+      'label' => $label,
+      'icon' => $theme_uri . '/assets/img/offers/' . $icon,
+      'title' => $title,
+      'text' => $text,
+    ];
+  }
+}
+
+if (!function_exists('ks_print_about_contact_card')) {
+  function ks_print_about_contact_card($card) {
+    ?>
+    <div class="ks-text-center">
+      <a class="ks-contact-iconwrap" href="<?php echo esc_url($card['url']); ?>" aria-label="<?php echo esc_attr($card['label']); ?>">
+        <img class="ks-contact-icon-img" src="<?php echo esc_url($card['icon']); ?>" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      </a>
+      <div class="ks-fw-700 ks-mb-16"><?php echo esc_html($card['title']); ?></div>
+      <div>
+        <a class="ks-link-light" href="<?php echo esc_url($card['url']); ?>"><?php echo esc_html($card['text']); ?></a>
+      </div>
+    </div>
+    <?php
+  }
+}
+
+if (!function_exists('ks_print_about_locations_section')) {
+  function ks_print_about_locations_section() {
+    ?>
+    <section id="standorte" class="ks-sec ks-py-32 ks-bg-deep ks-text-light ks-standorte">
+      <div class="container container--1200">
+        <div class="ks-title-wrap" data-bgword="STANDORTE">
+          <h2 class="ks-dir__title ks-text-dark">Unsere Standorte</h2>
+        </div>
+        <p class="ks-mt">
+          <a href="<?php echo esc_url(home_url('/franchise-2/#fr-worldwide-map')); ?>" class="ks-btn">Zu den Standorten</a>
+        </p>
+      </div>
+    </section>
+    <?php
+  }
+}
 
 

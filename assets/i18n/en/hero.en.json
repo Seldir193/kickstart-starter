@@ -1,0 +1,32 @@
+{
+  "common": {
+    "home": "Home"
+  },
+  "about": {
+    "hero": {
+      "title": "About us",
+      "subtitle": "We support children through football. With passion, expertise, and heart.",
+      "watermark": "ABOUT US"
+    }
+  },
+  "pageHero": {
+    "features": {
+      "trophy": {
+        "title": "Holistic development",
+        "text": "Athletic. Social. Personal."
+      },
+      "trainer": {
+        "title": "Experienced coaches",
+        "text": "Licensed experts with heart."
+      },
+      "location": {
+        "title": "Regionally active",
+        "text": "Training at strong locations."
+      },
+      "shield": {
+        "title": "Values that last",
+        "text": "Respect, team spirit, fairness."
+      }
+    }
+  }
+}
