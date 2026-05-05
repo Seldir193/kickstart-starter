@@ -28,5 +28,12 @@
         "text": "Respekt, Teamgeist, Fairness."
       }
     }
+  },
+  "news": {
+    "hero": {
+      "title": "News",
+      "subtitle": "Aktuelles aus der Dortmunder Fussball Schule",
+      "watermark": "NEWS"
+    }
   }
 }

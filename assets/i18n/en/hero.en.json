@@ -28,5 +28,12 @@
         "text": "Respect, team spirit, fairness."
       }
     }
+  },
+  "news": {
+    "hero": {
+      "title": "News",
+      "subtitle": "Latest updates from Dortmund Football School",
+      "watermark": "NEWS"
+    }
   }
 }

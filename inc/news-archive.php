@@ -32,11 +32,12 @@ if (!function_exists('ks_news_enqueue_assets')) {
     }
 
     ks_news_enqueue_file_style('ks-news', '/assets/css/ks-news.css', [
-      'kickstart-style',
-      'ks-utils',
-      'ks-home',
-      'ks-dir',
-    ]);
+  'kickstart-style',
+  'ks-utils',
+  'ks-home',
+  'ks-dir',
+  'ks-page-hero',
+]);
   }
 }
 
@@ -282,27 +283,57 @@ if (!function_exists('ks_news_render_sidebar')) {
   }
 }
 
+// if (!function_exists('ks_news_hero_shortcode')) {
+//   function ks_news_hero_shortcode($atts = []): string {
+//     ks_news_enqueue_assets();
+
+//     $atts = shortcode_atts([
+//       'img' => get_stylesheet_directory_uri() . '/assets/img/news/mfs.png',
+//       'title' => 'News',
+//       'watermark' => 'NEWS',
+//     ], $atts, 'ks_news_hero');
+
+//     return ks_news_hero_markup(esc_url($atts['img']), esc_html($atts['title']), esc_attr($atts['watermark']));
+//   }
+// }
+
 if (!function_exists('ks_news_hero_shortcode')) {
   function ks_news_hero_shortcode($atts = []): string {
     ks_news_enqueue_assets();
 
-    $atts = shortcode_atts([
-      'img' => get_stylesheet_directory_uri() . '/assets/img/news/mfs.png',
+    $data = shortcode_atts([
       'title' => 'News',
+      'subtitle' => 'Aktuelles aus der Dortmunder Fussball Schule',
       'watermark' => 'NEWS',
     ], $atts, 'ks_news_hero');
 
-    return ks_news_hero_markup(esc_url($atts['img']), esc_html($atts['title']), esc_attr($atts['watermark']));
+    return do_shortcode(ks_news_hero_shortcode_string($data));
   }
 }
 
-if (!function_exists('ks_news_hero_markup')) {
-  function ks_news_hero_markup(string $image, string $title, string $watermark): string {
-    return '<div class="ks-dir__hero" data-watermark="' . $watermark . '" style="--hero-img:url(\'' . $image . '\')">' .
-      '<div class="ks-dir__hero-inner"><div class="ks-dir__crumb">' .
-      '<a class="ks-dir__crumb-home" href="' . esc_url(home_url('/')) . '">Home</a>' .
-      '<span class="sep">/</span>' . $title . '</div>' .
-      '<h1 class="ks-dir__hero-title">' . $title . '</h1></div></div>';
+// if (!function_exists('ks_news_hero_markup')) {
+//   function ks_news_hero_markup(string $image, string $title, string $watermark): string {
+//     return '<div class="ks-dir__hero" data-watermark="' . $watermark . '" style="--hero-img:url(\'' . $image . '\')">' .
+//       '<div class="ks-dir__hero-inner"><div class="ks-dir__crumb">' .
+//       '<a class="ks-dir__crumb-home" href="' . esc_url(home_url('/')) . '">Home</a>' .
+//       '<span class="sep">/</span>' . $title . '</div>' .
+//       '<h1 class="ks-dir__hero-title">' . $title . '</h1></div></div>';
+//   }
+// }
+
+if (!function_exists('ks_news_hero_shortcode_string')) {
+  function ks_news_hero_shortcode_string(array $data): string {
+    $image = esc_url(get_stylesheet_directory_uri() . '/assets/img/hero/page-hero-child.png');
+
+    return '[ks_hero_page title="' . esc_attr($data['title']) . '" subtitle="' . esc_attr($data['subtitle']) . '" breadcrumb="Home" watermark="' . esc_attr($data['watermark']) . '" image="' . $image . '" variant="news" features="0" title_i18n="news.hero.title" subtitle_i18n="news.hero.subtitle" breadcrumb_i18n="common.home" watermark_i18n="news.hero.watermark"]';
+  }
+}
+
+if (!function_exists('ks_news_hero_shortcode_string')) {
+  function ks_news_hero_shortcode_string(array $data): string {
+    $image = esc_url(get_stylesheet_directory_uri() . '/assets/img/hero/page-hero-child.png');
+
+    return '[ks_hero_page title="' . esc_attr($data['title']) . '" subtitle="' . esc_attr($data['subtitle']) . '" breadcrumb="Home" watermark="' . esc_attr($data['watermark']) . '" image="' . $image . '" variant="news" features="0" title_i18n="news.hero.title" subtitle_i18n="news.hero.subtitle" breadcrumb_i18n="common.home" watermark_i18n="news.hero.watermark"]';
   }
 }
 
