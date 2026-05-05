@@ -214,10 +214,10 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
 
     $watermark = $mapWatermarks[$courseKey] ?? $heading;
 
-    $hero_url = get_the_post_thumbnail_url(null, 'full');
-    if (!$hero_url) {
-      $hero_url = $theme_uri . '/assets/img/mfs.png';
-    }
+    // $hero_url = get_the_post_thumbnail_url(null, 'full');
+    // if (!$hero_url) {
+    //   $hero_url = $theme_uri . '/assets/img/mfs.png';
+    // }
 
     
     $api_base = ks_api_base();
@@ -309,7 +309,7 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
      data-coachph="<?php echo esc_url( $theme_uri . '/assets/img/avatar.png' ); ?>">
 
   
-  <div class="ks-dir__hero"
+  <!-- <div class="ks-dir__hero"
        data-watermark="<?php echo esc_attr($watermark); ?>"
        style="--hero-img:url('<?php echo esc_url($hero_url); ?>')">
     <div class="ks-dir__hero-inner">
@@ -322,7 +322,11 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
 </div>
       <h1 class="ks-dir__hero-title"><?php echo esc_html($heading); ?></h1>
     </div>
-  </div>
+  </div> -->
+
+  <?php echo do_shortcode(
+  '[ks_hero_page title="' . esc_attr($heading) . '" breadcrumb="Home" watermark="' . esc_attr($watermark) . '" variant="offers" features="0" breadcrumb_i18n="common.home"]'
+); ?>
 
  
   <header class="ks-dir__intro ks-py-56">
