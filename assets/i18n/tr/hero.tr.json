@@ -27,6 +27,28 @@
         "title": "Kalıcı değerler",
         "text": "Saygı, takım ruhu, fair play."
       }
+    },
+    "franchiseFeatures": {
+      "model": {
+        "title": "Kanıtlanmış konsept",
+        "text": "Lokasyonun için yapılandırılmış bir temel."
+      },
+      "support": {
+        "title": "Güçlü destek",
+        "text": "Know-how, paylaşım ve net standartlar."
+      },
+      "start": {
+        "title": "Hızlı başlangıç",
+        "text": "Marka, süreçler ve destekle."
+      },
+      "partner": {
+        "title": "Uzun vadeli ortaklık",
+        "text": "Net bir perspektifle birlikte büyümek."
+      }
+    },
+    "actions": {
+      "primary": "Felsefemiz",
+      "team": "Antrenör ekibini gör"
     }
   },
   "news": {
@@ -44,20 +66,24 @@
     "hero": {
       "title": "Franchise",
       "subtitle": "Net bir futbol okulu konsepti, güçlü standartlar ve uzun vadeli destekle kendi lokasyonunu kur.",
-      "watermark": "FRANCHISE"
+      "eyebrow": "Franchise",
+      "actions": {
+        "concept": "Konsepti keşfet",
+        "contact": "İletişime geç"
+      }
     }
   },
-
-  "hero": {
-    "title": "Güncel iş ilanları",
-    "subtitle": "Dortmund Futbol Okulu’nda çalış",
-    "eyebrow": "Kariyer",
-    "actions": {
-      "positions": "Pozisyonları gör",
-      "apply": "Başvuru gönder"
+  "jobs": {
+    "hero": {
+      "title": "Güncel iş ilanları",
+      "subtitle": "Dortmund Futbol Okulu’nda çalış",
+      "eyebrow": "Kariyer",
+      "actions": {
+        "positions": "Pozisyonları gör",
+        "apply": "Başvuru gönder"
+      }
     }
   },
-
   "offersHero": {
     "titles": {
       "Kindergarten": "Futbol Anaokulu",
@@ -90,14 +116,12 @@
       "ClubProgram_Generic": "KULÜP PROGRAMLARI",
       "CoachEducation": "ANTRENÖR EĞİTİMİ",
       "Generic": "PROGRAMLAR"
-    }
-  },
-  "actions": {
-    "primary": "Felsefemiz",
-    "team": "Antrenör ekibini gör",
+    },
+    "actions": {
+      "booking": "Şimdi rezervasyon yap",
+      "faq": "Sık sorulan sorular"
+    },
     "eyebrow": "Kurslar",
-    "subtitle": "Sana uygun antrenmanı bul ve ücretsiz deneme antrenmanını doğrudan online rezerve et.",
-    "booking": "Şimdi rezervasyon yap",
-    "faq": "Sık sorulan sorular"
+    "subtitle": "Sana uygun antrenmanı bul ve ücretsiz deneme antrenmanını doğrudan online rezerve et."
   }
 }

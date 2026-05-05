@@ -184,11 +184,13 @@ if (!function_exists('ks_register_franchise_shortcode')) {
         </div>
       </section> -->
 
-      <?php
-$franchise_hero_image = esc_url($theme_uri . '/assets/img/hero/page-hero-child.png');
+ <?php
+$franchise_hero_image = esc_url($theme_uri . '/assets/img/hero/mfs.png');
 
 echo do_shortcode(
-  '[ks_hero_page title="Franchise" subtitle="Baue deinen eigenen Standort mit einem klaren Fußballschul-Konzept, starken Standards und langfristiger Unterstützung auf." breadcrumb="Home" watermark="FRANCHISE" image="' . $franchise_hero_image . '" variant="franchise" title_i18n="franchise.hero.title" subtitle_i18n="franchise.hero.subtitle" breadcrumb_i18n="common.home" watermark_i18n="franchise.hero.watermark"]'
+  '[ks_hero_page title="Franchise" subtitle="Baue deinen eigenen Standort mit einem klaren Fußballschul-Konzept, starken Standards und langfristiger Unterstützung auf." breadcrumb="Home" image="' .
+  $franchise_hero_image .
+  '" variant="franchise" features="1" eyebrow="Franchise" primary_label="Konzept entdecken" primary_href="#fr-intro" secondary_label="Kontakt aufnehmen" secondary_href="#kontakt" title_i18n="franchise.hero.title" subtitle_i18n="franchise.hero.subtitle" eyebrow_i18n="franchise.hero.eyebrow" primary_i18n="franchise.hero.actions.concept" secondary_i18n="franchise.hero.actions.contact"]'
 );
 ?>
 
@@ -466,6 +468,24 @@ get_template_part('inc/partials/shared/contact-form', null, [
 
   add_action('init', 'ks_register_franchise_shortcode');
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -27,6 +27,28 @@
         "title": "Werte, die bleiben",
         "text": "Respekt, Teamgeist, Fairness."
       }
+    },
+    "franchiseFeatures": {
+      "model": {
+        "title": "Bewährtes Konzept",
+        "text": "Strukturierte Grundlage für deinen Standort."
+      },
+      "support": {
+        "title": "Starke Begleitung",
+        "text": "Know-how, Austausch und klare Standards."
+      },
+      "start": {
+        "title": "Schneller Start",
+        "text": "Mit Marke, Prozessen und Unterstützung."
+      },
+      "partner": {
+        "title": "Langfristige Partnerschaft",
+        "text": "Gemeinsam wachsen mit klarer Perspektive."
+      }
+    },
+    "actions": {
+      "primary": "Unsere Philosophie",
+      "team": "Trainerteam ansehen"
     }
   },
   "news": {
@@ -44,20 +66,24 @@
     "hero": {
       "title": "Franchise",
       "subtitle": "Baue deinen eigenen Standort mit einem klaren Fußballschul-Konzept, starken Standards und langfristiger Unterstützung auf.",
-      "watermark": "FRANCHISE"
+      "eyebrow": "Franchise",
+      "actions": {
+        "concept": "Konzept entdecken",
+        "contact": "Kontakt aufnehmen"
+      }
     }
   },
-
-  "hero": {
-    "title": "Aktuelle Jobangebote",
-    "subtitle": "Arbeiten bei der Dortmunder Fussball Schule",
-    "eyebrow": "Karriere",
-    "actions": {
-      "positions": "Stellen ansehen",
-      "apply": "Bewerbung senden"
+  "jobs": {
+    "hero": {
+      "title": "Aktuelle Jobangebote",
+      "subtitle": "Arbeiten bei der Dortmunder Fussball Schule",
+      "eyebrow": "Karriere",
+      "actions": {
+        "positions": "Stellen ansehen",
+        "apply": "Bewerbung senden"
+      }
     }
   },
-
   "offersHero": {
     "titles": {
       "Kindergarten": "Fußballkindergarten",
@@ -90,14 +116,12 @@
       "ClubProgram_Generic": "VEREINSPROGRAMME",
       "CoachEducation": "TRAINERAUSBILDUNG",
       "Generic": "PROGRAMME"
-    }
-  },
-  "actions": {
-    "primary": "Unsere Philosophie",
-    "team": "Trainerteam ansehen",
+    },
+    "actions": {
+      "booking": "Jetzt buchen",
+      "faq": "Häufige Fragen"
+    },
     "eyebrow": "Kurse",
-    "subtitle": "Finde das passende Training und buche dein kostenfreies Schnuppertraining direkt online.",
-    "booking": "Jetzt buchen",
-    "faq": "Häufige Fragen"
+    "subtitle": "Finde das passende Training und buche dein kostenfreies Schnuppertraining direkt online."
   }
 }

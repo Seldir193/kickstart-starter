@@ -100,7 +100,8 @@ if (!function_exists('ks_print_page_hero_markup')) {
         <?php ks_print_page_hero_content($data); ?>
         <?php ks_print_page_hero_media($data); ?>
       </div>
-      <?php ks_print_page_hero_features($data['features']); ?>
+
+      <?php ks_print_page_hero_features($data['features'], $data['variant']); ?>
     </section>
     <?php
   }
@@ -227,19 +228,19 @@ if (!function_exists('ks_print_page_hero_media')) {
       <div class="ks-page-hero__image-card">
         <img class="ks-page-hero__image" src="<?php echo esc_url($data['image']); ?>" alt="<?php echo esc_attr($data['image_alt']); ?>" loading="eager" decoding="async">
       </div>
-      <?php ks_print_page_hero_floating_cards($data['features']); ?>
+      <?php ks_print_page_hero_floating_cards($data['features'], $data['variant']); ?>
     </div>
     <?php
   }
 }
 
 if (!function_exists('ks_print_page_hero_floating_cards')) {
-  function ks_print_page_hero_floating_cards($show_features) {
+  function ks_print_page_hero_floating_cards($show_features, $variant) {
     if (!$show_features) {
       return;
     }
 
-    foreach (ks_get_page_hero_floating_cards() as $card) {
+    foreach (ks_get_page_hero_floating_cards($variant) as $card) {
       ks_print_page_hero_floating_card($card);
     }
   }
@@ -262,12 +263,47 @@ if (!function_exists('ks_print_page_hero_floating_card')) {
 }
 
 if (!function_exists('ks_get_page_hero_floating_cards')) {
-  function ks_get_page_hero_floating_cards() {
+  function ks_get_page_hero_floating_cards($variant = '') {
+    if ($variant === 'franchise') {
+      return ks_get_page_hero_franchise_floating_cards();
+    }
+
+    return ks_get_page_hero_default_floating_cards();
+  }
+}
+
+if (!function_exists('ks_get_page_hero_default_floating_cards')) {
+  function ks_get_page_hero_default_floating_cards() {
     $base_uri = get_stylesheet_directory_uri() . '/assets/img/hero';
 
     return [
       ks_get_page_hero_floating_card($base_uri, 'trophy', 'Ganzheitliche Förderung', 'Sportlich. Sozial. Persönlich.', 'dark'),
       ks_get_page_hero_floating_card($base_uri, 'shield', 'Werte, die bleiben', 'Respekt, Teamgeist, Fairness.', 'light'),
+    ];
+  }
+}
+
+if (!function_exists('ks_get_page_hero_franchise_floating_cards')) {
+  function ks_get_page_hero_franchise_floating_cards() {
+    $base_uri = get_stylesheet_directory_uri() . '/assets/img/hero';
+
+    return [
+      [
+        'icon' => $base_uri . '/trophy.svg',
+        'title' => 'Bewährtes Konzept',
+        'text' => 'Strukturierte Grundlage für deinen Standort.',
+        'class' => 'ks-page-hero__float-card ks-page-hero__float-card--dark',
+        'title_i18n' => 'pageHero.franchiseFeatures.model.title',
+        'text_i18n' => 'pageHero.franchiseFeatures.model.text',
+      ],
+      [
+        'icon' => $base_uri . '/shield.svg',
+        'title' => 'Langfristige Partnerschaft',
+        'text' => 'Gemeinsam wachsen mit klarer Perspektive.',
+        'class' => 'ks-page-hero__float-card ks-page-hero__float-card--light',
+        'title_i18n' => 'pageHero.franchiseFeatures.partner.title',
+        'text_i18n' => 'pageHero.franchiseFeatures.partner.text',
+      ],
     ];
   }
 }
@@ -286,13 +322,13 @@ if (!function_exists('ks_get_page_hero_floating_card')) {
 }
 
 if (!function_exists('ks_print_page_hero_features')) {
-  function ks_print_page_hero_features($show_features) {
+  function ks_print_page_hero_features($show_features, $variant) {
     if (!$show_features) {
       return;
     }
     ?>
     <div class="ks-page-hero__features">
-      <?php foreach (ks_get_page_hero_features() as $feature): ?>
+      <?php foreach (ks_get_page_hero_features($variant) as $feature): ?>
         <?php ks_print_page_hero_feature($feature); ?>
       <?php endforeach; ?>
     </div>
@@ -319,7 +355,17 @@ if (!function_exists('ks_print_page_hero_feature')) {
 }
 
 if (!function_exists('ks_get_page_hero_features')) {
-  function ks_get_page_hero_features() {
+  function ks_get_page_hero_features($variant = '') {
+    if ($variant === 'franchise') {
+      return ks_get_page_hero_franchise_features();
+    }
+
+    return ks_get_page_hero_default_features();
+  }
+}
+
+if (!function_exists('ks_get_page_hero_default_features')) {
+  function ks_get_page_hero_default_features() {
     $base_uri = get_stylesheet_directory_uri() . '/assets/img/hero';
 
     return [
@@ -327,6 +373,43 @@ if (!function_exists('ks_get_page_hero_features')) {
       ks_get_page_hero_feature($base_uri, 'trainer', 'Erfahrene Trainer', 'Lizenzierte Experten mit Herz.'),
       ks_get_page_hero_feature($base_uri, 'location', 'Regional aktiv', 'Training an starken Standorten.'),
       ks_get_page_hero_feature($base_uri, 'shield', 'Werte, die bleiben', 'Respekt, Teamgeist, Fairness.'),
+    ];
+  }
+}
+
+if (!function_exists('ks_get_page_hero_franchise_features')) {
+  function ks_get_page_hero_franchise_features() {
+    $base_uri = get_stylesheet_directory_uri() . '/assets/img/hero';
+
+    return [
+      [
+        'icon' => $base_uri . '/trophy.svg',
+        'title' => 'Bewährtes Konzept',
+        'text' => 'Strukturierte Grundlage für deinen Standort.',
+        'title_i18n' => 'pageHero.franchiseFeatures.model.title',
+        'text_i18n' => 'pageHero.franchiseFeatures.model.text',
+      ],
+      [
+        'icon' => $base_uri . '/trainer.svg',
+        'title' => 'Starke Begleitung',
+        'text' => 'Know-how, Austausch und klare Standards.',
+        'title_i18n' => 'pageHero.franchiseFeatures.support.title',
+        'text_i18n' => 'pageHero.franchiseFeatures.support.text',
+      ],
+      [
+        'icon' => $base_uri . '/location.svg',
+        'title' => 'Schneller Start',
+        'text' => 'Mit Marke, Prozessen und Unterstützung.',
+        'title_i18n' => 'pageHero.franchiseFeatures.start.title',
+        'text_i18n' => 'pageHero.franchiseFeatures.start.text',
+      ],
+      [
+        'icon' => $base_uri . '/shield.svg',
+        'title' => 'Langfristige Partnerschaft',
+        'text' => 'Gemeinsam wachsen mit klarer Perspektive.',
+        'title_i18n' => 'pageHero.franchiseFeatures.partner.title',
+        'text_i18n' => 'pageHero.franchiseFeatures.partner.text',
+      ],
     ];
   }
 }
@@ -354,8 +437,6 @@ if (!function_exists('ks_get_page_hero_content')) {
 }
 
 ks_register_page_hero_shortcode();
-
-
 
 
 

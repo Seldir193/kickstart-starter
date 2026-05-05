@@ -27,6 +27,28 @@
         "title": "Values that last",
         "text": "Respect, team spirit, fairness."
       }
+    },
+    "franchiseFeatures": {
+      "model": {
+        "title": "Proven concept",
+        "text": "A structured foundation for your location."
+      },
+      "support": {
+        "title": "Strong support",
+        "text": "Know-how, exchange, and clear standards."
+      },
+      "start": {
+        "title": "Fast start",
+        "text": "With brand, processes, and support."
+      },
+      "partner": {
+        "title": "Long-term partnership",
+        "text": "Growing together with a clear perspective."
+      }
+    },
+    "actions": {
+      "primary": "Our philosophy",
+      "team": "View coaching team"
     }
   },
   "news": {
@@ -44,20 +66,24 @@
     "hero": {
       "title": "Franchise",
       "subtitle": "Build your own location with a clear football school concept, strong standards, and long-term support.",
-      "watermark": "FRANCHISE"
+      "eyebrow": "Franchise",
+      "actions": {
+        "concept": "Discover the concept",
+        "contact": "Contact us"
+      }
     }
   },
-
-  "hero": {
-    "title": "Current job openings",
-    "subtitle": "Work at Dortmund Football School",
-    "eyebrow": "Careers",
-    "actions": {
-      "positions": "View positions",
-      "apply": "Send application"
+  "jobs": {
+    "hero": {
+      "title": "Current job openings",
+      "subtitle": "Work at Dortmund Football School",
+      "eyebrow": "Careers",
+      "actions": {
+        "positions": "View positions",
+        "apply": "Send application"
+      }
     }
   },
-
   "offersHero": {
     "titles": {
       "Kindergarten": "Soccer Kindergarten",
@@ -90,14 +116,12 @@
       "ClubProgram_Generic": "CLUB PROGRAMS",
       "CoachEducation": "COACH EDUCATION",
       "Generic": "PROGRAMS"
-    }
-  },
-  "actions": {
-    "primary": "Our philosophy",
-    "team": "View coaching team",
+    },
+    "actions": {
+      "booking": "Book now",
+      "faq": "Frequently asked questions"
+    },
     "eyebrow": "Courses",
-    "subtitle": "Find the right training program and book your free trial session directly online.",
-    "booking": "Book now",
-    "faq": "Frequently asked questions"
+    "subtitle": "Find the right training program and book your free trial session directly online."
   }
 }
