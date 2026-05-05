@@ -1,263 +1,294 @@
 <?php
-/* -------------------------------------------------------
- * [ks_jobs] – Jobs Page (Offers-Directory Hero + global Accordion + i18n JSON)
- * Datei: inc/jobs.php
- * -----------------------------------------------------*/
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+  exit;
+}
 
-if (!function_exists('ks_jobs_enqueue_assets')) {
-  function ks_jobs_enqueue_assets() {
-    $theme_dir = get_stylesheet_directory();
-    $theme_uri = get_stylesheet_directory_uri();
-    
-
-    $utils_abs = $theme_dir . '/assets/css/ks-utils.css';
-    if (file_exists($utils_abs) && !wp_style_is('ks-utils', 'enqueued')) {
-      wp_enqueue_style(
-        'ks-utils',
-        $theme_uri . '/assets/css/ks-utils.css',
-        ['kickstart-style'],
-        filemtime($utils_abs)
-      );
-    }
-
-    $home_abs = $theme_dir . '/assets/css/ks-home.css';
-    if (file_exists($home_abs) && !wp_style_is('ks-home', 'enqueued')) {
-      wp_enqueue_style(
-        'ks-home',
-        $theme_uri . '/assets/css/ks-home.css',
-        ['kickstart-style', 'ks-utils'],
-        filemtime($home_abs)
-      );
-    }
-
-    $dir_abs = $theme_dir . '/assets/css/ks-dir.css';
-    if (file_exists($dir_abs) && !wp_style_is('ks-dir', 'enqueued')) {
-      wp_enqueue_style(
-        'ks-dir',
-        $theme_uri . '/assets/css/ks-dir.css',
-        ['ks-home'],
-        filemtime($dir_abs)
-      );
-    }
-
-    $handle = wp_style_is('ks-dir', 'enqueued')
-      ? 'ks-dir'
-      : (wp_style_is('ks-home', 'enqueued')
-        ? 'ks-home'
-        : (wp_style_is('ks-utils', 'enqueued') ? 'ks-utils' : 'kickstart-style'));
-
-    // Watermark im Jobs-Titleblock genauso wie bei FAQ/Offers (top:-80px)
-    wp_add_inline_style($handle, '#jobs .ks-title-wrap::after{top:-80px !important;}');
+if (!function_exists('ks_jobs_get_supported_languages')) {
+  function ks_jobs_get_supported_languages() {
+    return ['de', 'en', 'tr'];
   }
 }
 
+if (!function_exists('ks_jobs_get_query_language')) {
+  function ks_jobs_get_query_language() {
+    if (!isset($_GET['lang'])) {
+      return '';
+    }
 
+    return strtolower(sanitize_text_field(wp_unslash($_GET['lang'])));
+  }
+}
 
+if (!function_exists('ks_jobs_get_locale_language')) {
+  function ks_jobs_get_locale_language() {
+    $locale = function_exists('determine_locale') ? determine_locale() : get_locale();
+    $language = strtolower(substr((string) $locale, 0, 2));
 
-
-
+    return $language ?: 'de';
+  }
+}
 
 if (!function_exists('ks_jobs_lang_from_locale')) {
-  function ks_jobs_lang_from_locale(): string {
+  function ks_jobs_lang_from_locale() {
+    $language = ks_jobs_get_query_language() ?: ks_jobs_get_locale_language();
 
-    // ✅ 1) URL-Override (Test): /jobs/?lang=en oder ?lang=tr
-    if (isset($_GET['lang'])) {
-      $q = strtolower(sanitize_text_field(wp_unslash($_GET['lang'])));
-      if (in_array($q, ['de', 'en', 'tr'], true)) {
-        return $q;
-      }
-    }
-
-    // ✅ 2) Standard: WP Locale
-    $loc = function_exists('determine_locale') ? determine_locale() : get_locale();
-    $loc = (string) $loc;
-
-    $lang = strtolower(substr($loc, 0, 2));
-    if (!$lang) $lang = 'de';
-
-    if (!in_array($lang, ['de', 'en', 'tr'], true)) {
-      $lang = 'de';
-    }
-
-    return $lang;
+    return in_array($language, ks_jobs_get_supported_languages(), true) ? $language : 'de';
   }
 }
 
-
-
-
-
-
-
-
-if (!function_exists('ks_jobs_load_json')) {
-  function ks_jobs_load_json(string $lang): array {
+if (!function_exists('ks_jobs_get_json_path')) {
+  function ks_jobs_get_json_path($language) {
     $theme_dir = get_stylesheet_directory();
-
-    $primary = $theme_dir . '/assets/i18n/jobs.' . $lang . '.json';
+    $primary = $theme_dir . '/assets/i18n/jobs.' . $language . '.json';
     $fallback = $theme_dir . '/assets/i18n/jobs.de.json';
 
-    $file = file_exists($primary) ? $primary : $fallback;
-    if (!file_exists($file)) return [];
+    return file_exists($primary) ? $primary : $fallback;
+  }
+}
 
-    $raw = file_get_contents($file);
-    if ($raw === false) return [];
+if (!function_exists('ks_jobs_load_json')) {
+  function ks_jobs_load_json($language) {
+    $file_path = ks_jobs_get_json_path($language);
 
-    $data = json_decode($raw, true);
+    if (!file_exists($file_path)) {
+      return [];
+    }
+
+    return ks_jobs_decode_json_file($file_path);
+  }
+}
+
+if (!function_exists('ks_jobs_decode_json_file')) {
+  function ks_jobs_decode_json_file($file_path) {
+    $content = file_get_contents($file_path);
+
+    if ($content === false) {
+      return [];
+    }
+
+    $data = json_decode($content, true);
+
     return is_array($data) ? $data : [];
   }
 }
 
 if (!function_exists('ks_jobs_render_list')) {
-  function ks_jobs_render_list(array $items): string {
-    if (empty($items)) return '';
-
-    $out = '<ul>';
-    foreach ($items as $li) {
-      $out .= '<li>' . esc_html((string) $li) . '</li>';
+  function ks_jobs_render_list($items) {
+    if (empty($items)) {
+      return '';
     }
-    $out .= '</ul>';
 
-    return $out;
+    return '<ul>' . ks_jobs_render_list_items($items) . '</ul>';
+  }
+}
+
+if (!function_exists('ks_jobs_render_list_items')) {
+  function ks_jobs_render_list_items($items) {
+    $html = '';
+
+    foreach ($items as $item) {
+      $html .= '<li>' . esc_html((string) $item) . '</li>';
+    }
+
+    return $html;
+  }
+}
+
+if (!function_exists('ks_jobs_get_job_field')) {
+  function ks_jobs_get_job_field($job, $key) {
+    return isset($job[$key]) && is_array($job[$key]) ? $job[$key] : [];
+  }
+}
+
+if (!function_exists('ks_jobs_get_apply_email')) {
+  function ks_jobs_get_apply_email($data) {
+    $email = $data['apply_email'] ?? 'fussballschule@selcuk-kocyigit.de';
+
+    return sanitize_email((string) $email);
   }
 }
 
 if (!function_exists('ks_jobs_build_body_html')) {
-  function ks_jobs_build_body_html(array $job, string $apply_email): string {
-    $title = isset($job['title']) ? (string) $job['title'] : '';
-    $req   = isset($job['requirements']) && is_array($job['requirements']) ? $job['requirements'] : [];
-    $tasks = isset($job['tasks']) && is_array($job['tasks']) ? $job['tasks'] : [];
-    $ben   = isset($job['benefits']) && is_array($job['benefits']) ? $job['benefits'] : [];
+  function ks_jobs_build_body_html($job, $apply_email) {
+    $html = ks_jobs_build_section_html('ANFORDERUNGEN:', ks_jobs_get_job_field($job, 'requirements'));
+    $html .= ks_jobs_build_section_html('DEINE AUFGABEN SIND:', ks_jobs_get_job_field($job, 'tasks'));
+    $html .= ks_jobs_build_section_html('DAS BIETEN WIR:', ks_jobs_get_job_field($job, 'benefits'));
 
-    $email = sanitize_email($apply_email);
-    $mailto = $email ? 'mailto:' . $email : '';
+    return $html . ks_jobs_build_apply_html($apply_email);
+  }
+}
 
-    $out  = '';
+if (!function_exists('ks_jobs_build_section_html')) {
+  function ks_jobs_build_section_html($title, $items) {
+    return '<h4>' . esc_html($title) . '</h4>' . ks_jobs_render_list($items);
+  }
+}
 
-   
-
-    $out .= '<h4>ANFORDERUNGEN:</h4>';
-    $out .= ks_jobs_render_list($req);
-
-    $out .= '<h4>DEINE AUFGABEN SIND:</h4>';
-    $out .= ks_jobs_render_list($tasks);
-
-    $out .= '<h4>DAS BIETEN WIR:</h4>';
-    $out .= ks_jobs_render_list($ben);
-
-    if ($email) {
-      $out .= '<p>Alle Anforderungen erfüllt? Dann bewirb dich jetzt mit einer vollständigen Bewerbung bei uns für ein Bewerbungsgespräch unter:<br>';
-      $out .= '<a href="' . esc_url($mailto) . '">' . esc_html($email) . '</a></p>';
+if (!function_exists('ks_jobs_build_apply_html')) {
+  function ks_jobs_build_apply_html($email) {
+    if (!$email) {
+      return '';
     }
 
-    return $out;
+    return ks_jobs_build_apply_paragraph($email);
+  }
+}
+
+if (!function_exists('ks_jobs_build_apply_paragraph')) {
+  function ks_jobs_build_apply_paragraph($email) {
+    $mailto = 'mailto:' . $email;
+    $text = 'Alle Anforderungen erfüllt? Dann bewirb dich jetzt mit einer vollständigen Bewerbung bei uns für ein Bewerbungsgespräch unter:';
+
+    return '<p>' . esc_html($text) . '<br><a href="' . esc_url($mailto) . '">' . esc_html($email) . '</a></p>';
+  }
+}
+
+if (!function_exists('ks_jobs_get_position_title')) {
+  function ks_jobs_get_position_title($job) {
+    return isset($job['title']) ? (string) $job['title'] : '';
+  }
+}
+
+if (!function_exists('ks_jobs_build_item')) {
+  function ks_jobs_build_item($job, $apply_email) {
+    return [
+      'title' => ks_jobs_get_position_title($job),
+      'body' => ks_jobs_build_body_html($job, $apply_email),
+    ];
   }
 }
 
 if (!function_exists('ks_get_jobs_items')) {
-  function ks_get_jobs_items(): array {
-    $lang = ks_jobs_lang_from_locale();
-    $data = ks_jobs_load_json($lang);
-  
+  function ks_get_jobs_items() {
+    $data = ks_jobs_load_json(ks_jobs_lang_from_locale());
+    $positions = isset($data['positions']) && is_array($data['positions']) ? $data['positions'] : [];
 
-    $apply_email = isset($data['apply_email']) ? (string) $data['apply_email'] : 'fussballschule@selcuk-kocyigit.de';
-    $positions   = isset($data['positions']) && is_array($data['positions']) ? $data['positions'] : [];
+    return ks_jobs_build_items($positions, ks_jobs_get_apply_email($data));
+  }
+}
 
+if (!function_exists('ks_jobs_build_items')) {
+  function ks_jobs_build_items($positions, $apply_email) {
     $items = [];
+
     foreach ($positions as $job) {
-      if (!is_array($job)) continue;
-
-      $title = isset($job['title']) ? (string) $job['title'] : '';
-      if (!$title) continue;
-
-      $items[] = [
-        'title' => $title,
-        'body'  => ks_jobs_build_body_html($job, $apply_email),
-      ];
+      ks_jobs_append_item($items, $job, $apply_email);
     }
 
     return $items;
   }
 }
 
+if (!function_exists('ks_jobs_append_item')) {
+  function ks_jobs_append_item(&$items, $job, $apply_email) {
+    if (!is_array($job) || ks_jobs_get_position_title($job) === '') {
+      return;
+    }
+
+    $items[] = ks_jobs_build_item($job, $apply_email);
+  }
+}
+
+if (!function_exists('ks_jobs_get_icon_url')) {
+  function ks_jobs_get_icon_url($candidates) {
+    $theme_dir = get_stylesheet_directory();
+    $theme_uri = get_stylesheet_directory_uri();
+
+    return $theme_uri . ks_jobs_get_existing_icon_path($theme_dir, $candidates);
+  }
+}
+
+if (!function_exists('ks_jobs_get_existing_icon_path')) {
+  function ks_jobs_get_existing_icon_path($theme_dir, $candidates) {
+    foreach ($candidates as $relative_path) {
+      if (file_exists($theme_dir . $relative_path)) {
+        return $relative_path;
+      }
+    }
+
+    return $candidates[0];
+  }
+}
+
+if (!function_exists('ks_jobs_get_plus_icon_url')) {
+  function ks_jobs_get_plus_icon_url() {
+    return ks_jobs_get_icon_url(['/assets/img/home/plus.svg', '/assets/img/home/plus.png']);
+  }
+}
+
+if (!function_exists('ks_jobs_get_minus_icon_url')) {
+  function ks_jobs_get_minus_icon_url() {
+    return ks_jobs_get_icon_url(['/assets/img/home/minus.svg', '/assets/img/home/minus.png']);
+  }
+}
+
+if (!function_exists('ks_jobs_get_hero_image_url')) {
+  function ks_jobs_get_hero_image_url() {
+    return get_stylesheet_directory_uri() . '/assets/img/hero/mfs.png';
+  }
+}
+
+if (!function_exists('ks_jobs_get_hero_shortcode')) {
+  function ks_jobs_get_hero_shortcode($atts) {
+    $image = esc_url(ks_jobs_get_hero_image_url());
+
+    return '[ks_hero_page title="' . esc_attr($atts['title']) . '" subtitle="' . esc_attr($atts['subtitle']) . '" breadcrumb="Home" watermark="' . esc_attr($atts['bgword']) . '" image="' . $image . '" variant="jobs" title_i18n="jobs.hero.title" subtitle_i18n="jobs.hero.subtitle" breadcrumb_i18n="common.home" watermark_i18n="jobs.hero.watermark"]';
+  }
+}
+
+if (!function_exists('ks_jobs_get_shortcode_atts')) {
+  function ks_jobs_get_shortcode_atts($atts) {
+    return shortcode_atts([
+      'title' => 'Aktuelle Jobangebote',
+      'subtitle' => 'Arbeiten bei der Dortmunder Fussball Schule',
+      'bgword' => 'JOBS',
+    ], $atts, 'ks_jobs');
+  }
+}
+
+if (!function_exists('ks_jobs_get_template_args')) {
+  function ks_jobs_get_template_args($atts) {
+    return [
+      'title' => $atts['title'],
+      'subtitle' => $atts['subtitle'],
+      'bgword' => $atts['bgword'],
+      'plus_url' => ks_jobs_get_plus_icon_url(),
+      'minus_url' => ks_jobs_get_minus_icon_url(),
+      'items' => ks_get_jobs_items(),
+    ];
+  }
+}
+
+if (!function_exists('ks_jobs_render_inner_content')) {
+  function ks_jobs_render_inner_content($atts) {
+    ob_start();
+    get_template_part('inc/partials/pages/jobs', null, ks_jobs_get_template_args($atts));
+
+    return ob_get_clean();
+  }
+}
+
+if (!function_exists('ks_render_jobs_shortcode')) {
+  function ks_render_jobs_shortcode($atts = []) {
+    $data = ks_jobs_get_shortcode_atts($atts);
+    $hero = do_shortcode(ks_jobs_get_hero_shortcode($data));
+    $content = ks_jobs_render_inner_content($data);
+
+    return $hero . $content;
+  }
+}
+
 if (!function_exists('ks_register_jobs_shortcode')) {
   function ks_register_jobs_shortcode() {
-    add_shortcode('ks_jobs', function ($atts = []) {
-      ks_jobs_enqueue_assets();
-
-      $theme_dir = get_stylesheet_directory();
-      $theme_uri = get_stylesheet_directory_uri();
-
-      $atts = shortcode_atts([
-        'title'    => 'Aktuelle Jobangebote',
-        'subtitle' => 'Arbeiten bei der Dortmunder Fussball Schule',
-        'bgword'   => 'JOBS',
-      ], $atts, 'ks_jobs');
-
-      // Icons: wie dein globaler Mask-Style (SVG bevorzugt, PNG fallback)
-      $plus_candidates  = ['/assets/img/home/plus.svg',  '/assets/img/home/plus.png'];
-      $minus_candidates = ['/assets/img/home/minus.svg', '/assets/img/home/minus.png'];
-
-      $plus_rel = $plus_candidates[0];
-      foreach ($plus_candidates as $rel) {
-        if (file_exists($theme_dir . $rel)) { $plus_rel = $rel; break; }
-      }
-
-      $minus_rel = $minus_candidates[0];
-      foreach ($minus_candidates as $rel) {
-        if (file_exists($theme_dir . $rel)) { $minus_rel = $rel; break; }
-      }
-
-      if (!file_exists($theme_dir . $minus_rel)) {
-        $minus_rel = $plus_rel;
-      }
-
-      $plus_url  = $theme_uri . $plus_rel;
-      $minus_url = $theme_uri . $minus_rel;
-
-      // Hero Bild wie Offer-Directory (Featured Image fallback)
-      $hero_url = get_the_post_thumbnail_url(get_queried_object_id(), 'full');
-      if (!$hero_url) {
-        $hero_url = $theme_uri . '/assets/img/mfs.png';
-      }
-
-      // Offers-Directory Hero Struktur (Watermark via data-watermark)
-      $hero_html = '
-        <div class="ks-dir__hero"
-             data-watermark="' . esc_attr($atts['bgword']) . '"
-             style="--hero-img:url(\'' . esc_url($hero_url) . '\')">
-          <div class="ks-dir__hero-inner">
-            <div class="ks-dir__crumb">
-              <a class="ks-dir__crumb-home" href="' . esc_url(home_url('/')) . '">Home</a>
-              <span class="sep">/</span>
-              ' . esc_html($atts['title']) . '
-            </div>
-            <h1 class="ks-dir__hero-title">' . esc_html($atts['title']) . '</h1>
-          </div>
-        </div>
-      ';
-
-      $jobs = ks_get_jobs_items();
-
-      ob_start();
-      get_template_part('inc/partials/pages/jobs', null, [
-        'title'     => $atts['title'],
-        'subtitle'  => $atts['subtitle'],
-        'bgword'    => $atts['bgword'],
-        'plus_url'  => $plus_url,
-        'minus_url' => $minus_url,
-        'items'     => $jobs,
-      ]);
-      $inner = ob_get_clean();
-
-      return $hero_html . $inner;
-    });
+    add_shortcode('ks_jobs', 'ks_render_jobs_shortcode');
   }
 
   add_action('init', 'ks_register_jobs_shortcode');
 }
+
+
+
 
 
 
