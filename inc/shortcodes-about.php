@@ -60,12 +60,20 @@ if (!function_exists('ks_print_about_hero')) {
   }
 }
 
+// function ks_get_about_hero_shortcode() {
+//   $image = esc_url(get_stylesheet_directory_uri() . '/assets/img/hero/mfs.png');
+
+//   return '[ks_hero_page title="Über uns" subtitle="Wir fördern Kinder durch Fußball. Mit Leidenschaft, Kompetenz und Herz." breadcrumb="Home" watermark="ÜBER UNS" image="' . $image . '" variant="about" title_i18n="about.hero.title" subtitle_i18n="about.hero.subtitle" breadcrumb_i18n="common.home" watermark_i18n="about.hero.watermark"]';
+// }
+
 function ks_get_about_hero_shortcode() {
   $image = esc_url(get_stylesheet_directory_uri() . '/assets/img/hero/mfs.png');
 
-  return '[ks_hero_page title="Über uns" subtitle="Wir fördern Kinder durch Fußball. Mit Leidenschaft, Kompetenz und Herz." breadcrumb="Home" watermark="ÜBER UNS" image="' . $image . '" variant="about" title_i18n="about.hero.title" subtitle_i18n="about.hero.subtitle" breadcrumb_i18n="common.home" watermark_i18n="about.hero.watermark"]';
+  return sprintf(
+    '[ks_hero_page title="Über uns" subtitle="Wir fördern Kinder durch Fußball. Mit Leidenschaft, Kompetenz und Herz." breadcrumb="Home" watermark="ÜBER UNS" image="%s" variant="about" features="1" eyebrow="Mehr als Fussball" primary_label="Unsere Philosophie" primary_href="#philosophie" secondary_label="Trainerteam ansehen" secondary_href="#team" title_i18n="about.hero.title" subtitle_i18n="about.hero.subtitle" breadcrumb_i18n="common.home" watermark_i18n="about.hero.watermark" eyebrow_i18n="pageHero.eyebrow" primary_i18n="pageHero.actions.primary" secondary_i18n="pageHero.actions.team"]',
+    $image
+  );
 }
-
 if (!function_exists('ks_print_about_intro_section')) {
   function ks_print_about_intro_section() {
     ks_print_about_text_list_section(

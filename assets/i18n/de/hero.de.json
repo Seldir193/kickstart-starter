@@ -43,11 +43,14 @@
       "watermark": "FRANCHISE"
     }
   },
-  "jobs": {
-    "hero": {
-      "title": "Aktuelle Jobangebote",
-      "subtitle": "Arbeiten bei der Dortmunder Fussball Schule",
-      "watermark": "JOBS"
+
+  "hero": {
+    "title": "Aktuelle Jobangebote",
+    "subtitle": "Arbeiten bei der Dortmunder Fussball Schule",
+    "eyebrow": "Karriere",
+    "actions": {
+      "positions": "Stellen ansehen",
+      "apply": "Bewerbung senden"
     }
   },
 
@@ -84,5 +87,13 @@
       "CoachEducation": "TRAINERAUSBILDUNG",
       "Generic": "PROGRAMME"
     }
+  },
+  "actions": {
+    "primary": "Unsere Philosophie",
+    "team": "Trainerteam ansehen",
+    "eyebrow": "Kurse",
+    "subtitle": "Finde das passende Training und buche dein kostenfreies Schnuppertraining direkt online.",
+    "booking": "Jetzt buchen",
+    "faq": "Häufige Fragen"
   }
 }

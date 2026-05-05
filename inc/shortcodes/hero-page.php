@@ -9,10 +9,7 @@ if (!function_exists('ks_register_page_hero_shortcode')) {
 if (!function_exists('ks_render_page_hero_shortcode')) {
   function ks_render_page_hero_shortcode($atts = [], $content = '') {
     $data = ks_get_page_hero_data($atts);
-    $hero = ks_get_page_hero_markup($data);
-    $body = ks_get_page_hero_content($content);
-
-    return $hero . $body;
+    return ks_get_page_hero_markup($data) . ks_get_page_hero_content($content);
   }
 }
 
@@ -21,7 +18,6 @@ if (!function_exists('ks_get_page_hero_data')) {
     $data = shortcode_atts(ks_get_page_hero_defaults(), $atts, 'ks_hero_page');
     $data['image'] = ks_get_page_hero_image($data['image']);
     $data['features'] = ks_should_show_page_hero_features($data['features']);
-
     return $data;
   }
 }
@@ -32,15 +28,23 @@ if (!function_exists('ks_get_page_hero_defaults')) {
       'title' => get_the_title(),
       'subtitle' => '',
       'breadcrumb' => 'Home',
-      'watermark' => get_the_title(),
+      'watermark' => '',
       'image' => '',
       'image_alt' => '',
       'variant' => '',
       'features' => '1',
+      'eyebrow' => 'Mehr als Fussball',
+      'primary_label' => 'Unsere Philosophie',
+      'primary_href' => '#philosophie',
+      'secondary_label' => 'Trainerteam ansehen',
+      'secondary_href' => '#team',
       'title_i18n' => '',
       'subtitle_i18n' => '',
       'breadcrumb_i18n' => '',
       'watermark_i18n' => '',
+      'eyebrow_i18n' => 'pageHero.eyebrow',
+      'primary_i18n' => 'pageHero.actions.primary',
+      'secondary_i18n' => 'pageHero.actions.team',
     ];
   }
 }
@@ -64,7 +68,6 @@ if (!function_exists('ks_get_page_hero_image')) {
 if (!function_exists('ks_get_featured_page_hero_image')) {
   function ks_get_featured_page_hero_image() {
     $image = get_the_post_thumbnail_url(null, 'full');
-
     return $image ?: get_stylesheet_directory_uri() . '/assets/img/hero/page-hero-default.png';
   }
 }
@@ -85,7 +88,6 @@ if (!function_exists('ks_get_page_hero_markup')) {
   function ks_get_page_hero_markup($data) {
     ob_start();
     ks_print_page_hero_markup($data);
-
     return ob_get_clean();
   }
 }
@@ -93,11 +95,7 @@ if (!function_exists('ks_get_page_hero_markup')) {
 if (!function_exists('ks_print_page_hero_markup')) {
   function ks_print_page_hero_markup($data) {
     ?>
-    <section
-      class="<?php echo esc_attr(ks_get_page_hero_class($data['variant'])); ?>"
-      data-bgword="<?php echo esc_attr($data['watermark']); ?>"
-      <?php ks_print_page_hero_i18n_attr($data['watermark_i18n'], 'data-bgword'); ?>
-    >
+    <section class="<?php echo esc_attr(ks_get_page_hero_class($data['variant'])); ?>">
       <div class="ks-page-hero__inner">
         <?php ks_print_page_hero_content($data); ?>
         <?php ks_print_page_hero_media($data); ?>
@@ -127,36 +125,42 @@ if (!function_exists('ks_print_page_hero_content')) {
     ?>
     <div class="ks-page-hero__content">
       <?php ks_print_page_hero_crumb($data); ?>
+      <?php ks_print_page_hero_eyebrow($data); ?>
       <h1 class="ks-page-hero__title" <?php ks_print_page_hero_i18n_attr($data['title_i18n']); ?>>
         <?php echo esc_html($data['title']); ?>
       </h1>
       <?php ks_print_page_hero_subtitle($data); ?>
+      <?php ks_print_page_hero_actions($data); ?>
     </div>
     <?php
   }
 }
 
-
-
 if (!function_exists('ks_print_page_hero_crumb')) {
   function ks_print_page_hero_crumb($data) {
     ?>
-    <nav class="ks-page-hero__crumb" aria-label="Breadcrumb">
-      <a
-        class="ks-page-hero__crumb-link"
-        href="<?php echo esc_url(home_url('/')); ?>"
-        <?php ks_print_page_hero_i18n_attr($data['breadcrumb_i18n']); ?>
-      >
+    <p class="ks-page-hero__crumb">
+      <a class="ks-page-hero__crumb-link" href="<?php echo esc_url(home_url('/')); ?>" <?php ks_print_page_hero_i18n_attr($data['breadcrumb_i18n']); ?>>
         <?php echo esc_html($data['breadcrumb']); ?>
       </a>
-      <span class="ks-page-hero__crumb-separator" aria-hidden="true">/</span>
-      <strong
-        class="ks-page-hero__crumb-current"
-        <?php ks_print_page_hero_i18n_attr($data['title_i18n']); ?>
-      >
+      <span class="ks-page-hero__crumb-separator">/</span>
+      <strong class="ks-page-hero__crumb-current" <?php ks_print_page_hero_i18n_attr($data['title_i18n']); ?>>
         <?php echo esc_html($data['title']); ?>
       </strong>
-    </nav>
+    </p>
+    <?php
+  }
+}
+
+if (!function_exists('ks_print_page_hero_eyebrow')) {
+  function ks_print_page_hero_eyebrow($data) {
+    if ($data['eyebrow'] === '') {
+      return;
+    }
+    ?>
+    <p class="ks-kicker ks-page-hero__eyebrow" <?php ks_print_page_hero_i18n_attr($data['eyebrow_i18n']); ?>>
+      <?php echo esc_html($data['eyebrow']); ?>
+    </p>
     <?php
   }
 }
@@ -174,6 +178,45 @@ if (!function_exists('ks_print_page_hero_subtitle')) {
   }
 }
 
+if (!function_exists('ks_print_page_hero_actions')) {
+  function ks_print_page_hero_actions($data) {
+    if ($data['primary_label'] === '' && $data['secondary_label'] === '') {
+      return;
+    }
+    ?>
+    <div class="ks-page-hero__actions">
+      <?php ks_print_page_hero_button($data, 'primary'); ?>
+      <?php ks_print_page_hero_button($data, 'secondary'); ?>
+    </div>
+    <?php
+  }
+}
+
+if (!function_exists('ks_print_page_hero_button')) {
+  function ks_print_page_hero_button($data, $type) {
+    $label = $data[$type . '_label'];
+    $href = $data[$type . '_href'];
+
+    if ($label === '' || $href === '') {
+      return;
+    }
+
+    ks_print_page_hero_button_markup($label, $href, $type, $data[$type . '_i18n']);
+  }
+}
+
+if (!function_exists('ks_print_page_hero_button_markup')) {
+  function ks_print_page_hero_button_markup($label, $href, $type, $i18n) {
+    $icon = get_stylesheet_directory_uri() . '/assets/img/team/arrow_right_alt.svg';
+    ?>
+    <a class="ks-page-hero__button ks-page-hero__button--<?php echo esc_attr($type); ?>" href="<?php echo esc_url($href); ?>">
+      <span <?php ks_print_page_hero_i18n_attr($i18n); ?>><?php echo esc_html($label); ?></span>
+      <img class="ks-page-hero__button-icon" src="<?php echo esc_url($icon); ?>" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    </a>
+    <?php
+  }
+}
+
 if (!function_exists('ks_print_page_hero_media')) {
   function ks_print_page_hero_media($data) {
     if ($data['image'] === '') {
@@ -181,15 +224,64 @@ if (!function_exists('ks_print_page_hero_media')) {
     }
     ?>
     <div class="ks-page-hero__media" aria-hidden="true">
-      <img
-        class="ks-page-hero__image"
-        src="<?php echo esc_url($data['image']); ?>"
-        alt="<?php echo esc_attr($data['image_alt']); ?>"
-        loading="eager"
-        decoding="async"
-      >
+      <div class="ks-page-hero__image-card">
+        <img class="ks-page-hero__image" src="<?php echo esc_url($data['image']); ?>" alt="<?php echo esc_attr($data['image_alt']); ?>" loading="eager" decoding="async">
+      </div>
+      <?php ks_print_page_hero_floating_cards($data['features']); ?>
     </div>
     <?php
+  }
+}
+
+if (!function_exists('ks_print_page_hero_floating_cards')) {
+  function ks_print_page_hero_floating_cards($show_features) {
+    if (!$show_features) {
+      return;
+    }
+
+    foreach (ks_get_page_hero_floating_cards() as $card) {
+      ks_print_page_hero_floating_card($card);
+    }
+  }
+}
+
+if (!function_exists('ks_print_page_hero_floating_card')) {
+  function ks_print_page_hero_floating_card($card) {
+    ?>
+    <article class="<?php echo esc_attr($card['class']); ?>">
+      <img src="<?php echo esc_url($card['icon']); ?>" alt="" aria-hidden="true">
+      <strong data-i18n="<?php echo esc_attr($card['title_i18n']); ?>">
+        <?php echo esc_html($card['title']); ?>
+      </strong>
+      <span data-i18n="<?php echo esc_attr($card['text_i18n']); ?>">
+        <?php echo esc_html($card['text']); ?>
+      </span>
+    </article>
+    <?php
+  }
+}
+
+if (!function_exists('ks_get_page_hero_floating_cards')) {
+  function ks_get_page_hero_floating_cards() {
+    $base_uri = get_stylesheet_directory_uri() . '/assets/img/hero';
+
+    return [
+      ks_get_page_hero_floating_card($base_uri, 'trophy', 'Ganzheitliche Förderung', 'Sportlich. Sozial. Persönlich.', 'dark'),
+      ks_get_page_hero_floating_card($base_uri, 'shield', 'Werte, die bleiben', 'Respekt, Teamgeist, Fairness.', 'light'),
+    ];
+  }
+}
+
+if (!function_exists('ks_get_page_hero_floating_card')) {
+  function ks_get_page_hero_floating_card($base_uri, $key, $title, $text, $variant) {
+    return [
+      'icon' => $base_uri . '/' . $key . '.svg',
+      'title' => $title,
+      'text' => $text,
+      'class' => 'ks-page-hero__float-card ks-page-hero__float-card--' . $variant,
+      'title_i18n' => 'pageHero.features.' . $key . '.title',
+      'text_i18n' => 'pageHero.features.' . $key . '.text',
+    ];
   }
 }
 
@@ -262,3 +354,19 @@ if (!function_exists('ks_get_page_hero_content')) {
 }
 
 ks_register_page_hero_shortcode();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

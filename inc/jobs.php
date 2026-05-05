@@ -233,9 +233,11 @@ if (!function_exists('ks_jobs_get_hero_shortcode')) {
   function ks_jobs_get_hero_shortcode($atts) {
     $image = esc_url(ks_jobs_get_hero_image_url());
 
-    
-  return '[ks_hero_page title="' . esc_attr($atts['title']) . '" subtitle="' . esc_attr($atts['subtitle']) . '" breadcrumb="Home" watermark="' . esc_attr($atts['bgword']) . '" image="' . $image . '" variant="jobs" features="0" title_i18n="jobs.hero.title" subtitle_i18n="jobs.hero.subtitle" breadcrumb_i18n="common.home" watermark_i18n="jobs.hero.watermark"]';
-    }
+    return '[ks_hero_page title="' . esc_attr($atts['title']) .
+      '" subtitle="' . esc_attr($atts['subtitle']) .
+      '" breadcrumb="Home" image="' . $image .
+      '" variant="jobs" features="0" eyebrow="Karriere" primary_label="Stellen ansehen" primary_href="#jobs" secondary_label="Bewerbung senden" secondary_href="mailto:fussballschule@selcuk-kocyigit.de" title_i18n="jobs.hero.title" subtitle_i18n="jobs.hero.subtitle" eyebrow_i18n="jobs.hero.eyebrow" primary_i18n="jobs.hero.actions.positions" secondary_i18n="jobs.hero.actions.apply"]';
+  }
 }
 
 if (!function_exists('ks_jobs_get_shortcode_atts')) {

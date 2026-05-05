@@ -1,17 +1,14 @@
 <?php
-/**
- * Template Part: Jobs Content
- * Pfad: inc/partials/pages/jobs.php
- */
+
+if (!defined('ABSPATH')) {
+  exit;
+}
 
 $data = isset($args) && is_array($args) ? $args : [];
 
-$title     = isset($data['title']) ? (string) $data['title'] : 'Aktuelle Jobangebote';
-$subtitle  = isset($data['subtitle']) ? (string) $data['subtitle'] : '';
-$bgword    = isset($data['bgword']) ? (string) $data['bgword'] : 'JOBS';
-$plus_url  = isset($data['plus_url']) ? (string) $data['plus_url'] : '';
+$plus_url = isset($data['plus_url']) ? (string) $data['plus_url'] : '';
 $minus_url = isset($data['minus_url']) ? (string) $data['minus_url'] : '';
-$items     = isset($data['items']) && is_array($data['items']) ? $data['items'] : [];
+$items = isset($data['items']) && is_array($data['items']) ? $data['items'] : [];
 ?>
 
 <section
@@ -23,37 +20,44 @@ $items     = isset($data['items']) && is_array($data['items']) ? $data['items'] 
   "
 >
   <div class="container container--1100">
+    <div class="ks-title-wrap" data-bgword="JOBS" data-i18n="jobs.section.watermark" data-i18n-attr="data-bgword">
+      <div class="ks-kicker" data-i18n="jobs.section.kicker">Karriere</div>
 
-    <!-- Title + Watermark (global wie ks-utils) -->
-    <div class="ks-title-wrap" data-bgword="<?php echo esc_attr($bgword); ?>">
-      <div class="ks-kicker">KARRIERE</div>
-      <h2 class="ks-dir__title"><?php echo esc_html($title); ?></h2>
+      <h2 class="ks-dir__title" data-i18n="jobs.section.title">
+        Offene Positionen
+      </h2>
 
-      <?php if (!empty($subtitle)) : ?>
-        <p class="ks-text-center ks-mb-16" style="max-width:820px;margin-left:auto;margin-right:auto;">
-          <?php echo esc_html($subtitle); ?>
-        </p>
-      <?php endif; ?>
+      <p class="ks-text-center ks-mb-16 jobs-section__lead" data-i18n="jobs.section.lead">
+        Wähle eine passende Position aus und erfahre mehr über Aufgaben, Anforderungen und Vorteile.
+      </p>
     </div>
 
-    <!-- Accordion: Details/summary mit globalem ks-utils Look -->
-    <div class="ks-acc">
-      <?php foreach ($items as $i => $item) :
-        $t = isset($item['title']) ? (string) $item['title'] : '';
-        $b = isset($item['body']) ? (string) $item['body'] : '';
-        if (!$t) continue;
+    <div class="ks-accs">
+      <?php foreach ($items as $index => $item) :
+        $title = isset($item['title']) ? (string) $item['title'] : '';
+        $body = isset($item['body']) ? (string) $item['body'] : '';
+
+        if ($title === '') {
+          continue;
+        }
       ?>
-        <details class="ks-acc" <?php echo $i === 0 ? 'open' : ''; ?>>
-          <summary><?php echo esc_html($t); ?></summary>
+        <details class="ks-acc" <?php echo $index === 0 ? 'open' : ''; ?>>
+          <summary><?php echo esc_html($title); ?></summary>
+
           <div class="ks-acc__body">
-            <?php echo wp_kses_post($b); ?>
+            <?php echo wp_kses_post($body); ?>
           </div>
         </details>
       <?php endforeach; ?>
     </div>
-
   </div>
 </section>
+
+
+
+
+
+
 
 
 
