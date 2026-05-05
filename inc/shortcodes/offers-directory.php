@@ -324,11 +324,15 @@ if (file_exists($dir_hover_abs) && !wp_style_is('ks-dir-list-hover', 'enqueued')
     </div>
   </div> -->
 
-  <?php echo do_shortcode(
-  '[ks_hero_page title="' . esc_attr($heading) . '" breadcrumb="Home" watermark="' . esc_attr($watermark) . '" variant="offers" features="0" breadcrumb_i18n="common.home"]'
-); ?>
+  
 
- 
+<?php
+$page_hero_image = esc_url($theme_uri . '/assets/img/hero/mfs.png');
+
+echo do_shortcode(
+  '[ks_hero_page title="' . esc_attr($heading) . '" breadcrumb="Home" watermark="' . esc_attr($watermark) . '" image="' . $page_hero_image . '" variant="offers" features="0" breadcrumb_i18n="common.home"]'
+);
+?>
   <header class="ks-dir__intro ks-py-56">
     <p class="<?php echo esc_attr($kickerClass); ?>">
       Hier kannst du dein kostenfreies Schnuppertraining ganz einfach buchen

@@ -1,14 +1,482 @@
-/* ========================================================================== */
-/* Offers Directory Styles – Layout, Map/List, Hero, Directory-spezifisch      */
-/* Globales (FAQ-Hover/Masken + Kicker etc.) liegt in ks-utils                 */
-/* ========================================================================== */
-
 @layer pages {
   body.ks-modal-open {
     overflow: hidden;
   }
 
-  /* ===== Layout: Map | Liste ===== */
+  .ks-dir__layout {
+    display: grid;
+    grid-template-columns: minmax(420px, 1fr) 1fr;
+    gap: 16px;
+    align-items: start;
+    margin-top: 12px;
+  }
+
+  .ks-dir__map {
+    position: sticky;
+    top: calc(var(--header-height, 72px) + 12px);
+  }
+
+  .ks-map {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--color-border-form);
+  }
+
+  .ks-dir__map .ks-map {
+    height: min(520px, calc(100dvh - var(--header-height, 72px) - 24px));
+  }
+
+  .ks-dir__listwrap {
+    --row-h: 120px;
+    --row-gap: 12px;
+
+    max-height: calc(3 * var(--row-h) + 2 * var(--row-gap));
+    overflow-y: auto;
+  }
+
+  .ks-dir__list {
+    display: grid;
+    gap: 12px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ks-dir__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--color-border-soft);
+    border-radius: 999px;
+    background: var(--brand-white);
+    cursor: pointer;
+  }
+
+  .ks-dir__close img {
+    display: block;
+    width: 30px;
+    height: 30px;
+  }
+
+  .ks-dir__close:hover {
+    background: var(--color-surface-soft);
+  }
+
+  .ks-offer__sessions {
+    display: grid;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .ks-session {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 14px;
+    border: 1px solid var(--color-border-soft);
+    border-radius: 10px;
+    background: var(--brand-white);
+  }
+
+  .ks-session__left {
+    display: grid;
+    gap: 2px;
+  }
+
+  .ks-session__row {
+    color: var(--brand-black);
+    font-size: 14px;
+  }
+
+  .ks-session__coach {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 180px;
+  }
+
+  .ks-coach__avatar {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border: 1px solid var(--color-border-soft);
+    border-radius: 999px;
+    background: var(--color-surface-soft);
+    object-fit: cover;
+  }
+
+  .ks-coach__name {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+  }
+
+  .ks-coach__first {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .ks-coach__last {
+    color: var(--color-text);
+    font-size: 13px;
+  }
+
+  .ks-session__actions {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+
+  .ks-session__btn {
+    transition:
+      transform var(--ks-transition-ui-short),
+      box-shadow var(--ks-transition-fast),
+      background-color var(--ks-transition-fast);
+  }
+
+  .ks-session__btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--ks-button-hover-shadow);
+    background: var(--brand-black);
+  }
+
+  .ks-session.ks-session--selectable:hover {
+    background: var(--color-surface-page);
+  }
+
+  .ks-session.ks-session--selectable.ks-session--selected {
+    border-color: var(--color-border-strong);
+    background: var(--color-border-form);
+  }
+
+  .ks-book__h4 {
+    margin: 12px 0 6px;
+    font-size: 16px;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .ks-book__person a {
+    color: var(--brand);
+    text-decoration: none;
+  }
+
+  .ks-book__person a:hover {
+    text-decoration: underline;
+  }
+
+  .ks-fs {
+    margin: 12px 0;
+    padding: 12px;
+    border: 1px solid var(--color-border-soft);
+    border-radius: 10px;
+  }
+
+  .ks-fs > legend {
+    padding: 0 6px;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .ks-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .ks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .ks-field--sm input {
+    max-width: 120px;
+  }
+
+  .ks-field--btn {
+    align-self: end;
+  }
+
+  .ks-err {
+    display: none;
+    color: var(--accent-red);
+    font-size: 12px;
+  }
+
+  .ks-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .dob-group {
+    display: flex;
+    gap: 8px;
+  }
+
+  .dob-group select {
+    min-width: 80px;
+  }
+
+  .ks-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+
+  .ks-dir-faq__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .ks-accs {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .ks-acc {
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--color-border-form);
+  }
+
+  .ks-dir-faq__media {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--color-text-heading-sm);
+  }
+
+  .ks-dir-faq__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0.9;
+  }
+
+  .ks-dir-faq__play {
+    position: absolute;
+    inset: auto auto 12px 12px;
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--brand-white);
+    color: var(--brand-black);
+    cursor: pointer;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .ks-dir-program__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .ks-eyebrow {
+    color: var(--accent-red);
+    font-size: 12px;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ks-dir-program__title {
+    margin: 6px 0 8px;
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: var(--font-weight-extrabold);
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .ks-dir-program__body {
+    color: var(--color-text);
+  }
+
+  .ks-pluslist {
+    display: grid;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ks-pluslist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .ks-plus {
+    display: inline-block;
+    width: 22px;
+    min-width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: var(--accent-red);
+    color: var(--brand-white);
+    font-weight: var(--font-weight-extrabold);
+    line-height: 22px;
+    text-align: center;
+  }
+
+  .ks-dir__intro,
+  .ks-dir__filters,
+  .ks-dir__meta {
+    max-width: var(--ks-container);
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .ks-dir__meta {
+    margin: 6px 0 4px;
+    color: var(--color-text);
+    text-align: center;
+  }
+
+  .ks-dir__intro {
+    position: relative;
+    z-index: 1;
+    margin: 10px 0 6px;
+    text-align: center;
+  }
+
+  .ks-dir__intro::before {
+    content: "ANGEBOTE";
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    z-index: -1;
+    color: var(--ks-title-watermark-color);
+    font-size: clamp(72px, 18vw, 120px);
+    font-weight: var(--font-weight-black);
+    letter-spacing: 0.03em;
+    pointer-events: none;
+    transform: translateX(-50%);
+  }
+
+  .ks-dir__kicker {
+    min-height: 1.4em;
+    margin: 0 0 4px;
+    color: var(--color-text-muted);
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ks-dir__kicker--hidden {
+    visibility: hidden;
+  }
+
+  #ksDir {
+    position: relative;
+    z-index: 0;
+  }
+
+  #ksDir::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    right: 50%;
+    z-index: -1;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background: var(--color-surface-page);
+  }
+
+  .ks-program-text--full {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    background: var(--color-surface-soft);
+  }
+
+  .page-id-312 .entry-title,
+  .page-id-312 h1.entry-title {
+    display: none !important;
+  }
+
+  #ksDir [data-filters] {
+    visibility: hidden;
+  }
+
+  #ksDir.is-ready [data-filters] {
+    visibility: visible;
+  }
+
+  #ksDir .ks-dir-dd__caret img {
+    display: block;
+    width: 16px;
+    height: 16px;
+  }
+
+  @media (max-width: 900px) {
+    .ks-dir__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .ks-dir__map {
+      position: static;
+      top: auto;
+    }
+
+    .ks-dir__map .ks-map {
+      height: 320px;
+    }
+
+    .ks-dir-faq__grid,
+    .ks-dir-program__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .ks-session {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .ks-session__actions {
+      justify-content: stretch;
+    }
+
+    .ks-session__btn {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ks-session__btn {
+      transition: none;
+    }
+  }
+}
+
+/* 
+@layer pages {
+  body.ks-modal-open {
+    overflow: hidden;
+  }
+
+ 
   .ks-dir__layout {
     display: grid;
     grid-template-columns: minmax(420px, 1fr) 1fr;
@@ -46,7 +514,6 @@
     }
   }
 
-  /* ===== Liste / Scrollbereich ===== */
   .ks-dir__listwrap {
     --row-h: 120px;
     --row-gap: 12px;
@@ -62,7 +529,6 @@
     gap: 12px;
   }
 
-  /* ===== Close-Button (auch Dialoge) ===== */
   .ks-dir__close {
     position: absolute;
     top: 10px;
@@ -88,7 +554,7 @@
     background: #fafafa;
   }
 
-  /* ===== Sessions (Card-Layout) ===== */
+  
   .ks-offer__sessions {
     display: grid;
     gap: 12px;
@@ -180,7 +646,6 @@
     }
   }
 
-  /* Hover/Selected (Powertraining-Auswahl) */
   .ks-session.ks-session--selectable:hover {
     background: #f5f5f5;
   }
@@ -189,7 +654,7 @@
     border-color: #d4d4d4;
   }
 
-  /* ===== Booking Form Helper ===== */
+ 
   .ks-book__h4 {
     margin: 12px 0 6px;
     font-size: 16px;
@@ -262,7 +727,7 @@
     justify-content: flex-end;
   }
 
-  /* ===== Directory FAQ: Grid + Media ===== */
+
   .ks-dir-faq__grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -315,7 +780,6 @@
     }
   }
 
-  /* ===== Programmbeschreibung ===== */
   .ks-dir-program__grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -376,9 +840,7 @@
     }
   }
 
-  /* =========================================================
-     DFS-Style Hero für Offers Directory – wie Home Hero
-     ========================================================= */
+
   .ks-dir__hero {
     position: relative;
     width: 100vw;
@@ -389,7 +851,7 @@
     overflow: hidden;
   }
 
-  /* Hero Watermark */
+
   .ks-dir__hero::after {
     content: attr(data-watermark);
     position: absolute;
@@ -405,7 +867,7 @@
     white-space: nowrap;
   }
 
-  /* Inhalt im Container */
+ 
   .ks-dir__hero-inner {
     position: relative;
     z-index: 1;
@@ -462,7 +924,7 @@
     font-size: clamp(36px, 6vw, 72px);
   }
 
-  /* Hero Bild rechts */
+  
   .ks-dir__hero-inner::before {
     content: "";
     position: absolute;
@@ -487,7 +949,6 @@
     }
   }
 
-  /* Intro + Filter + Meta zentriert */
   .ks-dir__intro,
   .ks-dir__filters,
   .ks-dir__meta {
@@ -540,7 +1001,7 @@
     visibility: hidden;
   }
 
-  /* Full-Bleed Hintergrund für Offers-Directory */
+ 
   #ksDir {
     position: relative;
     z-index: 0;
@@ -559,7 +1020,6 @@
     z-index: -1;
   }
 
-  /* Program-Text Full */
   .ks-program-text--full {
     background: var(--light-gray);
     width: 100vw;
@@ -567,30 +1027,30 @@
     margin-right: calc(50% - 50vw);
   }
 
-  /* (Legacy) Nur falls genutzt: Franchise-Seite Titel verstecken */
+
   .page-id-312 .entry-title,
   .page-id-312 h1.entry-title {
     display: none !important;
   }
 }
 
-/* Offers-Hero Watermark: exakt zentrieren + etwas weiter nach unten */
+
 .ks-dir__hero::after {
   left: 50%;
   right: auto;
   width: 100%;
   transform: translateX(-50%);
-  bottom: -6%; /* vorher 6% -> weiter nach unten */
+  bottom: -6%; 
 }
 
-/* Optional: auf Mobile noch minimal tiefer */
+
 @media (max-width: 900px) {
   .ks-dir__hero::after {
     bottom: 1%;
   }
 }
 
-/* verhindert Icon/Select-Flicker vor dem JS-Enhance */
+
 #ksDir [data-filters] {
   visibility: hidden;
 }
@@ -603,4 +1063,4 @@
   width: 16px;
   height: 16px;
   display: block;
-}
+} */

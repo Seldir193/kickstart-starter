@@ -84,7 +84,6 @@
     font-weight: var(--font-weight-black);
     line-height: 0.86;
     letter-spacing: -0.035em;
-    text-transform: uppercase;
   }
 
   .ks-page-hero__title::after {
@@ -160,7 +159,7 @@
     filter: var(--ks-hero-image-shadow);
   }
 
-  .ks-page-hero__features {
+  /* .ks-page-hero__features {
     position: relative;
     z-index: 3;
     display: grid;
@@ -173,6 +172,23 @@
     border-radius: 24px;
     background: var(--color-surface-white-strong);
     box-shadow: var(--ks-card-glass-shadow);
+    backdrop-filter: var(--ks-card-glass-blur);
+    -webkit-backdrop-filter: var(--ks-card-glass-blur);
+  } */
+
+  .ks-page-hero__features {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    width: min(100% - 32px, 1180px);
+    margin: clamp(-64px, -4.8vw, -42px) auto 0;
+    overflow: hidden;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 24px;
+    background: var(--color-surface-white-strong);
+    box-shadow: 0 18px 46px var(--color-shadow-card-glass);
     backdrop-filter: var(--ks-card-glass-blur);
     -webkit-backdrop-filter: var(--ks-card-glass-blur);
   }
