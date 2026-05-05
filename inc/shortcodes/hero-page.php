@@ -136,18 +136,27 @@ if (!function_exists('ks_print_page_hero_content')) {
   }
 }
 
+
+
 if (!function_exists('ks_print_page_hero_crumb')) {
   function ks_print_page_hero_crumb($data) {
     ?>
-    <p class="ks-page-hero__crumb">
-      <span <?php ks_print_page_hero_i18n_attr($data['breadcrumb_i18n']); ?>>
+    <nav class="ks-page-hero__crumb" aria-label="Breadcrumb">
+      <a
+        class="ks-page-hero__crumb-link"
+        href="<?php echo esc_url(home_url('/')); ?>"
+        <?php ks_print_page_hero_i18n_attr($data['breadcrumb_i18n']); ?>
+      >
         <?php echo esc_html($data['breadcrumb']); ?>
-      </span>
-      <span>/</span>
-      <strong <?php ks_print_page_hero_i18n_attr($data['title_i18n']); ?>>
+      </a>
+      <span class="ks-page-hero__crumb-separator" aria-hidden="true">/</span>
+      <strong
+        class="ks-page-hero__crumb-current"
+        <?php ks_print_page_hero_i18n_attr($data['title_i18n']); ?>
+      >
         <?php echo esc_html($data['title']); ?>
       </strong>
-    </p>
+    </nav>
     <?php
   }
 }
