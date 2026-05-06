@@ -47,6 +47,7 @@
     "faq": {
       "title": "Fragen zur Partnerschaft",
       "kicker": "Gut zu wissen",
+      "watermark": "FAQ",
       "sideCard": {
         "kicker": "Interesse geweckt?",
         "title": "Lass uns ins Gespräch kommen",

@@ -1,8 +1,10 @@
 {
   "whatsapp": {
+    "defaultText": "Hello DFS, I have a question about your programs.",
     "aria": {
       "single": "WhatsApp contact",
-      "byLocation": "WhatsApp contact by location"
+      "byLocation": "WhatsApp contact by location",
+      "openLocation": "Open WhatsApp – %s"
     },
     "question": "Questions?",
     "singleText": "Message us on WhatsApp.",

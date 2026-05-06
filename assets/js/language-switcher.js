@@ -100,7 +100,7 @@
   }
 
   function getPageScopes() {
-    var scopes = ["header"];
+    var scopes = ["header", "common"];
 
     if (shouldLoadHeroScope()) {
       scopes.push("hero");

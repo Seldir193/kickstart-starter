@@ -1,6 +1,9 @@
 {
   "partnerNetwork": {
+    "ariaLabel": "Partnerler & Ağ",
     "eyebrow": "Ağ",
-    "title": "Partnerler & Markalar"
+    "title": "Partnerler & Markalar",
+    "navPrev": "Önceki partnerler",
+    "navNext": "Sonraki partnerler"
   }
 }

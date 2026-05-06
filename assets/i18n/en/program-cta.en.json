@@ -7,6 +7,12 @@
     "selectLabel": "Program",
     "placeholder": "Please select …",
     "hint": "You can change your program later at any time.",
-    "watermark": "BOOKING"
+    "watermark": "BOOKING",
+    "programs": {
+      "Foerdertraining": "Development Training",
+      "PersonalTraining": "Individual Training",
+      "Camp": "Football Camp",
+      "Kindergarten": "Kindergarten"
+    }
   }
 }

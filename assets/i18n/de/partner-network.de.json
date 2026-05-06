@@ -1,6 +1,9 @@
 {
   "partnerNetwork": {
+    "ariaLabel": "Partner & Netzwerk",
     "eyebrow": "Netzwerk",
-    "title": "Partner & Marken"
+    "title": "Partner & Marken",
+    "navPrev": "Vorherige Partner",
+    "navNext": "Nächste Partner"
   }
 }

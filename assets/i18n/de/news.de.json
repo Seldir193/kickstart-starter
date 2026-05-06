@@ -6,6 +6,15 @@
     "archiveButton": "Alle News ansehen",
     "readMore": "MEHR LESEN",
     "empty": "Keine Beiträge gefunden.",
+    "hero": {
+      "title": "News",
+      "subtitle": "Aktuelles aus der Dortmunder Fussball Schule",
+      "eyebrow": "Aktuelles",
+      "actions": {
+        "read": "Beiträge lesen",
+        "newsletter": "Newsletter"
+      }
+    },
     "category": {
       "general": "Allgemein",
       "news": "News",

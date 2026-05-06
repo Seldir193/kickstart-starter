@@ -7,6 +7,12 @@
     "selectLabel": "Programm",
     "placeholder": "Bitte auswählen …",
     "hint": "Du kannst dein Programm später jederzeit ändern.",
-    "watermark": "BUCHEN"
+    "watermark": "BUCHEN",
+    "programs": {
+      "Foerdertraining": "Fördertraining",
+      "PersonalTraining": "Einzeltraining",
+      "Camp": "Fußballcamp",
+      "Kindergarten": "Kindergarten"
+    }
   }
 }

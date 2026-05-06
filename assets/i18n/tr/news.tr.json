@@ -6,6 +6,15 @@
     "archiveButton": "Tüm haberleri gör",
     "readMore": "DEVAMINI OKU",
     "empty": "Hiç gönderi bulunamadı.",
+    "hero": {
+      "title": "Haberler",
+      "subtitle": "Dortmund Futbol Okulu’ndan güncel gelişmeler",
+      "eyebrow": "Güncel",
+      "actions": {
+        "read": "Yazıları oku",
+        "newsletter": "Bülten"
+      }
+    },
     "category": {
       "general": "Genel",
       "news": "Haberler",

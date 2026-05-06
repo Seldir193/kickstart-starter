@@ -90,6 +90,8 @@
       "fact3Text": "Close guidance for every player – on and off the pitch.",
       "cta": "View profile",
       "more": "Learn more",
+      "navUp": "Previous coach",
+      "navDown": "Next coach",
       "empty": "No coaches found."
     }
   }

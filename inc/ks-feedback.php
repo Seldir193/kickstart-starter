@@ -187,12 +187,14 @@ if (!function_exists('ks_feedback_category_text')) {
   }
 }
 
+
+
 if (!function_exists('ks_feedback_categories')) {
   function ks_feedback_categories(array $feedbacks): array {
     $ordered = ['Eltern', 'Spieler', 'Trainer', 'Partner'];
     $labels = array_unique(array_filter(array_column($feedbacks, 'label')));
 
-    return ks_sort_feedback_categories($ordered, $labels);
+    return ks_append_custom_feedback_categories($ordered, $labels);
   }
 }
 

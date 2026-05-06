@@ -1,8 +1,12 @@
 {
-  "section": {
-    "watermark": "İŞLER",
-    "kicker": "Kariyer",
-    "title": "Açık pozisyonlar",
-    "lead": "Uygun bir pozisyon seç ve görevler, şartlar ve avantajlar hakkında daha fazla bilgi al."
-  }
+  "jobs": {
+    "section": {
+      "watermark": "İŞLER",
+      "kicker": "Kariyer",
+      "title": "Açık pozisyonlar",
+      "lead": "Uygun bir pozisyon seç ve görevler, şartlar ve avantajlar hakkında daha fazla bilgi al."
+    }
+  },
+  "apply_email": "fussballschule@selcuk-kocyigit.de",
+  "positions": []
 }

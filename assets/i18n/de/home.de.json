@@ -90,6 +90,8 @@
       "fact3Text": "Begleitung nah am Spieler – auf und neben dem Platz.",
       "cta": "Profil ansehen",
       "more": "Mehr erfahren",
+      "navUp": "Vorheriger Trainer",
+      "navDown": "Nächster Trainer",
       "empty": "Keine Trainer gefunden."
     }
   }

@@ -1,8 +1,12 @@
 {
-  "section": {
-    "watermark": "JOBS",
-    "kicker": "Karriere",
-    "title": "Offene Positionen",
-    "lead": "Wähle eine passende Position aus und erfahre mehr über Aufgaben, Anforderungen und Vorteile."
-  }
+  "jobs": {
+    "section": {
+      "watermark": "JOBS",
+      "kicker": "Karriere",
+      "title": "Offene Positionen",
+      "lead": "Wähle eine passende Position aus und erfahre mehr über Aufgaben, Anforderungen und Vorteile."
+    }
+  },
+  "apply_email": "fussballschule@selcuk-kocyigit.de",
+  "positions": []
 }

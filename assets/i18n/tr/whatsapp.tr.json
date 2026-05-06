@@ -1,8 +1,10 @@
 {
   "whatsapp": {
+    "defaultText": "Merhaba DFS, programlarınız hakkında bir sorum var.",
     "aria": {
       "single": "WhatsApp iletişimi",
-      "byLocation": "Lokasyona göre WhatsApp iletişimi"
+      "byLocation": "Lokasyona göre WhatsApp iletişimi",
+      "openLocation": "WhatsApp'ı aç – %s"
     },
     "question": "Soruların mı var?",
     "singleText": "Bize WhatsApp üzerinden yaz.",

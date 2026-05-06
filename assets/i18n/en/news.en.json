@@ -6,6 +6,15 @@
     "archiveButton": "View all news",
     "readMore": "READ MORE",
     "empty": "No posts found.",
+    "hero": {
+      "title": "News",
+      "subtitle": "Latest updates from Dortmund Football School",
+      "eyebrow": "Latest news",
+      "actions": {
+        "read": "Read articles",
+        "newsletter": "Newsletter"
+      }
+    },
     "category": {
       "general": "General",
       "news": "News",

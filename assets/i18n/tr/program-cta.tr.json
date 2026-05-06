@@ -7,6 +7,12 @@
     "selectLabel": "Program",
     "placeholder": "Lütfen seç …",
     "hint": "Programını daha sonra istediğin zaman değiştirebilirsin.",
-    "watermark": "REZERVASYON"
+    "watermark": "REZERVASYON",
+    "programs": {
+      "Foerdertraining": "Gelişim Antrenmanı",
+      "PersonalTraining": "Bireysel Antrenman",
+      "Camp": "Futbol Kampı",
+      "Kindergarten": "Anaokulu"
+    }
   }
 }
