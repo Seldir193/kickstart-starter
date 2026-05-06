@@ -26,8 +26,20 @@ if (!function_exists('ks_render_about_shortcode')) {
   }
 }
 
+// if (!function_exists('ks_enqueue_about_team_assets')) {
+//   function ks_enqueue_about_team_assets() {
+//     if (function_exists('ks_enqueue_team_assets')) {
+//       ks_enqueue_team_assets();
+//     }
+//   }
+// }
+
 if (!function_exists('ks_enqueue_about_team_assets')) {
   function ks_enqueue_about_team_assets() {
+    if (function_exists('ks_enqueue_info_section_assets')) {
+      ks_enqueue_info_section_assets();
+    }
+
     if (function_exists('ks_enqueue_team_assets')) {
       ks_enqueue_team_assets();
     }
@@ -109,11 +121,23 @@ if (!function_exists('ks_get_about_intro_paragraphs')) {
 if (!function_exists('ks_get_about_intro_items')) {
   function ks_get_about_intro_items() {
     return [
-      ['key' => 'about.intro.items.0', 'text' => '25 Jahre Erfahrung'],
-      ['key' => 'about.intro.items.1', 'text' => '10 Partner und > 10 Trainer'],
-      ['key' => 'about.intro.items.2', 'text' => '> 7000 Kinder & 10 Partnervereine'],
-      ['key' => 'about.intro.items.3', 'text' => 'Wöchentliche Trainerfortbildungen'],
-      ['key' => 'about.intro.items.4', 'text' => 'Streamingportal mit > 1000 Videos'],
+      ks_get_about_fact_item('about.intro.items.0', '25 Jahre Erfahrung', 'about.intro.itemTexts.0', 'Langjährige Erfahrung in Training, Förderung und Entwicklung.', 'trophy.svg'),
+      ks_get_about_fact_item('about.intro.items.1', '10 Partner und > 10 Trainer', 'about.intro.itemTexts.1', 'Ein starkes Netzwerk aus Partnern und qualifizierten Trainern.', 'license.svg'),
+      ks_get_about_fact_item('about.intro.items.2', '> 7000 Kinder & 10 Partnervereine', 'about.intro.itemTexts.2', 'Viele Kinder, Vereine und Familien vertrauen auf unsere Arbeit.', 'group.svg'),
+      ks_get_about_fact_item('about.intro.items.3', 'Wöchentliche Trainerfortbildungen', 'about.intro.itemTexts.3', 'Regelmäßige Weiterentwicklung für moderne Trainingsqualität.', 'academy.svg'),
+      ks_get_about_fact_item('about.intro.items.4', 'Streamingportal mit > 1000 Videos', 'about.intro.itemTexts.4', 'Digitale Inhalte für Training, Vorbereitung und Weiterentwicklung.', 'video.svg'),
+    ];
+  }
+}
+
+if (!function_exists('ks_get_about_fact_item')) {
+  function ks_get_about_fact_item($key, $text, $desc_key, $description, $icon) {
+    return [
+      'key' => $key,
+      'text' => $text,
+      'desc_key' => $desc_key,
+      'description' => $description,
+      'icon' => $icon,
     ];
   }
 }
@@ -159,12 +183,12 @@ if (!function_exists('ks_get_about_philosophy_paragraphs')) {
 if (!function_exists('ks_get_about_philosophy_items')) {
   function ks_get_about_philosophy_items() {
     return [
-      ['key' => 'about.philosophy.items.0', 'text' => 'Spaß, Freude und Ausbildung vor Ergebnis'],
-      ['key' => 'about.philosophy.items.1', 'text' => '> 250 Tricks, Ballannahmen und Schusstechniken'],
-      ['key' => 'about.philosophy.items.2', 'text' => 'Komplexes altersgerechtes Athletiktraining'],
-      ['key' => 'about.philosophy.items.3', 'text' => 'Hohe Trainingseffizienz durch kleine Gruppen'],
-      ['key' => 'about.philosophy.items.4', 'text' => 'Perfekte Trainingsstruktur'],
-      ['key' => 'about.philosophy.items.5', 'text' => 'Individual-, Gruppen- und Mannschaftstaktik im Detail'],
+      ks_get_about_fact_item('about.philosophy.items.0', 'Spaß, Freude und Ausbildung vor Ergebnis', '', '', 'trophy.svg'),
+      ks_get_about_fact_item('about.philosophy.items.1', '> 250 Tricks, Ballannahmen und Schusstechniken', '', '', 'video.svg'),
+      ks_get_about_fact_item('about.philosophy.items.2', 'Komplexes altersgerechtes Athletiktraining', '', '', 'academy.svg'),
+      ks_get_about_fact_item('about.philosophy.items.3', 'Hohe Trainingseffizienz durch kleine Gruppen', '', '', 'group.svg'),
+      ks_get_about_fact_item('about.philosophy.items.4', 'Perfekte Trainingsstruktur', '', '', 'license.svg'),
+      ks_get_about_fact_item('about.philosophy.items.5', 'Individual-, Gruppen- und Mannschaftstaktik im Detail', '', '', 'trophy.svg'),
     ];
   }
 }
@@ -197,10 +221,10 @@ if (!function_exists('ks_get_about_goal_paragraphs')) {
 if (!function_exists('ks_get_about_goal_items')) {
   function ks_get_about_goal_items() {
     return [
-      ['key' => 'about.goals.items.0', 'text' => 'Möglichst vielen Menschen bestmögliches Training ermöglichen'],
-      ['key' => 'about.goals.items.1', 'text' => 'Vereine inhaltlich & wirtschaftlich unterstützen'],
-      ['key' => 'about.goals.items.2', 'text' => 'Stetige Verbesserung und Weiterentwicklung unserer Philosophie'],
-      ['key' => 'about.goals.items.3', 'text' => 'Unsere Philosophie in andere Städte & Länder bringen'],
+      ks_get_about_fact_item('about.goals.items.0', 'Möglichst vielen Menschen bestmögliches Training ermöglichen', '', '', 'group.svg'),
+      ks_get_about_fact_item('about.goals.items.1', 'Vereine inhaltlich & wirtschaftlich unterstützen', '', '', 'license.svg'),
+      ks_get_about_fact_item('about.goals.items.2', 'Stetige Verbesserung und Weiterentwicklung unserer Philosophie', '', '', 'academy.svg'),
+      ks_get_about_fact_item('about.goals.items.3', 'Unsere Philosophie in andere Städte & Länder bringen', '', '', 'trophy.svg'),
     ];
   }
 }
@@ -208,18 +232,21 @@ if (!function_exists('ks_get_about_goal_items')) {
 if (!function_exists('ks_print_about_text_list_section')) {
   function ks_print_about_text_list_section($id, $kicker_key, $kicker, $title_key, $title, $paragraphs, $items) {
     ?>
-    <section id="<?php echo esc_attr($id); ?>" class="ks-sec ks-py-48">
+    <section id="<?php echo esc_attr($id); ?>" class="ks-sec ks-py-48 ks-info-section">
       <div class="container container--1100">
-        <div class="ks-kicker" data-i18n="<?php echo esc_attr($kicker_key); ?>">
-          <?php echo esc_html(ks_about_t($kicker_key, $kicker)); ?>
-        </div>
+        <div class="ks-info-section__grid">
+          <div class="ks-info-section__content">
+            <div class="ks-kicker" data-i18n="<?php echo esc_attr($kicker_key); ?>">
+              <?php echo esc_html(ks_about_t($kicker_key, $kicker)); ?>
+            </div>
 
-        <h2 class="ks-dir__title ks-mb-16" data-i18n="<?php echo esc_attr($title_key); ?>">
-          <?php echo esc_html(ks_about_t($title_key, $title)); ?>
-        </h2>
+            <h2 class="ks-dir__title ks-mb-16" data-i18n="<?php echo esc_attr($title_key); ?>">
+              <?php echo esc_html(ks_about_t($title_key, $title)); ?>
+            </h2>
 
-        <div class="ks-grid-12-8">
-          <?php ks_print_about_paragraphs($paragraphs); ?>
+            <?php ks_print_about_paragraphs($paragraphs); ?>
+          </div>
+
           <?php ks_print_about_list($items); ?>
         </div>
       </div>
@@ -231,7 +258,7 @@ if (!function_exists('ks_print_about_text_list_section')) {
 if (!function_exists('ks_print_about_paragraphs')) {
   function ks_print_about_paragraphs($paragraphs) {
     ?>
-    <div>
+    <div class="ks-info-section__copy">
       <?php foreach ($paragraphs as $paragraph): ?>
         <p data-i18n="<?php echo esc_attr($paragraph['key']); ?>">
           <?php echo esc_html(ks_about_t($paragraph['key'], $paragraph['text'])); ?>
@@ -245,7 +272,7 @@ if (!function_exists('ks_print_about_paragraphs')) {
 if (!function_exists('ks_print_about_list')) {
   function ks_print_about_list($items) {
     ?>
-    <ul class="ks-list-plus">
+    <ul class="ks-info-facts" role="list">
       <?php foreach ($items as $item): ?>
         <?php ks_print_about_list_item($item); ?>
       <?php endforeach; ?>
@@ -256,11 +283,23 @@ if (!function_exists('ks_print_about_list')) {
 
 if (!function_exists('ks_print_about_list_item')) {
   function ks_print_about_list_item($item) {
+    $icon = get_stylesheet_directory_uri() . '/assets/img/team/' . $item['icon'];
     ?>
-    <li>
-      <span class="ks-list-plus__icon" aria-hidden="true"></span>
-      <span data-i18n="<?php echo esc_attr($item['key']); ?>">
-        <?php echo esc_html(ks_about_t($item['key'], $item['text'])); ?>
+    <li class="ks-info-fact">
+      <span class="ks-info-fact__icon" aria-hidden="true">
+        <img src="<?php echo esc_url($icon); ?>" alt="" loading="lazy" decoding="async">
+      </span>
+
+      <span class="ks-info-fact__body">
+        <strong class="ks-info-fact__title" data-i18n="<?php echo esc_attr($item['key']); ?>">
+          <?php echo esc_html(ks_about_t($item['key'], $item['text'])); ?>
+        </strong>
+
+        <?php if (!empty($item['desc_key']) || !empty($item['description'])): ?>
+          <span class="ks-info-fact__text" data-i18n="<?php echo esc_attr($item['desc_key']); ?>">
+            <?php echo esc_html(ks_about_t($item['desc_key'], $item['description'])); ?>
+          </span>
+        <?php endif; ?>
       </span>
     </li>
     <?php
@@ -338,14 +377,7 @@ if (!function_exists('ks_print_about_contact_card')) {
         data-i18n="<?php echo esc_attr($card['label_key']); ?>"
         data-i18n-attr="aria-label"
       >
-        <img
-          class="ks-contact-icon-img"
-          src="<?php echo esc_url($card['icon']); ?>"
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-        >
+        <img class="ks-contact-icon-img" src="<?php echo esc_url($card['icon']); ?>" alt="" aria-hidden="true" loading="lazy" decoding="async">
       </a>
 
       <div class="ks-fw-700 ks-mb-16" data-i18n="<?php echo esc_attr($card['title_key']); ?>">
@@ -379,11 +411,7 @@ if (!function_exists('ks_print_about_locations_section')) {
         </div>
 
         <p class="ks-mt">
-          <a
-            href="<?php echo esc_url(home_url('/franchise-2/#fr-worldwide-map')); ?>"
-            class="ks-btn"
-            data-i18n="about.locations.button"
-          >
+          <a href="<?php echo esc_url(home_url('/franchise-2/#fr-worldwide-map')); ?>" class="ks-btn" data-i18n="about.locations.button">
             <?php echo esc_html(ks_about_t('about.locations.button', 'Zu den Standorten')); ?>
           </a>
         </p>
@@ -392,6 +420,15 @@ if (!function_exists('ks_print_about_locations_section')) {
     <?php
   }
 }
+
+
+
+
+
+
+
+
+
 
 
 

@@ -40,6 +40,25 @@ if (!function_exists('ks_enqueue_team_assets')) {
   }
 }
 
+if (!function_exists('ks_enqueue_info_section_assets')) {
+  function ks_enqueue_info_section_assets() {
+    $theme_dir = get_stylesheet_directory();
+    $theme_uri = get_stylesheet_directory_uri();
+    $info_css = $theme_dir . '/assets/css/ks-info-section.css';
+
+    if (!file_exists($info_css) || wp_style_is('ks-info-section', 'enqueued')) {
+      return;
+    }
+
+    wp_enqueue_style(
+      'ks-info-section',
+      $theme_uri . '/assets/css/ks-info-section.css',
+      ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components'],
+      filemtime($info_css)
+    );
+  }
+}
+
 add_action('wp_enqueue_scripts', function () {
   
   $fonts_path = get_stylesheet_directory() . '/assets/css/fonts.css';

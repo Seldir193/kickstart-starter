@@ -2,11 +2,31 @@
 
 <?php
 
+if (!function_exists('ks_get_offer_program_icon')) {
+  function ks_get_offer_program_icon($index) {
+    $icons = [
+      'trophy.svg',
+      'license.svg',
+      'group.svg',
+      'academy.svg',
+      'video.svg',
+    ];
+
+    $file = $icons[$index % count($icons)];
+
+    return get_stylesheet_directory_uri() . '/assets/img/team/' . $file;
+  }
+}
+
 add_action('init', function () {
   add_shortcode('ks_offers_directory', function () {
     if (function_exists('ks_enqueue_feedback_assets')) {
       ks_enqueue_feedback_assets();
     }
+
+    if (function_exists('ks_enqueue_info_section_assets')) {
+  ks_enqueue_info_section_assets();
+}
 
     $theme_dir = get_stylesheet_directory();
     $theme_uri = get_stylesheet_directory_uri();
@@ -621,32 +641,50 @@ if (!empty($programs[$normKey]) && is_array($programs[$normKey])) {
   }
 }
 
+
+
+
+
 if ($program_title) : ?>
-  <section id="kursdetails" class="ks-sec ks-py-48 ks-program-text ks-program-text--full">
+  <section id="kursdetails" class="ks-sec ks-py-48 ks-program-text ks-program-text--full ks-info-section">
     <div class="container container--1100">
-      <?php if ($program_age): ?>
-        <div class="ks-kicker">
-          <?php echo esc_html($program_age); ?>
-        </div>
-      <?php endif; ?>
+      <div class="ks-info-section__grid">
+        <div class="ks-info-section__content">
+          <?php if ($program_age): ?>
+            <div class="ks-kicker">
+              <?php echo esc_html($program_age); ?>
+            </div>
+          <?php endif; ?>
 
-      <h2 class="ks-dir__title">
-        <?php echo esc_html($program_title); ?>
-      </h2>
+          <h2 class="ks-dir__title ks-mb-16">
+            <?php echo esc_html($program_title); ?>
+          </h2>
 
-      <div class="ks-grid-12-8">
-        <div>
-          <?php foreach ($program_text as $paragraph): ?>
-            <p><?php echo esc_html($paragraph); ?></p>
-          <?php endforeach; ?>
+          <div class="ks-info-section__copy">
+            <?php foreach ($program_text as $paragraph): ?>
+              <p><?php echo esc_html($paragraph); ?></p>
+            <?php endforeach; ?>
+          </div>
         </div>
 
         <?php if (!empty($program_bullets)): ?>
-          <ul class="ks-list-plus">
-            <?php foreach ($program_bullets as $bullet): ?>
-              <li>
-                <span class="ks-list-plus__icon" aria-hidden="true"></span>
-                <span><?php echo esc_html($bullet); ?></span>
+          <ul class="ks-info-facts" role="list">
+            <?php foreach ($program_bullets as $index => $bullet): ?>
+              <li class="ks-info-fact">
+                <span class="ks-info-fact__icon" aria-hidden="true">
+                  <img
+                    src="<?php echo esc_url(ks_get_offer_program_icon($index)); ?>"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </span>
+
+                <span class="ks-info-fact__body">
+                  <strong class="ks-info-fact__title">
+                    <?php echo esc_html($bullet); ?>
+                  </strong>
+                </span>
               </li>
             <?php endforeach; ?>
           </ul>
