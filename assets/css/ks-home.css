@@ -152,7 +152,7 @@
   border: 0;
   display: block;
 }
-
+/* 
 .ks-btn {
   --btn-border: var(--brand-gold);
   --btn-fill: var(--brand-black);
@@ -236,7 +236,7 @@
   --btn-fill: var(--brand-gold);
   --btn-text: var(--brand-white);
   --btn-text-h: var(--brand-black);
-}
+} */
 
 #trainer-profile img {
   width: 100%;
@@ -267,11 +267,11 @@
   }
 }
 
-@media (max-width: 640px) {
+/* @media (max-width: 640px) {
   .ks-btn {
     width: 100%;
   }
-}
+} */
 
 @media (prefers-reduced-motion: reduce) {
   .ks-btn {

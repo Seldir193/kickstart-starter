@@ -282,6 +282,8 @@ add_action('init', function () {
 
     ob_start(); ?>
 
+
+
 <div id="ksDir"
      class="ks-dir"
      data-api="<?php echo esc_attr($api_base); ?>"
