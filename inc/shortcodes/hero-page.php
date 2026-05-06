@@ -1,10 +1,6 @@
 <?php
 
-$hero_page_i18n = get_stylesheet_directory() . '/inc/shortcodes/hero-page-i18n.php';
 
-if (file_exists($hero_page_i18n)) {
-  require_once $hero_page_i18n;
-}
 
 if (!function_exists('ks_register_page_hero_shortcode')) {
   function ks_register_page_hero_shortcode() {
@@ -26,9 +22,33 @@ if (!function_exists('ks_get_page_hero_data')) {
     $data['image'] = ks_get_page_hero_image($data['image']);
     $data['features'] = ks_should_show_page_hero_features($data['features']);
 
-    return function_exists('ks_apply_page_hero_i18n')
-      ? ks_apply_page_hero_i18n($data)
-      : $data;
+    return ks_apply_page_hero_i18n($data);
+  }
+}
+
+if (!function_exists('ks_apply_page_hero_i18n')) {
+  function ks_apply_page_hero_i18n($data) {
+    foreach (ks_get_page_hero_i18n_map() as $value_key => $i18n_key) {
+      $data[$value_key] = ks_page_hero_get_text(
+        $data[$i18n_key],
+        $data[$value_key]
+      );
+    }
+
+    return $data;
+  }
+}
+
+if (!function_exists('ks_get_page_hero_i18n_map')) {
+  function ks_get_page_hero_i18n_map() {
+    return [
+      'title' => 'title_i18n',
+      'subtitle' => 'subtitle_i18n',
+      'breadcrumb' => 'breadcrumb_i18n',
+      'eyebrow' => 'eyebrow_i18n',
+      'primary_label' => 'primary_i18n',
+      'secondary_label' => 'secondary_i18n',
+    ];
   }
 }
 
@@ -135,9 +155,7 @@ if (!function_exists('ks_print_page_hero_i18n_attr')) {
 
 if (!function_exists('ks_page_hero_get_text')) {
   function ks_page_hero_get_text($key, $fallback) {
-    return function_exists('ks_page_hero_translate')
-      ? ks_page_hero_translate($key, $fallback)
-      : $fallback;
+    return function_exists('ks_t') ? ks_t($key, $fallback, 'hero') : $fallback;
   }
 }
 

@@ -424,6 +424,17 @@
     return normalizeLanguage(getBrowserLanguage(), state.fallback);
   }
 
+  // function persistLanguage(language) {
+  //   try {
+  //     localStorage.setItem("wpFrontendLng", language);
+  //   } catch (e) {}
+
+  //   document.cookie =
+  //     "wpFrontendLng=" +
+  //     encodeURIComponent(language) +
+  //     "; path=/; max-age=31536000; SameSite=Lax";
+  // }
+
   function persistLanguage(language) {
     try {
       localStorage.setItem("wpFrontendLng", language);
@@ -431,6 +442,11 @@
 
     document.cookie =
       "wpFrontendLng=" +
+      encodeURIComponent(language) +
+      "; path=/; max-age=31536000; SameSite=Lax";
+
+    document.cookie =
+      "ks_lang=" +
       encodeURIComponent(language) +
       "; path=/; max-age=31536000; SameSite=Lax";
   }
@@ -488,6 +504,24 @@
     bindEscape(state);
   }
 
+  // function initLanguageSwitcher() {
+  //   var switcher = qs(document, ".language-switcher");
+  //   if (!switcher) return;
+  //   var state = createState(switcher);
+  //   if (!isValidState(state)) return;
+  //   setNavKeys(state);
+  //   closeMenu(state);
+  //   bindEvents(state);
+
+  //   var initialLanguage = getInitialLanguage(state);
+
+  //   if (initialLanguage === "de") {
+  //     document.documentElement.classList.add("i18n-ready");
+  //   }
+
+  //   loadLanguage(state, initialLanguage);
+  // }
+
   function initLanguageSwitcher() {
     var switcher = qs(document, ".language-switcher");
     if (!switcher) return;
@@ -498,6 +532,8 @@
     bindEvents(state);
 
     var initialLanguage = getInitialLanguage(state);
+
+    persistLanguage(initialLanguage);
 
     if (initialLanguage === "de") {
       document.documentElement.classList.add("i18n-ready");

@@ -17,6 +17,7 @@ require_once get_stylesheet_directory() . '/inc/jobs.php';
 ks_require('setup.php');
 ks_require('assets.php');
 ks_require('helpers.php');
+ks_require('helpers/i18n.php');
 ks_require('contact-form.php');
 ks_require('ks-feedback.php');
 ks_require('ks-geocode.php');
