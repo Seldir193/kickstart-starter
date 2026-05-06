@@ -8,6 +8,12 @@ if (!function_exists('ks_register_partner_network_shortcode')) {
   add_action('init', 'ks_register_partner_network_shortcode');
 }
 
+if (!function_exists('ks_partner_network_text')) {
+  function ks_partner_network_text(string $key, string $fallback): string {
+    return function_exists('ks_t') ? ks_t($key, $fallback, 'partner-network') : $fallback;
+  }
+}
+
 if (!function_exists('ks_render_partner_network_shortcode')) {
   function ks_render_partner_network_shortcode(): string {
     $partners = ks_partner_network_items();
@@ -23,20 +29,30 @@ if (!function_exists('ks_render_partner_network_shortcode')) {
 if (!function_exists('ks_partner_network_markup')) {
   function ks_partner_network_markup(array $partners): string {
     $arrow_icon = get_stylesheet_directory_uri() . '/assets/img/team/arrow_right_alt.svg';
+    $aria_label = ks_partner_network_text('partnerNetwork.ariaLabel', 'Partner & Netzwerk');
+    $eyebrow = ks_partner_network_text('partnerNetwork.eyebrow', 'Netzwerk');
+    $title = ks_partner_network_text('partnerNetwork.title', 'Partner & Marken');
 
     ob_start();
     ?>
     <section
       id="partner-network"
       class="ks-sec ks-partner-network"
-      aria-label="Partner & Netzwerk"
+      aria-label="<?php echo esc_attr($aria_label); ?>"
+      data-i18n="partnerNetwork.ariaLabel"
+      data-i18n-attr="aria-label"
       data-partner-network
     >
       <div class="container container--1400">
         <div class="ks-partner-network__inner">
           <div class="ks-partner-network__intro">
-            <span class="ks-partner-network__eyebrow" data-i18n="partnerNetwork.eyebrow">Netzwerk</span>
-            <strong class="ks-partner-network__title"  data-i18n="partnerNetwork.title">Partner &amp; Marken</strong>
+            <span class="ks-partner-network__eyebrow" data-i18n="partnerNetwork.eyebrow">
+              <?php echo esc_html($eyebrow); ?>
+            </span>
+
+            <strong class="ks-partner-network__title" data-i18n="partnerNetwork.title">
+              <?php echo esc_html($title); ?>
+            </strong>
           </div>
 
           <div class="ks-partner-network__slider" data-partner-slider>
@@ -65,13 +81,20 @@ if (!function_exists('ks_partner_network_markup')) {
 if (!function_exists('ks_partner_network_nav_button')) {
   function ks_partner_network_nav_button(string $icon, string $direction): string {
     $modifier = $direction === 'prev' ? 'prev' : 'next';
-    $label = $direction === 'prev' ? 'Vorherige Partner' : 'Nächste Partner';
+    $label_key = $direction === 'prev'
+      ? 'partnerNetwork.navPrev'
+      : 'partnerNetwork.navNext';
+    $fallback = $direction === 'prev'
+      ? 'Vorherige Partner'
+      : 'Nächste Partner';
+    $label = ks_partner_network_text($label_key, $fallback);
 
     return sprintf(
-      '<button type="button" class="ks-partner-network__nav ks-partner-network__nav--%s" data-partner-%s aria-label="%s"><img class="ks-partner-network__nav-icon" src="%s" alt="" aria-hidden="true"></button>',
+      '<button type="button" class="ks-partner-network__nav ks-partner-network__nav--%s" data-partner-%s aria-label="%s" data-i18n="%s" data-i18n-attr="aria-label"><img class="ks-partner-network__nav-icon" src="%s" alt="" aria-hidden="true"></button>',
       esc_attr($modifier),
       esc_attr($modifier),
       esc_attr($label),
+      esc_attr($label_key),
       esc_url($icon)
     );
   }
@@ -106,6 +129,7 @@ if (!function_exists('ks_fetch_partner_network_items')) {
 if (!function_exists('ks_partner_network_api_url')) {
   function ks_partner_network_api_url(): string {
     $url = 'http://localhost:5000/api/public/partners';
+
     return apply_filters('ks_partner_network_api_url', $url);
   }
 }
@@ -130,6 +154,7 @@ if (!function_exists('ks_normalize_partner_network_items')) {
     }
 
     $partners = array_map('ks_normalize_partner_network_item', $items);
+
     return array_values(array_filter($partners));
   }
 }
@@ -201,3 +226,18 @@ if (!function_exists('ks_sort_partner_network_items')) {
     return (int) ($left['sortOrder'] ?? 100) <=> (int) ($right['sortOrder'] ?? 100);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
