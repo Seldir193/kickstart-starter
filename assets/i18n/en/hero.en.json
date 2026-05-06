@@ -5,7 +5,7 @@
   "about": {
     "hero": {
       "title": "About us",
-      "subtitle": "We support children through football. With passion, expertise, and heart.",
+      "subtitle": "We support children and young people through football, movement, and clear values. With age-appropriate training, personal guidance, and an environment where development, joy, and team spirit come together.",
       "watermark": "ABOUT US"
     }
   },
@@ -54,7 +54,7 @@
   "news": {
     "hero": {
       "title": "News",
-      "subtitle": "Latest updates from Dortmund Football School",
+      "subtitle": "Stay up to date with news, insights, and stories from our football school. Here you will find current articles about training, locations, projects, and ongoing developments.",
       "eyebrow": "Latest news",
       "actions": {
         "read": "Read articles",
@@ -65,7 +65,7 @@
   "franchise": {
     "hero": {
       "title": "Franchise",
-      "subtitle": "Build your own location with a clear football school concept, strong standards, and long-term support.",
+      "subtitle": "Start your own location with a clear football school concept, professional standards, and personal guidance. We support you with setup, processes, and the long-term development of your region.",
       "eyebrow": "Franchise",
       "actions": {
         "concept": "Discover the concept",
@@ -76,7 +76,7 @@
   "jobs": {
     "hero": {
       "title": "Current job openings",
-      "subtitle": "Work at Dortmund Football School",
+      "subtitle": "Become part of Dortmund Football School and support children with joy, structure, and responsibility. Discover open positions and see how you can bring your experience onto the pitch.",
       "eyebrow": "Careers",
       "actions": {
         "positions": "View positions",
@@ -122,6 +122,6 @@
       "faq": "Frequently asked questions"
     },
     "eyebrow": "Courses",
-    "subtitle": "Find the right training program and book your free trial session directly online."
+    "subtitle": "Find the right training program for your child and book a free trial session directly online. Choose a course, location, and date while keeping a clear overview of all available offers."
   }
 }
