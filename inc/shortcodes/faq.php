@@ -2,7 +2,18 @@
 
 if (!function_exists('ks_get_current_i18n_language')) {
   function ks_get_current_i18n_language(): string {
+    if (function_exists('ks_i18n_get_current_language')) {
+      return ks_i18n_get_current_language();
+    }
+
     $allowed = ['de', 'en', 'tr'];
+
+    if (!empty($_COOKIE['ks_lang'])) {
+      $cookie_lang = strtolower((string) $_COOKIE['ks_lang']);
+      if (in_array($cookie_lang, $allowed, true)) {
+        return $cookie_lang;
+      }
+    }
 
     if (!empty($_COOKIE['wpFrontendLng'])) {
       $cookie_lang = strtolower((string) $_COOKIE['wpFrontendLng']);
@@ -12,6 +23,7 @@ if (!function_exists('ks_get_current_i18n_language')) {
     }
 
     $header = strtolower((string) ($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? ''));
+
     foreach ($allowed as $lang) {
       if (strpos($header, $lang) === 0 || strpos($header, $lang . '-') !== false) {
         return $lang;
@@ -44,13 +56,9 @@ if (!function_exists('ks_get_i18n_scope_data')) {
     $json = file_get_contents($file);
     $data = json_decode((string) $json, true);
 
-    if (!is_array($data)) {
-      $cache[$cache_key] = [];
-      return [];
-    }
+    $cache[$cache_key] = is_array($data) ? $data : [];
 
-    $cache[$cache_key] = $data;
-    return $data;
+    return $cache[$cache_key];
   }
 }
 
@@ -62,6 +70,7 @@ if (!function_exists('ks_get_i18n_value')) {
       if (!is_array($value) || !array_key_exists($segment, $value)) {
         return null;
       }
+
       $value = $value[$segment];
     }
 
@@ -72,6 +81,7 @@ if (!function_exists('ks_get_i18n_value')) {
 if (!function_exists('ks_get_faq_slug')) {
   function ks_get_faq_slug(?string $key): string {
     $slug = sanitize_title((string) $key);
+
     return str_replace('-', '_', $slug);
   }
 }
@@ -108,40 +118,61 @@ if (!function_exists('ks_get_faq_items')) {
     $lang = ks_get_current_i18n_language();
 
     if ($context === 'home') {
-      $path = ['home', 'faq', 'items'];
-      $items = ks_get_i18n_value(ks_get_i18n_scope_data('home', $lang), $path);
-
-      if (!is_array($items) && $lang !== 'de') {
-        $items = ks_get_i18n_value(ks_get_i18n_scope_data('home', 'de'), $path);
-      }
-
-      return ks_normalize_faq_items($items);
+      return ks_get_faq_context_items('home', ['home', 'faq', 'items'], $lang);
     }
 
     if ($context === 'franchise') {
-      $path = ['franchise', 'faq', 'items'];
-      $items = ks_get_i18n_value(ks_get_i18n_scope_data('franchise', $lang), $path);
-
-      if (!is_array($items) && $lang !== 'de') {
-        $items = ks_get_i18n_value(ks_get_i18n_scope_data('franchise', 'de'), $path);
-      }
-
-      return ks_normalize_faq_items($items);
+      return ks_get_faq_context_items('franchise', ['franchise', 'faq', 'items'], $lang);
     }
 
     if ($context === 'offers') {
       $slug = ks_get_faq_slug($key);
-      $path = ['offers', 'faq', $slug, 'items'];
-      $items = ks_get_i18n_value(ks_get_i18n_scope_data('offers', $lang), $path);
 
-      if (!is_array($items) && $lang !== 'de') {
-        $items = ks_get_i18n_value(ks_get_i18n_scope_data('offers', 'de'), $path);
-      }
-
-      return ks_normalize_faq_items($items);
+      return ks_get_faq_context_items('offers', ['offers', 'faq', $slug, 'items'], $lang);
     }
 
     return [];
+  }
+}
+
+if (!function_exists('ks_get_faq_context_items')) {
+  function ks_get_faq_context_items(string $scope, array $path, string $lang): array {
+    $items = ks_get_i18n_value(ks_get_i18n_scope_data($scope, $lang), $path);
+
+    if (!is_array($items) && $lang !== 'de') {
+      $items = ks_get_i18n_value(ks_get_i18n_scope_data($scope, 'de'), $path);
+    }
+
+    return ks_normalize_faq_items($items);
+  }
+}
+
+if (!function_exists('ks_faq_text')) {
+  function ks_faq_text(string $key, string $fallback): string {
+    return $key !== '' && function_exists('ks_t') ? ks_t($key, $fallback) : $fallback;
+  }
+}
+
+if (!function_exists('ks_translate_faq_args')) {
+  function ks_translate_faq_args(array $args): array {
+    $map = [
+      'title' => 'title_i18n',
+      'kicker' => 'kicker_i18n',
+      'watermark' => 'watermark_i18n',
+      'side_card_kicker' => 'side_card_kicker_i18n',
+      'side_card_title' => 'side_card_title_i18n',
+      'side_card_text' => 'side_card_text_i18n',
+      'side_card_button' => 'side_card_button_i18n',
+    ];
+
+    foreach ($map as $value_key => $i18n_key) {
+      $args[$value_key] = ks_faq_text(
+        (string) ($args[$i18n_key] ?? ''),
+        (string) ($args[$value_key] ?? '')
+      );
+    }
+
+    return $args;
   }
 }
 
@@ -152,45 +183,45 @@ if (!function_exists('ks_render_faq_section')) {
     }
 
     $defaults = [
-      'section_id'             => 'faq',
-      'wrapper_class'          => 'container ks-home-faq',
-      'title'                  => 'Häufige Fragen',
-      'kicker'                 => 'Gut zu wissen',
-      'watermark'              => 'FAQ',
-      'title_i18n'             => '',
-      'kicker_i18n'            => '',
-      'items_i18n_prefix'      => '',
-      'use_video'              => false,
-      'video_embed'            => '',
-      'image_src'              => '',
-      'image_class'            => 'fr-faq__image',
-      'side_card_enabled'      => true,
-      'side_card_kicker'       => 'Fragen offen?',
-      'side_card_title'        => 'Wir helfen dir gerne weiter',
-      'side_card_text'         => 'Wenn noch etwas unklar ist, melde dich direkt bei uns.',
-      'side_card_button'       => 'Kontakt aufnehmen',
-      'side_card_href'         => '#kontakt',
-      'side_card_kicker_i18n'  => '',
-      'side_card_title_i18n'   => '',
-      'side_card_text_i18n'    => '',
-      'side_card_button_i18n'  => '',
+      'section_id' => 'faq',
+      'wrapper_class' => 'container ks-home-faq',
+      'title' => 'Häufige Fragen',
+      'kicker' => 'Gut zu wissen',
+      'watermark' => 'FAQ',
+      'title_i18n' => '',
+      'kicker_i18n' => '',
+      'watermark_i18n' => '',
+      'items_i18n_prefix' => '',
+      'use_video' => false,
+      'video_embed' => '',
+      'image_src' => '',
+      'image_class' => 'fr-faq__image',
+      'side_card_enabled' => true,
+      'side_card_kicker' => 'Fragen offen?',
+      'side_card_title' => 'Wir helfen dir gerne weiter',
+      'side_card_text' => 'Wenn noch etwas unklar ist, melde dich direkt bei uns.',
+      'side_card_button' => 'Kontakt aufnehmen',
+      'side_card_href' => '#kontakt',
+      'side_card_kicker_i18n' => '',
+      'side_card_title_i18n' => '',
+      'side_card_text_i18n' => '',
+      'side_card_button_i18n' => '',
     ];
 
-    $args = array_merge($defaults, $args);
+    $args = ks_translate_faq_args(array_merge($defaults, $args));
 
     ob_start();
     ?>
     <section id="<?php echo esc_attr($args['section_id']); ?>" class="ks-sec ks-py-56">
       <div class="<?php echo esc_attr($args['wrapper_class']); ?>">
-       
-
-
-<div
-  class="ks-title-wrap"
-  data-bgword="FAQ"
-  data-i18n="home.faq.watermark"
-  data-i18n-attr="data-bgword"
->
+        <div
+          class="ks-title-wrap"
+          data-bgword="<?php echo esc_attr($args['watermark']); ?>"
+          <?php if ($args['watermark_i18n'] !== ''): ?>
+            data-i18n="<?php echo esc_attr($args['watermark_i18n']); ?>"
+            data-i18n-attr="data-bgword"
+          <?php endif; ?>
+        >
           <div
             class="ks-kicker"
             <?php if ($args['kicker_i18n'] !== ''): ?>
@@ -300,3 +331,15 @@ if (!function_exists('ks_render_faq_section')) {
     return ob_get_clean();
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
