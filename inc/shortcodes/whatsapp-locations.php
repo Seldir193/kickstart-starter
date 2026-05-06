@@ -3,13 +3,17 @@
 if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
   function ks_register_whatsapp_locations_shortcode() {
     add_shortcode('ks_whatsapp_locations', function ($atts = []) {
+      $wa_t = function ($key, $fallback) {
+        return function_exists('ks_t') ? ks_t($key, $fallback, 'whatsapp') : $fallback;
+      };
+
       $a = shortcode_atts([
         'mode' => 'auto',
-        'text' => 'Hallo DFS, ich habe eine Frage zu euren Programmen.',
+        'text' => $wa_t('whatsapp.defaultText', 'Hallo DFS, ich habe eine Frage zu euren Programmen.'),
         'campaign' => 'whatsapp_locations',
         'btn_class' => 'ks-wa-btn',
         'select_class' => 'ks-wa-select',
-        'placeholder' => 'Standort wählen...',
+        'placeholder' => $wa_t('whatsapp.placeholder', 'Standort wählen...'),
       ], $atts, 'ks_whatsapp_locations');
 
       $locations = [
@@ -60,21 +64,32 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
           rawurlencode($a['text']),
           rawurlencode($campaign)
         );
+
+        $button_aria = sprintf(
+          $wa_t('whatsapp.aria.openLocation', 'WhatsApp öffnen – %s'),
+          $label
+        );
         ?>
 
         <section
           id="whatsapp-locations"
           class="ks-sec ks-wa-strip ks-wa-single"
-          aria-label="WhatsApp Kontakt"
+          aria-label="<?php echo esc_attr($wa_t('whatsapp.aria.single', 'WhatsApp Kontakt')); ?>"
           data-i18n="whatsapp.aria.single"
           data-i18n-attr="aria-label"
         >
           <div class="container ks-wa-grid">
             <p class="ks-wa-text">
-              <span data-i18n="whatsapp.question">Fragen?</span>
-              <strong data-i18n="whatsapp.singleText">Schreib uns auf WhatsApp.</strong>
+              <span data-i18n="whatsapp.question">
+                <?php echo esc_html($wa_t('whatsapp.question', 'Fragen?')); ?>
+              </span>
+              <strong data-i18n="whatsapp.singleText">
+                <?php echo esc_html($wa_t('whatsapp.singleText', 'Schreib uns auf WhatsApp.')); ?>
+              </strong>
               <span class="ks-wa-meta">
-                <span data-i18n="whatsapp.locationLabel">Standort:</span>
+                <span data-i18n="whatsapp.locationLabel">
+                  <?php echo esc_html($wa_t('whatsapp.locationLabel', 'Standort:')); ?>
+                </span>
                 <?php echo esc_html($label); ?>
               </span>
             </p>
@@ -84,10 +99,12 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
               href="<?php echo esc_url($href); ?>"
               target="_blank"
               rel="nofollow noopener"
-              aria-label="<?php echo esc_attr(sprintf('WhatsApp öffnen – %s', $label)); ?>"
+              aria-label="<?php echo esc_attr($button_aria); ?>"
             >
               <span class="ks-wa-icon" aria-hidden="true"></span>
-              <span data-i18n="whatsapp.button">WhatsApp öffnen</span>
+              <span data-i18n="whatsapp.button">
+                <?php echo esc_html($wa_t('whatsapp.button', 'WhatsApp öffnen')); ?>
+              </span>
             </a>
           </div>
         </section>
@@ -102,15 +119,17 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
         <section
           id="whatsapp-locations"
           class="ks-sec ks-wa-strip ks-wa-multi"
-          aria-label="WhatsApp Kontakt je Standort"
+          aria-label="<?php echo esc_attr($wa_t('whatsapp.aria.byLocation', 'WhatsApp Kontakt je Standort')); ?>"
           data-i18n="whatsapp.aria.byLocation"
           data-i18n-attr="aria-label"
         >
           <div class="container ks-wa-grid">
             <p class="ks-wa-text">
-              <span data-i18n="whatsapp.question">Fragen?</span>
+              <span data-i18n="whatsapp.question">
+                <?php echo esc_html($wa_t('whatsapp.question', 'Fragen?')); ?>
+              </span>
               <strong data-i18n="whatsapp.multiText">
-                Wähle deinen Standort &amp; schreib uns auf WhatsApp.
+                <?php echo esc_html($wa_t('whatsapp.multiText', 'Wähle deinen Standort & schreib uns auf WhatsApp.')); ?>
               </strong>
             </p>
 
@@ -127,6 +146,11 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
                   rawurlencode($a['text']),
                   rawurlencode($campaign)
                 );
+
+                $button_aria = sprintf(
+                  $wa_t('whatsapp.aria.openLocation', 'WhatsApp öffnen – %s'),
+                  $label
+                );
                 ?>
 
                 <li class="ks-wa-item">
@@ -135,11 +159,13 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
                     href="<?php echo esc_url($href); ?>"
                     target="_blank"
                     rel="nofollow noopener"
-                    aria-label="<?php echo esc_attr('WhatsApp öffnen – ' . $label); ?>"
+                    aria-label="<?php echo esc_attr($button_aria); ?>"
                   >
                     <span class="ks-wa-icon" aria-hidden="true"></span>
                     <?php echo esc_html($label); ?> –
-                    <span data-i18n="whatsapp.button">WhatsApp öffnen</span>
+                    <span data-i18n="whatsapp.button">
+                      <?php echo esc_html($wa_t('whatsapp.button', 'WhatsApp öffnen')); ?>
+                    </span>
                   </a>
                 </li>
               <?php endforeach; ?>
@@ -157,15 +183,17 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
       <section
         id="whatsapp-locations"
         class="ks-sec ks-wa-strip ks-wa-dropdown"
-        aria-label="WhatsApp Kontakt je Standort"
+        aria-label="<?php echo esc_attr($wa_t('whatsapp.aria.byLocation', 'WhatsApp Kontakt je Standort')); ?>"
         data-i18n="whatsapp.aria.byLocation"
         data-i18n-attr="aria-label"
       >
         <div class="container ks-wa-inner">
           <p class="ks-wa-text">
-            <span data-i18n="whatsapp.question">Fragen?</span>
+            <span data-i18n="whatsapp.question">
+              <?php echo esc_html($wa_t('whatsapp.question', 'Fragen?')); ?>
+            </span>
             <strong data-i18n="whatsapp.multiText">
-              Wähle deinen Standort &amp; schreib uns auf WhatsApp.
+              <?php echo esc_html($wa_t('whatsapp.multiText', 'Wähle deinen Standort & schreib uns auf WhatsApp.')); ?>
             </strong>
           </p>
 
@@ -182,7 +210,7 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
               class="screen-reader-only"
               data-i18n="whatsapp.selectLabel"
             >
-              Standort
+              <?php echo esc_html($wa_t('whatsapp.selectLabel', 'Standort')); ?>
             </label>
 
             <select
@@ -193,7 +221,7 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
               aria-hidden="true"
             >
               <option value="" selected disabled data-i18n="whatsapp.placeholder">
-                <?php echo esc_html($a['placeholder'] ?? 'Standort wählen...'); ?>
+                <?php echo esc_html($a['placeholder'] ?? $wa_t('whatsapp.placeholder', 'Standort wählen...')); ?>
               </option>
 
               <?php foreach ($clean as $loc): ?>
@@ -221,7 +249,7 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
                 aria-controls="<?php echo esc_attr($uid); ?>_panel"
               >
                 <span class="ks-dd__label" data-i18n="whatsapp.placeholder">
-                  <?php echo esc_html($a['placeholder'] ?? 'Standort wählen...'); ?>
+                  <?php echo esc_html($a['placeholder'] ?? $wa_t('whatsapp.placeholder', 'Standort wählen...')); ?>
                 </span>
 
                 <span class="ks-dd__caret" aria-hidden="true">
@@ -262,7 +290,9 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
               disabled
             >
               <span class="ks-wa-ico" aria-hidden="true"><?php echo $wa_icon; ?></span>
-              <span data-i18n="whatsapp.button">WhatsApp öffnen</span>
+              <span data-i18n="whatsapp.button">
+                <?php echo esc_html($wa_t('whatsapp.button', 'WhatsApp öffnen')); ?>
+              </span>
             </button>
           </form>
         </div>
@@ -275,6 +305,7 @@ if (!function_exists('ks_register_whatsapp_locations_shortcode')) {
 
   add_action('init', 'ks_register_whatsapp_locations_shortcode');
 }
+
 
 
 
