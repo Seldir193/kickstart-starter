@@ -17,21 +17,6 @@
     pointer-events: none;
     background: var(--ks-section-overlay-hero);
   }
-  /* 
-  .ks-page-hero__inner {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(340px, 1fr);
-    gap: clamp(28px, 3vw, 52px);
-    align-items: start;
-    width: 100%;
-    max-width: var(--ks-container);
-    min-height: 342px;
-    margin-inline: auto;
-    padding-inline: 16px;
-    box-sizing: border-box;
-  } */
 
   .ks-page-hero__inner {
     position: relative;
@@ -597,18 +582,6 @@
   }
 
   @media (max-width: 640px) {
-    /* .ks-page-hero__button {
-      width: 100%;
-    }
-
-    .ks-page-hero__features {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: thin;
-      scrollbar-color: var(--ks-scrollbar-thumb) var(--ks-scrollbar-track);
-    } */
-
     .ks-page-hero__features {
       display: flex;
       overflow-x: auto;
@@ -655,18 +628,6 @@
       bottom: 0;
     }
   }
-  /* 
-  @media (prefers-reduced-motion: reduce) {
-    .ks-page-hero__button,
-    .ks-page-hero__button::before,
-    .ks-page-hero__button-icon {
-      transition: none;
-    }
-
-    .ks-page-hero__image {
-      filter: none;
-    }
-  } */
 
   @media (prefers-reduced-motion: reduce) {
     .ks-page-hero__image {
@@ -674,62 +635,3 @@
     }
   }
 }
-
-/*  */
-/* 
-.ks-page-hero--offers {
-  padding: clamp(32px, 4vw, 52px) 0 clamp(58px, 5.2vw, 82px);
-}
-
-.ks-page-hero--offers .ks-page-hero__inner {
-  min-height: 430px;
-  align-items: center;
-}
-
-.ks-page-hero--offers .ks-page-hero__content {
-  max-height: none;
-  height: auto;
-}
-
-.ks-page-hero--offers .ks-page-hero__actions {
-  margin-top: 28px;
-}
-
-.ks-page-hero--offers .ks-page-hero__media {
-  height: 342px;
-  min-height: 342px;
-} */
-
-/* .ks-page-hero--offers .ks-page-hero__media {
-  height: 342px;
-  min-height: 342px;
-}
-
-.ks-page-hero--offers .ks-page-hero__image-card {
-  top: 62px;
-  height: 280px;
-}
-
-.ks-page-hero--offers .ks-page-hero__image {
-  height: 248px;
-} */
-
-/* .ks-page-hero--offers .ks-page-hero__side::before {
-  content: "";
-  display: block;
-  min-height: 52px;
-}
-
-.ks-page-hero--offers .ks-page-hero__media {
-  height: 280px;
-  min-height: 280px;
-}
-
-.ks-page-hero--offers .ks-page-hero__image-card {
-  top: 0;
-  height: 280px;
-}
-
-.ks-page-hero--offers .ks-page-hero__image {
-  height: 248px;
-} */

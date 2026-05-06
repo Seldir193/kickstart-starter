@@ -5,7 +5,7 @@
   "about": {
     "hero": {
       "title": "Über uns",
-      "subtitle": "Wir fördern Kinder durch Fußball. Mit Leidenschaft, Kompetenz und Herz.",
+      "subtitle": "Wir fördern Kinder und Jugendliche durch Fußball, Bewegung und klare Werte. Mit altersgerechtem Training, persönlicher Begleitung und einem Umfeld, in dem Entwicklung, Freude und Teamgeist zusammenkommen.",
       "watermark": "ÜBER UNS"
     }
   },
@@ -54,7 +54,7 @@
   "news": {
     "hero": {
       "title": "News",
-      "subtitle": "Aktuelles aus der Dortmunder Fussball Schule",
+      "subtitle": "Bleibe auf dem Laufenden mit Neuigkeiten, Einblicken und Geschichten aus unserer Fußballschule. Hier findest du aktuelle Beiträge rund um Training, Standorte, Projekte und Entwicklungen.",
       "eyebrow": "Aktuelles",
       "actions": {
         "read": "Beiträge lesen",
@@ -65,7 +65,7 @@
   "franchise": {
     "hero": {
       "title": "Franchise",
-      "subtitle": "Baue deinen eigenen Standort mit einem klaren Fußballschul-Konzept, starken Standards und langfristiger Unterstützung auf.",
+      "subtitle": "Starte deinen eigenen Standort mit einem klaren Fußballschul-Konzept, professionellen Standards und persönlicher Begleitung. Wir unterstützen dich beim Aufbau, bei Abläufen und bei der langfristigen Entwicklung deiner Region.",
       "eyebrow": "Franchise",
       "actions": {
         "concept": "Konzept entdecken",
@@ -76,7 +76,7 @@
   "jobs": {
     "hero": {
       "title": "Aktuelle Jobangebote",
-      "subtitle": "Arbeiten bei der Dortmunder Fussball Schule",
+      "subtitle": "Werde Teil der Dortmunder Fussball Schule und begleite Kinder mit Freude, Struktur und Verantwortung. Entdecke offene Positionen und finde heraus, wie du deine Erfahrung auf dem Platz einbringen kannst.",
       "eyebrow": "Karriere",
       "actions": {
         "positions": "Stellen ansehen",
@@ -122,6 +122,6 @@
       "faq": "Häufige Fragen"
     },
     "eyebrow": "Kurse",
-    "subtitle": "Finde das passende Training und buche dein kostenfreies Schnuppertraining direkt online."
+    "subtitle": "Finde das passende Training für dein Kind und buche dein kostenfreies Schnuppertraining direkt online. Wähle Kurs, Standort und Termin aus und erhalte einen klaren Überblick über alle verfügbaren Angebote."
   }
 }
