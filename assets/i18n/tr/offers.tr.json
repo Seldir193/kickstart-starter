@@ -19,11 +19,11 @@
           },
           {
             "question": "Gelişim antrenmanının ücreti nedir?",
-            "answer": "Antrenmanın aylık ücreti 50€’dur. Kardeş çocuklar için ücret aylık 40€’ya düşer."
+            "answer": "Antrenmanın aylık ücreti 50 €’dur. Kardeş çocuklar için ücret aylık 40 €’ya düşer."
           },
           {
             "question": "Hangi ekipmana ihtiyacım var?",
-            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı, antrenman salonda ise salon ayakkabısı ve yeterli içecek."
           },
           {
             "question": "Kayıt ve iptal şartları nasıldır?",
@@ -34,7 +34,7 @@
             "answer": "Lütfen bize e-posta veya telefonla bilgi verin. Çocuğunuzun devamsızlığını birlikte değerlendiririz."
           },
           {
-            "question": "Resmi tatillerde, okul tatillerinde veya okul olmayan günlerde ne olur?",
+            "question": "Resmi tatillerde, okul olmayan günlerde ve okul tatillerinde ne olur?",
             "answer": "Resmi tatillerde, okul olmayan günlerde ve okul tatillerinde düzenli kurs programı yapılmaz."
           }
         ]
@@ -47,7 +47,7 @@
           },
           {
             "question": "Futbol anaokulunun ücreti nedir?",
-            "answer": "Antrenmanın aylık ücreti 40€’dur. Kardeş çocuklar için ücret aylık 30€’ya düşer."
+            "answer": "Antrenmanın aylık ücreti 40 €’dur. Kardeş çocuklar için ücret aylık 30 €’ya düşer."
           },
           {
             "question": "Ebeveynler izleyebilir mi?",
@@ -55,7 +55,7 @@
           },
           {
             "question": "Hangi ekipmana ihtiyacım var?",
-            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı, antrenman salonda ise salon ayakkabısı ve yeterli içecek."
           },
           {
             "question": "Kayıt ve iptal şartları nasıldır?",
@@ -79,11 +79,11 @@
           },
           {
             "question": "Powertraining ücreti nedir ve neler dahildir?",
-            "answer": "Powertraining ücreti 35€’dur."
+            "answer": "Powertraining ücreti 35 €’dur."
           },
           {
             "question": "Hangi ekipman gerekir?",
-            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı (gerektiğinde suni çim ayakkabısı veya salon ayakkabısı) ve yeterli içecek."
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı, gerektiğinde suni çim ayakkabısı veya salon ayakkabısı ve yeterli içecek."
           },
           {
             "question": "Bir grupta kaç çocuk olur?",
@@ -91,7 +91,7 @@
           },
           {
             "question": "Kısa süre kala iptal edersem ne olur?",
-            "answer": "Powertraining katılımı 1 günden daha önce iptal edilirse ücretsizdir. Randevudan 24 saatten daha az süre önce yapılan iptallerde kısa sürede yedek oyuncu bulunamadığı için 35€ tutarın tamamı tahsil edilir."
+            "answer": "Powertraining katılımı 1 günden daha önce iptal edilirse ücretsizdir. Randevudan 24 saatten daha az süre önce yapılan iptallerde kısa sürede yedek oyuncu bulunamadığı için 35 € tutarın tamamı tahsil edilir."
           }
         ]
       },
@@ -131,7 +131,7 @@
           },
           {
             "question": "Bunun için hangi ekipmana ihtiyacım var?",
-            "answer": "Hava koşullarına uygun antrenman kıyafeti, kaleci eldiveni, futbol ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, kaleci eldiveni, futbol ayakkabısı, antrenman salonda ise salon ayakkabısı ve yeterli içecek."
           },
           {
             "question": "Kaleci antrenörümü seçebilir miyim?",
@@ -151,7 +151,7 @@
           },
           {
             "question": "Bunun için hangi ekipmana ihtiyacım var?",
-            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol veya suni çim ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol veya suni çim ayakkabısı, antrenman salonda ise salon ayakkabısı ve yeterli içecek."
           },
           {
             "question": "Antrenörümü seçebilir miyim?",
@@ -171,7 +171,7 @@
           },
           {
             "question": "Kaleci antrenmanının ücreti nedir?",
-            "answer": "Kaleci antrenmanı aylık 80€’dur."
+            "answer": "Kaleci antrenmanı aylık 80 €’dur."
           },
           {
             "question": "Bir grupta kaç kaleci olur?",
@@ -179,7 +179,7 @@
           },
           {
             "question": "Hangi ekipmana ihtiyacım var?",
-            "answer": "Hava koşullarına uygun antrenman kıyafeti, kaleci eldiveni, futbol ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, kaleci eldiveni, futbol ayakkabısı, antrenman salonda ise salon ayakkabısı ve yeterli içecek."
           },
           {
             "question": "Kayıt ve iptal şartları nasıldır?",
@@ -199,11 +199,11 @@
           },
           {
             "question": "Atletik gelişim antrenmanının ücreti nedir?",
-            "answer": "Antrenman aylık 50€’dur. Kardeş çocuklar için ücret aylık 40€’ya düşer."
+            "answer": "Antrenman aylık 50 €’dur. Kardeş çocuklar için ücret aylık 40 €’ya düşer."
           },
           {
             "question": "Hangi ekipmana ihtiyacım var?",
-            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı, antrenman salonda ise salon ayakkabısı ve yeterli içecek."
           },
           {
             "question": "Kayıt ve iptal şartları nasıldır?",
@@ -231,7 +231,7 @@
           },
           {
             "question": "Hangi ekipman gerekir?",
-            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı (antrenman salonda ise salon ayakkabısı) ve içecek."
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı, antrenman salonda ise salon ayakkabısı ve içecek."
           },
           {
             "question": "Kaç antrenör katılabilir?",
@@ -239,7 +239,7 @@
           },
           {
             "question": "Hangi içerikler öğretilir?",
-            "answer": "Felsefe eğitimi. Antrenman yapısı. Antrenman verimliliği. MFS antrenman içerikleri. Uygulamalı bölüm."
+            "answer": "Futbol felsefesi eğitimi. Antrenman yapısı. Antrenman verimliliği. DFS antrenman içerikleri. Uygulamalı bölüm."
           },
           {
             "question": "Eğitim kısa süre kala iptal edilirse ne olur?",
@@ -254,12 +254,12 @@
             "answer": "Süreç isteklerinize göre uyarlanabilir. Size memnuniyetle bir öneri sunar ve danışmanlık yaparız."
           },
           {
-            "question": "MFS hangi hizmetleri sunar?",
-            "answer": "MFS felsefesine uygun şekilde eğitilmiş ve deneyimli bir antrenör sağlıyoruz. Ekipman bireysel olarak planlanabilir."
+            "question": "DFS hangi hizmetleri sunar?",
+            "answer": "DFS felsefesine uygun şekilde eğitilmiş ve deneyimli bir antrenör sağlıyoruz. Ekipman bireysel olarak planlanabilir."
           },
           {
             "question": "Oyuncular hangi ekipmana ihtiyaç duyar?",
-            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol ayakkabısı, antrenman salonda ise salon ayakkabısı ve yeterli içecek."
           },
           {
             "question": "Antrenman kampını kısa süre kala iptal edersem ne olur?",
@@ -299,7 +299,7 @@
           },
           {
             "question": "Bunun için hangi ekipmana ihtiyacım var?",
-            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol veya suni çim ayakkabısı (antrenman salonda ise salon ayakkabısı) ve yeterli içecek."
+            "answer": "Hava koşullarına uygun antrenman kıyafeti, futbol veya suni çim ayakkabısı, antrenman salonda ise salon ayakkabısı ve yeterli içecek."
           },
           {
             "question": "Antrenörümü seçebilir miyim?",
@@ -309,6 +309,193 @@
             "question": "Hasta veya sakat olursam ne olur?",
             "answer": "Bireysel atletik antrenman randevudan 24 saat öncesine kadar ücretsiz iptal edilebilir. Aksi halde, antrenörleri bu kadar kısa sürede başka yerde görevlendiremediğimiz için tam ücret tahsil edilir."
           }
+        ]
+      }
+    },
+    "programDetails": {
+      "camp": {
+        "title": "Çalımlar ve koordinasyonla dolu futbol tatil eğlencesi",
+        "age": "8–13 yaş için",
+        "text": [
+          "Tatil kamplarımız farklı lokasyonlarda gerçekleşir ve 3 ila 5 gün boyunca yoğun bir futbol deneyimi sunar.",
+          "Çocuklar küçük gruplarda antrenman yapar, teknik, koordinasyon ve şut becerilerini geliştirir ve heyecanlı final maçlarıyla zenginleştirilmiş çeşitli bir günlük program yaşar."
+        ],
+        "bullets": [
+          "8–13 yaş için uygundur",
+          "Bol top aksiyonlu günlük antrenman",
+          "Koordinasyon, çalımlar ve şut odakta",
+          "Bireysel destekli küçük antrenman grupları",
+          "Son gün final turnuvası ve sertifika"
+        ]
+      },
+      "powertraining": {
+        "title": "Yoğun performans odaklı futbol antrenmanı",
+        "age": "Çok hırslı oyuncular için",
+        "text": [
+          "Power Training, teknik ve atletik olarak bir sonraki adımı atmak isteyen çok motive oyuncular için tasarlanmıştır.",
+          "Küçük gruplarda yüksek yoğunlukla teknik, hızlı karar verme ve oyun becerisi üzerinde çalışıyoruz – her zaman topla ve oyuna yakın durumlarda."
+        ],
+        "bullets": [
+          "Yüksek ve alçak toplarda ilk kontrol ve top taşıma",
+          "Tekniği geliştirmek için çalımlar, aldatmalar ve kombinasyonlar",
+          "Kuvvet, hız ve stabilite odaklı atletik antrenman",
+          "Farklı oyun durumlarında tüm şut teknikleri",
+          "Yüksek yoğunluklu farklı oyun formatları"
+        ]
+      },
+      "torwarttraining": {
+        "title": "Kaleci antrenmanı",
+        "age": "9–14 yaş için",
+        "text": [
+          "Kaleci antrenmanımızda futbol becerilerini kaleciliğin temel teknikleriyle birleştiriyoruz. Top tutma, yere düşme, uçma… evet! Ancak pas oyunu, şut teknikleri ve aldatmalar da modern kalecilerin gelişimi için mutlaka gereklidir.",
+          "Ayrıca genç kalecilerin genel kuvvetini ve hareketliliğini sürdürülebilir şekilde geliştiren özel koordinasyon ve atletik antrenman sunuyoruz. Program sadece ileri seviye kaleciler için değil, bu pozisyona özel bir tutku geliştiren çocuklar için de uygundur."
+        ],
+        "bullets": [
+          "Temel kaleci teknikleri",
+          "Top tutma ve düşme tekniği",
+          "1’e 1 durumlar",
+          "Oyun kurulumunda aldatmalar",
+          "Reaksiyon, koordinasyon, bilişsel beceriler ve pozisyon alma",
+          "Kalecinin oyun kurulumu"
+        ]
+      },
+      "foerdertraining_athletik": {
+        "title": "Atletik gelişim antrenmanı",
+        "age": "7–20 yaş için",
+        "text": [
+          "Atletik gelişim antrenmanında çocuklar kondisyonel beceriler alanında bütünsel olarak çalıştırılır. Her ay yeni bir odak belirlenir ve aylar birbirinin üzerine anlamlı şekilde inşa edilir.",
+          "Çocukların farklı yüklenmelere karşı iyi bir beden farkındalığı geliştirmesi ve tek yönlü hareket kalıplarına erken dönemde karşı koymayı öğrenmesi bizim için özellikle önemlidir."
+        ],
+        "bullets": [
+          "7–25 yaş için uygundur",
+          "Kuvvet, hareketlilik, hız ve dayanıklılık",
+          "Antrenman içeriklerinin bireysel uyarlanması",
+          "Stabilizasyon ve sakatlık önleme"
+        ]
+      },
+      "kindergarten": {
+        "title": "Futbol anaokulu",
+        "age": "3–6 yaş için",
+        "text": [
+          "Futbol anaokulu, hareket becerilerini geliştiren ve çocukları ilk futbola özgü tekniklerle tanıştıran çok yönlü temel sportif gelişim sunar.",
+          "Birçok sıçrama ve koordinasyon egzersiziyle çocuklar her antrenmanda yaşlarına uygun yeni görevlerle karşılaşır. Eğlence ve keyif burada açıkça ön plandadır.",
+          "Motto şudur: hareketten keyif almak ve futbola karşı sevgi geliştirmek."
+        ],
+        "bullets": [
+          "Hareket ve futbol sevgisini uyandırmak",
+          "Çok yönlü koordinatif hareket kalıpları",
+          "Destek ve hareket sistemini güçlendirme",
+          "Sağlık ve iyi oluşu destekleme",
+          "Futbol becerilerine giriş"
+        ]
+      },
+      "foerdertraining": {
+        "title": "Gelişim antrenmanı",
+        "age": "7–20 yaş için",
+        "text": [
+          "Gelişim antrenmanı, kulüp antrenmanının kendilerine yetmediği futbol tutkunu ve hırslı çocuklar için tasarlanmıştır. Odak noktası teknik ve koordinatif becerilerin geliştirilmesidir.",
+          "Oyuncular sadece rakibi yenmeyi değil, futbol oynamayı sevmeyi öğrenmelidir. Merkezde oyun keyfi, özgüven ve futbol becerilerinin sürdürülebilir gelişimi vardır."
+        ],
+        "bullets": [
+          "Tüm oyun durumları için aldatmalar",
+          "Yüksek ve alçak toplarda ilk kontrol ve top taşıma",
+          "İki ayakla şut teknikleri",
+          "Koordinatif hareket kalıpları",
+          "Özgüveni güçlendirme"
+        ]
+      },
+      "einzeltraining_athletik": {
+        "title": "Bireysel atletik antrenman",
+        "age": "7–25 yaş için",
+        "text": [
+          "Dengeli bir atletik yapı sayesinde oyuncular rakiplerinden ayrışabilir. Bu durum profesyonel, genç ve amatör futbolda giderek daha belirgin hale geliyor.",
+          "Takım antrenmanlarında bireysel oyuncuları atletik olarak desteklemek ve kişisel eksikleri hedefli şekilde gidermek çoğu zaman zordur.",
+          "Atletik gereksinimler pozisyona göre belirgin şekilde farklılık gösterir. Bu nedenle kuvvet, hareketlilik, stabilite, hız ve dayanıklılığı bireysel olarak dikkate alan bir antrenman gerekir."
+        ],
+        "bullets": [
+          "Pozisyona özel atletik antrenman",
+          "Eksikleri gidermek ve güçlü yönleri geliştirmek",
+          "Özgüveni artırmak",
+          "Kuvvet, hareketlilik, stabilizasyon, hız ve dayanıklılık"
+        ]
+      },
+      "einzeltraining_torwart": {
+        "title": "Bireysel kaleci antrenmanı",
+        "age": "7–12 yaş için",
+        "text": [
+          "Bireysel kaleci antrenmanı; top tutma ve yere düşme gibi kaleciye özgü temel teknikleri futbol, teknik ve koordinatif unsurlarla birleştirir.",
+          "Modern kaleciler sadece reaksiyon ve pozisyon alma değil, aynı zamanda temiz bir oyun kurulumu da gerektirir. Bu yüzden top tutma tekniklerini ve düşme hareketlerini uygun pas ve teknik görevlerle birleştiriyoruz."
+        ],
+        "bullets": [
+          "Kaleci tekniklerinin temelleri",
+          "Top tutma ve yere düşme",
+          "Oyun kurulumunda aldatmalar, pas ve şut teknikleri",
+          "Bilişsel beceri, koordinasyon, atletizm, sezgi ve reaksiyon",
+          "Pozisyon alma",
+          "Zorlu ve çeşitli antrenman"
+        ]
+      },
+      "personaltraining": {
+        "title": "Bireysel antrenman",
+        "age": "7–12 yaş için",
+        "text": [
+          "Bireysel performansı geliştirmek için çocuklar ve gençlere bireysel antrenman sunuyoruz.",
+          "Program; yetenekli oyunculara, altyapı performans oyuncularına ve belirli alanlarda hedefli şekilde gelişmek isteyen çocuklara yöneliktir.",
+          "Birçok takımda grup büyüklüğü nedeniyle güçlü ve zayıf yönler üzerinde bireysel olarak çalışmak zordur. Bireysel antrenman tam burada devreye girer."
+        ],
+        "bullets": [
+          "Optimal düzeltme ve otomatikleşme",
+          "Her seansta çok sayıda tekrar",
+          "İki ayakla şut teknikleri",
+          "Farklı oyun durumları için çalımlar ve ilk kontroller",
+          "Özgüveni güçlendirme"
+        ]
+      },
+      "coacheducation": {
+        "title": "Antrenör eğitimleri",
+        "age": "Kulüp antrenörleri için",
+        "text": [
+          "Antrenör eğitimlerimiz, çocuklar ve gençlerle yaptığı çalışmayı profesyonel olarak geliştirmek isteyen özverili antrenörlere yöneliktir.",
+          "Günlük kulüp antrenmanları için pratik içerikler, net antrenman yapıları ve yeni fikirler aktarıyoruz.",
+          "Eğitimler aktif, anlaşılır ve doğrudan antrenman pratiğine uygulanabilir yapıdadır."
+        ],
+        "bullets": [
+          "Futbol felsefesi konusunda eğitim",
+          "Antrenman yapısı",
+          "Antrenman verimliliği",
+          "Pratik antrenman içerikleri",
+          "Aktif ve uygulama odaklı eğitim"
+        ]
+      },
+      "clubprogram": {
+        "title": "Antrenman kampı",
+        "age": "7–25 yaş için",
+        "text": [
+          "Takımınla bir antrenman kampı düzenlemek ve oyuncularını sportif olarak en iyi şekilde geliştirmek mi istiyorsun?",
+          "Seni uyarlanmış antrenman içerikleri, nitelikli antrenörler ve net bir organizasyonla destekliyoruz.",
+          "İçerikler hedef gruba, performans seviyesine ve istenen odak noktasına göre belirlenir."
+        ],
+        "bullets": [
+          "Takımın için futbolda eğlence ve keyif",
+          "Yoğun antrenman birimleri",
+          "Aldatmalar, şut ve oyun formatları",
+          "Malzeme dahil nitelikli antrenörler"
+        ]
+      },
+      "rentacoach": {
+        "title": "Rent-a-Coach",
+        "age": "7–25 yaş için",
+        "text": [
+          "Rent-a-Coach ile takımın için nitelikli bir futbol antrenörü rezerve edebilirsin.",
+          "Program; ek katkılar, yeni antrenman içerikleri veya hedefli destek isteyen takımlar, kulüpler ya da antrenörler için uygundur.",
+          "Kulüp, antrenör ekibi ve velilerle yakın koordinasyon içinde genç oyuncuları ek olarak ve pratik şekilde destekliyoruz."
+        ],
+        "bullets": [
+          "Farklı yaş grupları için uygundur",
+          "Nitelikli DFS antrenörleri",
+          "Yoğun antrenman birimleri",
+          "İçerikler antrenör ve kulüple koordineli belirlenir",
+          "Aldatmalar, pas, ilk kontrol, şut, koordinasyon, ikili mücadele ve oyun formatları"
         ]
       }
     }

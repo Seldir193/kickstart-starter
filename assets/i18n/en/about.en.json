@@ -1,0 +1,70 @@
+{
+  "about": {
+    "intro": {
+      "kicker": "25 years of football experience",
+      "title": "Dortmund Football School",
+      "paragraphs": [
+        "Dortmund Football School was founded in 2025. Since then, our organization has grown with more than 10 coaches and partnerships with over 90 clubs across NRW and the Dortmund region. Our programs are independent of individual clubs and follow a holistic development philosophy.",
+        "We support children and young people athletically and personally – year after year."
+      ],
+      "items": [
+        "25 years of experience",
+        "10 partners and > 10 coaches",
+        "> 7000 children & 10 partner clubs",
+        "Weekly coach education",
+        "Streaming portal with > 1000 videos"
+      ],
+      "itemTexts": [
+        "Long-standing experience in training, support, and development.",
+        "A strong network of partners and qualified coaches.",
+        "Many children, clubs, and families trust our work.",
+        "Continuous development for modern training quality.",
+        "Digital content for training, preparation, and further development."
+      ]
+    },
+    "philosophy": {
+      "kicker": "What we stand for",
+      "title": "Our philosophy",
+      "paragraphs": [
+        "We teach football with a focus on joy, development, and character building. Development comes before results – we support children sustainably and age-appropriately."
+      ],
+      "items": [
+        "Fun, joy, and development before results",
+        "> 250 tricks, first touches, and shooting techniques",
+        "Complex age-appropriate athletic training",
+        "High training efficiency through small groups",
+        "Perfect training structure",
+        "Individual, group, and team tactics in detail"
+      ]
+    },
+    "goals": {
+      "kicker": "Our philosophy",
+      "title": "Our goals",
+      "paragraphs": [
+        "At the center are fun and joy in football – the foundation for performance and success. We promote social skills, offer high-quality training, and follow sports science principles."
+      ],
+      "items": [
+        "Enable as many people as possible to access high-quality training",
+        "Support clubs both in content and economically",
+        "Continuously improve and develop our philosophy",
+        "Bring our philosophy to other cities and countries"
+      ]
+    },
+    "contact": {
+      "kicker": "Contact",
+      "title": "Do you have questions?",
+      "text": "If you are interested, you can reach us in the following ways:",
+      "phoneAria": "Call us",
+      "phoneTitle": "Call us:",
+      "mailAria": "Write an email",
+      "mailTitle": "Write to us:",
+      "hoursAria": "Scroll to top",
+      "hoursTitle": "Phone hours:"
+    },
+    "locations": {
+      "watermark": "LOCATIONS",
+      "title": "Our locations",
+      "button": "View locations"
+    }
+  }
+}

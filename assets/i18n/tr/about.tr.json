@@ -1,0 +1,70 @@
+{
+  "about": {
+    "intro": {
+      "kicker": "25 yıllık futbol deneyimi",
+      "title": "Dortmund Futbol Okulu",
+      "paragraphs": [
+        "Dortmund Futbol Okulu 2025 yılında kuruldu. O zamandan beri kurumumuz 10’dan fazla antrenör ve NRW ile Dortmund bölgesinde 90’dan fazla kulüple yapılan iş birlikleriyle büyüdü. Programlarımız kulüplerden bağımsızdır ve bütünsel bir gelişim felsefesine dayanır.",
+        "Çocukları ve gençleri sportif ve kişisel olarak destekliyoruz – yıldan yıla."
+      ],
+      "items": [
+        "25 yıllık deneyim",
+        "10 partner ve > 10 antrenör",
+        "> 7000 çocuk & 10 partner kulüp",
+        "Haftalık antrenör eğitimleri",
+        "> 1000 videolu streaming portalı"
+      ],
+      "itemTexts": [
+        "Antrenman, destek ve gelişim alanında uzun yıllara dayanan deneyim.",
+        "Partnerlerden ve nitelikli antrenörlerden oluşan güçlü bir ağ.",
+        "Birçok çocuk, kulüp ve aile çalışmalarımıza güveniyor.",
+        "Modern antrenman kalitesi için sürekli gelişim.",
+        "Antrenman, hazırlık ve gelişim için dijital içerikler."
+      ]
+    },
+    "philosophy": {
+      "kicker": "Neyi temsil ediyoruz",
+      "title": "Felsefemiz",
+      "paragraphs": [
+        "Futbolu; keyif, gelişim ve karakter oluşumu odağıyla öğretiyoruz. Sonuç odaklı düşünceden önce gelişim gelir – çocukları sürdürülebilir ve yaşlarına uygun şekilde destekliyoruz."
+      ],
+      "items": [
+        "Eğlence, keyif ve gelişim sonuçtan önce gelir",
+        "> 250 çalım, top kontrolü ve şut tekniği",
+        "Yaşa uygun kapsamlı atletik antrenman",
+        "Küçük gruplarla yüksek antrenman verimliliği",
+        "Mükemmel antrenman yapısı",
+        "Bireysel, grup ve takım taktiği detaylı şekilde"
+      ]
+    },
+    "goals": {
+      "kicker": "Felsefemiz",
+      "title": "Hedeflerimiz",
+      "paragraphs": [
+        "Merkezde futboldan keyif almak ve eğlenmek vardır – bu, performans ve başarının temelidir. Sosyal becerileri destekliyor, kaliteli antrenman sunuyor ve spor bilimi kriterlerine dikkat ediyoruz."
+      ],
+      "items": [
+        "Mümkün olduğunca çok kişiye en iyi antrenmanı sunmak",
+        "Kulüpleri içerik ve ekonomik açıdan desteklemek",
+        "Felsefemizi sürekli iyileştirmek ve geliştirmek",
+        "Felsefemizi başka şehirlere ve ülkelere taşımak"
+      ]
+    },
+    "contact": {
+      "kicker": "İletişim",
+      "title": "Soruların mı var?",
+      "text": "İlgileniyorsan bize şu yollarla ulaşabilirsin:",
+      "phoneAria": "Ara",
+      "phoneTitle": "Bizi ara:",
+      "mailAria": "E-posta gönder",
+      "mailTitle": "Bize yaz:",
+      "hoursAria": "Yukarı çık",
+      "hoursTitle": "Telefon saatleri:"
+    },
+    "locations": {
+      "watermark": "LOKASYONLAR",
+      "title": "Lokasyonlarımız",
+      "button": "Lokasyonlara git"
+    }
+  }
+}

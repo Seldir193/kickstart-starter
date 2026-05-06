@@ -18,6 +18,32 @@ if (!function_exists('ks_get_offer_program_icon')) {
   }
 }
 
+if (!function_exists('ks_get_offer_program_detail')) {
+  function ks_get_offer_program_detail($norm_key) {
+    if (!function_exists('ks_i18n_load_scope')) {
+      return [];
+    }
+
+    $data = ks_i18n_load_scope('offers');
+    $detail = ks_i18n_get_nested_value($data, 'offers.programDetails.' . $norm_key);
+
+    return is_array($detail) ? $detail : [];
+  }
+}
+
+if (!function_exists('ks_get_offer_program_texts')) {
+  function ks_get_offer_program_texts($norm_key) {
+    $detail = ks_get_offer_program_detail($norm_key);
+
+    return [
+      'title' => is_string($detail['title'] ?? null) ? $detail['title'] : '',
+      'age' => is_string($detail['age'] ?? null) ? $detail['age'] : '',
+      'text' => is_array($detail['text'] ?? null) ? $detail['text'] : [],
+      'bullets' => is_array($detail['bullets'] ?? null) ? $detail['bullets'] : [],
+    ];
+  }
+}
+
 add_action('init', function () {
   add_shortcode('ks_offers_directory', function () {
     if (function_exists('ks_enqueue_feedback_assets')) {
@@ -303,15 +329,6 @@ add_action('init', function () {
     ob_start(); 
 
 $page_hero_image = esc_url($theme_uri . '/assets/img/hero/mfs.png');
-
-// echo do_shortcode(
-//   '[ks_hero_page title="' . esc_attr($heading) .
-//   '" subtitle="Finde das passende Training und buche dein kostenfreies Schnuppertraining direkt online." breadcrumb="Home" image="' .
-//   $page_hero_image .
-//   '" variant="offers" features="0" eyebrow="Kurse" primary_label="Jetzt buchen" primary_href="#angebote-buchen" secondary_label="Häufige Fragen" secondary_href="#dir-faq" title_i18n="' .
-//   esc_attr($title_i18n) .
-//   '" subtitle_i18n="offersHero.subtitle" eyebrow_i18n="offersHero.eyebrow" primary_i18n="offersHero.actions.booking" secondary_i18n="offersHero.actions.faq"]'
-// );
 
 echo do_shortcode(
   '[ks_hero_page title="' . esc_attr($heading) .
@@ -604,45 +621,27 @@ $aliasMap = [
   'fördertraining' => 'foerdertraining',
   'fördertraining_athletik' => 'foerdertraining_athletik',
   'athletiktraining' => 'foerdertraining_athletik',
+  'rentacoach_generic' => 'rentacoach',
+  'clubprogram_generic' => 'clubprogram',
+  'coacheducation' => 'coacheducation',
+  'coach_education' => 'coacheducation',
+  'personaltraining' => 'personaltraining',
+  'einzeltraining_athletik' => 'einzeltraining_athletik',
+  'einzeltraining_torwart' => 'einzeltraining_torwart',
 ];
 
 if (isset($aliasMap[$normKey])) {
   $normKey = $aliasMap[$normKey];
 }
 
-$prog_file = $theme_dir . '/inc/shortcodes/offer-program-texts.php';
-$programs = [];
 
-if (file_exists($prog_file)) {
-  $data = include $prog_file;
+$program_data = ks_get_offer_program_texts($normKey);
 
-  if (is_array($data)) {
-    $programs = $data;
-  }
-}
-
-if (!empty($programs[$normKey]) && is_array($programs[$normKey])) {
-  $cfg = $programs[$normKey];
-
-  if ($cfg === null) {
-    foreach ($programs as $key => $val) {
-      if ($val !== null && isset($aliasMap[$normKey]) && $key === $aliasMap[$normKey]) {
-        $cfg = $val;
-        break;
-      }
-    }
-  }
-
-  if (is_array($cfg)) {
-    $program_title = $cfg['title'] ?? '';
-    $program_age = $cfg['age'] ?? '';
-    $program_text = $cfg['text'] ?? [];
-    $program_bullets = $cfg['bullets'] ?? [];
-  }
-}
-
-
-
+$program_title = $program_data['title'];
+$program_age = $program_data['age'];
+$program_text = $program_data['text'];
+$program_bullets = $program_data['bullets'];
+$program_i18n_base = 'offers.programDetails.' . $normKey;
 
 
 if ($program_title) : ?>
@@ -651,19 +650,21 @@ if ($program_title) : ?>
       <div class="ks-info-section__grid">
         <div class="ks-info-section__content">
           <?php if ($program_age): ?>
-            <div class="ks-kicker">
-              <?php echo esc_html($program_age); ?>
-            </div>
+            <div class="ks-kicker" data-i18n="<?php echo esc_attr($program_i18n_base . '.age'); ?>">
+  <?php echo esc_html($program_age); ?>
+</div>
           <?php endif; ?>
 
-          <h2 class="ks-dir__title ks-mb-16">
-            <?php echo esc_html($program_title); ?>
-          </h2>
+          <h2 class="ks-dir__title ks-mb-16" data-i18n="<?php echo esc_attr($program_i18n_base . '.title'); ?>">
+  <?php echo esc_html($program_title); ?>
+</h2>
 
           <div class="ks-info-section__copy">
-            <?php foreach ($program_text as $paragraph): ?>
-              <p><?php echo esc_html($paragraph); ?></p>
-            <?php endforeach; ?>
+            <?php foreach ($program_text as $index => $paragraph): ?>
+  <p data-i18n="<?php echo esc_attr($program_i18n_base . '.text.' . $index); ?>">
+    <?php echo esc_html($paragraph); ?>
+  </p>
+<?php endforeach; ?>
           </div>
         </div>
 
@@ -681,9 +682,12 @@ if ($program_title) : ?>
                 </span>
 
                 <span class="ks-info-fact__body">
-                  <strong class="ks-info-fact__title">
-                    <?php echo esc_html($bullet); ?>
-                  </strong>
+                  <strong
+  class="ks-info-fact__title"
+  data-i18n="<?php echo esc_attr($program_i18n_base . '.bullets.' . $index); ?>"
+>
+  <?php echo esc_html($bullet); ?>
+</strong>
                 </span>
               </li>
             <?php endforeach; ?>

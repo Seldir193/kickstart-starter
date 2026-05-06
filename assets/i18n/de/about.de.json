@@ -1,0 +1,70 @@
+{
+  "about": {
+    "intro": {
+      "kicker": "25 Jahre Fußballerfahrung",
+      "title": "Die Dortmunder Fussball Schule",
+      "paragraphs": [
+        "Die Dortmunder Fussball Schule wurde 2025 gegründet. Inzwischen ist unser Unternehmen gewachsen – mit über 10 Trainer*innen und Kooperationen mit mehr als 90 Vereinen im Großraum NRW & Dortmund. Unsere Angebote sind vereinsunabhängig und folgen einer ganzheitlichen Ausbildungsphilosophie.",
+        "Wir begleiten Kinder und Jugendliche sportlich und persönlich – Jahr für Jahr."
+      ],
+      "items": [
+        "25 Jahre Erfahrung",
+        "10 Partner und > 10 Trainer",
+        "> 7000 Kinder & 10 Partnervereine",
+        "Wöchentliche Trainerfortbildungen",
+        "Streamingportal mit > 1000 Videos"
+      ],
+      "itemTexts": [
+        "Langjährige Erfahrung in Training, Förderung und Entwicklung.",
+        "Ein starkes Netzwerk aus Partnern und qualifizierten Trainern.",
+        "Viele Kinder, Vereine und Familien vertrauen auf unsere Arbeit.",
+        "Regelmäßige Weiterentwicklung für moderne Trainingsqualität.",
+        "Digitale Inhalte für Training, Vorbereitung und Weiterentwicklung."
+      ]
+    },
+    "philosophy": {
+      "kicker": "Wofür wir stehen",
+      "title": "Unsere Philosophie",
+      "paragraphs": [
+        "Wir lehren das Fußballspielen mit Fokus auf Freude, Entwicklung und Charakterbildung. Ausbildung geht bei uns vor Ergebnisdenken – wir fördern nachhaltig und altersgerecht."
+      ],
+      "items": [
+        "Spaß, Freude und Ausbildung vor Ergebnis",
+        "> 250 Tricks, Ballannahmen und Schusstechniken",
+        "Komplexes altersgerechtes Athletiktraining",
+        "Hohe Trainingseffizienz durch kleine Gruppen",
+        "Perfekte Trainingsstruktur",
+        "Individual-, Gruppen- und Mannschaftstaktik im Detail"
+      ]
+    },
+    "goals": {
+      "kicker": "Unsere Philosophie",
+      "title": "Unsere Ziele",
+      "paragraphs": [
+        "Im Mittelpunkt stehen Spaß und Freude am Fußball – das ist die Basis für Leistung und Erfolg. Wir fördern soziale Kompetenz, bieten qualitativ hochwertiges Training und achten auf sportwissenschaftliche Kriterien."
+      ],
+      "items": [
+        "Möglichst vielen Menschen bestmögliches Training ermöglichen",
+        "Vereine inhaltlich & wirtschaftlich unterstützen",
+        "Stetige Verbesserung und Weiterentwicklung unserer Philosophie",
+        "Unsere Philosophie in andere Städte & Länder bringen"
+      ]
+    },
+    "contact": {
+      "kicker": "Kontakt",
+      "title": "Hast du Fragen?",
+      "text": "Bei Interesse kannst du uns folgendermaßen erreichen:",
+      "phoneAria": "Anrufen",
+      "phoneTitle": "Ruf uns an:",
+      "mailAria": "E-Mail schreiben",
+      "mailTitle": "Schreib uns:",
+      "hoursAria": "Nach oben scrollen",
+      "hoursTitle": "Telefonzeiten:"
+    },
+    "locations": {
+      "watermark": "STANDORTE",
+      "title": "Unsere Standorte",
+      "button": "Zu den Standorten"
+    }
+  }
+}

@@ -15,27 +15,27 @@
         "items": [
           {
             "question": "Wo, wann und wie lange findet das Fördertraining statt?",
-            "answer": "Kursort und Zeit findest du oben in unserer Angebotskarte. Suche das Training in deiner Nähe aus und schicke uns eine Schnuppertrainingsanfrage. Wir nehmen uns so schnell es geht Kontakt auf und vereinbaren mit dir einen Schnuppertermin. Unser Fördertraining findet einmal wöchentlich für 60 min statt. Das Training findet zu Ferienzeiten und an Feiertagen nicht statt."
+            "answer": "Kursort und Zeit findest du oben in unserer Angebotskarte. Suche das Training in deiner Nähe aus und schicke uns eine Schnuppertrainingsanfrage. Wir nehmen so schnell wie möglich Kontakt mit dir auf und vereinbaren einen Schnuppertermin. Unser Fördertraining findet einmal wöchentlich für 60 Minuten statt. In den Ferien und an Feiertagen findet kein Training statt."
           },
           {
             "question": "Was kostet das Fördertraining?",
-            "answer": "Das Training kostet 50€ pro Monat. Für Geschwisterkinder reduziert sich der Beitrag auf 40€ pro Monat."
+            "answer": "Das Training kostet 50 € pro Monat. Für Geschwisterkinder reduziert sich der Beitrag auf 40 € pro Monat."
           },
           {
             "question": "Welche Ausrüstung benötige ich?",
-            "answer": "Wettergerechte Trainingsbekleidung, Fußballschuhe (Hallenschuhe, falls das Training Indoor stattfindet) und ausreichend Getränke."
+            "answer": "Wettergerechte Trainingsbekleidung, Fußballschuhe, Hallenschuhe falls das Training indoor stattfindet, und ausreichend Getränke."
           },
           {
             "question": "Wie sehen die Anmelde- und Kündigungsbedingungen aus?",
-            "answer": "Das Schnuppertraining ist kostenfrei. Zum Schnuppertraining muss das Anmeldeformular (dieses erhältst du vorher per Mail oder danach vor Ort) vollständig ausgefüllt und unterschrieben beim Trainer oder per Mail abgegeben werden. Der Vertrag kommt erst zustande, sobald wir die Teilnahme am Kurs schriftlich bestätigen. Die Kündigungsfrist beträgt 2 Monate nach Eingang der Kündigung."
+            "answer": "Das Schnuppertraining ist kostenfrei. Zum Schnuppertraining muss das Anmeldeformular vollständig ausgefüllt und unterschrieben beim Trainer oder per Mail abgegeben werden. Der Vertrag kommt erst zustande, sobald wir die Teilnahme am Kurs schriftlich bestätigen. Die Kündigungsfrist beträgt 2 Monate nach Eingang der Kündigung."
           },
           {
             "question": "Was passiert, wenn ich mal krank oder verletzt bin?",
-            "answer": "Bitte geben Sie uns per Mail oder Telefon Bescheid. Wir entscheiden dann gemeinsam über die Abwesenheit ihres Kindes."
+            "answer": "Bitte gib uns per Mail oder Telefon Bescheid. Wir entscheiden dann gemeinsam über die Abwesenheit deines Kindes."
           },
           {
-            "question": "Was passiert an Feiertagen, Schulferien Tagen und Schulfrei?",
-            "answer": "An Feiertagen und schulfreien Tagen sowie in den Schulferien findet grundsätzlich kein Kursprogramm statt."
+            "question": "Was passiert an Feiertagen, schulfreien Tagen und in den Schulferien?",
+            "answer": "An Feiertagen, schulfreien Tagen sowie in den Schulferien findet grundsätzlich kein reguläres Kursprogramm statt."
           }
         ]
       },
@@ -43,19 +43,19 @@
         "items": [
           {
             "question": "Wo, wann und wie lange findet der Fußballkindergarten statt?",
-            "answer": "Kursort und Zeit findest du oben in unserer Angebotskarte. Suche das Training in deiner Nähe aus und schicke uns eine Schnuppertrainingsanfrage. Wir nehmen uns so schnell es geht Kontakt auf und vereinbaren mit dir einen Schnuppertermin. Unser Fußballkindergarten findet einmal wöchentlich für 60 min statt. Das Training findet zu Ferienzeiten und an Feiertagen nicht statt."
+            "answer": "Kursort und Zeit findest du oben in unserer Angebotskarte. Suche das Training in deiner Nähe aus und schicke uns eine Schnuppertrainingsanfrage. Wir nehmen so schnell wie möglich Kontakt mit dir auf und vereinbaren einen Schnuppertermin. Unser Fußballkindergarten findet einmal wöchentlich für 60 Minuten statt. In den Ferien und an Feiertagen findet kein Training statt."
           },
           {
             "question": "Was kostet der Fußballkindergarten?",
-            "answer": "Das Training kostet 40€ pro Monat. Für Geschwisterkinder reduziert sich der Beitrag auf 30€ pro Monat."
+            "answer": "Das Training kostet 40 € pro Monat. Für Geschwisterkinder reduziert sich der Beitrag auf 30 € pro Monat."
           },
           {
             "question": "Dürfen Eltern zusehen?",
-            "answer": "Die Anwesenheit der Eltern während des Trainings ist sehr willkommen, denn gerade bei den Kleinsten ist dies ein wichtiger Faktor für die Sicherheit und Orientierung. Die Kinder dürfen sich beim Training frei bewegen und selbst entscheiden, ob sie Mama oder Papa im Blick behalten möchten oder sich vollständig auf das Training konzentrieren."
+            "answer": "Die Anwesenheit der Eltern während des Trainings ist sehr willkommen, denn gerade bei den Kleinsten ist dies ein wichtiger Faktor für Sicherheit und Orientierung. Die Kinder dürfen sich beim Training frei bewegen und selbst entscheiden, ob sie Mama oder Papa im Blick behalten möchten oder sich vollständig auf das Training konzentrieren."
           },
           {
             "question": "Welche Ausrüstung benötige ich?",
-            "answer": "Wettergerechte Trainingsbekleidung, Fußballschuhe (Hallenschuhe, falls Training Indoor stattfindet) und ausreichend Getränke."
+            "answer": "Wettergerechte Trainingsbekleidung, Fußballschuhe, Hallenschuhe falls das Training indoor stattfindet, und ausreichend Getränke."
           },
           {
             "question": "Wie sehen die Anmelde- und Kündigungsbedingungen aus?",
@@ -66,8 +66,8 @@
             "answer": "Bitte gib uns per Mail oder Telefon Bescheid. Wir entscheiden gemeinsam über die Abwesenheit des Kindes."
           },
           {
-            "question": "Was passiert an Feiertagen, schulfreien Tagen und den Schulferien?",
-            "answer": "An Feiertagen und schulfreien Tagen sowie in den Schulferien findet grundsätzlich kein Kursprogramm statt."
+            "question": "Was passiert an Feiertagen, schulfreien Tagen und in den Schulferien?",
+            "answer": "An Feiertagen, schulfreien Tagen sowie in den Schulferien findet grundsätzlich kein reguläres Kursprogramm statt."
           }
         ]
       },
@@ -75,15 +75,15 @@
         "items": [
           {
             "question": "Wie läuft das Powertraining ab?",
-            "answer": "Das Training geht über 120 min und ist in vier Blöcke zu je 30 min aufgeteilt. Die Trainingsinhalte des Powertrainings sind Ausdauertraining, Koordination mit Torschüssen, Technik mit Torschüssen, Zweikampftraining und Spielformen. Alle Trainingsblöcke beinhalten das Verhalten mit flachen, halbhohen Schüssen und Ballannahmen von hohen und flachen Bällen."
+            "answer": "Das Training dauert 120 Minuten und ist in vier Blöcke zu je 30 Minuten aufgeteilt. Die Inhalte umfassen Ausdauertraining, Koordination mit Torschüssen, Technik mit Torschüssen, Zweikampftraining und Spielformen. Alle Trainingsblöcke beinhalten außerdem den Umgang mit flachen und halbhohen Schüssen sowie Ballannahmen von hohen und flachen Bällen."
           },
           {
             "question": "Was kostet das Powertraining und welche Leistungen sind enthalten?",
-            "answer": "Das Powertraining kostet 35€."
+            "answer": "Das Powertraining kostet 35 €."
           },
           {
             "question": "Welche Ausrüstung wird benötigt?",
-            "answer": "Wettergerechte Trainingsbekleidung, Fußballschuhe (Kunstrasenschuhe, falls das Training Indoor stattfindet) und ausreichend Getränke."
+            "answer": "Wettergerechte Trainingsbekleidung, Fußballschuhe, Kunstrasenschuhe falls das Training draußen stattfindet, Hallenschuhe falls das Training indoor stattfindet, und ausreichend Getränke."
           },
           {
             "question": "Wie viele Kinder sind in einer Gruppe?",
@@ -91,7 +91,7 @@
           },
           {
             "question": "Was passiert, wenn ich kurzfristig absagen muss?",
-            "answer": "Kann die Teilnahme am Powertraining mehr als 1 Tag vorher storniert werden, ist dies kostenfrei. Kurzfristige Absagen unter 24 Stunden vor dem Termin führen dazu, dass der volle Betrag von 35€ berechnet wird, da kurzfristig kein Ersatzspieler organisiert werden kann."
+            "answer": "Kann die Teilnahme am Powertraining mehr als 1 Tag vorher storniert werden, ist dies kostenfrei. Kurzfristige Absagen unter 24 Stunden vor dem Termin führen dazu, dass der volle Betrag von 35 € berechnet wird, da kurzfristig kein Ersatzspieler organisiert werden kann."
           }
         ]
       },
@@ -99,11 +99,11 @@
         "items": [
           {
             "question": "Wie läuft das Camp ab?",
-            "answer": "Trainingszeiten: 09:00–13:30 Uhr (Technik, Taktik, Spielformen). Mittagspause: 11:15–12:00 Uhr. Abschlusstraining oder Turnier am letzten Tag. Die Dauer beträgt je nach Camp 3–5 Tage."
+            "answer": "Trainingszeiten sind von 09:00 bis 13:30 Uhr mit Technik, Taktik und Spielformen. Die Mittagspause ist von 11:15 bis 12:00 Uhr. Am letzten Tag findet ein Abschlusstraining oder Turnier statt. Die Dauer beträgt je nach Camp 3 bis 5 Tage."
           },
           {
             "question": "Was kostet das Camp und welche Leistungen sind enthalten?",
-            "answer": "Der Preis variiert je nach Angebot. Typische Leistungen sind: Trainingsprogramm von 09:00–13:30 Uhr, tägliche Betreuung, Trikot oder Trainingsshirt je nach Angebot sowie ein Abschlussturnier am letzten Tag."
+            "answer": "Der Preis variiert je nach Angebot. Typische Leistungen sind das Trainingsprogramm von 09:00 bis 13:30 Uhr, tägliche Betreuung, ein Trikot oder Trainingsshirt je nach Angebot sowie ein Abschlussturnier am letzten Tag."
           },
           {
             "question": "Ab wann kann ich mein Kind abgeben?",
@@ -115,7 +115,7 @@
           },
           {
             "question": "Wie viele Kinder sind in einer Gruppe? Und kommen Freunde zusammen in eine Gruppe?",
-            "answer": "Je nach Standort ca. 10–12 Kinder pro Gruppe. Wünsche bezüglich Gruppeneinteilung versuchen wir zu berücksichtigen."
+            "answer": "Je nach Standort sind etwa 10 bis 12 Kinder pro Gruppe. Wünsche bezüglich der Gruppeneinteilung versuchen wir nach Möglichkeit zu berücksichtigen."
           },
           {
             "question": "Was passiert, wenn ich kurzfristig absagen muss?",
@@ -127,19 +127,19 @@
         "items": [
           {
             "question": "Wo und wann findet das Torwarttraining statt?",
-            "answer": "Sowohl Ort als auch der Termin können telefonisch individuell abgestimmt werden."
+            "answer": "Sowohl Ort als auch Termin können telefonisch individuell abgestimmt werden."
           },
           {
             "question": "Welche Ausrüstung benötige ich dafür?",
-            "answer": "Wettergerechte Trainingsbekleidung, Torwarthandschuhe, Fußballschuhe (Hallenschuhe, falls das Training Indoor stattfindet) und ausreichend Getränke."
+            "answer": "Wettergerechte Trainingsbekleidung, Torwarthandschuhe, Fußballschuhe, Hallenschuhe falls das Training indoor stattfindet, und ausreichend Getränke."
           },
           {
             "question": "Kann ich mir den Torwarttrainer aussuchen?",
-            "answer": "Selbstverständlich versuchen wir deinem Trainerwunsch nachzukommen."
+            "answer": "Selbstverständlich versuchen wir, deinem Trainerwunsch nachzukommen."
           },
           {
             "question": "Was passiert, wenn ich mal krank oder verletzt bin?",
-            "answer": "Das Torwart-Einzeltraining kann bis 24 Std. vor Termin kostenfrei abgesagt werden. Ansonsten wird der volle Betrag fällig, da wir die Trainer so kurzfristig nicht anderweitig einsetzen können."
+            "answer": "Das Torwart-Einzeltraining kann bis 24 Stunden vor dem Termin kostenfrei abgesagt werden. Ansonsten wird der volle Betrag fällig, da wir die Trainer so kurzfristig nicht anderweitig einsetzen können."
           }
         ]
       },
@@ -147,19 +147,19 @@
         "items": [
           {
             "question": "Wo und wann findet das Einzeltraining statt?",
-            "answer": "Sowohl Ort als auch der Termin können telefonisch individuell abgestimmt werden."
+            "answer": "Sowohl Ort als auch Termin können telefonisch individuell abgestimmt werden."
           },
           {
             "question": "Welche Ausrüstung benötige ich dafür?",
-            "answer": "Wettergerechte Trainingsbekleidung, Fußball- oder Kunstrasenschuhe (Hallenschuhe, falls das Training Indoor stattfindet) und ausreichend Getränke."
+            "answer": "Wettergerechte Trainingsbekleidung, Fußball- oder Kunstrasenschuhe, Hallenschuhe falls das Training indoor stattfindet, und ausreichend Getränke."
           },
           {
             "question": "Kann ich mir den Trainer aussuchen?",
-            "answer": "Selbstverständlich versuchen wir deinem Trainerwunsch nachzukommen."
+            "answer": "Selbstverständlich versuchen wir, deinem Trainerwunsch nachzukommen."
           },
           {
             "question": "Was passiert, wenn ich mal krank oder verletzt bin?",
-            "answer": "Das Einzeltraining kann bis 24 Std. vor Termin kostenfrei abgesagt werden. Ansonsten wird der volle Betrag fällig, da wir die Trainer so kurzfristig nicht anderweitig einsetzen können."
+            "answer": "Das Einzeltraining kann bis 24 Stunden vor dem Termin kostenfrei abgesagt werden. Ansonsten wird der volle Betrag fällig, da wir die Trainer so kurzfristig nicht anderweitig einsetzen können."
           }
         ]
       },
@@ -167,11 +167,11 @@
         "items": [
           {
             "question": "Wo, wann und wie lange findet das Torwarttraining statt?",
-            "answer": "Kursort und Zeit findest du oben in unserer Angebotskarte. Suche das Training in deiner Nähe aus und schicke uns eine Schnuppertrainingsanfrage. Wir nehmen mit dir so schnell es geht Kontakt auf und vereinbaren mit dir einen Schnuppertermin. Unser Torwarttraining findet einmal wöchentlich für 60 min statt. Das Training findet zu Ferienzeiten und an Feiertagen nicht statt."
+            "answer": "Kursort und Zeit findest du oben in unserer Angebotskarte. Suche das Training in deiner Nähe aus und schicke uns eine Schnuppertrainingsanfrage. Wir nehmen so schnell wie möglich Kontakt mit dir auf und vereinbaren einen Schnuppertermin. Unser Torwarttraining findet einmal wöchentlich für 60 Minuten statt. In den Ferien und an Feiertagen findet kein Training statt."
           },
           {
             "question": "Was kostet das Torwarttraining?",
-            "answer": "Das Torwarttraining kostet 80€/Monat."
+            "answer": "Das Torwarttraining kostet 80 € pro Monat."
           },
           {
             "question": "Wie viele Torhüter sind in einer Gruppe?",
@@ -179,15 +179,15 @@
           },
           {
             "question": "Welche Ausrüstung benötige ich?",
-            "answer": "Wettergerechte Trainingsbekleidung, Torwarthandschuhe, Fußballschuhe (Hallenschuhe, falls das Training Indoor stattfindet) und ausreichend Getränke."
+            "answer": "Wettergerechte Trainingsbekleidung, Torwarthandschuhe, Fußballschuhe, Hallenschuhe falls das Training indoor stattfindet, und ausreichend Getränke."
           },
           {
             "question": "Wie sehen die Anmelde- und Kündigungsbedingungen aus?",
             "answer": "Das Schnuppertraining ist kostenfrei. Zum Schnuppertraining muss das Anmeldeformular vollständig ausgefüllt und unterschrieben beim Trainer oder per Mail abgegeben werden. Der Vertrag kommt erst zustande, sobald wir die Teilnahme am Kurs schriftlich bestätigen. Die Kündigungsfrist beträgt 2 Monate nach Eingang der Kündigung."
           },
           {
-            "question": "Was passiert an Feiertagen, schulfreien Tagen und Schulferien?",
-            "answer": "An Feiertagen und schulfreien Tagen sowie in den Schulferien findet grundsätzlich kein Kursprogramm statt."
+            "question": "Was passiert an Feiertagen, schulfreien Tagen und in den Schulferien?",
+            "answer": "An Feiertagen, schulfreien Tagen sowie in den Schulferien findet grundsätzlich kein reguläres Kursprogramm statt."
           }
         ]
       },
@@ -195,15 +195,15 @@
         "items": [
           {
             "question": "Wo, wann und wie lange findet das Athletik-Fördertraining statt?",
-            "answer": "Kursort und Zeit findest du oben in unserer Angebotskarte. Suche das Training in deiner Nähe aus und schicke uns eine Schnuppertrainingsanfrage. Wir nehmen mit dir so schnell es geht Kontakt auf und vereinbaren mit dir einen Schnuppertermin. Unser Athletik-Fördertraining findet einmal wöchentlich für 60 min statt. Das Training findet zu Ferienzeiten und an Feiertagen nicht statt."
+            "answer": "Kursort und Zeit findest du oben in unserer Angebotskarte. Suche das Training in deiner Nähe aus und schicke uns eine Schnuppertrainingsanfrage. Wir nehmen so schnell wie möglich Kontakt mit dir auf und vereinbaren einen Schnuppertermin. Unser Athletik-Fördertraining findet einmal wöchentlich für 60 Minuten statt. In den Ferien und an Feiertagen findet kein Training statt."
           },
           {
             "question": "Was kostet das Athletik-Fördertraining?",
-            "answer": "Das Training kostet 50€/Monat. Für Geschwisterkinder reduziert sich der Beitrag auf 40€/Monat."
+            "answer": "Das Training kostet 50 € pro Monat. Für Geschwisterkinder reduziert sich der Beitrag auf 40 € pro Monat."
           },
           {
             "question": "Welche Ausrüstung benötige ich?",
-            "answer": "Wettergerechte Trainingsbekleidung, Fußballschuhe (Hallenschuhe, falls das Training Indoor stattfindet) und ausreichend Getränke."
+            "answer": "Wettergerechte Trainingsbekleidung, Fußballschuhe, Hallenschuhe falls das Training indoor stattfindet, und ausreichend Getränke."
           },
           {
             "question": "Wie sehen die Anmelde- und Kündigungsbedingungen aus?",
@@ -211,11 +211,11 @@
           },
           {
             "question": "Was passiert, wenn ich mal krank oder verletzt bin?",
-            "answer": "Bitte geben Sie uns per Mail oder Telefon Bescheid. Wir entscheiden dann gemeinsam über die Abwesenheit ihres Kindes."
+            "answer": "Bitte gib uns per Mail oder Telefon Bescheid. Wir entscheiden dann gemeinsam über die Abwesenheit deines Kindes."
           },
           {
-            "question": "Was passiert an Feiertagen, schulfreien Tagen und Schulferien?",
-            "answer": "An Feiertagen und schulfreien Tagen sowie in den Schulferien findet grundsätzlich kein Kursprogramm statt."
+            "question": "Was passiert an Feiertagen, schulfreien Tagen und in den Schulferien?",
+            "answer": "An Feiertagen, schulfreien Tagen sowie in den Schulferien findet grundsätzlich kein reguläres Kursprogramm statt."
           }
         ]
       },
@@ -231,7 +231,7 @@
           },
           {
             "question": "Welche Ausrüstung wird benötigt?",
-            "answer": "Wettergerechte Trainingsbekleidung, Fußballschuhe (Hallenschuhe, falls das Training Indoor stattfindet) und Getränke."
+            "answer": "Wettergerechte Trainingsbekleidung, Fußballschuhe, Hallenschuhe falls das Training indoor stattfindet, und Getränke."
           },
           {
             "question": "Wie viele Trainer können teilnehmen?",
@@ -239,11 +239,11 @@
           },
           {
             "question": "Welche Inhalte werden geschult?",
-            "answer": "Ausbildung in Sachen Philosophie. Trainingsstruktur. Trainingseffizienz. MFS-Trainingseinhalte. Praxisteil."
+            "answer": "Ausbildung in Sachen Philosophie. Trainingsstruktur. Trainingseffizienz. DFS-Trainingsinhalte. Praxisteil."
           },
           {
             "question": "Was passiert, wenn die Fortbildung kurzfristig abgesagt werden muss?",
-            "answer": "Die Veranstaltung kann bis 7 Tage vor Termin kostenfrei storniert werden. Innerhalb der Frist von 7–1 Tag vor Veranstaltungsbeginn werden 50% der Teilnahmegebühr fällig. Bei Absagen innerhalb 24 Std. vor Veranstaltungsbeginn wird der volle Betrag fällig. Allerdings können die Fehlzeiten gegen Vorlage eines ärztlichen Attestes nachgeholt werden."
+            "answer": "Die Veranstaltung kann bis 7 Tage vor dem Termin kostenfrei storniert werden. Innerhalb der Frist von 7 bis 1 Tag vor Veranstaltungsbeginn werden 50 % der Teilnahmegebühr fällig. Bei Absagen innerhalb von 24 Stunden vor Veranstaltungsbeginn wird der volle Betrag fällig. Fehlzeiten können gegen Vorlage eines ärztlichen Attestes nachgeholt werden."
           }
         ]
       },
@@ -251,31 +251,31 @@
         "items": [
           {
             "question": "Wie ist der Ablauf?",
-            "answer": "Der Ablauf kann nach Ihren Wünschen angepasst werden. Gerne machen wir Ihnen dazu einen Vorschlag und beraten Sie."
+            "answer": "Der Ablauf kann nach deinen Wünschen angepasst werden. Gerne machen wir dir dazu einen Vorschlag und beraten dich."
           },
           {
-            "question": "Welche Leistungen bietet die MFS?",
-            "answer": "Wir stellen Ihnen einen, speziell auf die Philosophie der MFS geschulten und erfahrenen Trainer zur Verfügung. Ausrüstung kann individuell abgestimmt werden."
+            "question": "Welche Leistungen bietet DFS?",
+            "answer": "Wir stellen dir einen speziell auf die Philosophie der DFS geschulten und praxiserfahrenen Trainer zur Verfügung. Ausrüstung kann individuell abgestimmt werden."
           },
           {
             "question": "Welche Ausrüstung benötigen die Spieler?",
-            "answer": "Wettergerechte Trainingsbekleidung, Fußballschuhe (Hallenschuhe, falls das Training Indoor stattfindet) und ausreichend Getränke."
+            "answer": "Wettergerechte Trainingsbekleidung, Fußballschuhe, Hallenschuhe falls das Training indoor stattfindet, und ausreichend Getränke."
           },
           {
             "question": "Was passiert, wenn ich das Trainingslager kurzfristig absagen muss?",
-            "answer": "Der Termin kann bis 24 Std. vor Termin kostenfrei abgesagt werden. Ansonsten wird der volle Betrag fällig, da wir den Trainer so kurzfristig nicht anderweitig einsetzen können."
+            "answer": "Der Termin kann bis 24 Stunden vor dem Termin kostenfrei abgesagt werden. Ansonsten wird der volle Betrag fällig, da wir den Trainer so kurzfristig nicht anderweitig einsetzen können."
           }
         ]
       },
       "rentacoach": {
         "items": [
           {
-            "question": "Wo, wann und wie lange findet das Rent a Trainer-Programm statt?",
-            "answer": "Das Training findet auf Ihrem Vereinsgelände zu üblichen Trainingszeiten Ihres Teams statt. Das Training kann zu Ferienzeiten auf den Anlagen unserer Partnervereine stattfinden."
+            "question": "Wo, wann und wie lange findet das Rent-a-Coach-Programm statt?",
+            "answer": "Das Training findet auf deinem Vereinsgelände zu den üblichen Trainingszeiten deines Teams statt. In Ferienzeiten kann das Training auf den Anlagen unserer Partnervereine stattfinden."
           },
           {
-            "question": "Was kostet das Rent a Trainer-Programm?",
-            "answer": "60 min kosten 89 €, jede weitere 30 min kosten 30 € zusätzlich."
+            "question": "Was kostet das Rent-a-Coach-Programm?",
+            "answer": "60 Minuten kosten 89 €, jede weiteren 30 Minuten kosten 30 € zusätzlich."
           },
           {
             "question": "Was beinhaltet das Training?",
@@ -287,28 +287,215 @@
           },
           {
             "question": "Was passiert, wenn ich kurzfristig absagen muss?",
-            "answer": "Der Termin kann bis 24 Std. vor Termin kostenfrei abgesagt werden. Ansonsten wird der volle Betrag fällig, da wir den Trainer so kurzfristig nicht anderweitig einsetzen können."
+            "answer": "Der Termin kann bis 24 Stunden vor dem Termin kostenfrei abgesagt werden. Ansonsten wird der volle Betrag fällig, da wir den Trainer so kurzfristig nicht anderweitig einsetzen können."
           }
         ]
       },
       "einzeltraining_athletik": {
         "items": [
           {
-            "question": "Wo und wann findet das Athletik Einzeltraining statt?",
-            "answer": "Sowohl Ort als auch der Termin können telefonisch individuell abgestimmt werden."
+            "question": "Wo und wann findet das Athletik-Einzeltraining statt?",
+            "answer": "Sowohl Ort als auch Termin können telefonisch individuell abgestimmt werden."
           },
           {
             "question": "Welche Ausrüstung benötige ich dafür?",
-            "answer": "Wettergerechte Trainingsbekleidung, Fußball- oder Kunstrasenschuhe (Hallenschuhe, falls das Training Indoor stattfindet) und ausreichend Getränke."
+            "answer": "Wettergerechte Trainingsbekleidung, Fußball- oder Kunstrasenschuhe, Hallenschuhe falls das Training indoor stattfindet, und ausreichend Getränke."
           },
           {
             "question": "Kann ich mir den Trainer aussuchen?",
-            "answer": "Selbstverständlich versuchen wir deinem Trainerwunsch nachzukommen."
+            "answer": "Selbstverständlich versuchen wir, deinem Trainerwunsch nachzukommen."
           },
           {
             "question": "Was passiert, wenn ich mal krank oder verletzt bin?",
-            "answer": "Das Athletik Einzeltraining kann bis 24 Std. vor Termin kostenfrei abgesagt werden. Ansonsten wird der volle Betrag fällig, da wir die Trainer so kurzfristig nicht anderweitig einsetzen können."
+            "answer": "Das Athletik-Einzeltraining kann bis 24 Stunden vor dem Termin kostenfrei abgesagt werden. Ansonsten wird der volle Betrag fällig, da wir die Trainer so kurzfristig nicht anderweitig einsetzen können."
           }
+        ]
+      }
+    },
+    "programDetails": {
+      "camp": {
+        "title": "Fussball-Ferienspass mit vielen Tricks & Koordination",
+        "age": "Für 8–13 Jährige",
+        "text": [
+          "Unsere Feriencamps finden an verschiedenen Standorten statt und bieten 3 bis 5 Tage lang ein intensives Fussballerlebnis.",
+          "Die Kinder trainieren in kleinen Gruppen, verbessern Technik, Koordination und Torschuss und erleben ein abwechslungsreiches Tagesprogramm mit spannenden Abschlussspielen."
+        ],
+        "bullets": [
+          "Geeignet für 8–13 Jährige",
+          "Tägliches Training mit vielen Ballaktionen",
+          "Koordination, Tricks & Torschuss im Mittelpunkt",
+          "Kleine Trainingsgruppen mit individueller Betreuung",
+          "Abschlussturnier und Urkunde am letzten Tag"
+        ]
+      },
+      "powertraining": {
+        "title": "Intensives leistungsorientiertes Fussballtraining",
+        "age": "Für sehr ambitionierte Spieler*innen",
+        "text": [
+          "Das Powertraining richtet sich an sehr motivierte Kicker*innen, die technisch und athletisch den nächsten Schritt machen wollen.",
+          "In kleinen Gruppen arbeiten wir mit hoher Intensität an Technik, Handlungsschnelligkeit und Spielfähigkeit – immer mit Ball und in spielnahen Situationen."
+        ],
+        "bullets": [
+          "Ballan- und Mitnahmen von hohen und flachen Bällen",
+          "Tricks, Finten und Kombinationen zur Verbesserung der Technik",
+          "Athletiktraining mit Fokus auf Kraft, Schnelligkeit und Stabilität",
+          "Sämtliche Schusstechniken in verschiedenen Spielsituationen",
+          "Unterschiedliche Spielformen mit hoher Intensität"
+        ]
+      },
+      "torwarttraining": {
+        "title": "Torwarttraining",
+        "age": "Für 9–14 Jährige",
+        "text": [
+          "In unserem Torwarttraining kombinieren wir fußballerische Fähigkeiten mit den Grundlagen des Torwartspiels. Fangen, Hechten, Fliegen… JA! Aber auch Passspiel, Schusstechniken und Finten gehören unbedingt zur Ausbildung der modernen Torhüter*innen.",
+          "Zudem bieten wir ein spezielles Koordinations- und Athletiktraining, welches die allgemeine Kräftigung und Beweglichkeit der jungen Torhüter*innen nachhaltig verbessert. Dabei ist das Angebot nicht nur für fortgeschrittene Torhüter*innen geeignet, sondern auch für Kinder, die für diese Position eine besondere Leidenschaft entwickeln."
+        ],
+        "bullets": [
+          "Grundlagentechniken Torwart",
+          "Fang- und Falltechnik",
+          "1-gegen-1 Situationen",
+          "Finten im Spielaufbau",
+          "Reaktion, Koordination, Kognition und Stellungsspiel",
+          "Spielaufbau des Torwartes"
+        ]
+      },
+      "foerdertraining_athletik": {
+        "title": "Athletik-Fördertraining",
+        "age": "Für 7–20 Jährige",
+        "text": [
+          "Beim Athletik-Fördertraining werden Kinder ganzheitlich im Bereich der konditionellen Fähigkeiten trainiert. Jeden Monat wird ein neuer Schwerpunkt gesetzt, wobei die einzelnen Monate sinnvoll aufeinander aufbauen.",
+          "Uns liegt besonders am Herzen, dass Kinder ein gutes Körpergefühl für verschiedene Belastungen entwickeln und frühzeitig einseitigen Bewegungsmustern entgegenwirken."
+        ],
+        "bullets": [
+          "Geeignet für 7–25 Jährige",
+          "Kraft, Beweglichkeit, Schnelligkeit und Ausdauer",
+          "Individuelle Anpassung von Trainingsinhalten",
+          "Stabilisation und Prävention"
+        ]
+      },
+      "kindergarten": {
+        "title": "Fussballkindergarten",
+        "age": "Für 3–6 Jährige",
+        "text": [
+          "Der Fußballkindergarten bietet eine vielseitige sportliche Grundlagenausbildung, die Bewegungsabläufe schult und Kinder mit ersten fußballspezifischen Techniken vertraut macht.",
+          "Mit zahlreichen Sprung- und Koordinationsübungen werden die Kinder in jedem Training altersgerecht vor neue Herausforderungen gestellt. Spaß und Freude stehen dabei klar im Vordergrund.",
+          "Das Motto lautet: Spaß an der Bewegung und Freude am Fußball entwickeln."
+        ],
+        "bullets": [
+          "Spaß an der Bewegung und Freude am Fußball wecken",
+          "Vielseitige koordinative Bewegungsabläufe",
+          "Stärkung des Stütz- und Bewegungsapparates",
+          "Förderung von Gesundheit und Wohlbefinden",
+          "Heranführen an fußballerische Fähigkeiten"
+        ]
+      },
+      "foerdertraining": {
+        "title": "Fördertraining",
+        "age": "Für 7–20 Jährige",
+        "text": [
+          "Das Fördertraining richtet sich an fußballbegeisterte und ambitionierte Kinder, denen das Trainingspensum im Verein nicht ausreicht. Der Fokus liegt auf der Verbesserung technischer und koordinativer Fähigkeiten.",
+          "Die Spieler sollen das Fußballspielen lieben lernen und nicht nur den Triumph über den Gegner. Im Mittelpunkt stehen Spielfreude, Selbstvertrauen und die nachhaltige Verbesserung der fußballerischen Fähigkeiten."
+        ],
+        "bullets": [
+          "Finten für sämtliche Spielsituationen",
+          "Ballan- und Mitnahmen hoher und flacher Bälle",
+          "Beidfüßige Schusstechniken",
+          "Koordinative Bewegungsabläufe",
+          "Stärkung des Selbstvertrauens"
+        ]
+      },
+      "einzeltraining_athletik": {
+        "title": "Einzeltraining Athletik",
+        "age": "Für 7–25 Jährige",
+        "text": [
+          "Durch eine ausgewogene Athletik können sich Spieler*innen von der Konkurrenz absetzen. Das wird im Profi-, Jugend- und Amateurbereich immer deutlicher.",
+          "Im Mannschaftstraining ist es oft schwer, einzelne Spieler*innen athletisch so zu fördern, dass individuelle Defizite gezielt ausgeglichen werden.",
+          "Athletische Voraussetzungen unterscheiden sich je nach Position deutlich. Deshalb braucht es ein Training, das Kraft, Beweglichkeit, Stabilität, Schnelligkeit und Ausdauer individuell berücksichtigt."
+        ],
+        "bullets": [
+          "Positionsspezifisches Athletiktraining",
+          "Defizite ausgleichen und Stärken ausbauen",
+          "Steigerung des Selbstbewusstseins",
+          "Kraft, Beweglichkeit, Stabilisation, Schnelligkeit und Ausdauer"
+        ]
+      },
+      "einzeltraining_torwart": {
+        "title": "Einzeltraining Torwart",
+        "age": "Für 7–12 Jährige",
+        "text": [
+          "Das Einzeltraining für Torhüter verbindet torwartspezifische Grundtechniken wie Fangen und Fallen mit fußballerischen, technischen und koordinativen Elementen.",
+          "Moderne Torhüter*innen brauchen neben Reaktion und Stellungsspiel auch eine saubere Spieleröffnung. Deshalb kombinieren wir Fangtechniken und Fallbewegungen mit passenden Pass- und Technikaufgaben."
+        ],
+        "bullets": [
+          "Grundlagen der Torwarttechniken",
+          "Fangen und Fallen",
+          "Finten, Pass- und Schusstechniken im Spielaufbau",
+          "Kognition, Koordination, Athletik, Antizipation und Reaktion",
+          "Stellungsspiel",
+          "Anspruchsvolles und abwechslungsreiches Training"
+        ]
+      },
+      "personaltraining": {
+        "title": "Einzeltraining",
+        "age": "Für 7–12 Jährige",
+        "text": [
+          "Zur Verbesserung der individuellen Leistungsfähigkeit bieten wir Einzeltraining für Kinder und Jugendliche an.",
+          "Das Angebot richtet sich an talentierte Spieler*innen, Nachwuchsleistungsspieler*innen und Kinder, die sich in bestimmten Bereichen gezielt weiterentwickeln möchten.",
+          "In vielen Teams ist es aufgrund der Gruppengröße schwer, individuell an Stärken und Schwächen zu arbeiten. Genau hier setzt das Einzeltraining an."
+        ],
+        "bullets": [
+          "Optimale Korrektur und Automatisierung",
+          "Viele Wiederholungen pro Einheit",
+          "Beidfüßige Schusstechniken",
+          "Tricks und Ballannahmen für verschiedene Spielsituationen",
+          "Stärkung des Selbstvertrauens"
+        ]
+      },
+      "coacheducation": {
+        "title": "Trainerfortbildungen",
+        "age": "Für Vereinstrainer*innen",
+        "text": [
+          "Unsere Trainerfortbildungen richten sich an engagierte Trainer*innen, die ihre Arbeit mit Kindern und Jugendlichen fachlich weiterentwickeln möchten.",
+          "Wir vermitteln praxisnahe Inhalte, klare Trainingsstrukturen und neue Ideen für die tägliche Arbeit im Verein.",
+          "Die Fortbildungen sind aktiv, verständlich und direkt auf den Trainingsalltag übertragbar."
+        ],
+        "bullets": [
+          "Ausbildung in Sachen Philosophie",
+          "Trainingsstruktur",
+          "Trainingseffizienz",
+          "Praxisnahe Trainingsinhalte",
+          "Aktive und anwendungsnahe Fortbildung"
+        ]
+      },
+      "clubprogram": {
+        "title": "Trainingslager",
+        "age": "Für 7–25 Jährige",
+        "text": [
+          "Du möchtest mit deinem Team ein Trainingslager durchführen und Spieler*innen sportlich bestmöglich weiterentwickeln?",
+          "Dann unterstützen wir dich mit abgestimmten Trainingsinhalten, qualifizierten Trainern und einer klaren Organisation.",
+          "Die Inhalte richten sich nach Zielgruppe, Leistungsstand und gewünschtem Schwerpunkt."
+        ],
+        "bullets": [
+          "Spaß und Freude am Fußball für dein Team",
+          "Intensive Trainingseinheiten",
+          "Finten, Torschuss und Spielformen",
+          "Qualifizierte Trainer inklusive Material"
+        ]
+      },
+      "rentacoach": {
+        "title": "Rent-a-Coach",
+        "age": "Für 7–25 Jährige",
+        "text": [
+          "Mit Rent-a-Coach kannst du einen qualifizierten Fußballtrainer für dein Team buchen.",
+          "Das Angebot eignet sich für Mannschaften, Vereine oder Trainer, die zusätzliche Impulse, neue Trainingsinhalte oder gezielte Unterstützung wünschen.",
+          "In enger Abstimmung mit Verein, Trainerteam und Eltern fördern wir Nachwuchsspieler*innen zusätzlich und praxisnah."
+        ],
+        "bullets": [
+          "Für verschiedene Altersklassen geeignet",
+          "Qualifizierte DFS-Trainer",
+          "Intensive Trainingseinheiten",
+          "Inhalte in Abstimmung mit Trainer und Verein",
+          "Finten, Passen, Ballannahmen, Torschuss, Koordination, Zweikampf und Spielformen"
         ]
       }
     }

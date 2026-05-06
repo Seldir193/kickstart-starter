@@ -114,6 +114,10 @@
       scopes.push("news");
     }
 
+    if (hasI18nPrefix("about.")) {
+      scopes.push("about");
+    }
+
     if (hasI18nPrefix("programCta.")) {
       scopes.push("program-cta");
     }

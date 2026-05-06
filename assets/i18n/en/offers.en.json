@@ -23,7 +23,7 @@
           },
           {
             "question": "What equipment do I need?",
-            "answer": "Weather-appropriate sportswear, football boots (indoor shoes if the training takes place indoors), and enough drinks."
+            "answer": "Weather-appropriate sportswear, football boots, indoor shoes if the training takes place indoors, and enough drinks."
           },
           {
             "question": "What are the registration and cancellation conditions?",
@@ -55,7 +55,7 @@
           },
           {
             "question": "What equipment do I need?",
-            "answer": "Weather-appropriate sportswear, football boots (indoor shoes if the training takes place indoors), and enough drinks."
+            "answer": "Weather-appropriate sportswear, football boots, indoor shoes if the training takes place indoors, and enough drinks."
           },
           {
             "question": "What are the registration and cancellation conditions?",
@@ -83,7 +83,7 @@
           },
           {
             "question": "What equipment is needed?",
-            "answer": "Weather-appropriate sportswear, football boots (artificial turf shoes if the training takes place outdoors, indoor shoes if indoors), and enough drinks."
+            "answer": "Weather-appropriate sportswear, football boots, artificial turf shoes if the training takes place outdoors, indoor shoes if indoors, and enough drinks."
           },
           {
             "question": "How many children are in one group?",
@@ -131,7 +131,7 @@
           },
           {
             "question": "What equipment do I need for it?",
-            "answer": "Weather-appropriate sportswear, goalkeeper gloves, football boots (indoor shoes if the training takes place indoors), and enough drinks."
+            "answer": "Weather-appropriate sportswear, goalkeeper gloves, football boots, indoor shoes if the training takes place indoors, and enough drinks."
           },
           {
             "question": "Can I choose my goalkeeper coach?",
@@ -151,7 +151,7 @@
           },
           {
             "question": "What equipment do I need for it?",
-            "answer": "Weather-appropriate sportswear, football or artificial turf shoes (indoor shoes if the training takes place indoors), and enough drinks."
+            "answer": "Weather-appropriate sportswear, football or artificial turf shoes, indoor shoes if the training takes place indoors, and enough drinks."
           },
           {
             "question": "Can I choose my coach?",
@@ -179,7 +179,7 @@
           },
           {
             "question": "What equipment do I need?",
-            "answer": "Weather-appropriate sportswear, goalkeeper gloves, football boots (indoor shoes if the training takes place indoors), and enough drinks."
+            "answer": "Weather-appropriate sportswear, goalkeeper gloves, football boots, indoor shoes if the training takes place indoors, and enough drinks."
           },
           {
             "question": "What are the registration and cancellation conditions?",
@@ -203,7 +203,7 @@
           },
           {
             "question": "What equipment do I need?",
-            "answer": "Weather-appropriate sportswear, football boots (indoor shoes if the training takes place indoors), and enough drinks."
+            "answer": "Weather-appropriate sportswear, football boots, indoor shoes if the training takes place indoors, and enough drinks."
           },
           {
             "question": "What are the registration and cancellation conditions?",
@@ -231,7 +231,7 @@
           },
           {
             "question": "What equipment is needed?",
-            "answer": "Weather-appropriate sportswear, football boots (indoor shoes if the training takes place indoors), and drinks."
+            "answer": "Weather-appropriate sportswear, football boots, indoor shoes if the training takes place indoors, and drinks."
           },
           {
             "question": "How many coaches can take part?",
@@ -239,7 +239,7 @@
           },
           {
             "question": "What content is taught?",
-            "answer": "Training in philosophy. Training structure. Training efficiency. MFS training content. Practical section."
+            "answer": "Training in philosophy. Training structure. Training efficiency. DFS training content. Practical section."
           },
           {
             "question": "What happens if the training course has to be cancelled at short notice?",
@@ -254,12 +254,12 @@
             "answer": "The process can be adapted according to your wishes. We are happy to make a proposal and advise you."
           },
           {
-            "question": "What services does MFS offer?",
-            "answer": "We provide you with a coach specially trained in the MFS philosophy and experienced in practice. Equipment can be agreed individually."
+            "question": "What services does DFS offer?",
+            "answer": "We provide you with a coach specially trained in the DFS philosophy and experienced in practice. Equipment can be agreed individually."
           },
           {
             "question": "What equipment do the players need?",
-            "answer": "Weather-appropriate sportswear, football boots (indoor shoes if the training takes place indoors), and enough drinks."
+            "answer": "Weather-appropriate sportswear, football boots, indoor shoes if the training takes place indoors, and enough drinks."
           },
           {
             "question": "What happens if I have to cancel the training camp at short notice?",
@@ -299,7 +299,7 @@
           },
           {
             "question": "What equipment do I need for it?",
-            "answer": "Weather-appropriate sportswear, football or artificial turf shoes (indoor shoes if the training takes place indoors), and enough drinks."
+            "answer": "Weather-appropriate sportswear, football or artificial turf shoes, indoor shoes if the training takes place indoors, and enough drinks."
           },
           {
             "question": "Can I choose my coach?",
@@ -309,6 +309,193 @@
             "question": "What happens if I am sick or injured?",
             "answer": "The athletic individual training can be cancelled free of charge up to 24 hours before the appointment. Otherwise, the full amount becomes due because we cannot deploy the coaches elsewhere at such short notice."
           }
+        ]
+      }
+    },
+    "programDetails": {
+      "camp": {
+        "title": "Football holiday fun with tricks & coordination",
+        "age": "For ages 8–13",
+        "text": [
+          "Our holiday camps take place at different locations and offer an intensive football experience over 3 to 5 days.",
+          "Children train in small groups, improve technique, coordination, and shooting, and enjoy a varied daily program with exciting final games."
+        ],
+        "bullets": [
+          "Suitable for ages 8–13",
+          "Daily training with many ball actions",
+          "Focus on coordination, tricks & shooting",
+          "Small training groups with individual support",
+          "Final tournament and certificate on the last day"
+        ]
+      },
+      "powertraining": {
+        "title": "Intensive performance-focused football training",
+        "age": "For highly ambitious players",
+        "text": [
+          "Power Training is designed for highly motivated players who want to take the next technical and athletic step.",
+          "In small groups, we work with high intensity on technique, speed of action, and game ability – always with the ball and in realistic game situations."
+        ],
+        "bullets": [
+          "First touch and ball control with high and low balls",
+          "Tricks, feints, and combinations to improve technique",
+          "Athletic training focused on strength, speed, and stability",
+          "All shooting techniques in different game situations",
+          "Different game formats with high intensity"
+        ]
+      },
+      "torwarttraining": {
+        "title": "Goalkeeper training",
+        "age": "For ages 9–14",
+        "text": [
+          "In our goalkeeper training, we combine football skills with the foundations of goalkeeping. Catching, diving, flying… yes! But passing, shooting techniques, and feints are also essential for the development of modern goalkeepers.",
+          "We also offer special coordination and athletic training that sustainably improves the general strength and mobility of young goalkeepers. The program is suitable not only for advanced goalkeepers, but also for children who are developing a special passion for this position."
+        ],
+        "bullets": [
+          "Basic goalkeeper techniques",
+          "Catching and falling technique",
+          "1-on-1 situations",
+          "Feints in build-up play",
+          "Reaction, coordination, cognition, and positioning",
+          "Goalkeeper build-up play"
+        ]
+      },
+      "foerdertraining_athletik": {
+        "title": "Athletic development training",
+        "age": "For ages 7–20",
+        "text": [
+          "In athletic development training, children are trained holistically in the area of physical conditioning. Each month has a new focus, with the monthly topics building on each other in a meaningful way.",
+          "It is especially important to us that children develop a good body awareness for different types of physical stress and learn early to counteract one-sided movement patterns."
+        ],
+        "bullets": [
+          "Suitable for ages 7–25",
+          "Strength, mobility, speed, and endurance",
+          "Individual adaptation of training content",
+          "Stabilization and prevention"
+        ]
+      },
+      "kindergarten": {
+        "title": "Football kindergarten",
+        "age": "For ages 3–6",
+        "text": [
+          "Football kindergarten offers versatile basic athletic development, trains movement patterns, and introduces children to their first football-specific techniques.",
+          "With many jumping and coordination exercises, children face age-appropriate new challenges in every session. Fun and joy are clearly the main focus.",
+          "The motto is: develop joy in movement and love for football."
+        ],
+        "bullets": [
+          "Awaken joy in movement and football",
+          "Versatile coordination-based movement patterns",
+          "Strengthening of the musculoskeletal system",
+          "Promotion of health and well-being",
+          "Introduction to football skills"
+        ]
+      },
+      "foerdertraining": {
+        "title": "Development training",
+        "age": "For ages 7–20",
+        "text": [
+          "Development training is designed for football-loving and ambitious children who want more than their regular club training offers. The focus is on improving technical and coordination skills.",
+          "Players should learn to love playing football, not only winning against opponents. The focus is on increasing joy in the game, self-confidence, and sustainable improvement of football skills."
+        ],
+        "bullets": [
+          "Feints for all game situations",
+          "First touch and ball control with high and low balls",
+          "Two-footed shooting techniques",
+          "Coordination-based movement patterns",
+          "Strengthening self-confidence"
+        ]
+      },
+      "einzeltraining_athletik": {
+        "title": "Individual athletic training",
+        "age": "For ages 7–25",
+        "text": [
+          "With balanced athletic ability, players can set themselves apart from the competition. This is becoming increasingly clear in professional, youth, and amateur football.",
+          "In team training, it is often difficult to support individual players athletically in a way that specifically compensates for personal deficits.",
+          "Athletic requirements differ significantly depending on position. That is why training must individually address strength, mobility, stability, speed, and endurance."
+        ],
+        "bullets": [
+          "Position-specific athletic training",
+          "Compensate deficits and build strengths",
+          "Increase self-confidence",
+          "Strength, mobility, stabilization, speed, and endurance"
+        ]
+      },
+      "einzeltraining_torwart": {
+        "title": "Individual goalkeeper training",
+        "age": "For ages 7–12",
+        "text": [
+          "Individual goalkeeper training combines goalkeeper-specific basic techniques such as catching and falling with football, technical, and coordination elements.",
+          "Modern goalkeepers need not only reaction and positioning, but also clean build-up play. That is why we combine catching techniques and falling movements with suitable passing and technique tasks."
+        ],
+        "bullets": [
+          "Goalkeeper technique fundamentals",
+          "Catching and falling",
+          "Feints, passing, and shooting techniques in build-up play",
+          "Cognition, coordination, athleticism, anticipation, and reaction",
+          "Positioning",
+          "Challenging and varied training"
+        ]
+      },
+      "personaltraining": {
+        "title": "Individual training",
+        "age": "For ages 7–12",
+        "text": [
+          "To improve individual performance, we offer individual training for children and young people.",
+          "The program is aimed at talented players, youth academy players, and children who want to develop specific areas in a targeted way.",
+          "In many teams, it is difficult to work individually on strengths and weaknesses due to group size. This is exactly where individual training begins."
+        ],
+        "bullets": [
+          "Optimal correction and automation",
+          "Many repetitions per session",
+          "Two-footed shooting techniques",
+          "Tricks and first touches for different game situations",
+          "Strengthening self-confidence"
+        ]
+      },
+      "coacheducation": {
+        "title": "Coach education",
+        "age": "For club coaches",
+        "text": [
+          "Our coach education programs are designed for committed coaches who want to develop their work with children and young people professionally.",
+          "We provide practical content, clear training structures, and new ideas for everyday club training.",
+          "The sessions are active, easy to understand, and directly applicable to daily training practice."
+        ],
+        "bullets": [
+          "Education in football philosophy",
+          "Training structure",
+          "Training efficiency",
+          "Practical training content",
+          "Active and application-oriented education"
+        ]
+      },
+      "clubprogram": {
+        "title": "Training camp",
+        "age": "For ages 7–25",
+        "text": [
+          "Would you like to organize a training camp with your team and develop your players as effectively as possible?",
+          "We support you with coordinated training content, qualified coaches, and clear organization.",
+          "The content is based on the target group, performance level, and desired focus."
+        ],
+        "bullets": [
+          "Fun and joy in football for your team",
+          "Intensive training sessions",
+          "Feints, shooting, and game formats",
+          "Qualified coaches including equipment"
+        ]
+      },
+      "rentacoach": {
+        "title": "Rent-a-Coach",
+        "age": "For ages 7–25",
+        "text": [
+          "With Rent-a-Coach, you can book a qualified football coach for your team.",
+          "The program is suitable for teams, clubs, or coaches who want additional impulses, new training content, or targeted support.",
+          "In close coordination with the club, coaching team, and parents, we support young players additionally and practically."
+        ],
+        "bullets": [
+          "Suitable for different age groups",
+          "Qualified DFS coaches",
+          "Intensive training sessions",
+          "Content coordinated with coach and club",
+          "Feints, passing, first touches, shooting, coordination, duels, and game formats"
         ]
       }
     }
