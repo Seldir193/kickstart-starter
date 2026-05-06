@@ -7,6 +7,7 @@ if (!function_exists('ks_register_home_shortcode')) {
       $theme_uri = get_stylesheet_directory_uri();
 
       $utils_abs = $theme_dir . '/assets/css/ks-utils.css';
+
       if (file_exists($utils_abs) && !wp_style_is('ks-utils', 'enqueued')) {
         wp_enqueue_style(
           'ks-utils',
@@ -17,6 +18,7 @@ if (!function_exists('ks_register_home_shortcode')) {
       }
 
       $home_abs = $theme_dir . '/assets/css/ks-home.css';
+
       if (file_exists($home_abs)) {
         wp_enqueue_style(
           'ks-home',
@@ -26,11 +28,8 @@ if (!function_exists('ks_register_home_shortcode')) {
         );
       }
 
- 
-
-   
-
       $hero_split_abs = $theme_dir . '/assets/css/ks-home-hero.css';
+
       if (file_exists($hero_split_abs)) {
         wp_enqueue_style(
           'ks-home-hero',
@@ -41,6 +40,7 @@ if (!function_exists('ks_register_home_shortcode')) {
       }
 
       $videos_css = $theme_dir . '/assets/css/ks-videos.css';
+
       if (file_exists($videos_css)) {
         wp_enqueue_style(
           'ks-videos',
@@ -55,6 +55,7 @@ if (!function_exists('ks_register_home_shortcode')) {
       }
 
       $wa_css = $theme_dir . '/assets/css/ks-wa.css';
+
       if (file_exists($wa_css)) {
         wp_enqueue_style(
           'ks-wa',
@@ -65,6 +66,7 @@ if (!function_exists('ks_register_home_shortcode')) {
       }
 
       $hero_css = $theme_dir . '/assets/css/ks-hero-anim.css';
+
       if (file_exists($hero_css)) {
         wp_enqueue_style(
           'ks-hero-anim',
@@ -75,6 +77,7 @@ if (!function_exists('ks_register_home_shortcode')) {
       }
 
       $hero_js = $theme_dir . '/assets/js/ks-hero.js';
+
       if (file_exists($hero_js)) {
         wp_enqueue_script(
           'ks-hero',
@@ -102,6 +105,14 @@ if (!function_exists('ks_register_home_shortcode')) {
         ? get_permalink($about_page->ID)
         : home_url('/index.php/about/');
 
+      $home_t = function ($key, $fallback) {
+        return function_exists('ks_t') ? ks_t($key, $fallback, 'home') : $fallback;
+      };
+
+      $news_t = function ($key, $fallback) {
+        return function_exists('ks_t') ? ks_t($key, $fallback, 'news') : $fallback;
+      };
+
       $ball_img = $theme_uri . '/assets/img/home/mfs.png';
       $portal_bg = $theme_uri . '/assets/img/home/mfs.png';
       $portal_laptop = $theme_uri . '/assets/img/home/mfs.png';
@@ -120,6 +131,7 @@ if (!function_exists('ks_register_home_shortcode')) {
       $werte_target = home_url('/');
 
       $video_embed = wp_oembed_get('https://www.youtube.com/watch?v=KEWP2dELhrY');
+
       if (!$video_embed) {
         $video_embed = '<div class="ks-vid-ph" aria-hidden="true"></div>';
       }
@@ -134,41 +146,41 @@ if (!function_exists('ks_register_home_shortcode')) {
       $slides = [
         [
           'key' => 'camp',
-          'label' => 'CAMPS',
+          'label' => $home_t('home.hero.slides.camp.label', 'CAMPS'),
           'num' => '01',
-          'title' => 'Fussballcamps',
-          'lead' => 'Ferienprogramme mit Technik, Spielformen und Teamgefühl.',
-          'detail' => 'Ein 3- bis 5-tägiges Fußballprogramm mit Tricks, Koordination, Torschüssen, Wettkämpfen und einem Abschlussturnier – ideal, um Technik und Spaß zu verbinden.',
+          'title' => $home_t('home.hero.slides.camp.title', 'Fussballcamps'),
+          'lead' => $home_t('home.hero.slides.camp.lead', 'Ferienprogramme mit Technik, Spielformen und Teamgefühl.'),
+          'detail' => $home_t('home.hero.slides.camp.detail', 'Ein 3- bis 5-tägiges Fußballprogramm mit Tricks, Koordination, Torschüssen, Wettkämpfen und einem Abschlussturnier – ideal, um Technik und Spaß zu verbinden.'),
           'img' => $theme_uri . '/assets/img/home/left.png',
           'book' => $book_urls['camp'],
         ],
         [
           'key' => 'foerder',
-          'label' => 'TRAINING',
+          'label' => $home_t('home.hero.slides.foerder.label', 'TRAINING'),
           'num' => '02',
-          'title' => 'Fördertraining',
-          'lead' => 'Zusatztraining für Technik, Koordination und Spielverständnis.',
-          'detail' => 'Verbessere dein Spiel durch unser wöchentliches Fördertraining. Dich erwarten Tricks, Schusstechniken, Koordination und tolle Abschlussspiele.',
+          'title' => $home_t('home.hero.slides.foerder.title', 'Fördertraining'),
+          'lead' => $home_t('home.hero.slides.foerder.lead', 'Zusatztraining für Technik, Koordination und Spielverständnis.'),
+          'detail' => $home_t('home.hero.slides.foerder.detail', 'Verbessere dein Spiel durch unser wöchentliches Fördertraining. Dich erwarten Tricks, Schusstechniken, Koordination und tolle Abschlussspiele.'),
           'img' => $theme_uri . '/assets/img/home/mfs.png',
           'book' => $book_urls['foerder'],
         ],
         [
           'key' => 'kita',
-          'label' => 'KINDERGARTEN',
+          'label' => $home_t('home.hero.slides.kita.label', 'KINDERGARTEN'),
           'num' => '03',
-          'title' => 'Kindergarten',
-          'lead' => 'Spielerische Bewegung und erste Ballerfahrungen für Kinder.',
-          'detail' => 'Bewegung, Koordination und Freude am Ball – spielerisch und altersgerecht im Kindergarten mit viel Aktivität und Begeisterung.',
+          'title' => $home_t('home.hero.slides.kita.title', 'Kindergarten'),
+          'lead' => $home_t('home.hero.slides.kita.lead', 'Spielerische Bewegung und erste Ballerfahrungen für Kinder.'),
+          'detail' => $home_t('home.hero.slides.kita.detail', 'Bewegung, Koordination und Freude am Ball – spielerisch und altersgerecht im Kindergarten mit viel Aktivität und Begeisterung.'),
           'img' => $theme_uri . '/assets/img/home/dfs-home-1.png',
           'book' => $book_urls['kita'],
         ],
         [
           'key' => 'einzel',
-          'label' => 'EINZELTRAINING',
+          'label' => $home_t('home.hero.slides.einzel.label', 'EINZELTRAINING'),
           'num' => '04',
-          'title' => 'Einzeltraining',
-          'lead' => 'Individuelle Einheiten mit persönlichem Fokus und klaren Zielen.',
-          'detail' => '1-zu-1 Coaching: individuell, effizient und zielgerichtet – Technik, Torschuss, Athletik und persönliche Entwicklung.',
+          'title' => $home_t('home.hero.slides.einzel.title', 'Einzeltraining'),
+          'lead' => $home_t('home.hero.slides.einzel.lead', 'Individuelle Einheiten mit persönlichem Fokus und klaren Zielen.'),
+          'detail' => $home_t('home.hero.slides.einzel.detail', '1-zu-1 Coaching: individuell, effizient und zielgerichtet – Technik, Torschuss, Athletik und persönliche Entwicklung.'),
           'img' => $theme_uri . '/assets/img/home/dfs-home-4.png',
           'book' => $book_urls['einzel'],
         ],
@@ -186,15 +198,26 @@ if (!function_exists('ks_register_home_shortcode')) {
 <section id="home-hero" class="ks-home-hero ks-sec">
   <div class="container ks-home-hero__shell">
     <div class="ks-home-hero__intro">
-      <div class="ks-kicker" data-i18n="home.hero.kicker">Dortmund Football School</div>
-      <h1 class="ks-home-hero__brand-title" data-i18n="home.hero.title">Build football skills. Strengthen children.</h1>
+      <div class="ks-kicker" data-i18n="home.hero.kicker">
+        <?php echo esc_html($home_t('home.hero.kicker', 'Dortmund Football School')); ?>
+      </div>
+
+      <h1 class="ks-home-hero__brand-title" data-i18n="home.hero.title">
+        <?php echo esc_html($home_t('home.hero.title', 'Build football skills. Strengthen children.')); ?>
+      </h1>
+
       <p class="ks-home-hero__brand-lead" data-i18n="home.hero.lead">
-        Modern training programs for camps, development training, kindergarten and individual training –
-        with clear structure, joy of the game and personal growth.
+        <?php echo esc_html($home_t('home.hero.lead', 'Modern training programs for camps, development training, kindergarten and individual training – with clear structure, joy of the game and personal growth.')); ?>
       </p>
+
       <div class="ks-home-hero__brand-actions">
-        <a class="ks-btn ks-btn--dark" href="#wer-wir-sind" data-i18n="home.hero.primaryButton">Learn more</a>
-        <a class="ks-btn" href="<?php echo esc_url($offers); ?>" data-i18n="home.hero.secondaryButton">Explore programs</a>
+        <a class="ks-btn ks-btn--dark" href="#wer-wir-sind" data-i18n="home.hero.primaryButton">
+          <?php echo esc_html($home_t('home.hero.primaryButton', 'Learn more')); ?>
+        </a>
+
+        <a class="ks-btn" href="<?php echo esc_url($offers); ?>" data-i18n="home.hero.secondaryButton">
+          <?php echo esc_html($home_t('home.hero.secondaryButton', 'Explore programs')); ?>
+        </a>
       </div>
     </div>
 
@@ -217,15 +240,26 @@ if (!function_exists('ks_register_home_shortcode')) {
 
       <div class="ks-home-hero__media">
         <div class="ks-home-hero__overlay">
-          <div class="ks-kicker" data-i18n="home.hero.activeOffer">Active offer</div>
-          <h2 class="ks-home-hero__course-title"><?php echo esc_html($first_slide['title']); ?></h2>
-          <p class="ks-home-hero__course-text"><?php echo esc_html($first_slide['detail']); ?></p>
+          <div class="ks-kicker" data-i18n="home.hero.activeOffer">
+            <?php echo esc_html($home_t('home.hero.activeOffer', 'Active offer')); ?>
+          </div>
+
+          <h2 class="ks-home-hero__course-title">
+            <?php echo esc_html($first_slide['title']); ?>
+          </h2>
+
+          <p class="ks-home-hero__course-text">
+            <?php echo esc_html($first_slide['detail']); ?>
+          </p>
+
           <div class="ks-home-hero__course-actions">
             <a
               class="ks-btn ks-btn--dark ks-home-hero__course-link"
               href="<?php echo esc_url($first_slide['book']); ?>"
               data-i18n="home.hero.bookButton"
-            >Book now</a>
+            >
+              <?php echo esc_html($home_t('home.hero.bookButton', 'Book now')); ?>
+            </a>
           </div>
         </div>
 
@@ -245,33 +279,47 @@ if (!function_exists('ks_register_home_shortcode')) {
     </div>
   </div>
 </section>
-      
+
 <section id="wer-wir-sind" class="ks-sec ks-py-48 ks-home-about">
   <div class="container ks-home-about__grid">
     <div class="ks-home-about__content">
-      <div class="ks-kicker" data-i18n="home.aboutPreview.kicker">Our Philosophy</div>
+      <div class="ks-kicker" data-i18n="home.aboutPreview.kicker">
+        <?php echo esc_html($home_t('home.aboutPreview.kicker', 'Our Philosophy')); ?>
+      </div>
 
       <h2 class="ks-dir__title ks-dir__title--split">
         <span class="ks-dir__title-line" data-i18n="home.aboutPreview.titleLine1">
-          Dortmund
+          <?php echo esc_html($home_t('home.aboutPreview.titleLine1', 'Dortmund')); ?>
         </span>
+
         <span class="ks-dir__title-line" data-i18n="home.aboutPreview.titleLine2">
-          Football School
+          <?php echo esc_html($home_t('home.aboutPreview.titleLine2', 'Football School')); ?>
         </span>
       </h2>
 
       <p class="ks-home-about__lead" data-i18n="home.aboutPreview.lead">
-        We support children, young people, and clubs with a clear training approach that combines athletic development, enjoyment of the game, and a positive learning environment.
+        <?php echo esc_html($home_t('home.aboutPreview.lead', 'We support children, young people, and clubs with a clear training approach that combines athletic development, enjoyment of the game, and a positive learning environment.')); ?>
       </p>
 
       <div class="ks-home-about__points">
         <div class="ks-home-about__point">
-          <strong data-i18n="home.aboutPreview.point1Title">Structured</strong>
-          <span data-i18n="home.aboutPreview.point1Text">Clear content, modern training organization, and easy-to-understand processes.</span>
+          <strong data-i18n="home.aboutPreview.point1Title">
+            <?php echo esc_html($home_t('home.aboutPreview.point1Title', 'Structured')); ?>
+          </strong>
+
+          <span data-i18n="home.aboutPreview.point1Text">
+            <?php echo esc_html($home_t('home.aboutPreview.point1Text', 'Clear content, modern training organization, and easy-to-understand processes.')); ?>
+          </span>
         </div>
+
         <div class="ks-home-about__point">
-          <strong data-i18n="home.aboutPreview.point2Title">Individual</strong>
-          <span data-i18n="home.aboutPreview.point2Text">Support tailored to age, level, and development.</span>
+          <strong data-i18n="home.aboutPreview.point2Title">
+            <?php echo esc_html($home_t('home.aboutPreview.point2Title', 'Individual')); ?>
+          </strong>
+
+          <span data-i18n="home.aboutPreview.point2Text">
+            <?php echo esc_html($home_t('home.aboutPreview.point2Text', 'Support tailored to age, level, and development.')); ?>
+          </span>
         </div>
       </div>
 
@@ -280,27 +328,40 @@ if (!function_exists('ks_register_home_shortcode')) {
           class="ks-btn"
           href="<?php echo esc_url($about_url); ?>"
           data-i18n="home.aboutPreview.button"
-        >Learn more</a>
+        >
+          <?php echo esc_html($home_t('home.aboutPreview.button', 'Learn more')); ?>
+        </a>
       </div>
     </div>
 
     <div class="ks-home-about__media">
-      <div class="ks-home-about__badge" data-i18n="home.aboutPreview.mediaBadge">Insight into our work</div>
+      <div class="ks-home-about__badge" data-i18n="home.aboutPreview.mediaBadge">
+        <?php echo esc_html($home_t('home.aboutPreview.mediaBadge', 'Insight into our work')); ?>
+      </div>
+
       <div class="ks-vid ratio"><?php echo $video_embed; ?></div>
 
       <p class="ks-home-about__caption" data-i18n="home.aboutPreview.mediaCaption">
-        Insights into our work with children, young people, and clubs.
+        <?php echo esc_html($home_t('home.aboutPreview.mediaCaption', 'Insights into our work with children, young people, and clubs.')); ?>
       </p>
 
       <div
         class="ks-home-about__chips"
-        aria-label="Focus areas"
+        aria-label="<?php echo esc_attr($home_t('home.aboutPreview.chipsLabel', 'Focus areas')); ?>"
         data-i18n-attr="aria-label"
         data-i18n="home.aboutPreview.chipsLabel"
       >
-        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip1">Children &amp; Young People</span>
-        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip2">Individual Support</span>
-        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip3">Clubs &amp; Teams</span>
+        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip1">
+          <?php echo esc_html($home_t('home.aboutPreview.chip1', 'Children & Young People')); ?>
+        </span>
+
+        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip2">
+          <?php echo esc_html($home_t('home.aboutPreview.chip2', 'Individual Support')); ?>
+        </span>
+
+        <span class="ks-home-about__chip" data-i18n="home.aboutPreview.chip3">
+          <?php echo esc_html($home_t('home.aboutPreview.chip3', 'Clubs & Teams')); ?>
+        </span>
       </div>
     </div>
   </div>
@@ -310,14 +371,16 @@ if (!function_exists('ks_register_home_shortcode')) {
   <div class="container">
     <div
       class="ks-title-wrap ks-home-values__title-wrap"
-      data-bgword="HALTUNG" data-i18n="home.values.watermark"
-  data-i18n-attr="data-bgword"
+      data-bgword="<?php echo esc_attr($home_t('home.values.watermark', 'HALTUNG')); ?>"
+      data-i18n="home.values.watermark"
+      data-i18n-attr="data-bgword"
     >
       <div class="ks-kicker" data-i18n="home.values.kicker">
-        Our mindset
+        <?php echo esc_html($home_t('home.values.kicker', 'Our mindset')); ?>
       </div>
+
       <h2 class="ks-dir__title" data-i18n="home.values.title">
-        What defines us
+        <?php echo esc_html($home_t('home.values.title', 'What defines us')); ?>
       </h2>
     </div>
 
@@ -329,9 +392,13 @@ if (!function_exists('ks_register_home_shortcode')) {
         <div class="icon-wrap ks-home-values__icon-wrap">
           <img src="<?php echo esc_url($icon1); ?>" alt="" loading="lazy">
         </div>
-        <h3 data-i18n="home.values.card1Title">Joy of the game</h3>
+
+        <h3 data-i18n="home.values.card1Title">
+          <?php echo esc_html($home_t('home.values.card1Title', 'Joy of the game')); ?>
+        </h3>
+
         <p data-i18n="home.values.card1Text">
-          Football should inspire and motivate.
+          <?php echo esc_html($home_t('home.values.card1Text', 'Football should inspire and motivate.')); ?>
         </p>
       </a>
 
@@ -342,9 +409,13 @@ if (!function_exists('ks_register_home_shortcode')) {
         <div class="icon-wrap ks-home-values__icon-wrap">
           <img src="<?php echo esc_url($icon2); ?>" alt="" loading="lazy">
         </div>
-        <h3 data-i18n="home.values.card2Title">Professional quality</h3>
+
+        <h3 data-i18n="home.values.card2Title">
+          <?php echo esc_html($home_t('home.values.card2Title', 'Professional quality')); ?>
+        </h3>
+
         <p data-i18n="home.values.card2Text">
-          We work with structure and quality.
+          <?php echo esc_html($home_t('home.values.card2Text', 'We work with structure and quality.')); ?>
         </p>
       </a>
 
@@ -355,9 +426,13 @@ if (!function_exists('ks_register_home_shortcode')) {
         <div class="icon-wrap ks-home-values__icon-wrap">
           <img src="<?php echo esc_url($icon3); ?>" alt="" loading="lazy">
         </div>
-        <h3 data-i18n="home.values.card3Title">Strong values</h3>
+
+        <h3 data-i18n="home.values.card3Title">
+          <?php echo esc_html($home_t('home.values.card3Title', 'Strong values')); ?>
+        </h3>
+
         <p data-i18n="home.values.card3Text">
-          We strengthen children in sport and life.
+          <?php echo esc_html($home_t('home.values.card3Text', 'We strengthen children in sport and life.')); ?>
         </p>
       </a>
 
@@ -368,54 +443,56 @@ if (!function_exists('ks_register_home_shortcode')) {
         <div class="icon-wrap ks-home-values__icon-wrap">
           <img src="<?php echo esc_url($icon4); ?>" alt="" loading="lazy">
         </div>
-        <h3 data-i18n="home.values.card4Title">Targeted support</h3>
+
+        <h3 data-i18n="home.values.card4Title">
+          <?php echo esc_html($home_t('home.values.card4Title', 'Targeted support')); ?>
+        </h3>
+
         <p data-i18n="home.values.card4Text">
-          Every child is supported appropriately.
+          <?php echo esc_html($home_t('home.values.card4Text', 'Every child is supported appropriately.')); ?>
         </p>
       </a>
     </div>
   </div>
 </section>
-    
-      <?php
-      $faq_items = ks_get_faq_items('home');
 
-      if (!empty($faq_items)) {
-        $faq_video_embed = wp_oembed_get('https://www.youtube.com/watch?v=KEWP2dELhrY');
+<?php
+$faq_items = ks_get_faq_items('home');
 
-        if (!$faq_video_embed) {
-          $faq_video_embed = '<div class="ks-vid-ph" aria-hidden="true"></div>';
-        }
+if (!empty($faq_items)) {
+  $faq_video_embed = wp_oembed_get('https://www.youtube.com/watch?v=KEWP2dELhrY');
 
-echo ks_render_faq_section($faq_items, [
-  'section_id'              => 'faq',
-  'wrapper_class'           => 'container ks-home-faq',
-  'title'                   => 'Häufige Fragen zur Fußballschule',
-  'kicker'                  => 'Gut zu wissen',
-  'watermark'               => 'FAQ',
-  'title_i18n'              => 'home.faq.title',
-  'kicker_i18n'             => 'home.faq.kicker',
-  'items_i18n_prefix'       => 'home.faq',
-  'side_card_enabled'       => true,
-  'side_card_kicker'        => 'Fragen offen?',
-  'side_card_title'         => 'Wir helfen dir gerne weiter',
-  'side_card_text'          => 'Wenn du Fragen zu Trainingsformaten, Anmeldung oder Abläufen hast, kannst du dich jederzeit direkt bei uns melden.',
-  'side_card_button'        => 'Kontakt aufnehmen',
-  'side_card_href'          => esc_url(home_url('/#whatsapp-locations')),
-  'side_card_kicker_i18n'   => 'home.faq.sideCard.kicker',
-  'side_card_title_i18n'    => 'home.faq.sideCard.title',
-  'side_card_text_i18n'     => 'home.faq.sideCard.text',
-  'side_card_button_i18n'   => 'home.faq.sideCard.button',
-]);
-      }
-      ?>
+  if (!$faq_video_embed) {
+    $faq_video_embed = '<div class="ks-vid-ph" aria-hidden="true"></div>';
+  }
 
-      
+  echo ks_render_faq_section($faq_items, [
+    'section_id' => 'faq',
+    'wrapper_class' => 'container ks-home-faq',
+    'title' => $home_t('home.faq.title', 'Häufige Fragen zur Fußballschule'),
+    'kicker' => $home_t('home.faq.kicker', 'Gut zu wissen'),
+    'watermark' => $home_t('home.faq.watermark', 'FAQ'),
+    'title_i18n' => 'home.faq.title',
+    'kicker_i18n' => 'home.faq.kicker',
+    'items_i18n_prefix' => 'home.faq',
+    'side_card_enabled' => true,
+    'side_card_kicker' => $home_t('home.faq.sideCard.kicker', 'Fragen offen?'),
+    'side_card_title' => $home_t('home.faq.sideCard.title', 'Wir helfen dir gerne weiter'),
+    'side_card_text' => $home_t('home.faq.sideCard.text', 'Wenn du Fragen zu Trainingsformaten, Anmeldung oder Abläufen hast, kannst du dich jederzeit direkt bei uns melden.'),
+    'side_card_button' => $home_t('home.faq.sideCard.button', 'Kontakt aufnehmen'),
+    'side_card_href' => esc_url(home_url('/#whatsapp-locations')),
+    'side_card_kicker_i18n' => 'home.faq.sideCard.kicker',
+    'side_card_title_i18n' => 'home.faq.sideCard.title',
+    'side_card_text_i18n' => 'home.faq.sideCard.text',
+    'side_card_button_i18n' => 'home.faq.sideCard.button',
+  ]);
+}
+?>
 
-     <section
+<section
   id="coach-portal"
   class="ks-sec ks-home-portal"
-  aria-label="DFS Trainingsbibliothek"
+  aria-label="<?php echo esc_attr($home_t('home.portal.ariaLabel', 'DFS Trainingsbibliothek')); ?>"
   data-i18n-attr="aria-label"
   data-i18n="home.portal.ariaLabel"
 >
@@ -430,41 +507,43 @@ echo ks_render_faq_section($faq_items, [
   <div class="container ks-home-portal__grid">
     <div class="ks-home-portal__text">
       <div class="ks-eyebrow" data-i18n="home.portal.eyebrow">
-  Digitale Inhalte für Trainer, Teams und ambitionierte Spieler
-</div>
+        <?php echo esc_html($home_t('home.portal.eyebrow', 'Digitale Inhalte für Trainer, Teams und ambitionierte Spieler')); ?>
+      </div>
 
-<h2 class="ks-home-portal__title">
-  <span data-i18n="home.portal.titlePrefix">DFSCOACH</span>
-  <span data-i18n="home.portal.titleSuffix">Trainingsbibliothek</span>
-</h2>
+      <h2 class="ks-home-portal__title">
+        <span data-i18n="home.portal.titlePrefix">
+          <?php echo esc_html($home_t('home.portal.titlePrefix', 'DFSCOACH')); ?>
+        </span>
 
-<p data-i18n="home.portal.text">
-  Greife auf Übungen, Trainingsideen und strukturierte Inhalte zu. Nutze die Bibliothek
-  zur Vorbereitung deiner Einheiten und entwickle deine Trainingsarbeit gezielt weiter.
-</p>
+        <span data-i18n="home.portal.titleSuffix">
+          <?php echo esc_html($home_t('home.portal.titleSuffix', 'Trainingsbibliothek')); ?>
+        </span>
+      </h2>
 
-<p class="ks-home-portal__actions">
-  <a class="ks-btn ks-btn--light" href="<?php echo esc_url($portal_url); ?>" data-i18n="home.portal.button">
-    Mehr erfahren
-  </a>
-</p>
+      <p data-i18n="home.portal.text">
+        <?php echo esc_html($home_t('home.portal.text', 'Greife auf Übungen, Trainingsideen und strukturierte Inhalte zu. Nutze die Bibliothek zur Vorbereitung deiner Einheiten und entwickle deine Trainingsarbeit gezielt weiter.')); ?>
+      </p>
+
+      <p class="ks-home-portal__actions">
+        <a class="ks-btn ks-btn--light" href="<?php echo esc_url($portal_url); ?>" data-i18n="home.portal.button">
+          <?php echo esc_html($home_t('home.portal.button', 'Mehr erfahren')); ?>
+        </a>
+      </p>
     </div>
 
     <div class="ks-home-portal__media" role="presentation" aria-hidden="true"></div>
   </div>
 </section>
 
-      <?php include $theme_dir . '/inc/partials/shared/team-section.php'; ?>
+<?php include $theme_dir . '/inc/partials/shared/team-section.php'; ?>
 
-      <?php
-      if (function_exists('ks_render_feedback_section')) {
-        echo ks_render_feedback_section();
-      }
-      ?>
+<?php
+if (function_exists('ks_render_feedback_section')) {
+  echo ks_render_feedback_section();
+}
+?>
 
-      
-
-      <?php echo do_shortcode('[ks_partner_network]'); ?>
+<?php echo do_shortcode('[ks_partner_network]'); ?>
 
 <?php if ($show_news): ?>
   <?php
@@ -476,24 +555,29 @@ echo ks_render_faq_section($faq_items, [
   <section id="news" class="ks-sec ks-home-news">
     <div class="container ks-home-news__shell">
       <div class="ks-home-news__intro">
-        <div class="ks-kicker" data-i18n="news.kicker">Aktuelles</div>
+        <div class="ks-kicker" data-i18n="news.kicker">
+          <?php echo esc_html($news_t('news.kicker', 'Aktuelles')); ?>
+        </div>
 
         <h2
           class="ks-dir__title ks-home-news__title"
           data-i18n="news.title"
         >
-          Neues aus der Fussballschule
+          <?php echo esc_html($news_t('news.title', 'Neues aus der Fussballschule')); ?>
         </h2>
 
         <p class="ks-home-news__lead" data-i18n="news.lead">
-          Spannende Einblicke, aktuelle Entwicklungen und Geschichten aus unserem Alltag auf und neben dem Platz.
+          <?php echo esc_html($news_t('news.lead', 'Spannende Einblicke, aktuelle Entwicklungen und Geschichten aus unserem Alltag auf und neben dem Platz.')); ?>
         </p>
 
         <a
           class="ks-btn ks-home-news__archive-link"
           href="<?php echo esc_url($news_archive_url); ?>"
         >
-          <span data-i18n="news.archiveButton">Alle News ansehen</span>
+          <span data-i18n="news.archiveButton">
+            <?php echo esc_html($news_t('news.archiveButton', 'Alle News ansehen')); ?>
+          </span>
+
           <img
             class="ks-home-news__archive-icon"
             src="<?php echo esc_url($theme_uri . '/assets/img/team/arrow_right_alt.svg'); ?>"
@@ -510,22 +594,24 @@ echo ks_render_faq_section($faq_items, [
   </section>
 <?php endif; ?>
 
-      <?php
-      $program_cta_partial = $theme_dir . '/inc/partials/home/program-cta.php';
-      if (file_exists($program_cta_partial)) {
-        include $program_cta_partial;
-      }
-      ?>
+<?php
+$program_cta_partial = $theme_dir . '/inc/partials/home/program-cta.php';
 
-      <?php echo do_shortcode('[ks_whatsapp_locations]'); ?>
+if (file_exists($program_cta_partial)) {
+  include $program_cta_partial;
+}
+?>
 
-      <?php
+<?php echo do_shortcode('[ks_whatsapp_locations]'); ?>
+
+<?php
       return ob_get_clean();
     });
   }
 
   add_action('init', 'ks_register_home_shortcode');
 }
+
 
 
 
