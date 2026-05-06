@@ -1,5 +1,11 @@
 <?php
 
+$hero_page_i18n = get_stylesheet_directory() . '/inc/shortcodes/hero-page-i18n.php';
+
+if (file_exists($hero_page_i18n)) {
+  require_once $hero_page_i18n;
+}
+
 if (!function_exists('ks_register_page_hero_shortcode')) {
   function ks_register_page_hero_shortcode() {
     add_shortcode('ks_hero_page', 'ks_render_page_hero_shortcode');
@@ -9,6 +15,7 @@ if (!function_exists('ks_register_page_hero_shortcode')) {
 if (!function_exists('ks_render_page_hero_shortcode')) {
   function ks_render_page_hero_shortcode($atts = [], $content = '') {
     $data = ks_get_page_hero_data($atts);
+
     return ks_get_page_hero_markup($data) . ks_get_page_hero_content($content);
   }
 }
@@ -18,7 +25,10 @@ if (!function_exists('ks_get_page_hero_data')) {
     $data = shortcode_atts(ks_get_page_hero_defaults(), $atts, 'ks_hero_page');
     $data['image'] = ks_get_page_hero_image($data['image']);
     $data['features'] = ks_should_show_page_hero_features($data['features']);
-    return $data;
+
+    return function_exists('ks_apply_page_hero_i18n')
+      ? ks_apply_page_hero_i18n($data)
+      : $data;
   }
 }
 
@@ -68,6 +78,7 @@ if (!function_exists('ks_get_page_hero_image')) {
 if (!function_exists('ks_get_featured_page_hero_image')) {
   function ks_get_featured_page_hero_image() {
     $image = get_the_post_thumbnail_url(null, 'full');
+
     return $image ?: get_stylesheet_directory_uri() . '/assets/img/hero/page-hero-default.png';
   }
 }
@@ -88,10 +99,10 @@ if (!function_exists('ks_get_page_hero_markup')) {
   function ks_get_page_hero_markup($data) {
     ob_start();
     ks_print_page_hero_markup($data);
+
     return ob_get_clean();
   }
 }
-
 
 if (!function_exists('ks_print_page_hero_markup')) {
   function ks_print_page_hero_markup($data) {
@@ -108,9 +119,6 @@ if (!function_exists('ks_print_page_hero_markup')) {
   }
 }
 
-
-
-
 if (!function_exists('ks_print_page_hero_i18n_attr')) {
   function ks_print_page_hero_i18n_attr($key, $attr = '') {
     if ($key === '') {
@@ -125,15 +133,25 @@ if (!function_exists('ks_print_page_hero_i18n_attr')) {
   }
 }
 
+if (!function_exists('ks_page_hero_get_text')) {
+  function ks_page_hero_get_text($key, $fallback) {
+    return function_exists('ks_page_hero_translate')
+      ? ks_page_hero_translate($key, $fallback)
+      : $fallback;
+  }
+}
+
 if (!function_exists('ks_print_page_hero_content')) {
   function ks_print_page_hero_content($data) {
     ?>
     <div class="ks-page-hero__content">
       <?php ks_print_page_hero_crumb($data); ?>
       <?php ks_print_page_hero_eyebrow($data); ?>
+
       <h1 class="ks-page-hero__title" <?php ks_print_page_hero_i18n_attr($data['title_i18n']); ?>>
         <?php echo esc_html($data['title']); ?>
       </h1>
+
       <?php ks_print_page_hero_subtitle($data); ?>
       <?php ks_print_page_hero_actions($data); ?>
     </div>
@@ -148,7 +166,9 @@ if (!function_exists('ks_print_page_hero_crumb')) {
       <a class="ks-page-hero__crumb-link" href="<?php echo esc_url(home_url('/')); ?>" <?php ks_print_page_hero_i18n_attr($data['breadcrumb_i18n']); ?>>
         <?php echo esc_html($data['breadcrumb']); ?>
       </a>
+
       <span class="ks-page-hero__crumb-separator">/</span>
+
       <strong class="ks-page-hero__crumb-current" <?php ks_print_page_hero_i18n_attr($data['title_i18n']); ?>>
         <?php echo esc_html($data['title']); ?>
       </strong>
@@ -210,13 +230,14 @@ if (!function_exists('ks_print_page_hero_button')) {
   }
 }
 
-
 if (!function_exists('ks_print_page_hero_button_markup')) {
   function ks_print_page_hero_button_markup($label, $href, $type, $i18n) {
     $button_class = $type === 'primary' ? 'ks-btn ks-btn--dark' : 'ks-btn';
     ?>
     <a class="<?php echo esc_attr($button_class); ?>" href="<?php echo esc_url($href); ?>">
-      <span <?php ks_print_page_hero_i18n_attr($i18n); ?>><?php echo esc_html($label); ?></span>
+      <span <?php ks_print_page_hero_i18n_attr($i18n); ?>>
+        <?php echo esc_html($label); ?>
+      </span>
     </a>
     <?php
   }
@@ -230,8 +251,15 @@ if (!function_exists('ks_print_page_hero_media')) {
     ?>
     <div class="ks-page-hero__media" aria-hidden="true">
       <div class="ks-page-hero__image-card">
-        <img class="ks-page-hero__image" src="<?php echo esc_url($data['image']); ?>" alt="<?php echo esc_attr($data['image_alt']); ?>" loading="eager" decoding="async">
+        <img
+          class="ks-page-hero__image"
+          src="<?php echo esc_url($data['image']); ?>"
+          alt="<?php echo esc_attr($data['image_alt']); ?>"
+          loading="eager"
+          decoding="async"
+        >
       </div>
+
       <?php ks_print_page_hero_floating_cards($data['features'], $data['variant']); ?>
     </div>
     <?php
@@ -255,11 +283,13 @@ if (!function_exists('ks_print_page_hero_floating_card')) {
     ?>
     <article class="<?php echo esc_attr($card['class']); ?>">
       <img src="<?php echo esc_url($card['icon']); ?>" alt="" aria-hidden="true">
+
       <strong data-i18n="<?php echo esc_attr($card['title_i18n']); ?>">
-        <?php echo esc_html($card['title']); ?>
+        <?php echo esc_html(ks_page_hero_get_text($card['title_i18n'], $card['title'])); ?>
       </strong>
+
       <span data-i18n="<?php echo esc_attr($card['text_i18n']); ?>">
-        <?php echo esc_html($card['text']); ?>
+        <?php echo esc_html(ks_page_hero_get_text($card['text_i18n'], $card['text'])); ?>
       </span>
     </article>
     <?php
@@ -292,22 +322,21 @@ if (!function_exists('ks_get_page_hero_franchise_floating_cards')) {
     $base_uri = get_stylesheet_directory_uri() . '/assets/img/hero';
 
     return [
-      [
-        'icon' => $base_uri . '/trophy.svg',
-        'title' => 'Bewährtes Konzept',
-        'text' => 'Strukturierte Grundlage für deinen Standort.',
-        'class' => 'ks-page-hero__float-card ks-page-hero__float-card--dark',
-        'title_i18n' => 'pageHero.franchiseFeatures.model.title',
-        'text_i18n' => 'pageHero.franchiseFeatures.model.text',
-      ],
-      [
-        'icon' => $base_uri . '/shield.svg',
-        'title' => 'Langfristige Partnerschaft',
-        'text' => 'Gemeinsam wachsen mit klarer Perspektive.',
-        'class' => 'ks-page-hero__float-card ks-page-hero__float-card--light',
-        'title_i18n' => 'pageHero.franchiseFeatures.partner.title',
-        'text_i18n' => 'pageHero.franchiseFeatures.partner.text',
-      ],
+      ks_get_page_hero_franchise_floating_card($base_uri, 'model', 'trophy', 'Bewährtes Konzept', 'Strukturierte Grundlage für deinen Standort.', 'dark'),
+      ks_get_page_hero_franchise_floating_card($base_uri, 'partner', 'shield', 'Langfristige Partnerschaft', 'Gemeinsam wachsen mit klarer Perspektive.', 'light'),
+    ];
+  }
+}
+
+if (!function_exists('ks_get_page_hero_franchise_floating_card')) {
+  function ks_get_page_hero_franchise_floating_card($base_uri, $key, $icon, $title, $text, $variant) {
+    return [
+      'icon' => $base_uri . '/' . $icon . '.svg',
+      'title' => $title,
+      'text' => $text,
+      'class' => 'ks-page-hero__float-card ks-page-hero__float-card--' . $variant,
+      'title_i18n' => 'pageHero.franchiseFeatures.' . $key . '.title',
+      'text_i18n' => 'pageHero.franchiseFeatures.' . $key . '.text',
     ];
   }
 }
@@ -345,12 +374,14 @@ if (!function_exists('ks_print_page_hero_feature')) {
     ?>
     <article class="ks-page-hero__feature">
       <img src="<?php echo esc_url($feature['icon']); ?>" alt="" aria-hidden="true">
+
       <div>
         <strong data-i18n="<?php echo esc_attr($feature['title_i18n']); ?>">
-          <?php echo esc_html($feature['title']); ?>
+          <?php echo esc_html(ks_page_hero_get_text($feature['title_i18n'], $feature['title'])); ?>
         </strong>
+
         <span data-i18n="<?php echo esc_attr($feature['text_i18n']); ?>">
-          <?php echo esc_html($feature['text']); ?>
+          <?php echo esc_html(ks_page_hero_get_text($feature['text_i18n'], $feature['text'])); ?>
         </span>
       </div>
     </article>
@@ -386,34 +417,10 @@ if (!function_exists('ks_get_page_hero_franchise_features')) {
     $base_uri = get_stylesheet_directory_uri() . '/assets/img/hero';
 
     return [
-      [
-        'icon' => $base_uri . '/trophy.svg',
-        'title' => 'Bewährtes Konzept',
-        'text' => 'Strukturierte Grundlage für deinen Standort.',
-        'title_i18n' => 'pageHero.franchiseFeatures.model.title',
-        'text_i18n' => 'pageHero.franchiseFeatures.model.text',
-      ],
-      [
-        'icon' => $base_uri . '/trainer.svg',
-        'title' => 'Starke Begleitung',
-        'text' => 'Know-how, Austausch und klare Standards.',
-        'title_i18n' => 'pageHero.franchiseFeatures.support.title',
-        'text_i18n' => 'pageHero.franchiseFeatures.support.text',
-      ],
-      [
-        'icon' => $base_uri . '/location.svg',
-        'title' => 'Schneller Start',
-        'text' => 'Mit Marke, Prozessen und Unterstützung.',
-        'title_i18n' => 'pageHero.franchiseFeatures.start.title',
-        'text_i18n' => 'pageHero.franchiseFeatures.start.text',
-      ],
-      [
-        'icon' => $base_uri . '/shield.svg',
-        'title' => 'Langfristige Partnerschaft',
-        'text' => 'Gemeinsam wachsen mit klarer Perspektive.',
-        'title_i18n' => 'pageHero.franchiseFeatures.partner.title',
-        'text_i18n' => 'pageHero.franchiseFeatures.partner.text',
-      ],
+      ks_get_page_hero_franchise_feature($base_uri, 'model', 'trophy', 'Bewährtes Konzept', 'Strukturierte Grundlage für deinen Standort.'),
+      ks_get_page_hero_franchise_feature($base_uri, 'support', 'trainer', 'Starke Begleitung', 'Know-how, Austausch und klare Standards.'),
+      ks_get_page_hero_franchise_feature($base_uri, 'start', 'location', 'Schneller Start', 'Mit Marke, Prozessen und Unterstützung.'),
+      ks_get_page_hero_franchise_feature($base_uri, 'partner', 'shield', 'Langfristige Partnerschaft', 'Gemeinsam wachsen mit klarer Perspektive.'),
     ];
   }
 }
@@ -430,6 +437,18 @@ if (!function_exists('ks_get_page_hero_feature')) {
   }
 }
 
+if (!function_exists('ks_get_page_hero_franchise_feature')) {
+  function ks_get_page_hero_franchise_feature($base_uri, $key, $icon, $title, $text) {
+    return [
+      'icon' => $base_uri . '/' . $icon . '.svg',
+      'title' => $title,
+      'text' => $text,
+      'title_i18n' => 'pageHero.franchiseFeatures.' . $key . '.title',
+      'text_i18n' => 'pageHero.franchiseFeatures.' . $key . '.text',
+    ];
+  }
+}
+
 if (!function_exists('ks_get_page_hero_content')) {
   function ks_get_page_hero_content($content) {
     if (trim($content) === '') {
@@ -441,10 +460,6 @@ if (!function_exists('ks_get_page_hero_content')) {
 }
 
 ks_register_page_hero_shortcode();
-
-
-
-
 
 
 
