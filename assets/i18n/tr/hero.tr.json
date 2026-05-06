@@ -5,7 +5,7 @@
   "about": {
     "hero": {
       "title": "Hakkımızda",
-      "subtitle": "Çocukları futbol yoluyla destekliyoruz. Tutku, uzmanlık ve gönülden bağlılıkla.",
+      "subtitle": "Çocukları ve gençleri futbol, hareket ve net değerler yoluyla destekliyoruz. Yaşa uygun antrenman, kişisel rehberlik ve gelişim, keyif ve takım ruhunun bir araya geldiği bir ortam sunuyoruz.",
       "watermark": "HAKKIMIZDA"
     }
   },
@@ -54,7 +54,7 @@
   "news": {
     "hero": {
       "title": "Haberler",
-      "subtitle": "Dortmund Futbol Okulu’ndan güncel gelişmeler",
+      "subtitle": "Futbol okulumuzdan haberler, içgörüler ve hikâyelerle güncel kal. Burada antrenmanlar, lokasyonlar, projeler ve gelişmeler hakkında güncel yazılar bulabilirsin.",
       "eyebrow": "Güncel",
       "actions": {
         "read": "Yazıları oku",
@@ -65,7 +65,7 @@
   "franchise": {
     "hero": {
       "title": "Franchise",
-      "subtitle": "Net bir futbol okulu konsepti, güçlü standartlar ve uzun vadeli destekle kendi lokasyonunu kur.",
+      "subtitle": "Net bir futbol okulu konsepti, profesyonel standartlar ve kişisel rehberlikle kendi lokasyonunu kur. Kurulum, süreçler ve bölgenin uzun vadeli gelişimi konusunda seni destekliyoruz.",
       "eyebrow": "Franchise",
       "actions": {
         "concept": "Konsepti keşfet",
@@ -76,7 +76,7 @@
   "jobs": {
     "hero": {
       "title": "Güncel iş ilanları",
-      "subtitle": "Dortmund Futbol Okulu’nda çalış",
+      "subtitle": "Dortmund Futbol Okulu’nun bir parçası ol ve çocuklara keyif, yapı ve sorumlulukla eşlik et. Açık pozisyonları keşfet ve sahadaki deneyimini nasıl katkıya dönüştürebileceğini gör.",
       "eyebrow": "Kariyer",
       "actions": {
         "positions": "Pozisyonları gör",
@@ -122,6 +122,6 @@
       "faq": "Sık sorulan sorular"
     },
     "eyebrow": "Kurslar",
-    "subtitle": "Sana uygun antrenmanı bul ve ücretsiz deneme antrenmanını doğrudan online rezerve et."
+    "subtitle": "Çocuğun için uygun antrenmanı bul ve ücretsiz deneme antrenmanını doğrudan online rezerve et. Kurs, lokasyon ve tarihi seçerek mevcut tüm teklifleri net bir şekilde görebilirsin."
   }
 }
