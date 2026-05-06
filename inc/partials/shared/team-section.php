@@ -1,11 +1,12 @@
-
-
-
 <?php
 
 $team_items = array_values(is_array($coaches ?? null) ? $coaches : []);
 $fallback_src = $fallback_img ?: ($theme_uri . '/assets/img/avatar.png');
 $team_arrow_icon = $theme_uri . '/assets/img/team/arrow_right_alt.svg';
+
+$team_t = function ($key, $fallback) {
+  return function_exists('ks_t') ? ks_t($key, $fallback, 'home') : $fallback;
+};
 
 $team_fact_icons = [
   $theme_uri . '/assets/img/team/trophy.svg',
@@ -55,14 +56,20 @@ $side_items = array_slice($team_items, 1, 5);
 
       <div
         class="ks-title-wrap ks-title-wrap--team"
-        data-bgword="DFS"
+        data-bgword="<?php echo esc_attr($team_t('home.team.watermark', 'DFS')); ?>"
         data-i18n="home.team.watermark"
         data-i18n-attr="data-bgword"
       >
-        <div class="ks-kicker" data-i18n="home.team.kicker">Unsere Trainer</div>
-        <h2 class="ks-dir__title ks-home-team__title" data-i18n="home.team.title">Lerne unser Trainerteam kennen</h2>
+        <div class="ks-kicker" data-i18n="home.team.kicker">
+          <?php echo esc_html($team_t('home.team.kicker', 'Unsere Trainer')); ?>
+        </div>
+
+        <h2 class="ks-dir__title ks-home-team__title" data-i18n="home.team.title">
+          <?php echo esc_html($team_t('home.team.title', 'Lerne unser Trainerteam kennen')); ?>
+        </h2>
+
         <p class="ks-home-team__lead" data-i18n="home.team.lead">
-          Erfahrene Coaches. Echte Leidenschaft. Eine gemeinsame Mission: das Potenzial jedes Spielers zu entfalten – auf und neben dem Platz.
+          <?php echo esc_html($team_t('home.team.lead', 'Erfahrene Coaches. Echte Leidenschaft. Eine gemeinsame Mission: das Potenzial jedes Spielers zu entfalten – auf und neben dem Platz.')); ?>
         </p>
       </div>
 
@@ -100,8 +107,12 @@ $side_items = array_slice($team_items, 1, 5);
                     aria-hidden="true"
                   />
                   <span class="ks-home-team__fact-copy">
-                    <strong data-i18n="home.team.fact1Title">Individuelle Entwicklung</strong>
-                    <span data-i18n="home.team.fact1Text">Gezielte Förderung mit Blick auf Technik, Haltung und Spielverständnis.</span>
+                    <strong data-i18n="home.team.fact1Title">
+                      <?php echo esc_html($team_t('home.team.fact1Title', 'Individuelle Entwicklung')); ?>
+                    </strong>
+                    <span data-i18n="home.team.fact1Text">
+                      <?php echo esc_html($team_t('home.team.fact1Text', 'Gezielte Förderung mit Blick auf Technik, Haltung und Spielverständnis.')); ?>
+                    </span>
                   </span>
                 </li>
 
@@ -113,8 +124,12 @@ $side_items = array_slice($team_items, 1, 5);
                     aria-hidden="true"
                   />
                   <span class="ks-home-team__fact-copy">
-                    <strong data-i18n="home.team.fact2Title">Strukturiertes Coaching</strong>
-                    <span data-i18n="home.team.fact2Text">Klare Inhalte, moderne Trainingsmethoden und nachvollziehbare Abläufe.</span>
+                    <strong data-i18n="home.team.fact2Title">
+                      <?php echo esc_html($team_t('home.team.fact2Title', 'Strukturiertes Coaching')); ?>
+                    </strong>
+                    <span data-i18n="home.team.fact2Text">
+                      <?php echo esc_html($team_t('home.team.fact2Text', 'Klare Inhalte, moderne Trainingsmethoden und nachvollziehbare Abläufe.')); ?>
+                    </span>
                   </span>
                 </li>
 
@@ -126,14 +141,20 @@ $side_items = array_slice($team_items, 1, 5);
                     aria-hidden="true"
                   />
                   <span class="ks-home-team__fact-copy">
-                    <strong data-i18n="home.team.fact3Title">Praxisnahe Förderung</strong>
-                    <span data-i18n="home.team.fact3Text">Begleitung nah am Spieler – auf und neben dem Platz.</span>
+                    <strong data-i18n="home.team.fact3Title">
+                      <?php echo esc_html($team_t('home.team.fact3Title', 'Praxisnahe Förderung')); ?>
+                    </strong>
+                    <span data-i18n="home.team.fact3Text">
+                      <?php echo esc_html($team_t('home.team.fact3Text', 'Begleitung nah am Spieler – auf und neben dem Platz.')); ?>
+                    </span>
                   </span>
                 </li>
               </ul>
 
               <a class="ks-btn ks-home-team__cta" data-team-featured-link href="<?php echo esc_url($featured['href']); ?>">
-                <span data-i18n="home.team.cta">Profil ansehen</span>
+                <span data-i18n="home.team.cta">
+                  <?php echo esc_html($team_t('home.team.cta', 'Profil ansehen')); ?>
+                </span>
                 <img
                   class="ks-home-team__cta-icon"
                   src="<?php echo esc_url($team_arrow_icon); ?>"
@@ -148,31 +169,25 @@ $side_items = array_slice($team_items, 1, 5);
             <button
               type="button"
               class="ks-home-team__side-nav ks-home-team__side-nav--up"
-              aria-label="Vorheriger Trainer"
+              aria-label="<?php echo esc_attr($team_t('home.team.navUp', 'Vorheriger Trainer')); ?>"
               data-i18n="home.team.navUp"
               data-i18n-attr="aria-label"
             >
-              <!-- <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M12 18V6"></path>
-                <path d="M6 12l6-6 6 6"></path>
-              </svg> -->
-
-               <img
-  class="ks-home-team__side-nav-icon"
-  src="<?php echo esc_url($team_arrow_icon); ?>"
-  alt=""
-  aria-hidden="true"
-/>
+              <img
+                class="ks-home-team__side-nav-icon"
+                src="<?php echo esc_url($team_arrow_icon); ?>"
+                alt=""
+                aria-hidden="true"
+              />
             </button>
 
             <div class="ks-home-team__side">
               <?php foreach ($side_items as $item): ?>
-                <!-- <a class="ks-home-team__side-card" data-team-side-card href="<?php echo esc_url($item['href']); ?>"> -->
-                  <button
-  type="button"
-  class="ks-home-team__side-card"
-  data-team-side-card
->
+                <button
+                  type="button"
+                  class="ks-home-team__side-card"
+                  data-team-side-card
+                >
                   <span class="ks-home-team__side-media">
                     <img
                       class="ks-home-team__side-image"
@@ -194,7 +209,9 @@ $side_items = array_slice($team_items, 1, 5);
                     </span>
 
                     <span class="ks-home-team__side-linkline">
-                      <span class="ks-home-team__side-linktext" data-i18n="home.team.more">Mehr erfahren</span>
+                      <span class="ks-home-team__side-linktext" data-i18n="home.team.more">
+                        <?php echo esc_html($team_t('home.team.more', 'Mehr erfahren')); ?>
+                      </span>
                       <img
                         class="ks-home-team__mini-arrow"
                         src="<?php echo esc_url($team_arrow_icon); ?>"
@@ -203,7 +220,6 @@ $side_items = array_slice($team_items, 1, 5);
                       />
                     </span>
                   </span>
-                <!-- </a> -->
                 </button>
               <?php endforeach; ?>
             </div>
@@ -211,46 +227,25 @@ $side_items = array_slice($team_items, 1, 5);
             <button
               type="button"
               class="ks-home-team__side-nav ks-home-team__side-nav--down"
-              aria-label="Nächster Trainer"
+              aria-label="<?php echo esc_attr($team_t('home.team.navDown', 'Nächster Trainer')); ?>"
               data-i18n="home.team.navDown"
               data-i18n-attr="aria-label"
             >
-              <!-- <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M12 6v12"></path>
-                <path d="M6 12l6 6 6-6"></path>
-              </svg> -->
-
               <img
-  class="ks-home-team__side-nav-icon"
-  src="<?php echo esc_url($team_arrow_icon); ?>"
-  alt=""
-  aria-hidden="true"
-/>
+                class="ks-home-team__side-nav-icon"
+                src="<?php echo esc_url($team_arrow_icon); ?>"
+                alt=""
+                aria-hidden="true"
+              />
             </button>
           </div>
         </div>
       <?php else: ?>
-        <div class="ks-home-team__empty" data-i18n="home.team.empty">Keine Trainer gefunden.</div>
+        <div class="ks-home-team__empty" data-i18n="home.team.empty">
+          <?php echo esc_html($team_t('home.team.empty', 'Keine Trainer gefunden.')); ?>
+        </div>
       <?php endif; ?>
     </div>
   </div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
