@@ -1,3 +1,5 @@
+
+
 <?php
 
 $team_items = array_values(is_array($coaches ?? null) ? $coaches : []);
@@ -13,6 +15,7 @@ $team_fact_icons = [
   $theme_uri . '/assets/img/team/license.svg',
   $theme_uri . '/assets/img/team/group.svg',
 ];
+
 
 $build_team_item = function (array $coach) use ($trainer_url, $fallback_src) {
   $first = isset($coach['firstName']) ? trim((string) $coach['firstName']) : '';
@@ -248,4 +251,14 @@ $side_items = array_slice($team_items, 1, 5);
     </div>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
 
