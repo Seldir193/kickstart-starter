@@ -280,9 +280,28 @@ add_action('init', function () {
       }
     }
 
-    ob_start(); ?>
+    ob_start(); 
 
+$page_hero_image = esc_url($theme_uri . '/assets/img/hero/mfs.png');
 
+// echo do_shortcode(
+//   '[ks_hero_page title="' . esc_attr($heading) .
+//   '" subtitle="Finde das passende Training und buche dein kostenfreies Schnuppertraining direkt online." breadcrumb="Home" image="' .
+//   $page_hero_image .
+//   '" variant="offers" features="0" eyebrow="Kurse" primary_label="Jetzt buchen" primary_href="#angebote-buchen" secondary_label="Häufige Fragen" secondary_href="#dir-faq" title_i18n="' .
+//   esc_attr($title_i18n) .
+//   '" subtitle_i18n="offersHero.subtitle" eyebrow_i18n="offersHero.eyebrow" primary_i18n="offersHero.actions.booking" secondary_i18n="offersHero.actions.faq"]'
+// );
+
+echo do_shortcode(
+  '[ks_hero_page title="' . esc_attr($heading) .
+  '" subtitle="Finde das passende Training und buche dein kostenfreies Schnuppertraining direkt online." breadcrumb="Home" image="' .
+  $page_hero_image .
+  '" variant="offers" features="0" eyebrow="Kurse" primary_label="Jetzt buchen" primary_href="#angebote-buchen" secondary_label="Häufige Fragen" secondary_href="#dir-faq" title_i18n="' .
+  esc_attr($title_i18n) .
+  '" subtitle_i18n="offersHero.subtitle" eyebrow_i18n="offersHero.eyebrow" primary_i18n="offersHero.actions.booking" secondary_i18n="offersHero.actions.faq"]'
+);
+?>
 
 <div id="ksDir"
      class="ks-dir"
@@ -295,18 +314,7 @@ add_action('init', function () {
      data-close-icon="<?php echo esc_url($theme_uri . '/assets/img/close.png'); ?>"
      data-coachph="<?php echo esc_url($theme_uri . '/assets/img/avatar.png'); ?>">
 
-  <?php
-  $page_hero_image = esc_url($theme_uri . '/assets/img/hero/mfs.png');
-
-  echo do_shortcode(
-  '[ks_hero_page title="' . esc_attr($heading) .
-  '" subtitle="Finde das passende Training und buche dein kostenfreies Schnuppertraining direkt online." breadcrumb="Home" image="' .
-  $page_hero_image .
-  '" variant="offers" features="0" eyebrow="Kurse" primary_label="Jetzt buchen" primary_href="#angebote-buchen" secondary_label="Häufige Fragen" secondary_href="#dir-faq" title_i18n="' .
-  esc_attr($title_i18n) .
-  '" subtitle_i18n="offersHero.subtitle" eyebrow_i18n="offersHero.eyebrow" primary_i18n="offersHero.actions.booking" secondary_i18n="offersHero.actions.faq"]'
-);
-  ?>
+  
 
   <header id="angebote-buchen" class="ks-dir__intro ks-py-56">
     <p class="<?php echo esc_attr($kickerClass); ?>">

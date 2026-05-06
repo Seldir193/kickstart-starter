@@ -92,6 +92,7 @@ if (!function_exists('ks_get_page_hero_markup')) {
   }
 }
 
+
 if (!function_exists('ks_print_page_hero_markup')) {
   function ks_print_page_hero_markup($data) {
     ?>
@@ -106,6 +107,9 @@ if (!function_exists('ks_print_page_hero_markup')) {
     <?php
   }
 }
+
+
+
 
 if (!function_exists('ks_print_page_hero_i18n_attr')) {
   function ks_print_page_hero_i18n_attr($key, $attr = '') {
