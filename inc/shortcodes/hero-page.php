@@ -96,7 +96,7 @@ if (!function_exists('ks_print_page_hero_markup')) {
   function ks_print_page_hero_markup($data) {
     ?>
     <section class="<?php echo esc_attr(ks_get_page_hero_class($data['variant'])); ?>">
-      <div class="ks-page-hero__inner">
+      <div class="container ks-page-hero__inner">
         <?php ks_print_page_hero_content($data); ?>
         <?php ks_print_page_hero_media($data); ?>
       </div>
@@ -206,13 +206,13 @@ if (!function_exists('ks_print_page_hero_button')) {
   }
 }
 
+
 if (!function_exists('ks_print_page_hero_button_markup')) {
   function ks_print_page_hero_button_markup($label, $href, $type, $i18n) {
-    $icon = get_stylesheet_directory_uri() . '/assets/img/team/arrow_right_alt.svg';
+    $button_class = $type === 'primary' ? 'ks-btn ks-btn--dark' : 'ks-btn';
     ?>
-    <a class="ks-page-hero__button ks-page-hero__button--<?php echo esc_attr($type); ?>" href="<?php echo esc_url($href); ?>">
+    <a class="<?php echo esc_attr($button_class); ?>" href="<?php echo esc_url($href); ?>">
       <span <?php ks_print_page_hero_i18n_attr($i18n); ?>><?php echo esc_html($label); ?></span>
-      <img class="ks-page-hero__button-icon" src="<?php echo esc_url($icon); ?>" alt="" aria-hidden="true" loading="lazy" decoding="async">
     </a>
     <?php
   }

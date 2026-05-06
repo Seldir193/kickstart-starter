@@ -17,7 +17,7 @@
     pointer-events: none;
     background: var(--ks-section-overlay-hero);
   }
-
+  /* 
   .ks-page-hero__inner {
     position: relative;
     z-index: 2;
@@ -31,6 +31,17 @@
     margin-inline: auto;
     padding-inline: 16px;
     box-sizing: border-box;
+  } */
+
+  .ks-page-hero__inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 1fr);
+    gap: clamp(28px, 3vw, 52px);
+    align-items: start;
+    max-width: var(--ks-container);
+    min-height: 342px;
   }
 
   .ks-page-hero__content {
@@ -58,7 +69,7 @@
     max-width: 860px;
     margin: 0;
     color: var(--brand-black);
-    font-family: var(--font-display);
+    /* font-family: var(--font-display); */
     font-size: clamp(38px, 4.9vw, 68px);
     font-weight: var(--font-weight-black);
     line-height: 0.94;
@@ -91,7 +102,7 @@
     margin-top: auto;
   }
 
-  .ks-page-hero__button {
+  /* .ks-page-hero__button {
     --btn-border: var(--brand-gold);
     --btn-fill: var(--brand-black);
     --btn-text: var(--brand-black);
@@ -185,7 +196,7 @@
   .ks-page-hero__button:focus-visible .ks-page-hero__button-icon {
     filter: var(--icon-filter-white);
     transform: translateX(2px);
-  }
+  } */
 
   .ks-page-hero__media {
     position: relative;
@@ -580,9 +591,17 @@
   }
 
   @media (max-width: 640px) {
-    .ks-page-hero__button {
+    /* .ks-page-hero__button {
       width: 100%;
     }
+
+    .ks-page-hero__features {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      scrollbar-color: var(--ks-scrollbar-thumb) var(--ks-scrollbar-track);
+    } */
 
     .ks-page-hero__features {
       display: flex;
@@ -630,7 +649,7 @@
       bottom: 0;
     }
   }
-
+  /* 
   @media (prefers-reduced-motion: reduce) {
     .ks-page-hero__button,
     .ks-page-hero__button::before,
@@ -638,6 +657,12 @@
       transition: none;
     }
 
+    .ks-page-hero__image {
+      filter: none;
+    }
+  } */
+
+  @media (prefers-reduced-motion: reduce) {
     .ks-page-hero__image {
       filter: none;
     }
