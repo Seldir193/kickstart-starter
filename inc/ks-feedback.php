@@ -1,8 +1,3 @@
-
-
-
-
-
 <?php
 
 if (!function_exists('ks_enqueue_feedback_assets')) {
@@ -50,8 +45,18 @@ if (!function_exists('ks_enqueue_feedback_js')) {
   }
 }
 
+if (!function_exists('ks_feedback_text')) {
+  function ks_feedback_text(string $key, string $fallback): string {
+    return function_exists('ks_t') ? ks_t($key, $fallback, 'feedback') : $fallback;
+  }
+}
+
 if (!function_exists('ks_feedback_api_lang')) {
   function ks_feedback_api_lang(): string {
+    if (function_exists('ks_i18n_get_current_language')) {
+      return ks_i18n_get_current_language();
+    }
+
     $locale = function_exists('determine_locale') ? determine_locale() : get_locale();
 
     if (str_starts_with($locale, 'tr')) {
@@ -107,6 +112,7 @@ if (!function_exists('ks_normalize_feedbacks')) {
     }
 
     $feedbacks = array_map('ks_normalize_feedback_item', $items);
+
     return array_values(array_filter($feedbacks));
   }
 }
@@ -157,6 +163,7 @@ if (!function_exists('ks_feedback_icon_src')) {
     ];
 
     $file = $icons[$type] ?? $icons['Eltern'];
+
     return get_stylesheet_directory_uri() . '/assets/img/feedback/' . $file;
   }
 }
@@ -171,6 +178,12 @@ if (!function_exists('ks_feedback_category_key')) {
     ];
 
     return $keys[$label] ?? 'feedback.tabs.parents';
+  }
+}
+
+if (!function_exists('ks_feedback_category_text')) {
+  function ks_feedback_category_text(string $label): string {
+    return ks_feedback_text(ks_feedback_category_key($label), $label);
   }
 }
 
@@ -219,7 +232,6 @@ if (!function_exists('ks_feedback_image_src')) {
   }
 }
 
-
 if (!function_exists('ks_feedback_initial_active_index')) {
   function ks_feedback_initial_active_index(array $feedbacks, string $category): int {
     foreach ($feedbacks as $index => $item) {
@@ -231,7 +243,6 @@ if (!function_exists('ks_feedback_initial_active_index')) {
     return 0;
   }
 }
-
 
 if (!function_exists('ks_render_feedback_section')) {
   function ks_render_feedback_section() {
@@ -245,9 +256,8 @@ if (!function_exists('ks_render_feedback_section')) {
 
     $categories = ks_feedback_categories($feedbacks);
     $feedback_arrow_icon = get_stylesheet_directory_uri() . '/assets/img/team/arrow_right_alt.svg';
-
     $initial_category = $categories[0] ?? '';
-$initial_active_index = ks_feedback_initial_active_index($feedbacks, $initial_category);
+    $initial_active_index = ks_feedback_initial_active_index($feedbacks, $initial_category);
 
     ob_start();
     ?>
@@ -256,28 +266,34 @@ $initial_active_index = ks_feedback_initial_active_index($feedbacks, $initial_ca
       id="feedback"
       class="ks-sec ks-feedback"
       data-feedback-root
-      aria-label="Feedbacks"
+      aria-label="<?php echo esc_attr(ks_feedback_text('feedback.aria.section', 'Feedbacks')); ?>"
       data-i18n="feedback.aria.section"
       data-i18n-attr="aria-label"
     >
       <div class="container container--1400">
         <div
           class="ks-title-wrap ks-feedback__head"
-          data-bgword="STIMMEN"
+          data-bgword="<?php echo esc_attr(ks_feedback_text('feedback.watermark', 'STIMMEN')); ?>"
           data-i18n="feedback.watermark"
           data-i18n-attr="data-bgword"
         >
-          <div class="ks-kicker" data-i18n="feedback.kicker">Feedback</div>
-          <h2 class="ks-dir__title ks-feedback__title" data-i18n="feedback.title">Echte Stimmen aus der DFS</h2>
+          <div class="ks-kicker" data-i18n="feedback.kicker">
+            <?php echo esc_html(ks_feedback_text('feedback.kicker', 'Feedback')); ?>
+          </div>
+
+          <h2 class="ks-dir__title ks-feedback__title" data-i18n="feedback.title">
+            <?php echo esc_html(ks_feedback_text('feedback.title', 'Echte Stimmen aus der DFS')); ?>
+          </h2>
+
           <p class="ks-feedback__lead" data-i18n="feedback.lead">
-            Erfahrungen, die uns antreiben. Entwicklung, die bleibt.
+            <?php echo esc_html(ks_feedback_text('feedback.lead', 'Erfahrungen, die uns antreiben. Entwicklung, die bleibt.')); ?>
           </p>
         </div>
 
         <div
           class="ks-feedback__tabs"
           role="tablist"
-          aria-label="Feedback Kategorien"
+          aria-label="<?php echo esc_attr(ks_feedback_text('feedback.aria.tabs', 'Feedback Kategorien')); ?>"
           data-i18n="feedback.aria.tabs"
           data-i18n-attr="aria-label"
         >
@@ -298,8 +314,9 @@ $initial_active_index = ks_feedback_initial_active_index($feedbacks, $initial_ca
                   decoding="async"
                 />
               </span>
+
               <span data-i18n="<?php echo esc_attr(ks_feedback_category_key($category)); ?>">
-                <?php echo esc_html($category); ?>
+                <?php echo esc_html(ks_feedback_category_text($category)); ?>
               </span>
             </button>
           <?php endforeach; ?>
@@ -307,19 +324,20 @@ $initial_active_index = ks_feedback_initial_active_index($feedbacks, $initial_ca
 
         <div class="ks-feedback__frame">
           <?php foreach ($feedbacks as $index => $item): ?>
-  <?php $is_active_slide = $index === $initial_active_index; ?>
+            <?php $is_active_slide = $index === $initial_active_index; ?>
 
-  <article
-    class="ks-feedback__slide<?php echo $is_active_slide ? ' is-active' : ''; ?>"
-    data-feedback-slide
-    data-feedback-label="<?php echo esc_attr($item['label']); ?>"
-    data-feedback-index="<?php echo esc_attr((string) $index); ?>"
-    aria-hidden="<?php echo $is_active_slide ? 'false' : 'true'; ?>"
-  >
+            <article
+              class="ks-feedback__slide<?php echo $is_active_slide ? ' is-active' : ''; ?>"
+              data-feedback-slide
+              data-feedback-label="<?php echo esc_attr($item['label']); ?>"
+              data-feedback-index="<?php echo esc_attr((string) $index); ?>"
+              aria-hidden="<?php echo $is_active_slide ? 'false' : 'true'; ?>"
+            >
               <div class="ks-feedback__media">
                 <span class="ks-feedback__side-label" data-i18n="feedback.sideLabel">
-                  Dortmunder Fussball Schule
+                  <?php echo esc_html(ks_feedback_text('feedback.sideLabel', 'Dortmunder Fussball Schule')); ?>
                 </span>
+
                 <img
                   class="ks-feedback__image"
                   src="<?php echo esc_url(ks_feedback_image_src($item)); ?>"
@@ -338,9 +356,11 @@ $initial_active_index = ks_feedback_initial_active_index($feedbacks, $initial_ca
 
                 <div class="ks-feedback__author">
                   <span class="ks-feedback__line" aria-hidden="true"></span>
+
                   <strong>
                     <?php echo esc_html(mb_strtoupper($item['author'])); ?>
                   </strong>
+
                   <span>
                     <?php echo esc_html($item['meta']); ?>
                   </span>
@@ -348,7 +368,7 @@ $initial_active_index = ks_feedback_initial_active_index($feedbacks, $initial_ca
 
                 <div
                   class="ks-feedback__controls"
-                  aria-label="Feedback Navigation"
+                  aria-label="<?php echo esc_attr(ks_feedback_text('feedback.aria.controls', 'Feedback Navigation')); ?>"
                   data-i18n="feedback.aria.controls"
                   data-i18n-attr="aria-label"
                 >
@@ -356,7 +376,7 @@ $initial_active_index = ks_feedback_initial_active_index($feedbacks, $initial_ca
                     type="button"
                     class="ks-feedback__nav ks-feedback__nav--prev"
                     data-feedback-prev
-                    aria-label="Vorheriges Feedback"
+                    aria-label="<?php echo esc_attr(ks_feedback_text('feedback.aria.prev', 'Vorheriges Feedback')); ?>"
                     data-i18n="feedback.aria.prev"
                     data-i18n-attr="aria-label"
                   >
@@ -384,7 +404,7 @@ $initial_active_index = ks_feedback_initial_active_index($feedbacks, $initial_ca
                     type="button"
                     class="ks-feedback__nav ks-feedback__nav--next"
                     data-feedback-next
-                    aria-label="Nächstes Feedback"
+                    aria-label="<?php echo esc_attr(ks_feedback_text('feedback.aria.next', 'Nächstes Feedback')); ?>"
                     data-i18n="feedback.aria.next"
                     data-i18n-attr="aria-label"
                   >
@@ -403,9 +423,17 @@ $initial_active_index = ks_feedback_initial_active_index($feedbacks, $initial_ca
 
         <div class="ks-feedback__foot">
           <span></span>
-          <p data-i18n="feedback.footer.left">Fussball ist Entwicklung.</p>
+
+          <p data-i18n="feedback.footer.left">
+            <?php echo esc_html(ks_feedback_text('feedback.footer.left', 'Fussball ist Entwicklung.')); ?>
+          </p>
+
           <i aria-hidden="true"></i>
-          <p data-i18n="feedback.footer.right">Wir geben den Rahmen.</p>
+
+          <p data-i18n="feedback.footer.right">
+            <?php echo esc_html(ks_feedback_text('feedback.footer.right', 'Wir geben den Rahmen.')); ?>
+          </p>
+
           <span></span>
         </div>
       </div>
@@ -415,9 +443,6 @@ $initial_active_index = ks_feedback_initial_active_index($feedbacks, $initial_ca
     return ob_get_clean();
   }
 }
-
-
-
 
 
 
