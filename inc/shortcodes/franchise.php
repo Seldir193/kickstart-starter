@@ -1,5 +1,58 @@
 <?php
 
+if (!function_exists('ks_get_franchise_info_icon')) {
+  function ks_get_franchise_info_icon($index) {
+    $icons = [
+      'trophy.svg',
+      'license.svg',
+      'group.svg',
+      'academy.svg',
+      'video.svg',
+    ];
+
+    $file = $icons[$index % count($icons)];
+
+    return get_stylesheet_directory_uri() . '/assets/img/team/' . $file;
+  }
+}
+
+if (!function_exists('ks_get_franchise_info_facts')) {
+  function ks_get_franchise_info_facts() {
+    return [
+      [
+        'title_key' => 'franchise.info.facts.0.title',
+        'text_key' => 'franchise.info.facts.0.text',
+        'title' => '25 Jahre Erfahrung',
+        'text' => 'Langjährige Erfahrung in Training, Förderung und Entwicklung.',
+      ],
+      [
+        'title_key' => 'franchise.info.facts.1.title',
+        'text_key' => 'franchise.info.facts.1.text',
+        'title' => '10 Partner & > 10 Trainer',
+        'text' => 'Ein starkes Netzwerk aus Partnern und qualifizierten Trainern.',
+      ],
+      [
+        'title_key' => 'franchise.info.facts.2.title',
+        'text_key' => 'franchise.info.facts.2.text',
+        'title' => '> 7000 Kinder & 10 Partnervereine',
+        'text' => 'Viele Kinder, Vereine und Familien vertrauen auf unsere Arbeit.',
+      ],
+      [
+        'title_key' => 'franchise.info.facts.3.title',
+        'text_key' => 'franchise.info.facts.3.text',
+        'title' => 'Wöchentliche Trainerfortbildungen',
+        'text' => 'Regelmäßige Weiterentwicklung für moderne Trainingsqualität.',
+      ],
+      [
+        'title_key' => 'franchise.info.facts.4.title',
+        'text_key' => 'franchise.info.facts.4.text',
+        'title' => 'Trainingsbibliothek mit > 1000 Videos',
+        'text' => 'Digitale Inhalte für Training, Vorbereitung und Weiterentwicklung.',
+      ],
+    ];
+  }
+}
+
 if (!function_exists('ks_register_franchise_locations_rest')) {
   function ks_register_franchise_locations_rest() {
     add_action('rest_api_init', function () {
@@ -99,11 +152,9 @@ if (!function_exists('ks_register_franchise_shortcode')) {
       $theme_uri = get_stylesheet_directory_uri();
 
      
-      // $hero = get_the_post_thumbnail_url(null, 'full');
-      // if (!$hero) {
-      //   $hero = $theme_uri . '/assets/img/mfs.png';
-      // }
-
+      if (function_exists('ks_enqueue_info_section_assets')) {
+  ks_enqueue_info_section_assets();
+}
       
       $atts = shortcode_atts([
         'video' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
@@ -259,29 +310,56 @@ echo do_shortcode(
   </div>
 </section>
 
-      <section id="fr-worldwide" class="ks-sec ks-py-48 ks-bg-white">
-        <div class="container container--1100">
-          <div class="ks-kicker">25 Jahre Fußballerfahrung</div>
-          <h2 class="ks-dir__title ks-mb-16">Die Dortmunder Fussball Schule</h2>
-
-          <div class="ks-grid-12-8">
-            <div>
-              <p>Die Dortmunder Fussball Schule wurde 2025 gegründet. Inzwischen arbeiten über 10 Trainer für mehr als
-                10 Vereine im Großraum NRW &amp; Dortmund. Unsere Angebote sind vereinsunabhängig – mit ganzheitlicher
-                Ausbildungsphilosophie.</p>
-              <p>Gemeinsam fördern wir die Entwicklung junger Talente – seit über 25 Jahren.</p>
-            </div>
-
-            <ul class="ks-list-plus">
-              <li><span class="ks-list-plus__icon" aria-hidden="true"></span><span>25 Jahre Erfahrung</span></li>
-              <li><span class="ks-list-plus__icon" aria-hidden="true"></span><span>13 Partner &gt; 10 Trainer</span></li>
-              <li><span class="ks-list-plus__icon" aria-hidden="true"></span><span>&gt; 700 Kinder &amp; 10 Partnervereine</span></li>
-              <li><span class="ks-list-plus__icon" aria-hidden="true"></span><span>Wöchentliche Trainerfortbildungen</span></li>
-              <li><span class="ks-list-plus__icon" aria-hidden="true"></span><span>Streamingportal mit &gt; 1000 Videos</span></li>
-            </ul>
-          </div>
+      <section id="fr-worldwide" class="ks-sec ks-py-48 ks-bg-white ks-info-section">
+  <div class="container container--1100">
+    <div class="ks-info-section__grid">
+      <div class="ks-info-section__content">
+        <div class="ks-kicker" data-i18n="franchise.info.kicker">
+          25 Jahre Fußballerfahrung
         </div>
-      </section>
+
+        <h2 class="ks-dir__title ks-mb-16" data-i18n="franchise.info.title">
+          Die Dortmunder Fussball Schule
+        </h2>
+
+        <div class="ks-info-section__copy">
+          <p data-i18n="franchise.info.paragraphs.0">
+            Die Dortmunder Fussball Schule wurde 2025 gegründet. Inzwischen arbeiten über 10 Trainer für mehr als 10 Vereine im Großraum NRW &amp; Dortmund. Unsere Angebote sind vereinsunabhängig – mit ganzheitlicher Ausbildungsphilosophie.
+          </p>
+
+          <p data-i18n="franchise.info.paragraphs.1">
+            Gemeinsam fördern wir die Entwicklung junger Talente – seit über 25 Jahren.
+          </p>
+        </div>
+      </div>
+
+      <ul class="ks-info-facts" role="list">
+        <?php foreach (ks_get_franchise_info_facts() as $index => $fact): ?>
+          <li class="ks-info-fact">
+            <span class="ks-info-fact__icon" aria-hidden="true">
+              <img
+                src="<?php echo esc_url(ks_get_franchise_info_icon($index)); ?>"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              >
+            </span>
+
+            <span class="ks-info-fact__body">
+              <strong class="ks-info-fact__title" data-i18n="<?php echo esc_attr($fact['title_key']); ?>">
+                <?php echo esc_html($fact['title']); ?>
+              </strong>
+
+              <span class="ks-info-fact__text" data-i18n="<?php echo esc_attr($fact['text_key']); ?>">
+                <?php echo esc_html($fact['text']); ?>
+              </span>
+            </span>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  </div>
+</section>
 
 
 <section id="fr-worldwide-map" class="ks-sec ks-py-48 ks-bg-world">

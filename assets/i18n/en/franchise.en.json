@@ -72,6 +72,36 @@
           "answer": "If you would like to learn more, you can contact us directly through the contact form. After an initial conversation, we will discuss together whether a partnership fits your goals and our concept."
         }
       ]
+    },
+    "info": {
+      "kicker": "25 years of football experience",
+      "title": "Dortmund Football School",
+      "paragraphs": [
+        "Dortmund Football School was founded in 2025. Today, more than 10 coaches work with over 10 clubs across NRW and the Dortmund region. Our programs are independent of individual clubs and follow a holistic development philosophy.",
+        "Together, we support the development of young talents – with over 25 years of experience."
+      ],
+      "facts": [
+        {
+          "title": "25 years of experience",
+          "text": "Long-standing experience in training, support, and development."
+        },
+        {
+          "title": "10 partners & > 10 coaches",
+          "text": "A strong network of partners and qualified coaches."
+        },
+        {
+          "title": "> 7000 children & 10 partner clubs",
+          "text": "Many children, clubs, and families trust our work."
+        },
+        {
+          "title": "Weekly coach education",
+          "text": "Continuous development for modern training quality."
+        },
+        {
+          "title": "Training library with > 1000 videos",
+          "text": "Digital content for training, preparation, and further development."
+        }
+      ]
     }
   }
 }

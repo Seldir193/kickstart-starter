@@ -72,6 +72,36 @@
           "answer": "Wenn du mehr erfahren möchtest, kannst du uns direkt über das Kontaktformular schreiben. Nach einem ersten Austausch besprechen wir gemeinsam, ob eine Partnerschaft zu deinen Zielen und zu unserem Konzept passt."
         }
       ]
+    },
+    "info": {
+      "kicker": "25 Jahre Fußballerfahrung",
+      "title": "Die Dortmunder Fussball Schule",
+      "paragraphs": [
+        "Die Dortmunder Fussball Schule wurde 2025 gegründet. Inzwischen arbeiten über 10 Trainer für mehr als 10 Vereine im Großraum NRW & Dortmund. Unsere Angebote sind vereinsunabhängig – mit ganzheitlicher Ausbildungsphilosophie.",
+        "Gemeinsam fördern wir die Entwicklung junger Talente – seit über 25 Jahren."
+      ],
+      "facts": [
+        {
+          "title": "25 Jahre Erfahrung",
+          "text": "Langjährige Erfahrung in Training, Förderung und Entwicklung."
+        },
+        {
+          "title": "10 Partner & > 10 Trainer",
+          "text": "Ein starkes Netzwerk aus Partnern und qualifizierten Trainern."
+        },
+        {
+          "title": "> 7000 Kinder & 10 Partnervereine",
+          "text": "Viele Kinder, Vereine und Familien vertrauen auf unsere Arbeit."
+        },
+        {
+          "title": "Wöchentliche Trainerfortbildungen",
+          "text": "Regelmäßige Weiterentwicklung für moderne Trainingsqualität."
+        },
+        {
+          "title": "Trainingsbibliothek mit > 1000 Videos",
+          "text": "Digitale Inhalte für Training, Vorbereitung und Weiterentwicklung."
+        }
+      ]
     }
   }
 }

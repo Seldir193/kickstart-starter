@@ -71,6 +71,36 @@
           "answer": "Daha fazla bilgi almak isterseniz bizimle doğrudan iletişim formu üzerinden yazabilirsiniz. İlk görüşmeden sonra, bir ortaklığın sizin hedeflerinize ve bizim konseptimize uygun olup olmadığını birlikte değerlendiririz."
         }
       ]
+    },
+    "info": {
+      "kicker": "25 yıllık futbol deneyimi",
+      "title": "Dortmund Futbol Okulu",
+      "paragraphs": [
+        "Dortmund Futbol Okulu 2025 yılında kuruldu. Bugün NRW ve Dortmund bölgesinde 10’dan fazla antrenör, 10’dan fazla kulüple birlikte çalışıyor. Programlarımız kulüplerden bağımsızdır ve bütünsel bir gelişim felsefesine dayanır.",
+        "Genç yeteneklerin gelişimini birlikte destekliyoruz – 25 yılı aşkın deneyimle."
+      ],
+      "facts": [
+        {
+          "title": "25 yıllık deneyim",
+          "text": "Antrenman, destek ve gelişim alanında uzun yıllara dayanan deneyim."
+        },
+        {
+          "title": "10 partner & > 10 antrenör",
+          "text": "Partnerlerden ve nitelikli antrenörlerden oluşan güçlü bir ağ."
+        },
+        {
+          "title": "> 7000 çocuk & 10 partner kulüp",
+          "text": "Birçok çocuk, kulüp ve aile çalışmalarımıza güveniyor."
+        },
+        {
+          "title": "Haftalık antrenör eğitimleri",
+          "text": "Modern antrenman kalitesi için sürekli gelişim."
+        },
+        {
+          "title": "> 1000 videolu antrenman kütüphanesi",
+          "text": "Antrenman, hazırlık ve gelişim için dijital içerikler."
+        }
+      ]
     }
   }
 }
