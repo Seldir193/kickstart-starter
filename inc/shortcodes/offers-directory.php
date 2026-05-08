@@ -552,49 +552,11 @@ if (!empty($faq_items)) {
 }
 ?>
 
-<section id="kontakt" class="ks-sec ks-py-56 ks-bg-dark ks-text-light">
-  <div class="container container--1100 ks-text-center">
-    <div class="ks-kicker ks-text-accent">Kontakt</div>
-    <h2 class="ks-dir__title ks-text-light">Hast du Fragen?</h2>
-    <p>Bei Interesse kannst du uns folgendermaßen erreichen:</p>
-
-    <?php $icon_base = get_stylesheet_directory_uri() . '/assets/img/offers/'; ?>
-
-    <div class="ks-grid-3 ks-mt-28 ks-contact-cards">
-      <div class="ks-text-center">
-        <a class="ks-contact-iconwrap" href="tel:+4917643203362" aria-label="Anrufen">
-          <span class="ks-contact-icon" style="--icon:url('<?php echo esc_url($icon_base . 'phone.png'); ?>')"></span>
-        </a>
-        <div class="ks-fw-700 ks-mb-16">Ruf uns an:</div>
-        <div>
-          <a class="ks-link-light" href="tel:+4917643203362">+49 (176) 43 20 33 62</a>
-        </div>
-      </div>
-
-      <div class="ks-text-center">
-        <a class="ks-contact-iconwrap" href="mailto:fussballschule@selcuk-kocyigit.de" aria-label="E-Mail schreiben">
-          <span class="ks-contact-icon" style="--icon:url('<?php echo esc_url($icon_base . 'mail.png'); ?>')"></span>
-        </a>
-        <div class="ks-fw-700 ks-mb-16">Schreib uns:</div>
-        <div>
-          <a class="ks-link-light" href="mailto:fussballschule@selcuk-kocyigit.de">
-            fussballschule@selcuk-kocyigit.de
-          </a>
-        </div>
-      </div>
-
-      <div class="ks-text-center">
-        <a class="ks-contact-iconwrap" href="#ksDir" aria-label="Nach oben scrollen">
-          <span class="ks-contact-icon" style="--icon:url('<?php echo esc_url($icon_base . 'clock.png'); ?>')"></span>
-        </a>
-        <div class="ks-fw-700 ks-mb-16">Telefonzeiten:</div>
-        <div>
-          <a class="ks-link-light" href="#dir-faq">Mo.–Fr. 09:00–20:00 Uhr</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<?php
+if (function_exists('ks_print_shared_contact_section')) {
+  ks_print_shared_contact_section('ks-py-32');
+}
+?>
 
 <?php
 $courseKey = '';

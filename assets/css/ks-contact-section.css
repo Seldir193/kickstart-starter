@@ -1,0 +1,200 @@
+#kontakt.ks-contact-section {
+  position: relative;
+  z-index: 0;
+}
+
+#kontakt.ks-contact-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  right: 50%;
+  z-index: -1;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: var(--ks-section-bg-dark);
+}
+
+.ks-contact-section__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+  min-height: clamp(360px, 42vw, 520px);
+}
+
+.ks-contact-section__content {
+  max-width: none;
+}
+
+#kontakt.ks-contact-section .ks-contact-section__content .ks-kicker {
+  margin: 0 0 6px;
+}
+
+.ks-contact-section .ks-contact-section__title,
+.ks-contact-section .ks-contact-section__title .ks-dir__title-line {
+  color: var(--brand-white);
+}
+
+.ks-contact-section__text {
+  max-width: 560px;
+  margin: 0 0 30px;
+  color: var(--color-text-inverse-muted);
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.75;
+}
+
+.ks-contact-section__button {
+  width: max-content;
+  min-width: 180px;
+}
+
+.ks-contact-section__panel {
+  width: 100%;
+  display: grid;
+  gap: 0;
+  padding: clamp(22px, 3vw, 34px);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 28px;
+  background: var(--brand-white);
+  color: var(--brand-black);
+  box-shadow: var(--ks-shadow-medium);
+}
+
+.ks-contact-section__row {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+  transition:
+    transform var(--ks-transition-ui),
+    border-color var(--ks-transition-ui);
+}
+
+.ks-contact-section__row:first-child {
+  padding-top: 0;
+}
+
+.ks-contact-section__row:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.ks-contact-section__row:hover {
+  transform: translateX(4px);
+}
+
+.ks-contact-section__icon {
+  width: 54px;
+  height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--brand-gold);
+  box-shadow: var(--ks-button-hover-shadow);
+}
+
+.ks-contact-section__icon img {
+  width: 22px;
+  height: 22px;
+  display: block;
+  object-fit: contain;
+  filter: var(--icon-filter-black);
+}
+
+.ks-contact-section__body {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.ks-contact-section__label {
+  color: var(--color-text-strong);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.ks-contact-section__value {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  color: var(--color-text);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.ks-contact-section__value::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 100%;
+  height: 1.5px;
+  border-radius: 999px;
+  background: var(--color-text-strong);
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  opacity: 0;
+  transition:
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 220ms ease;
+}
+
+.ks-contact-section__value:hover,
+.ks-contact-section__value:focus-visible {
+  color: var(--brand-black);
+  text-decoration: none;
+}
+
+.ks-contact-section__value:hover::after,
+.ks-contact-section__value:focus-visible::after {
+  transform: translateX(-50%) scaleX(1);
+  opacity: 0.92;
+}
+
+.ks-contact-section__button:focus-visible,
+.ks-contact-section__value:focus-visible {
+  outline: var(--ks-focus-outline);
+  outline-offset: var(--ks-focus-outline-offset);
+}
+
+@media (max-width: 820px) {
+  .ks-contact-section__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ks-contact-section__button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .ks-contact-section__row {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 14px;
+    padding: 18px 0;
+  }
+
+  .ks-contact-section__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .ks-contact-section__icon img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ks-contact-section__row,
+  .ks-contact-section__value::after {
+    transition: none;
+  }
+
+  .ks-contact-section__row:hover {
+    transform: none;
+  }
+}
