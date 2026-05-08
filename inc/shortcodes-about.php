@@ -303,7 +303,7 @@ if (!function_exists('ks_print_about_list_item')) {
 if (!function_exists('ks_print_about_contact_section')) {
   function ks_print_about_contact_section($theme_uri) {
     ?>
-    <section id="kontakt" class="ks-sec ks-about-contact ks-text-light">
+    <section id="kontakt" class="ks-sec ks-py-32 ks-about-contact ks-text-light">
       <div class="container container--1100">
         <div class="ks-about-contact__grid">
           <?php ks_print_about_contact_content(); ?>
