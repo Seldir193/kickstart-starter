@@ -2,12 +2,6 @@
 
 <?php
 
-$ks_contact_section = get_stylesheet_directory() . '/inc/partials/shared/contact-section.php';
-
-if (file_exists($ks_contact_section)) {
-  require_once $ks_contact_section;
-}
-
 if (!function_exists('ks_get_offer_program_icon')) {
   function ks_get_offer_program_icon($index) {
     $icons = [

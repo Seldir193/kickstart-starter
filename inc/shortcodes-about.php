@@ -1,11 +1,5 @@
 <?php
 
-$ks_contact_section = get_stylesheet_directory() . '/inc/partials/shared/contact-section.php';
-
-if (file_exists($ks_contact_section)) {
-  require_once $ks_contact_section;
-}
-
 if (!function_exists('ks_about_t')) {
   function ks_about_t($key, $fallback) {
     return function_exists('ks_t') ? ks_t($key, $fallback, 'about') : $fallback;

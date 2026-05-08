@@ -19,6 +19,7 @@ ks_require('assets.php');
 ks_require('helpers.php');
 ks_require('helpers/i18n.php');
 ks_require('contact-form.php');
+ks_require('partials/shared/contact-section.php');
 ks_require('ks-feedback.php');
 ks_require('ks-geocode.php');
 ks_require('navigation-mega-about.php');
