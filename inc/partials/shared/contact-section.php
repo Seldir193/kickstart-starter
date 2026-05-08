@@ -77,25 +77,26 @@ if (!function_exists('ks_print_shared_contact_panel')) {
 if (!function_exists('ks_get_shared_contact_rows')) {
   function ks_get_shared_contact_rows($theme_uri) {
     return [
-      ks_get_shared_contact_row('tel:+4917643203362', 'phone.png', 'common.contact.phoneTitle', 'Ruf uns an:', '+49 (176) 43 20 33 62', 'common.contact.phoneAria', 'Anrufen', $theme_uri),
-      ks_get_shared_contact_row('mailto:fussballschule@selcuk-kocyigit.de', 'mail.png', 'common.contact.mailTitle', 'Schreib uns:', 'fussballschule@selcuk-kocyigit.de', 'common.contact.mailAria', 'E-Mail schreiben', $theme_uri),
-      ks_get_shared_contact_row('', 'clock.png', 'common.contact.hoursTitle', 'Telefonzeiten:', 'Mo.–Fr. 09:00–20:00 Uhr', 'common.contact.hoursAria', 'Telefonzeiten ansehen', $theme_uri),
+      ks_get_shared_contact_row('tel:+4917643203362', 'phone.png', 'common.contact.phoneTitle', 'Ruf uns an:', '', '+49 (176) 43 20 33 62', 'common.contact.phoneAria', 'Anrufen', $theme_uri),
+ks_get_shared_contact_row('mailto:fussballschule@selcuk-kocyigit.de', 'mail.png', 'common.contact.mailTitle', 'Schreib uns:', '', 'fussballschule@selcuk-kocyigit.de', 'common.contact.mailAria', 'E-Mail schreiben', $theme_uri),
+      ks_get_shared_contact_row('', 'clock.png', 'common.contact.hoursTitle', 'Telefonzeiten:', 'common.contact.hoursText', 'Mo.–Fr. 09:00–20:00 Uhr', 'common.contact.hoursAria', 'Telefonzeiten ansehen', $theme_uri),ks_get_shared_contact_row('', 'clock.png', 'common.contact.hoursTitle', 'Telefonzeiten:', 'Mo.–Fr. 09:00–20:00 Uhr', 'common.contact.hoursAria', 'Telefonzeiten ansehen', $theme_uri),
     ];
   }
 }
 
 if (!function_exists('ks_get_shared_contact_row')) {
-  function ks_get_shared_contact_row($url, $icon, $title_key, $title, $text, $label_key, $label, $theme_uri) {
-    return [
-      'url' => $url,
-      'icon' => $theme_uri . '/assets/img/offers/' . $icon,
-      'title_key' => $title_key,
-      'title' => $title,
-      'text' => $text,
-      'label_key' => $label_key,
-      'label' => $label,
-    ];
-  }
+function ks_get_shared_contact_row($url, $icon, $title_key, $title, $text_key, $text, $label_key, $label, $theme_uri) {
+  return [
+    'url' => $url,
+    'icon' => $theme_uri . '/assets/img/offers/' . $icon,
+    'title_key' => $title_key,
+    'title' => $title,
+    'text_key' => $text_key,
+    'text' => $text,
+    'label_key' => $label_key,
+    'label' => $label,
+  ];
+}
 }
 
 if (!function_exists('ks_print_shared_contact_row')) {
@@ -135,21 +136,32 @@ if (!function_exists('ks_print_shared_contact_row_body')) {
 
 if (!function_exists('ks_print_shared_contact_value')) {
   function ks_print_shared_contact_value($row) {
-    if (empty($row['url'])) {
-      echo '<span class="ks-contact-section__value">' . esc_html($row['text']) . '</span>';
-      return;
-    }
+  $text_key = $row['text_key'] ?? '';
 
+  if (empty($row['url'])) {
     ?>
-    <a
+    <span
       class="ks-contact-section__value"
-      href="<?php echo esc_url($row['url']); ?>"
-      aria-label="<?php echo esc_attr(ks_shared_contact_t($row['label_key'], $row['label'])); ?>"
-      data-i18n="<?php echo esc_attr($row['label_key']); ?>"
-      data-i18n-attr="aria-label"
+      <?php if ($text_key): ?>
+        data-i18n="<?php echo esc_attr($text_key); ?>"
+      <?php endif; ?>
     >
-      <?php echo esc_html($row['text']); ?>
-    </a>
+      <?php echo esc_html($text_key ? ks_shared_contact_t($text_key, $row['text']) : $row['text']); ?>
+    </span>
     <?php
+    return;
   }
+
+  ?>
+  <a
+    class="ks-contact-section__value"
+    href="<?php echo esc_url($row['url']); ?>"
+    aria-label="<?php echo esc_attr(ks_shared_contact_t($row['label_key'], $row['label'])); ?>"
+    data-i18n="<?php echo esc_attr($row['label_key']); ?>"
+    data-i18n-attr="aria-label"
+  >
+    <?php echo esc_html($row['text']); ?>
+  </a>
+  <?php
+}
 }

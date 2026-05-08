@@ -1,0 +1,32 @@
+{
+  "offersDirectory": {
+    "intro": {
+      "kicker": "Ücretsiz deneme antrenmanını buradan hızlıca ve kolayca rezerve edebilirsin",
+      "titlePrefix": "Tekliflerimiz",
+      "watermark": "TEKLİFLER"
+    },
+    "filters": {
+      "day": "Gün",
+      "age": "Yaş",
+      "location": "Konum",
+      "holidaySeason": "Tatil dönemi",
+      "holidayWeek": "Zaman aralığı",
+      "allDays": "Tüm günler",
+      "allAges": "Tümü",
+      "allLocations": "Tüm konumlar",
+      "allHolidaySeasons": "Tüm tatil dönemleri",
+      "allHolidayWeeks": "Tüm zaman aralıkları"
+    },
+    "meta": {
+      "offers": "Teklifler",
+      "locations": "Konumlar"
+    },
+    "cards": {
+      "offers": "teklif",
+      "emptyTitle": "Teklif bulunamadı.",
+      "emptyText": "Lütfen filtrelerini değiştir.",
+      "fromAge": "{{age}} yaştan itibaren",
+      "ageRange": "{{from}}–{{to}} yaş"
+    }
+  }
+}

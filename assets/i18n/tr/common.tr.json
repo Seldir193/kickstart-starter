@@ -2,5 +2,18 @@
   "common": {
     "home": "Ana sayfa",
     "backToTop": "Yukarı çık"
+  },
+  "contact": {
+    "kicker": "İletişim",
+    "title": "Sorularınız mı var?",
+    "text": "İlgileniyorsanız bizimle her zaman iletişime geçebilirsiniz. En kısa sürede size geri dönüş yaparız.",
+    "button": "Mesaj gönder",
+    "phoneTitle": "Bizi arayın:",
+    "mailTitle": "Bize yazın:",
+    "hoursTitle": "Telefon saatleri:",
+    "hoursText": "Pzt–Cum 09:00–20:00",
+    "phoneAria": "Bizi arayın",
+    "mailAria": "E-posta yaz",
+    "hoursAria": "Telefon saatlerini görüntüle"
   }
 }

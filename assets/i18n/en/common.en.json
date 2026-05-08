@@ -2,5 +2,18 @@
   "common": {
     "home": "Home",
     "backToTop": "Back to top"
+  },
+  "contact": {
+    "kicker": "Contact",
+    "title": "Do you have questions?",
+    "text": "If you are interested, you can contact us anytime. We will get back to you as soon as possible.",
+    "button": "Send a message",
+    "phoneTitle": "Call us:",
+    "mailTitle": "Email us:",
+    "hoursTitle": "Phone hours:",
+    "hoursText": "Mon–Fri 09:00–20:00",
+    "phoneAria": "Call us",
+    "mailAria": "Write an email",
+    "hoursAria": "View phone hours"
   }
 }

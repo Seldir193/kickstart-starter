@@ -1,0 +1,32 @@
+{
+  "offersDirectory": {
+    "intro": {
+      "kicker": "Book your free trial training quickly and easily here",
+      "titlePrefix": "Our offers",
+      "watermark": "OFFERS"
+    },
+    "filters": {
+      "day": "Day",
+      "age": "Age",
+      "location": "Location",
+      "holidaySeason": "Holiday period",
+      "holidayWeek": "Time period",
+      "allDays": "All days",
+      "allAges": "All",
+      "allLocations": "All locations",
+      "allHolidaySeasons": "All holiday periods",
+      "allHolidayWeeks": "All time periods"
+    },
+    "meta": {
+      "offers": "Offers",
+      "locations": "Locations"
+    },
+    "cards": {
+      "offers": "offers",
+      "emptyTitle": "No offers found.",
+      "emptyText": "Please adjust your filters.",
+      "fromAge": "from {{age}} years",
+      "ageRange": "{{from}}–{{to}} years"
+    }
+  }
+}

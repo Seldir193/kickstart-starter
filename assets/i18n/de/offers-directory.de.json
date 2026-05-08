@@ -1,0 +1,32 @@
+{
+  "offersDirectory": {
+    "intro": {
+      "kicker": "Hier kannst du dein kostenfreies Schnuppertraining ganz einfach buchen",
+      "titlePrefix": "Unsere Angebote",
+      "watermark": "ANGEBOTE"
+    },
+    "filters": {
+      "day": "Tag",
+      "age": "Alter",
+      "location": "Standort",
+      "holidaySeason": "Ferienzeit",
+      "holidayWeek": "Zeitraum",
+      "allDays": "Alle Tage",
+      "allAges": "Alle",
+      "allLocations": "Alle Standorte",
+      "allHolidaySeasons": "Alle Ferienzeiten",
+      "allHolidayWeeks": "Alle Zeiträume"
+    },
+    "meta": {
+      "offers": "Angebote",
+      "locations": "Standorte"
+    },
+    "cards": {
+      "offers": "Angebote",
+      "emptyTitle": "Keine Angebote gefunden.",
+      "emptyText": "Bitte passe deine Filter an.",
+      "fromAge": "ab {{age}} Jahre",
+      "ageRange": "{{from}}–{{to}} Jahre"
+    }
+  }
+}
