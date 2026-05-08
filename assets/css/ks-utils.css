@@ -121,6 +121,545 @@ body {
   top: -80px;
 }
 
+#news .ks-title-wrap .ks-kicker,
+#fr-benefits .ks-kicker {
+  display: block;
+  width: max-content;
+  margin: 0 auto 6px;
+}
+
+.ks-list-plus {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1.1;
+  font-weight: var(--font-weight-extrabold);
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ks-list-plus li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+}
+
+.ks-list-plus__icon {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  display: inline-block;
+  background-color: var(--accent-red);
+  -webkit-mask: url("../img/home/plus.svg") center/contain no-repeat;
+  mask: url("../img/home/plus.svg") center/contain no-repeat;
+}
+
+.ks-list-plus li span {
+  display: inline-block;
+}
+
+@layer pages {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+#brandbar {
+  position: relative;
+  background: var(--brand-navy);
+  color: var(--brand-white);
+  z-index: -1 !important;
+}
+
+.ks-acc summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-weight: var(--font-weight-bold);
+  color: var(--brand-black);
+  padding: 8px 0;
+}
+
+.ks-acc summary::marker {
+  content: "";
+}
+
+.ks-acc summary::-webkit-details-marker {
+  display: none;
+}
+
+.ks-acc__body {
+  padding: 8px 0 2px;
+  padding-inline: 12px;
+  color: var(--color-text-soft);
+  overflow: hidden;
+  white-space: pre-line;
+}
+
+.ks-acc__body > * {
+  margin-top: 0;
+}
+
+#jobs {
+  --acc-plus: url("../img/home/chevron-down.svg");
+  --acc-minus: url("../img/home/chevron-up.svg");
+  --acc-mask-size: 52%;
+  --acc-size: 30px;
+  --acc-gap: 14px;
+}
+
+#jobs .ks-acc summary {
+  position: relative;
+  padding: 12px 12px;
+  padding-right: calc(var(--acc-size) + var(--acc-gap) + 6px);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  transition:
+    color 0.18s ease,
+    background-color 0.18s ease;
+}
+
+#jobs .ks-acc summary::before,
+#jobs .ks-acc summary::after {
+  content: "";
+  position: absolute;
+  right: var(--acc-gap);
+  top: 50%;
+  width: var(--acc-size);
+  height: var(--acc-size);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+#jobs .ks-acc summary::after {
+  z-index: 1;
+  background-color: var(--brand-black) !important;
+  background-image: none !important;
+  -webkit-mask: var(--acc-plus) center/var(--acc-mask-size) no-repeat !important;
+  mask: var(--acc-plus) center/var(--acc-mask-size) no-repeat !important;
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease,
+    filter 0.18s ease,
+    background-color 0.18s ease;
+}
+
+#jobs .ks-acc[open] summary::after {
+  background-color: var(--brand-black) !important;
+  background-image: none !important;
+  -webkit-mask: var(--acc-minus) center/var(--acc-mask-size) no-repeat !important;
+  mask: var(--acc-minus) center/var(--acc-mask-size) no-repeat !important;
+}
+
+#jobs .ks-acc summary:hover::before,
+#jobs .ks-acc[open] summary::before {
+  z-index: 0;
+  border-radius: 50%;
+  background: var(--brand-black);
+}
+
+#jobs .ks-acc summary:hover::after {
+  transform: translateY(-50%) scale(1.18);
+  background-color: var(--brand-white) !important;
+}
+
+#jobs .ks-acc summary:hover,
+#jobs .ks-acc[open] summary {
+  color: var(--color-text-heading-sm);
+  background-color: var(--color-hover-dropdown-option);
+}
+
+#jobs .ks-acc summary:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+#jobs .ks-acc[open] summary::after {
+  transform: translateY(-50%) scale(1);
+  opacity: 1 !important;
+  filter: none !important;
+  background-color: var(--brand-white) !important;
+}
+
+#jobs .ks-acc[open] summary:hover::after {
+  transform: translateY(-50%) scale(1.18);
+}
+
+@media (max-width: 480px) {
+  #jobs {
+    --acc-size: 28px;
+    --acc-mask-size: 66%;
+  }
+}
+
+#news .ks-title-wrap::after,
+#team .ks-title-wrap::after {
+  top: -80px;
+}
+
+.ks-title-wrap {
+  text-align: center;
+  position: relative;
+  margin-bottom: 18px;
+  isolation: isolate;
+}
+
+.ks-title-wrap::after {
+  content: attr(data-bgword);
+  position: absolute;
+  left: 50%;
+  top: -80px;
+  z-index: -1;
+  transform: translateX(-50%);
+  color: var(--ks-title-watermark-color);
+  font-size: clamp(72px, 16vw, 180px);
+  font-weight: var(--font-weight-black);
+  letter-spacing: 0.03em;
+  pointer-events: none;
+}
+
+#ksMap.leaflet-container,
+#ksMap .leaflet-pane,
+#ksMap .leaflet-tile-pane,
+#ksMap .leaflet-layer {
+  filter: none !important;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+}
+
+#ksMap.leaflet-container img.leaflet-tile {
+  max-width: none !important;
+  max-height: none !important;
+  width: 256px !important;
+  height: 256px !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  object-fit: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+#ksMap .leaflet-tile-loaded {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#ksMap.leaflet-container {
+  background: var(--brand-white) !important;
+}
+
+#fr-worldwide-map,
+#fr-worldwide {
+  scroll-margin-top: 110px;
+}
+
+@layer pages {
+  body:is(.page-id-158, .page-id-269, .page-id-312, .page-id-387)
+    :is(h1.entry-title, .entry-title) {
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body:is(.page-id-158, .page-id-269, .page-id-312, .page-id-387)
+    :is(
+      .site-content,
+      .content-area,
+      main#primary.container.content,
+      #primary.container.content,
+      #primary,
+      .site-main
+    ) {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  body:is(.page-id-158, .page-id-269, .page-id-312, .page-id-387)
+    .entry-content
+    > :first-child {
+    margin-top: 0 !important;
+  }
+}
+
+:root {
+  --ks-feature-icon-w: 216px;
+  --ks-feature-icon-h: 183px;
+  --ks-feature-icon-gap: 16px;
+}
+
+#fr-benefits .ks-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+  text-align: center;
+  align-items: stretch;
+}
+
+#fr-benefits .ks-benefit {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+}
+
+#fr-benefits .ks-benefit__icon {
+  width: var(--ks-feature-icon-w);
+  height: var(--ks-feature-icon-h);
+  display: block;
+  margin: 0 auto var(--ks-feature-icon-gap);
+  object-fit: contain;
+  max-width: 100%;
+}
+
+#fr-benefits .ks-benefit h3 {
+  margin: 6px 0 10px;
+  font-size: 30px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-weight: var(--font-weight-extrabold);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+#fr-benefits .ks-benefit p {
+  margin-top: auto;
+  margin-bottom: 0;
+  max-width: 420px;
+  color: var(--color-text-soft);
+  line-height: 1.6;
+  align-self: center;
+}
+
+@media (max-width: 900px) {
+  #fr-benefits .ks-benefits {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+html:not(.i18n-ready) .ks-title-wrap::after,
+html:not(.i18n-ready) .ks-title-wrap--team::before,
+html:not(.i18n-ready) .ks-dir__hero::before {
+  opacity: 0;
+}
+
+.ks-btn {
+  --btn-border: var(--brand-gold);
+  --btn-fill: var(--brand-black);
+  --btn-text: var(--brand-black);
+  --btn-text-h: var(--brand-white);
+  --btn-radius: 999px;
+  --btn-bw: 2px;
+
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 22px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: var(--btn-bw) solid var(--btn-border);
+  border-radius: var(--btn-radius);
+  background: transparent;
+  color: var(--btn-text);
+  text-decoration: none;
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  transform: translateY(0);
+  transition:
+    color 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    transform 0.28s ease;
+}
+
+.ks-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--btn-fill);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ks-btn:hover::before,
+.ks-btn:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.ks-btn:hover,
+.ks-btn:focus-visible {
+  color: var(--btn-text-h);
+  border-color: transparent;
+  box-shadow: var(--ks-button-hover-shadow);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.ks-btn.ks-btn--dark {
+  --btn-border: var(--brand-gold);
+  --btn-fill: var(--brand-black);
+  --btn-text: var(--brand-black);
+  --btn-text-h: var(--brand-white);
+
+  background: var(--brand-gold);
+  cursor: pointer;
+}
+
+.ks-btn.ks-btn--light {
+  --btn-border: var(--brand-gold);
+  --btn-fill: var(--brand-black);
+  --btn-text: var(--brand-black);
+  --btn-text-h: var(--brand-white);
+
+  background: transparent;
+}
+
+#coach-portal .ks-btn.ks-btn--light {
+  --btn-border: var(--brand-gold);
+  --btn-fill: var(--brand-gold);
+  --btn-text: var(--brand-white);
+  --btn-text-h: var(--brand-black);
+}
+
+/* .ks-py-32 {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.ks-py-48 {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.ks-py-56 {
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+
+.ks-mb-16 {
+  margin-bottom: 16px;
+}
+
+.ks-mt-16 {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.ks-mt-28 {
+  margin-top: 28px;
+}
+
+.ks-fw-700 {
+  font-weight: var(--font-weight-bold);
+}
+
+.ks-text-center {
+  text-align: center;
+}
+
+.ks-text-light {
+  color: var(--brand-white) !important;
+}
+
+.ks-text-accent {
+  color: var(--accent-red);
+}
+
+.ks-link-light {
+  color: var(--brand-white);
+  text-decoration: underline;
+}
+
+.ks-link-light:hover {
+  opacity: 0.9;
+}
+
+.ks-grid-12-8 {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.ks-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.ks-bg-white {
+  background: var(--light-gray);
+}
+
+.ks-bg-dark {
+  background: var(--brand-navy);
+}
+
+.ks-bg-fafa {
+  background: var(--color-surface-soft);
+}
+
+.ks-bg-world {
+  background: var(--dark-gray);
+}
+
+.ks-standorte {
+  border-top: 1px solid var(--color-border-inverse-soft);
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+@supports not (overflow-x: clip) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}
+
+.ks-kicker {
+  position: relative;
+  padding-left: 12px;
+  color: var(--color-text-heading-sm);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.ks-kicker::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 4px;
+  height: 1.1em;
+  border-radius: 2px;
+  background: var(--brand-gold);
+  opacity: 0.95;
+  transform: translateY(-50%);
+}
+
+.ks-wm-top-80 .ks-title-wrap::after {
+  top: -80px;
+}
+
 #kontakt .ks-kicker,
 #news .ks-title-wrap .ks-kicker,
 #fr-benefits .ks-kicker {
@@ -527,7 +1066,6 @@ html:not(.i18n-ready) .ks-dir__hero::before {
   opacity: 0;
 }
 
-/* neu */
 
 .ks-btn {
   --btn-border: var(--brand-gold);
@@ -612,4 +1150,4 @@ html:not(.i18n-ready) .ks-dir__hero::before {
   --btn-fill: var(--brand-gold);
   --btn-text: var(--brand-white);
   --btn-text-h: var(--brand-black);
-}
+} */
