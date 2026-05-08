@@ -1,19 +1,19 @@
 {
   "common": {
     "home": "Home",
-    "backToTop": "Nach oben scrollen"
-  },
-  "contact": {
-    "kicker": "Kontakt",
-    "title": "Hast du Fragen?",
-    "text": "Bei Interesse kannst du uns jederzeit kontaktieren. Wir melden uns schnellstmöglich zurück.",
-    "button": "Nachricht schreiben",
-    "phoneTitle": "Ruf uns an:",
-    "mailTitle": "Schreib uns:",
-    "hoursTitle": "Telefonzeiten:",
-    "hoursText": "Mo.–Fr. 09:00–20:00 Uhr",
-    "phoneAria": "Anrufen",
-    "mailAria": "E-Mail schreiben",
-    "hoursAria": "Telefonzeiten ansehen"
+    "backToTop": "Nach oben scrollen",
+    "contact": {
+      "kicker": "Kontakt",
+      "title": "Hast du Fragen?",
+      "text": "Bei Interesse kannst du uns jederzeit kontaktieren. Wir melden uns schnellstmöglich zurück.",
+      "button": "Nachricht schreiben",
+      "phoneTitle": "Ruf uns an:",
+      "mailTitle": "Schreib uns:",
+      "hoursTitle": "Telefonzeiten:",
+      "hoursText": "Mo.–Fr. 09:00–20:00 Uhr",
+      "phoneAria": "Anrufen",
+      "mailAria": "E-Mail schreiben",
+      "hoursAria": "Telefonzeiten ansehen"
+    }
   }
 }
