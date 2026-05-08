@@ -6,28 +6,13 @@ if (!function_exists('ks_shared_contact_t')) {
   }
 }
 
-if (!function_exists('ks_enqueue_contact_section_assets')) {
-  function ks_enqueue_contact_section_assets() {
-    $theme_dir = get_stylesheet_directory();
-    $theme_uri = get_stylesheet_directory_uri();
-    $file = $theme_dir . '/assets/css/ks-contact-section.css';
-
-    if (!file_exists($file) || wp_style_is('ks-contact-section', 'enqueued')) {
-      return;
-    }
-
-    wp_enqueue_style(
-      'ks-contact-section',
-      $theme_uri . '/assets/css/ks-contact-section.css',
-      ['kickstart-style', 'ks-utils'],
-      filemtime($file)
-    );
-  }
-}
 
 if (!function_exists('ks_print_shared_contact_section')) {
   function ks_print_shared_contact_section($spacing_class = 'ks-py-32') {
-    ks_enqueue_contact_section_assets();
+    if (function_exists('ks_enqueue_contact_section_assets')) {
+      ks_enqueue_contact_section_assets();
+    }
+
     $theme_uri = get_stylesheet_directory_uri();
 
     ?>
