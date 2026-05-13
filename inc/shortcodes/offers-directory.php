@@ -243,11 +243,11 @@ add_action('init', function () {
     //   : 'ks-dir__kicker ks-dir__kicker--hidden';
 
     $kickerClass = $showKicker
-  ? 'ks-kicker ks-dir__kicker'
-  : 'ks-kicker ks-dir__kicker ks-dir__kicker--hidden';
+      ? 'ks-kicker ks-dir__kicker'
+      : 'ks-kicker ks-dir__kicker ks-dir__kicker--hidden';
 
-      $hero_i18n_key = $headingKey ?: $courseKey ?: 'Generic';
-$title_i18n = 'offersHero.titles.' . $hero_i18n_key;
+    $hero_i18n_key = $headingKey ?: $courseKey ?: 'Generic';
+    $title_i18n = 'offersHero.titles.' . $hero_i18n_key;
 
     $api_base = ks_api_base();
     $query = ['limit' => '200'];
@@ -342,14 +342,14 @@ $title_i18n = 'offersHero.titles.' . $hero_i18n_key;
 
     $page_hero_image = esc_url($theme_uri . '/assets/img/hero/mfs.png');
 
-echo do_shortcode(
-  '[ks_hero_page title="' . esc_attr($heading) .
-  '" subtitle="Finde das passende Training und buche dein kostenfreies Schnuppertraining direkt online." breadcrumb="Home" image="' .
-  $page_hero_image .
-  '" variant="offers" features="0" eyebrow="Kurse" primary_label="Jetzt buchen" primary_href="#angebote-buchen" secondary_label="Häufige Fragen" secondary_href="#dir-faq" title_i18n="' .
-  esc_attr($title_i18n) .
-  '" subtitle_i18n="offersHero.subtitle" eyebrow_i18n="offersHero.eyebrow" primary_i18n="offersHero.actions.booking" secondary_i18n="offersHero.actions.faq"]'
-);
+    echo do_shortcode(
+      '[ks_hero_page title="' . esc_attr($heading) .
+      '" subtitle="Finde das passende Training und buche dein kostenfreies Schnuppertraining direkt online." breadcrumb="Home" image="' .
+      $page_hero_image .
+      '" variant="offers" features="0" eyebrow="Kurse" primary_label="Jetzt buchen" primary_href="#angebote-buchen" secondary_label="Häufige Fragen" secondary_href="#dir-faq" title_i18n="' .
+      esc_attr($title_i18n) .
+      '" subtitle_i18n="offersHero.subtitle" eyebrow_i18n="offersHero.eyebrow" primary_i18n="offersHero.actions.booking" secondary_i18n="offersHero.actions.faq"]'
+    );
 ?>
 
 <div id="ksDir"
@@ -365,22 +365,18 @@ echo do_shortcode(
 
   <section
     id="angebote-buchen"
-   
-     class="ks-dir__hero ks-py-56 ks-watermark ks-watermark--hero"
-    data-bgword="ANGEBOTE"
-    data-i18n="offersDirectory.intro.watermark"
-    data-i18n-attr="data-bgword"
+    class="ks-dir__hero ks-py-56 ks-section-accent"
   >
-   <div class="ks-dir__hero-content">
-  <p class="<?php echo esc_attr($kickerClass); ?>">
-    <span data-i18n="offersDirectory.finder.kicker">Angebote & Standorte</span>
-  </p>
+    <div class="ks-dir__hero-content">
+      <p class="<?php echo esc_attr($kickerClass); ?>">
+        <span data-i18n="offersDirectory.finder.kicker">Angebote & Standorte</span>
+      </p>
 
-  <h2 class="ks-dir__title" data-i18n="offersDirectory.finder.title">
-    Wähle dein Training aus.
-  </h2>
+      <h2 class="ks-dir__title" data-i18n="offersDirectory.finder.title">
+        Wähle dein Training aus.
+      </h2>
 
-  <div class="ks-dir__stats" aria-label="DFS Vorteile">
+      <div class="ks-dir__stats" aria-label="DFS Vorteile">
         <span class="ks-dir__stat">
           <img src="<?php echo esc_url($location_icon); ?>" alt="" loading="lazy" decoding="async">
           <strong>300+</strong>
@@ -409,8 +405,6 @@ echo do_shortcode(
         </button>
 
         <div id="ksMap" class="ks-map"></div>
-
-       
       </div>
     </div>
   </section>
@@ -479,7 +473,6 @@ echo do_shortcode(
     <?php else: ?>
       <form class="ks-dir__filters" data-filters>
         <label class="ks-field ks-field--with-icon">
-         
           <div class="ks-field__shell">
             <span class="ks-field__lead-icon" aria-hidden="true">
               <img src="<?php echo esc_url($calendar_icon); ?>" alt="">
@@ -503,7 +496,6 @@ echo do_shortcode(
         </label>
 
         <label class="ks-field ks-field--with-icon">
-          
           <div class="ks-field__shell">
             <span class="ks-field__lead-icon" aria-hidden="true">
               <img src="<?php echo esc_url($age_icon); ?>" alt="">
@@ -523,7 +515,6 @@ echo do_shortcode(
         </label>
 
         <label class="ks-field ks-field--with-icon">
-         
           <div class="ks-field__shell">
             <span class="ks-field__lead-icon" aria-hidden="true">
               <img src="<?php echo esc_url($location_icon); ?>" alt="">
@@ -583,19 +574,15 @@ echo do_shortcode(
 
         <a href="#kontakt" class="ks-dir__support-cta">
           <span data-i18n="offersDirectory.support.cta">Zur Beratung</span>
-         <img src="<?php echo esc_url($arrow_icon); ?>" alt="" loading="lazy" decoding="async">
+          <img src="<?php echo esc_url($arrow_icon); ?>" alt="" loading="lazy" decoding="async">
         </a>
       </div>
     </aside>
 
     <section class="ks-dir__results-main" aria-live="polite">
-      
-
       <div class="ks-dir__listwrap">
         <ul id="ksDirList" class="ks-dir__list"></ul>
       </div>
-
-      
     </section>
   </div>
 
@@ -654,8 +641,6 @@ if (!empty($faq_items)) {
     'wrapper_class' => 'container ks-home-faq ks-dir-faq__grid',
     'title' => 'Wichtige Fragen zum Angebot',
     'kicker' => 'Gut zu wissen',
-    'watermark' => 'FAQ',
-     'watermark_class' => 'ks-watermark--faq',
     'title_i18n' => 'offers.faq.common.title',
     'kicker_i18n' => 'offers.faq.common.kicker',
     'items_i18n_prefix' => 'offers.faq.' . ks_get_faq_slug($faqKey),
@@ -787,10 +772,6 @@ if (function_exists('ks_render_feedback_section')) {
 return ob_get_clean();
   });
 });
-
-
-
-
 
 
 
