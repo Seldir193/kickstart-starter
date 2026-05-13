@@ -21,7 +21,7 @@ if (!function_exists('ks_enqueue_feedback_css')) {
     wp_enqueue_style(
       'ks-feedback',
       $theme_uri . '/assets/css/ks-feedback.css',
-      ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components','ks-watermark'],
+      ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components', 'ks-watermark'],
       filemtime($fb_css)
     );
   }
@@ -187,8 +187,6 @@ if (!function_exists('ks_feedback_category_text')) {
   }
 }
 
-
-
 if (!function_exists('ks_feedback_categories')) {
   function ks_feedback_categories(array $feedbacks): array {
     $ordered = ['Eltern', 'Spieler', 'Trainer', 'Partner'];
@@ -267,19 +265,13 @@ if (!function_exists('ks_render_feedback_section')) {
     <section
       id="feedback"
       class="ks-sec ks-feedback"
-      
       data-feedback-root
       aria-label="<?php echo esc_attr(ks_feedback_text('feedback.aria.section', 'Feedbacks')); ?>"
       data-i18n="feedback.aria.section"
       data-i18n-attr="aria-label"
     >
       <div class="container container--1400">
-        <div
-           class="ks-title-wrap ks-feedback__head ks-watermark ks-watermark--center ks-watermark--feedback"
-          data-bgword="<?php echo esc_attr(ks_feedback_text('feedback.watermark', 'STIMMEN')); ?>"
-          data-i18n="feedback.watermark"
-          data-i18n-attr="data-bgword"
-        >
+        <div class="ks-title-wrap ks-feedback__head ks-section-accent ks-section-accent--center">
           <div class="ks-kicker" data-i18n="feedback.kicker">
             <?php echo esc_html(ks_feedback_text('feedback.kicker', 'Feedback')); ?>
           </div>
@@ -446,24 +438,6 @@ if (!function_exists('ks_render_feedback_section')) {
     return ob_get_clean();
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -22,12 +22,7 @@ $programs = [
 >
   <div class="container ks-cta-grid">
     <div class="ks-cta-text">
-      <div
-        class="ks-title-wrap ks-watermark ks-watermark--center ks-watermark--cta"
-        data-bgword="<?php echo esc_attr($program_cta_t('programCta.watermark', 'BUCHEN')); ?>"
-        data-i18n="programCta.watermark"
-        data-i18n-attr="data-bgword"
-      >
+      <div class="ks-title-wrap ks-section-accent ks-section-accent--center">
         <div class="ks-kicker" data-i18n="programCta.kicker">
           <?php echo esc_html($program_cta_t('programCta.kicker', 'Schnell buchen')); ?>
         </div>
@@ -113,6 +108,20 @@ $programs = [
     </form>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
