@@ -1,7 +1,7 @@
 /* assets\css\header.css */
 /* assets\css\header.css */
 @layer layout {
-  .site-header {
+  /* .site-header {
     position: sticky;
     top: var(--wp-admin-bar-h);
     left: 0;
@@ -9,6 +9,21 @@
     z-index: calc(var(--mega-z) + 1);
     background: var(--header-bg);
     border-bottom: 1px solid var(--color-border-soft);
+  } */
+
+  .site-header {
+    position: fixed;
+    top: var(--wp-admin-bar-h);
+    left: 0;
+    right: 0;
+    z-index: calc(var(--mega-z) + 50);
+    width: 100%;
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  body {
+    padding-top: var(--header-height);
   }
 
   .header-inner {
