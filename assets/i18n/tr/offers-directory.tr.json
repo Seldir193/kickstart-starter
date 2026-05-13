@@ -38,7 +38,9 @@
       "qualityTitle": "Onaylı",
       "qualityText": "DFS kalitesi"
     },
-
+    "map": {
+      "nearby": "Yakınımda"
+    },
     "support": {
       "title": "Senin için buradayız",
       "text": "Programlar ve lokasyonlar hakkında kişisel danışmanlık.",

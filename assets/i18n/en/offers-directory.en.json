@@ -38,7 +38,9 @@
       "qualityTitle": "Verified",
       "qualityText": "DFS quality"
     },
-
+    "map": {
+      "nearby": "Near me"
+    },
     "support": {
       "title": "We are here for you",
       "text": "Personal advice on programs and locations.",

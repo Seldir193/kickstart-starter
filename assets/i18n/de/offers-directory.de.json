@@ -38,7 +38,9 @@
       "qualityTitle": "Geprüfte",
       "qualityText": "DFS-Qualität"
     },
-
+    "map": {
+      "nearby": "In meiner Nähe"
+    },
     "support": {
       "title": "Wir sind für dich da",
       "text": "Persönliche Beratung zu Programmen und Standorten.",
