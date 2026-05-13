@@ -1,5 +1,4 @@
 /* assets/css/ks-scrollbars.css */
-/* assets/css/ks-scrollbars.css */
 html {
   scrollbar-width: thin;
   scrollbar-color: var(--ks-scrollbar-thumb) var(--ks-scrollbar-track);
@@ -31,23 +30,35 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .ks-dir__listwrap,
+.ks-dd__inner,
+.ks-dir-dd__inner,
+.ks-dir-dd__panel,
 .book-embed {
   scrollbar-width: thin;
   scrollbar-color: var(--ks-scrollbar-thumb) var(--ks-scrollbar-track);
 }
 
 .ks-dir__listwrap::-webkit-scrollbar,
+.ks-dd__inner::-webkit-scrollbar,
+.ks-dir-dd__inner::-webkit-scrollbar,
+.ks-dir-dd__panel::-webkit-scrollbar,
 .book-embed::-webkit-scrollbar {
   width: var(--ks-scrollbar-size);
   height: var(--ks-scrollbar-size);
 }
 
 .ks-dir__listwrap::-webkit-scrollbar-track,
+.ks-dd__inner::-webkit-scrollbar-track,
+.ks-dir-dd__inner::-webkit-scrollbar-track,
+.ks-dir-dd__panel::-webkit-scrollbar-track,
 .book-embed::-webkit-scrollbar-track {
   background: var(--ks-scrollbar-track);
 }
 
 .ks-dir__listwrap::-webkit-scrollbar-thumb,
+.ks-dd__inner::-webkit-scrollbar-thumb,
+.ks-dir-dd__inner::-webkit-scrollbar-thumb,
+.ks-dir-dd__panel::-webkit-scrollbar-thumb,
 .book-embed::-webkit-scrollbar-thumb {
   background: var(--ks-scrollbar-thumb);
   border-radius: 999px;
@@ -56,6 +67,9 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .ks-dir__listwrap::-webkit-scrollbar-thumb:hover,
+.ks-dd__inner::-webkit-scrollbar-thumb:hover,
+.ks-dir-dd__inner::-webkit-scrollbar-thumb:hover,
+.ks-dir-dd__panel::-webkit-scrollbar-thumb:hover,
 .book-embed::-webkit-scrollbar-thumb:hover {
   background: var(--ks-scrollbar-thumb-hover);
   background-clip: content-box;

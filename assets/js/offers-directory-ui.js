@@ -77,7 +77,7 @@
         });
 
         const sel = panel.querySelector(
-          '.ks-dir-dd__option[aria-selected="true"]'
+          '.ks-dir-dd__option[aria-selected="true"]',
         );
         const first = panel.querySelector(".ks-dir-dd__option");
         (sel || first)?.focus({ preventScroll: true });
@@ -93,7 +93,7 @@
           document.removeEventListener(
             "pointerdown",
             onOutsidePointerDown,
-            true
+            true,
           );
           onOutsidePointerDown = null;
         }
@@ -121,7 +121,7 @@
           (e) => {
             if (e.key === "Escape") closeDD();
           },
-          { once: true }
+          { once: true },
         );
       }
 
@@ -147,7 +147,19 @@
         closeDD();
       });
 
+      // nativeSel.addEventListener("change", () => {
+      //   syncLabel();
+      //   if (dd.classList.contains("is-open")) buildPanel();
+      // });
+
+      // syncLabel();
+
       nativeSel.addEventListener("change", () => {
+        syncLabel();
+        if (dd.classList.contains("is-open")) buildPanel();
+      });
+
+      nativeSel.addEventListener("ks:sync-label", () => {
         syncLabel();
         if (dd.classList.contains("is-open")) buildPanel();
       });
@@ -159,10 +171,24 @@
     root.classList.add("is-ready");
 
     // global outside closer (1x)
+    // if (!root.dataset.ddOutsideBound) {
+    //   root.dataset.ddOutsideBound = "1";
+    //   document.addEventListener("pointerdown", (e) => {
+    //     if (!root.contains(e.target)) closeAll();
+    //   });
+    // }
+
     if (!root.dataset.ddOutsideBound) {
       root.dataset.ddOutsideBound = "1";
+
       document.addEventListener("pointerdown", (e) => {
         if (!root.contains(e.target)) closeAll();
+      });
+
+      document.addEventListener("ks:i18n:applied", () => {
+        root.querySelectorAll("[data-filters] select").forEach((select) => {
+          select.dispatchEvent(new Event("ks:sync-label"));
+        });
       });
     }
   }

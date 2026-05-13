@@ -54,6 +54,20 @@
     sonntag: "So",
     sunday: "So",
   };
+  // const DAY_LONG = {
+  //   Mo: "Montag",
+  //   Di: "Dienstag",
+  //   Mi: "Mittwoch",
+  //   Do: "Donnerstag",
+  //   Fr: "Freitag",
+  //   Sa: "Samstag",
+  //   So: "Sonntag",
+  // };
+
+  // const normDay = (v) =>
+  //   v ? DAY_ALIASES[String(v).trim().toLowerCase()] || v : "";
+  // const dayLongPlural = (c) => (DAY_LONG[c] || c) + (c ? "s" : "");
+
   const DAY_LONG = {
     Mo: "Montag",
     Di: "Dienstag",
@@ -66,7 +80,68 @@
 
   const normDay = (v) =>
     v ? DAY_ALIASES[String(v).trim().toLowerCase()] || v : "";
-  const dayLongPlural = (c) => (DAY_LONG[c] || c) + (c ? "s" : "");
+
+  const dayLong = (value) => {
+    const code = normDay(value);
+    return code ? DAY_LONG[code] || code : "";
+  };
+
+  // const getOfferDay = (session, offer) => {
+  //   if (session?.day) return dayLong(session.day);
+  //   if (offer?.day) return dayLong(offer.day);
+
+  //   const sessionDay = Array.isArray(session?.days) ? session.days[0] : "";
+  //   const offerDay = Array.isArray(offer?.days) ? offer.days[0] : "";
+  //   return dayLong(sessionDay || offerDay);
+  // };
+
+  // const isWeeklyOffer = (offer) =>
+  //   String(offer?.category || "").toLowerCase() === "weekly";
+
+  // const isIndividualOffer = (offer) =>
+  //   String(offer?.category || "").toLowerCase() === "individual";
+
+  // const formatScheduleTitle = (session, offer) => {
+  //   const day = getOfferDay(session, offer);
+  //   if (!day) return "—";
+  //   if (isWeeklyOffer(offer)) return `Jeden ${day}`;
+  //   if (isIndividualOffer(offer)) return day;
+  //   return day;
+  // };
+
+  const getOfferDay = (session, offer, sessionCount) => {
+    if (session?.day) return dayLong(session.day);
+
+    const sessionDay = Array.isArray(session?.days) ? session.days[0] : "";
+    if (sessionDay) return dayLong(sessionDay);
+
+    if (sessionCount === 1 && offer?.day) return dayLong(offer.day);
+
+    const offerDay = Array.isArray(offer?.days) ? offer.days[0] : "";
+    if (sessionCount === 1 && offerDay) return dayLong(offerDay);
+
+    return "";
+  };
+
+  const isWeeklyOffer = (offer) =>
+    String(offer?.category || "").toLowerCase() === "weekly";
+
+  const isIndividualOffer = (offer) =>
+    String(offer?.category || "").toLowerCase() === "individual";
+
+  // const formatScheduleTitle = (session, offer, sessionCount) => {
+  //   const day = getOfferDay(session, offer, sessionCount);
+  //   if (!day) return "—";
+  //   if (isWeeklyOffer(offer)) return `Jeden ${day}`;
+  //   if (isIndividualOffer(offer)) return day;
+  //   return day;
+  // };
+
+  const formatScheduleTitle = (session, offer, sessionCount) => {
+    const day = getOfferDay(session, offer, sessionCount);
+    if (!day) return "—";
+    return day;
+  };
 
   const nameAddr = (o) => {
     const name =
@@ -370,12 +445,15 @@
 
     return list
       .map((s, idx) => {
-        const dayCode = normDay(
-          Array.isArray(s.days) && s.days.length ? s.days[0] : "",
-        );
-        const weekdayShort = dayCode || "";
-        const weekdayLong = weekdayShort ? dayLongPlural(weekdayShort) : "";
+        // const dayCode = normDay(
+        //   Array.isArray(s.days) && s.days.length ? s.days[0] : "",
+        // );
+        // const weekdayShort = dayCode || "";
+        // const weekdayLong = weekdayShort ? dayLongPlural(weekdayShort) : "";
 
+        // const time = formatTime(s);
+
+        const scheduleTitle = formatScheduleTitle(s, offer, list.length);
         const time = formatTime(s);
         const age = formatAge(s);
         const fName = getCoachFirst(s);
@@ -388,14 +466,35 @@
         let middleLine = "";
         const isPower = isPowertraining;
 
+        // if (isHoliday) {
+        //   const holidayTitle = getHolidayTitle(offer || {}, s);
+        //   topLine = holidayTitle || "—";
+        //   middleLine = time || "—";
+        // } else {
+        //   topLine = weekdayLong || "—";
+        //   middleLine = time || "—";
+        // }
+
         if (isHoliday) {
           const holidayTitle = getHolidayTitle(offer || {}, s);
           topLine = holidayTitle || "—";
           middleLine = time || "—";
+        } else if (isWeeklyOffer(offer)) {
+          topLine = scheduleTitle ? `Reguläre Kurszeit: ${scheduleTitle}` : "—";
+          middleLine = time || "—";
         } else {
-          topLine = weekdayLong || "—";
+          topLine = scheduleTitle || "—";
           middleLine = time || "—";
         }
+
+        // if (isHoliday) {
+        //   const holidayTitle = getHolidayTitle(offer || {}, s);
+        //   topLine = holidayTitle || "—";
+        //   middleLine = time || "—";
+        // } else {
+        //   topLine = scheduleTitle || "—";
+        //   middleLine = time || "—";
+        // }
 
         if (isPower) {
           return `

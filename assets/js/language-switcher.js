@@ -130,6 +130,10 @@
       scopes.push("offers");
     }
 
+    if (hasI18nPrefix("offersDirectory.")) {
+      scopes.push("offers-directory");
+    }
+
     if (hasI18nPrefix("feedback.")) {
       scopes.push("feedback");
     }
@@ -342,6 +346,19 @@
     });
   }
 
+  // function applyHeaderTranslations(state, language, data) {
+  //   if (!data) return;
+  //   setDocumentLanguage(language);
+  //   setTriggerLabel(state, data);
+  //   setActiveLanguage(state, language, data);
+  //   state.navLinks.forEach(function (link) {
+  //     translateNavLink(link, data);
+  //   });
+  //   applyGenericTranslations(state, data);
+  //   applyDateTranslations(state, language);
+  //   document.documentElement.classList.add("i18n-ready");
+  // }
+
   function applyHeaderTranslations(state, language, data) {
     if (!data) return;
     setDocumentLanguage(language);
@@ -353,6 +370,14 @@
     applyGenericTranslations(state, data);
     applyDateTranslations(state, language);
     document.documentElement.classList.add("i18n-ready");
+
+    document.dispatchEvent(
+      new CustomEvent("ks:i18n:applied", {
+        detail: {
+          language: language,
+        },
+      }),
+    );
   }
 
   function getCachedLanguage(state, language) {

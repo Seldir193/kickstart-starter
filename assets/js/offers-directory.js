@@ -39,6 +39,9 @@
     const listEl = $("#ksDirList", root);
     const ageTitle = $("[data-age-title]", root);
 
+    const resetBtn = $("[data-reset-filters]", root);
+    const secondaryOfferCount = $("[data-count-offers-secondary]", root);
+
     function resetSelect(sel) {
       if (!sel) return;
       sel.value = "";
@@ -166,6 +169,10 @@
       setCounters(root, filtered);
       setAgeHeadline(ageTitle, filtered, SUBTYPE || TYPE);
 
+      if (secondaryOfferCount) {
+        secondaryOfferCount.textContent = String(filtered.length);
+      }
+
       let displayArr = filtered;
       let groups = null;
 
@@ -222,7 +229,27 @@
       });
     }
 
+    // if (holidayWeekSel) holidayWeekSel.addEventListener("change", apply);
+
+    // apply();
+
     if (holidayWeekSel) holidayWeekSel.addEventListener("change", apply);
+
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        resetSelect(daySel);
+        resetSelect(ageSel);
+        resetSelect(locSel);
+        resetSelect(holidaySeasonSel);
+        resetSelect(holidayWeekSel);
+
+        if (isHolidayPage) {
+          fillHolidayWeeksSelect(holidayWeekSel, items, "");
+        }
+
+        apply();
+      });
+    }
 
     apply();
   });

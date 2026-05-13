@@ -14,7 +14,7 @@
           ">": "&gt;",
           '"': "&quot;",
           "'": "&#39;",
-        }[m])
+        })[m],
     );
 
   function normalize_city(s) {
@@ -195,7 +195,7 @@
     const city = o?.city || city_from_offer(o) || "";
     const loc = String(o?.location || "").trim();
     const line = [street, [zip, city].filter(Boolean).join(" ")].filter(
-      Boolean
+      Boolean,
     );
     const full = line.join(", ").trim();
     if (full && full.length >= 6) return full;
@@ -257,6 +257,59 @@
     if (all_pts.length > 1) fly_to(map, all_pts);
     else if (all_pts.length === 1) map.flyTo(all_pts[0], 12, { duration: 0.5 });
     else map.setView(DEFAULT_CENTER, DEFAULT_Z);
+  }
+
+  function show_user_location_error(button) {
+    if (!button) return;
+    const oldText = button.dataset.originalText || button.textContent.trim();
+
+    button.disabled = true;
+    button.dataset.originalText = oldText;
+    button.querySelector("span")
+      ? (button.querySelector("span").textContent = "Standort nicht verfügbar")
+      : (button.textContent = "Standort nicht verfügbar");
+
+    setTimeout(() => {
+      button.disabled = false;
+      button.querySelector("span")
+        ? (button.querySelector("span").textContent = oldText)
+        : (button.textContent = oldText);
+    }, 2200);
+  }
+
+  function add_user_marker(state, ll) {
+    if (state.user_marker) {
+      state.user_marker.remove();
+    }
+
+    state.user_marker = L.circleMarker(ll, {
+      radius: 8,
+      weight: 3,
+      opacity: 1,
+      fillOpacity: 0.9,
+    }).addTo(state.map);
+  }
+
+  function focus_user_location(state, position) {
+    const ll = [position.coords.latitude, position.coords.longitude];
+    add_user_marker(state, ll);
+    state.map.flyTo(ll, 13, { duration: 0.6 });
+  }
+
+  function bind_nearby_button(state) {
+    const button = $(".ks-dir__nearby", state.root);
+
+    if (!button || !state.map || !navigator.geolocation) {
+      return;
+    }
+
+    button.addEventListener("click", () => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => focus_user_location(state, position),
+        () => show_user_location_error(button),
+        { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 },
+      );
+    });
   }
 
   function clear_markers(markers) {
@@ -330,7 +383,7 @@
     state.markers = clear_markers(state.markers);
     const { ready, missing } = split_markers_by_coords(display_arr);
     ready.forEach((x) =>
-      state.markers.push(add_marker(state.map, x.o, x.i, state.root, x.ll))
+      state.markers.push(add_marker(state.map, x.o, x.i, state.root, x.ll)),
     );
     geocode_missing_markers(state, missing);
   }
@@ -365,10 +418,13 @@
       root,
       map,
       markers: [],
+      user_marker: null,
       all_pts: [],
       render_token: 0,
       token: 0,
     };
+
+    bind_nearby_button(state);
 
     function set_all_points(items) {
       state.all_pts = points_from(items || []);

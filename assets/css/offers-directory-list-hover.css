@@ -6,38 +6,113 @@
 @layer pages {
   #ksDir .ks-dir__list > li {
     position: relative;
-    border-radius: 12px;
-    padding: 12px 14px;
+    overflow: hidden;
+    padding: 14px 16px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--dfs-radius-card);
+    background: var(--dfs-white);
     cursor: pointer;
-    background: transparent;
-    border: 1px solid transparent;
-    transition: background-color 0.18s ease, border-color 0.18s ease,
-      box-shadow 0.18s ease, transform 0.18s ease;
+    transition:
+      background-color var(--dfs-transition-short),
+      border-color var(--dfs-transition-short),
+      box-shadow var(--dfs-transition-short),
+      transform var(--dfs-transition-short);
   }
 
   #ksDir .ks-dir__list > li:hover {
-    background: #fff;
-    border-color: rgba(15, 30, 46, 0.12);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
-    transform: translateY(-1px);
+    border-color: var(--color-border-strong);
+    background: linear-gradient(
+      90deg,
+      var(--color-gold-glow-subtle),
+      var(--dfs-white) 38%
+    );
+    box-shadow: var(--dfs-shadow-soft);
+    transform: translateY(-2px);
   }
 
   #ksDir .ks-dir__list > li:focus-within {
-    background: #fff;
-    border-color: rgba(15, 30, 46, 0.22);
-    box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-navy) 22%, #ffffff);
+    border-color: var(--brand-navy);
+    background: var(--dfs-white);
+    box-shadow: var(--ks-focus-ring-navy);
+  }
+
+  #ksDir .ks-dir__list > li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 14px;
+    bottom: 14px;
+    width: 4px;
+    border-radius: var(--dfs-radius-pill);
+    background: var(--brand-gold);
+    opacity: 0;
+    transform: scaleY(0.4);
+    transform-origin: center;
+    transition:
+      opacity var(--dfs-transition-short),
+      transform var(--dfs-transition-short);
   }
 
   #ksDir .ks-dir__list > li:hover::before,
   #ksDir .ks-dir__list > li:focus-within::before {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* @layer pages {
+  #ksDir .ks-dir__list > li {
+    position: relative;
+    overflow: hidden;
+    padding: 14px 16px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--dfs-radius-card);
+    background: var(--dfs-white);
+    cursor: pointer;
+    transition:
+      background-color var(--dfs-transition-short),
+      border-color var(--dfs-transition-short),
+      box-shadow var(--dfs-transition-short),
+      transform var(--dfs-transition-short);
+  }
+
+  #ksDir .ks-dir__list > li:hover {
+    border-color: var(--color-border-strong);
+    background: linear-gradient(
+      90deg,
+      var(--color-gold-glow-subtle),
+      var(--dfs-white) 38%
+    );
+    box-shadow: var(--dfs-shadow-soft);
+    transform: translateY(-2px);
+  }
+
+  #ksDir .ks-dir__list > li:focus-within {
+    border-color: var(--brand-navy);
+    background: var(--dfs-white);
+    box-shadow: var(--ks-focus-ring-navy);
+  }
+
+  #ksDir .ks-dir__list > li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 10px;
-    bottom: 10px;
+    top: 14px;
+    bottom: 14px;
     width: 4px;
-    border-radius: 999px;
-    background: var(--brand-navy);
-    opacity: 0.9;
+    border-radius: var(--dfs-radius-pill);
+    background: var(--brand-gold);
+    opacity: 0;
+    transform: scaleY(0.4);
+    transform-origin: center;
+    transition:
+      opacity var(--dfs-transition-short),
+      transform var(--dfs-transition-short);
   }
-}
+
+  #ksDir .ks-dir__list > li:hover::before,
+  #ksDir .ks-dir__list > li:focus-within::before {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+} */

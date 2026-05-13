@@ -1,5 +1,3 @@
-
-
 <?php
 
 if (!function_exists('ks_get_offer_program_icon')) {
@@ -51,12 +49,22 @@ add_action('init', function () {
     }
 
     if (function_exists('ks_enqueue_info_section_assets')) {
-  ks_enqueue_info_section_assets();
-}
+      ks_enqueue_info_section_assets();
+    }
 
     $theme_dir = get_stylesheet_directory();
     $theme_uri = get_stylesheet_directory_uri();
-    $select_icon = $theme_uri . '/assets/img/offers/select-caret.svg';
+
+    $select_icon = $theme_uri . '/assets/img/offers/caret-down.svg';
+    $calendar_icon = $theme_uri . '/assets/img/offers/calendar-day.svg';
+    $age_icon = $theme_uri . '/assets/img/offers/age-user.svg';
+    $location_icon = $theme_uri . '/assets/img/offers/location-pin.svg';
+    $reset_icon = $theme_uri . '/assets/img/offers/reset-refresh.svg';
+    $support_icon = $theme_uri . '/assets/img/offers/support-headset.svg';
+    $phone_icon = $theme_uri . '/assets/img/offers/phone.svg';
+    $mail_icon = $theme_uri . '/assets/img/offers/mail.svg';
+    $route_icon = $theme_uri . '/assets/img/offers/route-navigation.svg';
+    $arrow_icon = $theme_uri . '/assets/img/team/arrow_right_alt.svg';
 
     add_action('wp_enqueue_scripts', function () {
       $theme_dir = get_stylesheet_directory();
@@ -230,12 +238,16 @@ add_action('init', function () {
       'Foerdertraining_Athletik',
     ], true);
 
-    $kickerClass = $showKicker
-      ? 'ks-dir__kicker'
-      : 'ks-dir__kicker ks-dir__kicker--hidden';
+    // $kickerClass = $showKicker
+    //   ? 'ks-dir__kicker'
+    //   : 'ks-dir__kicker ks-dir__kicker--hidden';
 
-    $hero_i18n_key = $headingKey ?: $courseKey ?: 'Generic';
-    $title_i18n = 'offersHero.titles.' . $hero_i18n_key;
+    $kickerClass = $showKicker
+  ? 'ks-kicker ks-dir__kicker'
+  : 'ks-kicker ks-dir__kicker ks-dir__kicker--hidden';
+
+      $hero_i18n_key = $headingKey ?: $courseKey ?: 'Generic';
+$title_i18n = 'offersHero.titles.' . $hero_i18n_key;
 
     $api_base = ks_api_base();
     $query = ['limit' => '200'];
@@ -326,9 +338,9 @@ add_action('init', function () {
       }
     }
 
-    ob_start(); 
+    ob_start();
 
-$page_hero_image = esc_url($theme_uri . '/assets/img/hero/mfs.png');
+    $page_hero_image = esc_url($theme_uri . '/assets/img/hero/mfs.png');
 
 echo do_shortcode(
   '[ks_hero_page title="' . esc_attr($heading) .
@@ -351,17 +363,73 @@ echo do_shortcode(
      data-close-icon="<?php echo esc_url($theme_uri . '/assets/img/close.png'); ?>"
      data-coachph="<?php echo esc_url($theme_uri . '/assets/img/avatar.png'); ?>">
 
-  
+  <section
+    id="angebote-buchen"
+    class="ks-dir__hero ks-py-56"
+    data-bgword="ANGEBOTE"
+    data-i18n="offersDirectory.intro.watermark"
+    data-i18n-attr="data-bgword"
+  >
+   <div class="ks-dir__hero-content">
+  <p class="<?php echo esc_attr($kickerClass); ?>">
+    <span data-i18n="offersDirectory.finder.kicker">Angebote & Standorte</span>
+  </p>
 
-  <header id="angebote-buchen" class="ks-dir__intro ks-py-56">
-    <p class="<?php echo esc_attr($kickerClass); ?>">
-      Hier kannst du dein kostenfreies Schnuppertraining ganz einfach buchen
-    </p>
+  <h2 class="ks-dir__title" data-i18n="offersDirectory.finder.title">
+    Wähle dein Training aus.
+  </h2>
 
-    <h2 class="ks-dir__title">
-      Unsere Angebote (<span data-age-title><?php echo esc_html($ageText); ?></span>)
-    </h2>
-  </header>
+  <div class="ks-dir__stats" aria-label="DFS Vorteile">
+        <span class="ks-dir__stat">
+          <img src="<?php echo esc_url($location_icon); ?>" alt="" loading="lazy" decoding="async">
+          <strong>300+</strong>
+          <small data-i18n="offersDirectory.stats.locations">Trainingsstandorte</small>
+        </span>
+
+        <span class="ks-dir__stat">
+          <img src="<?php echo esc_url($age_icon); ?>" alt="" loading="lazy" decoding="async">
+          <strong><?php echo esc_html(str_replace(' Jahre', '', $ageText)); ?></strong>
+          <small data-i18n="offersDirectory.stats.age">Jahre</small>
+        </span>
+
+        <span class="ks-dir__stat">
+          <img src="<?php echo esc_url($reset_icon); ?>" alt="" loading="lazy" decoding="async">
+          <strong data-i18n="offersDirectory.stats.qualityTitle">Geprüfte</strong>
+          <small data-i18n="offersDirectory.stats.qualityText">DFS-Qualität</small>
+        </span>
+      </div>
+    </div>
+
+    <div class="ks-dir__hero-map">
+      <div class="ks-dir__map">
+        <button type="button" class="ks-dir__nearby">
+          <img src="<?php echo esc_url($route_icon); ?>" alt="" loading="lazy" decoding="async">
+          <span data-i18n="offersDirectory.map.nearby">In meiner Nähe</span>
+        </button>
+
+        <div id="ksMap" class="ks-map"></div>
+
+        <!-- <div class="ks-dir__map-legend" aria-label="Kartenlegende">
+          <span>
+            <img src="<?php echo esc_url($location_icon); ?>" alt="" loading="lazy" decoding="async">
+            <b data-i18n="offersDirectory.map.locations">Standorte</b>
+          </span>
+          <span>
+            <b>1–3</b>
+            <small data-i18n="offersDirectory.map.few">Wenige Angebote</small>
+          </span>
+          <span>
+            <b>4–8</b>
+            <small data-i18n="offersDirectory.map.many">Viele Angebote</small>
+          </span>
+          <span>
+            <b>9+</b>
+            <small data-i18n="offersDirectory.map.veryMany">Sehr viele Angebote</small>
+          </span>
+        </div> -->
+      </div>
+    </div>
+  </section>
 
   <?php if ($showFilters): ?>
     <script>document.documentElement.classList.add('ks-js');</script>
@@ -369,116 +437,187 @@ echo do_shortcode(
     <?php if ($isHolidayCourse): ?>
       <form class="ks-dir__filters" data-filters>
         <label class="ks-field ks-field--with-icon">
-          <span>Ferienzeit</span>
-          <div class="ks-field__control ks-field__control--select">
-            <select id="ksFilterHolidaySeason">
-              <option value="">Alle Ferienzeiten</option>
-              <option value="oster">Ostern</option>
-              <option value="pfingst">Pfingsten</option>
-              <option value="sommer">Sommer</option>
-              <option value="herbst">Herbst</option>
-              <option value="winter">Winter</option>
-            </select>
-            <span class="ks-field__icon" aria-hidden="true">
-              <img src="<?php echo esc_url($select_icon); ?>" alt="">
+          <span data-i18n="offersDirectory.filters.holidaySeason">Ferienzeit</span>
+          <div class="ks-field__shell">
+            <span class="ks-field__lead-icon" aria-hidden="true">
+              <img src="<?php echo esc_url($calendar_icon); ?>" alt="">
             </span>
+            <div class="ks-field__control ks-field__control--select">
+              <select id="ksFilterHolidaySeason">
+                <option value="" data-i18n="offersDirectory.filters.allHolidaySeasons">Alle Ferienzeiten</option>
+                <option value="oster">Ostern</option>
+                <option value="pfingst">Pfingsten</option>
+                <option value="sommer">Sommer</option>
+                <option value="herbst">Herbst</option>
+                <option value="winter">Winter</option>
+              </select>
+              <span class="ks-field__icon" aria-hidden="true">
+                <img src="<?php echo esc_url($select_icon); ?>" alt="">
+              </span>
+            </div>
           </div>
         </label>
 
         <label class="ks-field ks-field--with-icon">
-          <span>Zeitraum</span>
-          <div class="ks-field__control ks-field__control--select">
-            <select id="ksFilterHolidayWeek">
-              <option value="">Alle Zeiträume</option>
-            </select>
-            <span class="ks-field__icon" aria-hidden="true">
-              <img src="<?php echo esc_url($select_icon); ?>" alt="">
+          <span data-i18n="offersDirectory.filters.holidayWeek">Zeitraum</span>
+          <div class="ks-field__shell">
+            <span class="ks-field__lead-icon" aria-hidden="true">
+              <img src="<?php echo esc_url($calendar_icon); ?>" alt="">
             </span>
+            <div class="ks-field__control ks-field__control--select">
+              <select id="ksFilterHolidayWeek">
+                <option value="" data-i18n="offersDirectory.filters.allHolidayWeeks">Alle Zeiträume</option>
+              </select>
+              <span class="ks-field__icon" aria-hidden="true">
+                <img src="<?php echo esc_url($select_icon); ?>" alt="">
+              </span>
+            </div>
           </div>
         </label>
 
         <label class="ks-field ks-field--with-icon">
-          <span>Standort</span>
-          <div class="ks-field__control ks-field__control--select">
-            <select id="ksFilterLoc">
-              <option value="">Alle Standorte</option>
-            </select>
-            <span class="ks-field__icon" aria-hidden="true">
-              <img src="<?php echo esc_url($select_icon); ?>" alt="">
+          <span data-i18n="offersDirectory.filters.location">Standort</span>
+          <div class="ks-field__shell">
+            <span class="ks-field__lead-icon" aria-hidden="true">
+              <img src="<?php echo esc_url($location_icon); ?>" alt="">
             </span>
+            <div class="ks-field__control ks-field__control--select">
+              <select id="ksFilterLoc">
+                <option value="" data-i18n="offersDirectory.filters.allLocations">Alle Standorte</option>
+              </select>
+              <span class="ks-field__icon" aria-hidden="true">
+                <img src="<?php echo esc_url($select_icon); ?>" alt="">
+              </span>
+            </div>
           </div>
         </label>
       </form>
-
-      <div class="ks-dir__meta">
-        <strong><span data-count-offers>0</span> Angebote</strong>
-        &nbsp;&bull;&nbsp;
-        <strong><span data-count-locations>0</span> Standorte</strong>
-      </div>
     <?php else: ?>
       <form class="ks-dir__filters" data-filters>
         <label class="ks-field ks-field--with-icon">
-          <span>Tag</span>
-          <div class="ks-field__control ks-field__control--select">
-            <select id="ksFilterDay">
-              <option value="">Alle Tage</option>
-              <option value="Mo">Mo</option>
-              <option value="Di">Di</option>
-              <option value="Mi">Mi</option>
-              <option value="Do">Do</option>
-              <option value="Fr">Fr</option>
-              <option value="Sa">Sa</option>
-              <option value="So">So</option>
-            </select>
-            <span class="ks-field__icon" aria-hidden="true">
-              <img src="<?php echo esc_url($select_icon); ?>" alt="">
+         
+          <div class="ks-field__shell">
+            <span class="ks-field__lead-icon" aria-hidden="true">
+              <img src="<?php echo esc_url($calendar_icon); ?>" alt="">
             </span>
+            <div class="ks-field__control ks-field__control--select">
+              <select id="ksFilterDay">
+                <option value="" data-i18n="offersDirectory.filters.allDays">Alle Tage</option>
+                <option value="Mo">Mo</option>
+                <option value="Di">Di</option>
+                <option value="Mi">Mi</option>
+                <option value="Do">Do</option>
+                <option value="Fr">Fr</option>
+                <option value="Sa">Sa</option>
+                <option value="So">So</option>
+              </select>
+              <span class="ks-field__icon" aria-hidden="true">
+                <img src="<?php echo esc_url($select_icon); ?>" alt="">
+              </span>
+            </div>
           </div>
         </label>
 
         <label class="ks-field ks-field--with-icon">
-          <span>Alter</span>
-          <div class="ks-field__control ks-field__control--select">
-            <select id="ksFilterAge">
-              <option value="">Alle</option>
-              <?php for ($i = 3; $i <= 18; $i++): ?>
-                <option value="<?php echo esc_attr($i); ?>"><?php echo esc_html($i); ?></option>
-              <?php endfor; ?>
-            </select>
-            <span class="ks-field__icon" aria-hidden="true">
-              <img src="<?php echo esc_url($select_icon); ?>" alt="">
+          
+          <div class="ks-field__shell">
+            <span class="ks-field__lead-icon" aria-hidden="true">
+              <img src="<?php echo esc_url($age_icon); ?>" alt="">
             </span>
+            <div class="ks-field__control ks-field__control--select">
+              <select id="ksFilterAge">
+                <option value="" data-i18n="offersDirectory.filters.allAges">Alle Altersgruppen</option>
+                <?php for ($i = 3; $i <= 18; $i++): ?>
+                  <option value="<?php echo esc_attr($i); ?>"><?php echo esc_html($i); ?></option>
+                <?php endfor; ?>
+              </select>
+              <span class="ks-field__icon" aria-hidden="true">
+                <img src="<?php echo esc_url($select_icon); ?>" alt="">
+              </span>
+            </div>
           </div>
         </label>
 
         <label class="ks-field ks-field--with-icon">
-          <span>Standort</span>
-          <div class="ks-field__control ks-field__control--select">
-            <select id="ksFilterLoc">
-              <option value="">Alle Standorte</option>
-            </select>
-            <span class="ks-field__icon" aria-hidden="true">
-              <img src="<?php echo esc_url($select_icon); ?>" alt="">
+         
+          <div class="ks-field__shell">
+            <span class="ks-field__lead-icon" aria-hidden="true">
+              <img src="<?php echo esc_url($location_icon); ?>" alt="">
             </span>
+            <div class="ks-field__control ks-field__control--select">
+              <select id="ksFilterLoc">
+                <option value="" data-i18n="offersDirectory.filters.allLocations">Alle Standorte</option>
+              </select>
+              <span class="ks-field__icon" aria-hidden="true">
+                <img src="<?php echo esc_url($select_icon); ?>" alt="">
+              </span>
+            </div>
           </div>
         </label>
+
+        <button type="button" class="ks-dir__reset" data-reset-filters>
+          <img src="<?php echo esc_url($reset_icon); ?>" alt="" loading="lazy" decoding="async">
+          <span data-i18n="offersDirectory.filters.reset">Filter zurücksetzen</span>
+        </button>
       </form>
-
-      <div class="ks-dir__meta">
-        <strong><span data-count-offers>0</span> Angebote</strong>
-        &nbsp;&bull;&nbsp;
-        <strong><span data-count-locations>0</span> Standorte</strong>
-      </div>
     <?php endif; ?>
+
+    <div class="ks-dir__meta">
+      <strong>
+        <span data-count-offers>0</span>
+        <span data-i18n="offersDirectory.meta.offers">Angebote</span>
+      </strong>
+      <span aria-hidden="true">•</span>
+      <strong>
+        <span data-count-locations>0</span>
+        <span data-i18n="offersDirectory.meta.locations">Standorte</span>
+      </strong>
+    </div>
   <?php endif; ?>
 
-  <div class="ks-dir__layout ks-py-56">
-    <div class="ks-dir__map">
-      <div id="ksMap" class="ks-map"></div>
-    </div>
-    <div class="ks-dir__listwrap" aria-live="polite">
-      <ul id="ksDirList" class="ks-dir__list"></ul>
-    </div>
+  <div class="ks-dir__results ks-py-48">
+    <aside class="ks-dir__support">
+      <span class="ks-dir__support-icon" aria-hidden="true">
+        <img src="<?php echo esc_url($support_icon); ?>" alt="" loading="lazy" decoding="async">
+      </span>
+
+      <div class="ks-dir__support-body">
+        <h3 data-i18n="offersDirectory.support.title">Wir sind für dich da</h3>
+        <p data-i18n="offersDirectory.support.text">
+          Persönliche Beratung zu Programmen und Standorten.
+        </p>
+
+        <a href="tel:+498912345678" class="ks-dir__support-link">
+          <img src="<?php echo esc_url($phone_icon); ?>" alt="" loading="lazy" decoding="async">
+          <span>089 123 456 78</span>
+        </a>
+
+        <a href="mailto:beratung@dfs-fussballschule.de" class="ks-dir__support-link">
+          <img src="<?php echo esc_url($mail_icon); ?>" alt="" loading="lazy" decoding="async">
+          <span>beratung@dfs-fussballschule.de</span>
+        </a>
+
+        <a href="#kontakt" class="ks-dir__support-cta">
+          <span data-i18n="offersDirectory.support.cta">Zur Beratung</span>
+         <img src="<?php echo esc_url($arrow_icon); ?>" alt="" loading="lazy" decoding="async">
+        </a>
+      </div>
+    </aside>
+
+    <section class="ks-dir__results-main" aria-live="polite">
+      <!-- <div class="ks-dir__results-head">
+        <h3>
+          <span data-count-offers-secondary>0</span>
+          <span data-i18n="offersDirectory.results.title">Angebote gefunden</span>
+        </h3>
+      </div> -->
+
+      <div class="ks-dir__listwrap">
+        <ul id="ksDirList" class="ks-dir__list"></ul>
+      </div>
+
+      
+    </section>
   </div>
 
   <div id="ksBookModal" class="ks-dir__modal" hidden>
@@ -487,11 +626,13 @@ echo do_shortcode(
       <button type="button" class="ks-dir__close" data-close aria-label="Schließen">
         <img src="<?php echo esc_url($theme_uri . '/assets/img/close.png'); ?>" alt="Schließen" width="14" height="14">
       </button>
-      <iframe class="ks-book__frame"
-              src=""
-              title="Buchung"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe
+        class="ks-book__frame"
+        src=""
+        title="Buchung"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
     </div>
   </div>
 
@@ -596,7 +737,6 @@ if (isset($aliasMap[$normKey])) {
   $normKey = $aliasMap[$normKey];
 }
 
-
 $program_data = ks_get_offer_program_texts($normKey);
 
 $program_title = $program_data['title'];
@@ -605,7 +745,6 @@ $program_text = $program_data['text'];
 $program_bullets = $program_data['bullets'];
 $program_i18n_base = 'offers.programDetails.' . $normKey;
 
-
 if ($program_title) : ?>
   <section id="kursdetails" class="ks-sec ks-py-48 ks-program-text ks-program-text--full ks-info-section">
     <div class="container container--1100">
@@ -613,20 +752,20 @@ if ($program_title) : ?>
         <div class="ks-info-section__content">
           <?php if ($program_age): ?>
             <div class="ks-kicker" data-i18n="<?php echo esc_attr($program_i18n_base . '.age'); ?>">
-  <?php echo esc_html($program_age); ?>
-</div>
+              <?php echo esc_html($program_age); ?>
+            </div>
           <?php endif; ?>
 
           <h2 class="ks-dir__title ks-mb-16" data-i18n="<?php echo esc_attr($program_i18n_base . '.title'); ?>">
-  <?php echo esc_html($program_title); ?>
-</h2>
+            <?php echo esc_html($program_title); ?>
+          </h2>
 
           <div class="ks-info-section__copy">
             <?php foreach ($program_text as $index => $paragraph): ?>
-  <p data-i18n="<?php echo esc_attr($program_i18n_base . '.text.' . $index); ?>">
-    <?php echo esc_html($paragraph); ?>
-  </p>
-<?php endforeach; ?>
+              <p data-i18n="<?php echo esc_attr($program_i18n_base . '.text.' . $index); ?>">
+                <?php echo esc_html($paragraph); ?>
+              </p>
+            <?php endforeach; ?>
           </div>
         </div>
 
@@ -645,11 +784,11 @@ if ($program_title) : ?>
 
                 <span class="ks-info-fact__body">
                   <strong
-  class="ks-info-fact__title"
-  data-i18n="<?php echo esc_attr($program_i18n_base . '.bullets.' . $index); ?>"
->
-  <?php echo esc_html($bullet); ?>
-</strong>
+                    class="ks-info-fact__title"
+                    data-i18n="<?php echo esc_attr($program_i18n_base . '.bullets.' . $index); ?>"
+                  >
+                    <?php echo esc_html($bullet); ?>
+                  </strong>
                 </span>
               </li>
             <?php endforeach; ?>
@@ -668,81 +807,6 @@ if (function_exists('ks_render_feedback_section')) {
 return ob_get_clean();
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

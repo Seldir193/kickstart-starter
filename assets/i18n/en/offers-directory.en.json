@@ -2,7 +2,10 @@
   "offersDirectory": {
     "intro": {
       "kicker": "Book your free trial training quickly and easily here",
+      "kickerPrefix": "Football training for",
+      "title": "Find the right training for your child.",
       "titlePrefix": "Our offers",
+      "text": "Discover professional football training and development programs near you – from technique boosts to intensive development training.",
       "watermark": "OFFERS"
     },
     "filters": {
@@ -12,10 +15,11 @@
       "holidaySeason": "Holiday period",
       "holidayWeek": "Time period",
       "allDays": "All days",
-      "allAges": "All",
+      "allAges": "All age groups",
       "allLocations": "All locations",
       "allHolidaySeasons": "All holiday periods",
-      "allHolidayWeeks": "All time periods"
+      "allHolidayWeeks": "All time periods",
+      "reset": "Reset filters"
     },
     "meta": {
       "offers": "Offers",
@@ -27,6 +31,26 @@
       "emptyText": "Please adjust your filters.",
       "fromAge": "from {{age}} years",
       "ageRange": "{{from}}–{{to}} years"
+    },
+    "stats": {
+      "locations": "Training locations",
+      "age": "Years",
+      "qualityTitle": "Verified",
+      "qualityText": "DFS quality"
+    },
+
+    "support": {
+      "title": "We are here for you",
+      "text": "Personal advice on programs and locations.",
+      "cta": "Get advice"
+    },
+    "results": {
+      "title": "offers found",
+      "loadMore": "Load more offers"
+    },
+    "finder": {
+      "kicker": "Offers & locations",
+      "title": "Choose your training."
     }
   }
 }

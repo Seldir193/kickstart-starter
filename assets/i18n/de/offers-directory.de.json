@@ -2,7 +2,10 @@
   "offersDirectory": {
     "intro": {
       "kicker": "Hier kannst du dein kostenfreies Schnuppertraining ganz einfach buchen",
+      "kickerPrefix": "Fussballtraining für",
+      "title": "Finde das passende Training für dein Kind.",
       "titlePrefix": "Unsere Angebote",
+      "text": "Entdecke professionelle Fussballtrainings und Förderprogramme in deiner Nähe – von Technik-Boosts bis zu intensiven Fördertrainings.",
       "watermark": "ANGEBOTE"
     },
     "filters": {
@@ -12,10 +15,11 @@
       "holidaySeason": "Ferienzeit",
       "holidayWeek": "Zeitraum",
       "allDays": "Alle Tage",
-      "allAges": "Alle",
+      "allAges": "Alle Altersgruppen",
       "allLocations": "Alle Standorte",
       "allHolidaySeasons": "Alle Ferienzeiten",
-      "allHolidayWeeks": "Alle Zeiträume"
+      "allHolidayWeeks": "Alle Zeiträume",
+      "reset": "Filter zurücksetzen"
     },
     "meta": {
       "offers": "Angebote",
@@ -27,6 +31,26 @@
       "emptyText": "Bitte passe deine Filter an.",
       "fromAge": "ab {{age}} Jahre",
       "ageRange": "{{from}}–{{to}} Jahre"
+    },
+    "stats": {
+      "locations": "Trainingsstandorte",
+      "age": "Jahre",
+      "qualityTitle": "Geprüfte",
+      "qualityText": "DFS-Qualität"
+    },
+
+    "support": {
+      "title": "Wir sind für dich da",
+      "text": "Persönliche Beratung zu Programmen und Standorten.",
+      "cta": "Zur Beratung"
+    },
+    "results": {
+      "title": "Angebote gefunden",
+      "loadMore": "Mehr Angebote laden"
+    },
+    "finder": {
+      "kicker": "Angebote & Standorte",
+      "title": "Wähle dein Training aus."
     }
   }
 }

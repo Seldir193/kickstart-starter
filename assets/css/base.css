@@ -94,6 +94,30 @@
     --brand-muted: #6b7280;
     --accent-red: #d71019;
 
+    --dfs-black: #111111;
+    --dfs-black-deep: #090909;
+    --dfs-navy: #0f1e2e;
+    --dfs-gold: #fde100;
+    --dfs-gold-dark: #e5c200;
+    --dfs-white: #ffffff;
+    --dfs-graphite: #171717;
+    --dfs-surface: #f5f5f5;
+    --dfs-surface-soft: #fafafa;
+
+    --dfs-radius-button: 999px;
+    --dfs-radius-control: 10px;
+    --dfs-radius-card: 16px;
+    --dfs-radius-card-lg: 20px;
+    --dfs-radius-image: 24px;
+    --dfs-radius-pill: 999px;
+
+    --dfs-shadow-soft: 0 6px 18px var(--color-shadow-slate-soft);
+    --dfs-shadow-medium: 0 16px 40px var(--color-shadow-slate-medium);
+    --dfs-shadow-premium: 0 20px 48px var(--color-shadow-slate-strong);
+
+    --dfs-transition: var(--ks-transition-ui);
+    --dfs-transition-short: var(--ks-transition-ui-short);
+
     --news-accent: var(--brand-gold);
     --news-title: var(--brand-black);
     --news-muted: var(--brand-muted);
@@ -550,8 +574,11 @@
     --ks-scrollbar-track: var(--color-scrollbar-track);
     --ks-scrollbar-size: 8px;
 
-    --ks-shadow-soft: 0 6px 18px var(--color-shadow-slate-soft);
-    --ks-shadow-medium: 0 16px 40px var(--color-shadow-slate-medium);
+    /* --ks-shadow-soft: 0 6px 18px var(--color-shadow-slate-soft);
+    --ks-shadow-medium: 0 16px 40px var(--color-shadow-slate-medium); */
+
+    --ks-shadow-soft: var(--dfs-shadow-soft);
+    --ks-shadow-medium: var(--dfs-shadow-medium);
 
     --ks-transition-fast: 0.28s ease;
     --ks-transition-ui: 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);

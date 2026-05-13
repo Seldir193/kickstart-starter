@@ -2,7 +2,10 @@
   "offersDirectory": {
     "intro": {
       "kicker": "Ücretsiz deneme antrenmanını buradan hızlıca ve kolayca rezerve edebilirsin",
+      "kickerPrefix": "Futbol antrenmanı",
+      "title": "Çocuğun için doğru antrenmanı bul.",
       "titlePrefix": "Tekliflerimiz",
+      "text": "Yakınındaki profesyonel futbol antrenmanlarını ve gelişim programlarını keşfet – teknik desteklerden yoğun gelişim antrenmanlarına kadar.",
       "watermark": "TEKLİFLER"
     },
     "filters": {
@@ -12,10 +15,11 @@
       "holidaySeason": "Tatil dönemi",
       "holidayWeek": "Zaman aralığı",
       "allDays": "Tüm günler",
-      "allAges": "Tümü",
+      "allAges": "Tüm yaş grupları",
       "allLocations": "Tüm konumlar",
       "allHolidaySeasons": "Tüm tatil dönemleri",
-      "allHolidayWeeks": "Tüm zaman aralıkları"
+      "allHolidayWeeks": "Tüm zaman aralıkları",
+      "reset": "Filtreleri sıfırla"
     },
     "meta": {
       "offers": "Teklifler",
@@ -27,6 +31,26 @@
       "emptyText": "Lütfen filtrelerini değiştir.",
       "fromAge": "{{age}} yaştan itibaren",
       "ageRange": "{{from}}–{{to}} yaş"
+    },
+    "stats": {
+      "locations": "Antrenman lokasyonları",
+      "age": "Yaş",
+      "qualityTitle": "Onaylı",
+      "qualityText": "DFS kalitesi"
+    },
+
+    "support": {
+      "title": "Senin için buradayız",
+      "text": "Programlar ve lokasyonlar hakkında kişisel danışmanlık.",
+      "cta": "Danışmanlık al"
+    },
+    "results": {
+      "title": "teklif bulundu",
+      "loadMore": "Daha fazla teklif yükle"
+    },
+    "finder": {
+      "kicker": "Teklifler ve konumlar",
+      "title": "Antrenmanını seç."
     }
   }
 }
