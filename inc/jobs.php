@@ -245,19 +245,15 @@ if (!function_exists('ks_jobs_get_shortcode_atts')) {
     return shortcode_atts([
       'title' => 'Aktuelle Jobangebote',
       'subtitle' => 'Arbeiten bei der Dortmunder Fussball Schule',
-      'bgword' => 'JOBS',
     ], $atts, 'ks_jobs');
   }
 }
-
-
 
 if (!function_exists('ks_jobs_get_template_args')) {
   function ks_jobs_get_template_args($atts) {
     return [
       'title' => $atts['title'],
       'subtitle' => $atts['subtitle'],
-      'bgword' => $atts['bgword'],
       'plus_url' => ks_jobs_get_plus_icon_url(),
       'minus_url' => ks_jobs_get_minus_icon_url(),
       'items' => ks_get_jobs_items(),
@@ -291,8 +287,6 @@ if (!function_exists('ks_register_jobs_shortcode')) {
 
   add_action('init', 'ks_register_jobs_shortcode');
 }
-
-
 
 
 
