@@ -58,7 +58,6 @@ if (!function_exists('ks_print_about_page')) {
     ks_print_about_intro_section();
     ks_print_about_team_section($context);
     ks_print_about_philosophy_section();
-   
     ks_print_shared_contact_section('ks-py-32');
     ks_print_about_goals_section();
     ks_print_about_locations_section();
@@ -76,7 +75,7 @@ if (!function_exists('ks_get_about_hero_shortcode')) {
     $image = esc_url(get_stylesheet_directory_uri() . '/assets/img/hero/mfs.png');
 
     return sprintf(
-      '[ks_hero_page title="Über uns" subtitle="Wir fördern Kinder durch Fußball. Mit Leidenschaft, Kompetenz und Herz." breadcrumb="Home" watermark="ÜBER UNS" image="%s" variant="about" features="1" eyebrow="Mehr als Fussball" primary_label="Unsere Philosophie" primary_href="#philosophie" secondary_label="Trainerteam ansehen" secondary_href="#team" title_i18n="about.hero.title" subtitle_i18n="about.hero.subtitle" breadcrumb_i18n="common.home" watermark_i18n="about.hero.watermark" eyebrow_i18n="pageHero.eyebrow" primary_i18n="pageHero.actions.primary" secondary_i18n="pageHero.actions.team"]',
+      '[ks_hero_page title="Über uns" subtitle="Wir fördern Kinder durch Fußball. Mit Leidenschaft, Kompetenz und Herz." breadcrumb="Home" image="%s" variant="about" features="1" eyebrow="Mehr als Fussball" primary_label="Unsere Philosophie" primary_href="#philosophie" secondary_label="Trainerteam ansehen" secondary_href="#team" title_i18n="about.hero.title" subtitle_i18n="about.hero.subtitle" breadcrumb_i18n="common.home" eyebrow_i18n="pageHero.eyebrow" primary_i18n="pageHero.actions.primary" secondary_i18n="pageHero.actions.team"]',
       $image
     );
   }
@@ -301,19 +300,12 @@ if (!function_exists('ks_print_about_list_item')) {
   }
 }
 
-
-
 if (!function_exists('ks_print_about_locations_section')) {
   function ks_print_about_locations_section() {
     ?>
     <section id="standorte" class="ks-sec ks-py-32 ks-bg-deep ks-text-light ks-standorte">
       <div class="container container--1200">
-        <div
-          class="ks-title-wrap ks-watermark ks-watermark--center ks-watermark--section"
-          data-bgword="<?php echo esc_attr(ks_about_t('about.locations.watermark', 'STANDORTE')); ?>"
-          data-i18n="about.locations.watermark"
-          data-i18n-attr="data-bgword"
-        >
+        <div class="ks-title-wrap ks-section-accent ks-section-accent--center">
           <h2 class="ks-dir__title ks-text-dark" data-i18n="about.locations.title">
             <?php echo esc_html(ks_about_t('about.locations.title', 'Unsere Standorte')); ?>
           </h2>
@@ -329,6 +321,18 @@ if (!function_exists('ks_print_about_locations_section')) {
     <?php
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
