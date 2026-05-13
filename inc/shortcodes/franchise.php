@@ -57,28 +57,28 @@ if (!function_exists('ks_register_franchise_locations_rest')) {
   function ks_register_franchise_locations_rest() {
     add_action('rest_api_init', function () {
       register_rest_route('ks/v1', '/franchise-locations', [
-        'methods'  => 'GET',
+        'methods' => 'GET',
         'permission_callback' => '__return_true',
         'callback' => function () {
           $api = defined('KS_FRANCHISE_LOCATIONS_API') ? KS_FRANCHISE_LOCATIONS_API : '';
+
           if (!$api) {
             return new WP_REST_Response([
               'ok' => false,
-              'error' => 'KS_FRANCHISE_LOCATIONS_API ist nicht gesetzt.'
+              'error' => 'KS_FRANCHISE_LOCATIONS_API ist nicht gesetzt.',
             ], 500);
           }
 
           $nocache = isset($_GET['nocache']) && $_GET['nocache'] == '1';
-
-         
-          $ttl = 20; 
-
-         
+          $ttl = 20;
           $cache_key = 'ks_fr_locations_v2_' . md5($api);
 
           if (!$nocache && $ttl > 0) {
             $cached = get_transient($cache_key);
-            if ($cached) return new WP_REST_Response($cached, 200);
+
+            if ($cached) {
+              return new WP_REST_Response($cached, 200);
+            }
           }
 
           $res = wp_remote_get($api, [
@@ -89,7 +89,7 @@ if (!function_exists('ks_register_franchise_locations_rest')) {
           if (is_wp_error($res)) {
             return new WP_REST_Response([
               'ok' => false,
-              'error' => $res->get_error_message()
+              'error' => $res->get_error_message(),
             ], 502);
           }
 
@@ -101,29 +101,29 @@ if (!function_exists('ks_register_franchise_locations_rest')) {
             return new WP_REST_Response([
               'ok' => false,
               'error' => 'Ungültige API Antwort.',
-              'status' => $code
+              'status' => $code,
             ], 502);
           }
 
-          
           $items = [];
+
           if (isset($json['items']) && is_array($json['items'])) {
             $items = $json['items'];
           } elseif (array_keys($json) === range(0, count($json) - 1)) {
             $items = $json;
-          } else {
-            $items = [];
           }
 
-         
           $items = array_values(array_filter($items, function ($it) {
-            $status = isset($it['status']) ? (string)$it['status'] : '';
-            $published = isset($it['published']) ? (bool)$it['published'] : false;
-         
+            $status = isset($it['status']) ? (string) $it['status'] : '';
+            $published = isset($it['published']) ? (bool) $it['published'] : false;
 
-            if ($status !== 'approved') return false;
-            if ($published !== true) return false;
-            
+            if ($status !== 'approved') {
+              return false;
+            }
+
+            if ($published !== true) {
+              return false;
+            }
 
             return true;
           }));
@@ -143,32 +143,29 @@ if (!function_exists('ks_register_franchise_locations_rest')) {
   ks_register_franchise_locations_rest();
 }
 
-
 if (!function_exists('ks_register_franchise_shortcode')) {
   function ks_register_franchise_shortcode() {
-
     add_shortcode('ks_franchise', function ($atts = []) {
       $theme_dir = get_stylesheet_directory();
       $theme_uri = get_stylesheet_directory_uri();
 
-     
       if (function_exists('ks_enqueue_info_section_assets')) {
-  ks_enqueue_info_section_assets();
-}
-      
+        ks_enqueue_info_section_assets();
+      }
+
       $atts = shortcode_atts([
         'video' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
       ], $atts, 'ks_franchise');
 
-      
       $video_embed = wp_oembed_get(esc_url($atts['video']));
+
       if (!$video_embed) {
-        $yt = preg_replace('~.*(?:v=|be/)([^&?]+).*~', '$1', (string)$atts['video']);
+        $yt = preg_replace('~.*(?:v=|be/)([^&?]+).*~', '$1', (string) $atts['video']);
         $video_embed = '<iframe class="ks-vid-embed" src="https://www.youtube.com/embed/' . esc_attr($yt) . '" allowfullscreen loading="lazy"></iframe>';
       }
 
-      
       $utils_abs = $theme_dir . '/assets/css/ks-utils.css';
+
       if (file_exists($utils_abs) && !wp_style_is('ks-utils', 'enqueued')) {
         wp_enqueue_style(
           'ks-utils',
@@ -178,8 +175,8 @@ if (!function_exists('ks_register_franchise_shortcode')) {
         );
       }
 
-      
       $home_abs = $theme_dir . '/assets/css/ks-home.css';
+
       if (file_exists($home_abs) && !wp_style_is('ks-home', 'enqueued')) {
         wp_enqueue_style(
           'ks-home',
@@ -190,52 +187,19 @@ if (!function_exists('ks_register_franchise_shortcode')) {
       }
 
       $fr_abs = $theme_dir . '/assets/css/ks-franchise.css';
+
       if (file_exists($fr_abs) && !wp_style_is('ks-franchise', 'enqueued')) {
-        // wp_enqueue_style(
-        //   'ks-franchise',
-        //   $theme_uri . '/assets/css/ks-franchise.css',
-        //   ['kickstart-style', 'ks-utils', 'ks-home'],
-        //   filemtime($fr_abs)
-
         wp_enqueue_style(
-  'ks-franchise',
-  $theme_uri . '/assets/css/ks-franchise.css',
-  ['kickstart-style', 'ks-utils', 'ks-home', 'ks-page-hero'],
-  filemtime($fr_abs)
-);
-        // );
+          'ks-franchise',
+          $theme_uri . '/assets/css/ks-franchise.css',
+          ['kickstart-style', 'ks-utils', 'ks-home', 'ks-page-hero', 'ks-watermark'],
+          filemtime($fr_abs)
+        );
       }
-
-      
-    
-      // $inline_handle = wp_style_is('ks-franchise', 'enqueued')
-      //   ? 'ks-franchise'
-      //   : (wp_style_is('ks-home', 'enqueued') ? 'ks-home' : 'kickstart-style');
-
-      // wp_add_inline_style(
-      //   $inline_handle,
-      //   '#fr-hero{--hero-img:url("' . esc_url($hero) . '")}'
-      // );
 
       ob_start(); ?>
 
-      
-      <!-- <section id="fr-hero"
-               class="ks-dir__hero ks-sec"
-               data-watermark="FRANCHISE">
-        <div class="ks-dir__hero-inner">
-          <div class="ks-dir__crumb">
-            <a class="ks-dir__crumb-home" href="<?php echo esc_url(home_url('/')); ?>">Home</a>
-            <span class="sep">/</span>
-            Franchise
-          </div>
-
-          <h1 class="ks-dir__hero-title">Franchise</h1>
-         
-        </div>
-      </section> -->
-
- <?php
+<?php
 $franchise_hero_image = esc_url($theme_uri . '/assets/img/hero/mfs.png');
 
 echo do_shortcode(
@@ -245,7 +209,7 @@ echo do_shortcode(
 );
 ?>
 
-      <section id="fr-intro" class="ks-sec ks-py-48 ks-home-about">
+<section id="fr-intro" class="ks-sec ks-py-48 ks-home-about">
   <div class="container ks-home-about__grid">
     <div class="ks-home-about__content">
       <div class="ks-kicker" data-i18n="franchise.intro.kicker">
@@ -310,7 +274,7 @@ echo do_shortcode(
   </div>
 </section>
 
-      <section id="fr-worldwide" class="ks-sec ks-py-48 ks-bg-white ks-info-section">
+<section id="fr-worldwide" class="ks-sec ks-py-48 ks-bg-white ks-info-section">
   <div class="container container--1100">
     <div class="ks-info-section__grid">
       <div class="ks-info-section__content">
@@ -361,7 +325,6 @@ echo do_shortcode(
   </div>
 </section>
 
-
 <section id="fr-worldwide-map" class="ks-sec ks-py-48 ks-bg-world">
   <div class="container container--1100">
     <div class="ks-kicker">UNSERE STANDORTE UND FRANCHISES</div>
@@ -381,16 +344,9 @@ echo do_shortcode(
   </div>
 </section>
 
-
-
-
-
-
-
 <section id="fr-benefits" class="ks-sec ks-py-48 ks-section--soft ks-wm-top-80">
   <div class="container container--1100">
-    
-      <div class="ks-title-wrap ks-watermark ks-watermark--center ks-watermark--section" data-bgword="VORTEILE">
+    <div class="ks-title-wrap ks-section-accent ks-section-accent--center">
       <div class="ks-kicker" data-i18n="franchise.benefits.kicker">WOFÜR WIR STEHEN</div>
       <h2 class="ks-dir__title" data-i18n="franchise.benefits.title">Franchise Vorteile</h2>
     </div>
@@ -467,100 +423,62 @@ echo do_shortcode(
   </div>
 </section>
 
+<?php
+$fr_faq_items = function_exists('ks_get_faq_items')
+  ? ks_get_faq_items('franchise')
+  : [];
 
+if (!empty($fr_faq_items)) {
+  echo ks_render_faq_section($fr_faq_items, [
+    'section_id' => 'fr-faq',
+    'wrapper_class' => 'container fr-faq',
+    'title' => 'Fragen zur Partnerschaft',
+    'kicker' => 'Gut zu wissen',
+    'title_i18n' => 'franchise.faq.title',
+    'kicker_i18n' => 'franchise.faq.kicker',
+    'items_i18n_prefix' => 'franchise.faq',
+    'side_card_enabled' => true,
+    'side_card_kicker' => 'Interesse geweckt?',
+    'side_card_title' => 'Lass uns ins Gespräch kommen',
+    'side_card_text' => 'Wenn du mehr über eine Partnerschaft erfahren möchtest, begleiten wir dich gerne im nächsten Schritt.',
+    'side_card_button' => 'Kontakt aufnehmen',
+    'side_card_href' => '#kontakt',
+    'side_card_kicker_i18n' => 'franchise.faq.sideCard.kicker',
+    'side_card_title_i18n' => 'franchise.faq.sideCard.title',
+    'side_card_text_i18n' => 'franchise.faq.sideCard.text',
+    'side_card_button_i18n' => 'franchise.faq.sideCard.button',
+    'use_video' => false,
+    'image_src' => '',
+    'image_class' => 'fr-faq__image',
+  ]);
+}
+?>
 
-      <?php
-      
-      $fr_faq_items = function_exists('ks_get_faq_items')
-        ? ks_get_faq_items('franchise')
-        : [];
-
-      if (!empty($fr_faq_items)) {
-        
-
-// echo ks_render_faq_section($fr_faq_items, [
-//   'section_id'         => 'fr-faq',
-//   'wrapper_class'      => 'container fr-faq',
-//   'title'              => 'Fragen zur Partnerschaft',
-//   'kicker'             => 'Gut zu wissen',
-//   'watermark'          => 'FAQ',
-//   'side_card_enabled'  => true,
-//   'side_card_kicker'   => 'Interesse geweckt?',
-//   'side_card_title'    => 'Lass uns ins Gespräch kommen',
-//   'side_card_text'     => 'Wenn du mehr über eine Partnerschaft erfahren möchtest, begleiten wir dich gerne im nächsten Schritt.',
-//   'side_card_button'   => 'Kontakt aufnehmen',
-//   'side_card_href'     => '#kontakt',
-//   'use_video'          => false,
-//   'image_src'          => '',
-//   'image_class'        => 'fr-faq__image',
-// ]);
-
-echo ks_render_faq_section($fr_faq_items, [
-  'section_id'              => 'fr-faq',
-  'wrapper_class'           => 'container fr-faq',
-  'title'                   => 'Fragen zur Partnerschaft',
-  'kicker'                  => 'Gut zu wissen',
-  'watermark'               => 'FAQ',
-  'title_i18n'              => 'franchise.faq.title',
-  'kicker_i18n'             => 'franchise.faq.kicker',
-  'items_i18n_prefix'       => 'franchise.faq',
-  'side_card_enabled'       => true,
-  'side_card_kicker'        => 'Interesse geweckt?',
-  'side_card_title'         => 'Lass uns ins Gespräch kommen',
-  'side_card_text'          => 'Wenn du mehr über eine Partnerschaft erfahren möchtest, begleiten wir dich gerne im nächsten Schritt.',
-  'side_card_button'        => 'Kontakt aufnehmen',
-  'side_card_href'          => '#kontakt',
-  'side_card_kicker_i18n'   => 'franchise.faq.sideCard.kicker',
-  'side_card_title_i18n'    => 'franchise.faq.sideCard.title',
-  'side_card_text_i18n'     => 'franchise.faq.sideCard.text',
-  'side_card_button_i18n'   => 'franchise.faq.sideCard.button',
-  'use_video'               => false,
-  'image_src'               => '',
-  'image_class'             => 'fr-faq__image',
-]);
-      }
-      ?>
 <?php
 get_template_part('inc/partials/shared/contact-form', null, [
   'ks_contact' => [
-    'show_map' => false, 
-    'map_url'  => '',
-
-    'kicker'   => 'KONTAKT',
-    'title'    => 'Hast Du Fragen?',
-    'bgword'   => '', 
-
-    'brand'    => 'Dortmunder Fussball Schule',
+    'show_map' => false,
+    'map_url' => '',
+    'kicker' => 'KONTAKT',
+    'title' => 'Hast Du Fragen?',
+    'bgword' => '',
+    'brand' => 'Dortmunder Fussball Schule',
     'subtitle' => 'Unser Office-Team ist täglich von 09:00 – 12:00 Uhr für Dich da und beantwortet gerne alle Deine Fragen.',
-
     'address_line1' => 'Hochfelder Straße 33',
     'address_line2' => '47226 Duisburg',
-    'phone'         => '0176 43203362',
-    'email'         => 'fussballschule@selcuk-kocyigit.de',
+    'phone' => '0176 43203362',
+    'email' => 'fussballschule@selcuk-kocyigit.de',
   ],
 ]);
 ?>
-      <?php
+
+<?php
       return ob_get_clean();
     });
   }
 
   add_action('init', 'ks_register_franchise_shortcode');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

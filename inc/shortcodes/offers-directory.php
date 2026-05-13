@@ -367,7 +367,12 @@ add_action('init', function () {
     id="angebote-buchen"
     class="ks-dir__hero ks-py-56 ks-section-accent"
   >
-    <div class="ks-dir__hero-content">
+     <div
+      class="ks-dir__hero-content ks-dir__hero-content--wordmark"
+      data-wordmark="<?php echo esc_attr(function_exists('ks_t') ? ks_t('offersDirectory.intro.watermark', 'ANGEBOTE', 'offers') : 'ANGEBOTE'); ?>"
+      data-i18n="offersDirectory.intro.watermark"
+      data-i18n-attr="data-wordmark"
+    >
       <p class="<?php echo esc_attr($kickerClass); ?>">
         <span data-i18n="offersDirectory.finder.kicker">Angebote & Standorte</span>
       </p>
