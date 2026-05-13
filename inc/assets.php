@@ -123,10 +123,10 @@ $styles = [
     'path' => '/assets/css/components.css',
     'deps' => ['kickstart-style', 'ks-utils'],
   ],
-  'watermark' => [
-  'path' => '/assets/css/ks-watermark.css',
-  'deps' => ['kickstart-style', 'ks-utils', 'ks-base'],
-],
+   'section-accent' => [
+    'path' => '/assets/css/ks-section-accent.css',
+    'deps' => ['kickstart-style', 'ks-utils', 'ks-base'],
+  ],
   'header' => [
     'path' => '/assets/css/header.css',
     'deps' => ['kickstart-style', 'ks-utils', 'ks-layout'],
@@ -149,7 +149,7 @@ $styles = [
 ],
   'about' => [
   'path' => '/assets/css/ks-about.css',
-  'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components', 'ks-watermark', 'ks-page-hero'],
+  'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components', 'ks-section-accent', 'ks-page-hero'],
 ],
   'home-values' => [
     'path' => '/assets/css/ks-home-values.css',
@@ -451,13 +451,25 @@ if (file_exists($back_top_js)) {
     );
   }
 
+   $offers_wordmark_css = get_stylesheet_directory() . '/assets/css/offers-wordmark.css';
+
+  if (file_exists($offers_wordmark_css)) {
+    wp_enqueue_style(
+      'ks-offers-wordmark',
+      get_stylesheet_directory_uri() . '/assets/css/offers-wordmark.css',
+      ['kickstart-style', 'ks-utils', 'ks-base', 'ks-section-accent'],
+      filemtime($offers_wordmark_css)
+    );
+  }
+
+
   $dir_css = get_stylesheet_directory() . '/assets/css/offers-directory.css';
 
   if (file_exists($dir_css)) {
     wp_enqueue_style(
       'kickstart-offers-directory',
       get_stylesheet_directory_uri() . '/assets/css/offers-directory.css',
-      ['kickstart-style', 'ks-utils', 'ks-components', 'ks-watermark', 'leaflet-css'],
+      ['kickstart-style', 'ks-utils', 'ks-components', 'ks-section-accent', 'leaflet-css'],
       filemtime($dir_css)
     );
   }

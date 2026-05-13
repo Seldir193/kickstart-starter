@@ -21,7 +21,7 @@ if (!function_exists('ks_enqueue_feedback_css')) {
     wp_enqueue_style(
       'ks-feedback',
       $theme_uri . '/assets/css/ks-feedback.css',
-      ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components', 'ks-watermark'],
+      ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components', 'ks-section-accent'],
       filemtime($fb_css)
     );
   }

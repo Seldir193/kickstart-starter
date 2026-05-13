@@ -192,7 +192,7 @@ if (!function_exists('ks_register_franchise_shortcode')) {
         wp_enqueue_style(
           'ks-franchise',
           $theme_uri . '/assets/css/ks-franchise.css',
-          ['kickstart-style', 'ks-utils', 'ks-home', 'ks-page-hero', 'ks-watermark'],
+          ['kickstart-style', 'ks-utils', 'ks-home', 'ks-page-hero', 'ks-section-accent'],
           filemtime($fr_abs)
         );
       }

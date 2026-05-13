@@ -23,7 +23,7 @@ if (!function_exists('ks_register_home_shortcode')) {
         wp_enqueue_style(
           'ks-home',
           $theme_uri . '/assets/css/ks-home.css',
-          ['kickstart-style', 'ks-utils', 'ks-watermark'],
+          ['kickstart-style', 'ks-utils', 'ks-section-accent'],
           filemtime($home_abs)
         );
       }
