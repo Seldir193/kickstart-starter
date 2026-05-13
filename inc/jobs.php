@@ -250,6 +250,8 @@ if (!function_exists('ks_jobs_get_shortcode_atts')) {
   }
 }
 
+
+
 if (!function_exists('ks_jobs_get_template_args')) {
   function ks_jobs_get_template_args($atts) {
     return [

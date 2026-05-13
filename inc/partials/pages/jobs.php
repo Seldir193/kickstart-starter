@@ -9,6 +9,7 @@ $data = isset($args) && is_array($args) ? $args : [];
 $plus_url = isset($data['plus_url']) ? (string) $data['plus_url'] : '';
 $minus_url = isset($data['minus_url']) ? (string) $data['minus_url'] : '';
 $items = isset($data['items']) && is_array($data['items']) ? $data['items'] : [];
+$bgword = isset($data['bgword']) ? (string) $data['bgword'] : 'JOBS';
 ?>
 
 <section
@@ -20,7 +21,12 @@ $items = isset($data['items']) && is_array($data['items']) ? $data['items'] : []
   "
 >
   <div class="container container--1100">
-    <div class="ks-title-wrap" data-bgword="JOBS" data-i18n="jobs.section.watermark" data-i18n-attr="data-bgword">
+    <div
+      class="ks-title-wrap ks-watermark ks-watermark--center ks-watermark--jobs"
+      data-bgword="<?php echo esc_attr($bgword); ?>"
+      data-i18n="jobs.section.watermark"
+      data-i18n-attr="data-bgword"
+    >
       <div class="ks-kicker" data-i18n="jobs.section.kicker">Karriere</div>
 
       <h2 class="ks-dir__title" data-i18n="jobs.section.title">
@@ -52,6 +58,7 @@ $items = isset($data['items']) && is_array($data['items']) ? $data['items'] : []
     </div>
   </div>
 </section>
+
 
 
 

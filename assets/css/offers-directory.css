@@ -54,7 +54,7 @@
     overflow: visible;
   }
 
-  #ksDir .ks-dir__hero::before {
+  /* #ksDir .ks-dir__hero::before {
     content: attr(data-bgword);
     position: absolute;
     left: 25%;
@@ -70,7 +70,7 @@
     opacity: 1;
     pointer-events: none;
     transform: translateX(-50%);
-  }
+  } */
 
   #ksDir .ks-dir__hero-content {
     position: relative;

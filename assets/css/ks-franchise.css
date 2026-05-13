@@ -40,9 +40,9 @@
   background: var(--light-gray);
 }
 
-.ks-wm-top-80 .ks-title-wrap::after {
+/* .ks-wm-top-80 .ks-title-wrap::after {
   top: -80px;
-}
+} */
 
 .fr-faq {
   display: grid;

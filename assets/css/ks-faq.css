@@ -35,10 +35,10 @@
   margin: 0 auto 6px;
 }
 
-#dir-faq .ks-title-wrap::after,
+/* #dir-faq .ks-title-wrap::after,
 #faq .ks-title-wrap::after {
   top: -80px;
-}
+} */
 
 .ks-faq-page__acc {
   display: flex;
@@ -69,7 +69,7 @@
   margin-bottom: 18px;
 }
 
-.ks-home-faq > .ks-title-wrap::after {
+/* .ks-home-faq > .ks-title-wrap::after {
   content: attr(data-bgword);
   position: absolute;
   left: 50%;
@@ -81,7 +81,7 @@
   font-weight: var(--font-weight-black);
   letter-spacing: 0.03em;
   pointer-events: none;
-}
+} */
 
 .ks-home-faq__image {
   min-height: 280px;

@@ -30,9 +30,9 @@
   margin: 0;
 }
 
-#program-cta .ks-title-wrap::after {
+/* #program-cta .ks-title-wrap::after {
   top: -80px;
-}
+} */
 
 #program-cta .ks-kicker {
   display: block;

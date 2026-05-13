@@ -365,7 +365,8 @@ echo do_shortcode(
 
   <section
     id="angebote-buchen"
-    class="ks-dir__hero ks-py-56"
+   
+     class="ks-dir__hero ks-py-56 ks-watermark ks-watermark--hero"
     data-bgword="ANGEBOTE"
     data-i18n="offersDirectory.intro.watermark"
     data-i18n-attr="data-bgword"
@@ -409,24 +410,7 @@ echo do_shortcode(
 
         <div id="ksMap" class="ks-map"></div>
 
-        <!-- <div class="ks-dir__map-legend" aria-label="Kartenlegende">
-          <span>
-            <img src="<?php echo esc_url($location_icon); ?>" alt="" loading="lazy" decoding="async">
-            <b data-i18n="offersDirectory.map.locations">Standorte</b>
-          </span>
-          <span>
-            <b>1–3</b>
-            <small data-i18n="offersDirectory.map.few">Wenige Angebote</small>
-          </span>
-          <span>
-            <b>4–8</b>
-            <small data-i18n="offersDirectory.map.many">Viele Angebote</small>
-          </span>
-          <span>
-            <b>9+</b>
-            <small data-i18n="offersDirectory.map.veryMany">Sehr viele Angebote</small>
-          </span>
-        </div> -->
+       
       </div>
     </div>
   </section>
@@ -605,12 +589,7 @@ echo do_shortcode(
     </aside>
 
     <section class="ks-dir__results-main" aria-live="polite">
-      <!-- <div class="ks-dir__results-head">
-        <h3>
-          <span data-count-offers-secondary>0</span>
-          <span data-i18n="offersDirectory.results.title">Angebote gefunden</span>
-        </h3>
-      </div> -->
+      
 
       <div class="ks-dir__listwrap">
         <ul id="ksDirList" class="ks-dir__list"></ul>
@@ -676,6 +655,7 @@ if (!empty($faq_items)) {
     'title' => 'Wichtige Fragen zum Angebot',
     'kicker' => 'Gut zu wissen',
     'watermark' => 'FAQ',
+     'watermark_class' => 'ks-watermark--faq',
     'title_i18n' => 'offers.faq.common.title',
     'kicker_i18n' => 'offers.faq.common.kicker',
     'items_i18n_prefix' => 'offers.faq.' . ks_get_faq_slug($faqKey),

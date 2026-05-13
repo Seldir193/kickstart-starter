@@ -117,9 +117,9 @@ body {
   transform: translateY(-50%);
 }
 
-.ks-wm-top-80 .ks-title-wrap::after {
+/* .ks-wm-top-80 .ks-title-wrap::after {
   top: -80px;
-}
+} */
 
 #news .ks-title-wrap .ks-kicker,
 #fr-benefits .ks-kicker {
@@ -297,10 +297,10 @@ body {
   }
 }
 
-#news .ks-title-wrap::after,
+/* #news .ks-title-wrap::after,
 #team .ks-title-wrap::after {
   top: -80px;
-}
+} */
 
 .ks-title-wrap {
   text-align: center;
@@ -309,7 +309,7 @@ body {
   isolation: isolate;
 }
 
-.ks-title-wrap::after {
+/* .ks-title-wrap::after {
   content: attr(data-bgword);
   position: absolute;
   left: 50%;
@@ -321,7 +321,7 @@ body {
   font-weight: var(--font-weight-black);
   letter-spacing: 0.03em;
   pointer-events: none;
-}
+} */
 
 #ksMap.leaflet-container,
 #ksMap .leaflet-pane,
@@ -446,9 +446,13 @@ body {
   }
 }
 
-html:not(.i18n-ready) .ks-title-wrap::after,
+/* html:not(.i18n-ready) .ks-title-wrap::after,
 html:not(.i18n-ready) .ks-title-wrap--team::before,
 html:not(.i18n-ready) .ks-dir__hero::before {
+  opacity: 0;
+} */
+
+html:not(.i18n-ready) .ks-watermark::before {
   opacity: 0;
 }
 

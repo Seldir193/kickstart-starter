@@ -389,7 +389,8 @@ echo do_shortcode(
 
 <section id="fr-benefits" class="ks-sec ks-py-48 ks-section--soft ks-wm-top-80">
   <div class="container container--1100">
-    <div class="ks-title-wrap" data-bgword="VORTEILE">
+    
+      <div class="ks-title-wrap ks-watermark ks-watermark--center ks-watermark--section" data-bgword="VORTEILE">
       <div class="ks-kicker" data-i18n="franchise.benefits.kicker">WOFÜR WIR STEHEN</div>
       <h2 class="ks-dir__title" data-i18n="franchise.benefits.title">Franchise Vorteile</h2>
     </div>

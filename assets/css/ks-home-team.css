@@ -12,14 +12,23 @@
   gap: clamp(28px, 4vw, 40px);
 }
 
-.ks-title-wrap--team {
+/* .ks-title-wrap--team {
   position: relative;
   isolation: isolate;
   margin: 0;
   text-align: left;
+} */
+
+.ks-title-wrap--team {
+  margin: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.ks-title-wrap--team::before {
+/* .ks-title-wrap--team::before {
   content: attr(data-bgword);
   position: absolute;
   left: 50%;
@@ -40,7 +49,7 @@
 .ks-title-wrap--team[data-bgword]::before {
   opacity: 0.06;
   letter-spacing: 0.08em;
-}
+} */
 
 .ks-home-team .ks-kicker {
   display: inline-flex;
@@ -79,7 +88,7 @@
 } */
 
 .ks-home-team__lead {
-  max-width: 68ch;
+  /* max-width: 68ch; */
   margin: 0;
   color: var(--color-text);
   line-height: 1.7;

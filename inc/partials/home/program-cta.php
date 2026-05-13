@@ -23,7 +23,7 @@ $programs = [
   <div class="container ks-cta-grid">
     <div class="ks-cta-text">
       <div
-        class="ks-title-wrap"
+        class="ks-title-wrap ks-watermark ks-watermark--center ks-watermark--cta"
         data-bgword="<?php echo esc_attr($program_cta_t('programCta.watermark', 'BUCHEN')); ?>"
         data-i18n="programCta.watermark"
         data-i18n-attr="data-bgword"

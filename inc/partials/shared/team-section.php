@@ -58,7 +58,7 @@ $side_items = array_slice($team_items, 1, 5);
       <script type="application/json" class="ks-home-team__data"><?php echo wp_json_encode($team_items, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?></script>
 
       <div
-        class="ks-title-wrap ks-title-wrap--team"
+        class="ks-title-wrap ks-title-wrap--team ks-watermark ks-watermark--center ks-watermark--team"
         data-bgword="<?php echo esc_attr($team_t('home.team.watermark', 'DFS')); ?>"
         data-i18n="home.team.watermark"
         data-i18n-attr="data-bgword"

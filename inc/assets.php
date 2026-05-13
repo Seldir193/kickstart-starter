@@ -123,6 +123,10 @@ $styles = [
     'path' => '/assets/css/components.css',
     'deps' => ['kickstart-style', 'ks-utils'],
   ],
+  'watermark' => [
+  'path' => '/assets/css/ks-watermark.css',
+  'deps' => ['kickstart-style', 'ks-utils', 'ks-base'],
+],
   'header' => [
     'path' => '/assets/css/header.css',
     'deps' => ['kickstart-style', 'ks-utils', 'ks-layout'],
@@ -145,7 +149,7 @@ $styles = [
 ],
   'about' => [
   'path' => '/assets/css/ks-about.css',
-  'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components', 'ks-page-hero'],
+  'deps' => ['kickstart-style', 'ks-utils', 'ks-base', 'ks-layout', 'ks-components', 'ks-watermark', 'ks-page-hero'],
 ],
   'home-values' => [
     'path' => '/assets/css/ks-home-values.css',
@@ -453,7 +457,7 @@ if (file_exists($back_top_js)) {
     wp_enqueue_style(
       'kickstart-offers-directory',
       get_stylesheet_directory_uri() . '/assets/css/offers-directory.css',
-      ['kickstart-style', 'ks-utils', 'ks-components', 'leaflet-css'],
+      ['kickstart-style', 'ks-utils', 'ks-components', 'ks-watermark', 'leaflet-css'],
       filemtime($dir_css)
     );
   }

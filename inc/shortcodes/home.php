@@ -23,7 +23,7 @@ if (!function_exists('ks_register_home_shortcode')) {
         wp_enqueue_style(
           'ks-home',
           $theme_uri . '/assets/css/ks-home.css',
-          ['kickstart-style', 'ks-utils'],
+          ['kickstart-style', 'ks-utils', 'ks-watermark'],
           filemtime($home_abs)
         );
       }
@@ -369,12 +369,7 @@ if (!function_exists('ks_register_home_shortcode')) {
 
 <section id="werte" class="ks-sec ks-py-56 ks-home-values">
   <div class="container">
-    <div
-      class="ks-title-wrap ks-home-values__title-wrap"
-      data-bgword="<?php echo esc_attr($home_t('home.values.watermark', 'HALTUNG')); ?>"
-      data-i18n="home.values.watermark"
-      data-i18n-attr="data-bgword"
-    >
+    <div class="ks-title-wrap ks-home-values__title-wrap ks-section-accent ks-section-accent--center">
       <div class="ks-kicker" data-i18n="home.values.kicker">
         <?php echo esc_html($home_t('home.values.kicker', 'Our mindset')); ?>
       </div>
@@ -471,7 +466,6 @@ if (!empty($faq_items)) {
     'wrapper_class' => 'container ks-home-faq',
     'title' => $home_t('home.faq.title', 'Häufige Fragen zur Fußballschule'),
     'kicker' => $home_t('home.faq.kicker', 'Gut zu wissen'),
-    'watermark' => $home_t('home.faq.watermark', 'FAQ'),
     'title_i18n' => 'home.faq.title',
     'kicker_i18n' => 'home.faq.kicker',
     'items_i18n_prefix' => 'home.faq',

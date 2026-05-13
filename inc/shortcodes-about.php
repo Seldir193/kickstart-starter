@@ -309,7 +309,7 @@ if (!function_exists('ks_print_about_locations_section')) {
     <section id="standorte" class="ks-sec ks-py-32 ks-bg-deep ks-text-light ks-standorte">
       <div class="container container--1200">
         <div
-          class="ks-title-wrap"
+          class="ks-title-wrap ks-watermark ks-watermark--center ks-watermark--section"
           data-bgword="<?php echo esc_attr(ks_about_t('about.locations.watermark', 'STANDORTE')); ?>"
           data-i18n="about.locations.watermark"
           data-i18n-attr="data-bgword"
