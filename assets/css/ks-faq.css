@@ -180,6 +180,18 @@
   mask: var(--acc-minus) center/var(--acc-mask-size) no-repeat !important;
 }
 
+#faq .ks-acc.is-closing summary::after,
+#dir-faq .ks-acc.is-closing summary::after {
+  background-color: var(--brand-black) !important;
+  -webkit-mask: var(--acc-plus) center/var(--acc-mask-size) no-repeat !important;
+  mask: var(--acc-plus) center/var(--acc-mask-size) no-repeat !important;
+  transform: translateY(-50%) scale(1);
+}
+
+#faq .ks-acc.is-closing summary::before,
+#dir-faq .ks-acc.is-closing summary::before {
+  background: transparent;
+}
 #faq .ks-acc summary:hover::before,
 #dir-faq .ks-acc summary:hover::before,
 #faq .ks-acc[open] summary::before,

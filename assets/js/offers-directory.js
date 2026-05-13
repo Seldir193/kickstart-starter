@@ -95,6 +95,10 @@
 
       fillLocations(locSel, items);
 
+      if (locSel) {
+        locSel.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+
       if (CITY && locSel) {
         const opt = Array.from(locSel.options).find(
           (o) => normalizeCity(o.value) === normalizeCity(CITY),

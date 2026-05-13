@@ -48,6 +48,49 @@
     sunday: "So",
   };
 
+  const STATIC_TRANSLATIONS = {
+    de: {
+      allLocations: "Alle Standorte",
+      allHolidayWeeks: "Alle Zeiträume",
+      emptyTitle: "Keine Angebote gefunden.",
+    },
+    en: {
+      allLocations: "All locations",
+      allHolidayWeeks: "All periods",
+      emptyTitle: "No offers found.",
+    },
+    tr: {
+      allLocations: "Tüm konumlar",
+      allHolidayWeeks: "Tüm dönemler",
+      emptyTitle: "Teklif bulunamadı.",
+    },
+  };
+
+  function getCurrentLanguage() {
+    const lang = String(document.documentElement.lang || "").toLowerCase();
+
+    if (lang.startsWith("en")) return "en";
+    if (lang.startsWith("tr")) return "tr";
+
+    try {
+      const saved = String(
+        localStorage.getItem("wpFrontendLng") || "",
+      ).toLowerCase();
+
+      if (saved.startsWith("en")) return "en";
+      if (saved.startsWith("tr")) return "tr";
+    } catch {}
+
+    return "de";
+  }
+
+  function t(key) {
+    const lang = getCurrentLanguage();
+    const data = STATIC_TRANSLATIONS[lang] || STATIC_TRANSLATIONS.de;
+
+    return data[key] || STATIC_TRANSLATIONS.de[key] || "";
+  }
+
   const normDay = (v) =>
     v ? DAY_ALIASES[String(v).trim().toLowerCase()] || v : "";
 
@@ -126,14 +169,26 @@
     return u.toString();
   }
 
+  // function fillLocations(selectEl, arr) {
+  //   if (!selectEl) return;
+  //   const cities = Array.from(
+  //     new Set(arr.map((o) => cityFromOffer(o)).filter(Boolean)),
+  //   ).sort((a, b) => a.localeCompare(b, "de"));
+
+  //   selectEl.innerHTML =
+  //     `<option value="">Alle Standorte</option>` +
+  //     cities.map((c) => `<option>${esc(c)}</option>`).join("");
+  // }
+
   function fillLocations(selectEl, arr) {
     if (!selectEl) return;
+
     const cities = Array.from(
       new Set(arr.map((o) => cityFromOffer(o)).filter(Boolean)),
-    ).sort((a, b) => a.localeCompare(b, "de"));
+    ).sort((a, b) => a.localeCompare(b, getCurrentLanguage()));
 
     selectEl.innerHTML =
-      `<option value="">Alle Standorte</option>` +
+      `<option value="" data-i18n="offersDirectory.filters.allLocations">${esc(t("allLocations"))}</option>` +
       cities.map((c) => `<option>${esc(c)}</option>`).join("");
   }
 
@@ -170,9 +225,13 @@
     return root?.dataset?.next || "http://localhost:3000";
   }
 
+  // function renderEmpty(listEl) {
+  //   listEl.innerHTML =
+  //     '<li><div class="card">Keine Angebote gefunden.</div></li>';
+  // }
+
   function renderEmpty(listEl) {
-    listEl.innerHTML =
-      '<li><div class="card">Keine Angebote gefunden.</div></li>';
+    listEl.innerHTML = `<li><div class="card" data-i18n="offersDirectory.cards.emptyTitle">${esc(t("emptyTitle"))}</div></li>`;
   }
 
   function renderPowerGroups(listEl, groups) {
@@ -429,11 +488,21 @@
     return opts;
   }
 
+  // function fillHolidayWeeksSelect(sel, arr, seasonValue) {
+  //   if (!sel) return;
+  //   const opts = collectHolidayOptions(arr, seasonValue);
+  //   sel.innerHTML =
+  //     '<option value="">Alle Zeiträume</option>' +
+  //     opts.map((k) => `<option value="${esc(k)}">${esc(k)}</option>`).join("");
+  // }
+
   function fillHolidayWeeksSelect(sel, arr, seasonValue) {
     if (!sel) return;
+
     const opts = collectHolidayOptions(arr, seasonValue);
+
     sel.innerHTML =
-      '<option value="">Alle Zeiträume</option>' +
+      `<option value="" data-i18n="offersDirectory.filters.allHolidayWeeks">${esc(t("allHolidayWeeks"))}</option>` +
       opts.map((k) => `<option value="${esc(k)}">${esc(k)}</option>`).join("");
   }
 

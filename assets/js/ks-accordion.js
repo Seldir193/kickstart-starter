@@ -43,9 +43,14 @@
         { height: startHeight + "px", opacity: 1 },
         { height: "0px", opacity: 0 },
       ],
+      // {
+      //   duration: 420,
+      //   easing: "ease-out",
+      //   fill: "both",
+      // },
       {
-        duration: 420,
-        easing: "ease-out",
+        duration: 180,
+        easing: "cubic-bezier(0.4, 0, 1, 1)",
         fill: "both",
       },
     ).onfinish = function () {
@@ -71,14 +76,33 @@
     summary.addEventListener("click", function (event) {
       event.preventDefault();
 
+      // if (details.hasAttribute("open")) {
+      //   animateClose(body, function () {
+      //     closeDetails(details);
+      //   });
+      //   return;
+      // }
+
+      // details.setAttribute("open", "open");
+      // requestAnimationFrame(function () {
+      //   animateOpen(body);
+      // });
       if (details.hasAttribute("open")) {
+        details.classList.add("is-closing");
+        details.classList.remove("is-opening");
+
         animateClose(body, function () {
           closeDetails(details);
+          details.classList.remove("is-closing");
         });
+
         return;
       }
 
+      details.classList.add("is-opening");
+      details.classList.remove("is-closing");
       details.setAttribute("open", "open");
+
       requestAnimationFrame(function () {
         animateOpen(body);
       });
