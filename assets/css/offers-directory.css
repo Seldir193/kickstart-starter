@@ -1016,3 +1016,17 @@
     }
   }
 }
+
+/* @layer components {
+  html:not(.i18n-ready) .ks-dir [data-i18n],
+  html:not(.i18n-ready) .ks-dir [data-i18n-attr],
+  html:not(.i18n-ready) .ks-dir__hero-content--wordmark::before {
+    visibility: hidden;
+  }
+
+  html.i18n-ready .ks-dir [data-i18n],
+  html.i18n-ready .ks-dir [data-i18n-attr],
+  html.i18n-ready .ks-dir__hero-content--wordmark::before {
+    visibility: visible;
+  }
+} */

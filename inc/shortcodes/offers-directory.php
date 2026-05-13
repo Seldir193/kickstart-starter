@@ -66,6 +66,10 @@ add_action('init', function () {
     $route_icon = $theme_uri . '/assets/img/offers/route-navigation.svg';
     $arrow_icon = $theme_uri . '/assets/img/team/arrow_right_alt.svg';
 
+    $offers_directory_t = function ($key, $fallback) {
+      return function_exists('ks_t') ? ks_t($key, $fallback, 'offers-directory') : $fallback;
+    };
+
     add_action('wp_enqueue_scripts', function () {
       $theme_dir = get_stylesheet_directory();
       $theme_uri = get_stylesheet_directory_uri();
@@ -238,10 +242,6 @@ add_action('init', function () {
       'Foerdertraining_Athletik',
     ], true);
 
-    // $kickerClass = $showKicker
-    //   ? 'ks-dir__kicker'
-    //   : 'ks-dir__kicker ks-dir__kicker--hidden';
-
     $kickerClass = $showKicker
       ? 'ks-kicker ks-dir__kicker'
       : 'ks-kicker ks-dir__kicker ks-dir__kicker--hidden';
@@ -367,37 +367,47 @@ add_action('init', function () {
     id="angebote-buchen"
     class="ks-dir__hero ks-py-56 ks-section-accent"
   >
-     <div
+    <div
       class="ks-dir__hero-content ks-dir__hero-content--wordmark"
-      data-wordmark="<?php echo esc_attr(function_exists('ks_t') ? ks_t('offersDirectory.intro.watermark', 'ANGEBOTE', 'offers') : 'ANGEBOTE'); ?>"
+      data-wordmark="<?php echo esc_attr($offers_directory_t('offersDirectory.intro.watermark', 'ANGEBOTE')); ?>"
       data-i18n="offersDirectory.intro.watermark"
       data-i18n-attr="data-wordmark"
     >
       <p class="<?php echo esc_attr($kickerClass); ?>">
-        <span data-i18n="offersDirectory.finder.kicker">Angebote & Standorte</span>
+        <span data-i18n="offersDirectory.finder.kicker">
+          <?php echo esc_html($offers_directory_t('offersDirectory.finder.kicker', 'Angebote & Standorte')); ?>
+        </span>
       </p>
 
       <h2 class="ks-dir__title" data-i18n="offersDirectory.finder.title">
-        Wähle dein Training aus.
+        <?php echo esc_html($offers_directory_t('offersDirectory.finder.title', 'Wähle dein Training aus.')); ?>
       </h2>
 
       <div class="ks-dir__stats" aria-label="DFS Vorteile">
         <span class="ks-dir__stat">
           <img src="<?php echo esc_url($location_icon); ?>" alt="" loading="lazy" decoding="async">
           <strong>300+</strong>
-          <small data-i18n="offersDirectory.stats.locations">Trainingsstandorte</small>
+          <small data-i18n="offersDirectory.stats.locations">
+            <?php echo esc_html($offers_directory_t('offersDirectory.stats.locations', 'Trainingsstandorte')); ?>
+          </small>
         </span>
 
         <span class="ks-dir__stat">
           <img src="<?php echo esc_url($age_icon); ?>" alt="" loading="lazy" decoding="async">
           <strong><?php echo esc_html(str_replace(' Jahre', '', $ageText)); ?></strong>
-          <small data-i18n="offersDirectory.stats.age">Jahre</small>
+          <small data-i18n="offersDirectory.stats.age">
+            <?php echo esc_html($offers_directory_t('offersDirectory.stats.age', 'Jahre')); ?>
+          </small>
         </span>
 
         <span class="ks-dir__stat">
           <img src="<?php echo esc_url($reset_icon); ?>" alt="" loading="lazy" decoding="async">
-          <strong data-i18n="offersDirectory.stats.qualityTitle">Geprüfte</strong>
-          <small data-i18n="offersDirectory.stats.qualityText">DFS-Qualität</small>
+          <strong data-i18n="offersDirectory.stats.qualityTitle">
+            <?php echo esc_html($offers_directory_t('offersDirectory.stats.qualityTitle', 'Geprüfte')); ?>
+          </strong>
+          <small data-i18n="offersDirectory.stats.qualityText">
+            <?php echo esc_html($offers_directory_t('offersDirectory.stats.qualityText', 'DFS-Qualität')); ?>
+          </small>
         </span>
       </div>
     </div>
@@ -406,7 +416,9 @@ add_action('init', function () {
       <div class="ks-dir__map">
         <button type="button" class="ks-dir__nearby">
           <img src="<?php echo esc_url($route_icon); ?>" alt="" loading="lazy" decoding="async">
-          <span data-i18n="offersDirectory.map.nearby">In meiner Nähe</span>
+          <span data-i18n="offersDirectory.map.nearby">
+            <?php echo esc_html($offers_directory_t('offersDirectory.map.nearby', 'In meiner Nähe')); ?>
+          </span>
         </button>
 
         <div id="ksMap" class="ks-map"></div>
