@@ -2,16 +2,12 @@
   .ks-section-accent {
     position: relative;
     isolation: isolate;
-  }
-
-  .ks-title-wrap.ks-section-accent,
-  .ks-dir__hero.ks-section-accent {
     overflow: hidden;
   }
 
   .ks-title-wrap.ks-section-accent {
     min-height: var(--ks-section-accent-stage-height, 136px);
-    padding-block: clamp(18px, 2.2vw, 28px) clamp(10px, 1.6vw, 18px);
+    padding-block: clamp(20px, 2.4vw, 32px) clamp(12px, 1.8vw, 20px);
   }
 
   .ks-title-wrap.ks-section-accent::before,
@@ -24,126 +20,149 @@
   }
 
   .ks-title-wrap.ks-section-accent::before {
-    left: var(--ks-accent-line-left, 0);
-    top: var(--ks-accent-line-top, 22px);
-    width: var(--ks-accent-line-width, 88px);
-    height: 3px;
-    border-radius: 999px;
-    background: var(--brand-gold);
-    opacity: var(--ks-accent-line-opacity, 1);
-    transform: translateX(var(--ks-accent-line-x, 0));
-  }
-
-  .ks-title-wrap.ks-section-accent::after {
-    right: var(--ks-accent-graphic-right, -54px);
+    left: 50%;
     top: 50%;
-    width: clamp(220px, 24vw, 360px);
-    height: clamp(120px, 14vw, 200px);
-    transform: translateY(-50%);
-    opacity: var(--ks-accent-graphic-opacity, 0.26);
+    width: min(94vw, 980px);
+    height: clamp(104px, 12vw, 154px);
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    opacity: var(--ks-tactical-opacity, 0.68);
     background:
-      radial-gradient(
-        circle at 78% 50%,
-        transparent 0 46px,
-        rgba(253, 225, 0, 0.72) 46px 48px,
-        transparent 48px
-      ),
       linear-gradient(
         90deg,
-        transparent 0 68%,
-        rgba(253, 225, 0, 0.3) 68% 68.8%,
-        transparent 68.8% 100%
+        transparent 0 9%,
+        rgba(253, 225, 0, 0.72) 9% 9.35%,
+        transparent 9.35% 48%,
+        rgba(17, 17, 17, 0.095) 48% 48.25%,
+        transparent 48.25% 90.65%,
+        rgba(253, 225, 0, 0.72) 90.65% 91%,
+        transparent 91% 100%
       ),
       linear-gradient(
         180deg,
-        transparent 0 24%,
-        rgba(17, 17, 17, 0.08) 24% 24.7%,
-        transparent 24.7% 100%
+        transparent 0 17%,
+        rgba(17, 17, 17, 0.095) 17% 17.8%,
+        transparent 17.8% 82.2%,
+        rgba(17, 17, 17, 0.095) 82.2% 83%,
+        transparent 83% 100%
       ),
       radial-gradient(
-        circle at 18% 50%,
-        rgba(17, 17, 17, 0.08) 0 1.4px,
-        transparent 1.4px
+        circle at 50% 50%,
+        transparent 0 23px,
+        rgba(253, 225, 0, 0.78) 23px 24.5px,
+        transparent 24.5px
+      ),
+      radial-gradient(
+        circle at 22% 50%,
+        rgba(17, 17, 17, 0.13) 0 1.3px,
+        transparent 1.3px
       );
     background-size:
       100% 100%,
       100% 100%,
       100% 100%,
-      16px 16px;
+      18px 18px;
     background-repeat: no-repeat, no-repeat, no-repeat, repeat;
   }
 
+  .ks-title-wrap.ks-section-accent::after {
+    left: 50%;
+    top: 50%;
+    width: min(78vw, 700px);
+    height: clamp(76px, 9vw, 124px);
+    z-index: -1;
+    border-top: 1.5px dashed rgba(253, 225, 0, 0.9);
+    border-right: 1.5px solid rgba(253, 225, 0, 0.78);
+    border-radius: 0 140px 0 0;
+    transform: translate(-50%, -42%) rotate(-7deg);
+    opacity: var(--ks-tactical-path-opacity, 0.72);
+  }
+
+  .ks-title-wrap.ks-section-accent > .ks-kicker {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ks-title-wrap.ks-section-accent > .ks-kicker::before {
+    content: "";
+    width: 18px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--brand-gold);
+  }
+
   .ks-section-accent--center {
-    --ks-accent-line-left: 50%;
-    --ks-accent-line-x: -50%;
-    --ks-accent-graphic-right: -48px;
+    text-align: center;
   }
 
   .ks-section-accent--left {
-    --ks-accent-line-left: 0;
-    --ks-accent-line-x: 0;
-    --ks-accent-graphic-right: -54px;
+    text-align: left;
   }
 
   .ks-section-accent--soft {
-    --ks-accent-graphic-opacity: 0.18;
+    --ks-tactical-opacity: 0.48;
+    --ks-tactical-path-opacity: 0.52;
   }
 
   .ks-section-accent--compact {
-    --ks-section-accent-stage-height: 120px;
-    --ks-accent-line-width: 74px;
+    --ks-section-accent-stage-height: 118px;
   }
 
   .ks-section-accent--large {
-    --ks-section-accent-stage-height: 152px;
-    --ks-accent-line-width: 104px;
+    --ks-section-accent-stage-height: 156px;
   }
 
   .ks-dir__hero.ks-section-accent {
+    position: relative;
+    isolation: isolate;
     overflow: hidden;
   }
 
   .ks-dir__hero.ks-section-accent::before {
-    right: -172px;
+    right: -160px;
     top: 50%;
     width: clamp(280px, 30vw, 460px);
     height: clamp(280px, 30vw, 460px);
-    border: 1.5px solid rgba(253, 225, 0, 0.55);
+    z-index: -1;
+    border: 1.5px solid rgba(253, 225, 0, 0.58);
     border-radius: 50%;
     transform: translateY(-50%);
     opacity: 0.9;
   }
 
   .ks-dir__hero.ks-section-accent::after {
-    right: clamp(34px, 8vw, 148px);
+    right: clamp(24px, 8vw, 148px);
     top: 50%;
-    width: clamp(170px, 18vw, 260px);
-    height: clamp(120px, 14vw, 180px);
+    width: clamp(240px, 24vw, 360px);
+    height: clamp(140px, 16vw, 230px);
+    z-index: -1;
     transform: translateY(-50%);
-    opacity: 0.38;
+    opacity: 0.48;
     background:
-      radial-gradient(
-        circle at 76% 48%,
-        transparent 0 8px,
-        rgba(253, 225, 0, 0.9) 8px 10px,
-        transparent 10px
-      ),
       linear-gradient(
-        120deg,
-        transparent 0 45%,
-        rgba(253, 225, 0, 0.38) 45% 45.9%,
-        transparent 45.9% 100%
+        118deg,
+        transparent 0 44%,
+        rgba(253, 225, 0, 0.58) 44% 44.7%,
+        transparent 44.7% 100%
       ),
       linear-gradient(
         180deg,
         transparent 0 49%,
-        rgba(253, 225, 0, 0.56) 49% 50.2%,
-        transparent 50.2% 100%
+        rgba(253, 225, 0, 0.54) 49% 50%,
+        transparent 50% 100%
+      ),
+      radial-gradient(
+        circle at 80% 50%,
+        transparent 0 10px,
+        rgba(253, 225, 0, 0.9) 10px 12px,
+        transparent 12px
       ),
       radial-gradient(
         circle at 18% 64%,
-        rgba(17, 17, 17, 0.16) 0 1.5px,
-        transparent 1.5px
+        rgba(17, 17, 17, 0.16) 0 1.4px,
+        transparent 1.4px
       );
     background-size:
       100% 100%,
@@ -155,52 +174,56 @@
 
   @media (max-width: 900px) {
     .ks-title-wrap.ks-section-accent {
-      min-height: var(--ks-section-accent-stage-height-mobile, 118px);
+      min-height: var(--ks-section-accent-stage-height-mobile, 116px);
       padding-block: 18px 12px;
     }
 
     .ks-title-wrap.ks-section-accent::before {
-      top: 16px;
-      width: var(--ks-accent-line-width-mobile, 72px);
+      width: min(96vw, 680px);
+      height: 104px;
+      opacity: 0.46;
     }
 
     .ks-title-wrap.ks-section-accent::after {
-      width: clamp(160px, 30vw, 240px);
-      height: clamp(100px, 18vw, 150px);
-      right: -44px;
-      opacity: 0.2;
+      width: min(78vw, 460px);
+      height: 76px;
+      opacity: 0.46;
     }
 
     .ks-dir__hero.ks-section-accent::before {
-      right: -132px;
+      right: -130px;
       width: clamp(220px, 38vw, 320px);
       height: clamp(220px, 38vw, 320px);
     }
 
     .ks-dir__hero.ks-section-accent::after {
-      right: 18px;
-      width: clamp(140px, 24vw, 200px);
-      height: clamp(90px, 16vw, 130px);
-      opacity: 0.26;
+      right: 16px;
+      width: clamp(160px, 28vw, 240px);
+      height: clamp(100px, 18vw, 150px);
+      opacity: 0.32;
     }
   }
 
   @media (max-width: 560px) {
     .ks-title-wrap.ks-section-accent {
-      min-height: var(--ks-section-accent-stage-height-mobile-sm, 104px);
+      min-height: var(--ks-section-accent-stage-height-mobile-sm, 100px);
       padding-block: 16px 10px;
     }
 
     .ks-title-wrap.ks-section-accent::before {
-      top: 14px;
-      width: 64px;
+      width: 96vw;
+      height: 86px;
+      opacity: 0.3;
     }
 
     .ks-title-wrap.ks-section-accent::after {
-      width: 160px;
-      height: 96px;
-      right: -58px;
-      opacity: 0.14;
+      width: 78vw;
+      height: 58px;
+      opacity: 0.34;
+    }
+
+    .ks-title-wrap.ks-section-accent > .ks-kicker::before {
+      width: 14px;
     }
 
     .ks-dir__hero.ks-section-accent::before {
@@ -212,9 +235,9 @@
 
     .ks-dir__hero.ks-section-accent::after {
       right: 8px;
-      width: 132px;
-      height: 88px;
-      opacity: 0.2;
+      width: 150px;
+      height: 96px;
+      opacity: 0.24;
     }
   }
 }

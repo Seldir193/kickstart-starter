@@ -158,7 +158,6 @@ if (!function_exists('ks_translate_faq_args')) {
     $map = [
       'title' => 'title_i18n',
       'kicker' => 'kicker_i18n',
-      'watermark' => 'watermark_i18n',
       'side_card_kicker' => 'side_card_kicker_i18n',
       'side_card_title' => 'side_card_title_i18n',
       'side_card_text' => 'side_card_text_i18n',
@@ -187,11 +186,8 @@ if (!function_exists('ks_render_faq_section')) {
       'wrapper_class' => 'container ks-home-faq',
       'title' => 'Häufige Fragen',
       'kicker' => 'Gut zu wissen',
-      'watermark' => 'FAQ',
-      'watermark_class' => 'ks-watermark--faq',
       'title_i18n' => '',
       'kicker_i18n' => '',
-      'watermark_i18n' => '',
       'items_i18n_prefix' => '',
       'use_video' => false,
       'video_embed' => '',
@@ -210,20 +206,12 @@ if (!function_exists('ks_render_faq_section')) {
     ];
 
     $args = ks_translate_faq_args(array_merge($defaults, $args));
-    $watermark_class = trim('ks-title-wrap ks-watermark ks-watermark--center ' . $args['watermark_class']);
 
     ob_start();
     ?>
     <section id="<?php echo esc_attr($args['section_id']); ?>" class="ks-sec ks-py-56">
       <div class="<?php echo esc_attr($args['wrapper_class']); ?>">
-        <div
-          class="<?php echo esc_attr($watermark_class); ?>"
-          data-bgword="<?php echo esc_attr($args['watermark']); ?>"
-          <?php if ($args['watermark_i18n'] !== ''): ?>
-            data-i18n="<?php echo esc_attr($args['watermark_i18n']); ?>"
-            data-i18n-attr="data-bgword"
-          <?php endif; ?>
-        >
+        <div class="ks-title-wrap ks-section-accent ks-section-accent--center">
           <div
             class="ks-kicker"
             <?php if ($args['kicker_i18n'] !== ''): ?>
@@ -333,15 +321,6 @@ if (!function_exists('ks_render_faq_section')) {
     return ob_get_clean();
   }
 }
-
-
-
-
-
-
-
-
-
 
 
 

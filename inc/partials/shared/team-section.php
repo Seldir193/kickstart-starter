@@ -1,5 +1,3 @@
-
-
 <?php
 
 $team_items = array_values(is_array($coaches ?? null) ? $coaches : []);
@@ -15,7 +13,6 @@ $team_fact_icons = [
   $theme_uri . '/assets/img/team/license.svg',
   $theme_uri . '/assets/img/team/group.svg',
 ];
-
 
 $build_team_item = function (array $coach) use ($trainer_url, $fallback_src) {
   $first = isset($coach['firstName']) ? trim((string) $coach['firstName']) : '';
@@ -57,12 +54,7 @@ $side_items = array_slice($team_items, 1, 5);
     >
       <script type="application/json" class="ks-home-team__data"><?php echo wp_json_encode($team_items, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?></script>
 
-      <div
-        class="ks-title-wrap ks-title-wrap--team ks-watermark ks-watermark--center ks-watermark--team"
-        data-bgword="<?php echo esc_attr($team_t('home.team.watermark', 'DFS')); ?>"
-        data-i18n="home.team.watermark"
-        data-i18n-attr="data-bgword"
-      >
+      <div class="ks-title-wrap ks-title-wrap--team ks-section-accent ks-section-accent--center">
         <div class="ks-kicker" data-i18n="home.team.kicker">
           <?php echo esc_html($team_t('home.team.kicker', 'Unsere Trainer')); ?>
         </div>
@@ -251,6 +243,8 @@ $side_items = array_slice($team_items, 1, 5);
     </div>
   </div>
 </section>
+
+
 
 
 
