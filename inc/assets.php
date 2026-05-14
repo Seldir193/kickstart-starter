@@ -357,27 +357,27 @@ if (file_exists($back_top_js)) {
     );
   }
 
-  $offers_dlg_css = get_stylesheet_directory() . '/assets/css/offers-dialog.css';
+  // $offers_dlg_css = get_stylesheet_directory() . '/assets/css/offers-dialog.css';
 
-  if (file_exists($offers_dlg_css)) {
-    wp_enqueue_style(
-      'ks-offers-dialog',
-      get_stylesheet_directory_uri() . '/assets/css/offers-dialog.css',
-      [],
-      filemtime($offers_dlg_css)
-    );
-  }
+  // if (file_exists($offers_dlg_css)) {
+  //   wp_enqueue_style(
+  //     'ks-offers-dialog',
+  //     get_stylesheet_directory_uri() . '/assets/css/offers-dialog.css',
+  //     [],
+  //     filemtime($offers_dlg_css)
+  //   );
+  // }
 
-  $book_dlg_css = get_stylesheet_directory() . '/assets/css/book-dialog.css';
+  // $book_dlg_css = get_stylesheet_directory() . '/assets/css/book-dialog.css';
 
-  if (file_exists($book_dlg_css)) {
-    wp_enqueue_style(
-      'ks-book-dialog',
-      get_stylesheet_directory_uri() . '/assets/css/book-dialog.css',
-      [],
-      filemtime($book_dlg_css)
-    );
-  }
+  // if (file_exists($book_dlg_css)) {
+  //   wp_enqueue_style(
+  //     'ks-book-dialog',
+  //     get_stylesheet_directory_uri() . '/assets/css/book-dialog.css',
+  //     [],
+  //     filemtime($book_dlg_css)
+  //   );
+  // }
 
   $map_deps = ['leaflet-js'];
 
@@ -473,6 +473,28 @@ if (file_exists($back_top_js)) {
       filemtime($dir_css)
     );
   }
+
+  $offer_sessions_dialog_css = get_stylesheet_directory() . '/assets/css/offers/offer-sessions-dialog.css';
+
+if (file_exists($offer_sessions_dialog_css)) {
+  wp_enqueue_style(
+    'ks-offer-sessions-dialog',
+    get_stylesheet_directory_uri() . '/assets/css/offers/offer-sessions-dialog.css',
+    ['kickstart-style', 'ks-utils', 'ks-base', 'ks-components', 'kickstart-offers-directory'],
+    filemtime($offer_sessions_dialog_css)
+  );
+}
+
+$booking_iframe_dialog_css = get_stylesheet_directory() . '/assets/css/offers/booking-iframe-dialog.css';
+
+if (file_exists($booking_iframe_dialog_css)) {
+  wp_enqueue_style(
+    'ks-booking-iframe-dialog',
+    get_stylesheet_directory_uri() . '/assets/css/offers/booking-iframe-dialog.css',
+    ['kickstart-style', 'ks-utils', 'ks-base', 'ks-components', 'kickstart-offers-directory'],
+    filemtime($booking_iframe_dialog_css)
+  );
+}
 
   $news_js = get_stylesheet_directory() . '/assets/js/newsletter.js';
 

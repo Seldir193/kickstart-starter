@@ -65,9 +65,15 @@ add_action('init', function () {
     $mail_icon = $theme_uri . '/assets/img/offers/mail.svg';
     $route_icon = $theme_uri . '/assets/img/offers/route-navigation.svg';
     $arrow_icon = $theme_uri . '/assets/img/team/arrow_right_alt.svg';
+    $dialog_icon_base = $theme_uri . '/assets/img/dialog/';
+    $dialog_close_icon = $dialog_icon_base . 'close.svg';
 
     $offers_directory_t = function ($key, $fallback) {
       return function_exists('ks_t') ? ks_t($key, $fallback, 'offers-directory') : $fallback;
+    };
+
+    $dialog_t = function ($key, $fallback) {
+      return function_exists('ks_t') ? ks_t($key, $fallback, 'dialog') : $fallback;
     };
 
     add_action('wp_enqueue_scripts', function () {
@@ -352,16 +358,22 @@ add_action('init', function () {
     );
 ?>
 
-<div id="ksDir"
-     class="ks-dir"
-     data-api="<?php echo esc_attr($api_base); ?>"
-     data-next="<?php echo esc_attr($next_base); ?>"
-     data-type="<?php echo esc_attr($type); ?>"
-     data-category="<?php echo esc_attr($category); ?>"
-     data-subtype="<?php echo esc_attr($sub_type); ?>"
-     data-city="<?php echo esc_attr($city); ?>"
-     data-close-icon="<?php echo esc_url($theme_uri . '/assets/img/close.png'); ?>"
-     data-coachph="<?php echo esc_url($theme_uri . '/assets/img/avatar.png'); ?>">
+<div
+  id="ksDir"
+  class="ks-dir"
+  data-api="<?php echo esc_attr($api_base); ?>"
+  data-next="<?php echo esc_attr($next_base); ?>"
+  data-type="<?php echo esc_attr($type); ?>"
+  data-category="<?php echo esc_attr($category); ?>"
+  data-subtype="<?php echo esc_attr($sub_type); ?>"
+  data-city="<?php echo esc_attr($city); ?>"
+  data-close-icon="<?php echo esc_url($dialog_close_icon); ?>"
+  data-dialog-icon-base="<?php echo esc_url($dialog_icon_base); ?>"
+  data-coachph="<?php echo esc_url($theme_uri . '/assets/img/avatar.png'); ?>"
+>
+  <span class="ks-sr-only" data-i18n="offersDialog.actions.close">
+    <?php echo esc_html($dialog_t('offersDialog.actions.close', 'Schließen')); ?>
+  </span>
 
   <section
     id="angebote-buchen"
@@ -602,42 +614,10 @@ add_action('init', function () {
       </div>
     </section>
   </div>
-
-  <div id="ksBookModal" class="ks-dir__modal" hidden>
-    <div class="ks-dir__overlay" data-close></div>
-    <div class="ks-dir__panel" role="dialog" aria-modal="true" aria-label="Buchung">
-      <button type="button" class="ks-dir__close" data-close aria-label="Schließen">
-        <img src="<?php echo esc_url($theme_uri . '/assets/img/close.png'); ?>" alt="Schließen" width="14" height="14">
-      </button>
-      <iframe
-        class="ks-book__frame"
-        src=""
-        title="Buchung"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </div>
-  </div>
-
-  <div id="ksOfferModal" class="ks-dir__modal" hidden>
-    <div class="ks-dir__overlay" data-close></div>
-    <div class="ks-dir__panel" role="dialog" aria-modal="true" aria-labelledby="ksOfferTitle">
-      <button type="button" class="ks-dir__close" data-close aria-label="Schließen">✕</button>
-      <h3 id="ksOfferTitle" class="ks-dir__m-title">Standort</h3>
-      <p class="ks-dir__m-addr" data-address></p>
-      <p class="ks-dir__m-meta">
-        <span>Tag: <b data-days>-</b></span> ·
-        <span>Uhrzeit: <b data-time>-</b></span> ·
-        <span>Alter: <b data-age>-</b></span>
-      </p>
-      <p class="ks-dir__m-coach" data-coach></p>
-      <p class="ks-dir__m-price"><b data-price></b></p>
-      <div class="ks-dir__m-actions">
-        <a class="btn btn-primary" data-select target="_blank" rel="noopener">Auswählen</a>
-      </div>
-    </div>
-  </div>
 </div>
+
+<?php get_template_part('inc/partials/offers/dialogs/offer-sessions-dialog'); ?>
+<?php get_template_part('inc/partials/offers/dialogs/booking-iframe-dialog'); ?>
 
 <?php echo do_shortcode('[ks_partner_network]'); ?>
 
@@ -789,8 +769,6 @@ if (function_exists('ks_render_feedback_section')) {
 return ob_get_clean();
   });
 });
-
-
 
 
 

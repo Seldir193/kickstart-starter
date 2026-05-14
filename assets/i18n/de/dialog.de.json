@@ -1,0 +1,25 @@
+{
+  "offersDialog": {
+    "actions": {
+      "close": "Schließen",
+      "continue": "Weiter"
+    },
+    "links": {
+      "googleDirections": "Anfahrt mit Google"
+    },
+    "labels": {
+      "regularCourseTime": "Reguläre Kurszeit",
+      "yearsOld": "Jährige"
+    },
+    "messages": {
+      "requestBasedProgram": "Dieses Programm ist anfragebasiert. Klicke auf „Weiter“."
+    }
+  },
+  "bookingDialog": {
+    "label": "Buchung",
+    "actions": {
+      "back": "Zurück",
+      "close": "Schließen"
+    }
+  }
+}

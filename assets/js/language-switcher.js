@@ -137,6 +137,9 @@
     if (hasI18nPrefix("feedback.")) {
       scopes.push("feedback");
     }
+    if (hasI18nPrefix("offersDialog.")) {
+      scopes.push("dialog");
+    }
 
     if (hasI18nPrefix("footer.")) {
       scopes.push("footer");
@@ -192,6 +195,8 @@
       i18nDateNodes: qsa(document, "[data-i18n-date]"),
       fallback: switcher.getAttribute("data-fallback-language") || "en",
       base: switcher.getAttribute("data-i18n-base") || "",
+      currentLanguage: "",
+      currentData: null,
     };
   }
 
@@ -337,6 +342,42 @@
     });
   }
 
+  function getScopedNodes(root, selector) {
+    var base = root || document;
+    var nodes = qsa(base, selector);
+
+    if (base.matches && base.matches(selector)) {
+      nodes.unshift(base);
+    }
+
+    return nodes;
+  }
+
+  function applyGenericTranslationsInRoot(root, data) {
+    getScopedNodes(root, "[data-i18n]").forEach(function (node) {
+      translateNodeText(node, data);
+    });
+
+    getScopedNodes(root, "[data-i18n-attr][data-i18n]").forEach(
+      function (node) {
+        translateNodeAttr(node, data);
+      },
+    );
+  }
+
+  function applyDateTranslationsInRoot(root, language) {
+    getScopedNodes(root, "[data-i18n-date]").forEach(function (node) {
+      translateDateNode(node, language);
+    });
+  }
+
+  function applyDynamicTranslations(state, root) {
+    if (!state.currentData || !state.currentLanguage) return;
+
+    applyGenericTranslationsInRoot(root || document, state.currentData);
+    applyDateTranslationsInRoot(root || document, state.currentLanguage);
+  }
+
   function applyGenericTranslations(state, data) {
     state.i18nNodes.forEach(function (node) {
       translateNodeText(node, data);
@@ -361,12 +402,18 @@
 
   function applyHeaderTranslations(state, language, data) {
     if (!data) return;
+
+    state.currentLanguage = language;
+    state.currentData = data;
+
     setDocumentLanguage(language);
     setTriggerLabel(state, data);
     setActiveLanguage(state, language, data);
+
     state.navLinks.forEach(function (link) {
       translateNavLink(link, data);
     });
+
     applyGenericTranslations(state, data);
     applyDateTranslations(state, language);
     document.documentElement.classList.add("i18n-ready");
@@ -379,6 +426,26 @@
       }),
     );
   }
+  // function applyHeaderTranslations(state, language, data) {
+  //   if (!data) return;
+  //   setDocumentLanguage(language);
+  //   setTriggerLabel(state, data);
+  //   setActiveLanguage(state, language, data);
+  //   state.navLinks.forEach(function (link) {
+  //     translateNavLink(link, data);
+  //   });
+  //   applyGenericTranslations(state, data);
+  //   applyDateTranslations(state, language);
+  //   document.documentElement.classList.add("i18n-ready");
+
+  //   document.dispatchEvent(
+  //     new CustomEvent("ks:i18n:applied", {
+  //       detail: {
+  //         language: language,
+  //       },
+  //     }),
+  //   );
+  // }
 
   function getCachedLanguage(state, language) {
     return state.cache[language] || null;
@@ -515,11 +582,27 @@
     });
   }
 
+  function bindDynamicContent(state) {
+    document.addEventListener("ks:i18n:content-added", function (event) {
+      var root =
+        event.detail && event.detail.root ? event.detail.root : document;
+      applyDynamicTranslations(state, root);
+    });
+  }
+
+  // function bindEvents(state) {
+  //   bindTrigger(state);
+  //   bindItems(state);
+  //   bindOutsideClick(state);
+  //   bindEscape(state);
+  // }
+
   function bindEvents(state) {
     bindTrigger(state);
     bindItems(state);
     bindOutsideClick(state);
     bindEscape(state);
+    bindDynamicContent(state);
   }
 
   function initLanguageSwitcher() {

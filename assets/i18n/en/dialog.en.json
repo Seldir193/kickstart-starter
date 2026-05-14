@@ -1,0 +1,25 @@
+{
+  "offersDialog": {
+    "actions": {
+      "close": "Close",
+      "continue": "Continue"
+    },
+    "links": {
+      "googleDirections": "Directions with Google"
+    },
+    "labels": {
+      "regularCourseTime": "Regular course time",
+      "yearsOld": "years old"
+    },
+    "messages": {
+      "requestBasedProgram": "This program is request-based. Click “Continue”."
+    }
+  },
+  "bookingDialog": {
+    "label": "Booking",
+    "actions": {
+      "back": "Back",
+      "close": "Close"
+    }
+  }
+}

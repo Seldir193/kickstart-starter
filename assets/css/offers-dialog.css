@@ -1,16 +1,484 @@
-/* ========================================================================== */
-/* Offers Dialog Styles – NUR Modal-Shell (Overlay, Panel, Close-Button)     */
-/*   – Layout, Hero, Filter, FAQ, Sessions etc. liegen in ks-dir.css         */
-/* ========================================================================== */
-
 @layer pages {
-  /* ===============================
-     Offers-Dialog (erste Modal)
-     wird für:
-       - #ksOfferModal
-       - #ksBookModal
-     benutzt (beide haben .ks-dir__modal, .ks-dir__overlay, .ks-dir__panel)
-     =============================== */
+  .ks-dir__modal[hidden] {
+    display: none !important;
+  }
+
+  .ks-dir__modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483000;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .ks-dir__overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--mega-backdrop);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+  .ks-dir__panel {
+    position: relative;
+    z-index: 1;
+    width: min(760px, calc(100vw - 32px));
+    max-height: calc(100dvh - 32px);
+    min-height: 0;
+    overflow: auto;
+    background: var(--brand-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--dfs-radius-card);
+    box-shadow: var(--dfs-shadow-medium);
+    color: var(--brand-black);
+  }
+
+  #ksOfferModal,
+  #ksBookModal {
+    z-index: 2147483000;
+  }
+
+  #ksOfferModal .ks-dir__panel {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    width: min(760px, calc(100vw - 32px));
+    max-height: calc(100dvh - 32px);
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  body.ks-modal-open {
+    overflow: hidden;
+  }
+
+  #ksOfferModal .ks-offer-dialog__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 18px;
+    background: var(--brand-white);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  #ksOfferModal .ks-offer-dialog__head-main {
+    min-width: 0;
+  }
+
+  #ksOfferModal .ks-offer-dialog__head-actions {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  #ksOfferModal .ks-offer-dialog__body {
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    padding: 16px 18px 18px;
+    background: var(--brand-white);
+  }
+
+  #ksOfferModal .ks-dir__m-title {
+    margin: 0;
+    color: var(--brand-black);
+    font-family: var(--font-display);
+    font-size: clamp(26px, 3vw, 34px);
+    font-weight: var(--font-weight-extrabold);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  #ksOfferModal .ks-dir__m-addr {
+    margin: 8px 0 0;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  #ksOfferModal .ks-offer__google {
+    margin: 10px 0 0;
+  }
+
+  #ksOfferModal .ks-offer__google a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    color: var(--brand-black);
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+    transition:
+      color var(--ks-transition-ui-short),
+      transform var(--ks-transition-ui-short);
+  }
+
+  #ksOfferModal .ks-offer__google img {
+    display: block;
+    width: 20px;
+    height: 20px;
+    filter: var(--icon-filter-gold);
+  }
+
+  #ksOfferModal .ks-offer__google a:hover,
+  #ksOfferModal .ks-offer__google a:focus-visible {
+    color: var(--brand-gold-700);
+    transform: translateX(2px);
+  }
+
+  #ksOfferModal .ks-offer__google a:focus-visible {
+    outline: 2px solid var(--brand-gold);
+    outline-offset: 4px;
+    border-radius: var(--dfs-radius-pill);
+  }
+
+  #ksOfferModal .ks-offer-dialog__close {
+    position: static;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    color: var(--brand-black);
+    background: var(--brand-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--dfs-radius-pill);
+    cursor: pointer;
+    transition:
+      background-color var(--ks-transition-ui-short),
+      border-color var(--ks-transition-ui-short),
+      box-shadow var(--ks-transition-ui-short),
+      transform var(--ks-transition-ui-short);
+  }
+
+  #ksOfferModal .ks-offer-dialog__close img {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+
+  #ksOfferModal .ks-offer-dialog__close:hover,
+  #ksOfferModal .ks-offer-dialog__close:focus-visible {
+    background: var(--color-surface-soft);
+    border-color: var(--color-border-strong);
+  }
+
+  #ksOfferModal .ks-offer-dialog__close:focus-visible {
+    outline: 2px solid var(--brand-gold);
+    outline-offset: 3px;
+  }
+
+  #ksOfferModal .ks-offer__sessions {
+    display: grid;
+    gap: 12px;
+    margin-top: 0;
+  }
+
+  #ksOfferModal .ks-session {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(110px, auto) auto;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    background: var(--brand-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--dfs-radius-card);
+    transition:
+      border-color var(--ks-transition-ui-short),
+      box-shadow var(--ks-transition-ui-short),
+      transform var(--ks-transition-ui-short);
+  }
+
+  #ksOfferModal .ks-session:hover,
+  #ksOfferModal .ks-session:focus-within {
+    border-color: var(--color-border-strong);
+    box-shadow: var(--dfs-shadow-soft);
+    transform: translateY(-1px);
+  }
+
+  #ksOfferModal .ks-session__left {
+    min-width: 0;
+    display: grid;
+    gap: 4px;
+  }
+
+  #ksOfferModal .ks-session__row {
+    color: var(--color-text-muted);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  #ksOfferModal .ks-session__row strong {
+    color: var(--brand-black);
+    font-weight: var(--font-weight-extrabold);
+  }
+
+  #ksOfferModal .ks-session__coach {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  #ksOfferModal .ks-coach__avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: var(--dfs-radius-pill);
+    object-fit: cover;
+    border: 1px solid var(--color-border-soft);
+    background: var(--color-surface-soft);
+  }
+
+  #ksOfferModal .ks-coach__name {
+    display: grid;
+    gap: 1px;
+    color: var(--brand-black);
+    font-size: 13px;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+  }
+
+  #ksOfferModal .ks-coach__last {
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-medium);
+  }
+
+  #ksOfferModal .ks-session__actions {
+    display: grid;
+    justify-items: end;
+    align-items: center;
+    gap: 9px;
+    white-space: nowrap;
+  }
+
+  #ksOfferModal .ks-session__price {
+    color: var(--brand-black);
+    font-size: 15px;
+    font-weight: var(--font-weight-extrabold);
+    line-height: 1;
+  }
+
+  #ksOfferModal .ks-session__btn {
+    min-height: 38px;
+    padding-inline: 18px;
+  }
+
+  #ksOfferModal .ks-session.ks-session--selectable:hover {
+    background: var(--brand-white);
+  }
+
+  #ksOfferModal .ks-session.ks-session--selectable.ks-session--selected {
+    border-color: var(--color-border-strong);
+    background: var(--color-surface-soft);
+  }
+
+  #ksOfferModal .ks-session--simple {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  #ksOfferModal .ks-session__info {
+    color: var(--color-text);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  #ksOfferModal .ks-offer__footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 14px;
+  }
+
+  #ksBookModal .ks-dir__panel {
+    width: min(980px, calc(100vw - 32px));
+    max-height: calc(100dvh - 32px);
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  #ksBookModal .ks-book__frame {
+    display: block;
+    width: 100%;
+    height: calc(100dvh - 64px);
+    max-height: calc(100dvh - 64px);
+    border: 0;
+    background: var(--brand-white);
+  }
+
+  #ksBookModal .ks-dir__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    color: var(--brand-black);
+    background: var(--brand-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--dfs-radius-pill);
+    cursor: pointer;
+  }
+
+  #ksBookModal .ks-dir__close img {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+
+  #ksBookModal .ks-dir__close:hover,
+  #ksBookModal .ks-dir__close:focus-visible {
+    background: var(--color-surface-soft);
+    border-color: var(--color-border-strong);
+  }
+
+  #ksBookModal .ks-dir__close:focus-visible {
+    outline: 2px solid var(--brand-gold);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 720px) {
+    .ks-dir__modal {
+      padding: 10px;
+    }
+
+    .ks-dir__panel {
+      width: min(100%, calc(100vw - 20px));
+      max-height: calc(100dvh - 20px);
+      border-radius: 16px;
+    }
+
+    #ksOfferModal .ks-dir__panel {
+      width: min(100%, calc(100vw - 20px));
+      max-height: calc(100dvh - 20px);
+    }
+
+    #ksOfferModal .ks-offer-dialog__head {
+      padding: 16px;
+    }
+
+    #ksOfferModal .ks-offer-dialog__body {
+      padding: 16px;
+    }
+
+    #ksOfferModal .ks-dir__m-title {
+      font-size: clamp(24px, 7vw, 30px);
+    }
+
+    #ksOfferModal .ks-session,
+    #ksOfferModal .ks-session--simple {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 15px;
+      border-radius: 16px;
+    }
+
+    #ksOfferModal .ks-session__actions {
+      width: 100%;
+      grid-template-columns: 1fr auto;
+      justify-items: start;
+    }
+
+    #ksOfferModal .ks-session__btn {
+      justify-self: end;
+    }
+
+    #ksBookModal .ks-dir__panel {
+      width: min(100%, calc(100vw - 20px));
+      max-height: calc(100dvh - 20px);
+      border-radius: 16px;
+    }
+
+    #ksBookModal .ks-book__frame {
+      height: calc(100dvh - 20px);
+      max-height: calc(100dvh - 20px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ks-dir__modal {
+      padding: 8px;
+    }
+
+    .ks-dir__panel {
+      width: min(100%, calc(100vw - 16px));
+      max-height: calc(100dvh - 16px);
+      border-radius: 14px;
+    }
+
+    #ksOfferModal .ks-dir__panel {
+      width: min(100%, calc(100vw - 16px));
+      max-height: calc(100dvh - 16px);
+    }
+
+    #ksOfferModal .ks-offer-dialog__head {
+      padding: 14px 14px 12px;
+      gap: 12px;
+    }
+
+    #ksOfferModal .ks-offer-dialog__body {
+      padding: 14px;
+    }
+
+    #ksOfferModal .ks-offer-dialog__close {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+    }
+
+    #ksOfferModal .ks-session__actions {
+      grid-template-columns: 1fr;
+      justify-items: stretch;
+    }
+
+    #ksOfferModal .ks-session__btn {
+      width: 100%;
+      justify-self: stretch;
+    }
+
+    #ksBookModal .ks-dir__panel {
+      width: min(100%, calc(100vw - 16px));
+      max-height: calc(100dvh - 16px);
+      border-radius: 14px;
+    }
+
+    #ksBookModal .ks-book__frame {
+      height: calc(100dvh - 16px);
+      max-height: calc(100dvh - 16px);
+    }
+
+    #ksBookModal .ks-dir__close {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #ksOfferModal .ks-offer__google a,
+    #ksOfferModal .ks-offer-dialog__close,
+    #ksOfferModal .ks-session {
+      transition: none;
+    }
+
+    #ksOfferModal .ks-offer__google a:hover,
+    #ksOfferModal .ks-offer__google a:focus-visible,
+    #ksOfferModal .ks-session:hover,
+    #ksOfferModal .ks-session:focus-within {
+      transform: none;
+    }
+  }
+}
+
+/* @layer pages {
+
 
   .ks-dir__modal[hidden] {
     display: none !important;
@@ -40,15 +508,15 @@
     padding: 16px;
     width: min(720px, calc(100% - 24px));
     max-height: calc(100dvh - 24px);
-    overflow: auto; /* Scroll nur im Panel */
+    overflow: auto; 
   }
 
-  /* Body lock, wenn ein Modal offen ist */
+  
   body.ks-modal-open {
     overflow: hidden;
   }
 
-  /* Close-Button (wird in beiden Modals genutzt) */
+  
   .ks-dir__close {
     position: absolute;
     top: 10px;
@@ -77,8 +545,8 @@
 
 .ks-session__actions {
   display: flex;
-  flex-direction: row-reverse; /* Button rechts */
-  justify-content: flex-start; /* wichtig bei row-reverse: start = rechts */
+  flex-direction: row-reverse; 
+  justify-content: flex-start; 
   align-items: center;
   gap: 20px;
   white-space: nowrap;
@@ -88,4 +556,4 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 12px;
-}
+} */

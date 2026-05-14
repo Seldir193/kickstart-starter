@@ -1,0 +1,25 @@
+{
+  "offersDialog": {
+    "actions": {
+      "close": "Kapat",
+      "continue": "Devam"
+    },
+    "links": {
+      "googleDirections": "Google ile yol tarifi"
+    },
+    "labels": {
+      "regularCourseTime": "Düzenli kurs saati",
+      "yearsOld": "yaş"
+    },
+    "messages": {
+      "requestBasedProgram": "Bu program talep bazlıdır. “Devam” butonuna tıkla."
+    }
+  },
+  "bookingDialog": {
+    "label": "Rezervasyon",
+    "actions": {
+      "back": "Geri",
+      "close": "Kapat"
+    }
+  }
+}

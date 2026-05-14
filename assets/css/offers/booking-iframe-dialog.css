@@ -1,0 +1,156 @@
+@layer pages {
+  .ks-book-modal[hidden] {
+    display: none !important;
+  }
+
+  .ks-book-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483000;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .ks-book-modal__overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--mega-backdrop);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+  .ks-book-modal__panel {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: min(980px, calc(100vw - 32px));
+    max-height: calc(100dvh - 32px);
+    min-height: 0;
+    overflow: hidden;
+    background: var(--brand-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--dfs-radius-card);
+    box-shadow: var(--dfs-shadow-medium);
+    color: var(--brand-black);
+    opacity: 1;
+  }
+
+  .ks-book-modal__frame {
+    display: block;
+    width: 100%;
+    height: calc(100dvh - 64px);
+    max-height: calc(100dvh - 64px);
+    min-height: 460px;
+    border: 0;
+    background: var(--brand-white);
+  }
+
+  .ks-book-modal__close,
+  .ks-book-modal__back {
+    position: absolute;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    color: var(--brand-black);
+    background: var(--brand-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--dfs-radius-pill);
+    cursor: pointer;
+    transition:
+      background-color var(--ks-transition-ui-short),
+      border-color var(--ks-transition-ui-short),
+      transform var(--ks-transition-ui-short);
+  }
+
+  .ks-book-modal__close {
+    top: 10px;
+    right: 10px;
+  }
+
+  .ks-book-modal__back {
+    top: 10px;
+    left: 10px;
+  }
+
+  .ks-book-modal__close img,
+  .ks-book-modal__back img {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+
+  .ks-book-modal__close:hover,
+  .ks-book-modal__close:focus-visible,
+  .ks-book-modal__back:hover,
+  .ks-book-modal__back:focus-visible {
+    background: var(--color-surface-soft);
+    border-color: var(--color-border-strong);
+  }
+
+  .ks-book-modal__close:focus-visible,
+  .ks-book-modal__back:focus-visible {
+    outline: 2px solid var(--brand-gold);
+    outline-offset: 3px;
+  }
+
+  body.ks-modal-open {
+    overflow: hidden;
+  }
+
+  @media (max-width: 720px) {
+    .ks-book-modal {
+      padding: 10px;
+    }
+
+    .ks-book-modal__panel {
+      width: min(100%, calc(100vw - 20px));
+      max-height: calc(100dvh - 20px);
+      border-radius: 16px;
+    }
+
+    .ks-book-modal__frame {
+      height: calc(100dvh - 20px);
+      max-height: calc(100dvh - 20px);
+      min-height: 360px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ks-book-modal {
+      padding: 8px;
+    }
+
+    .ks-book-modal__panel {
+      width: min(100%, calc(100vw - 16px));
+      max-height: calc(100dvh - 16px);
+      border-radius: 14px;
+    }
+
+    .ks-book-modal__frame {
+      height: calc(100dvh - 16px);
+      max-height: calc(100dvh - 16px);
+      min-height: 320px;
+    }
+
+    .ks-book-modal__close,
+    .ks-book-modal__back {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ks-book-modal__close,
+    .ks-book-modal__back {
+      transition: none;
+    }
+  }
+}
