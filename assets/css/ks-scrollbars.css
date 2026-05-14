@@ -33,6 +33,96 @@ body::-webkit-scrollbar-thumb:hover {
 .ks-dd__inner,
 .ks-dir-dd__inner,
 .ks-dir-dd__panel,
+.book-embed,
+.ks-offer-dialog__body,
+.ks-book-modal__panel,
+.ks-book-modal__frame {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ks-scrollbar-thumb) var(--ks-scrollbar-track);
+}
+
+.ks-dir__listwrap::-webkit-scrollbar,
+.ks-dd__inner::-webkit-scrollbar,
+.ks-dir-dd__inner::-webkit-scrollbar,
+.ks-dir-dd__panel::-webkit-scrollbar,
+.book-embed::-webkit-scrollbar,
+.ks-offer-dialog__body::-webkit-scrollbar,
+.ks-book-modal__panel::-webkit-scrollbar,
+.ks-book-modal__frame::-webkit-scrollbar {
+  width: var(--ks-scrollbar-size);
+  height: var(--ks-scrollbar-size);
+}
+
+.ks-dir__listwrap::-webkit-scrollbar-track,
+.ks-dd__inner::-webkit-scrollbar-track,
+.ks-dir-dd__inner::-webkit-scrollbar-track,
+.ks-dir-dd__panel::-webkit-scrollbar-track,
+.book-embed::-webkit-scrollbar-track,
+.ks-offer-dialog__body::-webkit-scrollbar-track,
+.ks-book-modal__panel::-webkit-scrollbar-track,
+.ks-book-modal__frame::-webkit-scrollbar-track {
+  background: var(--ks-scrollbar-track);
+}
+
+.ks-dir__listwrap::-webkit-scrollbar-thumb,
+.ks-dd__inner::-webkit-scrollbar-thumb,
+.ks-dir-dd__inner::-webkit-scrollbar-thumb,
+.ks-dir-dd__panel::-webkit-scrollbar-thumb,
+.book-embed::-webkit-scrollbar-thumb,
+.ks-offer-dialog__body::-webkit-scrollbar-thumb,
+.ks-book-modal__panel::-webkit-scrollbar-thumb,
+.ks-book-modal__frame::-webkit-scrollbar-thumb {
+  background: var(--ks-scrollbar-thumb);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.ks-dir__listwrap::-webkit-scrollbar-thumb:hover,
+.ks-dd__inner::-webkit-scrollbar-thumb:hover,
+.ks-dir-dd__inner::-webkit-scrollbar-thumb:hover,
+.ks-dir-dd__panel::-webkit-scrollbar-thumb:hover,
+.book-embed::-webkit-scrollbar-thumb:hover,
+.ks-offer-dialog__body::-webkit-scrollbar-thumb:hover,
+.ks-book-modal__panel::-webkit-scrollbar-thumb:hover,
+.ks-book-modal__frame::-webkit-scrollbar-thumb:hover {
+  background: var(--ks-scrollbar-thumb-hover);
+  background-clip: content-box;
+}
+/* html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ks-scrollbar-thumb) var(--ks-scrollbar-track);
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: var(--ks-scrollbar-size);
+  height: var(--ks-scrollbar-size);
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: var(--ks-scrollbar-track);
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: var(--ks-scrollbar-thumb);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: var(--ks-scrollbar-thumb-hover);
+  background-clip: content-box;
+}
+
+.ks-dir__listwrap,
+.ks-dd__inner,
+.ks-dir-dd__inner,
+.ks-dir-dd__panel,
 .book-embed {
   scrollbar-width: thin;
   scrollbar-color: var(--ks-scrollbar-thumb) var(--ks-scrollbar-track);
@@ -73,4 +163,4 @@ body::-webkit-scrollbar-thumb:hover {
 .book-embed::-webkit-scrollbar-thumb:hover {
   background: var(--ks-scrollbar-thumb-hover);
   background-clip: content-box;
-}
+} */
