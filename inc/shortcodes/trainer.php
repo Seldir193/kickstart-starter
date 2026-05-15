@@ -1,30 +1,11 @@
 <?php
-/**
- * inc/shortcodes/trainer.php
- *
- * Shortcode: [ks_trainer_profile]
- * - Lädt einen Trainer (per ?c=slug) aus dem Next.js-Proxy (/api/coaches/:slug)
- * - Zeigt Hero (global ks-dir.css) OHNE Bild im Watermark-Bereich (Option 3)
- * - Links: Custom-Dropdown (50px hoch, max. 5 Einträge sichtbar, Rest scrollbar)
- * - Verwendet ein verstecktes <select> fürs Formular-Submit; UI ist ein eigenes Dropdown
- */
 
 $theme_dir = get_stylesheet_directory();
 $theme_uri = get_stylesheet_directory_uri();
 
-/* Dropdown-Hover CSS */
-$dd_hover_css = $theme_dir . '/assets/css/dropdown-hover.css';
-if (file_exists($dd_hover_css) && !wp_style_is('ks-dropdown-hover', 'enqueued')) {
-  wp_enqueue_style(
-    'ks-dropdown-hover',
-    $theme_uri . '/assets/css/dropdown-hover.css',
-    ['kickstart-style'],
-    filemtime($dd_hover_css)
-  );
-}
-
-/* Trainer CSS (falls vorhanden) */
 $trainer_css = $theme_dir . '/assets/css/ks-trainer.css';
+$trainer_js = $theme_dir . '/assets/js/ks-trainer.js';
+
 if (file_exists($trainer_css) && !wp_style_is('ks-trainer', 'enqueued')) {
   wp_enqueue_style(
     'ks-trainer',
@@ -34,245 +15,471 @@ if (file_exists($trainer_css) && !wp_style_is('ks-trainer', 'enqueued')) {
   );
 }
 
+if (file_exists($trainer_js) && !wp_script_is('ks-trainer', 'enqueued')) {
+  wp_enqueue_script(
+    'ks-trainer',
+    $theme_uri . '/assets/js/ks-trainer.js',
+    [],
+    filemtime($trainer_js),
+    true
+  );
+}
 
-
-
-
-/* ==== Next.js Basis-URL (Proxy) ==== */
 if (!function_exists('ks_next_base')) {
   function ks_next_base(): string {
-    $opt = get_option('ks_next_base');
-    if (!empty($opt)) return rtrim((string) $opt, '/');
+    $option = get_option('ks_next_base');
+    if (!empty($option)) return rtrim((string) $option, '/');
     return 'http://localhost:3000';
   }
 }
 
-/* ==== Bild-URL robust normalisieren ==== */
-/* Erlaubt http/https, data:image/* oder relative Pfade (an NEXT-Base anhängen) */
-if (!function_exists('ks_normalize_next_img')) {
-  function ks_normalize_next_img(?string $u): string {
-    $u = trim((string) $u);
-    if ($u === '') return '';
-    if (preg_match('~^(https?://|data:image/)~i', $u)) return $u;
-
-    // führendes "admin/" entfernen
-    $u = preg_replace('#^/?admin/#i', '', $u);
-
-    // an Next-Base hängen
+if (!function_exists('ks_build_next_image_url')) {
+  function ks_build_next_image_url(string $url): string {
     $base = rtrim(ks_next_base(), '/');
-    if ($base) {
-      if ($u[0] !== '/') $u = '/' . $u;
-      return $base . $u;
-    }
-    return $u;
+    if (!$base) return $url;
+    if ($url[0] !== '/') $url = '/' . $url;
+    return $base . $url;
   }
 }
 
-/* ==== Bestes Bild aus Coach-Objekt wählen (erste existierende Key) ==== */
+if (!function_exists('ks_normalize_next_img')) {
+  function ks_normalize_next_img(?string $url): string {
+    $url = trim((string) $url);
+    if ($url === '') return '';
+    if (preg_match('~^(https?://|data:image/)~i', $url)) return $url;
+    $url = preg_replace('#^/?admin/#i', '', $url);
+    return ks_build_next_image_url($url);
+  }
+}
+
 if (!function_exists('ks_pick_coach_img')) {
   function ks_pick_coach_img(array $coach, array $keys): string {
-    foreach ($keys as $k) {
-      if (!empty($coach[$k]) && is_string($coach[$k])) {
-        $u = ks_normalize_next_img($coach[$k]);
-        if ($u !== '') return $u;
-      }
+    foreach ($keys as $key) {
+      if (empty($coach[$key]) || !is_string($coach[$key])) continue;
+      $url = ks_normalize_next_img($coach[$key]);
+      if ($url !== '') return $url;
     }
+
     return '';
   }
 }
 
-/* ==== Shortcode registrieren ==== */
-if (!function_exists('ks_register_trainer_shortcode')) {
-  function ks_register_trainer_shortcode() {
+if (!function_exists('ks_trainer_get_name')) {
+  function ks_trainer_get_name(array $coach): string {
+    $first = $coach['firstName'] ?? '';
+    $last = $coach['lastName'] ?? '';
+    $name = trim(($coach['name'] ?? '') ?: trim("$first $last"));
+    return $name !== '' ? $name : 'Trainer';
+  }
+}
 
-    add_shortcode('ks_trainer_profile', function () {
+if (!function_exists('ks_trainer_get_slug')) {
+  function ks_trainer_get_slug(array $coach): string {
+    $name = ks_trainer_get_name($coach);
+    if (!empty($coach['slug'])) return sanitize_title($coach['slug']);
+    return sanitize_title($name);
+  }
+}
 
-      /* --- akt. Trainer aus ?c= (Slug) --- */
-      $slug = isset($_GET['c']) ? sanitize_title(wp_unslash($_GET['c'])) : '';
-      if (!$slug) return '<p>Kein Trainer ausgewählt.</p>';
+if (!function_exists('ks_trainer_get_photo')) {
+  function ks_trainer_get_photo(array $coach, string $theme_uri): string {
+    $photo = ks_pick_coach_img($coach, ['photoUrl', 'imageUrl', 'avatarUrl']);
+    if ($photo !== '') return $photo;
+    return $theme_uri . '/assets/img/avatar.png';
+  }
+}
 
-      $theme_uri = get_stylesheet_directory_uri();
-      $next_base = rtrim(ks_next_base(), '/');
+if (!function_exists('ks_trainer_get_current_slug')) {
+  function ks_trainer_get_current_slug(): string {
+    if (!isset($_GET['c'])) return '';
+    return sanitize_title(wp_unslash($_GET['c']));
+  }
+}
 
-      /* --- 1) Aktuellen Trainer laden --- */
-      $coach_url = $next_base . '/api/coaches/' . rawurlencode($slug);
-      $res = wp_remote_get($coach_url, [
-        'timeout' => 12,
-        'headers' => ['Accept' => 'application/json'],
-      ]);
+if (!function_exists('ks_trainer_parse_response')) {
+  function ks_trainer_parse_response($response): array {
+    if (is_wp_error($response)) return ['ok' => false, 'code' => 0, 'data' => null];
+    $code = wp_remote_retrieve_response_code($response);
+    $body = json_decode(wp_remote_retrieve_body($response), true);
+    return ['ok' => $code === 200, 'code' => $code, 'data' => $body];
+  }
+}
 
-      if (is_wp_error($res) || wp_remote_retrieve_response_code($res) !== 200) {
-        $code = is_wp_error($res) ? 0 : wp_remote_retrieve_response_code($res);
-        return '<p>Trainer nicht gefunden.<br>'
-             . 'URL: ' . esc_html($coach_url) . '<br>'
-             . 'Status: ' . esc_html($code) . '</p>';
-      }
+if (!function_exists('ks_trainer_fetch_json')) {
+  function ks_trainer_fetch_json(string $url, int $timeout): array {
+    $response = wp_remote_get($url, [
+      'timeout' => $timeout,
+      'headers' => ['Accept' => 'application/json'],
+    ]);
 
-      $coach = json_decode(wp_remote_retrieve_body($res), true);
-      if (!$coach || !is_array($coach)) {
-        return '<p>Trainer nicht gefunden. (Ungültige Antwort)</p>';
-      }
+    return ks_trainer_parse_response($response);
+  }
+}
 
-      /* --- Name --- */
-      $full = trim(($coach['name'] ?? '') ?: trim(($coach['firstName'] ?? '') . ' ' . ($coach['lastName'] ?? '')));
-      if ($full === '') $full = 'Trainer';
+if (!function_exists('ks_trainer_get_current_coach')) {
+  function ks_trainer_get_current_coach(string $next_base, string $slug): array {
+    $url = $next_base . '/api/coaches/' . rawurlencode($slug);
+    $result = ks_trainer_fetch_json($url, 12);
 
-      /**
-       * PROFILBILD (photoUrl) ist das Original und kann data:image base64 sein
-       */
-      $profile_img = ks_pick_coach_img($coach, [
-        'photoUrl', 'imageUrl', 'avatarUrl'
-      ]);
+    if (!$result['ok'] || !is_array($result['data'])) {
+      return ['coach' => null, 'url' => $url, 'code' => $result['code']];
+    }
 
-      // Fallback, falls kein Bild vorhanden
-      if ($profile_img === '') {
-        $profile_img = $theme_uri . '/assets/img/avatar.png';
-      }
+    return ['coach' => $result['data'], 'url' => $url, 'code' => 200];
+  }
+}
 
-      /* --- Tabelle --- */
-      $rows = [
-        'Position'           => $coach['position']   ?? '',
-        'Abschluss'          => $coach['degree']     ?? '',
-        'Bei der MFS seit'   => $coach['since']      ?? '',
-        'DFB Lizenz'         => $coach['dfbLicense'] ?? '',
-        'MFS Lizenz'         => $coach['mfsLicense'] ?? '',
-        'Lieblingsverein'    => $coach['favClub']    ?? '',
-        'Lieblingstrainer'   => $coach['favCoach']   ?? '',
-        'Lieblingstrick'     => $coach['favTrick']   ?? '',
-      ];
+if (!function_exists('ks_trainer_get_list_urls')) {
+  function ks_trainer_get_list_urls(string $next_base): array {
+    return [
+      $next_base . '/api/coaches?limit=200',
+      $next_base . '/api/admin/coaches?limit=200',
+    ];
+  }
+}
 
-      /* --- 2) Alle Trainer für Dropdown laden --- */
-      $all_coaches = [];
-      foreach ([
-        $next_base . '/api/coaches?limit=200',
-        $next_base . '/api/admin/coaches?limit=200',
-      ] as $list_url) {
-        $r = wp_remote_get($list_url, ['timeout' => 10, 'headers' => ['Accept' => 'application/json']]);
-        if (!is_wp_error($r) && wp_remote_retrieve_response_code($r) === 200) {
-          $json = json_decode(wp_remote_retrieve_body($r), true);
-          if (isset($json['items']) && is_array($json['items'])) { $all_coaches = $json['items']; break; }
-          if (is_array($json)) { $all_coaches = $json; break; }
-        }
-      }
+if (!function_exists('ks_trainer_get_coach_list_from_url')) {
+  function ks_trainer_get_coach_list_from_url(string $url): array {
+    $result = ks_trainer_fetch_json($url, 10);
+    if (!$result['ok'] || !is_array($result['data'])) return [];
+    if (isset($result['data']['items'])) return (array) $result['data']['items'];
+    return $result['data'];
+  }
+}
 
-      /* Ziel-URL dieser Seite (ohne Query) fürs Formular */
-      $action_url = get_permalink();
+if (!function_exists('ks_trainer_get_all_coaches')) {
+  function ks_trainer_get_all_coaches(string $next_base): array {
+    foreach (ks_trainer_get_list_urls($next_base) as $url) {
+      $items = ks_trainer_get_coach_list_from_url($url);
+      if (!empty($items)) return $items;
+    }
 
-      /* === Eindeutige IDs, falls Shortcode mehrfach verwendet wird === */
-      $uid = uniqid('ks-trn-');
-      $form_id   = 'ksTrainerSelectForm-' . $uid;
-      $select_id = 'ks-trainer-select-'   . $uid;
-      $dd_id     = 'ks-dd-trainer-'       . $uid;
+    return [];
+  }
+}
 
-      /* --- HTML ausgeben --- */
-      ob_start(); ?>
+if (!function_exists('ks_trainer_get_rows')) {
+  function ks_trainer_get_rows(array $coach): array {
+    return [
+      'Position' => $coach['position'] ?? '',
+      'Abschluss' => $coach['degree'] ?? '',
+      'Bei der DFS seit' => $coach['since'] ?? '',
+      'DFB Lizenz' => $coach['dfbLicense'] ?? '',
+      'DFS Lizenz' => $coach['mfsLicense'] ?? '',
+      'Lieblingsverein' => $coach['favClub'] ?? '',
+      'Lieblingstrainer' => $coach['favCoach'] ?? '',
+      'Lieblingstrick' => $coach['favTrick'] ?? '',
+    ];
+  }
+}
 
-      <!-- HERO: Option 3 -> KEIN Bild im Hero/Watermark, nur Text + Breadcrumb -->
-      <section class="ks-dir__hero" data-watermark="TRAINER">
-        <div class="ks-dir__hero-inner">
-          <div class="ks-dir__crumb">
-            <a class="ks-dir__crumb-home" href="<?php echo esc_url(home_url('/')); ?>">Home</a>
-            <span class="sep">/</span>
-            Trainer
-          </div>
+if (!function_exists('ks_trainer_get_icons')) {
+  function ks_trainer_get_icons(): array {
+    return [
+      'Position' => 'icon-position.svg',
+      'Abschluss' => 'icon-degree.svg',
+      'Bei der DFS seit' => 'icon-calendar.svg',
+      'DFB Lizenz' => 'icon-license.svg',
+      'DFS Lizenz' => 'icon-shield.svg',
+      'Lieblingsverein' => 'icon-club.svg',
+      'Lieblingstrainer' => 'icon-coach.svg',
+      'Lieblingstrick' => 'icon-skill.svg',
+    ];
+  }
+}
 
-          <h1 class="ks-dir__hero-title"><?php echo esc_html($full); ?></h1>
-        </div>
-      </section>
+if (!function_exists('ks_trainer_render_error')) {
+  function ks_trainer_render_error(string $message): string {
+    return '<p>' . esc_html($message) . '</p>';
+  }
+}
 
-      <!-- Inhalt: 3-spaltig (Dropdown links, Foto mittig, Tabelle rechts) -->
-      <section class="ks-trainer-wrap">
-        <div class="container">
-          <div class="ks-trainer-grid">
+if (!function_exists('ks_trainer_render_not_found')) {
+  function ks_trainer_render_not_found(array $coach_result): string {
+    return '<p>Trainer nicht gefunden.<br>URL: '
+      . esc_html($coach_result['url'])
+      . '<br>Status: '
+      . esc_html($coach_result['code'])
+      . '</p>';
+  }
+}
 
-            <!-- Spalte 1: Dropdown -->
-            <div class="ks-trainer-col ks-trainer-col--left">
-              <?php if (!empty($all_coaches)): ?>
-                <form
-                  id="<?php echo esc_attr($form_id); ?>"
-                  class="ks-trainer-select"
-                  action="<?php echo esc_url($action_url); ?>"
-                  method="get"
-                >
-                  <label class="screen-reader-text" for="<?php echo esc_attr($select_id); ?>">Trainer wählen</label>
+if (!function_exists('ks_trainer_get_profile_text')) {
+  function ks_trainer_get_profile_text(): string {
+    return 'Unsere Trainer verbinden klare Methodik, Erfahrung und moderne Fußballentwicklung mit einer individuellen Betreuung auf dem Platz.';
+  }
+}
 
-                  <!-- echtes Select (unsichtbar, bleibt fürs Submit) -->
-                  <select id="<?php echo esc_attr($select_id); ?>" name="c" class="ks-select">
-                    <?php foreach ($all_coaches as $c):
-                      $first = $c['firstName'] ?? '';
-                      $last  = $c['lastName'] ?? '';
-                      $name  = trim(($c['name'] ?? '') ?: trim("$first $last")) ?: 'Trainer';
-                      $s     = isset($c['slug']) && $c['slug'] !== '' ? $c['slug'] : sanitize_title($name);
-                    ?>
-                      <option value="<?php echo esc_attr($s); ?>" <?php selected($s, $slug); ?>>
-                        <?php echo esc_html($name); ?>
-                      </option>
-                    <?php endforeach; ?>
-                  </select>
+if (!function_exists('ks_trainer_get_hero_text')) {
+  function ks_trainer_get_hero_text(): string {
+    return 'Lerne den Menschen hinter dem Training kennen. Qualifikation, Haltung und sportliche Schwerpunkte auf einen Blick.';
+  }
+}
 
-                  <!-- Custom Dropdown UI -->
-                  <div class="ks-dd" id="<?php echo esc_attr($dd_id); ?>" aria-expanded="false" data-submit="1" data-max-rows="5">
-                    <button type="button" class="ks-dd__btn" aria-haspopup="listbox" aria-expanded="false">
-                      <span class="ks-dd__label"><?php echo esc_html($full); ?></span>
-                      <span class="ks-dd__caret" aria-hidden="true">
-                        <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/offers/select-caret.svg'); ?>" alt="">
-                      </span>
-                    </button>
-                    <div class="ks-dd__panel" role="listbox" tabindex="-1"></div>
-                  </div>
-                </form>
-              <?php endif; ?>
-            </div>
+if (!function_exists('ks_trainer_get_hero_title')) {
+  function ks_trainer_get_hero_title(array $coach): string {
+    $position = trim((string) ($coach['position'] ?? ''));
+    return $position !== '' ? $position : 'Trainerprofil';
+  }
+}
 
-            <!-- Spalte 2: Foto (mittig, original) -->
-            <div class="ks-trainer-col ks-trainer-col--photo">
-              <div class="ks-trainer-photo">
-                <?php if ($profile_img): ?>
-                  <img
-                    src="<?php echo esc_attr($profile_img); ?>"
-                    alt="<?php echo esc_attr($full); ?>"
-                    loading="lazy"
-                    decoding="async">
-                <?php endif; ?>
-              </div>
-            </div>
-
-            <!-- Spalte 3: Tabelle (rechts) -->
-            <div class="ks-trainer-col ks-trainer-col--right">
-              <table class="ks-trainer-table">
-                <thead>
-                  <tr>
-                    <th>NAME</th>
-                    <th><?php echo esc_html($full); ?></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($rows as $label => $val): if (!$val) continue; ?>
-                    <tr>
-                      <th><?php echo esc_html($label); ?></th>
-                      <td><?php echo esc_html($val); ?></td>
-                    </tr>
-                  <?php endforeach; ?>
-                </tbody>
-              </table>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <?php
-      return ob_get_clean();
+if (!function_exists('ks_trainer_get_visible_rows')) {
+  function ks_trainer_get_visible_rows(array $rows): array {
+    return array_filter($rows, function ($value) {
+      return trim((string) $value) !== '';
     });
+  }
+}
+
+if (!function_exists('ks_trainer_build_view_data')) {
+  function ks_trainer_build_view_data(array $coach, array $all_coaches, string $slug): array {
+    $theme_uri = get_stylesheet_directory_uri();
+    $rows = ks_trainer_get_rows($coach);
+    return ks_trainer_merge_view_data($coach, $all_coaches, $slug, $theme_uri, $rows);
+  }
+}
+
+if (!function_exists('ks_trainer_merge_view_data')) {
+  function ks_trainer_merge_view_data(array $coach, array $all_coaches, string $slug, string $theme_uri, array $rows): array {
+    return [
+      'coach' => $coach,
+      'all_coaches' => $all_coaches,
+      'slug' => $slug,
+      'theme_uri' => $theme_uri,
+      'action_url' => get_permalink(),
+      'full' => ks_trainer_get_name($coach),
+      'profile_img' => ks_trainer_get_photo($coach, $theme_uri),
+      'hero_title' => ks_trainer_get_hero_title($coach),
+      'hero_text' => ks_trainer_get_hero_text(),
+      'profile_text' => ks_trainer_get_profile_text(),
+      'visible_rows' => ks_trainer_get_visible_rows($rows),
+      'icons' => ks_trainer_get_icons(),
+      'icon_base' => $theme_uri . '/assets/img/team/',
+    ];
+  }
+}
+
+if (!function_exists('ks_trainer_render_hero')) {
+  function ks_trainer_render_hero(array $data): void { ?>
+    <section class="ks-page-hero ks-page-hero--trainer">
+      <div class="container ks-page-hero__inner">
+        <?php ks_trainer_render_hero_content($data); ?>
+        <?php ks_trainer_render_hero_media($data); ?>
+      </div>
+    </section>
+  <?php }
+}
+
+if (!function_exists('ks_trainer_render_hero_content')) {
+  function ks_trainer_render_hero_content(array $data): void { ?>
+    <div class="ks-page-hero__content">
+      <p class="ks-kicker ks-page-hero__eyebrow">Trainer</p>
+
+      <h1 class="ks-page-hero__title">
+        <?php echo esc_html($data['hero_title']); ?>
+      </h1>
+
+      <p class="ks-page-hero__subtitle">
+        <?php echo esc_html($data['hero_text']); ?>
+      </p>
+
+      <div class="ks-page-hero__actions">
+        <a class="ks-btn ks-btn--dark" href="#trainer-profile">Profil ansehen</a>
+        <a class="ks-btn" href="<?php echo esc_url(home_url('/kontakt/')); ?>">Kontakt aufnehmen</a>
+      </div>
+    </div>
+  <?php }
+}
+
+if (!function_exists('ks_trainer_render_hero_media')) {
+  function ks_trainer_render_hero_media(array $data): void { ?>
+    <div class="ks-page-hero__media" aria-hidden="true">
+      <div class="ks-page-hero__image-card">
+        <img
+          class="ks-page-hero__image"
+          src="<?php echo esc_attr($data['profile_img']); ?>"
+          alt=""
+          loading="eager"
+          decoding="async"
+        >
+      </div>
+
+      <article class="ks-page-hero__float-card ks-page-hero__float-card--dark">
+        <strong>DFS Team</strong>
+        <span><?php echo esc_html($data['hero_title']); ?></span>
+      </article>
+    </div>
+  <?php }
+}
+if (!function_exists('ks_trainer_render_picker')) {
+  function ks_trainer_render_picker(array $data): void {
+    if (empty($data['all_coaches'])) return; ?>
+
+    <div class="ks-trainer-picker" aria-label="Trainer auswählen" data-trainer-picker>
+      <div class="ks-trainer-picker__title">
+        <span>Trainer auswählen</span>
+      </div>
+
+      <?php ks_trainer_render_picker_nav('prev', 'Trainerliste nach links scrollen'); ?>
+
+      <div class="ks-trainer-picker__viewport" data-trainer-picker-viewport>
+        <div class="ks-trainer-picker__track">
+          <?php foreach ($data['all_coaches'] as $coach) ks_trainer_render_picker_card($coach, $data); ?>
+        </div>
+      </div>
+
+      <?php ks_trainer_render_picker_nav('next', 'Trainerliste nach rechts scrollen'); ?>
+    </div>
+  <?php }
+}
+if (!function_exists('ks_trainer_render_picker_nav')) {
+  function ks_trainer_render_picker_nav(string $direction, string $label): void {
+    $is_prev = $direction === 'prev';
+    $class = $is_prev ? ' ks-trainer-picker__arrow--prev' : '';
+    $step = $is_prev ? '-1' : '1'; ?>
+
+    <button class="ks-trainer-picker__arrow<?php echo esc_attr($class); ?>" type="button" data-trainer-scroll="<?php echo esc_attr($step); ?>" aria-label="<?php echo esc_attr($label); ?>">
+      <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/team/arrow_right_alt.svg'); ?>" alt="">
+    </button>
+  <?php }
+}
+
+if (!function_exists('ks_trainer_render_picker_card')) {
+  function ks_trainer_render_picker_card(array $coach, array $data): void {
+    $name = ks_trainer_get_name($coach);
+    $slug = ks_trainer_get_slug($coach);
+    $photo = ks_trainer_get_photo($coach, $data['theme_uri']);
+    $active = $slug === $data['slug']; ?>
+
+    <a class="ks-trainer-picker__card<?php echo $active ? ' is-active' : ''; ?>" href="<?php echo esc_url(add_query_arg('c', $slug, $data['action_url'])); ?>">
+      <span class="ks-trainer-picker__avatar">
+        <img src="<?php echo esc_attr($photo); ?>" alt="">
+      </span>
+      <span class="ks-trainer-picker__name"><?php echo esc_html($name); ?></span>
+    </a>
+  <?php }
+}
+
+if (!function_exists('ks_trainer_render_profile')) {
+  function ks_trainer_render_profile(array $data): void { ?>
+    <section id="trainer-profile" class="ks-trainer-profile">
+      <div class="ks-trainer-profile__inner">
+        <div class="ks-trainer-profile__top">
+          <span class="ks-kicker">Trainerteam</span>
+          <h2 class="ks-trainer-profile__title">Dein Trainer im Überblick</h2>
+          <?php ks_trainer_render_picker($data); ?>
+        </div>
+        <?php ks_trainer_render_profile_grid($data); ?>
+      </div>
+    </section>
+  <?php }
+}
+
+if (!function_exists('ks_trainer_render_profile_grid')) {
+  function ks_trainer_render_profile_grid(array $data): void { ?>
+    <div class="ks-trainer-profile__grid">
+      <?php ks_trainer_render_main_card($data); ?>
+      <?php ks_trainer_render_facts($data); ?>
+      <?php ks_trainer_render_dna($data); ?>
+    </div>
+  <?php }
+}
+
+if (!function_exists('ks_trainer_render_main_card')) {
+  function ks_trainer_render_main_card(array $data): void { ?>
+    <article class="ks-trainer-card">
+      <div class="ks-trainer-card__image">
+        <img src="<?php echo esc_attr($data['profile_img']); ?>" alt="<?php echo esc_attr($data['full']); ?>" loading="lazy" decoding="async">
+      </div>
+      <div class="ks-trainer-card__body">
+        <span>Aktuelles Profil</span>
+        <h3><?php echo esc_html($data['full']); ?></h3>
+        <p><?php echo esc_html($data['profile_text']); ?></p>
+      </div>
+    </article>
+  <?php }
+}
+
+if (!function_exists('ks_trainer_render_facts')) {
+  function ks_trainer_render_facts(array $data): void {
+    $primary_rows = array_slice($data['visible_rows'], 0, 4, true); ?>
+
+    <div class="ks-trainer-facts">
+      <?php foreach ($primary_rows as $label => $value) ks_trainer_render_fact($label, $value, $data); ?>
+    </div>
+  <?php }
+}
+
+if (!function_exists('ks_trainer_render_fact')) {
+  function ks_trainer_render_fact(string $label, string $value, array $data): void {
+    $icon = $data['icons'][$label] ?? 'icon-target.svg'; ?>
+
+    <article class="ks-trainer-fact">
+      <span class="ks-trainer-fact__icon">
+        <img src="<?php echo esc_url($data['icon_base'] . $icon); ?>" alt="">
+      </span>
+      <span class="ks-trainer-fact__label"><?php echo esc_html($label); ?></span>
+      <strong><?php echo esc_html($value); ?></strong>
+    </article>
+  <?php }
+}
+
+if (!function_exists('ks_trainer_render_dna')) {
+  function ks_trainer_render_dna(array $data): void {
+    $secondary_rows = array_slice($data['visible_rows'], 4, null, true);
+    if (empty($secondary_rows)) return; ?>
+
+    <div class="ks-trainer-dna">
+      <div class="ks-trainer-dna__head">
+        <span class="ks-kicker">Trainer DNA</span>
+        <h3>Persönliches Profil</h3>
+      </div>
+      <div class="ks-trainer-dna__list">
+        <?php foreach ($secondary_rows as $label => $value) ks_trainer_render_dna_item($label, $value, $data); ?>
+      </div>
+    </div>
+  <?php }
+}
+
+if (!function_exists('ks_trainer_render_dna_item')) {
+  function ks_trainer_render_dna_item(string $label, string $value, array $data): void {
+    $icon = $data['icons'][$label] ?? 'icon-target.svg'; ?>
+
+    <div class="ks-trainer-dna__item">
+      <img src="<?php echo esc_url($data['icon_base'] . $icon); ?>" alt="">
+      <span><?php echo esc_html($label); ?></span>
+      <strong><?php echo esc_html($value); ?></strong>
+    </div>
+  <?php }
+}
+
+if (!function_exists('ks_render_trainer_profile_shortcode')) {
+  function ks_render_trainer_profile_shortcode(): string {
+    $slug = ks_trainer_get_current_slug();
+    if (!$slug) return ks_trainer_render_error('Kein Trainer ausgewählt.');
+
+    $next_base = rtrim(ks_next_base(), '/');
+    $coach_result = ks_trainer_get_current_coach($next_base, $slug);
+
+    if (!$coach_result['coach']) return ks_trainer_render_not_found($coach_result);
+
+    $all_coaches = ks_trainer_get_all_coaches($next_base);
+    $data = ks_trainer_build_view_data($coach_result['coach'], $all_coaches, $slug);
+
+    ob_start();
+    ks_trainer_render_hero($data);
+    ks_trainer_render_profile($data);
+    return ob_get_clean();
+  }
+}
+
+if (!function_exists('ks_register_trainer_shortcode')) {
+  function ks_register_trainer_shortcode(): void {
+    add_shortcode('ks_trainer_profile', 'ks_render_trainer_profile_shortcode');
   }
 
   add_action('init', 'ks_register_trainer_shortcode');
 }
-
-
-
-
-
 
 
 

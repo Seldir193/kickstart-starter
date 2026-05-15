@@ -265,6 +265,18 @@ if (file_exists($partner_network_js)) {
   );
 }
 
+$trainer_js = get_stylesheet_directory() . '/assets/js/ks-trainer.js';
+
+if (file_exists($trainer_js) && !wp_script_is('ks-trainer', 'enqueued')) {
+  wp_enqueue_script(
+    'ks-trainer',
+    get_stylesheet_directory_uri() . '/assets/js/ks-trainer.js',
+    [],
+    filemtime($trainer_js),
+    true
+  );
+}
+
   $whatsapp_js = get_stylesheet_directory() . '/assets/js/ks-whatsapp-locations.js';
 
   if (file_exists($whatsapp_js)) {
