@@ -251,20 +251,75 @@
       .join("");
   }
 
+  // function bindPowerGroupClicks(listEl, groups, allItems, mapManager, root) {
+  //   const NEXT = nextBase(root);
+  //   $$(".ks-offer", listEl).forEach((li, idx) => {
+  //     li.addEventListener("click", () => {
+  //       const group = groups[idx];
+  //       if (!group) return;
+  //       const offersAtLoc = allItems.filter((o) => groupKeyOf(o) === group.key);
+  //       const offer = offersAtLoc[0] || group.rep;
+  //       if (!offer) return;
+  //       mapManager?.focus_offer?.(offer, 14);
+  //       const sessions = offersAtLoc.length ? offersAtLoc : [offer];
+  //       window.KSOffersDialog?.open?.(offer, sessions, { nextBase: NEXT });
+  //     });
+  //   });
+  // }
+
   function bindPowerGroupClicks(listEl, groups, allItems, mapManager, root) {
     const NEXT = nextBase(root);
+
     $$(".ks-offer", listEl).forEach((li, idx) => {
+      const preload = () => preloadPowerGroup(groups, allItems, idx, NEXT);
+      bindPreloadEvents(li, preload);
+
       li.addEventListener("click", () => {
-        const group = groups[idx];
-        if (!group) return;
-        const offersAtLoc = allItems.filter((o) => groupKeyOf(o) === group.key);
-        const offer = offersAtLoc[0] || group.rep;
-        if (!offer) return;
-        mapManager?.focus_offer?.(offer, 14);
-        const sessions = offersAtLoc.length ? offersAtLoc : [offer];
-        window.KSOffersDialog?.open?.(offer, sessions, { nextBase: NEXT });
+        const data = getPowerGroupData(groups, allItems, idx);
+        if (!data) return;
+
+        mapManager?.focus_offer?.(data.offer, 14);
+        window.KSOffersDialog?.open?.(data.offer, data.sessions, {
+          nextBase: NEXT,
+        });
       });
     });
+  }
+
+  function preloadPowerGroup(groups, allItems, index, nextBaseValue) {
+    const data = getPowerGroupData(groups, allItems, index);
+    if (!data) return;
+
+    preloadOfferDialog(data.offer, data.sessions, nextBaseValue);
+  }
+
+  function bindPreloadEvents(element, callback) {
+    element.addEventListener("pointerenter", callback);
+    element.addEventListener("focusin", callback);
+    element.addEventListener("touchstart", callback, { passive: true });
+  }
+
+  function preloadOfferDialog(offer, sessions, nextBase) {
+    if (!offer) return;
+    window.KSOffersDialog?.preloadOffer?.(offer, sessions, { nextBase });
+  }
+
+  function getSessionsByGroup(offer, allItems) {
+    const key = groupKeyOf(offer);
+    const sessions = allItems.filter((x) => groupKeyOf(x) === key);
+    return sessions.length ? sessions : [offer];
+  }
+
+  function getPowerGroupData(groups, allItems, index) {
+    const group = groups[index];
+    if (!group) return null;
+
+    const sessions = allItems.filter((o) => groupKeyOf(o) === group.key);
+    const offer = sessions[0] || group.rep;
+
+    return offer
+      ? { offer, sessions: sessions.length ? sessions : [offer] }
+      : null;
   }
 
   function renderStandardOffers(listEl, displayArr) {
@@ -283,22 +338,49 @@
       .join("");
   }
 
+  // function bindStandardClicks(listEl, displayArr, allItems, mapManager, root) {
+  //   const NEXT = nextBase(root);
+  //   $$(".ks-offer", listEl).forEach((li, idx) => {
+  //     li.addEventListener("click", () => {
+  //       const offer = displayArr[idx];
+  //       if (!offer) return;
+  //       mapManager?.focus_offer?.(offer, 14);
+  //       const key = groupKeyOf(offer);
+  //       const sessions = allItems.filter((x) => groupKeyOf(x) === key);
+  //       window.KSOffersDialog?.open?.(
+  //         offer,
+  //         sessions.length ? sessions : [offer],
+  //         { nextBase: NEXT },
+  //       );
+  //     });
+  //   });
+  // }
+
   function bindStandardClicks(listEl, displayArr, allItems, mapManager, root) {
     const NEXT = nextBase(root);
+
     $$(".ks-offer", listEl).forEach((li, idx) => {
+      const preload = () =>
+        preloadStandardOffer(displayArr, allItems, idx, NEXT);
+      bindPreloadEvents(li, preload);
+
       li.addEventListener("click", () => {
         const offer = displayArr[idx];
         if (!offer) return;
+
+        const sessions = getSessionsByGroup(offer, allItems);
         mapManager?.focus_offer?.(offer, 14);
-        const key = groupKeyOf(offer);
-        const sessions = allItems.filter((x) => groupKeyOf(x) === key);
-        window.KSOffersDialog?.open?.(
-          offer,
-          sessions.length ? sessions : [offer],
-          { nextBase: NEXT },
-        );
+        window.KSOffersDialog?.open?.(offer, sessions, { nextBase: NEXT });
       });
     });
+  }
+
+  function preloadStandardOffer(displayArr, allItems, index, nextBaseValue) {
+    const offer = displayArr[index];
+    if (!offer) return;
+
+    const sessions = getSessionsByGroup(offer, allItems);
+    preloadOfferDialog(offer, sessions, nextBaseValue);
   }
 
   function renderList(

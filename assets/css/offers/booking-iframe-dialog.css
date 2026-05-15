@@ -36,6 +36,7 @@
     border: 1px solid var(--color-border-light);
     border-radius: var(--dfs-radius-card);
     box-shadow: var(--dfs-shadow-medium);
+    contain: layout paint;
   }
 
   .ks-book-dialog__head {
@@ -89,6 +90,8 @@
     height: calc(100dvh - 146px);
     max-height: calc(100dvh - 146px);
     min-height: 424px;
+    overflow: hidden;
+    color-scheme: light;
     border: 0;
     background: var(--brand-white);
   }
@@ -146,43 +149,10 @@
     overflow: hidden;
   }
 
-  .ks-book-modal--loading .ks-book-modal__frame {
-    opacity: 0;
+  .ks-session__btn.is-loading,
+  .ks-offer__continue.is-loading {
     pointer-events: none;
-  }
-
-  .ks-book-modal--loading .ks-book-modal__panel::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 4;
-    height: calc(100% - 86px);
-    background: var(--brand-white);
-    pointer-events: none;
-  }
-
-  .ks-book-modal--loading .ks-book-modal__panel::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: calc(50% + 42px);
-    z-index: 5;
-    width: 34px;
-    height: 34px;
-    border: 3px solid var(--color-border-light);
-    border-top-color: var(--brand-gold);
-    border-radius: var(--dfs-radius-pill);
-    transform: translate(-50%, -50%);
-    animation: ks-book-spin 0.75s linear infinite;
-    pointer-events: none;
-  }
-
-  @keyframes ks-book-spin {
-    to {
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
+    opacity: 0.78;
   }
 
   @media (max-width: 720px) {
@@ -225,14 +195,6 @@
       width: 40px;
       height: 40px;
       min-width: 40px;
-    }
-
-    .ks-book-modal--loading .ks-book-modal__panel::after {
-      height: calc(100% - 82px);
-    }
-
-    .ks-book-modal--loading .ks-book-modal__panel::before {
-      top: calc(50% + 38px);
     }
   }
 
@@ -280,14 +242,6 @@
       width: 22px;
       height: 22px;
     }
-
-    .ks-book-modal--loading .ks-book-modal__panel::after {
-      height: calc(100% - 78px);
-    }
-
-    .ks-book-modal--loading .ks-book-modal__panel::before {
-      top: calc(50% + 36px);
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -295,12 +249,9 @@
     .ks-book-modal__back {
       transition: none;
     }
-
-    .ks-book-modal--loading .ks-book-modal__panel::before {
-      animation: none;
-    }
   }
 }
+
 /* assets\css\offers\booking-iframe-dialog.css
 @layer pages {
   .ks-book-modal[hidden] {
