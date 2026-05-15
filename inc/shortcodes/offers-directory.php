@@ -371,9 +371,9 @@ add_action('init', function () {
   data-dialog-icon-base="<?php echo esc_url($dialog_icon_base); ?>"
   data-coachph="<?php echo esc_url($theme_uri . '/assets/img/avatar.png'); ?>"
 >
-  <span class="ks-sr-only" data-i18n="offersDialog.actions.close">
+  <!-- <span class="ks-sr-only" data-i18n="offersDialog.actions.close">
     <?php echo esc_html($dialog_t('offersDialog.actions.close', 'Schließen')); ?>
-  </span>
+  </span> -->
 
   <section
     id="angebote-buchen"
@@ -444,7 +444,7 @@ add_action('init', function () {
     <?php if ($isHolidayCourse): ?>
       <form class="ks-dir__filters" data-filters>
         <label class="ks-field ks-field--with-icon">
-          <span data-i18n="offersDirectory.filters.holidaySeason">Ferienzeit</span>
+          <!-- <span data-i18n="offersDirectory.filters.holidaySeason">Ferienzeit</span> -->
           <div class="ks-field__shell">
             <span class="ks-field__lead-icon" aria-hidden="true">
               <img src="<?php echo esc_url($calendar_icon); ?>" alt="">
@@ -466,7 +466,7 @@ add_action('init', function () {
         </label>
 
         <label class="ks-field ks-field--with-icon">
-          <span data-i18n="offersDirectory.filters.holidayWeek">Zeitraum</span>
+          <!-- <span data-i18n="offersDirectory.filters.holidayWeek">Zeitraum</span> -->
           <div class="ks-field__shell">
             <span class="ks-field__lead-icon" aria-hidden="true">
               <img src="<?php echo esc_url($calendar_icon); ?>" alt="">
@@ -483,7 +483,7 @@ add_action('init', function () {
         </label>
 
         <label class="ks-field ks-field--with-icon">
-          <span data-i18n="offersDirectory.filters.location">Standort</span>
+          <!-- <span data-i18n="offersDirectory.filters.location">Standort</span> -->
           <div class="ks-field__shell">
             <span class="ks-field__lead-icon" aria-hidden="true">
               <img src="<?php echo esc_url($location_icon); ?>" alt="">

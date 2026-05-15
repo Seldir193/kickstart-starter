@@ -303,13 +303,35 @@
     node.textContent = value;
   }
 
+  // function translateNodeAttr(node, data) {
+  //   var key = node.getAttribute("data-i18n") || "";
+  //   var attr = node.getAttribute("data-i18n-attr") || "";
+  //   if (!key || !attr) return;
+  //   var value = getNestedValue(data, key);
+  //   if (typeof value !== "string") return;
+  //   node.setAttribute(attr, value);
+  // }
+
   function translateNodeAttr(node, data) {
     var key = node.getAttribute("data-i18n") || "";
-    var attr = node.getAttribute("data-i18n-attr") || "";
-    if (!key || !attr) return;
+    var attrs = getI18nAttrs(node);
+    if (!key || !attrs.length) return;
+
     var value = getNestedValue(data, key);
     if (typeof value !== "string") return;
-    node.setAttribute(attr, value);
+
+    attrs.forEach(function (attr) {
+      node.setAttribute(attr, value);
+    });
+  }
+
+  function getI18nAttrs(node) {
+    return String(node.getAttribute("data-i18n-attr") || "")
+      .split(/\s+/)
+      .map(function (attr) {
+        return attr.trim();
+      })
+      .filter(Boolean);
   }
 
   function getDateLocale(language) {
