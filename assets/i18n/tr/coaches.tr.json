@@ -1,0 +1,40 @@
+{
+  "coaches": {
+    "notFound": "Antrenör bulunamadı.",
+    "hero": {
+      "kicker": "Antrenör",
+      "subtitle": "Antrenmanın arkasındaki kişiyi tanıyın. Nitelikler, yaklaşım ve sportif odak noktaları tek bakışta.",
+      "profileButton": "Profili görüntüle",
+      "contactButton": "İletişime geç",
+      "teamLabel": "DFS Ekibi"
+    },
+    "picker": {
+      "ariaLabel": "Antrenör seç",
+      "title": "Antrenör seç",
+      "prev": "Antrenör listesini sola kaydır",
+      "next": "Antrenör listesini sağa kaydır"
+    },
+    "profile": {
+      "kicker": "Antrenör ekibi",
+      "title": "Antrenörün genel görünümü"
+    },
+    "card": {
+      "currentProfile": "Güncel profil",
+      "profileText": "Antrenörlerimiz sahada bireysel destekle birlikte net yöntem, deneyim ve modern futbol gelişimini bir araya getirir."
+    },
+    "dna": {
+      "kicker": "Antrenör DNA",
+      "title": "Kişisel profil"
+    },
+    "labels": {
+      "position": "Pozisyon",
+      "degree": "Yeterlilik",
+      "since": "DFS'de başlangıç",
+      "dfbLicense": "DFB lisansı",
+      "dfsLicense": "DFS lisansı",
+      "favClub": "Favori kulüp",
+      "favCoach": "Favori antrenör",
+      "favTrick": "Favori hareket"
+    }
+  }
+}

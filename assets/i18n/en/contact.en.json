@@ -1,0 +1,22 @@
+{
+  "contact": {
+    "kicker": "CONTACT",
+    "title": "Do you have any questions?",
+    "brand": "Dortmund Football School",
+    "subtitle": "Our office team is available daily from 09:00 to 12:00 and will be happy to answer all your questions.",
+    "mapLabel": "Map",
+    "mapTitle": "Contact – Map",
+    "info": {
+      "address": "Address",
+      "phone": "Phone",
+      "email": "E-Mail"
+    },
+    "form": {
+      "name": "Name",
+      "email": "E-Mail",
+      "message": "Message",
+      "submit": "Send message",
+      "success": "Thank you! Your message has been sent."
+    }
+  }
+}

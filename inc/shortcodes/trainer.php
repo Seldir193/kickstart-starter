@@ -188,6 +188,23 @@ if (!function_exists('ks_trainer_get_icons')) {
   }
 }
 
+if (!function_exists('ks_trainer_get_label_i18n')) {
+  function ks_trainer_get_label_i18n(string $label): string {
+    $keys = [
+      'Position' => 'coaches.labels.position',
+      'Abschluss' => 'coaches.labels.degree',
+      'Bei der DFS seit' => 'coaches.labels.since',
+      'DFB Lizenz' => 'coaches.labels.dfbLicense',
+      'DFS Lizenz' => 'coaches.labels.dfsLicense',
+      'Lieblingsverein' => 'coaches.labels.favClub',
+      'Lieblingstrainer' => 'coaches.labels.favCoach',
+      'Lieblingstrick' => 'coaches.labels.favTrick',
+    ];
+
+    return $keys[$label] ?? '';
+  }
+}
+
 if (!function_exists('ks_trainer_render_error')) {
   function ks_trainer_render_error(string $message): string {
     return '<p>' . esc_html($message) . '</p>';
@@ -196,7 +213,7 @@ if (!function_exists('ks_trainer_render_error')) {
 
 if (!function_exists('ks_trainer_render_not_found')) {
   function ks_trainer_render_not_found(array $coach_result): string {
-    return '<p>Trainer nicht gefunden.<br>URL: '
+    return '<p data-i18n="coaches.notFound">Trainer nicht gefunden.</p><p>URL: '
       . esc_html($coach_result['url'])
       . '<br>Status: '
       . esc_html($coach_result['code'])
@@ -273,19 +290,19 @@ if (!function_exists('ks_trainer_render_hero')) {
 if (!function_exists('ks_trainer_render_hero_content')) {
   function ks_trainer_render_hero_content(array $data): void { ?>
     <div class="ks-page-hero__content">
-      <p class="ks-kicker ks-page-hero__eyebrow">Trainer</p>
+      <p class="ks-kicker ks-page-hero__eyebrow" data-i18n="coaches.hero.kicker">Trainer</p>
 
       <h1 class="ks-page-hero__title">
         <?php echo esc_html($data['hero_title']); ?>
       </h1>
 
-      <p class="ks-page-hero__subtitle">
+      <p class="ks-page-hero__subtitle" data-i18n="coaches.hero.subtitle">
         <?php echo esc_html($data['hero_text']); ?>
       </p>
 
       <div class="ks-page-hero__actions">
-        <a class="ks-btn ks-btn--dark" href="#trainer-profile">Profil ansehen</a>
-        <a class="ks-btn" href="<?php echo esc_url(home_url('/kontakt/')); ?>">Kontakt aufnehmen</a>
+        <a class="ks-btn ks-btn--dark" href="#trainer-profile" data-i18n="coaches.hero.profileButton">Profil ansehen</a>
+        <a class="ks-btn" href="<?php echo esc_url(home_url('/kontakt/')); ?>" data-i18n="coaches.hero.contactButton">Kontakt aufnehmen</a>
       </div>
     </div>
   <?php }
@@ -305,22 +322,29 @@ if (!function_exists('ks_trainer_render_hero_media')) {
       </div>
 
       <article class="ks-page-hero__float-card ks-page-hero__float-card--dark">
-        <strong>DFS Team</strong>
+        <strong data-i18n="coaches.hero.teamLabel">DFS Team</strong>
         <span><?php echo esc_html($data['hero_title']); ?></span>
       </article>
     </div>
   <?php }
 }
+
 if (!function_exists('ks_trainer_render_picker')) {
   function ks_trainer_render_picker(array $data): void {
     if (empty($data['all_coaches'])) return; ?>
 
-    <div class="ks-trainer-picker" aria-label="Trainer auswählen" data-trainer-picker>
+    <div
+      class="ks-trainer-picker"
+      aria-label="Trainer auswählen"
+      data-i18n="coaches.picker.ariaLabel"
+      data-i18n-attr="aria-label"
+      data-trainer-picker
+    >
       <div class="ks-trainer-picker__title">
-        <span>Trainer auswählen</span>
+        <span data-i18n="coaches.picker.title">Trainer auswählen</span>
       </div>
 
-      <?php ks_trainer_render_picker_nav('prev', 'Trainerliste nach links scrollen'); ?>
+      <?php ks_trainer_render_picker_nav('prev', 'Trainerliste nach links scrollen', 'coaches.picker.prev'); ?>
 
       <div class="ks-trainer-picker__viewport" data-trainer-picker-viewport>
         <div class="ks-trainer-picker__track">
@@ -328,17 +352,25 @@ if (!function_exists('ks_trainer_render_picker')) {
         </div>
       </div>
 
-      <?php ks_trainer_render_picker_nav('next', 'Trainerliste nach rechts scrollen'); ?>
+      <?php ks_trainer_render_picker_nav('next', 'Trainerliste nach rechts scrollen', 'coaches.picker.next'); ?>
     </div>
   <?php }
 }
+
 if (!function_exists('ks_trainer_render_picker_nav')) {
-  function ks_trainer_render_picker_nav(string $direction, string $label): void {
+  function ks_trainer_render_picker_nav(string $direction, string $label, string $i18n_key): void {
     $is_prev = $direction === 'prev';
     $class = $is_prev ? ' ks-trainer-picker__arrow--prev' : '';
     $step = $is_prev ? '-1' : '1'; ?>
 
-    <button class="ks-trainer-picker__arrow<?php echo esc_attr($class); ?>" type="button" data-trainer-scroll="<?php echo esc_attr($step); ?>" aria-label="<?php echo esc_attr($label); ?>">
+    <button
+      class="ks-trainer-picker__arrow<?php echo esc_attr($class); ?>"
+      type="button"
+      data-trainer-scroll="<?php echo esc_attr($step); ?>"
+      aria-label="<?php echo esc_attr($label); ?>"
+      data-i18n="<?php echo esc_attr($i18n_key); ?>"
+      data-i18n-attr="aria-label"
+    >
       <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/team/arrow_right_alt.svg'); ?>" alt="">
     </button>
   <?php }
@@ -365,8 +397,8 @@ if (!function_exists('ks_trainer_render_profile')) {
     <section id="trainer-profile" class="ks-trainer-profile">
       <div class="ks-trainer-profile__inner">
         <div class="ks-trainer-profile__top">
-          <span class="ks-kicker">Trainerteam</span>
-          <h2 class="ks-trainer-profile__title">Dein Trainer im Überblick</h2>
+          <span class="ks-kicker" data-i18n="coaches.profile.kicker">Trainerteam</span>
+          <h2 class="ks-trainer-profile__title" data-i18n="coaches.profile.title">Dein Trainer im Überblick</h2>
           <?php ks_trainer_render_picker($data); ?>
         </div>
         <?php ks_trainer_render_profile_grid($data); ?>
@@ -392,9 +424,9 @@ if (!function_exists('ks_trainer_render_main_card')) {
         <img src="<?php echo esc_attr($data['profile_img']); ?>" alt="<?php echo esc_attr($data['full']); ?>" loading="lazy" decoding="async">
       </div>
       <div class="ks-trainer-card__body">
-        <span>Aktuelles Profil</span>
+        <span data-i18n="coaches.card.currentProfile">Aktuelles Profil</span>
         <h3><?php echo esc_html($data['full']); ?></h3>
-        <p><?php echo esc_html($data['profile_text']); ?></p>
+        <p data-i18n="coaches.card.profileText"><?php echo esc_html($data['profile_text']); ?></p>
       </div>
     </article>
   <?php }
@@ -412,13 +444,14 @@ if (!function_exists('ks_trainer_render_facts')) {
 
 if (!function_exists('ks_trainer_render_fact')) {
   function ks_trainer_render_fact(string $label, string $value, array $data): void {
-    $icon = $data['icons'][$label] ?? 'icon-target.svg'; ?>
+    $icon = $data['icons'][$label] ?? 'icon-target.svg';
+    $i18n_key = ks_trainer_get_label_i18n($label); ?>
 
     <article class="ks-trainer-fact">
       <span class="ks-trainer-fact__icon">
         <img src="<?php echo esc_url($data['icon_base'] . $icon); ?>" alt="">
       </span>
-      <span class="ks-trainer-fact__label"><?php echo esc_html($label); ?></span>
+      <span class="ks-trainer-fact__label"<?php echo $i18n_key ? ' data-i18n="' . esc_attr($i18n_key) . '"' : ''; ?>><?php echo esc_html($label); ?></span>
       <strong><?php echo esc_html($value); ?></strong>
     </article>
   <?php }
@@ -431,8 +464,8 @@ if (!function_exists('ks_trainer_render_dna')) {
 
     <div class="ks-trainer-dna">
       <div class="ks-trainer-dna__head">
-        <span class="ks-kicker">Trainer DNA</span>
-        <h3>Persönliches Profil</h3>
+        <span class="ks-kicker" data-i18n="coaches.dna.kicker">Trainer DNA</span>
+        <h3 data-i18n="coaches.dna.title">Persönliches Profil</h3>
       </div>
       <div class="ks-trainer-dna__list">
         <?php foreach ($secondary_rows as $label => $value) ks_trainer_render_dna_item($label, $value, $data); ?>
@@ -443,11 +476,12 @@ if (!function_exists('ks_trainer_render_dna')) {
 
 if (!function_exists('ks_trainer_render_dna_item')) {
   function ks_trainer_render_dna_item(string $label, string $value, array $data): void {
-    $icon = $data['icons'][$label] ?? 'icon-target.svg'; ?>
+    $icon = $data['icons'][$label] ?? 'icon-target.svg';
+    $i18n_key = ks_trainer_get_label_i18n($label); ?>
 
     <div class="ks-trainer-dna__item">
       <img src="<?php echo esc_url($data['icon_base'] . $icon); ?>" alt="">
-      <span><?php echo esc_html($label); ?></span>
+      <span<?php echo $i18n_key ? ' data-i18n="' . esc_attr($i18n_key) . '"' : ''; ?>><?php echo esc_html($label); ?></span>
       <strong><?php echo esc_html($value); ?></strong>
     </div>
   <?php }
@@ -480,6 +514,9 @@ if (!function_exists('ks_register_trainer_shortcode')) {
 
   add_action('init', 'ks_register_trainer_shortcode');
 }
+
+
+
 
 
 

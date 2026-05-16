@@ -6,7 +6,8 @@
 
 get_header(); ?>
 
-<main id="primary" class="container content">
+<!-- <main id="primary" class="container content"> -->
+  <main id="primary" class="site-main container content"> 
   <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
     <article <?php post_class('entry'); ?>>
       <h1 class="entry-title"><?php the_title(); ?></h1>
@@ -20,3 +21,18 @@ get_header(); ?>
 </main>
 
 <?php get_footer();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

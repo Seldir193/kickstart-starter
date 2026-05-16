@@ -1,0 +1,22 @@
+{
+  "contact": {
+    "kicker": "KONTAKT",
+    "title": "Hast Du Fragen?",
+    "brand": "Dortmunder Fussball Schule",
+    "subtitle": "Unser Office-Team ist täglich von 09:00 – 12:00 Uhr für Dich da und beantwortet gerne alle Deine Fragen.",
+    "mapLabel": "Karte",
+    "mapTitle": "Kontakt – Karte",
+    "info": {
+      "address": "Adresse",
+      "phone": "Telefon",
+      "email": "E-Mail"
+    },
+    "form": {
+      "name": "Name",
+      "email": "E-Mail",
+      "message": "Nachricht",
+      "submit": "Nachricht senden",
+      "success": "Vielen Dank! Ihre Nachricht wurde gesendet."
+    }
+  }
+}

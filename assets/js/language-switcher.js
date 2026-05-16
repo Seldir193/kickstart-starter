@@ -118,6 +118,14 @@
       scopes.push("about");
     }
 
+    if (hasI18nPrefix("contact.")) {
+      scopes.push("contact");
+    }
+
+    if (hasI18nPrefix("coaches.")) {
+      scopes.push("coaches");
+    }
+
     if (hasI18nPrefix("programCta.")) {
       scopes.push("program-cta");
     }
@@ -302,15 +310,6 @@
     if (typeof value !== "string") return;
     node.textContent = value;
   }
-
-  // function translateNodeAttr(node, data) {
-  //   var key = node.getAttribute("data-i18n") || "";
-  //   var attr = node.getAttribute("data-i18n-attr") || "";
-  //   if (!key || !attr) return;
-  //   var value = getNestedValue(data, key);
-  //   if (typeof value !== "string") return;
-  //   node.setAttribute(attr, value);
-  // }
 
   function translateNodeAttr(node, data) {
     var key = node.getAttribute("data-i18n") || "";

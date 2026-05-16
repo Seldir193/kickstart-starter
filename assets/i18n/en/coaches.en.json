@@ -1,0 +1,40 @@
+{
+  "coaches": {
+    "notFound": "Coach not found.",
+    "hero": {
+      "kicker": "Coach",
+      "subtitle": "Get to know the person behind the training. Qualifications, mindset and sporting focus at a glance.",
+      "profileButton": "View profile",
+      "contactButton": "Contact us",
+      "teamLabel": "DFS Team"
+    },
+    "picker": {
+      "ariaLabel": "Select coach",
+      "title": "Select coach",
+      "prev": "Scroll coach list left",
+      "next": "Scroll coach list right"
+    },
+    "profile": {
+      "kicker": "Coaching team",
+      "title": "Your coach at a glance"
+    },
+    "card": {
+      "currentProfile": "Current profile",
+      "profileText": "Our coaches combine clear methodology, experience and modern football development with individual support on the pitch."
+    },
+    "dna": {
+      "kicker": "Coach DNA",
+      "title": "Personal profile"
+    },
+    "labels": {
+      "position": "Position",
+      "degree": "Qualification",
+      "since": "With DFS since",
+      "dfbLicense": "DFB license",
+      "dfsLicense": "DFS license",
+      "favClub": "Favorite club",
+      "favCoach": "Favorite coach",
+      "favTrick": "Favorite trick"
+    }
+  }
+}

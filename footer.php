@@ -1,4 +1,4 @@
-</main>
+<!-- </main> -->
 
 <?php
 $custom_logo_id = get_theme_mod('custom_logo');

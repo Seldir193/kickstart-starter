@@ -1,0 +1,22 @@
+{
+  "contact": {
+    "kicker": "İLETİŞİM",
+    "title": "Sorularınız mı var?",
+    "brand": "Dortmund Futbol Okulu",
+    "subtitle": "Ofis ekibimiz her gün 09:00 – 12:00 saatleri arasında sizin için hazırdır ve tüm sorularınızı memnuniyetle yanıtlar.",
+    "mapLabel": "Harita",
+    "mapTitle": "İletişim – Harita",
+    "info": {
+      "address": "Adres",
+      "phone": "Telefon",
+      "email": "E-posta"
+    },
+    "form": {
+      "name": "Ad",
+      "email": "E-posta",
+      "message": "Mesaj",
+      "submit": "Mesaj gönder",
+      "success": "Teşekkürler! Mesajınız gönderildi."
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "coaches": {
+    "notFound": "Trainer nicht gefunden.",
+    "hero": {
+      "kicker": "Trainer",
+      "subtitle": "Lerne den Menschen hinter dem Training kennen. Qualifikation, Haltung und sportliche Schwerpunkte auf einen Blick.",
+      "profileButton": "Profil ansehen",
+      "contactButton": "Kontakt aufnehmen",
+      "teamLabel": "DFS Team"
+    },
+    "picker": {
+      "ariaLabel": "Trainer auswählen",
+      "title": "Trainer auswählen",
+      "prev": "Trainerliste nach links scrollen",
+      "next": "Trainerliste nach rechts scrollen"
+    },
+    "profile": {
+      "kicker": "Trainerteam",
+      "title": "Dein Trainer im Überblick"
+    },
+    "card": {
+      "currentProfile": "Aktuelles Profil",
+      "profileText": "Unsere Trainer verbinden klare Methodik, Erfahrung und moderne Fußballentwicklung mit einer individuellen Betreuung auf dem Platz."
+    },
+    "dna": {
+      "kicker": "Trainer DNA",
+      "title": "Persönliches Profil"
+    },
+    "labels": {
+      "position": "Position",
+      "degree": "Abschluss",
+      "since": "Bei der DFS seit",
+      "dfbLicense": "DFB Lizenz",
+      "dfsLicense": "DFS Lizenz",
+      "favClub": "Lieblingsverein",
+      "favCoach": "Lieblingstrainer",
+      "favTrick": "Lieblingstrick"
+    }
+  }
+}

@@ -362,14 +362,30 @@ body {
 }
 
 @layer pages {
-  body:is(.page-id-158, .page-id-269, .page-id-312, .page-id-356, .page-id-387)
+  body:is(
+      .page-id-158,
+      .page-id-159,
+      .page-id-269,
+      .page-id-307,
+      .page-id-312,
+      .page-id-356,
+      .page-id-387
+    )
     :is(h1.entry-title, .entry-title) {
     display: none !important;
     margin: 0 !important;
     padding: 0 !important;
   }
 
-  body:is(.page-id-158, .page-id-269, .page-id-312, .page-id-356, .page-id-387)
+  body:is(
+      .page-id-158,
+      .page-id-159,
+      .page-id-269,
+      .page-id-307,
+      .page-id-312,
+      .page-id-356,
+      .page-id-387
+    )
     :is(
       .site-content,
       .content-area,
@@ -382,7 +398,15 @@ body {
     margin-top: 0 !important;
   }
 
-  body:is(.page-id-158, .page-id-269, .page-id-312, .page-id-356, .page-id-387)
+  body:is(
+      .page-id-158,
+      .page-id-159,
+      .page-id-269,
+      .page-id-307,
+      .page-id-312,
+      .page-id-356,
+      .page-id-387
+    )
     .entry-content
     > :first-child {
     margin-top: 0 !important;
